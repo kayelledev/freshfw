@@ -1,0 +1,84 @@
+
+<table width='100%' border='1'>
+  <thead>
+    <tr>
+      <td>Quantity</td>
+      <td>Product</td>
+      <td>Price</td>
+      <!--<td>Tax</td>-->
+      <td>Total</td>
+    </tr>
+  </thead>
+  <tbody>
+	<% @order_total = 0 %>
+	<% order.order_items.each do |item| %>
+    <tr>
+		<% @item_total = item.total %>
+      <td>
+		  <input id="qty" type="number" step="1" min="0" value="<%= item.quantity %>" size="4">
+		  <input id="sub" type="hidden" step="1" min="0" value="<%= item.sub_total %>" >
+		  
+		  <!--<input type="number" step="1" min="0" name="quantity" value="<%= item.quantity %>" size="4">-->
+		  
+	  </td>
+      <td><%= item.ordered_item.full_name %></td>
+      <td id="sub_total"><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></td>
+      <!--<td><%= number_to_currency item.tax_amount %></td>-->
+      <td id="item_total"><%= number_to_currency(item.total, unit: "$", format: "%u%n") %></script></td>
+	  
+    </tr>
+    <% end %>
+
+	<button type="button" onclick="update_basket()">Update Basket</button>
+	<input id="baskek_total" type="hidden" >
+	
+	<!-- deliver servie (calculate later) -->
+    <% if order.delivery_service %>
+    <tr>
+      <td></td>
+      <td><%= order.delivery_service.name %></td>
+      <td><%= number_to_currency order.delivery_price %></td>
+      <td><%= number_to_currency order.delivery_tax_amount %></td>
+      <td><%= number_to_currency order.delivery_price + order.delivery_tax_amount %></td>
+    </tr>
+    <% end %>
+	<!-- end deliver servie -->
+  </tbody>
+  
+  <tfoot>
+    <tr>
+      <td colspan='3'>Sub-Total</td>
+	  <input id="before_tax" type="hidden" value="<%= order.total_before_tax %>" >
+      <td id="total_before_tax"><%= number_to_currency order.total_before_tax %></td>
+    </tr>
+    <tr>
+      <td colspan='3'>Tax</td>
+      <td><%= number_to_currency order.tax %></td>
+    </tr>
+    <tr>
+      <td colspan='3'>Total</td>
+      <td><%= number_to_currency order.total %></td>
+    </tr>
+  </tfoot>
+</table>
+
+<script src="accounting.min.js"></script>
+<script>
+
+
+function update_basket() {
+    var x, subtotal;
+
+    // Get the value of the input field with id="numb"
+    x = document.getElementById("qty").value;
+	subtotal = document.getElementById("sub").value;
+	var before_tax = document.getElementById("before_tax").value * 1;
+	
+	var total = x * subtotal;
+	var order_total =  before_tax + total; 
+
+    document.getElementById("item_total").innerHTML = "$"+accounting.toFixed(total, 2);
+	document.getElementById("total_before_tax").innerHTML = "$"+accounting.toFixed(order_total, 2); 
+}
+
+</script>
