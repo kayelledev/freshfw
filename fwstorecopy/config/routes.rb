@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #mount Shoppe::Engine => "/shoppe"
   mount Shoppe::Engine => "/shoppe"
   get 'welcome/index'
   get 'welcome/about_us', to: 'welcome#about_us', as: 'about_us'

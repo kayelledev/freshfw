@@ -1,5 +1,5 @@
 <%= render 'orderlayout' %><h2>Checkout</h2>
-<%= render 'items', :order => @order %>
+<%= render 'final_items', :order => @order %>
 
 <%= form_for @order, :url => checkout_path do |f| %>
   <dl>
@@ -10,8 +10,9 @@
     <dd><%= f.text_field :billing_address1 %></dd>
     <dd><%= f.text_field :billing_address2 %></dd>
     <dd><%= f.text_field :billing_address3 %></dd>
-    <dd><%= f.text_field :billing_address4 %></dd>
-    <dt><%= f.label :billing_postcode, 'Post code' %></dt>
+	<dt><%= f.label :billing_address4, 'Province' %></dt>
+    <dd><%= f.collection_select :billing_address4, Shoppe::TaxRate.ordered.where(country: 'CA'), :id, :province%></dd>
+	<dt><%= f.label :billing_postcode, 'Postal Code' %></dt>
     <dd><%= f.text_field :billing_postcode %></dd>
     <dd><%= f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => true %></dd>
 
@@ -20,7 +21,21 @@
 
     <dt><%= f.label :phone_number %></dt>
     <dd><%= f.text_field :phone_number %></dd>
+	
+	<!-- Delivery Address -->
+	<dt><%= f.label :separate_delivery_address, 'If delivery address is different:' %></dt>
+	<dt><%= f.label :delivery_name, 'Receipant Name' %></dt>
+	<dd><%= f.check_box :separate_delivery_address ,:onclick=>'$(this).checked() ? $document.write("hello")'%>
+    <dd><%= f.text_field :delivery_name %></dd>
+    <dd><%= f.text_field :delivery_address1 %></dd>
+    <dd><%= f.text_field :delivery_address3 %></dd>
+	<dt><%= f.label :delivery_address4, 'Province' %></dt>
+    <dd><%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'CA'), :id, :province%></dd>
+	<dt><%= f.label :delivery_postcode, 'Postal Code' %></dt>
+    <dd><%= f.text_field :delivery_postcode %></dd>
+    <dd><%= f.collection_select :delivery_country, Shoppe::Country.ordered, :id, :name, :include_blank => true %></dd>
 
     <dd><%= f.submit 'Continue' %></dd>
   </dl>
 <% end %>
+

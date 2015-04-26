@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416035524) do
+ActiveRecord::Schema.define(version: 20150425062625) do
 
   create_table "items", force: :cascade do |t|
-    t.integer  "item_id"
     t.string   "item_sku"
     t.string   "item_name"
     t.string   "item_type"
@@ -253,6 +252,8 @@ ActiveRecord::Schema.define(version: 20150416035524) do
     t.datetime "updated_at"
     t.text     "country_ids"
     t.string   "address_type"
+    t.string   "country"
+    t.string   "province"
   end
 
   create_table "shoppe_users", force: :cascade do |t|

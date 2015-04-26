@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
           order = Shoppe::Order.create(:ip_address => request.ip)
           session[:order_id] = order.id
           order
+          
         end
       end
     end
