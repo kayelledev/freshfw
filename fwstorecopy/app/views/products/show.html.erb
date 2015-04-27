@@ -1,0 +1,46 @@
+<section id="hello" style="background-image: url(http://gofourwalls.com/wp-content/uploads/2015/03/C-Premium-LivingRoom-featured-darkened.jpeg); opacity: .9; margin: 0; width: 100%; height: 30em;">
+</section>
+
+
+<h2><%= @product.name %></h2>
+
+<% if @product.default_image %>
+  <%= image_tag @product.default_image.path, :width => '200px', :style => "float:right" %>
+<% end %>
+
+<% if @product.default_image %>
+  <%= image_tag @product.data_sheet.path, :width => '200px', :style => "float:right" %>
+<% end %>
+
+<p><%= @product.short_description %> and the product's permalink is <%=@product.permalink%></p>
+<p>
+  <b><%= number_to_currency @product.price %></b>
+ 
+
+  <% if params[:varsku]!= nil
+	  params.delete :varsku
+	end 
+	
+  if @product.has_variants? 
+	  
+  	for @var in @product.variants %> 
+  	    <%= radio_button_tag :varsku, @var.sku, true %>
+		<%= @var.permalink %>
+		
+    <% end %>
+  <% puts "#{@params}"%>
+		
+   <%= link_to "Add to basket", product_path(:permalink => @product.permalink, :sku => @product.sku, :varsku => @var.sku), :method => :post %>
+ <% else%>
+
+	  <%= link_to "Add to basket", product_path(:permalink => @product.permalink, :sku => @product.sku), :method => :post %>	  
+	  
+<% end %>
+
+</p>
+
+<hr>
+<%= simple_format @product.description %>
+<hr>
+
+<p><%= link_to "Back to list", products_url %></p>
