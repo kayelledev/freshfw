@@ -1,0 +1,277 @@
+<!-- Carousel 
+	================================================== -->
+<header class="intro-header" style="background-image: url('http://gofourwalls.com/wp-content/uploads/2015/03/Pinnacle-small-space-lightened.jpg')">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img class="first-slide" src="<%= Rails.application.config.carousel1s3path %>" alt="First slide">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Tired of furniture shopping?</h1>
+          <h2>Shop from the comfort of your home</h2>
+          <p><a class="btn btn-xl" href="<%= link_to "Shop now", products_url, class: "btn btn-xl center"%></a></p>
+        </div>
+      </div>
+    </div>
+	
+    <div class="item">
+      <img class="fill" src="<%= Rails.application.config.carousel2s3path %>" alt="Second slide">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Get the newest and greatest rooms</h1>
+		  
+		  
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="third-slide" src="<%= Rails.application.config.carousel3s3path %>" alt="Third slide">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Get your room in a box with one click.</h1>
+          <p><a class="btn btn-xl" href="<%= link_to "Shop now", products_url, class: "btn btn-xl center"%></a></p>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="third-slide" src="<%= Rails.application.config.carousel4s3path %>" alt="Third slide">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Great designs for different room sizes.</h1>
+          <p>Browse the rooms now</p>
+          <p><a class="btn btn-xl" href="<%= link_to "Shop now", products_url, class: "btn btn-xl center"%></a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div><!-- /.carousel -->
+</header>
+
+<!-- Services Section -->
+<section id="services" style="border: 1px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Room in a box</h2>
+                <h3 class="section-subheading text-muted">Choose the best tier for your room.</h3>
+				<div style="margin-top: 2em; margin-bottom: 2em;"><%= link_to "Shop now", products_url, class: "btn btn-xl center"%></div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <!--<span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                </span>-->
+		        <h2>Basic</h2>
+		        <h3>$1499</h3>
+		        <h5>Room size 7'x9' or 60+ sqr.ft.</h5>
+				<h5>Includes 3 essential furniture items</h5>
+		        <!--<table width="100%" style="margin-bottom:0px;">
+		          <tbody>
+		            <tr>
+		            <td width="30%"></td>
+		            <td width="65%">
+		              <h4 align="left">&#10004; Sofa </h4>
+		              <h4 align="left">&#10004; Coffee Table </h4>
+		              <h4 align="left">&#10004; TV Stand </h4>
+		            </td>
+		          </td>
+		          </tbody>
+		        </table>-->
+            </div>
+            <div class="col-md-4">
+                <!--<span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                </span>-->
+		        <h2>Regular</h2>
+		        <h3>$1999</h3>
+		        <h5>Room size 8'x9' or 70+ sqr.ft.</h5>
+				<h5>Includes 5 or more furniture items</h5>
+		          <!--<table width="100%" style="margin-bottom:0px;">
+		          <tbody>
+		            <tr>
+		            <td width="30%"></td>
+		            <td width="65%">
+		              <h4 align="left">&#10004; Sofa </h4>
+		              <h4 align="left">&#10004; Coffee Table </h4>
+		              <h4 align="left">&#10004; TV Stand </h4>
+		              <h4 align="left">&#10004; Floor Lamp </h4>
+		              <h4 align="left">&#10004; Occasional Table*</h4>
+		            </td>
+		          </td>
+		          </tbody>
+		        </table>-->
+            </div>
+            <div class="col-md-4">
+                <!--<span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                </span>-->
+		        <h2>Premium</h2>
+		        <h3>$2499</h3>
+		        <h5>Room size 9'x11' or 90+ sqr.ft.</h5>
+		        <h5>Includes 9 or more furniture items</h5>
+			    <!--<table width="100%" style="margin-bottom:0px;">
+		          <tbody>
+		            <tr>
+		            <td width="30%"></td>
+		            <td width="65%">
+		              <h4 align="left">&#10004; Sofa </h4>
+		              <h4 align="left">&#10004; Coffee Table </h4>
+		              <h4 align="left">&#10004; TV Stand </h4>
+		              <h4 align="left">&#10004; Floor Lamp </h4>
+		              <h4 align="left">&#10004; Occasional Table*</h4>
+		              <h4 align="left">&#10004; Area Rug</h4>
+		              <h4 align="left">&#10004; Dining Table </h4>
+		              <h4 align="left">&#10004; 2 or 4 Dining Chairs</h4>
+		            </td>
+		          </td>
+		          </tbody>
+		        </table>-->
+            </div>
+        </div>
+		<!--<p align="left">*An occasional table can be a side table or a console table</p>-->
+    </div>
+</section>
+
+<section style="background-image: url(https://s3.amazonaws.com/gofourwalls/globalimages/banner-autumn-livingdining-dark.jpg); opacity: .8; margin: 0; width: 100%; height: auto;">
+
+	
+</section>
+
+<!-- How it works Section -->
+<section id="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">How it works</h2>
+				<h3 class="section-subheading"></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/gofourwalls/globalimages/homepage-howitworks.jpg" alt="Browse the rooms">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Shop the rooms</h4>
+                                <h4 class="subheading">from the comfort of your home</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">We love interior design. We only curate furniture that appeal to a design-savvy eye. Our style is practical modernism with a midcentury touch. Each piece of furniture in our room has a timeless quality.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="https://s3.amazonaws.com/gofourwalls/globalimages/homepage-howitworks-pickroom.jpg" alt="Pick a room">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Choose one of the tiers</h4>
+                                <h4 class="subheading">Basic, Regular, Premium</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Our team of designers are condo dwellers who care about maximizing function in small spaces. We curate furniture that are condo-friendly in sizes and functions. The furniture often serve multiple purposes.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image" style="padding-top: 2.5em;">
+                            <i class="img-circle img-responsive fa-stack fa-4x fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Add To Cart</h4>
+                                <h4 class="subheading">Get it delivered!</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">We offer top-knotch white glove services to deliver and assemble your room. Completely hassle-free!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image" style="background-color: #000; opacity: .7;">
+                            <h4>Get your
+                                <br>room in a box
+                                <br>now!</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section id="team" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Our Amazing Team</h2>
+                <h3 class="section-subheading text-muted">From the amazing Toronto, Canada</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="team-member">
+                    <img src="https://s3.amazonaws.com/gofourwalls/globalimages/fw-team-karen.jpeg" class="img-responsive img-circle" alt="Karen Lau" style="width: 15em;">
+                    <h4>Karen Lau</h4>
+                    <p class="text-muted">Technology & Design</p>
+                    <ul class="list-inline social-buttons">
+                        <li><a href="https//www.twitter.com/karenlau_ck" target="_blank"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="team-member">
+                    <img src="https://s3.amazonaws.com/gofourwalls/globalimages/fw-team-mike.jpeg" class="img-responsive img-circle" alt="Michael Van" style="width: 15em;">
+                    <h4>Michael Van</h4>
+                    <p class="text-muted">Business Development</p>
+                    <ul class="list-inline social-buttons">
+                        <li><a href"https://www.twitter.com/iammikevan" target="_blank"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <p class="large text-muted">We are always looking for bright talents to join our team! Contact us if interested.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</div>
