@@ -62,10 +62,32 @@
           = attachment_preview @product.default_image
           %p= f.file_field :default_image_file
       %dl.half
-        %dt= f.label :data_sheet_file, t('shoppe.products.datasheet')
+        %dt= f.label :image2_file, t('shoppe.products.image_2')
         %dd
-          = attachment_preview @product.data_sheet
-          %p= f.file_field :data_sheet_file
+          = attachment_preview @product.image2
+          %p= f.file_field :image2_file
+	  
+      %dl.half
+        %dt= f.label :image3_file, t('shoppe.products.image_3')
+        %dd
+          = attachment_preview @product.image3
+          %p= f.file_field :image3_file
+      %dl.half
+        %dt= f.label :image4_file, t('shoppe.products.image_4')
+        %dd
+          = attachment_preview @product.image4
+          %p= f.file_field :image4_file
+	  
+      %dl.half
+        %dt= f.label :image5_file, t('shoppe.products.image_5')
+        %dd
+          = attachment_preview @product.image5
+          %p= f.file_field :image5_file
+      %dl.half
+        %dt= f.label :image6_file, t('shoppe.products.image_6')
+        %dd
+          = attachment_preview @product.image6
+          %p= f.file_field :image6_file
 
   - unless @product.has_variants?
     = field_set_tag t('shoppe.products.pricing') do

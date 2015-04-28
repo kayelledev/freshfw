@@ -11,7 +11,12 @@ module Shoppe
 
     # Products have a default_image and a data_sheet
     attachment :default_image
-    attachment :data_sheet
+    attachment :image2
+    attachment :image3
+    attachment :image4
+    attachment :image5
+    attachment :image6
+    #attachment :data_sheet
 
     # The product's category
     #

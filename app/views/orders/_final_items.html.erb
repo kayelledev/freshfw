@@ -1,28 +1,28 @@
 
-<table width='100%' border='1'>
+<table width='80%' border='1' style='margin: 3em; padding: 2em;' class="table-responsive">
   <thead>
     <tr>
-      <td>Quantity</td>
-      <td>Product</td>
-      <td>Price</td>
+      <td class="col-md-1">Quantity</td>
+      <td class="col-md-6">Product</td>
+      <td class="col-md-1">Price</td>
       <!--<td>Tax</td>-->
-      <td>Total</td>
+      <td class="col-md-1">Total</td>
     </tr>
   </thead>
   <tbody>
 	<% order.order_items.each do |item| %>
     <tr>
-      <td>
+      <td class="col-md-1">
 		  <input id="qty" type="number" step="1" min="0" value="<%= item.quantity %>" size="4">
 		  <input id="sub" type="hidden" step="1" min="0" value="<%= item.sub_total %>" >
 		  
 		  <!--<input type="number" step="1" min="0" name="quantity" value="<%= item.quantity %>" size="4">-->
 		  
 	  </td>
-      <td><%= item.ordered_item.full_name %></td>
-      <td id="sub_total"><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></td>
+      <td class="col-md-6"><%= item.ordered_item.full_name %></td>
+      <td id="sub_total" class="col-md-1"><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></td>
       <!--<td><%= number_to_currency item.tax_amount %></td>-->
-      <td id="item_total"><%= number_to_currency(item.total, unit: "$", format: "%u%n") %></script></td>
+      <td id="item_total" class="col-md-1"><%= number_to_currency(item.total, unit: "$", format: "%u%n") %></script></td>
 	  
     </tr>
     <% end %>
@@ -42,16 +42,16 @@
   
   <tfoot>
     <tr>
-      <td colspan='3'>Sub-Total</td>
+      <td colspan='3' style="text-align: right; padding-right: 1em; ">Sub-Total</td>
 	  <input id="before_tax" type="hidden" value="<%= order.total_before_tax %>" >
       <td id="total_before_tax"><%= number_to_currency order.total_before_tax %></td>
     </tr>
     <tr>
-      <td colspan='3'>Tax</td>
+      <td colspan='3' style="text-align: right; padding-right: 1em; ">Tax</td>
       <td><%= number_to_currency order.tax %></td>
     </tr>
     <tr>
-      <td colspan='3'>Total</td>
+      <td colspan='3' style="text-align: right; padding-right: 1em; ">Total</td>
       <td><%= number_to_currency order.total %></td>
     </tr>
   </tfoot>

@@ -1,5 +1,6 @@
-<%= render 'orders/orderlayout' %><h2>Checkout</h2>
-
+<%= render 'orders/orderlayout' %>
+<h2 style='padding-left: 2em; padding-top: 1em; '>Make Payment</h2>
+<div class="row" style='margin: 3em; padding: 2em;'>
 <%= form_tag charges_path do %>
   <article>
 	  <% puts @params 
@@ -14,3 +15,5 @@
           data-description="<%=@order.first_name %>"
           data-amount="<%=@order.total*100%>"></script>
 <% end %>
+
+</div>
