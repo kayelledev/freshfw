@@ -10,7 +10,9 @@ class ProductsController < ApplicationController
     
     def buy
       @paramlink = params[:permalink]; #this needs to be the product permalink, not variant permalink 
-      puts @paramlink
+      puts "product controller - buy: "
+      
+      puts "#{@paramlink}"
       
       @t_sku =  params[:varsku]
       if @t_sku == nil 

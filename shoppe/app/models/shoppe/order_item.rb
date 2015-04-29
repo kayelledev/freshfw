@@ -45,7 +45,7 @@ module Shoppe
     # @param ordered_item [Object] an object which implements the Shoppe::OrderableItem protocol
     # @param quantity [Fixnum] the number of items to order
     # @return [Shoppe::OrderItem]
-    def self.add_item(ordered_item, quantity = 1)
+    def self.add_item(ordered_item, quantity)
       raise Errors::UnorderableItem, :ordered_item => ordered_item unless ordered_item.orderable?
       transaction do
         if existing = self.where(:ordered_item_id => ordered_item.id, :ordered_item_type => ordered_item.class.to_s).first

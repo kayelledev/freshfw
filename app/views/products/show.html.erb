@@ -32,23 +32,23 @@
 			<a class="right carousel-control" href="#ProductCarousel" role="button" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 			</div>
 		</div>
+		
 		<div class="col-md-4">
+			
 			<h1><%= @product.name %></h1>
 			<div class="price"><b><%= number_to_currency @product.price %></b></div>
-			<div class="clearfix">
+			<!-- <div class="clearfix">
 				<div class="pull-left"><input class="form-control quantity" placeholder="Quantity" type="number"></div>
-				
+	
 			</div>
-			
+-->
 			<h3>Product Details</h3>	
 			<p><%= @product.short_description %> and the product's permalink is <%=@product.permalink%></p>
 			<p>
 			  <% if params[:varsku]!= nil
 				  params.delete :varsku
 				end 
-
 			  if @product.has_variants? 
-
 			  	for @var in @product.variants %> 
 			  	    <%= radio_button_tag :varsku, @var.sku, true %>
 					<%= @var.permalink %>
@@ -56,10 +56,10 @@
 			    <% end %>
 			  <% puts "#{@params}"%>
 
-			   
+   
 			<% end %>
 			</p>
-		
+
 			<div class="clearfix">
 				<div class="pull-left">
 				<%  if @product.has_variants? %>
@@ -67,7 +67,7 @@
 				<% else%>
 					<%= link_to "Add To Cart", product_path(:permalink => @product.permalink, :sku => @product.sku), :method => :post, :class => "fa fa-shopping-cart btn btn-danger" %>	  
 	 			<% end %>
-					
+		
 				<a href="mailto:info@gofourwalls.com" class="btn btn-primary fa fa-envelope">Email Us</a>				
 			</div>
 		</div>
