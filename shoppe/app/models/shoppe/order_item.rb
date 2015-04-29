@@ -47,7 +47,8 @@ module Shoppe
     # @return [Shoppe::OrderItem]
     def self.add_item(ordered_item, quantity)
       puts " in order_item, add_item: #{ordered_item.id} and class #{ordered_item.class.to_s}"
-      raise Errors::UnorderableItem, :ordered_item => ordered_item unless ordered_item.orderable?
+      raise Errors::UnorderableItem, :ordered_item => ordered_item 
+      #unless ordered_item.orderable?
       transaction do
         if existing = self.where(:ordered_item_id => ordered_item.id, :ordered_item_type => ordered_item.class.to_s).first
           existing.increase!(quantity)
