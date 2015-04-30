@@ -1,0 +1,1 @@
+Shoppe::Product.send(:include, PermalinkAsParam)
