@@ -8,12 +8,14 @@ Rails.application.routes.draw do
     resources :comments   
   end 
   resources :charges
-  
+
   #show, buying products
-  get "product/:permalink", to: "products#show", as: "product"
-  post "product/:permalink", to: "products#buy", as: "buy"
-  get 'products', to: 'products#index'
-  
+  resources :products, only: [:index, :show] do
+    member do
+      post 'buy'
+    end
+  end
+
   #adding products to basket
   get "basket", to: "orders#show"
   delete "basket", to: "orders#destroy"
