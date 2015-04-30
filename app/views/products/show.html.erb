@@ -1,79 +1,51 @@
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag 'products/products.js' %>
+<% end %>
 <%= render 'product_header' %>
 
 <div class="container">
 
 
-	<div class="content inside-page product-details">
-	<div class="breadcrumb"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %></div>	
-	<div class="row">
-		<div class="col-md-8">
-			<div id="ProductCarousel" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="item active"><img src="<%= @product.default_image.path %>" class="img-responsive" alt="product"></div>
+  <div class="content inside-page product-details">
+  <div class="breadcrumb"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
+  </div>
+  <div class="row">
 
-				<% if @product.image2 %>
-					<div class="item"><img src="<%= @product.image2.path %>"  class="img-responsive" alt="product"></div>
-				<% end %>
-				<% if @product.image3 %>
-					<div class="item"><img src="<%= @product.image3.path %>"  class="img-responsive" alt="product"></div>
-				<% end %>
-				<% if @product.image4 %>
-					<div class="item"><img src="<%= @product.image4.path %>"  class="img-responsive" alt="product"></div>
-				<% end %>
-				<% if @product.image5 %>
-					<div class="item"><img src="<%= @product.image5.path %>"  class="img-responsive" alt="product"></div>
-				<% end %>
-				<% if @product.image6 %>
-					<div class="item"><img src="<%= @product.image6.path %>"  class="img-responsive" alt="product"></div>
-				<% end %>
-			</div>
-			<!-- Controls -->
-			<a class="left carousel-control" href="#ProductCarousel" role="button" data-slide="prev"><i class="glyphicon glyphicon-chevron-left" style="vertical-align: middle; "></i></a>
-			<a class="right carousel-control" href="#ProductCarousel" role="button" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-			</div>
-		</div>
-		
-		<div class="col-md-4">
-			
-			<h1><%= @product.name %></h1>
-			<div class="price"><b><%= number_to_currency @product.price %></b></div>
-			<!-- <div class="clearfix">
-				<div class="pull-left"><input class="form-control quantity" placeholder="Quantity" type="number"></div>
-	
-			</div>
--->
-			<h3>Product Details</h3>	
-			<p><%= @product.description %></p>
-			<p>
-			  <% if params[:varsku]!= nil
-				  params.delete :varsku
-				end 
-			  if @product.has_variants? 
-			  	for @var in @product.variants %> 
-			  	    <%= radio_button_tag :varsku, @var.sku, true %>
-					<%= @var.permalink %>
+    <div id='product-gallery'>
+      <%= render 'variant_gallery', product: @product %>
+    </div>
 
-			    <% end %>
-			  <% puts "#{@params}"%>
+    <div class="col-md-4">
 
-   
-			<% end %>
-			</p>
+    <%= render 'variant_info', product: @product %>
 
-			<div class="clearfix">
-				<div class="pull-left">
-				<%  if @product.has_variants? %>
-				   <%= link_to "Add To Cart", product_path(:permalink => @product.permalink, :sku => @product.sku, :varsku => @var.sku), :method => :post, :class => "fa fa-shopping-cart btn btn-danger" %>
-				<% else%>
-					<%= link_to "Add To Cart", product_path(:permalink => @product.permalink, :sku => @product.sku), :method => :post, :class => "fa fa-shopping-cart btn btn-danger" %>	  
-	 			<% end %>
-		
-				<a href="mailto:info@gofourwalls.com" class="btn btn-primary fa fa-envelope">Email Us</a>				
-			</div>
-		</div>
-	</div>
+    <% @product.variants.each do |variant| %>
+      <%= render 'variant_info', product: variant %>
+    <% end %>
+
+    <p>
+      <% root_product.variants.each do |variant| %>
+        <%= radio_button_tag :varsku, variant.sku, variant.default? %>
+        <%= variant.permalink %>
+
+      <% end %>
+    </p>
+
+    <div class="clearfix">
+      <div class="pull-left">
+        <%  if @product.has_variants? %>
+           <%= link_to "Add To Cart", buy_product_path(@product.default_variant.permalink), method: :post, :class => "fa fa-shopping-cart btn btn-danger", id: :buy %>
+        <% else%>
+          <%= link_to "Add To Cart", buy_product_path(@product.permalink), method: :post, :class => "fa fa-shopping-cart btn btn-danger" %>
+        <% end %>
+
+        <a href="mailto:info@gofourwalls.com" class="btn btn-primary fa fa-envelope">Email Us</a>
+      </div>
+    </div>
+  </div>
 
 
+  </div>
 </div>
 
 <p><%= link_to "Back to list", products_url %></p>

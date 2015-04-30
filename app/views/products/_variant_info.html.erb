@@ -1,0 +1,8 @@
+<div class='variant' id="product_<%= product.sku %>" style="display: <%= product_visibility(product) %>"
+  data-url="<%= buy_product_path(id: product.permalink) %>">
+  <h1><%= product.name %></h1>
+  <div class="price"><b><%= number_to_currency product.price %></b></div>
+
+  <h3>Product Details</h3>
+  <p><%= product.short_description %> and the product's permalink is <%=product.permalink%></p>
+</div>
