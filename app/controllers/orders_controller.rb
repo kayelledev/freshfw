@@ -12,19 +12,50 @@ class OrdersController < ApplicationController
     puts "order id"
     @order = current_order
     
+    if request.get? 
+      puts "getting request in checkout: #{@order.separate_delivery_address}"
+      
+    end 
+    
   #@order = Shoppe::Order.find(current_order.id)
     
     if request.patch?
       #create charges 
-      
-      if @order.proceed_to_confirm(params[:order].permit(:first_name, :last_name, :billing_address1, :billing_address2, :billing_address3, :billing_address4, :billing_country_id, :billing_postcode, :email_address, :phone_number))
-        #redirect_to checkout_payment_path
-        redirect_to new_charge_path
+      puts "delivery address 1 = #{params[:order][:delivery_address1]}"
+      puts "order: #{params[:order]}"
+       if (params[:order][:delivery_address1]!=nil && params[:order][:delivery_postcode]!=nil && params[:order][:delivery_country_id]!=nil)
+         puts "setting separate delivery address to true "
+         @order.separate_delivery_address = true
+         
+       end 
+       
+        if !@order.separate_delivery_address 
+          
+          if @order.proceed_to_confirm(params[:order].permit(:first_name, :last_name, :billing_address1, :billing_address2, :billing_address3, :billing_address4, :billing_country_id, :billing_postcode, :email_address, :phone_number))
+            #redirect_to checkout_payment_path
+            puts "no separate delivery address"
+          
+            redirect_to new_charge_path
+          
+          else
+            flash.now[:notice] = "Could not exchange Stripe token. Please try again."
+          end
         
-      else
-        flash.now[:notice] = "Could not exchange Stripe token. Please try again."
+        else
+       
+          puts "* separate delivery address  #{params}"
+          if @order.proceed_to_confirm(params[:order].permit(:first_name, :last_name, :billing_address1, :billing_address2, :billing_address3, :billing_address4, :billing_country_id, :billing_postcode, :email_address, :phone_number, :separate_delivery_address, :delivery_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id, :delivery_price, :delivery_service_id, :delivery_tax_amount))
+            #redirect_to checkout_payment_path
+            puts "order controller = checkout / request = patch = getting ready for new charge path "
+            redirect_to new_charge_path
+          
+          else
+            flash.now[:notice] = "Could not exchange Stripe token. Please try again."
+          end
+            
+        end
       end
-    end
+      
   end
   
   def payment
@@ -51,6 +82,19 @@ class OrdersController < ApplicationController
       session[:order_id] = nil
       redirect_to root_path, :notice => "Order has been placed successfully!"
     end
+  end
+  
+  def safe_params
+    params[:order].permit(
+      :first_name, :last_name, :company,
+      :billing_address1, :billing_address2, :billing_address3, :billing_address4, :billing_postcode, :billing_country_id,
+      :separate_delivery_address,
+      :delivery_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id,
+      :delivery_price, :delivery_service_id, :delivery_tax_amount,
+      :email_address, :phone_number,
+      :notes,
+      :order_items_attributes => [:ordered_item_id, :ordered_item_type, :quantity, :unit_price, :tax_amount, :id, :weight]
+    )
   end
   
 end

@@ -15,6 +15,8 @@ module Shoppe
     # @return [Boolean]
     def proceed_to_confirm(params = {})
       self.status = 'confirming'
+
+      puts "shoppe moderl - order / actions .rb proceed to contorl: #{params}"
       if self.update(params)
         true
       else

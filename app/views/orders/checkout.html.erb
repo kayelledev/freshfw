@@ -44,7 +44,7 @@
 		<dl>
 		<!-- Delivery Address -->
 		<div class="row">
-		<dt><%= f.label :separate_delivery_address, 'If delivery address is different:', :class=>'col-full' %></dt>
+		<dt><%= f.label :separate_label, 'If delivery address is different:', :class=>'col-full' %></dt>
 		<dt><%= f.label :delivery_name, 'Receipant Name', :class=>'col-md-4 control-label' %></dt>
 	    <dd><%= f.text_field :delivery_name , :class=>'col-md-8'%></dd>
 	</div>
@@ -61,7 +61,9 @@
 		<dt><%= f.label :delivery_postcode, 'Postal Code', :class=>'col-md-4 control-label' %></dt>
 	    <dd><%= f.text_field :delivery_postcode, :class=>'col-md-8' %></dd>
 		<dt><%= f.label :delivery_country, 'Country', :class=>'col-md-4 control-label' %></dt>
-	    <dd><%= f.collection_select :delivery_country, Shoppe::Country.ordered, :id, :name, :include_blank => true, :class=>'col-md-8'  %></dd>
+	    <dd><%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, {:include_blank => true}, {:data => {:placeholder => t('shoppe.orders.select_country')}} %></dd>
+		
+		
 	</div>
   	</dl>
 
