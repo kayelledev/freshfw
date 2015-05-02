@@ -8,12 +8,35 @@ class OrdersController < ApplicationController
     redirect_to products_path
   end
   
+  def remove
+    @order = current_order
+    puts "in remove method: order #{@order.order_items.first.id} and params #{params}"
+    
+    item = @order.order_items.find(params[:order_item_id])
+    item.destroy 
+    
+    if @order.order_items.empty? 
+      flash.now[:notice] = "You have no more item in the basket."
+    end
+    
+    redirect_to basket_path
+    
+  end
+  
   def checkout
     puts "order id"
     @order = current_order
     
     if request.get? 
-      puts "getting request in checkout: #{@order.separate_delivery_address}"
+      puts current_order.total
+
+      puts "in checkout get or patch request"
+      
+      if current_order.total < 0.01
+        puts "balance is 0"
+        flash[:notice] = "You cannot check out an empty order. Add a room to your basket first."
+        redirect_to products_url
+      end 
       
     end 
     
@@ -23,8 +46,13 @@ class OrdersController < ApplicationController
       #create charges 
       puts "delivery address 1 = #{params[:order][:delivery_address1]}"
       puts "order: #{params[:order]}"
-       if (params[:order][:delivery_address1]!=nil && params[:order][:delivery_postcode]!=nil && params[:order][:delivery_country_id]!=nil)
+       if (params[:order][:delivery_address1]==nil && params[:order][:delivery_postcode]==nil && params[:order][:delivery_country_id]==nil)
+
+         puts "setting separate delivery address to false "
+         @order.separate_delivery_address = false
+       else
          puts "setting separate delivery address to true "
+        
          @order.separate_delivery_address = true
          
        end 
@@ -38,7 +66,7 @@ class OrdersController < ApplicationController
             redirect_to new_charge_path
           
           else
-            flash.now[:notice] = "Could not exchange Stripe token. Please try again."
+            flash.now[:notice] = "Some key information is missing. Please try again."
           end
         
         else
@@ -50,7 +78,8 @@ class OrdersController < ApplicationController
             redirect_to new_charge_path
           
           else
-            flash.now[:notice] = "Could not exchange Stripe token. Please try again."
+            flash.now[:notice] = "Some key information is missing. Please try again."
+            
           end
             
         end
@@ -96,5 +125,4 @@ class OrdersController < ApplicationController
       :order_items_attributes => [:ordered_item_id, :ordered_item_type, :quantity, :unit_price, :tax_amount, :id, :weight]
     )
   end
-  
 end
