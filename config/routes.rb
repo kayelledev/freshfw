@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   #adding products to basket
   get "basket", to: "orders#show"
   delete "basket", to: "orders#destroy"
+  post 'basket/:order_item_id', to: 'orders#remove', as: :remove_from_order
   
   #checking out
   match "checkout", to: "orders#checkout", as: "checkout", via: [:get, :patch]

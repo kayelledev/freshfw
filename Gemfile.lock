@@ -171,6 +171,7 @@ GEM
       polyamorous (~> 1.1)
     rdoc (4.2.0)
       json (~> 1.4)
+    redis (3.2.1)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -228,13 +229,13 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.4)
   byebug
   coffee-rails (~> 4.1.0)
-  haml
   jbuilder (~> 2.0)
   jquery-rails
   pg
   pry
   rails (= 4.2.1)
   rails_12factor
+  redis (~> 3.2.1)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   shoppe!

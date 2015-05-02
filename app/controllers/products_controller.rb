@@ -17,6 +17,8 @@ class ProductsController < ApplicationController
       @t_sku =  params[:varsku]
       if @t_sku == nil 
         @product = Shoppe::Product.find_by_sku!(params[:sku])
+
+        
       else 
         puts @t_sku
         @product = Shoppe::Product.find_by_sku!(params[:varsku])
@@ -26,4 +28,7 @@ class ProductsController < ApplicationController
       
       redirect_to product_path(params[:permalink]), :notice => "Product has been added successfuly!"
     end
+    
+    
+    
 end

@@ -28,7 +28,23 @@
         </div>
         <!-- /.container -->
 	</nav>
-	
   	
   </div>
 </div>
+<header style="background-image: url(http://gofourwalls.com/wp-content/uploads/2015/03/C-Premium-LivingRoom-featured-darkened.jpeg); height: 25em; width: 100%;">
+        <div class="container">
+            <div class="intro-text">
+				<% if request.original_url.include? "checkout" %>
+	                <div class="intro-lead-in">Checkout</div>
+				<% elsif request.original_url.include? "product" %>
+					<div class="intro-lead-in">Rooms</div>
+				<% elsif request.original_url.include? "basket" %>
+					<div class="intro-lead-in">Your Order</div>
+				<% elsif request.original_url.include? "about_us" %>
+					<div class="intro-lead-in">About Us</div>
+				<% else %>
+					<div class="intro-lead-in">Room In A Box</div>
+				<% end %>
+            </div>
+        </div>
+</header>

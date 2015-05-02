@@ -1,6 +1,9 @@
-<%= render 'orderlayout' %>
 <h2 style='padding-left: 2em; padding-top: 1em; '>Your basket</h2>
-<%= render 'final_items', :order => current_order %>
+<% if current_order.order_items.empty? 	%>
+	<div class="row"><div class="col-md-4" style="margin-left: 3em; margin-bottom: 1em;">Your basket is empty</div></div>
+<% else  %>
+	<%= render 'final_items', :order => current_order %>
+<% end %>
 <div class="row">
 <div class="col-md-4" style="margin-left: 3em;"><%= link_to 'Empty basket', basket_path, :method => :delete , :class=> 'btn btn-primary' %><%= link_to "Checkout", checkout_path, :class=> 'btn btn-danger ' %></div>
 </div>

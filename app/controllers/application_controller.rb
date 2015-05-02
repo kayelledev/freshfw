@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
         if has_order?
           @current_order
         else
-          order = Shoppe::Order.create(:ip_address => request.ip)
+          order = Shoppe::Order.create(:ip_address => request.ip) 
           session[:order_id] = order.id
           order
           
