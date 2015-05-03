@@ -11,13 +11,7 @@
   <tbody>
 	<% order.order_items.each do |item| %>
     <tr>
-      <td class="col-md-1">
-		  <input id="qty" type="number" step="1" min="0" value="<%= item.quantity %>" size="4">
-		  <input id="sub" type="hidden" step="1" min="0" value="<%= item.sub_total %>" >
-		  
-		  <!--<input type="number" step="1" min="0" name="quantity" value="<%= item.quantity %>" size="4">-->
-		  
-	  </td>
+      <td class="col-md-1"><%= item.quantity %></td>
       <td class="col-md-6"><%= item.ordered_item.full_name %>
 		  <div style="float: right; ">
 			  <% if request.original_url.include? "basket" %>
@@ -52,7 +46,7 @@
       <td id="total_before_tax"><%= number_to_currency order.total_before_tax %></td>
     </tr>
     <tr>
-      <td colspan='3' style="text-align: right; padding-right: 1em; ">Tax</td>
+      <td colspan='3' style="text-align: right; padding-right: 1em; ">Tax <%= params[:order_tax_rate]%></td>
       <td><%= number_to_currency order.tax %></td>
     </tr>
     <tr>

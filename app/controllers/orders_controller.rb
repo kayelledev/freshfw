@@ -10,9 +10,14 @@ class OrdersController < ApplicationController
   
   def show
     @order = current_order
-    puts "in order controler/show: tax: #{@order.tax}"
     
-    puts "order controler: tax rate: #{params[:order_tax_rate]}"
+    order_tax = 0.0; 
+    @order.order_items.each do |item|
+      item.update(tax_rate: params[:order_tax_rate])
+      order_tax += item.tax_amount
+    end 
+
+    @order.update(tax: order_tax) 
   end 
   
   def remove

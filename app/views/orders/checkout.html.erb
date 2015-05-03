@@ -17,7 +17,7 @@
 		    <dd><%= f.text_field :billing_address3, :class=>'col-md-offset-3 col-md-9' %></dd>
 			<div class="row">
 				<dt><%= f.label :billing_address4, 'Province', :class=>'col-md-3 control-label' %></dt>
-			    <dd><%= f.collection_select :billing_address4, Shoppe::TaxRate.ordered.where(country: 'CA'), :id, :province, :class=>'col-md-9'%></dd>
+			    <dd><%= f.collection_select :billing_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province, :class=>'col-md-9', :selected => @order.billing_address4 %></dd>
 			</div>
 			<div class="row">
 				<dt><%= f.label :billing_postcode, 'Postal Code', :class=>'col-md-3 control-label' %></dt>
@@ -25,7 +25,8 @@
 			</div>
 			<div class="row">
 				<dt><%= f.label :billing_country_id, 'Country', :class=>'col-md-3 control-label' %></dt>
-			    <dd><%= f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => true , :class=>'col-md-9'%></dd>
+				<dd><%= f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false, :class=>'col-md-9', :selected => @order.billing_country %></dd>
+				
 			</div>
 		    <dt><%= f.label :email_address, 'Email', :class=>'col-md-3 control-label' %></dt>
 		    <dd><%= f.text_field :email_address, :class=>'col-md-9' %></dd>
@@ -50,7 +51,7 @@
 		    <dd><%= f.text_field :delivery_address3 , :class=>'col-md-offset-4 col-md-8'%></dd>
 			<div class="row">
 				<dt><%= f.label :delivery_address4, 'Province', :class=>'col-md-4 control-label' %></dt>
-			    <dd><%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'CA'), :id, :province, :class=>'col-md-8'%></dd>
+			    <dd><%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province, :class=>'col-md-8' , :selected => @order.billing_address4 %></dd>
 			</div>
 			<div class="row">
 				<dt><%= f.label :delivery_postcode, 'Postal Code', :class=>'col-md-4 control-label' %></dt>
@@ -58,7 +59,7 @@
 			</div>
 			<div class="row">
 				<dt><%= f.label :delivery_country, 'Country', :class=>'col-md-4 control-label' %></dt>
-			    <dd><%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, {:include_blank => true}, {:data => {:placeholder => t('shoppe.orders.select_country')}} %></dd>
+			    <dd><%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false, :class=>'col-md-9', :selected => @order.billing_country %></dd>
 			</div>
 		</dl>
 		</div>
