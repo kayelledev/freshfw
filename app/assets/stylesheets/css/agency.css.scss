@@ -888,3 +888,10 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: #fed136;
 }
+
+/* custom for Four Walls */
+.highlight_box {
+	border: 5px solid #fed136;
+	border-radius: 10px;
+	padding: 10px;
+}
