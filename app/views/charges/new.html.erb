@@ -5,7 +5,7 @@
 	  <% puts @params 
 	  @order = current_order %>
     <label class="amount">
-      <span>Amount: <%= @order.total%></span>
+      <span>Amount: <%= number_with_precision(@order.total, precision: 2) %></span>
     </label>
   </article>
 
