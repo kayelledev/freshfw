@@ -11,6 +11,8 @@ class OrdersController < ApplicationController
   def show
     @order = current_order
     puts "in order controler/show: tax: #{@order.tax}"
+    
+    puts "order controler: tax rate: #{params[:order_tax_rate]}"
   end 
   
   def remove

@@ -35,5 +35,8 @@ module Fwstore
     config.facebookpath = 'https://www.facebook.com/gofourwalls/'
     config.pinterestpath = 'https://www.pinterest.com/gofourwalls/'
     
+    # default state and country
+    config.country = 'Canada'
+    config.state_code = 'ON'
   end
 end
