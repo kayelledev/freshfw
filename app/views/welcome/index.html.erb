@@ -16,7 +16,7 @@
         <div class="carousel-caption">
           <h1>Tired of furniture shopping?</h1>
           <h2>Shop from the comfort of your home</h2>
-          <p><a class="btn btn-xl" href="<%= link_to "Shop now", products_url, class: "btn btn-xl center"%></a></p>
+          <p><a class="btn btn-xl center" href="<%= products_url %>">Shop now</a></p>
         </div>
       </div>
     </div>
@@ -73,85 +73,37 @@
             </div>
         </div>
         <div class="row text-center">
-            <div class="col-md-4">
-                <!--<span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                </span>-->
-		        <h2>Basic</h2>
-		        <h3>$1499</h3>
-		        <h5>Room size 7'x9' or 60+ sqr.ft.</h5>
-				<h5>Includes 3 essential furniture items</h5>
-		        <!--<table width="100%" style="margin-bottom:0px;">
-		          <tbody>
-		            <tr>
-		            <td width="30%"></td>
-		            <td width="65%">
-		              <h4 align="left">&#10004; Sofa </h4>
-		              <h4 align="left">&#10004; Coffee Table </h4>
-		              <h4 align="left">&#10004; TV Stand </h4>
-		            </td>
-		          </td>
-		          </tbody>
-		        </table>-->
+            <div class="col-md-4" style="padding: 5px; ">
+                <div class="highlight_box">
+			        <h2>Basic</h2>
+			        <h3>$1499</h3>
+			        <h5>Room size 7'x9' or 60+ sqr.ft.</h5>
+					<h5>Includes 3 essential furniture items</h5>
+				</div>
             </div>
-            <div class="col-md-4">
-                <!--<span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                </span>-->
-		        <h2>Regular</h2>
-		        <h3>$1999</h3>
-		        <h5>Room size 8'x9' or 70+ sqr.ft.</h5>
-				<h5>Includes 5 or more furniture items</h5>
-		          <!--<table width="100%" style="margin-bottom:0px;">
-		          <tbody>
-		            <tr>
-		            <td width="30%"></td>
-		            <td width="65%">
-		              <h4 align="left">&#10004; Sofa </h4>
-		              <h4 align="left">&#10004; Coffee Table </h4>
-		              <h4 align="left">&#10004; TV Stand </h4>
-		              <h4 align="left">&#10004; Floor Lamp </h4>
-		              <h4 align="left">&#10004; Occasional Table*</h4>
-		            </td>
-		          </td>
-		          </tbody>
-		        </table>-->
+           <div class="col-md-4" style="padding: 5px; ">
+                <div class="highlight_box">
+			        <h2>Regular</h2>
+			        <h3>$1999</h3>
+			        <h5>Room size 8'x9' or 70+ sqr.ft.</h5>
+					<h5>Includes 5 or more furniture items</h5>
+				</div>
+		        <h5 style="background-color: #777777; color: #fff; text-align: center; margin-top: 2px; padding: 6px; ">BEST VALUE</h5>
             </div>
-            <div class="col-md-4">
-                <!--<span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                </span>-->
-		        <h2>Premium</h2>
-		        <h3>$2499</h3>
-		        <h5>Room size 9'x11' or 90+ sqr.ft.</h5>
-		        <h5>Includes 9 or more furniture items</h5>
-			    <!--<table width="100%" style="margin-bottom:0px;">
-		          <tbody>
-		            <tr>
-		            <td width="30%"></td>
-		            <td width="65%">
-		              <h4 align="left">&#10004; Sofa </h4>
-		              <h4 align="left">&#10004; Coffee Table </h4>
-		              <h4 align="left">&#10004; TV Stand </h4>
-		              <h4 align="left">&#10004; Floor Lamp </h4>
-		              <h4 align="left">&#10004; Occasional Table*</h4>
-		              <h4 align="left">&#10004; Area Rug</h4>
-		              <h4 align="left">&#10004; Dining Table </h4>
-		              <h4 align="left">&#10004; 2 or 4 Dining Chairs</h4>
-		            </td>
-		          </td>
-		          </tbody>
-		        </table>-->
+            <div class="col-md-4" style="padding: 5px; ">
+                <div class="highlight_box">
+			        <h2>Premium</h2>
+			        <h3>$2499</h3>
+			        <h5>Room size 9'x11' or 90+ sqr.ft.</h5>
+			        <h5>Includes 9 or more furniture items</h5>
+				</div>
             </div>
         </div>
-		<!--<p align="left">*An occasional table can be a side table or a console table</p>-->
+		
     </div>
 </section>
 
-<section style="background-image: url(https://s3.amazonaws.com/gofourwalls/globalimages/banner-autumn-livingdining-dark.jpg); opacity: .8; margin: 0; width: 100%; height: auto;">
+<section style="background-image: url(https://s3.amazonaws.com/gofourwalls/globalimages/banner-autumn-livingdining-dark.jpg); opacity: .8; margin: 0; width: 100%; height: 20em;">
 	
 	<!-- Begin MailChimp Signup Form -->
 	<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
@@ -160,7 +112,7 @@
 		/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
 		   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
 	</style>
-	<div id="mc_embed_signup" style="background: none; ">
+	<div id="mc_embed_signup" style="background: none; margin-top: -8em;">
 	<form action="//gofourwalls.us9.list-manage.com/subscribe/post?u=2925a3a7e8e3d72d2bf106eca&amp;id=82d02b4614" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 	    <div id="mc_embed_signup_scroll">
 		<h2 style="color: #fff; font-size: 24px; text-align: center; font-style: Montserrat; ">Join our mailing list </h2>
@@ -239,9 +191,9 @@
                     </li>
                     <li class="timeline-inverted">
                         <div class="timeline-image" style="background-color: #000; opacity: .7;">
-                            <h4>Get your
+                            <a href="<%= products_url %>" style="color: #fff; "><h4>Get your
                                 <br>room in a box
-                                <br>now!</h4>
+                                <br>now!</h4></a>
                         </div>
                     </li>
                 </ul>

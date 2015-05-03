@@ -19,9 +19,11 @@
 		  
 	  </td>
       <td class="col-md-6"><%= item.ordered_item.full_name %>
-		  <% if request.original_url.include? "basket" %>
-			<%= link_to 'Destroy', remove_from_order_path(item.id),method: :post %>
-		<% end %>
+		  <div style="float: right; ">
+			  <% if request.original_url.include? "basket" %>
+				<%= link_to 'Remove', remove_from_order_path(item.id),method: :post %>
+			<% end %>
+		</div>
 		</td>
       <td id="sub_total" class="col-md-1"><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></td>
       <!--<td><%= number_to_currency item.tax_amount %></td>-->

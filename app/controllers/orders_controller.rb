@@ -8,6 +8,11 @@ class OrdersController < ApplicationController
     redirect_to products_path
   end
   
+  def show
+    @order = current_order
+    puts "in order controler/show: tax: #{@order.tax}"
+  end 
+  
   def remove
     @order = current_order
     puts "in remove method: order #{@order.order_items.first.id} and params #{params}"
