@@ -1,4 +1,6 @@
-<h2>Place your order</h2>
-<%= render 'items', :order => current_order %>
-<% params.merge(:order => current_order)%>
-<%= link_to "Place order", checkout_confirmation_path, :method => :post %>
+<div class="container">	  
+	<h2>Place your order</h2>
+	<%= render 'items', :order => current_order %>
+	<% params.merge(:order => current_order)%>
+	<%= link_to "Place order", checkout_confirmation_path, :method => :post %>
+</div>

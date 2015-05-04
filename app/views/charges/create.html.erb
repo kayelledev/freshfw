@@ -1,4 +1,7 @@
-<h2>Thank you for your payment. </h2>
-<%= render 'orders/final_items', :order => current_order %>
-<% current_order.confirm!
-   session[:order_id] = nil %>
+<div class="container">	  
+
+	<h2>Thank you for your payment. </h2>
+	<%= render 'orders/final_items', :order => current_order %>
+	<% current_order.confirm!
+	   session[:order_id] = nil %>
+</div>

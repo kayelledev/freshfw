@@ -35,11 +35,15 @@ class ApplicationController < ActionController::Base
     helper_method :current_order, :has_order?
   
     def set_tax_rate(ip_address, order)
-      puts "application contoller: ip address: #{ip_address} params: #{params} and geo: #{Geocoder.search(ip_address).first.state}"
-      @user_city = Geocoder.search(ip_address).first.city
-      @user_state = Geocoder.search(ip_address).first.state_code
-      @user_country = Geocoder.search(ip_address).first.country
-
+      begin 
+        @user_city = Geocoder.search(ip_address).first.city
+        @user_state = Geocoder.search(ip_address).first.state_code
+        @user_country = Geocoder.search(ip_address).first.country
+      rescue 
+        @user_city = 'Toronto'
+        @user_state = Rails.application.config.province
+        @user_country = Rails.application.config.country
+      end 
       @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
 
       puts "show the db tax rate for ON: #{@db_tax_rate}"

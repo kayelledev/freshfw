@@ -1,0 +1,58 @@
+<table width='80%' border='1' style='margin: 3em; padding: 2em;' class="table-responsive">
+  <thead>
+    <tr>
+      <td class="col-md-1">Quantity</td>
+      <td class="col-md-6">Product</td>
+      <td class="col-md-1">Unit Price</td>
+      <!--<td>Tax</td>-->
+      <td class="col-md-1">Total</td>
+    </tr>
+  </thead>
+  <tbody>
+	<% order.order_items.each do |item| %>
+    <tr>
+      <td class="col-md-1"><%= item.quantity %></td>
+      <td class="col-md-6"><%= item.ordered_item.full_name %>
+		  <div style="float: right; ">
+			  <% if request.original_url.include? "basket" %>
+				<%= link_to 'Remove', remove_from_order_path(item.id),method: :post %>
+			<% end %>
+		</div>
+		</td>
+      <td id="sub_total" class="col-md-1"><%= number_to_currency(item.unit_price, unit: "$", format: "%u%n") %></td>
+      <!--<td><%= number_to_currency item.tax_amount %></td>-->
+      <td id="item_total" class="col-md-1"><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></script></td>
+	  
+    </tr>
+    <% end %>
+	
+	<!-- deliver servie (calculate later) -->
+    <% if order.delivery_service %>
+    <tr>
+      <td></td>
+      <td><%= order.delivery_service.name %></td>
+      <td><%= number_to_currency order.delivery_price %></td>
+      <td><%= number_to_currency order.delivery_tax_amount %></td>
+      <td><%= number_to_currency order.delivery_price + order.delivery_tax_amount %></td>
+    </tr>
+    <% end  %>
+	<!-- end deliver servie -->
+  </tbody>
+  
+  <tfoot>
+    <tr>
+      <td colspan='3' style="text-align: right; padding-right: 1em; ">Sub-Total</td>
+	  <input id="before_tax" type="hidden" value="<%= order.total_before_tax %>" >
+      <td id="total_before_tax"><%= number_to_currency order.total_before_tax %></td>
+    </tr>
+    <tr>
+      <td colspan='3' style="text-align: right; padding-right: 1em; ">Tax <%= params[:order_tax_rate]%></td>
+      <td><%= number_to_currency order.tax %></td>
+    </tr>
+    <tr>
+      <td colspan='3' style="text-align: right; padding-right: 1em; ">Total</td>
+      <td><%= number_to_currency order.total %></td>
+    </tr>
+  </tfoot>
+</table>
+
