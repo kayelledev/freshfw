@@ -1,20 +1,14 @@
 <div class="container">	  
 	<h2 style='padding-left: 2em; padding-top: 1em; '>Step 3 of 3: Make Payment</h2>
-	<div class="row" style='margin: 3em; padding: 2em;'>
+  <% puts @params 
+  @order = current_order %>
+  	<%= render 'orders/final_items', :order => @order %>
+	<div class="row" style="float: right; margin-right: 6em;">
 	<%= form_tag charges_path do %>
-	  <article>
-		  <% puts @params 
-		  @order = current_order %>
-	    <label class="amount">
-	      <span>Amount: <%= number_with_precision(@order.total, precision: 2) %></span>
-	    </label>
-	  </article>
-
 	  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 	          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
 	          data-description="<%=@order.first_name %>"
-	          data-amount="<%=@order.total*100%>"></script>
+	          data-amount="<%=@order.total*100%>"></script>  
 	<% end %>
-
 	</div>
 </div>

@@ -80,7 +80,7 @@ class OrdersController < ApplicationController
           
           else
             flash.now[:notice] = "Some key information is missing. Please try again."
-            redirect_to checkout_path
+            
           end
         
         else
@@ -93,7 +93,6 @@ class OrdersController < ApplicationController
           
           else
             flash.now[:notice] = "Some key information is missing. Please try again."
-            redirect_to checkout_path
             
           end
             
