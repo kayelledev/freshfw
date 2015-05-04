@@ -1,30 +1,43 @@
-<table width='80%' border='1' style='margin: 3em; padding: 2em;' class="table-responsive">
-  <thead>
-    <tr>
-      <td class="col-md-1">Quantity</td>
-      <td class="col-md-6">Product</td>
-      <td class="col-md-1">Price</td>
-      <!--<td>Tax</td>-->
-      <td class="col-md-1">Total</td>
-    </tr>
-  </thead>
-  <tbody>
-	<% order.order_items.each do |item| %>
-    <tr>
-      <td class="col-md-1"><%= item.quantity %></td>
-      <td class="col-md-6"><%= item.ordered_item.full_name %>
-		  <div style="float: right; ">
-			  <% if request.original_url.include? "basket" %>
-				<%= link_to 'Remove', remove_from_order_path(item.id),method: :post %>
-			<% end %>
-		</div>
-		</td>
-      <td id="sub_total" class="col-md-1"><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></td>
-      <!--<td><%= number_to_currency item.tax_amount %></td>-->
-      <td id="item_total" class="col-md-1"><%= number_to_currency(item.total, unit: "$", format: "%u%n") %></script></td>
-	  
-    </tr>
-    <% end %>
+<div class="table-responsive cart_info">			
+	<table class="table table-condensed">
+		<thead>
+			<tr class="cart_menu">
+				<td class="image">Item</td>
+				<td class="description"></td>
+				<td class="price">Price</td>
+				<td class="quantity">Quantity</td>
+				<td class="total">Total</td>
+				<td></td>
+			</tr>
+		</thead>
+		<tbody>
+		<% order.order_items.each do |item| %>
+		<tr>
+			<td class="cart_product" style="width: 120px; height: auto;">
+				<a href="<%= product_path(item.ordered_item.permalink) %>"><img src="<%= item.ordered_item.default_image.path %>" class="img-responsive thumbnail" alt="<%= item.ordered_item.full_name %>"></a>
+			</td>
+			<td class="cart_description">
+				<h4><a href="<%= product_path(item.ordered_item.permalink) %>"><%= item.ordered_item.full_name %></a></h4>
+				<p>sku: <%= item.ordered_item.sku %></p>
+			</td>
+			<td class="cart_price">
+				<p><%= number_to_currency(item.unit_price, unit: "$", format: "%u%n") %></p>
+			</td>
+			<td class="cart_quantity">
+				<div class="cart_quantity_button">
+					<p class="cart_quantity_up"><%= item.quantity %></p>
+				</div>
+			</td>
+			<td class="cart_total">
+				<p class="cart_total_price"><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></p>
+			</td>
+			<td class="cart_delete">
+			    <% if request.original_url.include? "basket" %>
+					<a class="cart_quantity_delete" href="<%= remove_from_order_path(item.id) %>"><i class="fa fa-times"></i></a>
+				<% end %>
+			</td>
+		</tr>
+	    <% end %>
 	
 	<!-- deliver servie (calculate later) -->
     <% if order.delivery_service %>
@@ -41,18 +54,18 @@
   
   <tfoot>
     <tr>
-      <td colspan='3' style="text-align: right; padding-right: 1em; ">Sub-Total</td>
+      <td colspan='4' style="text-align: right; padding-right: 1em; ">Sub-Total</td>
 	  <input id="before_tax" type="hidden" value="<%= order.total_before_tax %>" >
-      <td id="total_before_tax"><%= number_to_currency order.total_before_tax %></td>
+      <td id="total_before_tax"><%=  number_to_currency(order.total_before_tax, unit: '$', format: '%u%n') %></td>
     </tr>
     <tr>
-      <td colspan='3' style="text-align: right; padding-right: 1em; ">Tax <%= params[:order_tax_rate]%></td>
-      <td><%= number_to_currency order.tax %></td>
+      <td colspan='4' style="text-align: right; padding-right: 1em; ">Tax <%= params[:order_tax_rate]%>%</td>
+      <td><%= number_to_currency(order.tax, unit: "$", format: "%u%n") %></td>
     </tr>
     <tr>
-      <td colspan='3' style="text-align: right; padding-right: 1em; ">Total</td>
-      <td><%= number_to_currency order.total %></td>
+      <td colspan='4' style="text-align: right; padding-right: 1em; ">Total</td>
+      <td><%= number_to_currency(order.total, unit: "$", format: "%u%n") %></td>
     </tr>
   </tfoot>
 </table>
-
+</div>

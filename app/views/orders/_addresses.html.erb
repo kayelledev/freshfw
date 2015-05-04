@@ -1,0 +1,37 @@
+<%= form_for @order, :url => checkout_path, :class=> 'form-horizontal' do |f| %>
+
+	<div class="row"><%= f.error_messages %></div>
+	<div class="row">
+		<div class="col-md-6" style="padding: 5px; ">
+			<h5>Billing Address</h5>
+			<dl>
+			    <dd><%= f.text_field :first_name, :class=>'col-md-10', placeholder: 'First Name' %></dd>
+				<dd><%= f.text_field :last_name, :class=>'col-md-10', placeholder: 'Last Name' %></dd>
+			    <dd><%= f.text_field :billing_address1 , :class=>'col-md-10', placeholder: 'Address 1 *'%></dd>
+			    <dd><%= f.text_field :billing_address2 , :class=>'col-md-10', placeholder: 'Address 2'%></dd>
+				<dd class="col-md-10"><%= f.collection_select :billing_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province %></dd>
+				<dd><%= f.text_field :billing_postcode, :class=>'col-md-10', placeholder: 'Postal Code / Zipcode'%></dd>
+				<dd class="col-md-10" style="float: left; "><%= f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false, placeholder: 'Country' %></dd>
+			    <dd><%= f.text_field :email_address, :class=>'col-md-10', placeholder: 'Email Address' %></dd>
+			    <dd><%= f.text_field :phone_number, :class=>'col-md-10', placeholder: 'Phone Number' %></dd>
+			</dl>
+		</div>
+		
+		<div class="col-md-6" style="padding: 5px; ">
+			<h5>Shipping Address</h5>			
+			<dl>
+				<!-- Delivery Address -->
+				<dt><%= f.label :separate_label, 'If delivery address is different:', :class=>'col-md-10' %></dt>
+				<dd><%= f.text_field :delivery_name, :class=>'col-md-10', placeholder: 'Contact Name' %></dd>
+				<dd><%= f.text_field :delivery_address1, :class=>'col-md-10', placeholder: 'Address 1 *' %></dd>
+				<dd><%= f.text_field :delivery_address3 , :class=>'col-md-10', placeholder: 'Address 2' %></dd>
+				<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province %></dd>
+				<dd><%= f.text_field :delivery_postcode, :class=>'col-md-10', placeholder: 'Postal Code / Zipcode'%></dd>
+				<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false %></dd>
+			</dl>
+		</div>
+	</div>
+	<div class="row col-md-6" style="margin-top: 1em;">
+		<dd><%= f.submit 'Continue', :class => 'btn btn-xl center' %><%= link_to "Back to cart", cart_path, class: 'back-link' %></dd>
+	</div>
+<% end %>

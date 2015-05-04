@@ -22,6 +22,13 @@
     <% @product.variants.each do |variant| %>
       <%= render 'variant_info', product: variant %>
     <% end %>
+	<div class="content inside-page product-details">
+	<div class="breadcrumb" style="background: none; "><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %></div>	
+	<div class="row">
+		<div class="col-md-8">
+			<div id="ProductCarousel" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="item active"><img src="<%= @product.default_image.path %>" class="img-responsive" alt="<%= @product.name %>"></div>
 
     <p>
       <% root_product.variants.each do |variant| %>
@@ -44,8 +51,4 @@
     </div>
   </div>
 
-
-  </div>
 </div>
-
-<p><%= link_to "Back to list", products_url %></p>

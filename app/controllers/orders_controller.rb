@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   def destroy
     current_order.destroy
     session[:order_id] = nil
+    flash[:notice] = "Your cart has been emptied."
     #redirect_to root_path, :notice => "Basket emptied successfully."
     redirect_to products_path
   end
@@ -28,10 +29,10 @@ class OrdersController < ApplicationController
     item.destroy 
     
     if @order.order_items.empty? 
-      flash.now[:notice] = "You have no more item in the basket."
+      flash.now[:notice] = "You have no more item in the cart."
     end
     
-    redirect_to basket_path
+    redirect_to cart_path
     
   end
   
@@ -46,7 +47,7 @@ class OrdersController < ApplicationController
       
       if current_order.total < 0.01
         puts "balance is 0"
-        flash[:notice] = "You cannot check out an empty order. Add a room to your basket first."
+        flash[:notice] = "You cannot check out an empty order. Add a room to your cart first."
         redirect_to products_url
       end 
       
@@ -79,6 +80,7 @@ class OrdersController < ApplicationController
           
           else
             flash.now[:notice] = "Some key information is missing. Please try again."
+            redirect_to checkout_path
           end
         
         else
@@ -91,6 +93,7 @@ class OrdersController < ApplicationController
           
           else
             flash.now[:notice] = "Some key information is missing. Please try again."
+            redirect_to checkout_path
             
           end
             
