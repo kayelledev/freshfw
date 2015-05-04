@@ -25,9 +25,13 @@ class ChargesController < ApplicationController
     @order = current_order
     puts "in charges create controller "
     
-    
     begin
       @amount = helper.number_with_precision(@order.total*100, precision: 0)
+      
+      if params[:stripeEmail]==nil
+        params[:stripeEmail]= current_order.email_address  
+      end 
+      
       @customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
         :card  => params[:stripeToken]
@@ -36,7 +40,7 @@ class ChargesController < ApplicationController
       @charge = Stripe::Charge.create(
         :customer    => @customer.id,
         :amount      => @amount,
-        :description => @order.first_name,
+        :description => "#{@order.first_name}'s Order",
         :currency    => 'cad'
       )
       
