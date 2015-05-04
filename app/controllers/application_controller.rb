@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
         @user_country = Geocoder.search(ip_address).first.country
       rescue 
         @user_city = 'Toronto'
-        @user_state = Rails.application.config.province
+        @user_state = Rails.application.config.state_code
         @user_country = Rails.application.config.country
       end 
       @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     
         end 
       else
-        order.billing_address4 = Rails.application.config.province
+        order.billing_address4 = Rails.application.config.state_code
       end
 
       params[:order_tax_rate] = @db_tax_rate
