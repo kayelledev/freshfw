@@ -14,7 +14,7 @@
 	  				<%  if product.has_variants? %>
 	  				   <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
 	  				<% else%>
-				    	<p><%= link_to "", product_path(:permalink => product.permalink, :sku => product.sku), :method => :post, :class => "btn btn-xl fa fa-shopping-cart" %>
+				    	<p><%= link_to "", buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl fa fa-shopping-cart" %>
 							<b style="margin-left: 10px; "><%= number_to_currency(product.price, unit: "$", format: "%u%n") %></b>
 						</p>
 					<% end %>	
