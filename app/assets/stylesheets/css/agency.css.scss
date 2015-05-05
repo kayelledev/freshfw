@@ -888,3 +888,29 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: #fed136;
 }
+
+/* custom for Four Walls */
+.highlight_box {
+	border: 5px solid #fed136;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.back-link {
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+	color: #777777;
+	margin: 0px 10px;
+}
+
+.btn-second {
+    padding: 20px 40px;
+    border-color: #777777;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #777777;
+}

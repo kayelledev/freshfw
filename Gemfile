@@ -30,10 +30,8 @@ gem 'bootstrap-sass', '~> 3.3.4'
 #gem "shoppe-stripe", require: "shoppe/stripe"
 gem 'shoppe', path: "shoppe"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
-gem 'haml'
-
-#for Heroku
-gem 'rails_12factor', group: :production
+gem 'redis', '~> 3.2.1'
+gem 'geocoder'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,51 +1,49 @@
 <% content_for :custom_scripts do %>
   <%= javascript_include_tag 'products/products.js' %>
 <% end %>
-<%= render 'product_header' %>
 
 <div class="container">
 
 
   <div class="content inside-page product-details">
-  <div class="breadcrumb"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
-  </div>
-  <div class="row">
-
-    <div id='product-gallery'>
-      <%= render 'variant_gallery', product: @product %>
+    <div class="breadcrumb" style="background: none; "><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
     </div>
 
-    <div class="col-md-4">
+    <div class="row">
 
-    <%= render 'variant_info', product: @product %>
+      <div id='product-gallery'>
+        <%= render 'variant_gallery', product: @product %>
+      </div>
 
-    <% @product.variants.each do |variant| %>
-      <%= render 'variant_info', product: variant %>
-    <% end %>
+      <div class="col-md-4">
 
-    <p>
-      <% root_product.variants.each do |variant| %>
-        <%= radio_button_tag :varsku, variant.sku, variant.default? %>
-        <%= variant.permalink %>
+        <%= render 'variant_info', product: @product %>
 
-      <% end %>
-    </p>
-
-    <div class="clearfix">
-      <div class="pull-left">
-        <%  if @product.has_variants? %>
-           <%= link_to "Add To Cart", buy_product_path(@product.default_variant.permalink), method: :post, :class => "fa fa-shopping-cart btn btn-danger", id: :buy %>
-        <% else%>
-          <%= link_to "Add To Cart", buy_product_path(@product.permalink), method: :post, :class => "fa fa-shopping-cart btn btn-danger" %>
+        <% @product.variants.each do |variant| %>
+          <%= render 'variant_info', product: variant %>
         <% end %>
 
-        <a href="mailto:info@gofourwalls.com" class="btn btn-primary fa fa-envelope">Email Us</a>
+        <p>
+          <% root_product.variants.each do |variant| %>
+            <%= radio_button_tag :varsku, variant.sku, variant.default? %>
+            <%= variant.permalink %>
+
+          <% end %>
+        </p>
+
+        <div class="clearfix">
+          <div class="pull-left">
+            <%  if @product.has_variants? %>
+               <%= link_to "Add To Cart", buy_product_path(@product.default_variant.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart", id: :buy %>
+            <% else%>
+              <%= link_to "Add To Cart", buy_product_path(@product.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart" %>
+            <% end %>
+
+            <a href="mailto:info@gofourwalls.com" class="btn btn-second fa fa-envelope">Email Us</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
-
-
-  </div>
 </div>
-
-<p><%= link_to "Back to list", products_url %></p>

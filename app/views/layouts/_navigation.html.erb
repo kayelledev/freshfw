@@ -2,7 +2,7 @@
   <div class="container">
 
 	<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container-fluid">
+        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -20,7 +20,7 @@
                     <li><%= link_to "Shop", products_url, class: "active"%></li>
                     <li><%= link_to "About Us", about_us_url, class: "active"%></li>
                     <li><%= link_to "My Account", products_url, class: "active"%></li>
-                    <li><%= link_to "Basket (#{current_order.total_items})", basket_path, class: "active"%></li>
+                    <li><%= link_to "Cart (#{current_order.total_items})", cart_path, class: "active"%></li>
                     <li><%= link_to "Checkout", checkout_path %></li>
                 </ul>
             </div>
@@ -28,7 +28,25 @@
         </div>
         <!-- /.container -->
 	</nav>
-	
   	
   </div>
 </div>
+<% if request.original_url != "#{request.base_url}/" || request.original_url==request.base_url %>
+<header style="background-image: url(http://gofourwalls.com/wp-content/uploads/2015/03/C-Premium-LivingRoom-featured-darkened.jpeg); height: 25em; width: 100%;">
+        <div class="container">
+            <div class="intro-text">
+				<% if request.original_url.include? "checkout" %>
+	                <div class="intro-lead-in">Checkout</div>
+				<% elsif request.original_url.include? "product" %>
+					<div class="intro-lead-in">Rooms</div>
+				<% elsif request.original_url.include? "basket" %>
+					<div class="intro-lead-in">Your Order</div>
+				<% elsif request.original_url.include? "about_us" %>
+					<div class="intro-lead-in">About Four Walls</div>
+				<% else %>
+					<div class="intro-lead-in">Room In A Box</div>
+				<% end %>
+            </div>
+        </div>
+</header>
+<% end %>
