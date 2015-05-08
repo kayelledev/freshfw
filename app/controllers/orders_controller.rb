@@ -37,7 +37,6 @@ class OrdersController < ApplicationController
   end
   
   def checkout
-    puts "order id"
     @order = current_order
     
     if request.get? 
@@ -57,8 +56,12 @@ class OrdersController < ApplicationController
     
     if request.patch?
       #create charges 
+      binding_pry
+    
       puts "delivery address 1 = #{params[:order][:delivery_address1]}"
       puts "order: #{params[:order]}"
+      puts "order id: sep delivery? #{@order.separate_delivery_address}"
+    
        if (params[:order][:delivery_address1]==nil && params[:order][:delivery_postcode]==nil && params[:order][:delivery_country_id]==nil)
 
          puts "setting separate delivery address to false "
