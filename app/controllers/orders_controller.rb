@@ -69,17 +69,17 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
-      if (params[:order][:delivery_address1]==nil && params[:order][:delivery_postcode]==nil && params[:order][:delivery_country_id]==nil)
-        puts "setting separate delivery address to false "
-        @order.separate_delivery_address = false
-      else
+      if delivery_address_params?
         puts "setting separate delivery address to true "
         @order.separate_delivery_address = true
+      else
+        puts "setting separate delivery address to false "
+        @order.separate_delivery_address = false
       end
 
-      if !@order.separate_delivery_address
+      if @order.separate_delivery_address
 
-        if @order.proceed_to_confirm(params[:order].permit(:first_name, :last_name, :billing_address1, :billing_address2, :billing_address3, :billing_address4, :billing_country_id, :billing_postcode, :email_address, :phone_number))
+        if @order.proceed_to_confirm(with_deliver_params)
           #redirect_to checkout_payment_path
           puts "no separate delivery address"
 
@@ -91,11 +91,11 @@ class OrdersController < ApplicationController
 
       else
         puts "* separate delivery address  #{params}"
-        if @order.proceed_to_confirm(params[:order].permit(:first_name, :last_name, :billing_address1, :billing_address2, :billing_address3, :billing_address4, :billing_country_id, :billing_postcode, :email_address, :phone_number, :separate_delivery_address, :delivery_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id, :delivery_price, :delivery_service_id, :delivery_tax_amount))
+
+        if @order.proceed_to_confirm(without_deliver_params)
           #redirect_to checkout_payment_path
           puts "order controller = checkout / request = patch = getting ready for new charge path "
           redirect_to new_charge_path
-
         else
           flash.now[:notice] = "Some key information is missing. Please try again."
         end
@@ -139,5 +139,36 @@ class OrdersController < ApplicationController
       :notes,
       :order_items_attributes => [:ordered_item_id, :ordered_item_type, :quantity, :unit_price, :tax_amount, :id, :weight]
     )
+  end
+
+  def without_deliver_params
+    params[:order].permit(
+      :first_name, :last_name,
+      :billing_address1, :billing_address2,
+      :billing_address3, :billing_address4,
+      :billing_country_id, :billing_postcode,
+      :email_address, :phone_number
+    )
+  end
+
+  def with_deliver_params
+    params[:order].permit(
+      :first_name, :last_name,
+      :billing_address1, :billing_address2,
+      :billing_address3, :billing_address4,
+      :billing_country_id, :billing_postcode,
+      :email_address, :phone_number,
+      :separate_delivery_address, :delivery_name,
+      :delivery_address1, :delivery_address2, :delivery_address3,
+      :delivery_address4, :delivery_postcode, :delivery_country_id,
+      :delivery_price, :delivery_service_id, :delivery_tax_amount
+    )
+  end
+
+  def delivery_address_params?
+    return false unless params[:order][:delivery_address1].try(&:present?)
+    return false unless params[:order][:delivery_postcode].try(&:present?)
+    return false unless params[:order][:delivery_country_id].try(&:present?)
+    true
   end
 end
