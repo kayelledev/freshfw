@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
     
     if request.patch?
       #create charges 
-      binding_pry
+      # binding_pry
     
       puts "delivery address 1 = #{params[:order][:delivery_address1]}"
       puts "order: #{params[:order]}"
