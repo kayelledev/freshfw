@@ -171,7 +171,8 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default {
     border-color: transparent;
-    background-color: #222;
+    background-color: #777;
+	opacity: 0.85;
 }
 
 .navbar-default .navbar-brand {
@@ -913,4 +914,29 @@ body {
     font-weight: 700;
     color: #ffffff;
     background-color: #777777;
+}
+
+.breadcrumb-fw {
+  padding: 10px 0px;
+  margin-bottom: 20px;
+  list-style: none;
+  border-radius: 4px;
+  color: #333;
+}
+
+/* line 6, /Users/KayElle/Web_Development/GitHub/fwapp/vendor/assets/stylesheets/bootstrap.min.css.scss */
+.breadcrumb-fw > li {
+  display: inline-block;
+}
+
+/* line 6, /Users/KayElle/Web_Development/GitHub/fwapp/vendor/assets/stylesheets/bootstrap.min.css.scss */
+.breadcrumb-fw > li + li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "/\00a0";
+}
+
+/* line 6, /Users/KayElle/Web_Development/GitHub/fwapp/vendor/assets/stylesheets/bootstrap.min.css.scss */
+.breadcrumb-fw > .active {
+  color: #777;
 }

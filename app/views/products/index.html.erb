@@ -8,17 +8,15 @@
 		  <ul>
 		    <% products.each do |product| %>
 			<div class="col-md-4 col-sm-6 portfolio-item">
-			    <li>
-			      <h4><%= link_to product.name, product_path(product.permalink) %></h4>
-				  <p><a href="<%= product_path(product.permalink) %>"><img src="<%= product.default_image.path %>" class="img-responsive" style="width: 100%; height: auto;" alt="<%= product.full_name %>"></a></p>
-	  				<%  if product.has_variants? %>
-	  				   <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
-	  				<% else%>
-				    	<p><%= link_to "", buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl fa fa-shopping-cart" %>
-							<b style="margin-left: 10px; "><%= number_to_currency(product.price, unit: "$", format: "%u%n") %></b>
-						</p>
-					<% end %>	
-			    </li>
+		      <h4 style="color: #333;" ><%= link_to product.name, product_path(product.permalink) %></h4>
+			  <p ><a href="<%= product_path(product.permalink) %>"><img src="<%= product.default_image.path %>" class="img-responsive" style="width: 100%; height: auto;" alt="<%= product.full_name %>"></a></p>
+  				<%  if product.has_variants? %>
+  				   <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
+  				<% else%>
+			    	<p><%= link_to "", buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl fa fa-shopping-cart" %>
+						<b style="margin-left: 10px; "><%= number_to_currency(product.price, unit: "$", format: "%u%n") %></b>
+					</p>
+				<% end %>	
 			</div>
 		    <% end %>
 		  </ul>

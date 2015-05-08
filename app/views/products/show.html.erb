@@ -6,23 +6,14 @@
 
 
   <div class="content inside-page product-details">
-    <div class="breadcrumb" style="background: none; "><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
+    <div class="breadcrumb-fw" style="color: #333;"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
     </div>
 
+    <div class="row" style="margin: 0 10px;">
+	  <h2 ><%= @product.name %></h2>
+	</div>
     <div class="row">
-
-      <div id='product-gallery'>
-        <%= render 'variant_gallery', product: @product %>
-      </div>
-
       <div class="col-md-4">
-
-        <%= render 'variant_info', product: @product %>
-
-        <% @product.variants.each do |variant| %>
-          <%= render 'variant_info', product: variant %>
-        <% end %>
-
         <p>
           <% root_product.variants.each do |variant| %>
             <%= radio_button_tag :varsku, variant.sku, variant.default? %>
@@ -30,9 +21,16 @@
 
           <% end %>
         </p>
+        <%= render 'variant_info', product: @product %>
+
+        <% @product.variants.each do |variant| %>
+          <%= render 'variant_info', product: variant %>
+        <% end %>
+
+        
 
         <div class="clearfix">
-          <div class="pull-left">
+          <div class="pull-left" style="margin-top: 2em;">
             <%  if @product.has_variants? %>
                <%= link_to "Add To Cart", buy_product_path(@product.default_variant.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart", id: :buy %>
             <% else%>
@@ -43,6 +41,10 @@
           </div>
         </div>
 
+      </div>
+
+      <div id='product-gallery'>
+        <%= render 'variant_gallery', product: @product %>
       </div>
     </div>
   </div>

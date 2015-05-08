@@ -21,13 +21,16 @@
 			<h5>Shipping Address</h5>			
 			<dl>
 				<!-- Delivery Address -->
-				<dt><%= f.label :separate_label, 'If delivery address is different:', :class=>'col-md-10' %></dt>
-				<dd><%= f.text_field :delivery_name, :class=>'col-md-10', placeholder: 'Contact Name' %></dd>
-				<dd><%= f.text_field :delivery_address1, :class=>'col-md-10', placeholder: 'Address 1 *' %></dd>
-				<dd><%= f.text_field :delivery_address3 , :class=>'col-md-10', placeholder: 'Address 2' %></dd>
-				<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province %></dd>
-				<dd><%= f.text_field :delivery_postcode, :class=>'col-md-10', placeholder: 'Postal Code / Zipcode'%></dd>
-				<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false %></dd>
+				<dt><%= f.label :separate_delivery_address, 'If delivery address is different:', :class=>'col-md-10' %></dt>
+				<dd><%= f.check_box :separate_delivery_address, id: 'separate_delivery_address_checkbox' %></dd>
+				<div id="delivery" style="display: none;" >
+					<dd><%= f.text_field :delivery_name, :class=>'col-md-10', placeholder: 'Contact Name' %></dd>
+					<dd><%= f.text_field :delivery_address1, :class=>'col-md-10', placeholder: 'Address 1 *' %></dd>
+					<dd><%= f.text_field :delivery_address3 , :class=>'col-md-10', placeholder: 'Address 2' %></dd>
+					<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province %></dd>
+					<dd><%= f.text_field :delivery_postcode, :class=>'col-md-10', placeholder: 'Postal Code / Zipcode'%></dd>
+					<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false %></dd>
+				</div>
 			</dl>
 		</div>
 	</div>
@@ -35,3 +38,17 @@
 		<dd><%= f.submit 'Continue', :class => 'btn btn-xl center' %><%= link_to "Back to cart", cart_path, class: 'back-link' %></dd>
 	</div>
 <% end %>
+
+
+<script type="text/javascript">
+
+var checkbox = document.getElementById('separate_delivery_address_checkbox');
+var delivery_div = document.getElementById('delivery');
+checkbox.onclick = function() {
+   if(this.checked) {
+     delivery_div.style['display'] = 'block';
+   } else {
+     delivery_div.style['display'] = 'none';
+   }
+};
+</script>
