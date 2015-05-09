@@ -9,16 +9,23 @@
     <div class="breadcrumb-fw" style="color: #333;"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
     </div>
 
-    <div class="row" style="margin: 0 10px;">
+    <div class="row" style="margin: 0 0px;">
 	  <h2 ><%= @product.name %></h2>
+	  <br>
 	</div>
     <div class="row">
       <div class="col-md-4">
+	    <p><%= @product.description %></p>
+		<br>
+		<% if @product.has_variants? %>
+			<h4>Options</h4>
+		<% end %>
         <p>
           <% root_product.variants.each do |variant| %>
+		  <div style="display: block;">
             <%= radio_button_tag :varsku, variant.sku, variant.default? %>
-            <%= variant.permalink %>
-
+            <%= variant.name %> 
+			</div>
           <% end %>
         </p>
         <%= render 'variant_info', product: @product %>

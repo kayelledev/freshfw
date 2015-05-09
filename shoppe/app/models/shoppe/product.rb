@@ -9,6 +9,9 @@ module Shoppe
     require_dependency 'shoppe/product/product_attributes'
     require_dependency 'shoppe/product/variants'
 
+    #mount Carrierwave uploader
+    mount_uploader :image, ImageUploader
+    
     # Products have a default_image and a data_sheet
     attachment :default_image
     attachment :image2
