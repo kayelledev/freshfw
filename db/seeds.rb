@@ -6,12 +6,15 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Create tax rate for Ontario
 tax_rate = Shoppe::TaxRate.create!(:name => "HST", :rate => 13.0, :province => "ON", :country => "Canada")
-lorem = 'A high style living room with walnut and neutral finishes complemented by chrome and glass pieces to create an eclectic style. Every piece is durable and functional, allowing a casual lifestyle.'
 
 cat1 = Shoppe::ProductCategory.create!(:name => 'Living Rooms')
 
-pro = cat1.products.create!(:name => 'Casual Eclectic', :sku => '1000100', :permalink => 'casual-eclectic', :description => lorem, :short_description => 'A casual eclectic living room', :featured => true)
+# Casual Eclectic Living Room
+desc_casual_eclectic = 'A high style living room with walnut and neutral finishes complemented by chrome and glass pieces to create an eclectic style. Every piece is durable and functional, allowing a casual lifestyle.'
+
+pro = cat1.products.create!(:name => 'Casual Eclectic', :sku => '1000100', :permalink => 'casual-eclectic', :description => desc_casual_eclectic, :short_description => 'A casual eclectic living room', :featured => true)
 pro.save!
 
 v1 = pro.variants.create(:name => "Full Style & Function", :sku => "1000201", :permalink => 'casual-electic-full', :price => 1999.00, :tax_rate => tax_rate, :default => true)

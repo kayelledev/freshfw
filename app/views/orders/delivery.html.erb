@@ -1,0 +1,10 @@
+<div class="container">	  
+
+	<h2 style='padding-left: 2em; padding-top: 1em; '>Step 3 of 4: Select Delivery Method</h2>
+	<%= render 'final_items', :order => @order %>
+	<p>Shipping to: <%= @order.delivery_address1%>, <%= @order.delivery_address3 %>, <%= @order.delivery_address4 %>, <%= @order.delivery_postcode %>, <%= @order.delivery_country.name %></p>
+	<div class="col-md-6" style="padding: 5px; ">
+		<h5>Delivery Methods: </h5>			
+		
+	</div>
+</div>

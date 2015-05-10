@@ -69,6 +69,7 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
+      #TODO Michael - since separate_delivery_address should be determiend by the checkbox on views/orders/checkout.html, this section should be removed. 
       if delivery_address_params?
         puts "setting separate delivery address to true "
         @order.separate_delivery_address = true
