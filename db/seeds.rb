@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-tax_rate = Shoppe::TaxRate.create!(:name => "HST", :rate => 13.0)
+tax_rate = Shoppe::TaxRate.create!(:name => "HST", :rate => 13.0, :province => "ON", :country => "Canada")
 lorem = 'A high style living room with walnut and neutral finishes complemented by chrome and glass pieces to create an eclectic style. Every piece is durable and functional, allowing a casual lifestyle.'
 
 cat1 = Shoppe::ProductCategory.create!(:name => 'Living Rooms')
