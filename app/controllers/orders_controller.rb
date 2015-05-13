@@ -69,37 +69,17 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
-      if delivery_address_params?
-        puts "setting separate delivery address to true "
-        @order.separate_delivery_address = true
+      @order.separate_delivery_address = delivery_address_params?
+
+      proceed_params = @order.separate_delivery_address ?
+        with_deliver_params : without_deliver_params
+
+      if @order.proceed_to_confirm(proceed_params)
+        redirect_to new_charge_path
       else
-        puts "setting separate delivery address to false "
-        @order.separate_delivery_address = false
+        flash.now[:notice] = "Some key information is missing. Please try again."
       end
 
-      if @order.separate_delivery_address
-
-        if @order.proceed_to_confirm(with_deliver_params)
-          #redirect_to checkout_payment_path
-          puts "no separate delivery address"
-
-          redirect_to new_charge_path
-
-        else
-          flash.now[:notice] = "Some key information is missing. Please try again."
-        end
-
-      else
-        puts "* separate delivery address  #{params}"
-
-        if @order.proceed_to_confirm(without_deliver_params)
-          #redirect_to checkout_payment_path
-          puts "order controller = checkout / request = patch = getting ready for new charge path "
-          redirect_to new_charge_path
-        else
-          flash.now[:notice] = "Some key information is missing. Please try again."
-        end
-      end
     end
   end
 
@@ -160,8 +140,7 @@ class OrdersController < ApplicationController
       :email_address, :phone_number,
       :separate_delivery_address, :delivery_name,
       :delivery_address1, :delivery_address2, :delivery_address3,
-      :delivery_address4, :delivery_postcode, :delivery_country_id,
-      :delivery_price, :delivery_service_id, :delivery_tax_amount
+      :delivery_address4, :delivery_postcode, :delivery_country_id
     )
   end
 
