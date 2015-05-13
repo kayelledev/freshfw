@@ -4,6 +4,7 @@ module ProductsHelper
   end
 
   def product_visibility product
-    product.parent ? 'none' : 'block'
+    return 'none' if product.has_variants?
+    (product.default? || !product.parent)? 'block' : 'none'
   end
 end
