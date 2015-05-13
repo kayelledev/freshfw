@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
-      @order.separate_delivery_address = delivery_address_params?
+      @order.separate_delivery_address = params[:order][:separate_delivery_address]
 
       proceed_params = @order.separate_delivery_address ?
         with_deliver_params : without_deliver_params

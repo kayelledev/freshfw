@@ -5,10 +5,10 @@
 		<div class="col-md-6" style="padding: 5px; ">
 			<h5>Billing Address</h5>
 			<dl>
-			    <dd><%= f.text_field :first_name, :class=>'col-md-10', placeholder: 'First Name' %></dd>
+			  <dd><%= f.text_field :first_name, :class=>'col-md-10', placeholder: 'First Name' %></dd>
 				<dd><%= f.text_field :last_name, :class=>'col-md-10', placeholder: 'Last Name' %></dd>
-			    <dd><%= f.text_field :billing_address1 , :class=>'col-md-10', placeholder: 'Address 1 *'%></dd>
-			    <dd><%= f.text_field :billing_address2 , :class=>'col-md-10', placeholder: 'Address 2'%></dd>
+			  <dd><%= f.text_field :billing_address1 , :class=>'col-md-10', placeholder: 'Address 1 *'%></dd>
+			  <dd><%= f.text_field :billing_address2 , :class=>'col-md-10', placeholder: 'Address 2'%></dd>
 				<dd class="col-md-10"><%= f.collection_select :billing_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province %></dd>
 				<dd><%= f.text_field :billing_postcode, :class=>'col-md-10', placeholder: 'Postal Code / Zipcode'%></dd>
 				<dd class="col-md-10" style="float: left; "><%= f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false, placeholder: 'Country' %></dd>
@@ -16,17 +16,16 @@
 			    <dd><%= f.text_field :phone_number, :class=>'col-md-10', placeholder: 'Phone Number' %></dd>
 			</dl>
 		</div>
-		
+
 		<div class="col-md-6" style="padding: 5px; ">
-			<h5>Shipping Address</h5>			
+			<h5>Shipping Address</h5>
 			<dl>
-				<!-- Delivery Address -->
 				<dt><%= f.label :separate_delivery_address, 'If delivery address is different:', :class=>'col-md-10' %></dt>
 				<dd><%= f.check_box :separate_delivery_address, id: 'separate_delivery_address_checkbox' %></dd>
 				<div id="delivery" style="display: none;" >
-					<dd><%= f.text_field :delivery_name, :class=>'col-md-10', placeholder: 'Contact Name' %></dd>
+					<dd><%= f.text_field :delivery_name, :class=>'col-md-10', placeholder: 'Contact Name *', value: '' %></dd>
 					<dd><%= f.text_field :delivery_address1, :class=>'col-md-10', placeholder: 'Address 1 *' %></dd>
-					<dd><%= f.text_field :delivery_address3 , :class=>'col-md-10', placeholder: 'Address 2' %></dd>
+					<dd><%= f.text_field :delivery_address2, :class=>'col-md-10', placeholder: 'Address 2 *' %></dd>
 					<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province %></dd>
 					<dd><%= f.text_field :delivery_postcode, :class=>'col-md-10', placeholder: 'Postal Code / Zipcode'%></dd>
 					<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false %></dd>
@@ -56,6 +55,9 @@
 
 var checkbox = document.getElementById('separate_delivery_address_checkbox');
 var delivery_div = document.getElementById('delivery');
+
+delivery_div.style['display'] = checkbox.checked ? 'block' : 'none'
+
 checkbox.onclick = function() {
    if(this.checked) {
      delivery_div.style['display'] = 'block';
