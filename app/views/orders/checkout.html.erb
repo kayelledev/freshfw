@@ -1,7 +1,14 @@
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag 'checkout/items_refresh' %>
+<% end %>
+
 <div class="container">	  
 
 	<h2 style='padding-left: 2em; padding-top: 1em; '>Step 2 of 3: Add Billing and Delivery Info</h2>
-	<%= render 'final_items', :order => @order %>
-	<%= render 'addresses', :order => @order %>
-	
+
+  <div id='final_items'>
+    <%= render 'final_items', :order => @order %>
+	</div>
+
+  <%= render 'addresses', :order => @order %>
 </div>

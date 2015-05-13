@@ -83,6 +83,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  def refresh_items
+    @order = current_order
+    @order.update(delivery_service_id: params[:delivery_service_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def payment
     @order = current_order
     puts @order.id
