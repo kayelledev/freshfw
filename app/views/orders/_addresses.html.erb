@@ -39,7 +39,7 @@
 		<h5> Delivery Service </h5>
 		<% @order.available_delivery_services.each do |service| %>
 		  <div style="display: block;" data-refresh-path="<%= refresh_order_items_path(@order) %>">
-        <%= f.radio_button :delivery_service_id, service.id, checked: service.default? %>
+        <%= f.radio_button :delivery_service_id, service.id, checked: (current_system(@order, service) ||service.default?)  %>
         <%= "#{service.name}
           ( #{number_to_currency(service.delivery_service_prices.first.price)} $ )" %>
 			</div>
