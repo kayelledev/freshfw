@@ -16,12 +16,17 @@
       %dl.third
         %dt= f.label :sku, t('shoppe.variants.sku')
         %dd= f.text_field :sku, :class => 'text'
+    %dl
+      %dt= f.label :in_the_box, t('shoppe.variants.in_the_box')
+      %dd= f.text_area :in_the_box, :class => 'text'
 
   = field_set_tag t('shoppe.variants.image') do
     %dl
       %dd
         = attachment_preview @variant.default_image, :hide_if_blank => true
         %p= f.file_field :default_image_file
+	
+	  
   = field_set_tag t("shoppe.variants.pricing") do
     .splitContainer
       %dl.third

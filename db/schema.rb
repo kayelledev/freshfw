@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503043309) do
+ActiveRecord::Schema.define(version: 20150509200008) do
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -217,6 +217,13 @@ ActiveRecord::Schema.define(version: 20150503043309) do
     t.text     "in_the_box"
     t.boolean  "stock_control",                               default: true
     t.boolean  "default",                                     default: false
+    t.string   "default_image"
+    t.string   "image2"
+    t.string   "image3"
+    t.string   "image4"
+    t.string   "image5"
+    t.string   "image6"
+    t.string   "image"
   end
 
   add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id"

@@ -88,6 +88,20 @@
         %dd
           = attachment_preview @product.image6
           %p= f.file_field :image6_file
+  = field_set_tag t('shoppe.products.images') do
+    .splitContainer
+      %dl.half
+        %dt= f.label :image, t('shoppe.products.image'), :class => 'attachmentPreview'
+        %dd
+          = link_to image_tag (@product.image.thumb.url), :class => 'imageContainer'
+          %p= f.file_field :image
+          %p= f.hidden_field :image_cache
+      %dl.half
+        %dt= f.label :image, t('shoppe.products.image'), :class => 'attachmentPreview'
+        %dd
+          = link_to image_tag (@product.image.thumb.url), :class => 'imageContainer'
+          %p= f.file_field :image
+          %p= f.hidden_field :image_cache
 
   - unless @product.has_variants?
     = field_set_tag t('shoppe.products.pricing') do

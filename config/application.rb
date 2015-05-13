@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'fog/aws'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -38,5 +39,6 @@ module FourWalls
     # default state and country
     config.country = 'Canada'
     config.state_code = 'ON'
+    
   end
 end
