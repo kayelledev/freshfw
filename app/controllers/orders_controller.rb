@@ -127,7 +127,8 @@ class OrdersController < ApplicationController
       :billing_address1, :billing_address2,
       :billing_address3, :billing_address4,
       :billing_country_id, :billing_postcode,
-      :email_address, :phone_number
+      :email_address, :phone_number,
+      :delivery_service_id
     )
   end
 
@@ -140,7 +141,8 @@ class OrdersController < ApplicationController
       :email_address, :phone_number,
       :separate_delivery_address, :delivery_name,
       :delivery_address1, :delivery_address2, :delivery_address3,
-      :delivery_address4, :delivery_postcode, :delivery_country_id
+      :delivery_address4, :delivery_postcode, :delivery_country_id,
+      :delivery_service_id
     )
   end
 

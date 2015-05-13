@@ -34,6 +34,18 @@
 			</dl>
 		</div>
 	</div>
+
+	<div class='col-md-12' style='padding: 5px;'>
+		<h5> Delivery Service </h5>
+		<% @order.available_delivery_services.each do |service| %>
+		  <div style="display: block;">
+        <%= f.radio_button :delivery_service_id, service.id, checked: service.default? %>
+        <%= "#{service.name}
+          ( #{number_to_currency(service.delivery_service_prices.first.price)} $ )" %>
+			</div>
+    <% end %>
+	</div>
+
 	<div class="row col-md-6" style="margin-top: 1em;">
 		<dd><%= f.submit 'Continue', :class => 'btn btn-xl center' %><%= link_to "Back to cart", cart_path, class: 'back-link' %></dd>
 	</div>
