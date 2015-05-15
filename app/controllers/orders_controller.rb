@@ -69,6 +69,7 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
+<<<<<<< HEAD
       #TODO Michael - since separate_delivery_address should be determiend by the checkbox on views/orders/checkout.html, this section should be removed. 
       if delivery_address_params?
         puts "setting separate delivery address to true "
@@ -77,30 +78,28 @@ class OrdersController < ApplicationController
         puts "setting separate delivery address to false "
         @order.separate_delivery_address = false
       end
+=======
+      @order.separate_delivery_address = params[:order][:separate_delivery_address]
+>>>>>>> 17a9f079ddf5c3c0aa97f7958976256542fa52b9
 
-      if @order.separate_delivery_address
+      proceed_params = @order.separate_delivery_address ?
+        with_deliver_params : without_deliver_params
 
-        if @order.proceed_to_confirm(with_deliver_params)
-          #redirect_to checkout_payment_path
-          puts "no separate delivery address"
-
-          redirect_to new_charge_path
-
-        else
-          flash.now[:notice] = "Some key information is missing. Please try again."
-        end
-
+      if @order.proceed_to_confirm(proceed_params)
+        redirect_to new_charge_path
       else
-        puts "* separate delivery address  #{params}"
-
-        if @order.proceed_to_confirm(without_deliver_params)
-          #redirect_to checkout_payment_path
-          puts "order controller = checkout / request = patch = getting ready for new charge path "
-          redirect_to new_charge_path
-        else
-          flash.now[:notice] = "Some key information is missing. Please try again."
-        end
+        flash.now[:notice] = "Some key information is missing. Please try again."
       end
+
+    end
+  end
+
+  def refresh_items
+    @order = current_order
+    @order.update(delivery_service_id: params[:delivery_service_id])
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -148,7 +147,8 @@ class OrdersController < ApplicationController
       :billing_address1, :billing_address2,
       :billing_address3, :billing_address4,
       :billing_country_id, :billing_postcode,
-      :email_address, :phone_number
+      :email_address, :phone_number,
+      :delivery_service_id
     )
   end
 
@@ -162,7 +162,7 @@ class OrdersController < ApplicationController
       :separate_delivery_address, :delivery_name,
       :delivery_address1, :delivery_address2, :delivery_address3,
       :delivery_address4, :delivery_postcode, :delivery_country_id,
-      :delivery_price, :delivery_service_id, :delivery_tax_amount
+      :delivery_service_id
     )
   end
 

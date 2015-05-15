@@ -1,0 +1,1 @@
+$(document).ready(function(){$('input[name="order[delivery_service_id]"]').change(function(e){var r=$(e.target).parent().data("refreshPath"),t=$(e.target).val();$.post(r,{delivery_service_id:t})})});
