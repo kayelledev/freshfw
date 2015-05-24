@@ -1,5 +1,5 @@
 class ChangeIncludedToInteger < ActiveRecord::Migration
   def change
-    change_column :shoppe_products, :included, :string, array: true, :default = {}
+    change_column :shoppe_products, :included, :string, array: true, default: nil 
   end
 end
