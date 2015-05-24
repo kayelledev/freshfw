@@ -51,8 +51,12 @@
 	    <% if @product.included != nil && @product.included != "" %>
 		     <div class="col-full"><h2 >What's Included: </h2></div>
 	    	 <% items = @product.included.from(1).to(-2) %>
-		   	 <% item_array = Array.new 
-		   	 item_array = items.scan(/\d+/) %>
+		   	 <% item_array = Array.new %>
+
+			 array: <%= items %>
+		   	 <% if item_array != nil 
+				 item_array = items.scan(/\d+/) 
+			 end %>
 		   	 <% item_array.each do |i|%>
 		   		<% item = Shoppe::Product.find(i.to_i) %>
 
