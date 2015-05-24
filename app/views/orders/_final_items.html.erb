@@ -1,12 +1,12 @@
 <div class="table-responsive cart_info">			
-	<table class="table table-condensed">
+	<table class="table table-condensed" style="margin-top: 20px; font-stye: bold;">
 		<thead>
 			<tr class="cart_menu">
-				<td class="image">Item</td>
-				<td class="description"></td>
-				<td class="price">Price</td>
-				<td class="quantity">Quantity</td>
-				<td class="total">Total</td>
+				<td class="image"><h5>Item</h5></td>
+				<td class="description"><h5>Description</h5></td>
+				<td class="price"><h5>Price</h5></td>
+				<td class="quantity"><h5>Quantity</h5></td>
+				<td class="total" style="text-align: right; "><h5>Total</h5></td>
 				<td></td>
 			</tr>
 		</thead>
@@ -14,7 +14,7 @@
 		<% order.order_items.each do |item| %>
 		<tr>
 			<td class="cart_product" style="width: 120px; height: auto;">
-				<a href="<%= product_path(item.ordered_item.permalink) %>"><img src="<%= item.ordered_item.default_image.path %>" class="img-responsive thumbnail" alt="<%= item.ordered_item.full_name %>"></a>
+				<a href="<%= product_path(item.ordered_item.permalink) %>"><%= image_tag item.ordered_item.default_image.thumb, class: "img-responsive thumbnail", alt: "#{item.ordered_item.full_name}" %></a>
 			</td>
 			<td class="cart_description">
 				<h4><a href="<%= product_path(item.ordered_item.permalink) %>"><%= item.ordered_item.full_name %></a></h4>
@@ -25,11 +25,11 @@
 			</td>
 			<td class="cart_quantity">
 				<div class="cart_quantity_button">
-					<p class="cart_quantity_up"><%= item.quantity %></p>
+					<p class="cart_quantity_up" style="margin-left: 30px; "><%= item.quantity %></p>
 				</div>
 			</td>
 			<td class="cart_total">
-				<p class="cart_total_price"><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></p>
+				<p class="cart_total_price" style="text-align: right; "><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></p>
 			</td>
 			<td class="cart_delete">
 			    <% if request.original_url.include? "basket" %>
@@ -43,10 +43,10 @@
     <% if order.delivery_service %>
     <tr>
       <td></td>
-      <td><%= order.delivery_service.name %></td>
-      <td><%= number_to_currency order.delivery_price %></td>
-      <td><%= number_to_currency order.delivery_tax_amount %></td>
-      <td><%= number_to_currency order.delivery_price + order.delivery_tax_amount %></td>
+      <td class="cart_description"><p><%= order.delivery_service.name %> Delivery</p></td>
+      <td class="cart_price"><%= number_to_currency(order.delivery_price, unit: "$", format: "%u%n") %></td>
+      <td class="cart_quantity"></td>
+      <td class="cart_total" style="text-align: right; "><%= number_to_currency(order.delivery_price, unit: "$", format: "%u%n") %></td>
     </tr>
     <% end  %>
 	<!-- end deliver servie -->
@@ -56,15 +56,15 @@
     <tr>
       <td colspan='4' style="text-align: right; padding-right: 1em; ">Sub-Total</td>
 	  <input id="before_tax" type="hidden" value="<%= order.total_before_tax %>" >
-      <td id="total_before_tax"><%=  number_to_currency(order.total_before_tax, unit: '$', format: '%u%n') %></td>
+      <td id="total_before_tax" style="text-align: right; "><%=  number_to_currency(order.total_before_tax, unit: '$', format: '%u%n') %></td>
     </tr>
     <tr>
       <td colspan='4' style="text-align: right; padding-right: 1em; ">Tax <%= params[:order_tax_rate]%>%</td>
-      <td><%= number_to_currency(order.tax, unit: "$", format: "%u%n") %></td>
+      <td style="text-align: right; "><%= number_to_currency(order.tax + order.delivery_tax_amount, unit: "$", format: "%u%n") %></td>
     </tr>
     <tr>
       <td colspan='4' style="text-align: right; padding-right: 1em; "><b>Total</b></td>
-      <td><b><%= number_to_currency(order.total, unit: "$", format: "%u%n") %></b></td>
+      <td style="text-align: right; "><b><%= number_to_currency(order.total, unit: "$", format: "%u%n") %></b></td>
     </tr>
   </tfoot>
 </table>

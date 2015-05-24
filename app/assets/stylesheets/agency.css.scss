@@ -930,20 +930,11 @@ body {
 }
 
 .breadcrumb-fw {
-  padding: 8em 0 10px 0;
+  padding: 10px 0 10px 0;
   margin-bottom: 20px;
   list-style: none;
   border-radius: 4px;
   color: #333;
-}
-@media (max-width: 768px) {
-	.breadcrumb-fw {
-	  padding: 5em 0 10px 0;
-	  margin-bottom: 20px;
-	  list-style: none;
-	  border-radius: 4px;
-	  color: #333;
-	}
 }
 
 /* line 6, /Users/KayElle/Web_Development/GitHub/fwapp/vendor/assets/stylesheets/bootstrap.min.css.scss */
