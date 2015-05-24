@@ -54,11 +54,17 @@
 		   	 <% item_array = Array.new %>
 
 			 array: <%= items %>
-		   	 <% if item_array != nil 
+		   	 <% if items.is_a? String 
 				 item_array = items.scan(/\d+/) 
+			 elsif items.is_a? Array
+				 items_array = items 
 			 end %>
 		   	 <% item_array.each do |i|%>
-		   		<% item = Shoppe::Product.find(i.to_i) %>
+	   		   	 <% if items.is_a? String 
+			   		 item = Shoppe::Product.find(i.to_i) %>
+	   			 <% elsif items.is_a? Array
+			   		 item = Shoppe::Product.find(i) %> 
+	   			 <% end %>
 
 		   		    <div class="row">
 		   		       	<div class="col-md-3"><a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image, class: "img-responsive", alt: "product" %></a></div>
