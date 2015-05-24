@@ -1,10 +1,15 @@
+/ Declare Variable
+/- furniture_category_id = Shoppe::ProductCategory.find_by_name('Furniture').id
+/- furniture_items = Shoppe::Product.where(:product_category_id == furniture_category_id)
+
 = form_for @product, :html => {:multipart => true} do |f|
+
   = f.error_messages
   = field_set_tag  t('shoppe.products.product_information') do
     %dl
       %dt= f.label :product_category_id, t('shoppe.products.product_category')
       %dd= f.collection_select :product_category_id, Shoppe::ProductCategory.ordered, :id, :name, {:prompt => false}, {:class => 'chosen'}
-
+    
     .splitContainer
       %dl.third
         %dt= f.label :name, t('shoppe.products.name')
@@ -49,60 +54,51 @@
               %td= text_field_tag 'product[product_attributes_array][][key]', attribute.key, :placeholder => t('shoppe.products.name')
               %td= text_field_tag 'product[product_attributes_array][][value]', attribute.value, :placeholder => t('shoppe.products.value')
               %td.searchable= check_box_tag 'product[product_attributes_array][][searchable]', '1', attribute.searchable?
-              %td.searchable= check_box_tag 'product[product_attributes_array][][public]', '1', attribute.public?
+              %td.public= check_box_tag 'product[product_attributes_array][][public]', '1', attribute.public?
               %td.remove= link_to t("shoppe.remove"), '#', :class => 'button button-mini purple'
               %td.handle
       %p.addAttribute= link_to t('shoppe.products.add_attribute') , '#', :data => {:behavior => 'addAttributeToAttributesTable'}, :class => 'button button-mini green'
 
-  = field_set_tag t('shoppe.products.attachments') do
-    .splitContainer
-      %dl.half
-        %dt= f.label :default_image_file, t('shoppe.products.default_image')
-        %dd
-          = attachment_preview @product.default_image
-          %p= f.file_field :default_image_file
-      %dl.half
-        %dt= f.label :image2_file, t('shoppe.products.image_2')
-        %dd
-          = attachment_preview @product.image2
-          %p= f.file_field :image2_file
-	  
-      %dl.half
-        %dt= f.label :image3_file, t('shoppe.products.image_3')
-        %dd
-          = attachment_preview @product.image3
-          %p= f.file_field :image3_file
-      %dl.half
-        %dt= f.label :image4_file, t('shoppe.products.image_4')
-        %dd
-          = attachment_preview @product.image4
-          %p= f.file_field :image4_file
-	  
-      %dl.half
-        %dt= f.label :image5_file, t('shoppe.products.image_5')
-        %dd
-          = attachment_preview @product.image5
-          %p= f.file_field :image5_file
-      %dl.half
-        %dt= f.label :image6_file, t('shoppe.products.image_6')
-        %dd
-          = attachment_preview @product.image6
-          %p= f.file_field :image6_file
+
   = field_set_tag t('shoppe.products.images') do
     .splitContainer
       %dl.half
-        %dt= f.label :image, t('shoppe.products.image'), :class => 'attachmentPreview'
+        %dt= f.label :default_image, t('shoppe.products.default_image'), :class => 'attachmentPreview'
         %dd
-          = link_to image_tag (@product.image.thumb.url), :class => 'imageContainer'
-          %p= f.file_field :image
-          %p= f.hidden_field :image_cache
+          = link_to image_tag (@product.default_image.thumb.url), :class => 'imageContainer'
+          %p= f.file_field :default_image
+          %p= f.hidden_field :default_image_cache
       %dl.half
-        %dt= f.label :image, t('shoppe.products.image'), :class => 'attachmentPreview'
+        %dt= f.label :image2, t('shoppe.products.image_2'), :class => 'attachmentPreview'
         %dd
-          = link_to image_tag (@product.image.thumb.url), :class => 'imageContainer'
-          %p= f.file_field :image
-          %p= f.hidden_field :image_cache
-
+          = link_to image_tag (@product.image2.thumb.url), :class => 'imageContainer'
+          %p= f.file_field :image2
+          %p= f.hidden_field :image2_cache
+      %dl.half
+        %dt= f.label :image3, t('shoppe.products.image_3'), :class => 'attachmentPreview'
+        %dd
+          = link_to image_tag (@product.image3.thumb.url), :class => 'imageContainer'
+          %p= f.file_field :image3
+          %p= f.hidden_field :image3_cache
+      %dl.half
+        %dt= f.label :image4, t('shoppe.products.image_4'), :class => 'attachmentPreview'
+        %dd
+          = link_to image_tag (@product.image4.thumb.url), :class => 'imageContainer'
+          %p= f.file_field :image4
+          %p= f.hidden_field :image4_cache
+      %dl.half
+        %dt= f.label :image5, t('shoppe.products.image_5'), :class => 'attachmentPreview'
+        %dd
+          = link_to image_tag (@product.image5.thumb.url), :class => 'imageContainer'
+          %p= f.file_field :image5
+          %p= f.hidden_field :image5_cache
+      %dl.half
+        %dt= f.label :image6, t('shoppe.products.image_6'), :class => 'attachmentPreview'
+        %dd
+          = link_to image_tag (@product.image6.thumb.url), :class => 'imageContainer'
+          %p= f.file_field :image6
+          %p= f.hidden_field :image6_cache	
+	  
   - unless @product.has_variants?
     = field_set_tag t('shoppe.products.pricing') do
       .splitContainer
@@ -137,7 +133,7 @@
   = field_set_tag  t('shoppe.products.website_properties') do
     .splitContainer
       %dl.half
-        %dt= f.label :active,  t('shoppe.products.on_sale?')
+        %dt= f.label :active,  t('shoppe.products.active?')
         %dd.checkbox
           = f.check_box :active
           = f.label :active,  t('shoppe.products.on_sale_info')
@@ -146,6 +142,22 @@
         %dd.checkbox
           = f.check_box :featured
           = f.label :featured, t('shoppe.products.featured_info')
+		  
+  - if room_categories.include? Shoppe::ProductCategory.find_by_id(@product.product_category_id).permalink
+    - if @product.included == nil
+      - @product.included = []
+    = field_set_tag  t('shoppe.products.furniture_included') do
+      .splitContainer
+      - for item in Shoppe::Product.all.order("product_category_id ASC")
+        - cat2 = Shoppe::ProductCategory.find_by_id(item.product_category_id)
+        - if cat2 != nil
+          - if furniture_categories.include? cat2.permalink
+            %dl.third
+              %dt= f.label :furniture_included, t("#{cat2.name}: #{item.name} (#{item.sku})")
+              %dd=check_box_tag 'included[]', item.id, (@product.included.include? item.id.to_s )
+              %dd=item.name 
+              %dt= link_to image_tag (item.default_image.thumb.url), :class => 'imageContainer'
+            
 
   %p.submit
     - unless @product.new_record?

@@ -29,6 +29,10 @@ module Shoppe
 
     def update
       if @variant.update(safe_params)
+
+        @variant.update(included: "#{params[:included]}")
+        @variant.save
+        
         redirect_to edit_product_variant_path(@product, @variant), :notice => t('shoppe.variants.update_notice')
       else
         render :action => "form"
@@ -43,7 +47,7 @@ module Shoppe
     private
 
     def safe_params
-      params[:product].permit(:name, :permalink, :sku, :default_image_file, :price, :cost_price, :in_the_box, :tax_rate_id, :weight, :stock_control, :active, :default)
+      params[:product].permit(:name, :permalink, :sku, :default_image, :price, :cost_price, :in_the_box, :tax_rate_id, :weight, :stock_control, :active, :default, :included=>[])
     end
 
   end

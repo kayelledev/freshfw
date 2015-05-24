@@ -5,30 +5,28 @@
 	    <li data-target="#ProductCarousel" data-slide-to="1"></li>
 	    <li data-target="#ProductCarousel" data-slide-to="2"></li>
 	  </ol>
-	  <div class="carousel-inner" role="listbox" style="min-width: 100%; min-height: 100%; ">
-	      <div class="item active" ><img src="<%= product.default_image.path %>" class="first-slide img-responsive" alt="<%= product.name %>"></div>
+	  <div class="carousel-inner" role="listbox" style="min-width: 100%; min-height: 100%;">
+	      <div class="item active" ><%= image_tag product.default_image,  class: "img-responsive", alt: "product" %></div>
 
 	      <% if product.image2 %>
-	        <div class="item"><img src="<%= product.image2.path %>"  class="img-responsive" alt="product"></div>
+	        <div class="item" style="margin: auto; padding: auto;"><%= image_tag product.image2, class: "img-responsive", alt: "product" %></div>
 	      <% end %>
 	      <% if product.image3 %>
-	        <div class="item"><img src="<%= product.image3.path %>"  class="img-responsive" alt="product"></div>
+	        <div class="item"><%= image_tag product.image3, class: "img-responsive", alt: "product" %></div>
 	      <% end %>
 	      <% if product.image4 %>
-	        <div class="item"><img src="<%= product.image4.path %>"  class="img-responsive" alt="product"></div>
+	        <div class="item"><%= image_tag product.image4, class: "img-responsive", alt: "product" %></div>
 	      <% end %>
 	      <% if product.image5 %>
-	        <div class="item"><img src="<%= product.image5.path %>"  class="img-responsive" alt="product"></div>
+	        <div class="item"><%= image_tag product.image5, class: "img-responsive", alt: "product" %></div>
 	      <% end %>
 	      <% if product.image6 %>
-	        <div class="item"><img src="<%= product.image6.path %>"  class="img-responsive" alt="product"></div>
-	      <% end %>
-	      <% if product.image %>
-	        <div class="item"><img src="<%= product.image %>"  class="img-responsive" alt="product"></div>
+	        <div class="item"><%= image_tag product.image6, class: "img-responsive", alt: "product" %></div>
 	      <% end %>
 	    </div>
 	    <!-- Controls -->
 	    <a class="left carousel-control" href="#ProductCarousel" role="button" data-slide="prev"><i class="glyphicon glyphicon-chevron-left" style="vertical-align: middle; "></i></a>
 	    <a class="right carousel-control" href="#ProductCarousel" role="button" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 	</div>
+	 
 </div>

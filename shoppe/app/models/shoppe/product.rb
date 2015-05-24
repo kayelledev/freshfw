@@ -10,15 +10,20 @@ module Shoppe
     require_dependency 'shoppe/product/variants'
 
     #mount Carrierwave uploader
-    mount_uploader :image, ImageUploader
+    mount_uploader :default_image, ImageUploader
+    mount_uploader :image2, ImageUploader
+    mount_uploader :image3, ImageUploader
+    mount_uploader :image4, ImageUploader
+    mount_uploader :image5, ImageUploader
+    mount_uploader :image6, ImageUploader
     
     # Products have a default_image and a data_sheet
-    attachment :default_image
-    attachment :image2
-    attachment :image3
-    attachment :image4
-    attachment :image5
-    attachment :image6
+    #attachment :default_image
+    #attachment :image2
+    #attachment :image3
+    #attachment :image4
+    #attachment :image5
+    #attachment :image6
     #attachment :data_sheet
 
     # The product's category

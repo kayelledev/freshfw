@@ -20,11 +20,12 @@
       %dt= f.label :in_the_box, t('shoppe.variants.in_the_box')
       %dd= f.text_area :in_the_box, :class => 'text'
 
-  = field_set_tag t('shoppe.variants.image') do
+  = field_set_tag t('shoppe.variants.default_image') do
     %dl
       %dd
-        = attachment_preview @variant.default_image, :hide_if_blank => true
-        %p= f.file_field :default_image_file
+        = link_to image_tag (@variant.default_image.thumb.url), :class => 'imageContainer', :hide_if_blank => true
+        %p= f.file_field :default_image
+        %p= f.hidden_field :default_image_cache
 	
 	  
   = field_set_tag t("shoppe.variants.pricing") do
@@ -63,6 +64,23 @@
         %dd.checkbox
           = f.check_box :default
           = f.label :default, t('shoppe.variants.default_variant_info')
+
+
+  - if room_categories.include? Shoppe::ProductCategory.find_by_id(@product.product_category_id).permalink
+    - if @variant.included == nil
+      - @variant.included = []
+    = field_set_tag  t('shoppe.products.furniture_included') do
+      .splitContainer
+      - for item in Shoppe::Product.all.order("product_category_id ASC")
+        - cat2 = Shoppe::ProductCategory.find_by_id(item.product_category_id)
+        - if cat2 != nil
+          - if furniture_categories.include? cat2.permalink
+            %dl.third
+              %dt= f.label :furniture_included, t("#{cat2.name}: #{item.name} (#{item.sku})")
+              %dd=check_box_tag 'included[]', item.id, (@variant.included.include? item.id.to_s )
+              %dd=item.name 
+              %dt= link_to image_tag (item.default_image.thumb.url), :class => 'imageContainer'
+            
 
   %p.submit
     - unless @variant.new_record?
