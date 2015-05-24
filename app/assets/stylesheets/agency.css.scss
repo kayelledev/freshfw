@@ -930,7 +930,7 @@ body {
 }
 
 .breadcrumb-fw {
-  padding: 10em 0 10px 0;
+  padding: 8em 0 10px 0;
   margin-bottom: 20px;
   list-style: none;
   border-radius: 4px;
@@ -987,10 +987,10 @@ body {
 	padding: 4em 0;
 }
 
-#ProductCarousel {
-	height: 40em; 
+#ProductCarousel { 
 	overflow: hidden; 
-	width: 100%;
+	width: 75vw;
+	height: 80vh;
 }
 @media (max-width: 768px) {
 	#ProductCarousel {
