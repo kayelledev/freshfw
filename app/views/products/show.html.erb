@@ -2,19 +2,16 @@
   <%= javascript_include_tag 'products/products.js' %>
 <% end %>
 
-<div class="container">
-
+<div class="col-full">
 
   <div class="content inside-page product-details">
-    <div class="breadcrumb-fw" style="color: #333;"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
-    </div>
-
-    <div class="row" style="margin: 0 0px;">
-	  <h2 ><%= @product.name %></h2>
-	  <br>
-	</div>
+    
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3" style="left: 10px;" >
+	      <div class="breadcrumb-fw" style="color: #333;"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
+	      </div>
+		  <h2 ><%= @product.name %></h2>
+	  <br>
 	    <p><%= @product.description %></p>
 		<br>
 		<% if @product.has_variants? %>
@@ -50,7 +47,7 @@
 
       </div>
 
-      <div id='product-gallery'>
+      <div id='product-gallery' class="col-md-9">
         <%= render 'variant_gallery', product: @product %>
       </div>
     </div>

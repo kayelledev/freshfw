@@ -14,7 +14,9 @@
 		    <% products.each do |product| %>
 			<div class="col-md-4 col-sm-6 portfolio-item">
 		      <h4 style="color: #333;" ><%= link_to product.name, product_path(product.permalink) %></h4>
-			  <p ><a href="<%= product_path(product.permalink) %>"><img src="<%= product.default_image.path %>" class="img-responsive" style="width: 100%; height: auto;" alt="<%= product.full_name %>"></a></p>
+			  <p ><a href="<%= product_path(product.permalink) %>">
+				  <%  if product.default_image != nil %><img src="<%= product.default_image.path %>" class="img-responsive" style="width: 100%; height: auto;" alt="<%= product.full_name %>"></a></p>
+				  <%  end %>
   				<%  if product.has_variants? %>
   				   <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
   				<% else%>
