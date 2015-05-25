@@ -7,13 +7,17 @@
         %th{:width => '25%'}= t('shoppe.products.price_variants')
         %th{:width => '15%'}= t('shoppe.products.stock')
     %tbody
+      - displayed = {}
       - if products.empty?
         %tr.empty
           %td{:colspan => 4}= t('shoppe.products.no_products')
       - else
         - for category, products in products
           %tr
-            %th{:colspan => 4}= category.name
+            - if category.parent_id != nil
+              %th{:colspan => 4}= "#{Shoppe::ProductCategory.where(id: category.parent_id).first.name} : #{category.name}"
+            - else 
+              %th{:colspan => 4}= category.name
           - for product in products
             %tr
               %td= product.sku

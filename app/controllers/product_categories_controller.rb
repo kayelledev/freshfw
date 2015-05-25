@@ -1,14 +1,11 @@
 class ProductCategoriesController < ApplicationController
-  include ProductsHelper
   include ActionView::Helpers::UrlHelper
 
-  before_action :find_product, except: [:index]
-
-  def index
-    @categories = Shoppe::ProductCategory.ordered(:parent_id)
+  def index_type
+    @categories = Shoppe::ProductCategory.all
   end
 
-  def show
+  def index_size
+    @categories = Shoppe::ProductCategory.all
   end
-
 end

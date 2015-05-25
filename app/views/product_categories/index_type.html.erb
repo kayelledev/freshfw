@@ -1,0 +1,11 @@
+<div class="col-full">
+  <ul>
+    <% room_categories.each do |r| %>
+		<% room = Shoppe::ProductCategory.where(permalink: r).first %>
+		<% if room != nil %>
+			<h2><%= link_to "#{room.name}", room_size_path(:room => room.id) %></h2>
+		<% end %>					
+	<% end %>
+	
+  </ul>
+</div>

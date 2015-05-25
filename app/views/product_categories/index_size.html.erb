@@ -1,0 +1,49 @@
+<div class="col-full">
+  <ul>
+	<% room_type = Shoppe::ProductCategory.find_by_id("#{params['room'].to_i}") %>
+	<% if room_type == nil %>
+		<div class="col-md-4">
+	      <h4 style="color: #333;" ><%= link_to "Small", products_path(:room_size_name => "Small") %></h4>
+		  <p >
+			  <%  rs = Shoppe::ProductCategory.where(name: "Small").first
+			  if rs != nil && rs.default_image !=nil %>
+				  <a href="<%= products_path(:room_size_name => "Small")  %>"><%= image_tag rs.default_image.catalog, class: "img-responsive", alt: "#{rs.name}" %></a>
+			  <%  end %>
+		  </p>
+		</div>
+		
+		<div class="col-md-4">
+	      <h4 style="color: #333;" ><%= link_to "Medium", products_path(:room_size_name => "Medium") %></h4>
+		  <p >
+			  <%  rs = Shoppe::ProductCategory.where(name: "Medium").first
+			  if rs != nil && rs.default_image !=nil %>
+				  <a href="<%= products_path(:room_size_name => "Medium")  %>"><%= image_tag rs.default_image.catalog, class: "img-responsive", alt: "#{rs.name}" %></a>
+			  <%  end %>
+		  </p>
+		</div>
+		
+		<div class="col-md-4">
+	      <h4 style="color: #333;" ><%= link_to "Large", products_path(:room_size_name => "Large") %></h4>
+		  <p >
+			  <%  rs = Shoppe::ProductCategory.where(name: "Large").first
+			  if rs != nil && rs.default_image !=nil %>
+				  <a href="<%= products_path(:room_size_name => "Large")  %>"><%= image_tag rs.default_image.catalog, class: "img-responsive", alt: "#{rs.name}" %></a>
+			  <%  end %>
+		  </p>
+		</div>
+	<% else  %>
+		<h2><%= room_type.name %></h2>
+		<% Shoppe::ProductCategory.where(parent_id: "#{params['room']}").each do |rs| %>
+		<div class="col-md-4">
+	      <h4 style="color: #333;" ><% roomsize = Shoppe::ProductCategory.find(rs.id) %><%= link_to roomsize.name, products_path(:room_size => roomsize.id) %></h4>
+		  <p >
+			  <%  if roomsize.default_image != nil %>
+				  <a href="<%= products_path(:room_size => roomsize.id) %>"><%= image_tag roomsize.default_image.catalog, class: "img-responsive", alt: "#{roomsize.name}" %></a>
+			  <%  end %>
+		  </p>
+		</div>
+		<% end %>
+	<% end %>
+
+  </ul>
+</div>

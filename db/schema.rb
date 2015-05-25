@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525001545) do
+ActiveRecord::Schema.define(version: 20150525023439) do
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(version: 20150525001545) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
+    t.string   "default_image"
   end
 
   add_index "shoppe_product_categories", ["permalink"], name: "index_shoppe_product_categories_on_permalink"

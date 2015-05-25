@@ -84,12 +84,12 @@
 	    <div class="col-md-4" style="text-align: center;">
 		  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/how-it-works-roomtype.png" width="50%" height="auto" style="margin: 0 auto;">
 		  <h3>1. Choose the room type</h3>
-	      <h3 class="section-subheading text-muted">Living room, dining room or bedroom</h3>         
+	      <h3 class="section-subheading text-muted"><%= link_to "Living room, dining room or bedroom", room_type_path %></h3>         
 		</div>
 		<div class="col-md-4" style="text-align: center;">
 			  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/how-it-works-roomsize.png" width="50%" height="auto" style="margin: 0 auto;">
 			  <h3>2. Choose the room size</h3>
-		      <h3 class="section-subheading text-muted"><%= link_to "Small, medium, large", products_url, class: "section-subheading text-muted"%></h3> 
+		      <h3 class="section-subheading text-muted"><%= link_to "Small, medium, large", room_size_path, class: "section-subheading text-muted"%></h3> 
 		</div>
 		<div class="col-md-4" style="text-align: center;">
 			  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/how-it-works-getroom.png" width="50%" height="auto" style="margin: 0 auto;">

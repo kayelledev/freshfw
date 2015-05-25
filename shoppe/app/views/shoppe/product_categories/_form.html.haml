@@ -17,10 +17,11 @@
 
   = field_set_tag t('shoppe.product_category.attachments') do
     %dl
-      %dt= f.label :image_file, t('shoppe.product_category.image')
+      %dt= f.label :default_image, t('shoppe.product_category.default_image'), :class => 'attachmentPreview'
       %dd
-        = attachment_preview @product_category.image
-        %p= f.file_field :image_file
+        = link_to image_tag (@product_category.default_image.thumb.url), :class => 'imageContainer'
+        %p= f.file_field :default_image
+        %p= f.hidden_field :default_image_cache
 
   %p.submit
     - unless @product_category.new_record?
