@@ -2,12 +2,15 @@
   = f.error_messages
   = field_set_tag t('shoppe.product_category.category_details') do
     .splitContainer
-      %dl.half
+      %dl.third
         %dt= f.label :name, t('shoppe.product_category.name')
         %dd= f.text_field :name, :class => 'focus text'
-      %dl.half
+      %dl.third
         %dt= f.label :permalink, t('shoppe.product_category.permalink')
         %dd= f.text_field :permalink, :class => 'text'
+      %dl.third
+        %dt= f.label :parent_id, t('shoppe.products.parent')
+        %dd= f.collection_select :parent_id, Shoppe::ProductCategory.ordered, :id, :name, {:class => 'chosen'}
     %dl
       %dt= f.label :description, t('shoppe.product_category.description')
       %dd= f.text_area :description, :class => 'text'

@@ -16,4 +16,7 @@
       - else
         - for cat in @product_categories
           %tr
-            %td= link_to cat.name, [:edit, cat]
+            - if cat.parent_id == nil
+              %td= link_to cat.name, [:edit, cat]
+              - Shoppe::ProductCategory.where(parent_id: cat.id ).each do |subcat|
+                %td= link_to subcat.name, [:edit, subcat]
