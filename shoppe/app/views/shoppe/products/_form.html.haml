@@ -142,22 +142,16 @@
         %dd.checkbox
           = f.check_box :featured
           = f.label :featured, t('shoppe.products.featured_info')
-		  
-  - if room_categories.include? Shoppe::ProductCategory.find_by_id(@product.product_category_id).permalink
-    - if @product.included == nil
-      - @product.included = []
+
+  - if room_categories.include? @product.product_category.try(:permalink)
     = field_set_tag  t('shoppe.products.furniture_included') do
       .splitContainer
-      - for item in Shoppe::Product.all.order("product_category_id ASC")
-        - cat2 = Shoppe::ProductCategory.find_by_id(item.product_category_id)
-        - if cat2 != nil
-          - if furniture_categories.include? cat2.permalink
-            %dl.third
-              %dt= f.label :furniture_included, t("#{cat2.name}: #{item.name} (#{item.sku})")
-              %dd=check_box_tag 'included[]', item.id, (@product.included.include? item.id.to_s )
-              %dd=item.name 
-              %dt= link_to image_tag (item.default_image.thumb.url), :class => 'imageContainer'
-            
+      - Shoppe::Product.furniture.order("product_category_id ASC").each do |product|
+        %dl.third
+          %dt= f.label :furniture_included, t("#{product.product_category.name}: #{product.name} (#{product.sku})")
+          %dd= check_box_tag 'included[]', product.id, (@product.included_products.include? product)
+          %dd= product.name
+          %dt= link_to image_tag (product.default_image.thumb.url), :class => 'imageContainer'
 
   %p.submit
     - unless @product.new_record?

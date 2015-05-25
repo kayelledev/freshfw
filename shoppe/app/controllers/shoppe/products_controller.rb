@@ -26,9 +26,7 @@ module Shoppe
 
     def update
       if @product.update(safe_params)
-        #need to update @product's included furniture separately 
-        @product.update(included: "#{params[:included]}")
-        @product.save
+        @product.update_included_products params[:included]
         redirect_to [:edit, @product], :flash => {:notice => t('shoppe.products.update_notice') }
       else
         render :action => "edit"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150525023439) do
+ActiveRecord::Schema.define(version: 20150525113917) do
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -47,11 +47,6 @@ ActiveRecord::Schema.define(version: 20150525023439) do
     t.string  "group"
     t.string  "name"
     t.string  "value"
-  end
-
-  create_table "ref_subcategories", force: :cascade do |t|
-    t.string "product_category_name"
-    t.string "subcategory_name"
   end
 
   create_table "shoppe_countries", force: :cascade do |t|
@@ -94,6 +89,11 @@ ActiveRecord::Schema.define(version: 20150525023439) do
   end
 
   add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active"
+
+  create_table "shoppe_included_products", force: :cascade do |t|
+    t.integer "parent_product_id"
+    t.integer "included_product_id"
+  end
 
   create_table "shoppe_order_items", force: :cascade do |t|
     t.integer  "order_id"
@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(version: 20150525023439) do
     t.decimal  "amount_paid",               precision: 8, scale: 2, default: 0.0
     t.boolean  "exported",                                          default: false
     t.string   "invoice_number"
-    t.decimal  "tax"
+    t.decimal  "tax",                       precision: 5, scale: 2
   end
 
   add_index "shoppe_orders", ["delivery_service_id"], name: "index_shoppe_orders_on_delivery_service_id"

@@ -9,6 +9,8 @@ module Shoppe
     require_dependency 'shoppe/product/product_attributes'
     require_dependency 'shoppe/product/variants'
 
+    extend ApplicationHelper
+
     #mount Carrierwave uploader
     mount_uploader :default_image, ImageUploader
     mount_uploader :image2, ImageUploader
@@ -45,6 +47,10 @@ module Shoppe
     # Stock level adjustments for this product
     has_many :stock_level_adjustments, :dependent => :destroy, :class_name => 'Shoppe::StockLevelAdjustment', :as => :item
 
+    #
+    has_many :product_associations, dependent: :destroy, class_name: 'Shoppe::IncludedProduct', foreign_key: "parent_product_id"
+    has_many :included_products, through: :product_associations, dependent: :destroy, class_name: 'Shoppe::Product'
+
     # Validations
     with_options :if => Proc.new { |p| p.parent.nil? } do |product|
       product.validates :product_category_id, :presence => true
@@ -69,6 +75,16 @@ module Shoppe
 
     # All products ordered with default items first followed by name ascending
     scope :ordered, -> {order(:default => :desc, :name => :asc)}
+
+
+    # All products with furniture_categories
+    scope :furniture, -> { joins(:product_category)
+                            .where(shoppe_product_categories:
+                              {
+                                permalink: furniture_categories
+                              }
+                            )
+                          }
 
     # Return the name of the product
     #
@@ -106,6 +122,20 @@ module Shoppe
     def stock
       self.stock_level_adjustments.sum(:adjustment)
     end
+
+    def update_included_products ids
+      ids.map!(&:to_i)
+
+      to_create_ids = ids - product_associations.map(&:included_product_id)
+      to_destroy_ids = product_associations.map(&:included_product_id) - ids
+
+      product_associations.where(included_product_id: to_destroy_ids).destroy_all
+
+      to_create_ids.each do |id|
+        product_associations.create(included_product_id: id)
+      end
+
+     end
 
     # Search for products which include the given attributes and return an active record
     # scope of these products. Chainable with other scopes and with_attributes methods.
