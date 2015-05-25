@@ -8,21 +8,21 @@
     
     <div class="row">
       <div class="col-md-3" style="left: 10px;" >
-	      <div class="breadcrumb-fw" style="color: #333;"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
-	      </div>
-		  <h2 ><%= @product.name %></h2>
-	  <br>
-	    <p><%= @product.description %></p>
-		<br>
-		<% if @product.has_variants? %>
-			<h4>Options</h4>
-		<% end %>
+        <div class="breadcrumb-fw" style="color: #333;"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
+        </div>
+      <h2 ><%= @product.name %></h2>
+    <br>
+      <p><%= @product.description %></p>
+    <br>
+    <% if @product.has_variants? %>
+      <h4>Options</h4>
+    <% end %>
         <p>
           <% root_product.variants.each do |variant| %>
-		  <div style="display: block;">
+      <div style="display: block;">
             <%= radio_button_tag :varsku, variant.sku, variant.default? %>
             <%= variant.name %> 
-			</div>
+      </div>
           <% end %>
         </p>
         <%= render 'variant_info', product: @product %>
@@ -48,39 +48,24 @@
         <%= render 'variant_gallery', product: @product %>
 
 
-	    <% if @product.included_products.any? %>
-		     <div class="col-full"><h2 >What's Included: </h2></div>
-	    	 <% items = @product.included.from(1).to(-2) %>
-		   	 <% item_array = Array.new %>
+      <% if @product.included_products.any? %>
+         <div class="col-full"><h2 >What's Included: </h2></div>
+         <% items = @product.included_products %>
 
-			 array: <%= items %>
-		   	 <% if items.is_a? String 
-				 item_array = items.scan(/\d+/) 
-			 elsif items.is_a? Array
-				 items_array = items 
-			 end %>
-		   	 <% item_array.each do |i|%>
-	   		   	 <% if items.is_a? String 
-			   		 item = Shoppe::Product.find(i.to_i) %>
-	   			 <% elsif items.is_a? Array
-			   		 item = Shoppe::Product.find(i) %> 
-	   			 <% end %>
-
-		   		    <div class="row">
-		   		       	<div class="col-md-3"><a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image, class: "img-responsive", alt: "product" %></a></div>
-		   				<div class="col-md-9" style="vertical-align: text-bottom; ">
-		   					<h3><strong><%= item.name %></strong></h3>
-		   					<p><%= item.description %></p>
-		   				</div>
-		   			</div>
-		   	 <% end %>
-	     <% end %>
-		
+         <% items.each do |item|%>
+          <div class="row">
+            <div class="col-md-3">
+              <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image, class: "img-responsive", alt: "product" %>
+              </a>
+            </div>
+            <div class="col-md-9" style="vertical-align: text-bottom; ">
+              <h3><strong><%= item.name %></strong></h3>
+              <p><%= item.description %></p>
+            </div>
+          </div>
+         <% end %>
+       <% end %>
       </div>
-	  
     </div>
-    
   </div>
-
-
 </div>
