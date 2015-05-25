@@ -72,7 +72,7 @@
       - Shoppe::Product.furniture.order("product_category_id ASC").each do |product|
         %dl.third
           %dt= f.label :furniture_included, t("#{product.product_category.name}: #{product.name} (#{product.sku})")
-          %dd= check_box_tag 'included[]', product.id, (@product.included_products.include? product)
+          %dd= check_box_tag 'included[]', product.id, (@variant.included_products.include? product)
           %dd= product.name
           %dt= link_to image_tag (product.default_image.thumb.url), :class => 'imageContainer'
 

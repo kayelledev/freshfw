@@ -29,7 +29,7 @@ module Shoppe
 
     def update
       if @variant.update(safe_params)
-        @product.update_included_products params[:included] if params[:included]
+        @variant.update_included_products params[:included] if params[:included]
         redirect_to edit_product_variant_path(@product, @variant), :notice => t('shoppe.variants.update_notice')
       else
         render :action => "form"
