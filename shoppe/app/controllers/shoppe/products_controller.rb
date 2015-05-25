@@ -26,7 +26,7 @@ module Shoppe
 
     def update
       if @product.update(safe_params)
-        @product.update_included_products params[:included]
+        @product.update_included_products params[:included] if params[:included]
         redirect_to [:edit, @product], :flash => {:notice => t('shoppe.products.update_notice') }
       else
         render :action => "edit"
