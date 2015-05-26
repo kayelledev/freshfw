@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   #mount Shoppe::Engine => "/shoppe"
   mount Shoppe::Engine => "/shoppe"
   get 'welcome/index'
