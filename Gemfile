@@ -35,7 +35,7 @@ gem 'geocoder'
 gem "mini_magick"
 gem "fog", "~> 1.27"
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
-
+gem 'devise'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
