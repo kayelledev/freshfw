@@ -36,6 +36,9 @@ gem "mini_magick"
 gem "fog", "~> 1.27"
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
