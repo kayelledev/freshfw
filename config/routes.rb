@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   end
 
   #mount Shoppe::Engine => "/shoppe"
-  mount Shoppe::Engine => "/shoppe"
+  devise_scope :user do
+    mount Shoppe::Engine => "/shoppe"
+  end
+
   get 'welcome/index'
   get 'welcome/about_us', to: 'welcome#about_us', as: 'about_us'
   

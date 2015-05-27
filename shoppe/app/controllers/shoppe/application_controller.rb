@@ -1,7 +1,7 @@
 module Shoppe
   class ApplicationController < ActionController::Base
     
-    before_filter :login_required
+    before_action :authenticate_user!
     
     rescue_from ActiveRecord::DeleteRestrictionError do |e|
       redirect_to request.referer || root_path, :alert => e.message
@@ -22,10 +22,6 @@ module Shoppe
 
     def logged_in?
       current_user.is_a?(User)
-    end
-    
-    def current_user
-      @current_user ||= login_from_session || login_with_demo_mdoe || :false
     end
 
     def login_from_session
