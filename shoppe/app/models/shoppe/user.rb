@@ -3,7 +3,7 @@ module Shoppe
 
     self.table_name = 'shoppe_users'
   
-    has_secure_password
+    # has_secure_password
   
     # Validations
     validates :first_name, :presence => true
@@ -44,6 +44,18 @@ module Shoppe
       return false unless user.authenticate(password)
       user
     end
-  
+
+    # def self.build_with_auth_data(auth_data, params)
+    #   password = Devise.friendly_token.first(8)
+    #   first_name = auth_data['info']['name'].split[0]
+    #   last_name = auth_data['info']['name'].split[1]
+
+    #   user = self.new(email_address: params.try(:[], "user").try(:[], "email") || auth_data['info']['email'],
+    #            :first_name => first_name, :last_name => last_name,
+    #            :password => password ,
+    #            :password_confirmation => password,
+    #            auth_data['provider'] => auth_data['uid']
+    #           )
+    # end
   end
 end
