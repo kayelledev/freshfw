@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth/callbacks' }
+
+  devise_scope :user do
+    match 'create_user' => 'omniauth/callbacks#create_user', as: :create_user, via: :post
+    match 'user_prompt' => 'omniauth/callbacks#user_prompt', as: :user_prompt, via: :get
+  end
+
   #mount Shoppe::Engine => "/shoppe"
   mount Shoppe::Engine => "/shoppe"
   get 'welcome/index'

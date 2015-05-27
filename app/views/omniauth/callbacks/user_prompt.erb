@@ -1,0 +1,25 @@
+<% if @avatar %>
+    <%= image_tag @avatar, class: 'image-avatar'%>
+<% end %>
+
+<div>
+
+  <div class='col-md-6'>
+    <h2> Please, enter some required fields </h2>
+    <%= form_for @user, url: create_user_path do |f| %>
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, class: "form-control", disabled: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, class: "form-control", disabled: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "form-control", disabled: @email.present? %>
+      </div>
+      <%= f.submit 'Continue', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
