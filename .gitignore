@@ -17,6 +17,7 @@
 /tmp
 #/public/assets
 /public/uploads
+/public/photos
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
