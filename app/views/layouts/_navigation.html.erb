@@ -22,7 +22,6 @@
                     <li><%= link_to "Cart (#{current_order.total_items})", cart_path, class: "active"%></li>
                     <li><%= link_to "Checkout", checkout_path %></li>
                     <% if current_user %>
-                      <li><a> <%= "Hi, #{current_user.fullname}" %> </a></li>
                       <li><%= link_to "Logout", destroy_user_session_path, method: 'DELETE' %></li>
                     <% else %>
                       <li><%= link_to "Sign in", new_user_session_path %></li>
