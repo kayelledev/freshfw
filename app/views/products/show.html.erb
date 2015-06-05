@@ -8,7 +8,12 @@
     
     <div class="row">
       <div class="col-md-3" style="left: 10px;" >
-        <div class="breadcrumb-fw" style="color: #333;"><a href="<%= root_url%>">Home</a> > <a href="<%= products_url %>">Shop</a> > <%= @product.name %>
+        <div class="breadcrumb-fw" style="color: #333;">
+          <a href="<%= root_url%>">Home</a> 
+            <span> > </span>
+            <a href="<%= products_url %>"> Shop </a>
+            <span> > </span>
+            <span> <%= @product.name %> </span>
         </div>
       <h2 ><%= @product.name %></h2>
     <br>
