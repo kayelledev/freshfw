@@ -264,7 +264,7 @@ header {
     text-align: center;
     color: #fff;
     background-attachment: scroll;
-    background-image: url(../img/header-bg.jpg);
+    background-image: url(../assets/header-bg.jpg);
     background-position: center center;
     background-repeat: none;
     -webkit-background-size: cover;
@@ -1000,7 +1000,7 @@ p {
 
 #ProductCarousel {
     margin: 20px auto;
-    width: 70%;
+    min-height: 800px;
 }
 #ProductCarousel .carousel-indicators {
     margin: 10px 0 0;

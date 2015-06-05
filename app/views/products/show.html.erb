@@ -43,28 +43,29 @@
           </div>
         </div>
 
+        <div>
+          <% if @product.included_products.any? %>
+            <div class="col-full"><h2 >What's Included: </h2></div>
+            <% items = @product.included_products %>
+
+            <% items.each do |item|%>
+              <div class="row">
+                <div class="col-md-3">
+                  <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.thumb, class: "img-responsive", alt: "product" %>
+                  </a>
+                </div>
+                <div class="col-md-9" style="vertical-align: text-bottom; ">
+                  <h3><strong><%= item.name %></strong></h3>
+                  <p><%= item.description %></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
       </div>
       <div id='product-gallery' class="col-md-9">
         <%= render 'variant_gallery', product: @product %>
-
-
-      <% if @product.included_products.any? %>
-         <div class="col-full"><h2 >What's Included: </h2></div>
-         <% items = @product.included_products %>
-
-         <% items.each do |item|%>
-          <div class="row">
-            <div class="col-md-3">
-              <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image, class: "img-responsive", alt: "product" %>
-              </a>
-            </div>
-            <div class="col-md-9" style="vertical-align: text-bottom; ">
-              <h3><strong><%= item.name %></strong></h3>
-              <p><%= item.description %></p>
-            </div>
-          </div>
-         <% end %>
-       <% end %>
       </div>
     </div>
   </div>
