@@ -1047,9 +1047,8 @@ p {
     color: #777;
 }
 
-
-// .carousel-inner > .item > img,
-//   .carousel-inner > .item > a > img {
-//       width: 70%;
-//       margin: auto;
-//   }
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+      margin: auto;
+  }

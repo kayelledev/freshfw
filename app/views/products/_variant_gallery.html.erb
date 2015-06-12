@@ -1,7 +1,7 @@
 <div class="col-full">
   <div id="ProductCarousel" class="carousel slide" data-ride="carousel" style="">
 	  <div class="carousel-outer">
-		  <div class="carousel-inner" role="listbox" style="min-width: 100%; min-height: 100%;">
+		  <div class="carousel-inner" role="listbox">
 		     <div class="item active" ><%= image_tag product.default_image,  class: "img-responsive", alt: "product" %>
 		     </div>
 
@@ -22,7 +22,7 @@
 		      <% end %>
 		  </div>
 		    <!-- Controls -->
-		    <a class="left carousel-control" href="#ProductCarousel" role="button" data-slide="prev"><i class="glyphicon glyphicon-chevron-left" style="vertical-align: middle; "></i></a>
+		    <a class="left carousel-control" href="#ProductCarousel" role="button" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
 		    <a class="right carousel-control" href="#ProductCarousel" role="button" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 		</div>
     <ol class='carousel-indicators mCustomScrollbar'>
