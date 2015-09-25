@@ -2,7 +2,7 @@ module Shoppe
   class UsersController < Shoppe::ApplicationController
 
     before_filter { @active_nav = :users }
-    before_filter { params[:id] && @user = Shoppe::User.find(params[:id]) }
+    before_filter { params[:id] && @user = ::User.find(params[:id]) }
     before_filter(:only => [:create, :update, :destroy]) do
       if Shoppe.settings.demo_mode?
         raise Shoppe::Error, t('shoppe.users.demo_mode_error')
@@ -10,15 +10,15 @@ module Shoppe
     end
 
     def index
-      @users = Shoppe::User.all
+      @users = ::User.all
     end
 
     def new
-      @user = Shoppe::User.new
+      @user = ::User.new
     end
 
     def create
-      @user = Shoppe::User.new(safe_params)
+      @user = ::User.new(safe_params)
       if @user.save
         redirect_to :users, :flash => {:notice => t('shoppe.users.create_notice') }
       else
