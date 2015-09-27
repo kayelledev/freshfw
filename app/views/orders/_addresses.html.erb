@@ -45,6 +45,11 @@
     <% end %>
 	</div>
 
+	<% unless current_user %>
+		<div class="row col-md-6" style="margin-top: 1em;">
+			<%= render 'shared/sign_up_form' %>
+		</div>
+	<% end %>
 	<div class="row col-md-6" style="margin-top: 1em;">
 		<dd><%= f.submit 'Continue', :class => 'btn btn-xl center' %><%= link_to "Back to cart", cart_path, class: 'back-link' %></dd>
 	</div>

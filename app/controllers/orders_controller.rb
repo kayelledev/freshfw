@@ -69,6 +69,7 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
+      process_user if params[:signup][:email]
 
       @order.separate_delivery_address = params[:order][:separate_delivery_address]
 
@@ -161,5 +162,20 @@ class OrdersController < ApplicationController
     return false unless params[:order][:delivery_postcode].try(&:present?)
     return false unless params[:order][:delivery_country_id].try(&:present?)
     true
+  end
+
+  def process_user
+    if (user = ::User.find_or_initialize_by(email: params[:signup][:email])).persisted?
+      return unless user.valid_password?(params[:signup][:password])
+      sign_in user
+    else
+      user.assign_attributes(user_params.merge(confirmed_at: Time.now))
+      sign_in user if user.save
+    end
+  end
+
+  def user_params
+    params.require(:signup).permit(:password, :password_confirmation).merge(
+      params.require(:order).permit(:first_name, :last_name))
   end
 end

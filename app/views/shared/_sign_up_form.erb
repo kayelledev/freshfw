@@ -1,0 +1,21 @@
+<script type="text/javascript">
+  function triggerSignUpFields(checkbox) {
+    if (checkbox.checked) {
+      $('#sign_up_fields').show();
+      $('input[name="signup[email]"]').val($('input[name="order[email_address]"]').val());
+      $('input', '#sign_up_fields').attr('required', true);
+    } else {
+      $('#sign_up_fields').hide();
+      $('input', '#sign_up_fields').removeAttr('required');
+    };
+  }
+</script>
+
+<%= check_box_tag  'signup[show_form]', '', false, { class: 'col-md-3', onchange: "triggerSignUpFields(this);"} %>
+<%= label_tag 'signup[show_form]', 'Sign up for an account', :class=>'col-md-6' %>
+<div id='sign_up_fields' style="display: none;">
+  <%= text_field_tag 'signup[email]', '', :class=>'col-md-10', placeholder: 'Email Address' %>
+  <%= text_field_tag 'signup[password]', '', type: 'password', :class=>'col-md-10', placeholder: 'Password' %>
+  <%= text_field_tag 'signup[password_confirmation]', '', type: 'password', :class=>'col-md-10', placeholder: 'Password confirmation' %>
+</div>
+
