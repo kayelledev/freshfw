@@ -986,7 +986,7 @@ body {
 
 #ProductCarousel { 
 	overflow: hidden; 
-	width: 75vw;
+	/*width: 75vw;*/
 	height: 80vh;
 }
 @media (max-width: 768px) {
@@ -1005,7 +1005,7 @@ p {
 }
 
 #ProductCarousel {
-    margin: 20px auto;
+    margin: auto;
     min-height: 800px;
 }
 #ProductCarousel .carousel-indicators {
