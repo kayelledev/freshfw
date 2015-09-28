@@ -1,8 +1,9 @@
 module Shoppe
   class ApplicationController < ActionController::Base
     
+    before_action :is_an_admin?    
     before_action :authenticate_user!
-    
+
     rescue_from ActiveRecord::DeleteRestrictionError do |e|
       redirect_to request.referer || root_path, :alert => e.message
     end
@@ -13,6 +14,16 @@ module Shoppe
     end
 
     private
+
+    def is_an_admin?
+      if current_user
+        if current_user.admin == true
+
+        else
+          redirect_to main_app.root_path
+        end
+      end
+    end
 
     def login_required
       unless logged_in?

@@ -19,6 +19,11 @@
       %dl.third
         %dt= f.label :password_confirmation, t('shoppe.users.password_confirmation')
         %dd= f.password_field :password_confirmation, :class => 'text'
+  = field_set_tag t("shoppe.users.admin") do
+    .splitContainer
+      %dl.one
+        %dt= f.label :admin, t('shoppe.users.admin')
+        %dd= f.check_box :admin
 
   %p.submit
     - unless @user.new_record?
