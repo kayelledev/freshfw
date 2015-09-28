@@ -17,9 +17,7 @@ module Shoppe
 
     def is_an_admin?
       if current_user
-        if current_user.admin == true
-
-        else
+        unless current_user.admin == true
           redirect_to main_app.root_path
         end
       end
