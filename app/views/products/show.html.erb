@@ -7,27 +7,27 @@
   <div class="content inside-page product-details">
     
     <div class="row">
-      <div class="col-md-3" style="left: 10px;" >
+      <div class="col-md-4" style="left: 10px;" >
         <div class="breadcrumb-fw" style="color: #333;">
           <a href="<%= root_url%>">Home</a> 
-            <span> > </span>
+            <span> / </span>
             <a href="<%= products_url %>"> Shop </a>
-            <span> > </span>
-            <span> <%= @product.name %> </span>
+            <!--<span> > </span>
+            <span> <%= @product.name %> </span>-->
         </div>
       <h2 ><%= @product.name %></h2>
     <br>
-      <p><%= @product.description %></p>
+      <p><%= @product.short_description %></p>
     <br>
     <% if @product.has_variants? %>
       <h4>Options</h4>
     <% end %>
         <p>
           <% root_product.variants.each do |variant| %>
-      <div style="display: block;">
-            <%= radio_button_tag :varsku, variant.sku, variant.default? %>
-            <%= variant.name %> 
-      </div>
+            <div style="display: block;">
+              <%= radio_button_tag :varsku, variant.sku, variant.default? %>
+              <%= variant.name %> 
+            </div>
           <% end %>
         </p>
         <%= render 'variant_info', product: @product %>
@@ -40,7 +40,7 @@
           <div class="pull-left" style="margin-top: 2em;">
             <%  if @product.has_variants? %>
                <%= link_to "Add To Cart", buy_product_path(@product.default_variant.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart", id: :buy %>
-            <% else%>
+            <% else %>
               <%= link_to "Add To Cart", buy_product_path(@product.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart" %>
             <% end %>
 
@@ -49,55 +49,96 @@
         </div>
 
         <div>
-          <% if @product.included_products.any? %>
-            <div class="col-full"><h2 >What's Included: </h2></div>
-            <% items = @product.included_products %>
+        
 
+      <% if root_product.has_variants? %>
+        <% root_product.variants.each do |variant| %>
+          <% if variant.included_products.any? %>
+          <div class='variant' id='description_product_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>">
+            <div class="col-full"><h3 >What's Included: </h3></div>
+            <% items = variant.included_products %>
             <% items.each do |item|%>
               <div class="row">
-                <div class="col-md-3">
-                  <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.thumb, class: "img-responsive", alt: "product" %>
+                <div class="col-md-4">
+                  <!--<a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.thumb, class: "img-responsive", alt: "product" %>
+                  </a>-->
+                  <a href="<%= item.permalink %>">
+                    <strong class="whats-included-on-product"><%= item.name %></strong>
                   </a>
                 </div>
-                <div class="col-md-9" style="vertical-align: text-bottom; ">
-                  <h3><strong><%= item.name %></strong></h3>
-                  <p><%= item.description %></p>
+                <div class="col-md-8" style="vertical-align: text-bottom; ">
+                  <!--<h3><strong><%= item.name %></strong></h3>
+                  <p><%= item.description %></p>-->
                 </div>
               </div>
+              <div>
+              </div>
             <% end %>
+            <%= variant.in_the_box %>
+          </div>
+          <% else %>
+            <div class='variant' id='description_product_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>"></div>
           <% end %>
+        <% end %>
+      <% end %>
+
+
         </div>
 
       </div>
-      <div id='product-gallery' class="col-md-9">
+      <div id='product-gallery' class="col-md-8" style="padding-left: 15px;">
         <%= render 'variant_gallery', product: @product %>
-
         <% if @product.included_products.any? %>
           <div class="col-full">
-            <h2>Product Details</h2>
-            <% @product.included_products.each do |item|%>
-              <div class="row included-product">
-                <div class="col-md-3">
-                  <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.catalog, class: "img-responsive", alt: "product" %>
-                  </a>
-                </div>
-                <div class="col-md-9" style="vertical-align: text-bottom; ">
-                  <strong><%= item.name %></strong>
-                  <div>
-                    <span> Qty: </span>
-                    <span> </span>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation col-md-4" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                  <h2>Product Details</h2>
+                </a>
+                </li>
+                <li role="presentation col-md-8"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                  <h2>SHIPPING AND DELIVERY INFO</h2>
+                </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="home">
+                <% @product.included_products.each do |item|%>
+                  <div class="row included-product">
+                    <div class="col-md-4">
+                      <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.catalog, class: "img-responsive", alt: "product" %>
+                      </a>
+                    </div>
+                    <div class="col-md-8" style="vertical-align: text-bottom; ">
+                      <strong><%= item.name %></strong>
+                      <div>
+                        <span> Qty: </span>
+                        <span> </span>
+                      </div>
+                      <div>
+                        <span>SKU: </span>
+                        <span><%= item.sku %></span>
+                      </div>
+                      <div>
+                        <span>Description: </span>
+                        <p><%= item.description %></p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <span>SKU: </span>
-                    <span><%= item.sku %></span>
-                  </div>
-                  <div>
-                    <span>Description: </span>
-                    <p><%= item.description %></p>
-                  </div>
-                </div>
+                <% end %>
               </div>
-            <% end %>
+              <div role="tabpanel" class="tab-pane fade" id="profile">
+                <% @product.included_products.each do |item|%>
+                  <% item.product_attributes.each do |attribure| %>
+                    <div class="col-md-4">
+                      <%= attribure.key %>:
+                    </div>
+                    <div class="col-md-8">
+                      <h2><%= attribure.value %></h2>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           </div>
         <% end %>
 
@@ -105,3 +146,12 @@
     </div>
   </div>
 </div>
+<script>
+$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+
+})
+</script>
+
+

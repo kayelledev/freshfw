@@ -987,13 +987,13 @@ body {
 #ProductCarousel { 
 	overflow: hidden; 
 	width: 75vw;
-	height: 80vh;
+	/* height: 80vh; */
 }
 @media (max-width: 768px) {
 	#ProductCarousel {
 		overflow: hidden; 
 		width: 100%;
-		height: 17em;
+		/*height: 17em;*/
 	}
 }
 
@@ -1006,7 +1006,7 @@ p {
 
 #ProductCarousel {
     margin: 20px auto;
-    min-height: 800px;
+    /* min-height: 800px; */
 }
 #ProductCarousel .carousel-indicators {
     margin: 10px 0 0;
@@ -1055,4 +1055,42 @@ p {
 #product-gallery {
   border-left: 1px solid grey;
   padding-left: 0px;
+}
+#product-gallery h2 {
+    font-size: 16px;
+    display: inline;
+    color: #777777;
+}
+#product-gallery{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: #777777 !important;
+    cursor: default;  
+    border: none;
+}
+.nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    cursor: default;
+    color: #777777 !important;
+    border: none;
+}
+.nav-tabs > li > a {
+    margin-right: 0px;
+    border-left: none !important; 
+    border-right: none !important; 
+    border-top: none !important; 
+}
+
+.nav-tabs {
+    border-bottom: none !important;
+}
+.nav-tabs > li.active {
+    cursor: default;
+    color: #777777 !important;
+    border-bottom: solid #F49224 4px  !important;
+}
+.nav {
+    margin-bottom:5px !important;
 }

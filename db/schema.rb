@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527085806) do
+ActiveRecord::Schema.define(version: 20150928122248) do
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -205,8 +205,37 @@ ActiveRecord::Schema.define(version: 20150527085806) do
 
   add_index "shoppe_product_categories", ["permalink"], name: "index_shoppe_product_categories_on_permalink"
 
-# Could not dump table "shoppe_products" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "shoppe_products", force: :cascade do |t|
+    t.integer  "parent_id"
+    t.integer  "product_category_id"
+    t.string   "name"
+    t.string   "sku"
+    t.string   "permalink"
+    t.text     "description"
+    t.text     "short_description"
+    t.boolean  "active",                                      default: true
+    t.decimal  "weight",              precision: 8, scale: 3, default: 0.0
+    t.decimal  "price",               precision: 8, scale: 2, default: 0.0
+    t.decimal  "cost_price",          precision: 8, scale: 2, default: 0.0
+    t.integer  "tax_rate_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "featured",                                    default: false
+    t.text     "in_the_box"
+    t.boolean  "stock_control",                               default: true
+    t.boolean  "default",                                     default: false
+    t.string   "default_image"
+    t.string   "image2"
+    t.string   "image3"
+    t.string   "image4"
+    t.string   "image5"
+    t.string   "image6"
+  end
+
+  add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id"
+  add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink"
+  add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id"
+  add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku"
 
   create_table "shoppe_settings", force: :cascade do |t|
     t.string "key"
@@ -248,7 +277,7 @@ ActiveRecord::Schema.define(version: 20150527085806) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -258,13 +287,14 @@ ActiveRecord::Schema.define(version: 20150527085806) do
     t.string   "unconfirmed_email"
     t.string   "twitter"
     t.string   "facebook"
+    t.boolean  "admin",                  default: false
   end
 
   add_index "shoppe_users", ["email_address"], name: "index_shoppe_users_on_email_address"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -272,12 +302,13 @@ ActiveRecord::Schema.define(version: 20150527085806) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "twitter"
     t.string   "facebook"
+    t.boolean  "admin",                  default: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
