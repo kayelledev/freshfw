@@ -1,6 +1,6 @@
 <div class='variant' id="product_<%= product.sku %>" style="display: <%= product_visibility(product) %>"
   data-url="<%= buy_product_path(id: product.permalink) %>">
-  <p><%= product.in_the_box %></p>
+  <!--<p><%= product.in_the_box %></p>-->
   <hr>
   <h4><b><%= number_to_currency(product.price, unit: "$", format: "%u%n") %></b></h4>
   
