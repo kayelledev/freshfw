@@ -40,7 +40,7 @@
           <div class="pull-left" style="margin-top: 2em;">
             <%  if @product.has_variants? %>
                <%= link_to "Add To Cart", buy_product_path(@product.default_variant.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart", id: :buy %>
-            <% else%>
+            <% else %>
               <%= link_to "Add To Cart", buy_product_path(@product.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart" %>
             <% end %>
 
@@ -86,35 +86,61 @@
         </div>
 
       </div>
-      <div id='product-gallery' class="col-md-8">
-        <%= render 'variant_gallery', product: @product %>
 
+      <div id='product-gallery' class="col-md-8" style="padding-left: 15px;">
+        <%= render 'variant_gallery', product: @product %>
         <% if @product.included_products.any? %>
           <div class="col-full">
-            <h2>Product Details</h2>
-            <% @product.included_products.each do |item|%>
-              <div class="row included-product">
-                <div class="col-md-4">
-                  <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.catalog, class: "img-responsive", alt: "product" %>
-                  </a>
-                </div>
-                <div class="col-md-8" style="vertical-align: text-bottom; ">
-                  <strong><%= item.name %></strong>
-                  <div>
-                    <span> Qty: </span>
-                    <span> </span>
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation col-md-4" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                  <h2>Product Details</h2>
+                </a>
+                </li>
+                <li role="presentation col-md-8"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                  <h2>SHIPPING AND DELIVERY INFO</h2>
+                </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade in active" id="home">
+                <% @product.included_products.each do |item|%>
+                  <div class="row included-product">
+                    <div class="col-md-4">
+                      <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.catalog, class: "img-responsive", alt: "product" %>
+                      </a>
+                    </div>
+                    <div class="col-md-8" style="vertical-align: text-bottom; ">
+                      <strong><%= item.name %></strong>
+                      <div>
+                        <span> Qty: </span>
+                        <span> </span>
+                      </div>
+                      <div>
+                        <span>SKU: </span>
+                        <span><%= item.sku %></span>
+                      </div>
+                      <div>
+                        <span>Description: </span>
+                        <p><%= item.description %></p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <span>SKU: </span>
-                    <span><%= item.sku %></span>
-                  </div>
-                  <div>
-                    <span>Description: </span>
-                    <p><%= item.description %></p>
-                  </div>
-                </div>
+                <% end %>
               </div>
-            <% end %>
+              <div role="tabpanel" class="tab-pane fade" id="profile">
+                <% @product.included_products.each do |item|%>
+                  <% item.product_attributes.each do |attribure| %>
+                    <div class="col-md-4">
+                      <%= attribure.key %>:
+                    </div>
+                    <div class="col-md-8">
+                      <h2><%= attribure.value %></h2>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           </div>
         <% end %>
 
@@ -122,5 +148,13 @@
     </div>
   </div>
 </div>
+
+<script>
+$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+
+})
+</script>
 
 

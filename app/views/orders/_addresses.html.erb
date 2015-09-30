@@ -30,6 +30,7 @@
 					<dd><%= f.text_field :delivery_postcode, :class=>'col-md-10', placeholder: 'Postal Code / Zipcode'%></dd>
 					<dd class="col-md-10" style="float: left; "><%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => false %></dd>
 				</div>
+
 			</dl>
 		</div>
 	</div>

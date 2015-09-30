@@ -986,14 +986,14 @@ body {
 
 #ProductCarousel { 
 	overflow: hidden; 
-	/*width: 75vw;*/
-	height: 80vh;
+	width: 75vw;
 }
+
 @media (max-width: 768px) {
 	#ProductCarousel {
 		overflow: hidden; 
 		width: 100%;
-		height: 17em;
+		/*height: 17em;*/
 	}
 }
 
@@ -1005,8 +1005,7 @@ p {
 }
 
 #ProductCarousel {
-    margin: auto;
-    min-height: 800px;
+    margin: 20px auto;
 }
 #ProductCarousel .carousel-indicators {
     margin: 10px 0 0;
@@ -1056,12 +1055,42 @@ p {
   border-left: 1px solid grey;
   padding-left: 0px;
 }
-.whats-included-on-product{
-    color: black;
-    text-decoration: none;
-    font-size: 12px;
+
+#product-gallery h2 {
+    font-size: 16px;
+    display: inline;
+    color: #777777;
 }
-.whats-included-on-product:hover{
-    text-decoration: none !important;
-    font-size: 12px;
+#product-gallery{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: #777777 !important;
+    cursor: default;  
+    border: none;
+}
+.nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    cursor: default;
+    color: #777777 !important;
+    border: none;
+}
+.nav-tabs > li > a {
+    margin-right: 0px;
+    border-left: none !important; 
+    border-right: none !important; 
+    border-top: none !important; 
+}
+
+.nav-tabs {
+    border-bottom: none !important;
+}
+.nav-tabs > li.active {
+    cursor: default;
+    color: #777777 !important;
+    border-bottom: solid #F49224 4px  !important;
+}
+.nav {
+    margin-bottom:5px !important;
 }
