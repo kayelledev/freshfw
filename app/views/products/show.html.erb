@@ -129,15 +129,13 @@
                 <% end %>
               </div>
               <div role="tabpanel" class="tab-pane fade" id="profile">
-                <% @product.included_products.each do |item|%>
-                  <% item.product_attributes.each do |attribure| %>
-                    <div class="col-md-4">
-                      <%= attribure.key %>:
-                    </div>
-                    <div class="col-md-8">
-                      <h2><%= attribure.value %></h2>
-                    </div>
-                  <% end %>
+                <% @product.product_attributes.each do |attribure| %>
+                  <div class="col-md-4">
+                    <%= attribure.key %>:
+                  </div>
+                  <div class="col-md-8">
+                    <h2><%= attribure.value %></h2>
+                  </div>
                 <% end %>
               </div>
             </div>
