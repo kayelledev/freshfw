@@ -986,9 +986,8 @@ body {
 
 #ProductCarousel { 
 	overflow: hidden; 
-	width: 75vw;
+	/* height: 80vh; */
 }
-
 @media (max-width: 768px) {
 	#ProductCarousel {
 		overflow: hidden; 
@@ -1005,7 +1004,8 @@ p {
 }
 
 #ProductCarousel {
-    margin: 20px auto;
+    margin: auto;
+    /* min-height: 800px; */
 }
 #ProductCarousel .carousel-indicators {
     margin: 10px 0 0;
@@ -1055,7 +1055,6 @@ p {
   border-left: 1px solid grey;
   padding-left: 0px;
 }
-
 #product-gallery h2 {
     font-size: 16px;
     display: inline;
@@ -1064,7 +1063,6 @@ p {
 #product-gallery{
     font-family: 'Roboto Condensed', sans-serif;
 }
-
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
     color: #777777 !important;
@@ -1093,4 +1091,10 @@ p {
 }
 .nav {
     margin-bottom:5px !important;
+}
+
+@media (max-width: 768px) {
+    #product-gallery{
+        padding-left: 15px;
+    }
 }
