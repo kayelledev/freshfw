@@ -986,7 +986,7 @@ body {
 
 #ProductCarousel { 
 	overflow: hidden; 
-	width: 75vw;
+	/*width: 75vw;*/
 	height: 80vh;
 }
 @media (max-width: 768px) {
@@ -1005,7 +1005,7 @@ p {
 }
 
 #ProductCarousel {
-    margin: 20px auto;
+    margin: auto;
     min-height: 800px;
 }
 #ProductCarousel .carousel-indicators {
@@ -1055,4 +1055,13 @@ p {
 #product-gallery {
   border-left: 1px solid grey;
   padding-left: 0px;
+}
+.whats-included-on-product{
+    color: black;
+    text-decoration: none;
+    font-size: 12px;
+}
+.whats-included-on-product:hover{
+    text-decoration: none !important;
+    font-size: 12px;
 }
