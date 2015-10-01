@@ -1,0 +1,19 @@
+
+.editor-container {
+  width: 90%;
+  height: 400px;
+  border: 1px solid black;
+  margin: 200px auto;
+  position: relative;
+}
+
+.editor-container .draggable {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  position: absolute;
+}
+
+.editor-container .draggable.active {
+  border-color: #3eff00;
+}
