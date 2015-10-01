@@ -4,6 +4,8 @@ class User < Shoppe::User
          :recoverable, :rememberable, :confirmable,
          :omniauthable
 
+  validates_uniqueness_of :email_address
+
   def self.build_with_auth_data(auth_data, params)
     password = Devise.friendly_token.first(8)
     first_name = auth_data['info']['name'].split[0]
