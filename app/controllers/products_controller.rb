@@ -10,6 +10,8 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @items = Shoppe::Product.all
+    @categories = Shoppe::ProductCategory.all
   end
 
   def buy

@@ -29,6 +29,15 @@
     %dl
       %dt= f.label :in_the_box, t('shoppe.products.in_the_box')
       %dd= f.text_area :in_the_box, :class => 'text'
+    %dl
+      %dt= f.label :width, t('shoppe.products.widht')
+      %dd= f.text_field :width, :class => 'number', type: 'number'
+    %dl
+      %dt= f.label :height, t('shoppe.products.height')
+      %dd= f.text_field :height, :class => 'number', type: 'number'
+    %dl
+      %dt= f.label :is_preset, t('shoppe.products.is_room')
+      %dd= f.text_field :is_preset, :class => 'number', type: 'checkbox'
 
   = field_set_tag t('shoppe.products.attributes') do
     .margin

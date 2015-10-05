@@ -88,6 +88,9 @@ en:
         short_description: Short description
         sku: SKU
         weight: Weight
+        widht: Width inches
+        height: Height inches
+        is_room: Is room
       shoppe/product_attribute:
         key: Key
       shoppe/product_category:

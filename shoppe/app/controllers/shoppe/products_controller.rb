@@ -52,7 +52,12 @@ module Shoppe
     private
 
     def safe_params
-      params[:product].permit(:product_category_id, :name, :sku, :permalink, :description, :short_description, :weight, :price, :cost_price, :tax_rate_id, :stock_control, :default_image, :image2, :image3,:image4,:image5,:image6,:default_image_file_sheet_file, :active, :featured, :in_the_box, :image, :product_attributes_array => [:key, :value, :searchable, :public], :included=>[])
+      params[:product].permit(:product_category_id, :name, :sku, :permalink, :description,
+                              :short_description, :weight, :price, :cost_price, :tax_rate_id,
+                              :stock_control, :default_image, :image2, :image3,:image4,:image5,:image6,
+                              :default_image_file_sheet_file, :active, :featured, :in_the_box, :image,
+                              :width, :height, :is_preset,
+                              :product_attributes_array => [:key, :value, :searchable, :public], :included=>[])
     end
 
   end

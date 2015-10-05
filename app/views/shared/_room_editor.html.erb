@@ -1,0 +1,51 @@
+<div class="navigation-holder">
+  <!--<div>-->
+    <!--Position X-->
+    <!--<input type="number" class="position-x" min="0" step="1">-->
+  <!--</div>-->
+  <!--<div>-->
+    <!--Position Y-->
+    <!--<input type="number" class="position-y" min="0" step="1">-->
+  <!--</div>-->
+  <!--<h3>-->
+    <!--Products-->
+    <!--<select class="products-manager">-->
+      <!--<option>All</option>-->
+      <!--<% @items.each do |item| %>-->
+          <!--<option data-width="<%= item.width %>" data-height="<%= item.height %>" data-category="<%= item.product_category_id || 0 %>"><%= item.name %></option>-->
+      <!--<% end %>-->
+    <!--</select>-->
+  <!--</h3>-->
+  <!--<h3>-->
+    <!--Category-->
+    <!--<select class="categories-manager">-->
+      <!--<option>All</option>-->
+      <!--<% @categories.each do |item| %>-->
+          <!--<option data-id="<%= item.id %>"><%= item.name %></option>-->
+      <!--<% end %>-->
+    <!--</select>-->
+  <!--</h3>-->
+  <!--<button class="add-draggable">Add element</button>-->
+</div>
+
+<div class="rotate-angle">
+  Angle
+  <input type="number" class="rotation-manager" min="0" max="360" step="1">
+</div>
+
+<div class="editor-width">
+  <hr>
+  <input type="number" class="holder-width" min="0" step="1">
+  <span>in</span>
+</div>
+
+<div class="editor-height">
+  <input type="number" class="holder-height" min="0" step="1">
+  <span>in</span>
+</div>
+
+<div class="editor-container">
+  <% @product.included_products.each do |item| %>
+      <div class="draggable" data-width="<%= item.width %>" data-heigh="<%= item.height %>" data-toggle="tooltip"></div>
+  <% end %>
+</div>

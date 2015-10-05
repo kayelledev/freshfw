@@ -66,6 +66,12 @@
          */
         this.$productsManager = $('.products-manager');
 
+        /**
+         * Manage products list
+         * @type {*|HTMLElement}
+         */
+        this.$catsManager = $('.categories-manager');
+
         this.$options = {
             // enable inertial throwing
             inertia: true,
@@ -98,7 +104,6 @@
 
                 $positionPanelX.val(x);
                 $positionPanelY.val(y);
-
 
             },
             // call this function on every dragend event
@@ -144,6 +149,11 @@
             $(this).attr('data-x', $(this).width()/2.0);
             $(this).attr('data-y', $(this).height()/2.0);
             $(this).attr('data-rotation', 0);
+
+            $(this).css({
+                'width': $(this).data('width'),
+                'height': $(this).data('heigh')
+            });
         });
 
         interact('.' + elementsClass).draggable(this.$options);
@@ -205,14 +215,16 @@
 
         if(this.$currentElement) {
             var deg = parseInt(this.$rotationPanel.val()),
-                offsetX = parseFloat(this.$positionPanelX.val()),
-                offsetY = parseFloat(this.$positionPanelY.val());
+                offsetX = parseFloat(this.$currentElement.attr('data-x')),
+                offsetY = parseFloat(this.$currentElement.attr('data-y'));
 
             this.$currentElement.attr({
                 'data-rotation': deg,
                 'data-x': offsetX,
                 'data-y': offsetY
             }).css({
+                    'width': this.$currentElement.data('width'),
+                    'height': this.$currentElement.data('heigh'),
                     '-webkit-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + deg + 'deg)',
                     '-moz-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + deg + 'deg)',
                     '-ms-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + deg + 'deg)',
@@ -264,7 +276,7 @@
                     if(scaleType == 'xCord') {
                         $(this).width($(this).data('width') * scaleX);
                     } else {
-                        $(this).height($(this).data('height') * scaleY);
+                        $(this).height($(this).data('heigh') * scaleY);
                     }
                 });
             }, this);
@@ -282,6 +294,22 @@
     };
 
     /**
+     * Manage products list with category selection
+     */
+    Controller.prototype.manageCats = function() {
+        var self = this;
+
+        this.$catsManager.on('change', function() {
+            var catID = parseInt($(this).find('option:selected').data('id'));
+            if(catID) {
+                self.$productsManager.find('option').hide();
+
+                self.$productsManager.find('option[data-category="' + catID + '"]').show();
+            }
+        });
+    };
+
+    /**
      * Init all Class methods
      *
      */
@@ -290,8 +318,9 @@
         this.addElement();
         this.catchElement();
         this.rotateElement();
-        this.managePosition();
+        //this.managePosition();
         this.manageHolderScaling();
+        this.manageCats();
     };
 
     $(document).ready(function() {
