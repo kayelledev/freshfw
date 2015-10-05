@@ -1,7 +1,7 @@
 
 .editor-container {
-  width: 90%;
-  height: 400px;
+  width: 80%;
+  height: 600px;
   border: 1px solid black;
   margin: 200px auto;
   position: relative;
@@ -12,8 +12,13 @@
   height: 100px;
   border: 1px solid black;
   position: absolute;
+  transform-origin: top left;
 }
 
 .editor-container .draggable.active {
   border-color: #3eff00;
+}
+
+.editor-container .draggable.collision {
+  border-color: red;
 }

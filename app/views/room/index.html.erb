@@ -4,13 +4,35 @@
     Rotate current
     <input type="number" class="rotation-manager" min="0" max="360" step="1">
   </h3>
+  <h3>
+    Position X
+    <input type="number" class="position-x" min="0" step="1">
+  </h3>
+  <h3>
+    Position Y
+    <input type="number" class="position-y" min="0" step="1">
+  </h3>
+  <h3>
+    Holder Width
+    <input type="number" class="holder-width" min="0" step="1">
+  </h3>
+  <h3>
+    Holder Height
+    <input type="number" class="holder-height" min="0" step="1">
+  </h3>
+  <h3>
+    Products
+    <select class="products-manager">
+      <% @items.each do |item| %>
+          <option data-width="<%= item.width %>" data-height="<%= item.height %>"><%= item.name %></option>
+      <% end %>
+    </select>
+  </h3>
 </div>
 
 <div class="editor-container">
-    <div id="drag-1" class="draggable">
-        <p> You can drag one element </p>
+    <div id="drag-1" class="draggable" data-width="100" data-height="100" data-toggle="tooltip" title="Sofa">
     </div>
-    <div id="drag-2" class="draggable">
-        <p> with each pointer </p>
+    <div id="drag-2" class="draggable" data-width="100" data-height="100" data-toggle="tooltip" title="Table">
     </div>
 </div>
