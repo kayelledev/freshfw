@@ -1,1 +1,10 @@
-<%= render 'shared/room_editor' %>
+
+<h3>Choose preset</h3>
+<form class="preset-form" action="/room_editor/edit">
+    <select class="preset" name="preset">
+    <% @products.each do |product| %>
+        <option value="<%= product.id %>"><%= product.name %></option>
+    <% end %>
+    </select>
+    <button class="button button-primary select-preset">Choose</button>
+</form>

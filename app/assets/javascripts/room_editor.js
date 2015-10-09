@@ -52,13 +52,13 @@
         /**
          * Calculate Holder width
          */
-        this.holderWidth = parseFloat(this.$holder.width());
+        this.holderWidth = parseFloat(this.$holder.attr('data-width'));
 
         /**
          * Calculate holder height
          * @type {Number}
          */
-        this.holderHeight = parseFloat(this.$holder.height());
+        this.holderHeight = parseFloat(this.$holder.attr('data-height'));
 
         /**
          * List all products
@@ -84,11 +84,11 @@
 
             // call this function on every dragmove event
             onmove: function(event) {
-                var target = event.target,
+                var target = event.target.parentNode,
                 // keep the dragged position in the data-x/data-y attributes
                     x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
                     y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy,
-                    r = (parseFloat(target.getAttribute('data-rotation')) || 0),
+                    r = (parseFloat(event.target.getAttribute('data-rotation')) || 0),
                     $positionPanelX = $('.position-x'),
                     $positionPanelY = $('.position-y');
 
@@ -101,6 +101,8 @@
                 target.setAttribute('data-x', x);
                 target.setAttribute('data-y', y);
                 target.setAttribute('data-rotation', r);
+
+                //$('.rotation-arrow').hide();
 
                 $positionPanelX.val(x);
                 $positionPanelY.val(y);
@@ -117,11 +119,11 @@
                     //]).setAngle(parseInt($element.attr('data-rotation')));
 
                         return new SAT.Box(
-                            new SAT.Vector(parseFloat($element.attr('data-x')) - $element.width()/2.0, parseFloat($element.attr('data-y')) + $element.height()/2.0),
-                            $element.width(),
-                            $element.height()
+                            new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
+                            $element.parent().width(),
+                            $element.parent().height()
 
-                        ).toPolygon().setAngle(parseInt($element.attr('data-rotation'))*Math.PI/180.0);
+                        ).toPolygon().setAngle(parseInt($element.attr('data-rotation')) * Math.PI/180.0);
                 },
                     $elements = $('.editor-container div').not('.active'),
                     activeRect = createRect($(event.target));
@@ -144,15 +146,32 @@
      * @param elementsClass
      */
     Controller.prototype.initElements = function(elementsClass) {
+        var scalingX = parseFloat(this.$holder.data('width')) / this.$holder.width(),
+            scalingY = parseFloat(this.$holder.data('height')) / this.$holder.height();
         // target elements with the "draggable" class
         $('.' + elementsClass).each(function() {
-            $(this).attr('data-x', $(this).width()/2.0);
-            $(this).attr('data-y', $(this).height()/2.0);
-            $(this).attr('data-rotation', 0);
+            //$(this).attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
+            //$(this).attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
 
-            $(this).css({
+            $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
+            $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
+
+            //$(this).css({
+            //    'width': $(this).data('width'),
+            //    'height': $(this).data('heigh'),
+            //    '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+            //    '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+            //    '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+            //    'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+            //});
+
+            $(this).parent().css({
                 'width': $(this).data('width'),
-                'height': $(this).data('heigh')
+                'height': $(this).data('heigh'),
+                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
             });
         });
 
@@ -205,6 +224,10 @@
                 self.$rotationPanel.val((parseInt($(this).attr('data-rotation')) || 0));
                 self.$positionPanelX.val((parseFloat($(this).attr('data-x')) || 0));
                 self.$positionPanelY.val((parseFloat($(this).attr('data-y')) || 0));
+
+                $('.rotation-arrow').hide();
+
+                $(this).parent().find('.rotation-arrow').show();
             });
     };
 
@@ -281,16 +304,16 @@
                 });
             }, this);
 
-        $widthPanel.val(this.holderWidth);
-        $heightPanel.val(this.holderHeight);
+        $widthPanel.val(this.$holder.width());
+        $heightPanel.val(this.$holder.height());
 
         $widthPanel.on('change', function() {
             scale('xCord');
-        });
+        }).trigger('change');
 
         $heightPanel.on('change', function() {
             scale('yCord');
-        });
+        }).trigger('change');
     };
 
     /**
@@ -309,6 +332,26 @@
         });
     };
 
+    Controller.prototype.showRotationArrow = function() {
+        var $arrow = $('.rotation-arrow');
+
+        this.$holder.find('div').on('click', $.proxy(function() {
+            var offsetX = parseFloat(this.$currentElement.attr('data-x')) + this.$currentElement.width(),
+                offsetY = parseFloat(this.$currentElement.attr('data-y')) + this.$currentElement.height() + 4,
+                deg = parseFloat(this.$currentElement.attr('data-rotation'));
+
+            $arrow.css('transform-origin', offsetX + 'px ' + offsetY + 'px');
+            $arrow.show();
+
+            $arrow.css({
+                '-webkit-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px)',
+                '-moz-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px)',
+                '-ms-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px)',
+                'transform': 'translate(' + offsetX + 'px,' + offsetY + 'px)'
+            });
+        }, this));
+    };
+
     /**
      * Init all Class methods
      *
@@ -321,13 +364,73 @@
         //this.managePosition();
         this.manageHolderScaling();
         this.manageCats();
+        //this.showRotationArrow();
     };
 
     $(document).ready(function() {
 
-        var controller = new Controller();
+        var controller = new Controller(),
+            $presetSelector = $('.preset'),
+            $button = $('.save-preset');
 
         controller.init();
+
+        $presetSelector.on('change', function() {
+            this.attr('value', $(this).find('option:selected').val());
+        });
+
+        $button.on('click', function() {
+            var positions = {};
+
+            controller.$holder.find('div').each(function() {
+                var data = {
+                    'posX': parseInt($(this).parent().attr('data-x')),
+                    'posY': parseInt($(this).parent().attr('data-y')),
+                    'rotation': parseInt($(this).attr('data-rotation'))
+                };
+                positions[$(this).attr('id')] = data;
+            });
+
+            $.ajax({
+                url: "/room_editor/save", // Route to the Script Controller method
+                type: "POST",
+                data: { position: positions }, // This goes to Controller in params hash, i.e. params[:file_name]
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        });
+
+        // the same as yours.
+        function rotateOnMouse(e) {
+            var offset = controller.$currentElement.offset();
+            var center_x = offset.left;
+            var center_y = offset.top;
+            var mouse_x = e.pageX;
+            var mouse_y = e.pageY;
+            var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+            var degree = (radians * (180 / Math.PI) * -1) + 100;
+            var offsetX = parseFloat(controller.$currentElement.parent().attr('data-x')),
+                offsetY = parseFloat(controller.$currentElement.parent().attr('data-y'));
+
+            controller.$currentElement.parent().css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            controller.$currentElement.parent().css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            controller.$currentElement.parent().css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            controller.$currentElement.parent().css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+
+            controller.$currentElement.attr('data-rotation', degree);
+        }
+
+        $('.rotation-arrow').mousedown(function(e) {
+            e.preventDefault(); // prevents the dragging of the image.
+            $(document).bind('mousemove.rotateImg', function(e2) {
+                rotateOnMouse(e2);
+            });
+        });
+
+        $(document).mouseup(function(e) {
+            $(document).unbind('mousemove.rotateImg');
+        });
 
         // this is used later in the resizing demo
         //window.dragMoveListener = dragMoveListener;

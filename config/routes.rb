@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   get 'room_editor', to: 'room#index'
+  get 'room_editor/edit', to: 'room#edit'
+  post 'room_editor/save', to: 'room#save'
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

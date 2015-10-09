@@ -38,6 +38,9 @@
     %dl
       %dt= f.label :is_preset, t('shoppe.products.is_room')
       %dd= f.text_field :is_preset, :class => 'number', type: 'checkbox'
+    %dl
+      %dt= f.label :editor, 'Go to editor'
+      %dd= link_to 'Go to editor', "/room_editor/edit?preset=#{@product.id}", class: "button"
 
   = field_set_tag t('shoppe.products.attributes') do
     .margin

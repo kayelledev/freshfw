@@ -45,9 +45,6 @@ a.active {
     color: #fec503;
 }
 
-h1,
-h2,
-h3,
 h4,
 h5,
 h6 {
@@ -69,15 +66,13 @@ h6 {
 }
 
 .btn-landing {
-    border-color: #f6bf01;
+    border: 5px solid white;
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 800;
-    border-radius: 5px;
+    font-weight: bold;
 	font-size: 24px;
     color: #fff;
 	padding: 10px 20px;
-    background-color: #fec503; 
 }
 
 .btn-landing:hover,
@@ -85,9 +80,7 @@ h6 {
 .btn-landing:active,
 .btn-landing.active,
 .open .dropdown-toggle.btn-landing {
-    border-color: #f6bf01;
-    color: #fff;
-    background-color: #Fed536;
+  color: white;
 }
 
 .btn-landing:active,
@@ -962,19 +955,27 @@ body {
 
 .floating-text-container{
 	position: absolute;
-	padding-top: 15%;
-	right: 0;
-	left: 0;
+    left: 10%;
+    bottom: 0;
 	z-index: 2;
-	text-align: center;
+}
+
+.intro-header {
+
+  position: relative;
 }
 	
 .floating-text{
 	padding: 3em 5em;
 	display: inline-block;
-	background-color: rgba(255,255,255,0.8);
-	text-align: center;
-	color: #000;
+    color: white;
+	text-align: left;
+}
+
+.floating-text h1 {
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 40px;
 }
 
 .homepage-section {
@@ -1038,14 +1039,25 @@ p {
     position: relative;
 }
 
-.row .included-product {
-    margin-bottom: 25px;
+.row.included-product {
+    margin-bottom: 35px;
+    margin-top: 20px;
+    margin-right: 1px;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
     letter-spacing: 1px;
     color: #777;
+    display: inline-block;
+    width: 50%;
 }
 
+.row.included-product:hover {
+  border: 1px solid #ff7c00;
+}
+
+.carousel-inner > .item {
+  height: 800px;
+}
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
       width: 100%;
@@ -1075,7 +1087,7 @@ p {
     border: none;
 }
 .nav-tabs > li > a {
-    margin-right: 0px;
+    margin-right: 30px !important;
     border-left: none !important; 
     border-right: none !important; 
     border-top: none !important; 
@@ -1091,6 +1103,26 @@ p {
 }
 .nav {
     margin-bottom:5px !important;
+}
+
+.desc {
+  margin-bottom: 14px;
+  margin-top: 14px;
+}
+
+.products-list {
+  padding: 40px;
+  margin-top: 40px;
+  float: left;
+  width: 100%;
+}
+
+.included {
+  margin-top: 40px;
+}
+
+.included ul li {
+  list-style-type: none;
 }
 
 @media (max-width: 768px) {

@@ -4,7 +4,6 @@
 		  <div class="carousel-inner" role="listbox">
 		     <div class="item active" ><%= image_tag product.default_image,  class: "img-responsive", alt: "product" %>
 		     </div>
-
 		      <% if product.image2.url %>
 		        <div class="item" style="margin: auto; padding: auto;"><%= image_tag product.image2, class: "img-responsive", alt: "product" %></div>
 		      <% end %>
@@ -20,6 +19,9 @@
 		      <% if product.image6.url %>
 		        <div class="item"><%= image_tag product.image6, class: "img-responsive", alt: "product" %></div>
 		      <% end %>
+              <% @product.included_products.each do |item| %>
+                <div class="item"><%= image_tag item.default_image, class: "img-responsive", alt: "product" %></div>
+              <% end %>
 		  </div>
 		    <!-- Controls -->
 		    <a class="left carousel-control" href="#ProductCarousel" role="button" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
@@ -32,6 +34,9 @@
       <li data-target='#ProductCarousel' data-slide-to='3'><%= image_tag product.image4.thumb, class: "img-responsive", alt: "product" %></li>
       <li data-target='#ProductCarousel' data-slide-to='4'><%= image_tag product.image5.thumb, class: "img-responsive", alt: "product" %></li>
       <li data-target='#ProductCarousel' data-slide-to='5'><%= image_tag product.image6.thumb, class: "img-responsive", alt: "product" %></li>
+      <% @product.included_products.each do |item| %>
+          <li data-target='#ProductCarousel' data-slide-to='5'><%= image_tag item.default_image.thumb, class: "img-responsive", alt: "product" %></li>
+      <% end %>
     </ol>
 	</div>
 </div>

@@ -7,7 +7,7 @@
   <div class="content inside-page product-details">
     
     <div class="row">
-      <div class="col-md-4" style="left: 10px;" >
+      <div class="col-md-4" style="left: 10px; padding-right: 2%;" >
         <div class="breadcrumb-fw" style="color: #333;">
           <a href="<%= root_url%>">Home</a> 
             <span> / </span>
@@ -46,6 +46,15 @@
 
             <a href="mailto:info@gofourwalls.com" class="btn btn-second fa fa-envelope">Email Us</a>
           </div>
+        </div>
+
+        <div class="included">
+          <p>WHAT'S INCLUDED:</p>
+          <ul>
+            <% @product.included_products.each do |item| %>
+                <li><%= item.name %></li>
+            <% end %>
+          </ul>
         </div>
 
         <div>
@@ -88,62 +97,57 @@
 
       <div id='product-gallery' class="col-md-8">
         <%= render 'variant_gallery', product: @product %>
-        <% if @product.included_products.any? %>
-          <div class="col-full">
-
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation col-md-4" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-                  <h2>Product Details</h2>
-                </a>
-                </li>
-                <li role="presentation col-md-8"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-                  <h2>SHIPPING AND DELIVERY INFO</h2>
-                </a>
-                </li>
-            </ul>
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane fade in active" id="home">
-                <% @product.included_products.each do |item|%>
+      </div>
+    </div>
+    <div class="products-list">
+      <% if @product.included_products.any? %>
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation col-md-4" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+              <h2>DETAILS AND DIMENSIONS</h2>
+            </a>
+            </li>
+            <li role="presentation col-md-8"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+              <h2>SHIPPING AND DELIVERY INFO</h2>
+            </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="home">
+              <% @product.included_products.each do |item|%>
                   <div class="row included-product">
                     <div class="col-md-4">
                       <a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.catalog, class: "img-responsive", alt: "product" %>
                       </a>
                     </div>
                     <div class="col-md-8" style="vertical-align: text-bottom; ">
-                      <strong><%= item.name %></strong>
-                      <div>
-                        <span> Qty: </span>
-                        <span> </span>
-                      </div>
-                      <div>
-                        <span>SKU: </span>
-                        <span><%= item.sku %></span>
-                      </div>
-                      <div>
-                        <span>Description: </span>
+                      <a href="<%= item.permalink %>" target="_blank">
+                        <strong><%= item.name %></strong>
+                      </a>
+                      <div class="desc">
                         <p><%= item.description %></p>
                       </div>
                     </div>
                   </div>
-                <% end %>
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="profile">
-                <% @product.product_attributes.each do |attribure| %>
+              <% end %>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="profile">
+              <% @product.product_attributes.each do |attribure| %>
                   <div class="col-md-4">
                     <%= attribure.key %>:
                   </div>
                   <div class="col-md-8">
                     <h2><%= attribure.value %></h2>
                   </div>
-                <% end %>
-              </div>
+              <% end %>
             </div>
           </div>
-        <% end %>
-        <%= render 'shared/room_editor', product: @product %>
-
-      </div>
-    </div>
+          </div>
+      <% end %>
+      <% if @product.is_preset %>
+          <div style="width: 760px; height: <%= @product.height + 300 %>px; margin: 0 auto; clear: both;">
+            <%= render 'shared/room_editor', product: @product %>
+          </div>
+      <% end %>
   </div>
 </div>
 

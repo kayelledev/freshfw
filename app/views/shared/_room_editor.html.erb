@@ -28,24 +28,44 @@
   <!--<button class="add-draggable">Add element</button>-->
 </div>
 
-<div class="rotate-angle">
+<div class="rotate-angle" hidden>
   Angle
   <input type="number" class="rotation-manager" min="0" max="360" step="1">
 </div>
 
 <div class="editor-width">
   <hr>
-  <input type="number" class="holder-width" min="0" step="1">
-  <span>in</span>
+  <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
+  <span><%= @product.width %> in</span>
+  <%= image_tag 'line.png' %>
 </div>
 
 <div class="editor-height">
-  <input type="number" class="holder-height" min="0" step="1">
-  <span>in</span>
+  <%= image_tag 'line.png' %>
+  <div class="height-manager">
+    <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
+    <span><%= @product.height %> in</span>
+  </div>
 </div>
 
-<div class="editor-container">
+<div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.height %>" style="width: 760px; height: 600px;">
   <% @product.included_products.each do |item| %>
-      <div class="draggable" data-width="<%= item.width %>" data-heigh="<%= item.height %>" data-toggle="tooltip"></div>
+      <span style="position: absolute;" data-width="<%= item.width %>" data-heigh="<%= item.height %>"
+            data-rotation="<%= item.rotation %>"
+            data-x="<%= item.posX %>"
+            data-y="<%= item.posY %>"
+            data-toggle="tooltip" title="<%= item.name %>">
+
+      <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-heigh="<%= item.height %>"
+           data-rotation="<%= item.rotation %>"
+           data-x="<%= item.posX %>"
+           data-y="<%= item.posY %>"
+           style="width: <%= item.width %>px; height: <%= item.height %>px;">
+        <% if item.image6 %>
+            <%= image_tag item.image6, width: '100%', height: '100%' %>
+        <% end %>
+      </div>
+        <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
+      </span>
   <% end %>
 </div>

@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
-      process_user if params[:signup][:email]
+      process_user if params[:signup] && params[:signup][:email]
 
       @order.separate_delivery_address = params[:order][:separate_delivery_address]
 
