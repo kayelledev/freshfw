@@ -56,7 +56,7 @@
             data-y="<%= item.posY %>"
             data-toggle="tooltip" title="<%= item.name %>">
 
-      <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-heigh="<%= item.height %>"
+        <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-heigh="<%= item.height %>"
            data-rotation="<%= item.rotation %>"
            data-x="<%= item.posX %>"
            data-y="<%= item.posY %>"
@@ -64,7 +64,7 @@
         <% if item.image6 %>
             <%= image_tag item.image6, width: '100%', height: '100%' %>
         <% end %>
-      </div>
+        </div>
         <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
       </span>
   <% end %>
