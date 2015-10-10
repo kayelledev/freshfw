@@ -83,6 +83,24 @@ h6 {
   color: white;
 }
 
+.container .btn-landing {
+  border: 5px solid #ffb300;
+  text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #ffb300;
+  padding: 10px 20px;
+}
+
+.container .btn-landing:hover,
+.container .btn-landing:focus,
+.container .btn-landing:active,
+.container .btn-landing.active,
+.container .open .dropdown-toggle.btn-landing {
+  color: #ffb300;
+}
+
 .btn-landing:active,
 .btn-landing.active,
 .open .dropdown-toggle.btn-landing {
