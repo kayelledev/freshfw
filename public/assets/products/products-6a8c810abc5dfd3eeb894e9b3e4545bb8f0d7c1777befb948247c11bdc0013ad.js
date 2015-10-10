@@ -1,0 +1,1 @@
+$(document).ready(function(){$("input[name=varsku]").on("change",function(t){var a=$("#product_"+t.target.value),r=$("#description_product_"+t.target.value);$(".variant").hide(),$(a).show(),$(r).show(),$("#buy").attr("href",a.data("url"))})});
