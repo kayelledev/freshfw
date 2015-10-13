@@ -51,6 +51,8 @@ $ ->
       $(this).val('true')
     else
       $(this).val('false')
+   .click()
+   .click()
 
   # Sort users table
   $('table.data').tablesorter()
