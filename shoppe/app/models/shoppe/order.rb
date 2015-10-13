@@ -60,6 +60,14 @@ module Shoppe
       "#{first_name} #{last_name}"
     end
 
+    def return_first_name
+      "#{first_name}"
+    end
+
+    def return_last_name
+      "#{last_name}"
+    end
+
     # Is this order empty? (i.e. doesn't have any items associated with it)
     #
     # @return [Boolean]
@@ -79,6 +87,12 @@ module Shoppe
     # @return [Integer]
     def total_items
       order_items.inject(0) { |t,i| t + i.quantity }
+    end
+
+    def cart_total_cost
+        puts '========='
+        puts order_items.count
+      order_items.inject(0) { |t,i| t + i.unit_price * i.quantity }
     end
 
     def self.ransackable_attributes(auth_object = nil)

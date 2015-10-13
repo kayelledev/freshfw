@@ -1,0 +1,31 @@
+<div class='row'>
+    <div class='cell'>Cart Total</div>
+    <div class='cell'><%= number_to_currency(@order.cart_total_cost, unit: "$", format: "%u%n") %></div>
+</div>
+<div class='row'>
+    <div class='cell'>Shipping</div>
+    <div class='cell cart_price'><%= number_to_currency(@order.delivery_price, unit: "$", format: "%u%n") %></div>
+</div>
+<div class='row'>
+    <div class='cell'><br></div>
+    <div class='cell'><br></div>
+</div>
+<div class='row'>
+    <div class='cell'>Estimated Tax</div>
+    <div class='cell'><%= number_to_currency(@order.tax, unit: "$", format: "%u%n") %></div>
+ </div>
+
+ <div class='row'>
+    <div class='cell'><br></div>
+    <div class='cell'><br></div>
+ </div>
+
+ <div class='row total'>
+    <div class='cell'></div>
+    <div class='cell'></div>
+ </div>
+
+<div class='row'>
+    <div class='cell'>Order Total</div>
+    <div class='cell'><%= number_to_currency(@order.total, unit: "$", format: "%u%n") %></div>
+</div>

@@ -124,7 +124,7 @@ class OrdersController < ApplicationController
       :first_name, :last_name, :company,
       :billing_address1, :billing_address2, :billing_address3, :billing_address4, :billing_postcode, :billing_country_id,
       :separate_delivery_address,
-      :delivery_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id,
+      :delivery_first_name, :delivery_last_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id,
       :delivery_price, :delivery_service_id, :delivery_tax_amount,
       :email_address, :phone_number,
       :notes,
@@ -150,7 +150,7 @@ class OrdersController < ApplicationController
       :billing_address3, :billing_address4,
       :billing_country_id, :billing_postcode,
       :email_address, :phone_number,
-      :separate_delivery_address, :delivery_name,
+      :separate_delivery_address, :delivery_first_name, :delivery_last_name,
       :delivery_address1, :delivery_address2, :delivery_address3,
       :delivery_address4, :delivery_postcode, :delivery_country_id,
       :delivery_service_id

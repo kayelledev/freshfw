@@ -1,45 +1,45 @@
-<div class="table-responsive cart_info">			
-	<table class="table table-condensed" style="margin-top: 20px; font-stye: bold;">
-		<thead>
-			<tr class="cart_menu">
-				<td class="image"><h5>Item</h5></td>
-				<td class="description"><h5>Description</h5></td>
-				<td class="price"><h5>Price</h5></td>
-				<td class="quantity"><h5>Quantity</h5></td>
-				<td class="total" style="text-align: right; "><h5>Total</h5></td>
-				<td></td>
-			</tr>
-		</thead>
-		<tbody>
-		<% order.order_items.each do |item| %>
-		<tr>
-			<td class="cart_product" style="width: 120px; height: auto;">
-				<a href="<%= product_path(item.ordered_item.permalink) %>"><%= image_tag item.ordered_item.default_image.thumb, class: "img-responsive thumbnail", alt: "#{item.ordered_item.full_name}" %></a>
-			</td>
-			<td class="cart_description">
-				<h4><a href="<%= product_path(item.ordered_item.permalink) %>"><%= item.ordered_item.full_name %></a></h4>
-				<p>sku: <%= item.ordered_item.sku %></p>
-			</td>
-			<td class="cart_price">
-				<p><%= number_to_currency(item.unit_price, unit: "$", format: "%u%n") %></p>
-			</td>
-			<td class="cart_quantity">
-				<div class="cart_quantity_button">
-					<p class="cart_quantity_up" style="margin-left: 30px; "><%= item.quantity %></p>
-				</div>
-			</td>
-			<td class="cart_total">
-				<p class="cart_total_price" style="text-align: right; "><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></p>
-			</td>
-			<td class="cart_delete">
-			    <% if request.original_url.include? "basket" %>
-					<a class="cart_quantity_delete" href="<%= remove_from_order_path(item.id) %>"><i class="fa fa-times"></i></a>
-				<% end %>
-			</td>
-		</tr>
-	    <% end %>
-	
-	<!-- deliver servie (calculate later) -->
+<div class="table-responsive cart_info">
+    <table class="table table-condensed" style="margin-top: 20px; font-stye: bold;">
+        <thead>
+            <tr class="cart_menu">
+                <td class="image"><h5>Item</h5></td>
+                <td class="description"><h5>Description</h5></td>
+                <td class="price"><h5>Price</h5></td>
+                <td class="quantity"><h5>Quantity</h5></td>
+                <td class="total" style="text-align: right; "><h5>Total</h5></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+        <% order.order_items.each do |item| %>
+        <tr>
+            <td class="cart_product" style="width: 120px; height: auto;">
+                <a href="<%= product_path(item.ordered_item.permalink) %>"><%= image_tag item.ordered_item.default_image.thumb, class: "img-responsive thumbnail", alt: "#{item.ordered_item.full_name}" %></a>
+            </td>
+            <td class="cart_description">
+                <h4><a href="<%= product_path(item.ordered_item.permalink) %>"><%= item.ordered_item.full_name %></a></h4>
+                <p>sku: <%= item.ordered_item.sku %></p>
+            </td>
+            <td class="cart_price">
+                <p><%= number_to_currency(item.unit_price, unit: "$", format: "%u%n") %></p>
+            </td>
+            <td class="cart_quantity">
+                <div class="cart_quantity_button">
+                    <p class="cart_quantity_up" style="margin-left: 30px; "><%= item.quantity %></p>
+                </div>
+            </td>
+            <td class="cart_total">
+                <p class="cart_total_price" style="text-align: right; "><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></p>
+            </td>
+            <td class="cart_delete">
+                <% if request.original_url.include? "basket" %>
+                    <a class="cart_quantity_delete" href="<%= remove_from_order_path(item.id) %>"><i class="fa fa-times"></i></a>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    
+    <!-- deliver servie (calculate later) -->
     <% if order.delivery_service %>
     <tr>
       <td></td>
@@ -49,13 +49,13 @@
       <td class="cart_total" style="text-align: right; "><%= number_to_currency(order.delivery_price, unit: "$", format: "%u%n") %></td>
     </tr>
     <% end  %>
-	<!-- end deliver servie -->
+    <!-- end deliver servie -->
   </tbody>
   
   <tfoot>
     <tr>
       <td colspan='4' style="text-align: right; padding-right: 1em; ">Sub-Total</td>
-	  <input id="before_tax" type="hidden" value="<%= order.total_before_tax %>" >
+      <input id="before_tax" type="hidden" value="<%= order.total_before_tax %>" >
       <td id="total_before_tax" style="text-align: right; "><%=  number_to_currency(order.total_before_tax, unit: '$', format: '%u%n') %></td>
     </tr>
     <tr>

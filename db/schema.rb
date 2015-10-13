@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "ip_address"
     t.text     "notes"
     t.boolean  "separate_delivery_address",                         default: false
-    t.string   "delivery_name"
+    t.string   "delivery_first_name"
     t.string   "delivery_address1"
     t.string   "delivery_address2"
     t.string   "delivery_address3"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.boolean  "exported",                                          default: false
     t.string   "invoice_number"
     t.decimal  "tax",                       precision: 5, scale: 2
+    t.string   "delivery_last_name"
   end
 
   add_index "shoppe_orders", ["delivery_service_id"], name: "index_shoppe_orders_on_delivery_service_id"

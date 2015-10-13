@@ -5,7 +5,8 @@
     %h1= Shoppe.settings.store_name
     %h2= t("shoppe.orders.despatch_note.despatch_note")
   .address
-    %p.name= @order.delivery_name
+    %p.name= @order.delivery_first_name
+    %p.name= @order.delivery_last_name
     %p= @order.delivery_address1
     %p= @order.delivery_address2
     %p= @order.delivery_address3

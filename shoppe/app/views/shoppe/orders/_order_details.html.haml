@@ -19,7 +19,8 @@
       %dd= @order.billing_country.try(:name)
       - if @order.separate_delivery_address?
         %dt= t('shoppe.orders.delivery_address')
-        %dd= @order.delivery_name
+        %dd= @order.delivery_first_name
+        %dd= @order.delivery_last_name
         %dd= @order.delivery_address1
         %dd= @order.delivery_address2
         %dd= @order.delivery_address3
