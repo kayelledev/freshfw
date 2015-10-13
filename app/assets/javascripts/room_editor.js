@@ -214,6 +214,17 @@
     Controller.prototype.catchElement = function() {
         var self = this;
 
+        var mouse_is_outside = false;
+
+        var div_elem = this.$holder.find('div');
+        var arrow_elem = this.$holder.find('.rotation-arrow');
+
+        this.$holder.find('div').hover(function(){
+            mouse_is_outside = false;
+        }, function(){
+            mouse_is_outside = true;
+        });
+
         this.$holder.find('div')
             .off('mousedown')
             .on('mousedown', function() {
@@ -230,6 +241,20 @@
 
                 $(this).parent().find('.rotation-arrow').show();
             });
+
+        $(document).click(function() { 
+            if(mouse_is_outside) {
+                div_elem.removeClass('active');
+                arrow_elem.hide();
+            }
+        })
+            // this.$holder.find('div')('mouseup', function(){
+            //     if (clicked) {
+            //         clicked = false;
+            //         self.$holder.find('div').removeClass('active');
+            //         $(this).parent().find('.rotation-arrow').show();
+            //     }
+            // });
     };
 
     /**
