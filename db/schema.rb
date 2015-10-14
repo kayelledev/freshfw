@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at"
     t.string   "courier"
     t.string   "tracking_url"
+    t.string   "description"
   end
 
   add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active"

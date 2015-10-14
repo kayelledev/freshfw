@@ -248,13 +248,6 @@
                 arrow_elem.hide();
             }
         })
-            // this.$holder.find('div')('mouseup', function(){
-            //     if (clicked) {
-            //         clicked = false;
-            //         self.$holder.find('div').removeClass('active');
-            //         $(this).parent().find('.rotation-arrow').show();
-            //     }
-            // });
     };
 
     /**

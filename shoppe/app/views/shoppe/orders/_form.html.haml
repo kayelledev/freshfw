@@ -37,9 +37,13 @@
         = f.label :separate_delivery_address, t('shoppe.orders.use_separate_delivery_address?')
 
 = field_set_tag t('shoppe.orders.delivery_address'), :class => 'delivery' do
-  %dl
-    %dt= f.label :delivery_name, t('shoppe.orders.delivery_name')
-    %dd= f.text_field :delivery_name, :class => 'text'
+  .splitContainer
+    %dl.half
+      %dt= f.label :delivery_first_name, t('shoppe.orders.first_name')
+      %dd= f.text_field :delivery_first_name, :class => 'text'
+    %dl.half
+      %dt= f.label :delivery_last_name, t('shoppe.orders.first_name')
+      %dd= f.text_field :delivery_last_name, :class => 'text'  
   %dl
     %dt= f.label :delivery_address1, t('shoppe.orders.address')
     %dd.space= f.text_field :delivery_address1, :class => 'text'
