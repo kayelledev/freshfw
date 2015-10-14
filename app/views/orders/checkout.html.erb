@@ -119,12 +119,17 @@
                   </div>
               </div>
               <div class="row form-fields">
-                  <div class='col-md-9 delivery-service-col'>
+                    <div class='col-md-9 delivery-service-col'>
                       <% @order.available_delivery_services.each do |service| %>
-                          <div style="display: block;" data-refresh-path="<%= refresh_order_items_path(@order) %>">
+                        <div style="display: block;" data-refresh-path="<%= refresh_order_items_path(@order) %>" class='delivery-service-radio-button'>
+                            <div class='radio-button'>
                               <%= f.radio_button :delivery_service_id, service.id, checked: (current_system(@order, service) || service.default?)  %>
-                              <%= "#{service.name} Delivery" %>
-                          </div>
+                            </div>
+                            <div class='radio-button-label'>
+                                <p class='service-name'><%= "#{service.name} Delivery" %></p>
+                                <p class='service-description'><%= service.description %></p>
+                            </div>
+                        </div>
                       <% end %>
                   </div>
               </div>
