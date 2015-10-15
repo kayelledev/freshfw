@@ -26,15 +26,19 @@ class OrdersController < ApplicationController
     @order = current_order
     #TODO don't commit debug tools
     puts "in remove method: order #{@order.order_items.first.id} and params #{params}"
-
-    item = @order.order_items.find(params[:order_item_id])
-    item.destroy
+    @item = @order.order_items.find(params[:order_item_id])
+    @item.destroy
 
     if @order.order_items.empty?
       flash.now[:notice] = "You have no more item in the cart."
     end
-
-    redirect_to cart_path
+    puts '==========='
+    puts @order.cart_total_cost
+    puts @order.id
+    respond_to do |format|
+      format.html { redirect_to cart_path }
+      format.js { render 'remove.js.erb'}
+    end
   end
 
   def checkout
@@ -87,7 +91,15 @@ class OrdersController < ApplicationController
 
   def refresh_items
     @order = current_order
-    @order.update(delivery_service_id: params[:delivery_service_id])
+    if params[:delivery_service_id]
+      @order.update("delivery_service_id = ?", params[:delivery_service_id] )
+    end
+    if params[:item_quantity]
+      item_id = params[:item_id]
+      item_quantity = params[:item_quantity]
+      @item = @order.order_items.find(item_id)
+      @item.update_attributes(quantity: item_quantity)
+    end
 
     respond_to do |format|
       format.js

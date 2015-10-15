@@ -1,0 +1,5 @@
+$(".order-items-list #item_<%= @item.id %>").fadeOut( 400, function() {
+    $(this).remove();
+});
+console.log("<%= @order.id %>")
+$('#order-summary-info .row .cart-value').html("$0.00");

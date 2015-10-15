@@ -16,3 +16,4 @@
 //= require_directory .
 //= require 'checkout/checkout.js'
 //= require 'carousel.js'
+//= require 'item_quantity.js'

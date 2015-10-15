@@ -90,9 +90,11 @@ module Shoppe
     end
 
     def cart_total_cost
-        puts '========='
-        puts order_items.count
-      order_items.inject(0) { |t,i| t + i.unit_price * i.quantity }
+        if order_items.count > 0
+            order_items.inject(0) { |t,i| t + i.unit_price * i.quantity }
+        else
+            0
+        end
     end
 
     def self.ransackable_attributes(auth_object = nil)
