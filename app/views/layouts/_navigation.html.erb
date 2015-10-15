@@ -11,7 +11,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-				<%= link_to "Four Walls", root_url, class: 'navbar-brand' %>
+				<%= link_to root_url, class: 'navbar-brand' do %>
+                    <span class='site-name-border'>FOUR</span> WALLS
+                <% end %>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
