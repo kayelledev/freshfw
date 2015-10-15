@@ -32,9 +32,7 @@ class OrdersController < ApplicationController
     if @order.order_items.empty?
       flash.now[:notice] = "You have no more item in the cart."
     end
-    puts '==========='
-    puts @order.cart_total_cost
-    puts @order.id
+
     respond_to do |format|
       format.html { redirect_to cart_path }
       format.js { render 'remove.js.erb'}
@@ -92,7 +90,7 @@ class OrdersController < ApplicationController
   def refresh_items
     @order = current_order
     if params[:delivery_service_id]
-      @order.update("delivery_service_id = ?", params[:delivery_service_id] )
+      @order.update_attributes(delivery_service_id: params[:delivery_service_id] )
     end
     if params[:item_quantity]
       item_id = params[:item_id]

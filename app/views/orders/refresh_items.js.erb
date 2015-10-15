@@ -1,2 +1,4 @@
 $('#order-summary-info').html("<%= j (render 'order_summary_info', order: @order ) %>");
-$(".shopping-cart .order-items-list #item_<%= @item.id %>").html("<%= j ( render partial: 'order_item', locals: { item: @item } ) %>");
+<% if @item.present? %>
+	$(".shopping-cart .order-items-list #item_<%= @item.id %>").html("<%= j ( render partial: 'order_item', locals: { item: @item } ) %>");
+<% end %>
