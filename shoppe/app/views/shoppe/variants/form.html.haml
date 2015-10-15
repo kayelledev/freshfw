@@ -74,7 +74,9 @@
           %dt= f.label :furniture_included, t("#{product.product_category.name}: #{product.name} (#{product.sku})")
           %dd= check_box_tag 'included[]', product.id, (@variant.included_products.include? product)
           %dd= product.name
-          %dt= link_to image_tag (product.default_image.thumb.url), :class => 'imageContainer'
+          %dt
+            - if image_link(product, 'default_image')
+              = link_to (image_tag image_link(product, 'default_image'), :class => 'imageContainer', width: 80),  edit_product_path(product)
 
 
   %p.submit

@@ -22,7 +22,8 @@ Rails.application.routes.draw do
       post 'buy'
     end
   end
-  
+  post 'products/destroy_img' => 'products#destroy_img'
+
   #show product_categories
   get "room_type", to: "product_categories#index_type"
   get "room_size", to: "product_categories#index_size"

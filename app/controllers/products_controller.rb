@@ -19,6 +19,14 @@ class ProductsController < ApplicationController
     redirect_to product_path(id: root_product.permalink), :notice => "Product has been added successfuly! #{link_to 'View Your Cart', cart_path}"
   end
 
+  def destroy_img
+    product = Shoppe::Product.find(params[:id])
+    product.update(params[:img_id].to_sym => nil)
+    product.update("url_#{params[:img_id]}".to_sym => nil)
+    binding.pry
+    render json: { status: 'ok', status_code: 200 }
+  end
+
   private
 
   def find_product
