@@ -1,8 +1,8 @@
 <div class="navbar-wrapper" >
-  <div class="container">
+  <div class="container-fluid">
 
-	<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container">
+	<nav class="navbar navbar-default navbar-custom header-navbar">
+        <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -12,16 +12,22 @@
                     <span class="icon-bar"></span>
                 </button>
 				<%= link_to "Four Walls", root_url, class: 'navbar-brand' %>
-                <%= render 'layouts/flashes' %>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                      <input id='header-search' type="text" class="form-control input-sm" placeholder="Search">
+                    </div>
+                    <span id="search-button"></span>
+                </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><%= link_to "Shop", room_type_path, class: "active"%></li>
                     <li><%= link_to "About Us", about_us_url, class: "active"%></li>
+                    <li><%= link_to "Blog", "#" %></li>
+                    <li><%= link_to "Account", "#" %></li>
                     <li><%= link_to "Cart (#{current_order.total_items})", cart_path, class: "active"%></li>
-                    <li><%= link_to "Checkout", checkout_path %></li>
                     <% if current_user %>
                       <li><%= link_to "Logout", destroy_user_session_path, method: 'DELETE' %></li>
                     <% else %>
@@ -36,28 +42,12 @@
 
   </div>
 </div>
+<div class='error-messages-block'>
+    <%= render 'layouts/flashes' %>
+    <%= render 'layouts/errors' %>
+</div>
 
-<% unless  request.original_url.include? "#{request.base_url}/products/"%>
-	<% if request.original_url != "#{request.base_url}/" || request.original_url==request.base_url  %>
-	<header style="background-color: #373434; opacity: 0.8; height: 15em; width: 100%;">
-	        <div class="container">
-	            <div style="color: #fff; margin-top: 10em; ">
-					<% if request.original_url.include? "checkout" %>
-		                <h1>Checkout</h1>
-					<% elsif request.original_url.include? "product" %>
-						<h1>Rooms</h1>
-					<% elsif request.original_url.include? "basket" %>
-						<h1>Your Order</h1>
-					<% elsif request.original_url.include? "about_us" %>
-						<h1>About Us</h1>
-					<% else %>
-						<h1>Room In A Box</h1>
-					<% end %>
-	            </div>
-	        </div>
-	</header>
-	<% end %>
-<% end %>
+
 <% if request.original_url.include? "#{request.base_url}/products/" %>
 	<header style="background-color: #000; opacity: 0.8; height: 7.5em; width: 100%;">
 	</header>

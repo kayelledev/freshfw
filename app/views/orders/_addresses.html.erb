@@ -1,6 +1,6 @@
 <%= form_for @order, :url => checkout_path, :class=> 'form-horizontal' do |f| %>
 
-	<div class="row"><%= f.error_messages %></div>
+	<%= form_errors_for @order %>
 	<div class="row">
 		<div class="col-md-6" style="padding: 5px; ">
 			<h5>Billing Address</h5>
