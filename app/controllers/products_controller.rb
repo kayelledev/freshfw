@@ -23,7 +23,6 @@ class ProductsController < ApplicationController
     product = Shoppe::Product.find(params[:id])
     product.update(params[:img_id].to_sym => nil)
     product.update("url_#{params[:img_id]}".to_sym => nil)
-    binding.pry
     render json: { status: 'ok', status_code: 200 }
   end
 
