@@ -1,3 +1,13 @@
+%link{:rel => :stylesheet, :type => :"text/css", :href => "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"}
+= javascript_include_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+
+:css
+  p {margin-top:3px;}
+  span.remove-img{
+    color:red;
+    cursor:pointer;
+  }
+
 / Declare Variable
 /- furniture_category_id = Shoppe::ProductCategory.find_by_name('Furniture').id
 /- furniture_items = Shoppe::Product.where(:product_category_id == furniture_category_id)
@@ -9,7 +19,7 @@
     %dl
       %dt= f.label :product_category_id, t('shoppe.products.product_category')
       %dd= f.collection_select :product_category_id, Shoppe::ProductCategory.ordered, :id, :permalink, {:prompt => false}, {:class => 'chosen'}
-    
+
     .splitContainer
       %dl.third
         %dt= f.label :name, t('shoppe.products.name')
@@ -71,46 +81,24 @@
               %td.handle
       %p.addAttribute= link_to t('shoppe.products.add_attribute') , '#', :data => {:behavior => 'addAttributeToAttributesTable'}, :class => 'button button-mini green'
 
-
   = field_set_tag t('shoppe.products.images') do
     .splitContainer
+      - array_images.each do |img|
+        %dl.half
+          %dt= f.label img, t("shoppe.products.#{img}"), :class => 'attachmentPreview'
+          %dd
+            - image = @product.send img
+            - if image_link(@product, img)
+              = link_to image_tag image_link(@product, img), :class => 'imageContainer', width: 80,  id: img
+              %span.glyphicon.glyphicon-remove.remove-img{id: img}
+            %p= f.file_field img
+            %p
+              = f.label "url_#{img}"
+              = f.text_field "url_#{img}", id: img, class: 'url_image'
+            %p= f.hidden_field "#{img}_cache"
+        %br
       %dl.half
-        %dt= f.label :default_image, t('shoppe.products.default_image'), :class => 'attachmentPreview'
-        %dd
-          = link_to image_tag (@product.default_image.thumb.url), :class => 'imageContainer'
-          %p= f.file_field :default_image
-          %p= f.hidden_field :default_image_cache
-      %dl.half
-        %dt= f.label :image2, t('shoppe.products.image_2'), :class => 'attachmentPreview'
-        %dd
-          = link_to image_tag (@product.image2.thumb.url), :class => 'imageContainer'
-          %p= f.file_field :image2
-          %p= f.hidden_field :image2_cache
-      %dl.half
-        %dt= f.label :image3, t('shoppe.products.image_3'), :class => 'attachmentPreview'
-        %dd
-          = link_to image_tag (@product.image3.thumb.url), :class => 'imageContainer'
-          %p= f.file_field :image3
-          %p= f.hidden_field :image3_cache
-      %dl.half
-        %dt= f.label :image4, t('shoppe.products.image_4'), :class => 'attachmentPreview'
-        %dd
-          = link_to image_tag (@product.image4.thumb.url), :class => 'imageContainer'
-          %p= f.file_field :image4
-          %p= f.hidden_field :image4_cache
-      %dl.half
-        %dt= f.label :image5, t('shoppe.products.image_5'), :class => 'attachmentPreview'
-        %dd
-          = link_to image_tag (@product.image5.thumb.url), :class => 'imageContainer'
-          %p= f.file_field :image5
-          %p= f.hidden_field :image5_cache
-      %dl.half
-        %dt= f.label :image6, t('shoppe.products.image_6'), :class => 'attachmentPreview'
-        %dd
-          = link_to image_tag (@product.image6.thumb.url), :class => 'imageContainer'
-          %p= f.file_field :image6
-          %p= f.hidden_field :image6_cache	
-	  
+
   - unless @product.has_variants?
     = field_set_tag t('shoppe.products.pricing') do
       .splitContainer
@@ -163,10 +151,35 @@
           %dt= f.label :furniture_included, t("#{product.product_category.name}: #{product.name} (#{product.sku})")
           %dd= check_box_tag 'included[]', product.id, (@product.included_products.include? product)
           %dd= product.name
-          %dt= link_to image_tag (product.default_image.thumb.url), :class => 'imageContainer'
+          %dt
+            - if image_link(product, 'default_image')
+              = link_to (image_tag image_link(product, 'default_image'), :class => 'imageContainer', width: 80),  edit_product_path(product)
 
   %p.submit
     - unless @product.new_record?
       %span.right= link_to t('shoppe.delete') , @product, :class => 'button purple', :method => :delete, :data => {:confirm => "Are you sure you wish to remove this product?"}
     = f.submit t('shoppe.submit'),  :class => 'button green'
     = link_to t('shoppe.cancel'), :products, :class => 'button'
+
+:javascript
+  $( "span.remove-img" ).click(function() {
+    var span = $(this);
+    var id = span.attr('id');
+
+    $.ajax({
+      type: 'post',
+      data: {
+              img_id: id,
+              id: "#{@product.id}",
+            },
+      headers: {
+        'X-CSRF-Token': "#{form_authenticity_token.to_s}"
+      },
+      url: "/products/destroy_img",
+      success: function(response) {
+        $('input.url_image#'+id).val('');
+        $('img#'+id).remove();
+        span.remove();
+      }
+    })
+  });
