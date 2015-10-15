@@ -23,6 +23,22 @@ class ProductsController < ApplicationController
     product = Shoppe::Product.find(params[:id])
     product.update(params[:img_id].to_sym => nil)
     product.update("url_#{params[:img_id]}".to_sym => nil)
+    case params[:img_id]
+    when 'image2'
+      product.remove_image2!
+    when 'image3'
+      product.remove_image3!
+    when 'image4'
+      product.remove_image4!
+    when 'image5'
+      product.remove_image5!
+    when 'image6'
+      product.remove_image6!
+    when 'default_image'
+      product.default_image!
+    else
+    end
+    product.save!
     render json: { status: 'ok', status_code: 200 }
   end
 
