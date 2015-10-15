@@ -18,12 +18,18 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                 <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                      <input id='header-search' type="text" class="form-control input-sm" placeholder="Search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
                     </div>
-                    <span id="search-button"></span>
                 </form>
+
                 <ul class="nav navbar-nav navbar-right">
                     <li><%= link_to "Shop", room_type_path, class: "active"%></li>
                     <li><%= link_to "About Us", about_us_url, class: "active"%></li>
