@@ -2,9 +2,26 @@
     margin-left: 1em;
 }
 
+.cart-view .breadcrumbs {
+    margin: 25px 0px;
+}
+
 .cart-view .breadcrumbs p {
     color: #777;
     margin-left: 1em;
+}
+
+.cart-view .breadcrumbs p span {
+    margin: 0 10px;
+}
+
+.cart-view .breadcrumbs p .active a {
+    color: black;
+    text-decoration: none;
+}
+
+.cart-view .breadcrumbs p .active {
+    margin: 0 0;
 }
 
 .cart-view .shopping-cart {
@@ -128,4 +145,10 @@
 .cart-view .cart-order-summary .box .inside-box .info .total .cell {
     border-top: 1px solid #e6e6e6;
     padding: 10px;
+}
+
+.cart-view #proceed-to-payment {
+    border-radius: 0px;
+    background-color: #ffaa01;
+    color: white;
 }
