@@ -10,7 +10,7 @@
         %dd= f.text_field :permalink, :class => 'text'
       %dl.third
         %dt= f.label :parent_id, t('shoppe.products.parent')
-        %dd= f.collection_select :parent_id, Shoppe::ProductCategory.ordered.push(Shoppe::ProductCategory.new), :id, :name, {:class => 'chosen'}
+        %dd= f.collection_select :parent_id, [Shoppe::ProductCategory.new] + Shoppe::ProductCategory.order(:name), :id, :name, {:class => 'chosen'}
     %dl
       %dt= f.label :description, t('shoppe.product_category.description')
       %dd= f.text_area :description, :class => 'text'
