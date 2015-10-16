@@ -10,11 +10,6 @@
     border-radius: 0px;
 }
 
-.sign-in-or-register .submit-button {
-    border-radius: 0px;
-    color: white;
-    background-color: black;
-}
 .sign-in-or-register .sign-in-or-register-forms .create-account {
     display: none;
 }
@@ -34,4 +29,15 @@
 
 .sign-in-or-register .content {
     margin: 0 30px;
+}
+
+.sign-in-or-register .submit-button {
+    border-radius: 0px;
+    color: white;
+    background-color: black;
+}
+
+.sign-in-or-register .submit-button:hover {
+    color: #D0D0D0 !important;
+    background-color: black !important;
 }
