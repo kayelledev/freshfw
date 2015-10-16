@@ -35,8 +35,19 @@
 }
 
 .cart-view .shopping-cart .title p {
+    position: absolute;
     margin-left: 12px;
 }
+
+.cart-view .shopping-cart .title .row {
+    width: 100%;
+}
+
+.cart-view .shopping-cart .title .row .column-name p {
+    margin: 0 0 0 0;
+    color: #707070;
+}
+
 
 .cart-view .shopping-cart .description {
     width: 100%;
