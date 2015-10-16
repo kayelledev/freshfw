@@ -1,6 +1,14 @@
 <div class="container-fluid checkout">
   <div class='breadcrumbs'>
-    <p><%= link_to 'VIEW CART', cart_path %> >> <span><%= link_to 'BILLING AND SHIPPING INFO', checkout_path %></span> >> PAYMENT >> REVIEW AND CONFIRM</p>
+    <p>
+      <%= link_to 'VIEW CART', cart_path %>
+      <span>>></span>
+      <span class="active"><%= link_to 'BILLING AND SHIPPING INFO', checkout_path %></span>
+      <span>>></span>
+      PAYMENT
+      <span>>></span>
+      REVIEW AND CONFIRM
+    </p>
   </div>
   <%= form_for @order, url: checkout_path, html: { class: 'form-inline', id: 'checkout-form'} do |f| %>
     <%= form_errors_for @order %>
