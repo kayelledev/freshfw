@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  get 'search', to: 'search#index'
 #Karen added to test all functions with Users 
 
   # Example of regular route:
