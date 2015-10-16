@@ -45,7 +45,7 @@
 
 .cart-view .shopping-cart .title .row .column-name p {
     margin: 0 0 0 0;
-    color: #707070;
+    color: #888888;
 }
 
 
@@ -104,6 +104,13 @@
 .cart-view .shopping-cart .order-items-list .order-item .quantity select {
     border-radius: 0px;
     width: 70px;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .quantity span {
+    position: absolute;
+    color: #888888;
+    font-size: 95%;
+    margin-left: 10px;
 }
 
 .cart-view .shopping-cart .order-items-list .order-item .total p {

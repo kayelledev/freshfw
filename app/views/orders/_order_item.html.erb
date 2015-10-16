@@ -18,6 +18,7 @@
 </div>
 <div class='quantity col-md-3' data-refresh-path="<%= refresh_order_items_path(current_order) %>">
     <%= select_tag 'quantity', options_for_select((1..20).to_a, item.quantity), class: "form-control", id: "quantity-select" %>
+    <span><b>Update</b></span>
 </div>
 <div class='total col-md-1'>
     <p><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></p>
