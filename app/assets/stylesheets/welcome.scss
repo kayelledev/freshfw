@@ -1,3 +1,18 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.content-page-image-block {
+    position:relative;
+}
+.content-page-image {
+    width: 100%;
+}
+
+.page-name {
+    position: absolute;
+    bottom: 8%;
+    left: 4%;
+    color: white;
+    font-size: 50px;
+}

@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   end
 
   get 'welcome/index'
-  get 'welcome/about_us', to: 'welcome#about_us', as: 'about_us'
-  
+  get 'about_us', to: 'welcome#about_us', as: 'about_us'
+  get 'blog', to: 'welcome#blog', as: 'blog'
+  get 'account', to: 'welcome#account', as: 'account'
+
   resources :charges
 
   #show, buying products
@@ -32,7 +34,7 @@ Rails.application.routes.draw do
   get "cart", to: "orders#show"
   delete "cart", to: "orders#destroy"
   post 'cart/:order_item_id', to: 'orders#remove', as: :remove_from_order
-  
+
   #checking out
   match "checkout", to: "orders#checkout", as: "checkout", via: [:get, :patch]
   match "checkout/pay", to: "orders#payment", as: "checkout_payment", via: [:get, :post]
@@ -49,7 +51,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'search', to: 'search#index'
-#Karen added to test all functions with Users 
+#Karen added to test all functions with Users
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
