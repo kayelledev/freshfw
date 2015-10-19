@@ -2,9 +2,26 @@
     margin-left: 1em;
 }
 
+.cart-view .breadcrumbs {
+    margin: 25px 0px;
+}
+
 .cart-view .breadcrumbs p {
     color: #777;
     margin-left: 1em;
+}
+
+.cart-view .breadcrumbs p span {
+    margin: 0 10px;
+}
+
+.cart-view .breadcrumbs p .active a {
+    color: black;
+    text-decoration: none;
+}
+
+.cart-view .breadcrumbs p .active {
+    margin: 0 0;
 }
 
 .cart-view .shopping-cart {
@@ -18,8 +35,19 @@
 }
 
 .cart-view .shopping-cart .title p {
+    position: absolute;
     margin-left: 12px;
 }
+
+.cart-view .shopping-cart .title .row {
+    width: 100%;
+}
+
+.cart-view .shopping-cart .title .row .column-name p {
+    margin: 0 0 0 0;
+    color: #888888;
+}
+
 
 .cart-view .shopping-cart .description {
     width: 100%;
@@ -32,11 +60,10 @@
 }
 
 .cart-view .shopping-cart .order-items-list .order-item  {
-    margin: 20px 0;
-    width: 100%;
+    margin: 0;
     vertical-align: middle;
-    display: flex;
-    align-items: center;
+    /*display: flex;
+    align-items: center;*/
 }
 
 .cart-view .shopping-cart .order-items-list .order-item a {
@@ -51,18 +78,19 @@
 
 .cart-view .shopping-cart .order-items-list .order-item .remove-item {
     vertical-align: top;
-    padding-left: 3%;
+    padding-left: 2%;
 }
 
 .cart-view .shopping-cart .order-items-list .order-item .image .item-img {
-    width: 90px;
-    height: auto;
+    height: 95px;
+    width: auto;
     margin-bottom: 0;
 }
 
 .cart-view .shopping-cart .order-items-list .order-item .name a {
     color: black;
     text-decoration: none;
+    margin-left: 15px;
 }
 
 .cart-view .shopping-cart .order-items-list .order-item .price {
@@ -76,6 +104,13 @@
 .cart-view .shopping-cart .order-items-list .order-item .quantity select {
     border-radius: 0px;
     width: 70px;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .quantity span {
+    position: absolute;
+    color: #888888;
+    font-size: 95%;
+    margin-left: 10px;
 }
 
 .cart-view .shopping-cart .order-items-list .order-item .total p {
@@ -128,4 +163,25 @@
 .cart-view .cart-order-summary .box .inside-box .info .total .cell {
     border-top: 1px solid #e6e6e6;
     padding: 10px;
+}
+
+.cart-view #proceed-to-payment {
+    border-radius: 0px;
+    background-color: #ffaa01;
+    color: white;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .column-margin {
+    margin-top: 15px;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .column {
+    display: table;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .column .center-column {
+    display:table-cell;
+    vertical-align:middle;
+    height: 95px;
+    padding: 0;
 }

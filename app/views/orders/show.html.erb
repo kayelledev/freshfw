@@ -1,6 +1,14 @@
 <div class="container-fluid cart-view">
     <div class='breadcrumbs'>
-        <p><span><%= link_to 'VIEW CART', cart_path %></span> >> BILLING AND SHIPPING INFO >> PAYMENT >> REVIEW AND CONFIRM</p>
+        <p>
+            <span class="active"><%= link_to 'VIEW CART', cart_path %></span>
+            <span>>></span>
+            BILLING AND SHIPPING INFO
+            <span>>></span>
+            PAYMENT
+            <span>>></span>
+            REVIEW AND CONFIRM
+        </p>
     </div>
 
     <div class="row">
@@ -8,6 +16,19 @@
             <div class='shopping-cart' data-order="<%= current_order.id %>">
                 <div class='title'>
                     <p><b>SHOPING CARD</b></p>
+                    <div class='row'>
+                        <div class='col-md-7'>
+                        </div>
+                        <div class='col-md-1 column-name'>
+                            <p>PRICE</p>
+                        </div>
+                        <div class='col-md-3 column-name'>
+                            <p>QTY</p>
+                        </div>
+                        <div class='col-md-1 column-name'>
+                            <p>TOTAL</p>
+                        </div>
+                    </div>
                 </div>
                 <div class='description'>
                     <center><p>All products will be delivered at the same day</p></center>
