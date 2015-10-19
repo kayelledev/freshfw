@@ -79,7 +79,7 @@ module Shoppe
             @nodes << x
           end
         end
-        @nodes = @nodes.compact
+        @nodes = @nodes.compact.uniq
         categories[index_c] = nil if flag
       end
       categories = categories.compact
