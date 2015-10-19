@@ -36,7 +36,7 @@
 <div class="editor-width">
   <hr>
   <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
-  <span><%= @product.width %> in</span>
+  <span><%= full_measure( @product.width ) %></span>
   <%= image_tag 'line.png' %>
 </div>
 
@@ -44,7 +44,7 @@
   <%= image_tag 'line.png' %>
   <div class="height-manager">
     <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
-    <span><%= @product.height %> in</span>
+    <span><%= full_measure( @product.height )%></span>
   </div>
 </div>
 

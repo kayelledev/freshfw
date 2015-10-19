@@ -18,7 +18,7 @@ module Shoppe
     mount_uploader :image4, ImageUploader
     mount_uploader :image5, ImageUploader
     mount_uploader :image6, ImageUploader
-    
+
     # Products have a default_image and a data_sheet
     #attachment :default_image
     #attachment :image2
@@ -148,7 +148,7 @@ module Shoppe
       product_ids = Shoppe::ProductAttribute.searchable.where(:key => key, :value => values).pluck(:product_id).uniq
       where(:id => product_ids)
     end
-  
+
     # Imports products from a spreadsheet file
     # Example:
     #
