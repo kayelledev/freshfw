@@ -40,7 +40,7 @@ module Shoppe
 
     def parent_himself
       if self.id && self.id == self.parent_id
-        errors.add(:parent, "himself a parent")
+        errors.add(:parent, "Category can not be parent to itself")
       end
     end
 
