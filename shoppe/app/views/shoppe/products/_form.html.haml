@@ -161,6 +161,7 @@
     = link_to t('shoppe.cancel'), :products, :class => 'button'
 
 :javascript
+  $('header.logo').css('height','auto');
   $( "span.remove-img" ).click(function() {
     var span = $(this);
     var id = span.attr('id');
@@ -180,5 +181,5 @@
         $('img#'+id).remove();
         span.remove();
       }
-    })
+    });
   });
