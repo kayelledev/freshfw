@@ -1,5 +1,4 @@
-%link{:rel => :stylesheet, :type => :"text/css", :href => "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"}
-= javascript_include_tag "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+%link{:rel => :stylesheet, :type => :"text/css", :href => "/assets/bootstrap.min.css"}
 
 :css
   p {margin-top:3px;}
@@ -162,6 +161,7 @@
     = link_to t('shoppe.cancel'), :products, :class => 'button'
 
 :javascript
+  $('header.logo').css('height','auto');
   $( "span.remove-img" ).click(function() {
     var span = $(this);
     var id = span.attr('id');
@@ -181,5 +181,5 @@
         $('img#'+id).remove();
         span.remove();
       }
-    })
+    });
   });
