@@ -1071,11 +1071,12 @@ p {
 }
 
 .row.included-product:hover {
-  border: 1px solid #ff7c00;
+   border: 4px solid #F49224;
 }
 
 .row.active-product {
-    border: 1px solid #ff7c00;
+    /*border: 1px solid #ff7c00;*/
+    border: 4px solid #F49224;
 }
 
 #product-gallery .carousel-inner > .item {
