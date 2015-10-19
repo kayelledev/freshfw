@@ -40,7 +40,7 @@ module Shoppe
 
     def parent_himself
       if self.id && self.id == self.parent_id
-        errors.add(:parent, "himself a parent")
+        errors.add(:parent, "Category can not be parent to itself")
       end
     end
 
@@ -79,7 +79,7 @@ module Shoppe
             @nodes << x
           end
         end
-        @nodes = @nodes.compact
+        @nodes = @nodes.compact.uniq
         categories[index_c] = nil if flag
       end
       categories = categories.compact
