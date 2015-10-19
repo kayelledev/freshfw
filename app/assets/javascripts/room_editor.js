@@ -232,6 +232,9 @@
                 self.$holder.find('div').removeClass('active');
                 $(this).addClass('active');
 
+                $(".included-product").removeClass('active-product');
+                $("#product_" + $(this).attr('id')).addClass('active-product');
+
                 self.$currentElement = $(this);
                 self.$rotationPanel.val((parseInt($(this).attr('data-rotation')) || 0));
                 self.$positionPanelX.val((parseFloat($(this).attr('data-x')) || 0));
@@ -246,6 +249,7 @@
             if(mouse_is_outside) {
                 div_elem.removeClass('active');
                 arrow_elem.hide();
+                $(".included-product").removeClass('active-product');
             }
         })
     };
