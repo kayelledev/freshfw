@@ -1,0 +1,17 @@
+<div class='account-form'>
+    <%= hidden_field_tag 'account[form_type]', 'sign-in' %>
+    <div class="form-group">
+        <%= text_field_tag 'account[email]', '', class: 'form-control', placeholder: 'Email Address' %>
+    </div>
+    <div class="form-group">
+        <%= text_field_tag 'account[password]', '', type: 'password', class: 'form-control', placeholder: 'Password' %>
+    </div>
+    <div class='fields-for-registration'>
+        <div class="form-group">
+            <%= text_field_tag 'account[password_confirmation]', '', type: 'password', class: 'form-control', placeholder: "Confirm Password (only if you are creating an account)" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <%= text_field_tag 'account[phone]', '', class: 'form-control', placeholder: "Phone (optional)" %>
+    </div>
+</div>

@@ -27,6 +27,10 @@
     margin-bottom: 50px;
 }
 
+.checkout .left-side-checkout {
+    margin-left: 1em;
+}
+
 .checkout .left-side-checkout .form-fields {
     margin-left: 12px;
 }
@@ -44,6 +48,10 @@
 
 .checkout .shipping-info {
     margin-bottom: 50px;
+}
+
+.checkout .right-side-checkout {
+    margin-right: 1em;
 }
 
 .checkout .right-side-checkout .form-group {
@@ -160,3 +168,6 @@
     display: inline-block;
 }
 
+.checkout .contact-info .account-form .fields-for-registration {
+    display: none;
+}
