@@ -36,7 +36,7 @@
 
 .cart-view .shopping-cart .title p {
     position: absolute;
-    margin-left: 12px;
+    margin-left: 1em;
 }
 
 .cart-view .shopping-cart .title .row {
@@ -131,7 +131,7 @@
 
 .cart-view .cart-order-summary .title p {
     vertical-align: middle;
-    margin-left: 8px;
+    margin-left: 1em;
 }
 
 .cart-view .cart-order-summary .box {
@@ -166,9 +166,15 @@
 }
 
 .cart-view #proceed-to-payment {
-    border-radius: 0px;
-    background-color: #ffaa01;
-    color: white;
+    padding: .5em .5em;
+    margin: .5em 0em;
+    border-color: #F49224;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #F49224;
 }
 
 .cart-view .shopping-cart .order-items-list .order-item .column-margin {
