@@ -30,6 +30,7 @@ module FourWalls
     config.carousel2s3path = 'https://s3.amazonaws.com/gofourwalls/globalimages/dann-livingroom-carousel.jpg'
     config.carousel3s3path = 'https://s3.amazonaws.com/gofourwalls/globalimages/Pinnacle-livingdining-carousel.jpg'
     config.carousel4s3path = 'https://s3.amazonaws.com/gofourwalls/globalimages/Echo-livingdining-carousel.jpg'
+    config.carousel_shop_about_blog = 'assets/shop_about_blog.jpg'
   
     #Global variables for the webapp
     config.twitterpath = 'https://twitter.com/go4walls/'
