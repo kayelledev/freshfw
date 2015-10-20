@@ -102,13 +102,15 @@
     <div class="products-list">
       <% if @product.included_products.any? %>
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation col-md-4" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-              <h2>DETAILS AND DIMENSIONS</h2>
-            </a>
+            <li role="presentation col-md-4" class="active">
+              <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                <h2>DETAILS AND DIMENSIONS</h2>
+              </a>
             </li>
-            <li role="presentation col-md-8"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-              <h2>SHIPPING AND DELIVERY INFO</h2>
-            </a>
+            <li role="presentation col-md-8">
+              <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                <h2>SHIPPING AND DELIVERY INFO</h2>
+              </a>
             </li>
           </ul>
           <div class="tab-content">
@@ -136,6 +138,11 @@
                   <% end %>
                 </div>
               <% end %>
+              <% if @product.is_preset %>
+                <div style="width: 760px; height: <%= @product.height %>px; margin: 0 auto; clear: both;">
+                  <%= render 'shared/room_editor', product: @product %>
+                </div>
+              <% end %>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="profile">
               <% @product.product_attributes.each do |attribure| %>
@@ -150,20 +157,18 @@
           </div>
           </div>
       <% end %>
-      <% if @product.is_preset %>
-          <div style="width: 760px; height: <%= @product.height + 300 %>px; margin: 0 auto; clear: both;">
-            <%= render 'shared/room_editor', product: @product %>
-          </div>
-      <% end %>
   </div>
 </div>
 
 <script>
-$('#myTabs a').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show')
+  $('#myTabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
 
-})
+  $( document ).ready(function() {
+    $('div#footer').css('position','static');
+  });
 </script>
 
 
