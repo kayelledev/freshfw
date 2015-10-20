@@ -152,30 +152,30 @@
                         <div class='form-title'>
                             <p>CONTACT INFO</p>
                         </div>
-                            <%= render 'contact_info' %>
-                            <div class="form-group">
-                                <%= label_tag 'account[create_account]' do %>
-                                    <%= check_box_tag 'account[create_account]', '', false, {id: 'create_account_checkbox'} %>
-                                    Create account
-                                <% end %>
-                            </div>
+                        <%= render 'contact_info' %>
+                        <div class="form-group">
+                            <%= label_tag 'account[create_account]' do %>
+                                <%= check_box_tag 'account[create_account]', '', false, {id: 'create_account_checkbox'} %>
+                                Create account
+                            <% end %>
                         </div>
                     </div>
 
-                <div class='order-summary'>
-                    <div class='title'>
-                        <p><b>ORDER SUMMARY</b></p>
-                    </div>
-                    <div class='box'>
-                        <div class='inside-box'>
-                            <div class='info' id='order-summary-info'>
-                                <%= render 'order_summary_info', :order => @order %>
-                            </div>
+                    <div class='order-summary'>
+                        <div class='title'>
+                            <p><b>ORDER SUMMARY</b></p>
                         </div>
-                        <center>
-                            <p>PROMOCODE OR STORE CREDIT</p>
-                            <%= f.submit "PROCEED TO PAYMENT", class: 'btn btn-default btn-lg btn-block', id: 'proceed-to-payment' %>
-                        </center>
+                        <div class='box'>
+                            <div class='inside-box'>
+                                <div class='info' id='order-summary-info'>
+                                    <%= render 'order_summary_info', :order => @order %>
+                                </div>
+                            </div>
+                            <center>
+                                <p>PROMOCODE OR STORE CREDIT</p>
+                                <%= f.submit "PROCEED TO PAYMENT", class: 'btn btn-default btn-lg btn-block', id: 'proceed-to-payment' %>
+                            </center>
+                        </div>
                     </div>
                 </div>
             </div>
