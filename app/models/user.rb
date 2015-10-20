@@ -2,7 +2,7 @@ class User < Shoppe::User
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :confirmable,
-         :omniauthable
+         :omniauthable, :validatable
 
   validates_uniqueness_of :email_address
 
