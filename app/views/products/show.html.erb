@@ -139,7 +139,7 @@
                 </div>
               <% end %>
               <% if @product.is_preset %>
-                <div style="width: 760px; height: <%= @product.height %>px; margin: 0 auto; clear: both;">
+                <div style="width: 760px; height: <%= @product.height + 300%>px; margin: 0 auto; clear: both;">
                   <%= render 'shared/room_editor', product: @product %>
                 </div>
               <% end %>
@@ -166,9 +166,6 @@
     $(this).tab('show');
   });
 
-  $( document ).ready(function() {
-    $('div#footer').css('position','static');
-  });
 </script>
 
 
