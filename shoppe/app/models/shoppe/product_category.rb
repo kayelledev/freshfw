@@ -5,6 +5,7 @@ module Shoppe
     has_many :children, class_name: "ProductCategory", foreign_key: "parent_id"
 
     validate :parent_himself
+    validate :parent_children
 
     self.table_name = 'shoppe_product_categories'
 
@@ -16,7 +17,7 @@ module Shoppe
     has_many :products, :dependent => :restrict_with_exception, :class_name => 'Shoppe::Product'
 
     # Validations
-    validates :name, :presence => true
+    validates :name, :presence => true, :uniqueness => true
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true
 
     # All categories ordered by their name ascending
@@ -44,49 +45,51 @@ module Shoppe
       end
     end
 
-
-  def self.categories_to_tree
-    categories = Shoppe::ProductCategory.all.order(:name).to_a
-
-    nodes = categories.select{|category| category.children.count==0}
-
-    @nodes = nodes.map do |node|
-      categories.reject!{|category| category.id == node.id}
-      x = {}
-      x[:text] = node.name
-      x[:id] = node.id
-      x[:href] = ['product_categories', node.id, 'edit'].join('/')
-      x
-    end
-
-    categories = categories.compact
-    while !categories.empty? do
-      categories.each_with_index do |category, index_c|
-        flag = false
-        children = category.children.map(&:id)
-        @nodes.each_with_index do |node, index_n|
-          if children.include?(node[:id])
-            flag = true
-            x = @nodes.compact.find{|node| node[:text].eql?(category.name)}.nil? ? {} : @nodes.compact.find{|node| node[:text].eql?(category.name)}
-            if x.empty?
-              x[:text] = category.name
-              x[:id] = category.id
-              x[:href] = ['product_categories', category.id, 'edit'].join('/')
-              x[:nodes] = []
+    def parent_children
+        if self.id && self.parent_id
+          parent_id = self.parent_id
+          parents = [parent_id]
+          while parent_id do
+            p parent_id
+            parent_id = Shoppe::ProductCategory.find(parent_id).parent_id
+            parents << parent_id
+            p parent_id
+            p parents.uniq
+            if parents.include?(self.id)
+              errors.add("#{self.name}", "can not be children for category #{parent.name}")
+              break
             end
-            x[:nodes] << node
-            @nodes[index_n] = nil
-            @nodes << x
           end
         end
-        @nodes = @nodes.compact.uniq
-        categories[index_c] = nil if flag
-      end
-      categories = categories.compact
     end
-    @nodes
-  end
 
+    def self.categories_to_tree
+      categories = Shoppe::ProductCategory.all.order(:name).to_a
+      @nodes = categories.map do |category|
+        x = {}
+        x[:text] = category.name
+        x[:id] = category.id
+        x[:parent_id] = category.parent_id
+        x[:children_count] = category.children.count
+        x[:href] = ['product_categories', category.id, 'edit'].join('/')
+        x[:nodes] = []
+        x
+      end
+      while @nodes.select{|node| !node[:parent_id].nil?}.count > 0
+        @nodes.each do |node|
+          if (node[:parent_id]) && (node[:children_count] == node[:nodes].count)
+            parent = @nodes.find{|n| n[:id] == node[:parent_id]}
+            node[:nodes] = nil if node[:children_count].zero?
+            parent[:nodes] << node
+            @nodes.delete(node)
+          end
+        end
+      end
+      @nodes.each do |node|
+        node[:nodes] = nil if node[:children_count].zero?
+      end
+      @nodes
+    end
 
   end
 end
