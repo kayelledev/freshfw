@@ -1,5 +1,9 @@
 $(".order-items-list #item_<%= @item.id %>").fadeOut( 400, function() {
     $(this).remove();
 });
-console.log("<%= @order.id %>")
-$('#order-summary-info .row .cart-value').html("$0.00");
+var emptyCart = "<%= @order.order_items.count == 0 %>";
+if (emptyCart == 'true') {
+    $('#order-summary-info .row .cart-value').html("$0.00");
+} else {
+    $('#order-summary-info').html("<%= j ( render 'order_summary_info', order: @order ) %>")
+}

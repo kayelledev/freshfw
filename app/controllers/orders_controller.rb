@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
     #TODO don't commit debug tools
     puts "in remove method: order #{@order.order_items.first.id} and params #{params}"
     @item = @order.order_items.find(params[:order_item_id])
-    @item.destroy
+    @order.order_items.delete(@item)
 
     if @order.order_items.empty?
       flash.now[:notice] = "You have no more item in the cart."
