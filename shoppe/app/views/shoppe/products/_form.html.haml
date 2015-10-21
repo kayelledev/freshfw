@@ -146,8 +146,8 @@
     = field_set_tag  t('shoppe.products.furniture_included') do
       .splitContainer
       - Shoppe::Product.furniture.order("product_category_id ASC").each do |product|
-        %dl.third
-          %dt= f.label :furniture_included, t("#{product.product_category.name}: #{product.name} (#{product.sku})")
+        %dl.third.furniture
+          %dt= link_to t("#{product.product_category.name}: #{product.name} (#{product.sku})"), edit_product_path(product)
           %dd= check_box_tag 'included[]', product.id, (@product.included_products.include? product)
           %dd= product.name
           %dt
@@ -162,6 +162,7 @@
 
 :javascript
   $('header.logo').css('height','auto');
+  $('dl.third.furniture').last().css('float','left');
   $( "span.remove-img" ).click(function() {
     var span = $(this);
     var id = span.attr('id');

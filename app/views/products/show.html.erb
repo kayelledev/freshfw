@@ -47,16 +47,6 @@
             <a href="mailto:info@gofourwalls.com" class="btn btn-second fa fa-envelope">Email Us</a>
           </div>
         </div>
-
-        <div class="included">
-          <p>WHAT'S INCLUDED:</p>
-          <ul>
-            <% @product.included_products.each do |item| %>
-                <li><%= item.name %></li>
-            <% end %>
-          </ul>
-        </div>
-
         <div>
         
 
@@ -71,9 +61,9 @@
                 <div class="col-md-4">
                   <!--<a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.thumb, class: "img-responsive", alt: "product" %>
                   </a>-->
-                  <a href="<%= item.permalink %>">
+
                     <strong class="whats-included-on-product"><%= item.name %></strong>
-                  </a>
+
                 </div>
                 <div class="col-md-8" style="vertical-align: text-bottom; ">
                   <!--<h3><strong><%= item.name %></strong></h3>
