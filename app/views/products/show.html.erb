@@ -54,26 +54,13 @@
         <% root_product.variants.each do |variant| %>
           <% if variant.included_products.any? %>
           <div class='variant' id='description_product_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>">
-            <div class="col-full"><h3 >What's Included: </h3></div>
+            <div class="col-full"><h3 style="text-transform: uppercase;">What's Included: </h3></div>
             <% items = variant.included_products %>
             <% items.each do |item|%>
-              <div class="row">
-                <div class="col-md-4">
-                  <!--<a href="<%= item.permalink %>" target="_blank"><%= image_tag item.default_image.thumb, class: "img-responsive", alt: "product" %>
-                  </a>-->
-
-                    <strong class="whats-included-on-product"><%= item.name %></strong>
-
-                </div>
-                <div class="col-md-8" style="vertical-align: text-bottom; ">
-                  <!--<h3><strong><%= item.name %></strong></h3>
-                  <p><%= item.description %></p>-->
-                </div>
-              </div>
-              <div>
-              </div>
+              <p style="line-height: normal; margin-left: 5em;">
+                <%= item.name %>
+              </p>
             <% end %>
-            <%= variant.in_the_box %>
           </div>
           <% else %>
             <div class='variant' id='description_product_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>"></div>
@@ -129,7 +116,7 @@
                 </div>
               <% end %>
               <% if @product.is_preset %>
-                <div style="width: 760px; height: <%= @product.height + 300%>px; margin: 0 auto; clear: both;">
+                <div style="width: 760px; height: <%= @product.height%>px; margin: 0 auto; clear: both;">
                   <%= render 'shared/room_editor', product: @product %>
                 </div>
               <% end %>
