@@ -145,14 +145,14 @@
   - if room_categories.include? @product.product_category.try(:permalink)
     = field_set_tag  t('shoppe.products.furniture_included') do
       .splitContainer
-      - Shoppe::Product.furniture.order("product_category_id ASC").each do |product|
-        %dl.third.furniture
-          %dt= link_to t("#{product.product_category.name}: #{product.name} (#{product.sku})"), edit_product_path(product)
-          %dd= check_box_tag 'included[]', product.id, (@product.included_products.include? product)
-          %dd= product.name
-          %dt
-            - if image_link(product, 'default_image')
-              = link_to (image_tag image_link(product, 'default_image'), :class => 'imageContainer', width: 80),  edit_product_path(product)
+        - Shoppe::Product.furniture.order("product_category_id ASC").each do |product|
+          %dl.third.furniture
+            %dt= link_to t("#{product.product_category.name}: #{product.name} (#{product.sku})"), edit_product_path(product)
+            %dd= check_box_tag 'included[]', product.id, (@product.included_products.include? product)
+            %dd= product.name
+            %dt
+              - if image_link(product, 'default_image')
+                = link_to (image_tag image_link(product, 'default_image'), :class => 'imageContainer', width: 80),  edit_product_path(product)
 
   %p.submit
     - unless @product.new_record?
