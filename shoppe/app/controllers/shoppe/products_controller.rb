@@ -56,7 +56,7 @@ module Shoppe
                               :short_description, :weight, :price, :cost_price, :tax_rate_id,
                               :stock_control, :default_image, :image2, :image3,:image4,:image5,:image6,
                               :default_image_file_sheet_file, :active, :featured, :in_the_box, :image,
-                              :width, :height, :is_preset,
+                              :width, :height, :depth, :is_preset,
                               :url_default_image, :url_image2, :url_image3, :url_image4, :url_image5, :url_image6,
                               :product_attributes_array => [:key, :value, :searchable, :public], :included=>[]
                               )
