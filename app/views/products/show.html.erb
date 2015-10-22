@@ -17,7 +17,7 @@
         </div>
       <h2 ><%= @product.name %></h2>
     <br>
-      <p><%= @product.short_description %></p>
+      <p><%= @product.description %></p>
     <br>
     <% if @product.has_variants? %>
       <h4>Options</h4>
@@ -39,12 +39,12 @@
         <div class="clearfix">
           <div class="pull-left" style="margin-top: 2em;">
             <%  if @product.has_variants? %>
-               <%= link_to "Add To Cart", buy_product_path(@product.default_variant.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart", id: :buy %>
+               <%= link_to " Add To Cart", buy_product_path(@product.default_variant.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart", id: :buy %>
             <% else %>
-              <%= link_to "Add To Cart", buy_product_path(@product.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart" %>
+              <%= link_to " Add To Cart", buy_product_path(@product.permalink), method: :post, :class => "btn btn-xl fa fa-shopping-cart" %>
             <% end %>
 
-            <a href="mailto:info@gofourwalls.com" class="btn btn-second fa fa-envelope">Email Us</a>
+            <a href="mailto:info@gofourwalls.com" class="btn btn-second fa fa-envelope"> Email Us</a>
           </div>
         </div>
         <div>
@@ -65,6 +65,17 @@
           <% else %>
             <div class='variant' id='description_product_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>"></div>
           <% end %>
+        <% end %>
+      <% elsif @product.included_products.count > 0 %>
+        <div class="col-full">
+          <h3 style="text-transform: uppercase;">
+            What's Included: </h3>
+        </div>
+        <% items = @product.included_products %>
+        <% items.each do |item|%>
+          <p style="line-height: normal; margin-left: 5em;">
+            <%= item.name %>
+          </p>
         <% end %>
       <% end %>
 
