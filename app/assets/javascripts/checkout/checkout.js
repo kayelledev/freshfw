@@ -28,20 +28,5 @@ $(document).ready(function() {
         var url = $(e.target).parent().parent().data('refreshPath');
         var value = $(e.target).val();
         $.post( url, { delivery_service_id: value});
-      });
-
-    // sign in or register
-    var checkbox = $('.checkout .contact-info #create_account_checkbox');
-    var registrationFields = $('.checkout .contact-info .account-form .fields-for-registration');
-    var hiddenField = $('.checkout .contact-info .account-form #account_form_type');
-
-    checkbox.on('click', function(){
-        if( $(this).is(':checked') ) {
-            registrationFields.fadeIn(200);
-            hiddenField.val("register");
-        } else {
-            registrationFields.fadeOut(200);
-            hiddenField.val("sign-in");
-        }
     });
 });

@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   helper_method :current_order, :has_order?
+  before_action :authenticate_user!, only: :checkout
 
   def destroy
     current_order.destroy
@@ -71,58 +72,17 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
-      logger.debug params[:account]
-      unless current_user || params[:account][:email].blank?
-        logger.debug '==== STARTprocess_user'
-        logger.debug params[:account][:form_type]
-        if params[:account][:form_type] == 'sign-in'
-          logger.debug "==== SINGING IN"
-          if (@user = ::User.find_or_initialize_by(email: params[:account][:email])).persisted?
-            if @user.valid_password?(params[:account][:password])
-              sign_in @user
-              logger.debug '==== sign in successfull'
-            else
-              @user.errors.add(:base, "Email or Password is invalid")
-              logger.debug "=== password invalid"
-            end
-          else
-            @user.errors.add(:base, "Email or Password is invalid")
-            logger.debug "=== user don't exist"
-          end
-        elsif params[:account][:form_type] == 'register'
-          logger.debug "==== REGISTER"
-          @user = ::User.new(
-            email: params[:account][:email],
-            password: params[:account][:password],
-            password_confirmation: params[:account][:password_confirmation],
-            first_name: params[:order][:first_name],
-            last_name: params[:order][:last_name],
-            confirmed_at: Time.now
-          )
-          if @user.save
-            sign_in @user
-            logger.debug '=====register done'
-          else
-            logger.debug '======register FAIL'
-          end
-        end
-      end
-
       @order.separate_delivery_address = params[:order][:separate_delivery_address]
       @order.phone_number = params[:account][:phone]
+      @order.email_address = params[:account][:email]
 
       proceed_params = @order.separate_delivery_address ?
         with_deliver_params : without_deliver_params
 
-      if user_signed_in?
-        email_address = params[:account][:email]
-        if @order.proceed_to_confirm(proceed_params.merge(email_address: email_address))
-          redirect_to new_charge_path
-        else
-          flash.now[:notice] = "Some key information is missing. Please try again."
-          render :checkout
-        end
+      if @order.proceed_to_confirm(proceed_params)
+        redirect_to new_charge_path
       else
+        flash.now[:notice] = "Some key information is missing. Please try again."
         render :checkout
       end
       logger.debug '========='
