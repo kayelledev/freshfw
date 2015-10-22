@@ -1,3 +1,12 @@
+%link{:rel => :stylesheet, :type => :"text/css", :href => "/assets/bootstrap.min.css"}
+
+:css
+  p {margin-top:3px;}
+  span.remove-img{
+    color:red;
+    cursor:pointer;
+  }
+
 - @page_title = "#{t('shoppe.variants.variants')} - #{@product.name}"
 = content_for :header do
   %p.buttons= link_to t('shoppe.variants.back_to_variants'), [@product, :variants], :class => 'button'
@@ -69,14 +78,14 @@
   - if room_categories.include? @product.product_category.try(:permalink)
     = field_set_tag  t('shoppe.products.furniture_included') do
       .splitContainer
-      - Shoppe::Product.furniture.order("product_category_id ASC").each do |product|
-        %dl.third
-          %dt= f.label :furniture_included, t("#{product.product_category.name}: #{product.name} (#{product.sku})")
-          %dd= check_box_tag 'included[]', product.id, (@variant.included_products.include? product)
-          %dd= product.name
-          %dt
-            - if image_link(product, 'default_image')
-              = link_to (image_tag image_link(product, 'default_image'), :class => 'imageContainer', width: 80),  edit_product_path(product)
+        - Shoppe::Product.furniture.order("product_category_id ASC").each do |product|
+          %dl.third
+            %dt= link_to t("#{product.product_category.name}: #{product.name} (#{product.sku})"), edit_product_path(product)
+            %dd= check_box_tag 'included[]', product.id, (@variant.included_products.include? product)
+            %dd= product.name
+            %dt
+              - if image_link(product, 'default_image')
+                = link_to (image_tag image_link(product, 'default_image'), :class => 'imageContainer', width: 80),  edit_product_path(product)
 
 
   %p.submit
@@ -84,3 +93,30 @@
       %span.right= link_to t('shoppe.delete'), product_variant_path(@product, @variant), :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.variants.delete_confirmation')}
     = f.submit t('shoppe.variants.save_variant'), :class => 'button green'
     = link_to t('shoppe.cancel'), :products, :class => 'button'
+
+:javascript
+  $('header.logo').css('height','auto');
+  $('fieldset legend').css('width','auto');
+  $('fieldset legend').css('border','none');
+  $('dl.third').last().css('float','left');
+  $( "span.remove-img" ).click(function() {
+    var span = $(this);
+    var id = span.attr('id');
+
+    $.ajax({
+      type: 'post',
+      data: {
+              img_id: id,
+              id: "#{@product.id}",
+            },
+      headers: {
+        'X-CSRF-Token': "#{form_authenticity_token.to_s}"
+      },
+      url: "/products/destroy_img",
+      success: function(response) {
+        $('input.url_image#'+id).val('');
+        $('img#'+id).remove();
+        span.remove();
+      }
+    });
+  });

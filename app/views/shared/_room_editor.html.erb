@@ -48,6 +48,9 @@
 
 <div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.height %>" style="width: 760px; height: 600px;">
   <% @product.included_products.each do |item| %>
+    <% if @product.width > item.width && @product.height > item.height %>
+      <% item.posX = @product.width / 2 if item.posX > @product.width || item.posX < 0 %>
+      <% item.posY = @product.height / 2 if item.posY > @product.height || item.posY < 0 %>
       <span style="position: absolute;" data-width="<%= item.width %>" data-heigh="<%= item.height %>"
             data-rotation="<%= item.rotation %>"
             data-x="<%= item.posX %>"
@@ -65,7 +68,21 @@
         </div>
         <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
       </span>
+    <% else %>
+      <script>
+        $('.editor-container').parent().hide()
+        $('div#footer').css('position','absolute');
+        alert('<%= "Size #{item.name} (#{item.height}*#{item.width}) more than room size (#{@product.height}*#{@product.width})" %>');
+      </script>
+    <% end %>
   <% end %>
 </div>
 
 
+<script>
+  $( document ).ready(function() {
+    if ($('div.editor-container').parent().css('display') != 'none') {
+      $('div#footer').css('position','static');
+    }
+  });
+</script>
