@@ -71,7 +71,6 @@
     <% else %>
       <script>
         $('.editor-container').parent().hide()
-        $('div#footer').css('position','absolute');
         alert('<%= "Size #{item.name} (#{item.height}*#{item.width}) more than room size (#{@product.height}*#{@product.width})" %>');
       </script>
     <% end %>
@@ -80,9 +79,4 @@
 
 
 <script>
-  $( document ).ready(function() {
-    if ($('div.editor-container').parent().css('display') != 'none') {
-      $('div#footer').css('position','static');
-    }
-  });
 </script>
