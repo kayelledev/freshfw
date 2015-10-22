@@ -7,17 +7,24 @@
 
 
 default: &default
-  adapter: sqlite3
-  pool: 5
+  adapter: postgresql
+  host: localhost
   timeout: 5000
+  encoding: unicode
+  pool: 5
 
 development:
-  database: db/development.sqlite3
   <<: *default
+  database: fresh_fw_development
+  username: andrey
+  password: 35493549
 
 
 production:
   <<: *default
+  database: fresh_fw_development
+  username: andrey
+  password: 35493549
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

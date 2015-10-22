@@ -72,9 +72,9 @@
       </span>
     <% else %>
       <script>
-        alert('<%= "Size #{item.name} (#{item.height}*#{item.width}) more than room size (#{@product.height}*#{@product.width})" %>');
         $('.editor-container').parent().hide()
         $('div#footer').css('position','absolute');
+        alert('<%= "Size #{item.name} (#{item.height}*#{item.width}) more than room size (#{@product.height}*#{@product.width})" %>');
       </script>
     <% end %>
   <% end %>
