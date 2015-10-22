@@ -1,17 +1,17 @@
 <div class="col-full">
   <div id="ProductCarousel" class="carousel slide" data-ride="carousel" style="">
     <div class="carousel-outer">
-      <div class="carousel-inner" role="listbox">
+      <div class="carousel-inner" role="listbox" id='carousel-inner-product'>
         <% array_images.each do |img|%>
           <% if image_link(product, img) %>
-            <div class="item<%= img.eql?('default_image') ? ' active' : nil %>">
+            <div class="item<%= img.eql?('default_image') ? ' active' : nil %> carousel-item-product">
               <%= image_tag image_link(product, img),  class: "img-responsive", alt: "product" %>
             </div>
           <% end %>
         <% end %>
         <% @product.included_products.each do |item| %>
           <% if image_link(item, 'default_image') %>
-            <div class="item">
+            <div class="item carousel-item-product">
               <%= image_tag image_link(item, 'default_image'), class: "img-responsive", alt: "product" %>
             </div>
           <% end %>
@@ -25,14 +25,14 @@
       <% array_images.each_with_index do |img, index|%>
         <% if image_link(product, img) %>
           <li data-target='#ProductCarousel' data-slide-to="<%= index %>" class="<%= img.eql?('default_image') ? 'active' : nil %>">
-            <%= image_tag image_link(product, img), class: "img-responsive", alt: "product", width: 80 %>
+            <%= image_tag image_link(product, img), class: "img-responsive carousel-indicators-image", alt: "product", width: 150, height: 100 %>
           </li>
         <% end %>
       <% end %>
       <% @product.included_products.each_with_index do |item, index| %>
         <% if image_link(item, 'default_image') %>
           <li data-target='#ProductCarousel' data-slide-to="<%= index+6 %>">
-            <%= image_tag image_link(item, 'default_image'), class: "img-responsive", alt: "product", width: 80 %>
+            <%= image_tag image_link(item, 'default_image'), class: "img-responsive carousel-indicators-image", alt: "product", width: 150, height: 100 %>
           </li>
         <% end %>
       <% end %>

@@ -182,6 +182,16 @@
         interact('.' + elementsClass).draggable(this.$options);
 
         $('[data-toggle="tooltip"]').tooltip();
+
+         this.$holder.find('div')
+            .on('mouseover', function() {
+                $("#product_" + $(this).attr('id')).addClass('active-product');
+            })
+            .on('mouseout', function() {
+                if (!( $(this).hasClass( "active" ) ) ) {
+                    $("#product_" + $(this).attr('id')).removeClass('active-product');
+                }
+            });
     };
 
     /**

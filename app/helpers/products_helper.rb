@@ -36,7 +36,7 @@ module ProductsHelper
   def full_measure(value)
     ft = value / 12
     inch = value % 12
-    "#{ft} ft. #{inch} in."
+    "#{ft} ft #{inch} in"
   end
 
 end

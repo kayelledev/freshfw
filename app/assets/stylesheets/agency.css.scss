@@ -1067,9 +1067,9 @@ p {
     position: relative;
 }
 
-.row.included-product {
-    margin-bottom: 35px;
-    margin-top: 20px;
+.included-product {
+    /*margin-bottom: 35px;*/
+    margin-top: 1em;
     margin-right: 1px;
     font-family: 'roboto_condensedregular', sans-serif !important;
     font-weight: 400;
@@ -1081,11 +1081,11 @@ p {
     border: 4px solid white;
 }
 
-.row.included-product:hover {
+.included-product:hover {
    border: 4px solid #F49224;
 }
 
-.row.active-product {
+.active-product {
     /*border: 1px solid #ff7c00;*/
     border: 4px solid #F49224;
 }

@@ -1,3 +1,119 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.product-details {
+    color: #777777;
+}
+
+.product-details .row .col-md-4 .product-info {
+    margin-left: 5%;
+    margin-right: 1em;
+}
+
+.product-details .row .col-md-8 .product-gallery {
+    margin-right: 5%;
+}
+
+.carousel-indicators .carousel-indicators-image {
+    height: 100px;
+    max-width: auto;
+    width: 150px;
+}
+
+.product-details .row .col-md-4 .product-info p.option {
+    text-transform: uppercase;
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+.product-details .row .col-md-4 .product-info p.product-description {
+    margin-top: 15px;
+}
+
+.product-details .row .col-md-4 .product-info .variants-radio-button {
+    margin-left: 25px;
+    display: block;
+}
+
+.product-details .row .col-md-4 .product-info .buttons .btn {
+    width: 100%;
+}
+
+.product-details .row .col-md-4 .product-info .buttons {
+    width: 100%;
+    margin: 0;
+}
+
+.product-details .row .col-md-4 .product-info .buttons .col-md-8 {
+    padding-right: 4px;
+    padding-left: 0;
+}
+
+.product-details .row .col-md-4 .product-info .buttons .col-md-4 {
+    padding-left: 4px;
+    padding-right: 0;
+}
+
+.product-details .row .col-md-4 .product-info .variant .included p {
+    text-transform: uppercase;
+}
+
+.product-details .row .col-md-4 .product-info .variant .included {
+    margin-top: 15px;
+}
+
+.product-details .row .col-md-4 .product-info .variant p.whats-included-on-product {
+    margin-left: 25px;
+}
+
+.product-details .row .col-md-4 .product-info .buttons .btn {
+    width: 100%;
+    margin: 0;
+
+    padding: .5em .5em;
+    margin: .5em 0em;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.product-details .row .col-md-4 .product-info .buttons .col-md-8 .btn {
+    background-color: #F49224;
+    border-color: #F49224;
+}
+
+.included-product {
+    overflow: hidden;
+    padding: 5px;
+    padding-bottom: 15px;
+}
+
+.included-product .product-list-image {
+    float: left;
+}
+
+.included-product .product-list-description {
+    overflow: hidden;
+    padding-left: 1em;
+}
+
+.included-product .product-list-image {
+    width: 300px;
+    height: 200px;
+}
+
+.product-name a {
+    color: #777777;
+    text-transform: uppercase;
+}
+
+.product-name a:hover {
+    color: #777777;
+}
+
+.product-list-description {
+    max-height: 200px;
+}

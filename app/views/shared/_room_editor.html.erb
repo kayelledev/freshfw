@@ -36,16 +36,14 @@
 <div class="editor-width">
   <hr>
   <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
-  <span><%= full_measure( @product.width ) %></span>
-  <%= image_tag 'line.png' %>
+  <div class='measure-width'><%= full_measure( @product.width ) %></div>
+  <%= image_tag 'line.png', class: 'editor-line' %>
 </div>
 
 <div class="editor-height">
   <%= image_tag 'line.png' %>
-  <div class="height-manager">
     <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
-    <span><%= full_measure( @product.height )%></span>
-  </div>
+    <div class='measure-height'><%= full_measure( @product.height )%></div>
 </div>
 
 <div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.height %>" style="width: 760px; height: 600px;">
@@ -54,7 +52,7 @@
             data-rotation="<%= item.rotation %>"
             data-x="<%= item.posX %>"
             data-y="<%= item.posY %>"
-            data-toggle="tooltip" title="<%= item.name %>">
+            data-toggle="tooltip" title="<%= item.product_category.name %>">
 
         <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-heigh="<%= item.height %>"
              data-rotation="<%= item.rotation %>"

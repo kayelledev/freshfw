@@ -87,3 +87,22 @@
 .save-preset {
   margin-top: 10px;
 }
+
+.measure-width {
+  position: absolute;
+  background-color: white;
+  padding: 0 7px;
+  bottom: 0px;
+  right: 45%;
+}
+
+.editor-line {
+  z-index: -1;
+}
+
+.measure-height {
+  position: absolute;
+  background-color: white;
+  padding: 7px 0;
+  bottom: 50%;
+}
