@@ -8,7 +8,9 @@
             <div class="col-md-4">
                 <div class='product-info'>
                     <h1 class='product-name'><%= @product.name %></h1>
-                    <p class='product-description'><%= @product.short_description %></p>
+                    <p class='product-description'>
+                        <%= @product.description %>
+                    </p>
                     <% if @product.has_variants? %>
                         <p class='option'>Options</p>
                     <% end %>
