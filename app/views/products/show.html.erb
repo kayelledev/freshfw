@@ -39,6 +39,7 @@
                                     Add To Cart
                                 <% end %>
                             <% end %>
+
                         </div>
                         <div class="col-md-4">
                             <a href="mailto:info@gofourwalls.com" class="btn btn-second">
@@ -62,6 +63,17 @@
                                 <% else %>
                                     <div class='variant' id='description_product_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>"></div>
                                 <% end %>
+                            <% end %>
+                        <% elsif @product.included_products.count > 0 %>
+                            <div class="col-full">
+                                <h3 style="text-transform: uppercase;">
+                                    What's Included: </h3>
+                            </div>
+                            <% items = @product.included_products %>
+                            <% items.each do |item|%>
+                                <p style="line-height: normal; margin-left: 5em;">
+                                    <%= item.name %>
+                                </p>
                             <% end %>
                         <% end %>
                     </div>
