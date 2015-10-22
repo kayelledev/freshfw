@@ -1204,7 +1204,7 @@ header.main h2.settings {
 }
 /* line 138, /home/andrey/Projects/fresh-fw/shoppe/app/assets/stylesheets/shoppe/application.scss */
 #content fieldset {
-  border: 1px solid #dce2eb;
+  border: 1px solid #5B6270;
   background: #fff;
   padding-top: 15px;
   padding-bottom: 25px;
@@ -1446,7 +1446,7 @@ header.main h2.settings {
 #content form p.submit {
   margin: 0;
   background: #fff;
-  border: 1px solid #dce2eb;
+  border: 1px solid #5B6270;
   padding: 25px;
 }
 /* line 268, /home/andrey/Projects/fresh-fw/shoppe/app/assets/stylesheets/shoppe/application.scss */
@@ -1732,7 +1732,7 @@ header.main h2.settings {
 #content fieldset.orderPayments form {
   overflow: hidden;
   background: #F7F9FC;
-  border: 1px solid #DCE2EB;
+  border: 1px solid #5B6270;
   padding: 15px;
 }
 /* line 401, /home/andrey/Projects/fresh-fw/shoppe/app/assets/stylesheets/shoppe/application.scss */
