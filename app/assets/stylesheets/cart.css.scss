@@ -43,9 +43,12 @@
     width: 100%;
 }
 
-.cart-view .shopping-cart .title .row .column-name p {
-    margin: 0 0 0 0;
+.cart-view .shopping-cart .title .row .column-name {
     color: #888888;
+}
+
+.cart-view .shopping-cart .title .row .column-name .quantity-title {
+    padding-left: 12%;
 }
 
 
