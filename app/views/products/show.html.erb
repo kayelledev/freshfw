@@ -120,7 +120,7 @@
                                                     <% end %>
                                                 </div>
                                                 <div class="desc">
-                                                    <p><%= truncate(item.description, length: 100, separator: ' ') { link_to "more", "#" } %></p>
+                                                    <p><%= truncate(item.description, length: 100, separator: ' ') { link_to "more", item.permalink } %></p>
                                                 </div>
                                                 <div class='dimensions'>
                                                     <p><%= item.width %>"W x <%= item.height %>"H</p>
