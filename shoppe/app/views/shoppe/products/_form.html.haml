@@ -6,6 +6,10 @@
     color:red;
     cursor:pointer;
   }
+  label.is_room{margin-bottom: 0px;}
+  label.is_room input{margin-bottom: 4px;}
+  div.room-size{margin-bottom:10px; display:none;}
+  fieldset.product-dimensions{display:none;}
 
 / Declare Variable
 /- furniture_category_id = Shoppe::ProductCategory.find_by_name('Furniture').id
@@ -38,18 +42,32 @@
     %dl
       %dt= f.label :in_the_box, t('shoppe.products.in_the_box')
       %dd= f.text_area :in_the_box, :class => 'text'
+    %div.room-size
+      %dl
+        %dt= f.label :width, t('shoppe.products.widht')
+        %dd= f.text_field :width, :class => 'number', type: 'number'
+      %dl
+        %dt= f.label :depth, t('shoppe.products.depth')
+        %dd= f.text_field :depth, :class => 'number', type: 'number'
     %dl
+      %dt
+        = f.label :is_preset, class: 'is_room' do
+          = 'Is Room: '
+          = f.check_box :is_preset, id: 'isRoom'
+    %dl
+      %dd= link_to 'Go to editor', "/room_editor/edit?preset=#{@product.id}", class: "button"
+
+  = field_set_tag  t('shoppe.products.product_dimensions'), class: 'product-dimensions' do
+    %dl.third
       %dt= f.label :width, t('shoppe.products.widht')
       %dd= f.text_field :width, :class => 'number', type: 'number'
-    %dl
+    %dl.third
+      %dt= f.label :depth, t('shoppe.products.depth')
+      %dd= f.text_field :depth, :class => 'number', type: 'number'
+    %dl.third
       %dt= f.label :height, t('shoppe.products.height')
       %dd= f.text_field :height, :class => 'number', type: 'number'
-    %dl
-      %dt= f.label :is_preset, t('shoppe.products.is_room')
-      %dd= f.text_field :is_preset, :class => 'number', type: 'checkbox'
-    %dl
-      %dt= f.label :editor, 'Go to editor'
-      %dd= link_to 'Go to editor', "/room_editor/edit?preset=#{@product.id}", class: "button"
+
 
   = field_set_tag t('shoppe.products.attributes') do
     .margin
@@ -185,4 +203,26 @@
         span.remove();
       }
     });
+  });
+
+  if ( $('input#isRoom').is(':checked') ){
+    $('div.room-size').show();
+  } else{
+    $('fieldset.product-dimensions').show();
+  }
+
+  $('input#isRoom').change(function() {
+    if (!$('input#isRoom').is(':checked')){
+      $('div.room-size').hide();
+      $('fieldset.product-dimensions').show();
+    } else {
+      $('div.room-size').show();
+      $('fieldset.product-dimensions').hide();
+    }
+  });
+
+  $('input#product_width, input#product_depth, input#product_height').bind("change paste keyup", function() {
+    var id = $(this).attr('id');
+    var val = $(this).val();
+    $('input#'+id).val(val);
   });

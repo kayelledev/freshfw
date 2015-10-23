@@ -129,7 +129,7 @@
 
                                                 </div>
                                                 <div class='dimensions'>
-                                                    <p><%= item.width %>"W x <%= item.height %>"H</p>
+                                                    <p><%= item.width %>"W x <%= item.depth %>"H</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,7 +139,7 @@
                         <% end %>
                         <% if @product.is_preset %>
                             <h2>LAYOUT OPTIONS</h2>
-                            <div style="width: 760px; height: <%= @product.height + 300%>px; margin: 0 auto; clear: both;">
+                            <div style="width: 760px; height: <%= @product.depth + 300%>px; margin: 0 auto; clear: both;">
                                 <%= render 'shared/room_editor', product: @product %>
                             </div>
                         <% end %>
