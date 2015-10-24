@@ -18,7 +18,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><%= link_to "Shop", room_type_path, class: "active"%></li>
+                    <li><%= link_to "Shop", products_url, class: "active"%></li>
                     <li><%= link_to "About Us", about_us_url, class: "active"%></li>
                     <li><%= link_to "Cart (#{current_order.total_items})", cart_path, class: "active"%></li>
                     <li><%= link_to "Checkout", checkout_path %></li>

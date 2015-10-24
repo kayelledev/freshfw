@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       @current_order ||= begin
         if has_order?
           if params[:order_tax_rate]==nil
-            params[:order_tax_rate] = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+            params[:order_tax_rate] = 0.13 #Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
           end
           @current_order
         else
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
         @user_state = Rails.application.config.state_code
         @user_country = Rails.application.config.country
       end 
-      @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+      @db_tax_rate = 0.13 #Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
 
       puts "show the db tax rate for ON: #{@db_tax_rate}"
       @db_country = Shoppe::Country.where(name: @user_country).first
