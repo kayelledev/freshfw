@@ -29,7 +29,6 @@
 
 .checkout .left-side-checkout {
     margin-left: 1em;
-    margin-right: 1em;
 }
 
 .checkout .left-side-checkout .form-fields {
@@ -51,13 +50,9 @@
     margin-bottom: 50px;
 }
 
-.checkout .delivery-service {
-    margin-bottom: 50px;
-}
 
 .checkout .right-side-checkout {
     margin-right: 1em;
-    margin-left: 1em;
 }
 
 .checkout .right-side-checkout .form-group {
@@ -181,4 +176,15 @@
 
 .checkout .contact-info .account-form .fields-for-registration {
     display: none;
+}
+
+@media(max-width:991px){
+    .checkout .right-side-checkout {
+        margin-left: 1em;
+    }
+
+    .checkout .left-side-checkout {
+        margin-right: 1em;
+        margin-bottom: 50px;
+    }
 }
