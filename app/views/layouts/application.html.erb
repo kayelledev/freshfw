@@ -54,16 +54,13 @@
   </head>
   <body>
     <div id="wrapper">
-
       <div id="header">
         <%= render 'layouts/navigation' %>
       </div><!-- #header -->
-
-
       <div id="content">
         <%= yield %>
+        <%= render 'layouts/modals' %>
       </div><!-- #content -->
-
       <div id="footer">
         <%= render 'layouts/footer' %>
       </div><!-- #footer -->

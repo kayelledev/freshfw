@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'search', to: 'search#index'
+  post 'change_user_country', to: 'welcome#change_user_country'
 #Karen added to test all functions with Users
 
   # Example of regular route:
