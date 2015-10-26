@@ -26,7 +26,7 @@
                           <% end %>
                         <% end %>
                         <b style="margin-left: 10px; ">
-                          <%= number_to_currency(product.price, unit: "$", format: "%u%n") %>
+                          <%= number_to_currency(currency_price(product), unit: "$", format: "%u%n") %>
                         </b>
                       </p>
                   <% end %>
@@ -56,7 +56,7 @@
                        <% end %>
                     <% end %>
                     <b style="margin-left: 10px; ">
-                      <%= number_to_currency(product.price, unit: "$", format: "%u%n") %>
+                      <%= number_to_currency(currency_price(product), unit: "$", format: "%u%n") %>
                     </b>
                   </p>
                 <% end %>
@@ -88,7 +88,7 @@
                         <% end %>
                       <% end %>
                       <b style="margin-left: 10px; ">
-                        <%= number_to_currency(product.price, unit: "$", format: "%u%n") %>
+                        <%= number_to_currency(currency_price(product), unit: "$", format: "%u%n") %>
                       </b>
                     </p>
                   <% end %>

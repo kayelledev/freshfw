@@ -2,6 +2,6 @@
   data-url="<%= buy_product_path(id: product.permalink) %>">
   <!--<p><%= product.in_the_box %></p>-->
   <hr>
-  <h4><b><%= number_to_currency(product.price, unit: "$", format: "%u%n") %></b></h4>
+  <h4><b><%= number_to_currency(currency_price(product), unit: "$", format: "%u%n") %></b></h4>
   
 </div>

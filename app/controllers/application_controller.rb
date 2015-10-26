@@ -3,8 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  before_action :set_user_currency, unless: :location_in_cookies? 
   private
+
+    def location_in_cookies?
+      cookies[:currency].present?
+    end
+
 
     def current_order
       @current_order ||= begin
@@ -21,6 +26,13 @@ class ApplicationController < ActionController::Base
           order
         end
       end
+    end
+
+    def set_user_currency
+     @ip_address = request.ip
+     cookies[:currency] = Geocoder.search(@ip_address).first.country == 'Canada' ? 'ca' : 'us'
+    # todo delete this line
+     cookies[:currency_test] = Geocoder.search(@ip_address).first.country
     end
 
     def has_order?
