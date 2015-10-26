@@ -16,7 +16,7 @@
                      <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
                   <% else%>
                       <p>
-                        <% if product.in_stock? %>
+                        <% if (product.in_stock? && product.stock_control) || !product.stock_control %>
                           <%= link_to buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl" do %>
                             <i class="fa fa-shopping-cart"></i>
                           <% end %>
@@ -46,7 +46,7 @@
                    <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
                 <% else%>
                   <p>
-                    <% if product.in_stock? %>
+                    <% if (product.in_stock? && product.stock_control) || !product.stock_control %>
                       <%= link_to buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl" do %>
                         <i class="fa fa-shopping-cart"></i>
                       <% end %>
@@ -78,7 +78,7 @@
                     <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
                   <% else%>
                     <p>
-                      <% if product.in_stock? %>
+                      <% if (product.in_stock? && product.stock_control) || !product.stock_control %>
                         <%= link_to buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl" do %>
                           <i class="fa fa-shopping-cart"></i>
                         <% end %>
