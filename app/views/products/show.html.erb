@@ -36,9 +36,15 @@
                                     Add To Cart
                                 <% end %>
                             <% else %>
-                                <%= link_to buy_product_path(@product.permalink), method: :post, :class => "btn btn-xl" do %>
-                                    <i class="fa fa-shopping-cart"></i>
-                                    Add To Cart
+                                <% if (@product.in_stock? && @product.stock_control) || !@product.stock_control %>
+                                    <%= link_to buy_product_path(@product.permalink), method: :post, :class => "btn btn-xl" do %>
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add To Cart
+                                    <% end %>
+                                <% else %>
+                                    <button class="btn" style="background-color:#777777; border-color:#777777;cursor:default" %>
+                                        Out of stock
+                                    </button>
                                 <% end %>
                             <% end %>
 
@@ -139,7 +145,7 @@
                         <% end %>
                         <% if @product.is_preset %>
                             <h2>LAYOUT OPTIONS</h2>
-                            <div style="width: 760px; height: <%= @product.depth + 300%>px; margin: 0 auto; clear: both;">
+                            <div style="width: 760px; margin: 0 auto; clear: both;">
                                 <%= render 'shared/room_editor', product: @product %>
                             </div>
                         <% end %>
