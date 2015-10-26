@@ -44,10 +44,10 @@
       %dd= f.text_area :in_the_box, :class => 'text'
     %div.room-size
       %dl
-        %dt= f.label :width, t('shoppe.products.widht')
+        %dt= f.label :width, "Width(in)"
         %dd= f.text_field :width, :class => 'number', type: 'number'
       %dl
-        %dt= f.label :depth, t('shoppe.products.depth')
+        %dt= f.label :depth, "Depth(in)"
         %dd= f.text_field :depth, :class => 'number', type: 'number'
     %dl
       %dt
@@ -59,13 +59,13 @@
 
   = field_set_tag  t('shoppe.products.product_dimensions'), class: 'product-dimensions' do
     %dl.third
-      %dt= f.label :width, t('shoppe.products.widht')
+      %dt= f.label :width, "Width(in)"
       %dd= f.text_field :width, :class => 'number', type: 'number'
     %dl.third
-      %dt= f.label :depth, t('shoppe.products.depth')
+      %dt= f.label :depth, "Depth(in)"
       %dd= f.text_field :depth, :class => 'number', type: 'number'
     %dl.third
-      %dt= f.label :height, t('shoppe.products.height')
+      %dt= f.label :height, "Height(in)"
       %dd= f.text_field :height, :class => 'number', type: 'number'
 
 
