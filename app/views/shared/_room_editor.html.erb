@@ -1,4 +1,4 @@
-<center><%= button_tag 'Set dimensions', class: "btn", id: 'set-dimensions' %></center>
+<center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %></center>
 <div class="navigation-holder">
   <!--<div>-->
     <!--Position X-->
@@ -79,24 +79,30 @@
 </div>
 
 <div id="dimensions-dialog" title="Set dimensions">
-  <center>
     <form class="form-horizontal">
+
       <div class="form-group">
-        <label class='col-sm-2 control-label'>Width:</label>
-        <div class="col-sm-10">
+        <label class='col-sm-3 control-label'>Width:</label>
+        <div class="col-sm-9">
           <input type="number" class="form-control inline" id="width-ft" placeholder="ft." required>
           <input type="number" class="form-control inline" id="width-inch" placeholder="inch." required>
         </div>
       </div>
+
       <div class="form-group">
-      <label class='col-sm-2 control-label'>Height:</label>
-        <div class="col-sm-10">
+        <label class='col-sm-3 control-label'>Height:</label>
+        <div class="col-sm-9">
           <input type="number" class="form-control inline" id="height-ft" placeholder="ft." required>
           <input type="number" class="form-control inline" id="height-inch" placeholder="inch." required>
         </div>
       </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <button type="submit" class="btn btn-guideline">Submit</button>
+        </div>
+      </div>
     </form>
-  </center>
 </div>
 
 <script>

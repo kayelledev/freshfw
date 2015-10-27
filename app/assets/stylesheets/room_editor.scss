@@ -107,7 +107,7 @@
   bottom: 50%;
 }
 
-#set-dimensions{
+.btn-guideline{
   padding: .5em .5em;
   margin: .5em 0em;
   border-radius: 3px;
@@ -116,14 +116,31 @@
   font-weight: 700;
   color: #ffffff;
   background-color: #777777;
+  font-family: 'roboto_condensedregular', sans-serif !important;
 }
 
+.btn-guideline:hover {
+    color: #ffffff !important;
+}
+
+
 #dimensions-dialog .form-group .form-control {
-  width: 6em;
+  width: 100px;
 }
 
 #dimensions-dialog .form-group .form-control {
   display: inline-block;
 }
 
+#dimensions-dialog {
+  font-family: 'roboto_condensedregular', sans-serif !important;
+}
 
+#dimensions-dialog input {
+  font-family: 'roboto_condensedregular', sans-serif !important;
+}
+
+button.ui-dialog-titlebar-close {
+  width: 22px !important;
+  height: 22px !important;
+}

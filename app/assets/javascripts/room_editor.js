@@ -405,18 +405,40 @@
     Controller.prototype.resizeArea = function(elementsClass) {
       var $setDimensionsButton = $('#set-dimensions');
       var $dimensionsDialog = $('div#dimensions-dialog');
+
+      function clearArea(){
+        $setDimensionsButton.on('click', function(){
+          $('.' + elementsClass).each(function() {
+            $(this).parent().css('display', 'none');
+          });
+          $dimensionsDialog.dialog('open');
+        });
+      }
+
+      function restoreArea(){
+        $('.' + elementsClass).each(function() {
+          $(this).parent().css('display', 'block');
+        });
+      }
+
       $dimensionsDialog.dialog({
         autoOpen: false,
-        minWidth: 400,
-        minHeight: 170
+        minWidth: 350,
+        minHeight: 210,
+        resizable: false,
+        modal: true,
+        open: function() {
+          $(this).closest(".ui-dialog")
+          .find(".ui-dialog-titlebar-close")
+          .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+        },
+        beforeClose: function(event, ui){
+          restoreArea();
+        }
       });
 
-      $setDimensionsButton.on('click', function(){
-        $('.' + elementsClass).each(function() {
-          $(this).parent().css('display', 'none');
-        });
-        $dimensionsDialog.dialog('open');
-      });
+      clearArea();
+
     };
 
     /**
