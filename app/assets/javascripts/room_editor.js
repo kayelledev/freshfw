@@ -400,6 +400,19 @@
     };
 
     /**
+     * Clear area
+     */
+    Controller.prototype.clearArea = function(elementsClass) {
+      var $setDimensionsButton = $('#set-dimensions');
+
+      $setDimensionsButton.on('click', function(){
+        $('.' + elementsClass).each(function() {
+          $(this).parent().css('display', 'none');
+        });
+      });
+    };
+
+    /**
      * Init all Class methods
      *
      */
@@ -412,6 +425,7 @@
         //this.manageHolderScaling();
         //this.manageCats();
         this.initMouseRotation();
+        this.clearArea(this.$initialElenemts);
     };
 
     $(document).ready(function() {
