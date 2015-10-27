@@ -255,7 +255,7 @@
                 $(this).parent().find('.rotation-arrow').show();
             });
 
-        $(document).click(function() { 
+        $(document).click(function() {
             if(mouse_is_outside) {
                 div_elem.removeClass('active');
                 arrow_elem.hide();
