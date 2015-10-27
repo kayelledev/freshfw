@@ -402,7 +402,7 @@
     /**
      * Clear area
      */
-    Controller.prototype.clearArea = function(elementsClass) {
+    Controller.prototype.resizeArea = function(elementsClass) {
       var $setDimensionsButton = $('#set-dimensions');
 
       $setDimensionsButton.on('click', function(){
@@ -425,7 +425,7 @@
         //this.manageHolderScaling();
         //this.manageCats();
         this.initMouseRotation();
-        this.clearArea(this.$initialElenemts);
+        this.resizeArea(this.$initialElenemts);
     };
 
     $(document).ready(function() {
