@@ -55,6 +55,7 @@ class ApplicationController < ActionController::Base
         @user_country = Rails.application.config.country
       end
       # @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+      # TODO conflict was there, left version from github
       @db_tax_rate = 0.13 #Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
 
       puts "show the db tax rate for ON: #{@db_tax_rate}"

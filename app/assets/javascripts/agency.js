@@ -34,7 +34,7 @@ $('body > *').not('nav').click(function() {
 // todo maybe it will be better transfer this code to another place
 $(document).ready(function(){
   $('#selectNewCurrency').on('click', function(e){
-    $("#changeCurrencyModal").modal();
+    $("#changeCurrencyModal").modal('show');
   });  
   $('.change-currency-button').on('click', function(){
     $.ajax({
