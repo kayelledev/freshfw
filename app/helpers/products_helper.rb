@@ -27,7 +27,7 @@ module ProductsHelper
       product.send "url_#{img}"
     elsif (product.send img).present?
       image = product.send img
-      image.thumb.url
+      image.url
     else
       nil
     end
