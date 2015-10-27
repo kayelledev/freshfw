@@ -404,11 +404,18 @@
      */
     Controller.prototype.resizeArea = function(elementsClass) {
       var $setDimensionsButton = $('#set-dimensions');
+      var $dimensionsDialog = $('div#dimensions-dialog');
+      $dimensionsDialog.dialog({
+        autoOpen: false,
+        minWidth: 400,
+        minHeight: 170
+      });
 
       $setDimensionsButton.on('click', function(){
         $('.' + elementsClass).each(function() {
           $(this).parent().css('display', 'none');
         });
+        $dimensionsDialog.dialog('open');
       });
     };
 
