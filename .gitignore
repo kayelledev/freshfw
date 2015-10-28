@@ -27,5 +27,7 @@
 # Ignore application configuration
 /config/application.yml
 config/database.yml
-
+config/fog_credentials.yml
+config/social.yml
+config/secrets.yml
 ./idea
