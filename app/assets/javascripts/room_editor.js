@@ -514,6 +514,8 @@
 
         console.log(scaleHeight);
         $('.editor-container').height($('.editor-container').data('height') * scaleHeight);
+        $('.measure-width').html(newWidthFt + ' ft ' + newWidthInch + ' in');
+        $('.measure-height').html(newHeightFt + ' ft ' + newHeightInch + ' in');
       })
     };
 
