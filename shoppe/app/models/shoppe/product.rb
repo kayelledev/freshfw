@@ -61,8 +61,9 @@ module Shoppe
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true
     validates :sku, :presence => true, :uniqueness => true
     validates :weight, :numericality => true
-    validates :height, :numericality => true
-    validates :depth, :numericality => true
+    validates :width, numericality: {only_float: true}
+    validates :height, numericality: {only_float: true}
+    validates :depth, numericality: {only_float: true}
     validates :price, :numericality => true
     validates :cost_price, :numericality => true, :allow_blank => true
 

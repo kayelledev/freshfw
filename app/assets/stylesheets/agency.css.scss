@@ -1165,3 +1165,77 @@ p {
         padding-left: 15px;
     }
 }
+#countrySelectCurrency .dropdown-menu a{
+  color: #252525;
+}
+#countrySelectCurrency .dropdown-menu a:hover{
+  color: #252525;
+}
+// .flag-us{
+//   background-image: asset-url('ca_us_flags.png');
+// }
+// .flag-ca{
+//   background-image: assets-url('ca_us_flags.png');
+// }
+#countrySelectCurrency .icon {
+  float: left;
+  background-image: url("ca_us_flags.png");
+  width: 15px;
+  height: 11px;
+  margin-right: 3px;
+  margin-top: 5px;
+}
+#countrySelectCurrency .icon.flag-ca {
+  background-position: -17px 0;
+}
+#changeCurrencyModal .change-currency-button{
+  background: #111;
+  color: #fff;
+}
+#changeCurrencyModal .change-currency-button:hover{
+  background-color: #333; 
+}
+#countrySelectCurrency .dropdown-menu > li > a{
+  text-align: center;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+#countrySelectCurrency .dropdown-menu{
+  min-width: 130px;  
+}
+@media(max-width:768px) {
+  #countrySelectCurrency a span:nth-child(2){
+    display: none;
+  }
+}
+#changeCurrencyModal{
+  @media(min-width:768px) {
+    .vertical-alignment-helper {
+      display:table;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .vertical-align-center {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  .modal-dialog{
+    width: 500px;
+  }
+  @media(max-width:768px) {
+    .modal-dialog{
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .modal-header{
+    padding: 25px 50px 10px 50px;
+  }
+  .modal-body{
+    padding:20px 40px;
+  }
+
+}

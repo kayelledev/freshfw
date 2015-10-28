@@ -223,8 +223,37 @@ ActiveRecord::Schema.define(version: 20153002432638) do
 
   add_index "shoppe_product_categories", ["permalink"], name: "index_shoppe_product_categories_on_permalink"
 
-# Could not dump table "shoppe_products" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "shoppe_products", force: :cascade do |t|
+    t.integer  "parent_id"
+    t.integer  "product_category_id"
+    t.string   "name"
+    t.string   "sku"
+    t.string   "permalink"
+    t.text     "description"
+    t.text     "short_description"
+    t.boolean  "active",                                      default: true
+    t.decimal  "weight",              precision: 8, scale: 3, default: 0.0
+    t.decimal  "price",               precision: 8, scale: 2, default: 0.0
+    t.decimal  "cost_price",          precision: 8, scale: 2, default: 0.0
+    t.integer  "tax_rate_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "featured",                                    default: false
+    t.text     "in_the_box"
+    t.boolean  "stock_control",                               default: true
+    t.boolean  "default",                                     default: false
+    t.string   "default_image"
+    t.string   "image2"
+    t.string   "image3"
+    t.string   "image4"
+    t.string   "image5"
+    t.string   "image6"
+  end
+
+  add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id"
+  add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink"
+  add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id"
+  add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku"
 
   create_table "shoppe_settings", force: :cascade do |t|
     t.string "key"

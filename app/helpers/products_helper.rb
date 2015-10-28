@@ -27,7 +27,7 @@ module ProductsHelper
       product.send "url_#{img}"
     elsif (product.send img).present?
       image = product.send img
-      image.thumb.url
+      image.url
     else
       nil
     end
@@ -36,7 +36,7 @@ module ProductsHelper
   def full_measure(value)
     ft = value / 12
     inch = value % 12
-    "#{ft} ft #{inch} in"
+    "#{ft.floor} ft #{inch.round} in"
   end
 
 end

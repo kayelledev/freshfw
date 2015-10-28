@@ -45,10 +45,10 @@
     %div.room-size
       %dl
         %dt= f.label :width, "Width(in)"
-        %dd= f.text_field :width, :class => 'number', type: 'number'
+        %dd= f.text_field :width, :class => 'number', type: 'number', step: 'any'
       %dl
         %dt= f.label :depth, "Depth(in)"
-        %dd= f.text_field :depth, :class => 'number', type: 'number'
+        %dd= f.text_field :depth, :class => 'number', type: 'number', step: 'any'
     %dl
       %dt
         = f.label :is_preset, class: 'is_room' do
@@ -60,13 +60,13 @@
   = field_set_tag  t('shoppe.products.product_dimensions'), class: 'product-dimensions' do
     %dl.third
       %dt= f.label :width, "Width(in)"
-      %dd= f.text_field :width, :class => 'number', type: 'number'
+      %dd= f.text_field :width, :class => 'number', type: 'number', step: 'any'
     %dl.third
       %dt= f.label :depth, "Depth(in)"
-      %dd= f.text_field :depth, :class => 'number', type: 'number'
+      %dd= f.text_field :depth, :class => 'number', type: 'number', step: 'any'
     %dl.third
       %dt= f.label :height, "Height(in)"
-      %dd= f.text_field :height, :class => 'number', type: 'number'
+      %dd= f.text_field :height, :class => 'number', type: 'number', step: 'any'
 
 
   = field_set_tag t('shoppe.products.attributes') do

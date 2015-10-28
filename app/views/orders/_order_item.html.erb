@@ -18,7 +18,7 @@
 </div>
 
 <div class='price col-md-1 col-sm-1 col-xs-2'>
-   <center> <p><%= number_to_currency(item.unit_price, unit: "$", format: "%u%n") %></p></center>
+   <center> <p><%= number_to_currency(currency_price(item, true), unit: "$", format: "%u%n") %></p></center>
 </div>
 
 <div class='quantity col-md-1 col-sm-1 col-xs-2' data-refresh-path="<%= refresh_order_items_path(current_order) %>">

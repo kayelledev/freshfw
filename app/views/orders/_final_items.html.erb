@@ -21,7 +21,7 @@
                 <p>sku: <%= item.ordered_item.sku %></p>
             </td>
             <td class="cart_price">
-                <p><%= number_to_currency(item.unit_price, unit: "$", format: "%u%n") %></p>
+                <p><%= number_to_currency(currency_price(item,true), unit: "$", format: "%u%n") %></p>
             </td>
             <td class="cart_quantity">
                 <div class="cart_quantity_button">

@@ -3,14 +3,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  before_action :set_user_currency, unless: :location_in_cookies? 
   private
+
+    def location_in_cookies?
+      cookies[:currency].present?
+    end
+
 
     def current_order
       @current_order ||= begin
         if has_order?
           if params[:order_tax_rate]==nil
-            params[:order_tax_rate] = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+            params[:order_tax_rate] = 0.13 #Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
           end
           @current_order
         else
@@ -21,6 +26,11 @@ class ApplicationController < ActionController::Base
           order
         end
       end
+    end
+
+    def set_user_currency
+      @ip_address = request.ip
+      cookies[:currency] = Geocoder.search(@ip_address).first.country == 'Canada' ? 'ca' : 'us'
     end
 
     def has_order?
@@ -42,7 +52,9 @@ class ApplicationController < ActionController::Base
         @user_state = Rails.application.config.state_code
         @user_country = Rails.application.config.country
       end
-      @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+      # @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+      # TODO conflict was there, left version from github
+      @db_tax_rate = 0.13 #Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
 
       puts "show the db tax rate for ON: #{@db_tax_rate}"
       @db_country = Shoppe::Country.where(name: @user_country).first
