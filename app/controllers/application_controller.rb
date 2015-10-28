@@ -29,10 +29,8 @@ class ApplicationController < ActionController::Base
     end
 
     def set_user_currency
-     @ip_address = request.ip
-     cookies[:currency] = Geocoder.search(@ip_address).first.country == 'Canada' ? 'ca' : 'us'
-    # todo delete this line
-     cookies[:currency_test] = Geocoder.search(@ip_address).first.country
+      @ip_address = request.ip
+      cookies[:currency] = Geocoder.search(@ip_address).first.country == 'Canada' ? 'ca' : 'us'
     end
 
     def has_order?

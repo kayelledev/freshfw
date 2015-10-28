@@ -91,7 +91,7 @@ module Shoppe
 
     def cart_total_cost
         if order_items.count > 0
-            order_items.inject(0) { |t,i| t + i.unit_price * i.quantity }
+            order_items.inject(0) { |t,i| t + i.send(currency=='us' ? 'unit_cost_price' : 'unit_price') * i.quantity }
         else
             0
         end

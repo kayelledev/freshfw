@@ -36,12 +36,12 @@ class ChargesController < ApplicationController
         :email => params[:stripeEmail],
         :card  => params[:stripeToken]
       )
-    
+      currency = cookies[:currency] == 'ca' ? 'cad' : 'usd'
       @charge = Stripe::Charge.create(
         :customer    => @customer.id,
         :amount      => @amount,
         :description => "#{@order.first_name}'s Order",
-        :currency    => 'cad'
+        :currency    => currency
       )
       
     rescue Stripe::CardError => e

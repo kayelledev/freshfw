@@ -149,9 +149,15 @@ module Shoppe
     # The sub total for the product
     #
     # @return [BigDecimal]
+    
+
     def sub_total
-      quantity * unit_price
+      quantity * (order.currency=='us' ? unit_cost_price : unit_price)
     end
+    # old method
+    # def sub_total
+    #   quantity * unit_price
+    # end
 
     # The total price including tax for the order line
     #

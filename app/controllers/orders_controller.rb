@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = current_order
-
+    @order.update(currency: cookies[:currency])
     order_tax = 0.0;
     @order.order_items.each do |item|
       item.update(tax_rate: params[:order_tax_rate])
@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
 
   def checkout
     @order = current_order
-
+    @order.update(currency: cookies[:currency])
     if request.get?
       #TODO don't commit debug tools
       puts current_order.total

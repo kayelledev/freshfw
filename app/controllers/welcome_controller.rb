@@ -14,6 +14,8 @@ class WelcomeController < ApplicationController
 
   def change_user_country
     cookies[:currency] = params[:currency] if params[:currency].present?
+    @order = current_order
+    @order.update(currency: cookies[:currency])
     render json: {status: true}
   end
 
