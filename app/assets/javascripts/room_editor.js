@@ -402,7 +402,7 @@
     /**
      * Clear area
      */
-    Controller.prototype.resizeArea = function(elementsClass) {
+    Controller.prototype.clearArea = function(elementsClass) {
       var $setDimensionsButton = $('#set-dimensions');
       var $dimensionsDialog = $('div#dimensions-dialog');
 
@@ -442,6 +442,82 @@
     };
 
     /**
+     * Adapt area
+     */
+    Controller.prototype.adaptArea = function() {
+
+      function resizeArea(){
+        var documentWidth = $(document).width();
+        $('.room-editor-container').width(documentWidth * 0.8);
+        $('.editor-container').width(documentWidth * 0.8);
+        var scaleHeight = $('.editor-container').width() / $('.editor-container').data('width');
+        $('.editor-container').height($('.editor-container').data('height') * scaleHeight);
+      }
+
+      $('.editor-container').change(function() {
+        console.log( "Handler for .change() called." );
+      });
+
+      resizeArea();
+      // $(window).resize(function() {
+      //   resizeArea();
+      // });
+    };
+
+
+    /**
+     * Resize area
+     */
+    Controller.prototype.resizeArea = function() {
+      var $dimensionsDialog = $('div#dimensions-dialog');
+
+      $('#submit-new-dimensions').on('click', function(e) {
+
+        e.preventDefault();
+
+        function isNumber(n) {
+          return !isNaN(parseFloat(n)) && isFinite(n) && n >= 0;
+        }
+
+        function validateForm() {
+          var validInputs = 0;
+          $('.dialog-input').each(function(index) {
+            if ( !isNumber( $(this).val() ) ){
+              $(this).css('border-color', '#A94442');
+            } else {
+              $(this).css('border-color', '#ccc');
+              validInputs++;
+            }
+          });
+          if (validInputs < 4) {
+            return false;
+          } else {
+            return true;
+          }
+        }
+
+        if (!validateForm()){ return; }
+
+        var newWidthFt = +$('#width-ft').val();
+        var newWidthInch = +$('#width-inch').val();
+        var newHeightFt = +$('#height-ft').val();
+        var newHeightInch = +$('#height-inch').val();
+
+        var newWidth = ( newWidthFt * 12 ) + newWidthInch;
+        var newHeight = ( newHeightFt * 12 ) + newHeightInch;
+
+        $('.editor-container').data( 'width', newWidth );
+        $('.editor-container').data( 'height', newHeight );
+
+        $dimensionsDialog.dialog('close');
+        var scaleHeight = $('.editor-container').width() / $('.editor-container').data('width');
+
+        console.log(scaleHeight);
+        $('.editor-container').height($('.editor-container').data('height') * scaleHeight);
+      })
+    };
+
+    /**
      * Init all Class methods
      *
      */
@@ -454,7 +530,9 @@
         //this.manageHolderScaling();
         //this.manageCats();
         this.initMouseRotation();
-        this.resizeArea(this.$initialElenemts);
+        this.clearArea(this.$initialElenemts);
+        this.adaptArea();
+        this.resizeArea();
     };
 
     $(document).ready(function() {

@@ -47,7 +47,7 @@
     <div class='measure-height'><%= full_measure( @product.depth )%></div>
 </div>
 
-<div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.depth %>" style="width: 760px; height: 600px;">
+<div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.depth %>" style="height: 600px;">
   <% @product.included_products.each do |item| %>
     <% if @product.width > item.width && @product.depth > item.depth %>
       <% item.posX = @product.width / 2 if item.posX > @product.width || item.posX < 0 %>
@@ -79,27 +79,27 @@
 </div>
 
 <div id="dimensions-dialog" title="Set dimensions">
-    <form class="form-horizontal">
+    <form class="form-horizontal" id='dialog-form'>
 
       <div class="form-group">
         <label class='col-sm-3 control-label'>Width:</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control inline" id="width-ft" placeholder="ft." required>
-          <input type="number" class="form-control inline" id="width-inch" placeholder="inch." required>
+          <input type="number" class="form-control dialog-input" id="width-ft" placeholder="ft." required>
+          <input type="number" class="form-control dialog-input" id="width-inch" placeholder="inch." required>
         </div>
       </div>
 
       <div class="form-group">
         <label class='col-sm-3 control-label'>Height:</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control inline" id="height-ft" placeholder="ft." required>
-          <input type="number" class="form-control inline" id="height-inch" placeholder="inch." required>
+          <input type="number" class="form-control dialog-input" id="height-ft" placeholder="ft." required>
+          <input type="number" class="form-control dialog-input" id="height-inch" placeholder="inch." required>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-          <button type="submit" class="btn btn-guideline">Submit</button>
+          <button class="btn btn-guideline" id='submit-new-dimensions'>Submit</button>
         </div>
       </div>
     </form>
