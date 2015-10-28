@@ -51,6 +51,8 @@ gem "figaro"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'pg'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
@@ -66,10 +68,17 @@ group :development, :test do
   gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-rails'
 end
 
 group :production do
-  gem 'pg'
   #gem 'mysql2'
-  gem'rails_12factor'
+  #gem 'rails_12factor'
+end
+
+group :production, :staging do
+  gem 'unicorn'
 end
