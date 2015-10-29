@@ -150,8 +150,22 @@
      * @param elementsClass
      */
     Controller.prototype.initElements = function(elementsClass) {
+
+        // set container width
+        var documentWidth = $(document).width();
+        $('.room-editor-container').width(documentWidth * 0.6);
+        $('.editor-container').width(documentWidth * 0.6);
+
+        // set container height according width
+        var scaling = parseFloat(this.$holder.data('width')) / this.$holder.width();
+        $('.editor-container').height($('.editor-container').data('height') / scaling);
+
+        // init draggable
+        interact('.' + elementsClass).draggable(this.$options);
+
         var scalingX = parseFloat(this.$holder.data('width')) / this.$holder.width(),
             scalingY = parseFloat(this.$holder.data('height')) / this.$holder.height();
+
         // target elements with the "draggable" class
         $('.' + elementsClass).each(function() {
             //$(this).attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
@@ -170,8 +184,10 @@
             //});
 
             $(this).parent().css({
-                'width': $(this).data('width'),
-                'height': $(this).data('heigh'),
+                'width': $(this).data('width') * scaling,
+                'height': $(this).data('heigh') * scaling,
+                // 'width': $(this).data('width'),
+                // 'height': $(this).data('heigh'),
                 '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
                 '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
                 '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
@@ -179,7 +195,7 @@
             });
         });
 
-        interact('.' + elementsClass).draggable(this.$options);
+
 
         $('[data-toggle="tooltip"]').tooltip();
 
@@ -406,6 +422,7 @@
       var $setDimensionsButton = $('#set-dimensions');
       var $dimensionsDialog = $('div#dimensions-dialog');
 
+      //clear area
       function clearArea(){
         $setDimensionsButton.on('click', function(){
           $('.' + elementsClass).each(function() {
@@ -415,12 +432,14 @@
         });
       }
 
+      // restore area
       function restoreArea(){
         $('.' + elementsClass).each(function() {
           $(this).parent().css('display', 'block');
         });
       }
 
+      // define dialog
       $dimensionsDialog.dialog({
         autoOpen: false,
         minWidth: 350,
@@ -442,43 +461,20 @@
     };
 
     /**
-     * Adapt area
-     */
-    Controller.prototype.adaptArea = function() {
-
-      function resizeArea(){
-        var documentWidth = $(document).width();
-        $('.room-editor-container').width(documentWidth * 0.8);
-        $('.editor-container').width(documentWidth * 0.8);
-        var scaleHeight = $('.editor-container').width() / $('.editor-container').data('width');
-        $('.editor-container').height($('.editor-container').data('height') * scaleHeight);
-      }
-
-      $('.editor-container').change(function() {
-        console.log( "Handler for .change() called." );
-      });
-
-      resizeArea();
-      // $(window).resize(function() {
-      //   resizeArea();
-      // });
-    };
-
-
-    /**
      * Resize area
      */
-    Controller.prototype.resizeArea = function() {
+    Controller.prototype.resizeArea = function(elementsClass) {
       var $dimensionsDialog = $('div#dimensions-dialog');
 
       $('#submit-new-dimensions').on('click', function(e) {
-
         e.preventDefault();
 
+        // validate number
         function isNumber(n) {
           return !isNaN(parseFloat(n)) && isFinite(n) && n >= 0;
         }
 
+        // form validation
         function validateForm() {
           var validInputs = 0;
           $('.dialog-input').each(function(index) {
@@ -496,8 +492,10 @@
           }
         }
 
+        //return if form invalid
         if (!validateForm()){ return; }
 
+        // new dimensions
         var newWidthFt = +$('#width-ft').val();
         var newWidthInch = +$('#width-inch').val();
         var newHeightFt = +$('#height-ft').val();
@@ -506,17 +504,45 @@
         var newWidth = ( newWidthFt * 12 ) + newWidthInch;
         var newHeight = ( newHeightFt * 12 ) + newHeightInch;
 
+        // set new dimetsion to container data
         $('.editor-container').data( 'width', newWidth );
         $('.editor-container').data( 'height', newHeight );
 
-        $dimensionsDialog.dialog('close');
-        var scaleHeight = $('.editor-container').width() / $('.editor-container').data('width');
+        var scaling = $('.editor-container').width() / $('.editor-container').data('width');
 
-        console.log(scaleHeight);
-        $('.editor-container').height($('.editor-container').data('height') * scaleHeight);
+        // change container height
+        $('.editor-container').height($('.editor-container').data('height') * scaling);
+
+        // change measure description
         $('.measure-width').html(newWidthFt + ' ft ' + newWidthInch + ' in');
         $('.measure-height').html(newHeightFt + ' ft ' + newHeightInch + ' in');
-      })
+
+        var scalingX = parseFloat($('.editor-container').data('width')) / $('.editor-container').width(),
+            scalingY = parseFloat($('.editor-container').data('height')) / $('.editor-container').height();
+
+        // scale items according to new dimensions
+        $('.' + elementsClass).each(function() {
+
+            $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
+            $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
+
+
+            $(this).parent().css({
+                'width': $(this).data('width') * scaling,
+                'height': $(this).data('heigh') * scaling,
+                // 'width': $(this).data('width'),
+                // 'height': $(this).data('heigh'),
+                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+            });
+        });
+
+        // close dialog
+        $dimensionsDialog.dialog('close');
+
+      });
     };
 
     /**
@@ -533,8 +559,7 @@
         //this.manageCats();
         this.initMouseRotation();
         this.clearArea(this.$initialElenemts);
-        this.adaptArea();
-        this.resizeArea();
+        this.resizeArea(this.$initialElenemts);
     };
 
     $(document).ready(function() {
