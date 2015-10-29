@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  include ProductsHelper
+  include ActionView::Helpers::UrlHelper
 
   def index
   end
@@ -10,6 +12,10 @@ class WelcomeController < ApplicationController
   end
 
   def account
+    if current_user.present?
+      @orders = Shoppe::Order.where(email_address: current_user.email_address)
+      @products = current_user.products.order('created_at DESC').take(3).map{|product| Shoppe::Product.find(product) }
+    end
   end
 
   def change_user_country

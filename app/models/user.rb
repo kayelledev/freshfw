@@ -3,7 +3,9 @@ class User < Shoppe::User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :confirmable,
          :omniauthable, :validatable
-
+  
+  has_many :reviews
+  has_many :products, through: :reviews
   validates_uniqueness_of :email_address
 
   def self.build_with_auth_data(auth_data, params)
