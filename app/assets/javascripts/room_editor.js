@@ -160,6 +160,10 @@
         var scaling = parseFloat(this.$holder.data('width')) / this.$holder.width();
         $('.editor-container').height($('.editor-container').data('height') / scaling);
 
+        // change editor height line
+        $('.editor-height').height($('.editor-container').height());
+        $('.editor-height img').height($('.editor-container').height());
+
         // init draggable
         interact('.' + elementsClass).draggable(this.$options);
 
@@ -428,7 +432,15 @@
           $('.' + elementsClass).each(function() {
             $(this).parent().css('display', 'none');
           });
+          // open dialog
           $dimensionsDialog.dialog('open');
+
+          //set measure to inputs value
+          $('input#width-ft').val($('span#measure-width-ft').text());
+          $('input#width-inch').val($('span#measure-width-inch').text());
+          $('input#height-ft').val($('span#measure-height-ft').text());
+          $('input#height-inch').val($('span#measure-height-inch').text());
+
         });
       }
 
@@ -513,9 +525,16 @@
         // change container height
         $('.editor-container').height($('.editor-container').data('height') * scaling);
 
+        // change editor height line
+        $('.editor-height').height($('.editor-container').height());
+        $('.editor-height img').height($('.editor-container').height());
+
         // change measure description
-        $('.measure-width').html(newWidthFt + ' ft ' + newWidthInch + ' in');
-        $('.measure-height').html(newHeightFt + ' ft ' + newHeightInch + ' in');
+
+        $('span#measure-width-ft').html(newWidthFt);
+        $('span#measure-width-inch').html(newWidthInch);
+        $('span#measure-height-ft').html(newHeightFt);
+        $('span#measure-height-inch').html(newHeightInch);
 
         var scalingX = parseFloat($('.editor-container').data('width')) / $('.editor-container').width(),
             scalingY = parseFloat($('.editor-container').data('height')) / $('.editor-container').height();

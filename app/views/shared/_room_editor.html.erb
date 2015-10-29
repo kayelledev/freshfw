@@ -37,14 +37,24 @@
 <div class="editor-width">
   <hr>
   <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
-  <div class='measure-width'><%= full_measure( @product.width ) %></div>
+  <div class='measure-width'>
+    <span id='measure-width-ft'><%= full_measure( @product.width )[:ft] %></span>
+    ft
+    <span id='measure-width-inch'><%= full_measure( @product.width )[:inch] %></span>
+    in
+  </div>
   <%= image_tag 'line.png', class: 'editor-line' %>
 </div>
 
 <div class="editor-height">
-  <%= image_tag 'line.png' %>
+  <%= image_tag 'vertical-line.png' %>
     <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
-    <div class='measure-height'><%= full_measure( @product.depth )%></div>
+    <div class='measure-height'>
+      <span id='measure-height-ft'><%= full_measure( @product.depth )[:ft] %></span>
+      ft
+      <span id='measure-height-inch'><%= full_measure( @product.depth )[:inch] %></span>
+      in
+    </div>
 </div>
 
 <div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.depth %>" style="height: 600px;">
