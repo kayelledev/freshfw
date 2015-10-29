@@ -20,6 +20,14 @@ module ApplicationHelper
     cookies[:currency] == 'us' ? 'ca' : 'us'
   end
 
+  def current_currency_name
+    cookies[:currency] + 'd'
+  end
+
+  def dropdown_currency_name
+    (cookies[:currency] == 'us' ? 'ca' : 'us') + 'd'
+  end
+
   def dropdown_currency_label(currency)
     currency == 'us' ? 'USA($USD)' : 'Canada($CAD)'
   end
