@@ -144,3 +144,22 @@ button.ui-dialog-titlebar-close {
 div#dialog-form-errors {
   color: #A94442;
 }
+
+.editor-items-panel{
+  float: left;
+  position: relative;
+  width: 10%;
+  right: 10%;
+  height: 100%;
+  border: 1px solid black;
+  display: none;
+  margin-top: 10px;
+}
+
+
+.draggable2 {
+  width:100%;
+  height:auto;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
