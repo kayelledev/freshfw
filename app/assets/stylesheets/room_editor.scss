@@ -53,14 +53,7 @@
 }
 
 .editor-height img {
-  /*transform: rotate(90deg);*/
   position: absolute;
-  /*top: 295px;*/
-  /*left: -300px;*/
-  /*width: 600px;*/
-  /*bottom: 49%;*/
-  /*left: -330%;*/
-  /*left: -280px;*/
 }
 
 .height-manager {
@@ -107,7 +100,7 @@
   position: absolute;
   background-color: white;
   padding: 7px 0;
-  bottom: 50%;
+  bottom: 48%;
 }
 
 .btn-guideline{
@@ -146,4 +139,8 @@
 button.ui-dialog-titlebar-close {
   width: 22px !important;
   height: 22px !important;
+}
+
+div#dialog-form-errors {
+  color: #A94442;
 }

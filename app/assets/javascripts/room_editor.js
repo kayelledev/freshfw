@@ -188,8 +188,8 @@
             //});
 
             $(this).parent().css({
-                'width': $(this).data('width') * scaling,
-                'height': $(this).data('heigh') * scaling,
+                'width': $(this).data('width') / scaling,
+                'height': $(this).data('heigh') / scaling,
                 // 'width': $(this).data('width'),
                 // 'height': $(this).data('heigh'),
                 '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
@@ -300,7 +300,7 @@
                 'data-y': offsetY
             }).css({
                     'width': this.$currentElement.data('width'),
-                    'height': this.$currentElement.data('heigh'),
+                    'height': this.$currentElement.data('height'),
                     '-webkit-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + deg + 'deg)',
                     '-moz-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + deg + 'deg)',
                     '-ms-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + deg + 'deg)',
@@ -352,7 +352,7 @@
                     if(scaleType == 'xCord') {
                         $(this).width($(this).data('width') * scaleX);
                     } else {
-                        $(this).height($(this).data('heigh') * scaleY);
+                        $(this).height($(this).data('height') * scaleY);
                     }
                 });
             }, this);
@@ -430,7 +430,7 @@
       function clearArea(){
         $setDimensionsButton.on('click', function(){
           $('.' + elementsClass).each(function() {
-            $(this).parent().css('display', 'none');
+            // $(this).parent().css('display', 'none');
           });
           // open dialog
           $dimensionsDialog.dialog('open');
@@ -520,10 +520,55 @@
         $('.editor-container').data( 'width', newWidth );
         $('.editor-container').data( 'height', newHeight );
 
-        var scaling = $('.editor-container').width() / $('.editor-container').data('width');
+        var scaling = parseFloat($('.editor-container').data('width')) / $('.editor-container').width();
+
+        var newEditorContainerWidth =  +$('.editor-container').data( 'width' );
+        var newEditorContainerHeight =  +$('.editor-container').data( 'height' );
+        var invalidItemWidth = 0
+        var invalidItemHeight = 0
+
+        $('.' + elementsClass).each(function() {
+          var newItemWidth = $(this).data('width');
+          var newItemHeight = $(this).data('height');
+
+          if(newItemWidth > newEditorContainerWidth) {
+            invalidItemWidth++;
+          }
+          if (newItemHeight > newEditorContainerHeight) {
+            invalidItemHeight++;
+          }
+        });
+
+        if(invalidItemWidth > 0 || invalidItemHeight > 0) {
+          if(invalidItemWidth > 0 && invalidItemHeight === 0) {
+            $('#dialog-form-errors').html("<center><p><b>Width of this room is too small for this furniture!</b></p></center");
+            $('.dialog-input-width').each(function(index) {
+                $(this).css('border-color', '#A94442');
+            });
+            $('.dialog-input-height').each(function(index) {
+                $(this).css('border-color', '#ccc');
+            });
+
+          } else if (invalidItemWidth === 0 && invalidItemHeight > 0) {
+            $('#dialog-form-errors').html("<center><p><b>Height of this room is too small for this furniture!</b></p></center");
+            $('.dialog-input-width').each(function(index) {
+                $(this).css('border-color', '#ccc');
+            });
+            $('.dialog-input-height').each(function(index) {
+                $(this).css('border-color', '#A94442');
+            });
+
+          } else if (invalidItemWidth > 0 && invalidItemHeight > 0) {
+            $('#dialog-form-errors').html("<center><p><b>Width and Height of this room is too small for this furniture!</b></p></center");
+            $('.dialog-input').each(function(index) {
+                $(this).css('border-color', '#A94442');
+            });
+          }
+          return;
+        }
 
         // change container height
-        $('.editor-container').height($('.editor-container').data('height') * scaling);
+        $('.editor-container').height($('.editor-container').data('height') / scaling);
 
         // change editor height line
         $('.editor-height').height($('.editor-container').height());
@@ -547,8 +592,8 @@
 
 
             $(this).parent().css({
-                'width': $(this).data('width') * scaling,
-                'height': $(this).data('heigh') * scaling,
+                'width': $(this).data('width') / scaling,
+                'height': $(this).data('heigh') / scaling,
                 // 'width': $(this).data('width'),
                 // 'height': $(this).data('heigh'),
                 '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
@@ -556,6 +601,16 @@
                 '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
                 'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
             });
+
+            // replare irem to top and left if room is too small
+            if( +$(this).data('x') + +$(this).width() > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).height() > +$('.editor-container').data('height') ) {
+              $(this).parent().css({
+                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                'transform': 'translate(0px, 0px) rotate(0deg)',
+              });
+            }
         });
 
         // close dialog

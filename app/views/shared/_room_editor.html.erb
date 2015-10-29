@@ -34,6 +34,9 @@
   <input type="number" class="rotation-manager" min="0" max="360" step="1">
 </div>
 
+<div class="editor-items-panel">
+</div>
+
 <div class="editor-width">
   <hr>
   <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
@@ -62,13 +65,13 @@
     <% if @product.width > item.width && @product.depth > item.depth %>
       <% item.posX = @product.width / 2 if item.posX > @product.width || item.posX < 0 %>
       <% item.posY = @product.depth / 2 if item.posY > @product.depth || item.posY < 0 %>
-      <span style="position: absolute;" data-width="<%= item.width %>" data-heigh="<%= item.depth %>"
+      <span style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>"
             data-rotation="<%= item.rotation %>"
             data-x="<%= item.posX %>"
             data-y="<%= item.posY %>"
             data-toggle="tooltip" title="<%= item.product_category.name %>">
 
-        <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-heigh="<%= item.depth %>"
+        <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>"
              data-rotation="<%= item.rotation %>"
              data-x="<%= item.posX %>"
              data-y="<%= item.posY %>"
@@ -89,21 +92,22 @@
 </div>
 
 <div id="dimensions-dialog" title="Set dimensions">
+    <div id='dialog-form-errors'></div>
     <form class="form-horizontal" id='dialog-form'>
 
       <div class="form-group">
         <label class='col-sm-3 control-label'>Width:</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control dialog-input" id="width-ft" placeholder="ft." required>
-          <input type="number" class="form-control dialog-input" id="width-inch" placeholder="inch." required>
+          <input type="number" class="form-control dialog-input dialog-input-width" id="width-ft" placeholder="ft." required>
+          <input type="number" class="form-control dialog-input dialog-input-width" id="width-inch" placeholder="inch." required>
         </div>
       </div>
 
       <div class="form-group">
         <label class='col-sm-3 control-label'>Height:</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control dialog-input" id="height-ft" placeholder="ft." required>
-          <input type="number" class="form-control dialog-input" id="height-inch" placeholder="inch." required>
+          <input type="number" class="form-control dialog-input dialog-input-height" id="height-ft" placeholder="ft." required>
+          <input type="number" class="form-control dialog-input dialog-input-height" id="height-inch" placeholder="inch." required>
         </div>
       </div>
 
