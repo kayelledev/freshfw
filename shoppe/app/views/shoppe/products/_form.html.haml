@@ -12,6 +12,9 @@
   fieldset.product-dimensions{display:none;}
   table.seat{width:100%;margin-top:100px;}
   dd.checkbox{margin-left:3%;}
+  input.number{width: 100%;}
+  dl.fourth{width: 20%; margin: 0 10px !important; float: left;}
+  div.chosen-container{width:100% !important;}
 
 / Declare Variable
 /- furniture_category_id = Shoppe::ProductCategory.find_by_name('Furniture').id
@@ -29,20 +32,21 @@
       %dd= f.collection_select :product_subcategory_id, Shoppe::ProductCategory.order(:name), :id, :name, {:class => 'chosen'}
 
     .splitContainer
-      %dl.third
+      %dl.fourth
         %dt= f.label :name, t('shoppe.products.name')
         %dd= f.text_field :name, :class => 'text focus'
-      %dl.third
+      %dl.fourth
         %dt= f.label :permalink, t('shoppe.products.permalink')
         %dd= f.text_field :permalink, :class => 'text'
-      %dl.third
+      %dl.fourth
         %dt= f.label :sku, t('shoppe.products.sku')
         %dd= f.text_field :sku, :class => 'text'
+      %dl.fourth
+        %dt= f.label :description, t('shoppe.products.description')
+        %dd= f.text_area :description, :class => 'text'
+    %br
     %dl
-      %dt= f.label :description, t('shoppe.products.description')
-      %dd= f.text_area :description, :class => 'text'
-    %dl
-      %dt= f.label :short_description, t('shoppe.products.short_description')
+      %dt= f.label :short_description, t('shoppe.products.short_description'), style:'width:100%'
       %dd= f.text_area :short_description, :class => 'text'
     %dl
       %dt= f.label :in_the_box, t('shoppe.products.in_the_box')
@@ -63,34 +67,33 @@
       %dd= link_to 'Go to editor', "/room_editor/edit?preset=#{@product.id}", class: "button"
 
   = field_set_tag  t('shoppe.products.product_dimensions'), class: 'product-dimensions' do
-    %dl.third
-      %dt= f.label :width, "Width(in)"
-      %dd= f.text_field :width, :class => 'number', type: 'number', step: 'any'
-    %dl.third
-      %dt= f.label :depth, "Depth(in)"
-      %dd= f.text_field :depth, :class => 'number', type: 'number', step: 'any'
-    %dl.third
-      %dt= f.label :height, "Height(in)"
-      %dd= f.text_field :height, :class => 'number', type: 'number', step: 'any'
-
-    %table.seat
-      %tr
-        %td
-          %dl
-            %dt= f.label :seat_width, "Seat width(in)"
-            %dd= f.text_field :seat_width, :class => 'number', type: 'number', step: 'any'
-        %td
-          %dl
-            %dt= f.label :seat_depth, "Seat depth(in)"
-            %dd= f.text_field :seat_depth, :class => 'number', type: 'number', step: 'any'
-        %td
-          %dl
-            %dt= f.label :seat_height, "Seat height(in)"
-            %dd= f.text_field :seat_height, :class => 'number', type: 'number', step: 'any'
-        %td
-          %dl
-            %dt= f.label :arm_height, "Arm height(in)"
-            %dd= f.text_field :arm_height, :class => 'number', type: 'number', step: 'any'
+    .splitContainer
+      %dl.fourth
+        %dt= f.label :width, "Width(in)"
+        %dd= f.text_field :width, :class => 'number', type: 'number', step: 'any'
+      %dl.fourth
+        %dt= f.label :depth, "Depth(in)"
+        %dd= f.text_field :depth, :class => 'number', type: 'number', step: 'any'
+      %dl.fourth
+        %dt= f.label :height, "Height(in)"
+        %dd= f.text_field :height, :class => 'number', type: 'number', step: 'any'
+      %dl.fourth
+        %dt= f.label :other_details, "Other details:(text)"
+        %dd= f.text_area :other_details, :class => 'text'
+    %br
+    .splitContainer
+      %dl.fourth
+        %dt= f.label :seat_width, "Seat width(in)"
+        %dd= f.text_field :seat_width, :class => 'number', type: 'number', step: 'any'
+      %dl.fourth
+        %dt= f.label :seat_depth, "Seat depth(in)"
+        %dd= f.text_field :seat_depth, :class => 'number', type: 'number', step: 'any'
+      %dl.fourth
+        %dt= f.label :seat_height, "Seat height(in)"
+        %dd= f.text_field :seat_height, :class => 'number', type: 'number', step: 'any'
+      %dl.fourth
+        %dt= f.label :arm_height, "Arm height(in)"
+        %dd= f.text_field :arm_height, :class => 'number', type: 'number', step: 'any'
 
 
   = field_set_tag t('shoppe.products.attributes') do
