@@ -197,6 +197,17 @@
                 '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
                 'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
             });
+
+            // replase item to top and left if room is too small
+            if( +$(this).data('x') + +$(this).data('width')/scalingX > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).data('height')/scalingY > +$('.editor-container').data('height') ) {
+              console.log('TOO SMALL');
+              $(this).parent().css({
+                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                'transform': 'translate(0px, 0px) rotate(0deg)',
+              });
+            }
         });
 
 
@@ -212,6 +223,7 @@
                     $("#product_" + $(this).attr('id')).removeClass('active-product');
                 }
             });
+
     };
 
     /**
@@ -623,16 +635,7 @@
                 'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
             });
 
-            // replare item to top and left if room is too small
-            if( +$(this).data('x') + +$(this).width() > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).height() > +$('.editor-container').data('height') ) {
-              console.log('TOO SMALL');
-              $(this).parent().css({
-                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
-                '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
-                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
-                'transform': 'translate(0px, 0px) rotate(0deg)',
-              });
-            }
+
         });
 
         // activate items panel
