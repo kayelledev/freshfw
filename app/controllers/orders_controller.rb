@@ -108,6 +108,17 @@ class OrdersController < ApplicationController
     end
   end
 
+  def check_country
+    @order = current_order
+    proceed_params = @order.separate_delivery_address ?
+        with_deliver_params : without_deliver_params
+    @country = Shoppe::Country.find(proceed_params[:billing_country_id])
+    current_country = cookies[:currency] == 'us' ? 'Other' : 'Canada'
+    order_country = @country.try(:name) == 'Canada' ? 'Canada' : 'Other'    
+    country_changed = current_country == order_country
+    render json: country_changed.try(:to_json)
+  end
+
   def payment
     @order = current_order
     puts @order.id

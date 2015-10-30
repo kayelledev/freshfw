@@ -32,6 +32,7 @@ module Shoppe
     #
     # @return [Shoppe::ProductCategory]
     belongs_to :product_category, :class_name => 'Shoppe::ProductCategory'
+    belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
 
     # The product's tax rate
     #
@@ -157,47 +158,51 @@ module Shoppe
     #
     #   Shoppe:Product.import("path/to/file.csv")
     def self.import(file)
+      field_array = ['Product Name', 'SKU', 'Category Name', 'Subcategory Name', 'Permalink', 'Description', 'Short Description', 'Featured',
+                     "What's in the box?", 'Width', 'Height', 'Depth', 'Seat Width', 'Seat Depth', 'Seat Height', 'Arm Height',
+                     'CAD Price', 'USA Price', 'Default Image', 'Image2', 'Image3', 'Image4', 'Image5', 'Image6']
+      attr_active_array = ['Color', 'Item 2 Width', 'Item 2 Depth', 'Item 2 Height', 'Item 3 Width', 'Item 3 Depth', 'Item 3 Height', 'NW', 'Technical Description',
+                           'Features', 'Instructions', 'Outdoor']
       spreadsheet = open_spreadsheet(file)
       spreadsheet.default_sheet = spreadsheet.sheets.first
       header = spreadsheet.row(1)
       (2..spreadsheet.last_row).each do |i|
-        row = Hash[[header, spreadsheet.row(i)].transpose]
-
-        # Don't import products where the name is blank
-        unless row["name"].nil?
-          if product = find_by(name: row["name"])
-            # Dont import products with the same name but update quantities if they're not the same
-            qty = row["qty"].to_i
-            if qty > 0 && qty != product.stock
-              product.stock_level_adjustments.create!(description: I18n.t('shoppe.import'), adjustment: qty)
-            end
-          else
-            product = new
-            product.name = row["name"]
-            product.sku = row["sku"]
-            product.description = row["description"]
-            product.short_description = row["short_description"]
-            product.weight = row["weight"]
-            product.price = row["price"].nil? ? 0 : row["price"]
-
-            product.product_category_id = begin
-              if Shoppe::ProductCategory.find_by(name: row["category_name"]).present?
-                # Find and set the category
-                Shoppe::ProductCategory.find_by(name: row["category_name"]).id
-              else
-                # Create the category
-                Shoppe::ProductCategory.create(name: row["category_name"]).id
-              end
-            end
-
-            product.save!
-
-            # Create quantities
-            qty = row["qty"].to_i
-            if qty > 0
-              product.stock_level_adjustments.create!(description: I18n.t('shoppe.import'), adjustment: qty)
-            end
+        begin
+          row = Hash[[header, spreadsheet.row(i)].transpose]
+          product = Shoppe::Product.where(name: row["Product Name"], sku: row['SKU']).first_or_create
+          product.product_category_id = Shoppe::ProductCategory.where(name: row["Category Name"]).first_or_create.id
+          product.product_subcategory_id = Shoppe::ProductCategory.where(name: row["Subcategory Name"]).first_or_create.id
+          product.permalink = row["Permalink"]
+          product.description = row["Description"]
+          product.short_description = row["Short Description"]
+          product.save!
+          product.featured = row["Featured"].to_i
+          product.in_the_box = row["What's in the box?"]
+          product.width = row["Width"].to_f
+          product.height = row["Height"].to_f
+          product.depth = row["Depth"].to_f
+          product.seat_width = row["Seat Width"].to_f
+          product.seat_depth = row["Seat Depth"].to_f
+          product.seat_height = row["Seat Height"].to_f
+          product.arm_height = row["Arm Height"].to_f
+          product.price = row["CAD Price"].to_d
+          product.cost_price = row["USA Price"].to_d
+          product.url_default_image = row["Default Image"]
+          product.url_image2 = row["Image2"]
+          product.url_image3 = row["Image3"]
+          product.url_image4 = row["Image4"]
+          product.url_image5 = row["Image5"]
+          product.url_image6 = row["Image6"]
+          product.save!
+          field_array.each{|element| row.delete(element)}
+          row.each do |key, value|
+            product_attr = Shoppe::ProductAttribute.where(product_id: product.id, key: key).first_or_create
+            product_attr.public = attr_active_array.include?(key)
+            product_attr.searchable = false
+            product_attr.value = value
+            product_attr.save!
           end
+        rescue
         end
       end
     end
