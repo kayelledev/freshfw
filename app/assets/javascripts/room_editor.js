@@ -207,6 +207,13 @@
                 '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
                 'transform': 'translate(0px, 0px) rotate(0deg)',
               });
+
+              $(this).parent().attr('data-rotation', '0');
+              $(this).parent().attr('data-x', '0');
+              $(this).parent().attr('data-y', '0');
+              $(this).attr('data-rotation', '0');
+              $(this).attr('data-x', '0');
+              $(this).attr('data-y', '0');
             }
         });
 
@@ -735,7 +742,7 @@
         this.initElements(this.$initialElenemts);
         //this.addElement();
         this.catchElement();
-        this.rotateElement();
+        // this.rotateElement();
         //this.managePosition();
         //this.manageHolderScaling();
         //this.manageCats();
