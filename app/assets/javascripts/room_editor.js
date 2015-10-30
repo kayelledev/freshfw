@@ -257,18 +257,28 @@
           // target elements with the "draggable" class
           $('.' + elementsClass).each(function() {
 
+              var parentDataX = +$(this).parent().data('x')/scalingX;
+              var parentDataY = +$(this).parent().data('y')/scalingY;
+              var dataX = +$(this).data('x')/scalingX;
+              var dataY = +$(this).data('y')/scalingY;
+
+              $(this).attr('data-x', parentDataX);
+              $(this).attr('data-y', parentDataY);
+              $(this).parent().attr('data-x', parentDataX);
+              $(this).parent().attr('data-y', parentDataY);
+
+
+              console.log($(this).parent().attr('data-x'));
+
               $(this).parent().css({
                   'width': $(this).data('width') / scaling,
                   'height': $(this).data('heigh') / scaling,
-                  '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+                  '-webkit-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-moz-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-ms-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  'transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
               });
-              $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
-              $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
-              $(this).attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
-              $(this).attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
+
 
               $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
            });
