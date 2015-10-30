@@ -77,7 +77,7 @@
             inertia: true,
             // keep the element within the area of it's parent
             restrict: {
-                restriction: '.editor-container',
+                restriction: '.dragg',
                 endOnly: true,
                 elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
             },
@@ -153,7 +153,7 @@
         var controller = this;
         function init () {
           // set container width
-          var documentWidth = $(document).width();
+          var documentWidth = $(window).width();
           $('.room-editor-container').width(documentWidth * 0.6);
           $('.editor-container').width(documentWidth * 0.6);
 
@@ -238,51 +238,51 @@
         }
         init();
 
-        $(window).resize(function(){
-          var documentWidth = $(document).width();
-          $('.room-editor-container').width(documentWidth * 0.6);
-          $('.editor-container').width(documentWidth * 0.6);
+        // $(window).resize(function(){
+        //   var documentWidth = $(window).width();
+        //   $('.room-editor-container').width(documentWidth * 0.6);
+        //   $('.editor-container').width(documentWidth * 0.6);
 
-          // set container height according width
-          var scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
-          $('.editor-container').height($('.editor-container').data('height') / scaling);
+        //   // set container height according width
+        //   var scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
+        //   $('.editor-container').height($('.editor-container').data('height') / scaling);
 
-          // change editor height line
-          $('.editor-height').height($('.editor-container').height());
-          $('.editor-height img').height($('.editor-container').height());
+        //   // change editor height line
+        //   $('.editor-height').height($('.editor-container').height());
+        //   $('.editor-height img').height($('.editor-container').height());
 
-          var scalingX = parseFloat(controller.$holder.data('width')) / controller.$holder.width(),
-              scalingY = parseFloat(controller.$holder.data('height')) / controller.$holder.height();
+        //   var scalingX = parseFloat(controller.$holder.data('width')) / controller.$holder.width(),
+        //       scalingY = parseFloat(controller.$holder.data('height')) / controller.$holder.height();
 
-          // target elements with the "draggable" class
-          $('.' + elementsClass).each(function() {
+        //   // target elements with the "draggable" class
+        //   $('.' + elementsClass).each(function() {
 
-              var parentDataX = +$(this).parent().data('x')/scalingX;
-              var parentDataY = +$(this).parent().data('y')/scalingY;
-              var dataX = +$(this).data('x')/scalingX;
-              var dataY = +$(this).data('y')/scalingY;
+        //       var parentDataX = +$(this).parent().data('x')/scalingX;
+        //       var parentDataY = +$(this).parent().data('y')/scalingY;
+        //       var dataX = +$(this).data('x')/scalingX;
+        //       var dataY = +$(this).data('y')/scalingY;
 
-              $(this).attr('data-x', parentDataX);
-              $(this).attr('data-y', parentDataY);
-              $(this).parent().attr('data-x', parentDataX);
-              $(this).parent().attr('data-y', parentDataY);
-
-
-              console.log($(this).parent().attr('data-x'));
-
-              $(this).parent().css({
-                  'width': $(this).data('width') / scaling,
-                  'height': $(this).data('heigh') / scaling,
-                  '-webkit-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  '-moz-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  '-ms-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  'transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
-              });
+        //       $(this).attr('data-x', parentDataX);
+        //       $(this).attr('data-y', parentDataY);
+        //       $(this).parent().attr('data-x', parentDataX);
+        //       $(this).parent().attr('data-y', parentDataY);
 
 
-              $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
-           });
-        });
+        //       console.log($(this).parent().attr('data-x'));
+
+        //       $(this).parent().css({
+        //           'width': $(this).data('width') / scaling,
+        //           'height': $(this).data('heigh') / scaling,
+        //           '-webkit-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+        //           '-moz-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+        //           '-ms-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+        //           'transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+        //       });
+
+
+        //       $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
+        //    });
+        // });
 
     };
 
@@ -748,18 +748,18 @@
           var itemCenterHeight = ( $('.editor-container').height() / 2 ) - ( realItem.height() / 2 );
 
 
-          realItem.parent().attr('data-rotation', '0');
-          realItem.parent().attr('data-x', itemCenterWidth);
-          realItem.parent().attr('data-y', itemCenterHeight);
-          realItem.attr('data-rotation', '0');
-          realItem.attr('data-x', itemCenterWidth);
-          realItem.attr('data-y', itemCenterHeight);
+          realItem.parent().attr('data-rotation', 0);
+          realItem.parent().attr('data-x', 0);
+          realItem.parent().attr('data-y', 0);
+          realItem.attr('data-rotation', 0);
+          realItem.attr('data-x', 0);
+          realItem.attr('data-y', 0);
 
           realItem.parent().css({
-                '-webkit-transform': 'translate(' + itemCenterWidth + 'px, ' + itemCenterHeight + 'px) rotate(0deg)',
-                '-moz-transform': 'translate('+ itemCenterWidth +'px, ' + itemCenterHeight + 'px) rotate(0deg)',
-                '-ms-transform': 'translate('+ itemCenterWidth +'px, ' + itemCenterHeight + 'px) rotate(0deg)',
-                'transform': 'translate('+ itemCenterWidth +'px, ' + itemCenterHeight + 'px) rotate(0deg)',
+                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                'transform': 'translate(0px, 0px) rotate(0deg)',
               });
 
           if ( $('.editor-items-panel').height() == 0 ){
@@ -790,6 +790,55 @@
 
     };
 
+    Controller.prototype.adaptArea = function(elementsClass) {
+      var controller = this;
+      $(window).resize(function(){
+          var documentWidth = $(window).width();
+          $('.room-editor-container').width(documentWidth * 0.6);
+          $('.editor-container').width(documentWidth * 0.6);
+
+          // set container height according width
+          var scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
+          $('.editor-container').height($('.editor-container').data('height') / scaling);
+
+          // change editor height line
+          $('.editor-height').height($('.editor-container').height());
+          $('.editor-height img').height($('.editor-container').height());
+
+          var scalingX = parseFloat(controller.$holder.data('width')) / controller.$holder.width(),
+              scalingY = parseFloat(controller.$holder.data('height')) / controller.$holder.height();
+
+          // target elements with the "draggable" class
+          $('.' + elementsClass).each(function() {
+
+              var parentDataX = +$(this).parent().data('x')/scalingX;
+              var parentDataY = +$(this).parent().data('y')/scalingY;
+              var dataX = +$(this).data('x')/scalingX;
+              var dataY = +$(this).data('y')/scalingY;
+
+              $(this).attr('data-x', parentDataX);
+              $(this).attr('data-y', parentDataY);
+              $(this).parent().attr('data-x', parentDataX);
+              $(this).parent().attr('data-y', parentDataY);
+
+
+              console.log($(this).parent().attr('data-x'));
+
+              $(this).parent().css({
+                  'width': $(this).data('width') / scaling,
+                  'height': $(this).data('heigh') / scaling,
+                  '-webkit-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-moz-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-ms-transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  'transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+              });
+
+
+              $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
+           });
+        });
+    }
+
     /**
      * Init all Class methods
      *
@@ -805,6 +854,7 @@
         this.initMouseRotation();
         this.clearArea(this.$initialElenemts);
         this.resizeArea(this.$initialElenemts);
+        this.adaptArea(this.$initialElenemts);
     };
 
     $(document).ready(function() {

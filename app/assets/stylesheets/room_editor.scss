@@ -147,13 +147,12 @@ div#dialog-form-errors {
 
 .editor-items-panel{
   float: left;
-  position: relative;
-  width: 8%;
-  right: 9%;
-  height: 100%;
+  position: absolute;
+  width: 5%;
+  left: 14%;
   border: 1px solid black;
   display: none;
-  margin-top: 10px;
+  height: auto;
 }
 
 
