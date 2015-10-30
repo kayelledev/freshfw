@@ -215,6 +215,10 @@
               $(this).attr('data-x', '0');
               $(this).attr('data-y', '0');
             }
+
+            $(this).parent().children('.rotation-arrow').css('bottom', '0px')
+            $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
+
         });
 
 
@@ -641,6 +645,9 @@
                 '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
                 'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
             });
+
+            $(this).parent().children('.rotation-arrow').css('bottom', '0px')
+            $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
 
 
         });
