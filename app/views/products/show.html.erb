@@ -162,14 +162,16 @@
                             </div>
                         <% end %>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="profile">
-                        <% @product.product_attributes.each do |attribure| %>
-                            <div class="col-md-4">
+                    <div role="tabpanel" class="tab-pane fade  col-md-6" id="profile">
+                        <% @product.product_attributes.where(public: true).each do |attribure| %>
+                            <% if attribure.value.present? %>
+                              <div class="col-md-3">
                                 <%= attribure.key %>:
-                            </div>
-                            <div class="col-md-8">
-                                <h2><%= attribure.value %></h2>
-                            </div>
+                              </div>
+                              <div class="col-md-7">
+                                <%= attribure.value %>
+                              </div>
+                            <% end %>
                         <% end %>
                     </div>
                 </div>
@@ -182,17 +184,16 @@
                             </a>
                         </li>
                         <div class="tab-content" style="margin-top: 100px;">
-                            <div role="tabpanel" class="tab-pane fade active in" id="profile">
+                            <div role="tabpanel" class="tab-pane fade active in col-md-6" id="profile">
                                 <% @product.product_attributes.where(public: true).each do |attribure| %>
-                                    <div class="col-md-4">
+                                    <% if attribure.value.present? %>
+                                      <div class="col-md-3">
                                         <%= attribure.key %>:
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h2>
-                                            &nbsp
-                                            <%= attribure.value %>
-                                        </h2>
-                                    </div>
+                                      </div>
+                                      <div class="col-md-7">
+                                        <%= attribure.value %>
+                                      </div>
+                                    <% end %>
                                 <% end %>
                             </div>
                         </div>
