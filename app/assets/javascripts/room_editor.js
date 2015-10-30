@@ -430,7 +430,7 @@
       function clearArea(){
         $setDimensionsButton.on('click', function(){
           $('.' + elementsClass).each(function() {
-            // $(this).parent().css('display', 'none');
+             $(this).css('display', 'none');
           });
           // open dialog
           $dimensionsDialog.dialog('open');
@@ -480,6 +480,19 @@
 
       $('#submit-new-dimensions').on('click', function(e) {
         e.preventDefault();
+
+        $('.items-panel-elem').each(function() {
+          $(this).show();
+          $(this).attr('data-x', '0');
+          $(this).attr('data-y', '0');
+
+          $(this).css({
+                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                'transform': 'translate(0px, 0px) rotate(0deg)',
+              });
+        });
 
         // validate number
         function isNumber(n) {
@@ -613,10 +626,93 @@
             }
         });
 
+        // activate items panel
+        $('.editor-items-panel').show();
+
         // close dialog
         $dimensionsDialog.dialog('close');
 
       });
+      this.initItemsPanelArea();
+    };
+
+    /**
+     * Init items panel area
+     */
+    Controller.prototype.initItemsPanelArea = function() {
+       interact('.draggable2')
+        .draggable({
+          // enable inertial throwing
+          inertia: false,
+          // keep the element within the area of it's parent
+          restrict: {
+            restriction: ".dragg",
+            endOnly: true,
+            elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+          },
+          // enable autoScroll
+          autoScroll: true,
+
+          // call this function on every dragmove event
+          onmove: dragMoveListener,
+          // call this function on every dragend event
+          onend: dropElem
+        });
+
+        function dropElem (event) {
+          var item = event.target;
+          var itemId = $(item).data('id');
+          // console.log($(item).data('id'));
+          console.log(event);
+          $(item).hide();
+
+          var realItem = $('#' + itemId);
+          realItem.show();
+
+          var itemCenterWidth = ( $('.editor-container').width() / 2 ) - ( realItem.width() / 2 );
+          var itemCenterHeight = ( $('.editor-container').height() / 2 ) - ( realItem.height() / 2 );
+
+
+          realItem.parent().attr('data-rotation', '0');
+          realItem.parent().attr('data-x', itemCenterWidth);
+          realItem.parent().attr('data-y', itemCenterHeight);
+          realItem.attr('data-rotation', '0');
+          realItem.attr('data-x', itemCenterWidth);
+          realItem.attr('data-y', itemCenterHeight);
+
+          realItem.parent().css({
+                '-webkit-transform': 'translate(' + itemCenterWidth + 'px, ' + itemCenterHeight + 'px) rotate(0deg)',
+                '-moz-transform': 'translate('+ itemCenterWidth +'px, ' + itemCenterHeight + 'px) rotate(0deg)',
+                '-ms-transform': 'translate('+ itemCenterWidth +'px, ' + itemCenterHeight + 'px) rotate(0deg)',
+                'transform': 'translate('+ itemCenterWidth +'px, ' + itemCenterHeight + 'px) rotate(0deg)',
+              });
+
+          if ( $('.editor-items-panel').height() == 0 ){
+            $('.editor-items-panel').hide();
+          }
+
+        }
+
+        function dragMoveListener (event) {
+          var target = event.target,
+              // keep the dragged position in the data-x/data-y attributes
+              x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+              y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+          // translate the element
+          target.style.webkitTransform =
+          target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)';
+
+          // update the posiion attributes
+          target.setAttribute('data-x', x);
+          target.setAttribute('data-y', y);
+        }
+
+        $('.draggable2').each(function() {
+           console.log($(this).position().top);
+        });
+
     };
 
     /**
@@ -672,6 +768,7 @@
 
         // this is used later in the resizing demo
         //window.dragMoveListener = dragMoveListener;
+
     });
 
 })(jQuery);
