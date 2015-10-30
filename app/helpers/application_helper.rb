@@ -31,4 +31,8 @@ module ApplicationHelper
   def dropdown_currency_label(currency)
     currency == 'us' ? 'USA($USD)' : 'Canada($CAD)'
   end
+
+  def dimension_if_positive(message, field)
+    "#{message}: #{field}" if field > 0
+  end
 end

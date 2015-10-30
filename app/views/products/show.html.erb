@@ -13,15 +13,15 @@
                         <p><%= @product.short_description %><p>
                     </p>
                     <p class='dimensions'>
-                        <p><%= "Width(in): #{@product.width}" %><p>
-                        <p><%= "Depth(in): #{@product.depth}" %><p>
-                        <p><%= "Height(in): #{@product.height}" %><p>
+                        <p><%= dimension_if_positive("Width(in)", @product.width) %><p>
+                        <p><%= dimension_if_positive("Depth(in)", @product.depth) %><p>
+                        <p><%= dimension_if_positive("Height(in)", @product.height) %><p>
                     </p>
                     <p class='dimensions'>
-                        <p><%= "Seat Width(in): #{@product.seat_width}" %><p>
-                        <p><%= "Seat Depth(in): #{@product.seat_depth}" %><p>
-                        <p><%= "Seat Height(in): #{@product.seat_height}" %><p>
-                        <p><%= "Arm Height(in): #{@product.arm_height}" %><p>
+                        <p><%= dimension_if_positive("Seat Width(in)", @product.seat_width) %><p>
+                        <p><%= dimension_if_positive("Seat Depth(in)", @product.seat_depth) %><p>
+                        <p><%= dimension_if_positive("Seat Height(in)", @product.seat_height) %><p>
+                        <p><%= dimension_if_positive("Arm Height(in)", @product.arm_height) %><p>
                     </p>
                     <% if @product.has_variants? %>
                         <p class='option'>Options</p>
