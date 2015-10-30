@@ -164,7 +164,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane fade  col-md-6" id="profile">
                         <% @product.product_attributes.where(public: true).each do |attribure| %>
-                            <% if attribure.value.present? %>
+                            <% if attribure.value.present? && attribure.value!="0" %>
                               <div class="col-md-3">
                                 <%= attribure.key %>:
                               </div>
@@ -186,7 +186,7 @@
                         <div class="tab-content" style="margin-top: 100px;">
                             <div role="tabpanel" class="tab-pane fade active in col-md-6" id="profile">
                                 <% @product.product_attributes.where(public: true).each do |attribure| %>
-                                    <% if attribure.value.present? %>
+                                    <% if attribure.value.present? && attribure.value!="0" %>
                                       <div class="col-md-3">
                                         <%= attribure.key %>:
                                       </div>
