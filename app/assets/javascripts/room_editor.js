@@ -447,7 +447,11 @@
       // restore area
       function restoreArea(){
         $('.' + elementsClass).each(function() {
-          $(this).parent().css('display', 'block');
+          if ($('.editor-items-panel').css('display') === 'none') {
+            $(this).css('display', 'block');
+          } else {
+            $(this).css('display', 'none');
+          }
         });
       }
 
@@ -619,8 +623,9 @@
                 'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
             });
 
-            // replare irem to top and left if room is too small
+            // replare item to top and left if room is too small
             if( +$(this).data('x') + +$(this).width() > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).height() > +$('.editor-container').data('height') ) {
+              console.log('TOO SMALL');
               $(this).parent().css({
                 '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
                 '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
