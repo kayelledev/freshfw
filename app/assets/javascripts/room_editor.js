@@ -150,90 +150,129 @@
      * @param elementsClass
      */
     Controller.prototype.initElements = function(elementsClass) {
+        var controller = this;
+        function init () {
+          // set container width
+          var documentWidth = $(document).width();
+          $('.room-editor-container').width(documentWidth * 0.6);
+          $('.editor-container').width(documentWidth * 0.6);
 
-        // set container width
-        var documentWidth = $(document).width();
-        $('.room-editor-container').width(documentWidth * 0.6);
-        $('.editor-container').width(documentWidth * 0.6);
+          // set container height according width
+          var scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
+          $('.editor-container').height($('.editor-container').data('height') / scaling);
 
-        // set container height according width
-        var scaling = parseFloat(this.$holder.data('width')) / this.$holder.width();
-        $('.editor-container').height($('.editor-container').data('height') / scaling);
+          // change editor height line
+          $('.editor-height').height($('.editor-container').height());
+          $('.editor-height img').height($('.editor-container').height());
 
-        // change editor height line
-        $('.editor-height').height($('.editor-container').height());
-        $('.editor-height img').height($('.editor-container').height());
+          // init draggable
+          interact('.' + elementsClass).draggable(controller.$options);
 
-        // init draggable
-        interact('.' + elementsClass).draggable(this.$options);
+          var scalingX = parseFloat(controller.$holder.data('width')) / controller.$holder.width(),
+              scalingY = parseFloat(controller.$holder.data('height')) / controller.$holder.height();
 
-        var scalingX = parseFloat(this.$holder.data('width')) / this.$holder.width(),
-            scalingY = parseFloat(this.$holder.data('height')) / this.$holder.height();
+          // target elements with the "draggable" class
+          $('.' + elementsClass).each(function() {
+              //$(this).attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
+              //$(this).attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
 
-        // target elements with the "draggable" class
-        $('.' + elementsClass).each(function() {
-            //$(this).attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
-            //$(this).attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
+              $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
+              $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
 
-            $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
-            $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
+              //$(this).css({
+              //    'width': $(this).data('width'),
+              //    'height': $(this).data('heigh'),
+              //    '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+              //    '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+              //    '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+              //    'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+              //});
 
-            //$(this).css({
-            //    'width': $(this).data('width'),
-            //    'height': $(this).data('heigh'),
-            //    '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-            //    '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-            //    '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-            //    'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
-            //});
-
-            $(this).parent().css({
-                'width': $(this).data('width') / scaling,
-                'height': $(this).data('heigh') / scaling,
-                // 'width': $(this).data('width'),
-                // 'height': $(this).data('heigh'),
-                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
-            });
-
-            // replase item to top and left if room is too small
-            if( +$(this).data('x') + +$(this).data('width')/scalingX > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).data('height')/scalingY > +$('.editor-container').data('height') ) {
-              console.log('TOO SMALL');
               $(this).parent().css({
-                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
-                '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
-                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
-                'transform': 'translate(0px, 0px) rotate(0deg)',
+                  'width': $(this).data('width') / scaling,
+                  'height': $(this).data('heigh') / scaling,
+                  // 'width': $(this).data('width'),
+                  // 'height': $(this).data('heigh'),
+                  '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
               });
 
-              $(this).parent().attr('data-rotation', '0');
-              $(this).parent().attr('data-x', '0');
-              $(this).parent().attr('data-y', '0');
-              $(this).attr('data-rotation', '0');
-              $(this).attr('data-x', '0');
-              $(this).attr('data-y', '0');
-            }
+              // replase item to top and left if room is too small
+              if( +$(this).data('x') + +$(this).data('width')/scalingX > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).data('height')/scalingY > +$('.editor-container').data('height') ) {
+                console.log('TOO SMALL');
+                $(this).parent().css({
+                  '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                  '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                  '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                  'transform': 'translate(0px, 0px) rotate(0deg)',
+                });
 
-            $(this).parent().children('.rotation-arrow').css('bottom', '0px')
-            $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
+                $(this).parent().attr('data-rotation', '0');
+                $(this).parent().attr('data-x', '0');
+                $(this).parent().attr('data-y', '0');
+                $(this).attr('data-rotation', '0');
+                $(this).attr('data-x', '0');
+                $(this).attr('data-y', '0');
+              }
 
+              $(this).parent().children('.rotation-arrow').css('bottom', '0px')
+              $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
+
+          });
+
+
+
+          $('[data-toggle="tooltip"]').tooltip();
+
+           controller.$holder.find('div')
+              .on('mouseover', function() {
+                  $("#product_" + $(this).attr('id')).addClass('active-product');
+              })
+              .on('mouseout', function() {
+                  if (!( $(this).hasClass( "active" ) ) ) {
+                      $("#product_" + $(this).attr('id')).removeClass('active-product');
+                  }
+              });
+        }
+        init();
+
+        $(window).resize(function(){
+          var documentWidth = $(document).width();
+          $('.room-editor-container').width(documentWidth * 0.6);
+          $('.editor-container').width(documentWidth * 0.6);
+
+          // set container height according width
+          var scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
+          $('.editor-container').height($('.editor-container').data('height') / scaling);
+
+          // change editor height line
+          $('.editor-height').height($('.editor-container').height());
+          $('.editor-height img').height($('.editor-container').height());
+
+          var scalingX = parseFloat(controller.$holder.data('width')) / controller.$holder.width(),
+              scalingY = parseFloat(controller.$holder.data('height')) / controller.$holder.height();
+
+          // target elements with the "draggable" class
+          $('.' + elementsClass).each(function() {
+
+              $(this).parent().css({
+                  'width': $(this).data('width') / scaling,
+                  'height': $(this).data('heigh') / scaling,
+                  '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+              });
+              $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
+              $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
+              $(this).attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
+              $(this).attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
+
+              $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
+           });
         });
-
-
-
-        $('[data-toggle="tooltip"]').tooltip();
-
-         this.$holder.find('div')
-            .on('mouseover', function() {
-                $("#product_" + $(this).attr('id')).addClass('active-product');
-            })
-            .on('mouseout', function() {
-                if (!( $(this).hasClass( "active" ) ) ) {
-                    $("#product_" + $(this).attr('id')).removeClass('active-product');
-                }
-            });
 
     };
 
@@ -749,7 +788,7 @@
         this.initElements(this.$initialElenemts);
         //this.addElement();
         this.catchElement();
-        // this.rotateElement();
+        this.rotateElement();
         //this.managePosition();
         //this.manageHolderScaling();
         //this.manageCats();
