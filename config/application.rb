@@ -55,7 +55,7 @@ module FourWalls
             ENV['TWITTER_API_KEY'] = cfg['TWITTER_API_KEY'] if ENV['TWITTER_API_KEY'].nil?
             ENV['TWITTER_API_SECRET'] = cfg['TWITTER_API_SECRET'] if ENV['TWITTER_API_SECRET'].nil?
             ENV['FACEBOOK_APP_ID'] = cfg['FACEBOOK_APP_ID'] if ENV['FACEBOOK_APP_ID'].nil?
-            ENV['FACEBOOK_APP_ID'] = cfg['FACEBOOK_APP_ID'] if ENV['FACEBOOK_APP_ID'].nil?
+            ENV['FACEBOOK_APP_SECRET'] = cfg['FACEBOOK_APP_SECRET'] if ENV['FACEBOOK_APP_SECRET'].nil?
         end
     end
 
