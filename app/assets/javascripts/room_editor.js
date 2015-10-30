@@ -481,6 +481,7 @@
       $('#submit-new-dimensions').on('click', function(e) {
         e.preventDefault();
 
+        // reset items panel
         $('.items-panel-elem').each(function() {
           $(this).show();
           $(this).attr('data-x', '0');
@@ -533,12 +534,15 @@
         $('.editor-container').data( 'width', newWidth );
         $('.editor-container').data( 'height', newHeight );
 
+        // scaling
         var scaling = parseFloat($('.editor-container').data('width')) / $('.editor-container').width();
 
         var newEditorContainerWidth =  +$('.editor-container').data( 'width' );
         var newEditorContainerHeight =  +$('.editor-container').data( 'height' );
         var invalidItemWidth = 0
         var invalidItemHeight = 0
+
+        // validate width and heigh of room
 
         $('.' + elementsClass).each(function() {
           var newItemWidth = $(this).data('width');
@@ -552,9 +556,10 @@
           }
         });
 
+        // render errors
         if(invalidItemWidth > 0 || invalidItemHeight > 0) {
           if(invalidItemWidth > 0 && invalidItemHeight === 0) {
-            $('#dialog-form-errors').html("<center><p><b>Width of this room is too small for this furniture!</b></p></center");
+            $('#dialog-form-errors').html("<center><p><b>New room width is too small for the furniture included. Please enlarge it.</b></p></center");
             $('.dialog-input-width').each(function(index) {
                 $(this).css('border-color', '#A94442');
             });
@@ -563,7 +568,7 @@
             });
 
           } else if (invalidItemWidth === 0 && invalidItemHeight > 0) {
-            $('#dialog-form-errors').html("<center><p><b>Height of this room is too small for this furniture!</b></p></center");
+            $('#dialog-form-errors').html("<center><p><b>New room depth is too small for the furniture included. Please enlarge it.</b></p></center>");
             $('.dialog-input-width').each(function(index) {
                 $(this).css('border-color', '#ccc');
             });
@@ -572,7 +577,7 @@
             });
 
           } else if (invalidItemWidth > 0 && invalidItemHeight > 0) {
-            $('#dialog-form-errors').html("<center><p><b>Width and Height of this room is too small for this furniture!</b></p></center");
+            $('#dialog-form-errors').html("<center><p><b>New room dimensions are not enough for all the furniture included. Please, enlarge them both.</b></p></center");
             $('.dialog-input').each(function(index) {
                 $(this).css('border-color', '#A94442');
             });
@@ -588,7 +593,6 @@
         $('.editor-height img').height($('.editor-container').height());
 
         // change measure description
-
         $('span#measure-width-ft').html(newWidthFt);
         $('span#measure-width-inch').html(newWidthInch);
         $('span#measure-height-ft').html(newHeightFt);

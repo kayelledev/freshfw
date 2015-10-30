@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string  "value"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "room_items", force: :cascade do |t|
     t.integer  "room_id"
     t.integer  "item_id"
