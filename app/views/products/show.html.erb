@@ -17,6 +17,9 @@
                         <p><%= dimension_if_positive("Depth(in)", @product.depth) %><p>
                         <p><%= dimension_if_positive("Height(in)", @product.height) %><p>
                     </p>
+                    <p>
+                        <p><%= "Other Details: #{@product.other_details}" if @product.other_details.present? %></p>
+                    </p>
                     <p class='dimensions'>
                         <p><%= dimension_if_positive("Seat Width(in)", @product.seat_width) %><p>
                         <p><%= dimension_if_positive("Seat Depth(in)", @product.seat_depth) %><p>
