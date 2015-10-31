@@ -55,7 +55,8 @@ class ApplicationController < ActionController::Base
         @user_city = 'Toronto'
         @user_state = Rails.application.config.state_code
         @user_country = Rails.application.config.country
-       @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+      end 
+        @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
       #@db_tax_rate = 0.13 #Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20153002432638) do
+ActiveRecord::Schema.define(version: 20151027212207) do
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "invoice_number"
     t.decimal  "tax",                       precision: 5, scale: 2
     t.string   "delivery_last_name"
+    t.string   "currency",                                          default: "ca"
   end
 
   add_index "shoppe_orders", ["delivery_service_id"], name: "index_shoppe_orders_on_delivery_service_id"
@@ -248,6 +249,19 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "image4"
     t.string   "image5"
     t.string   "image6"
+    t.float    "width",                                       default: 80.0
+    t.float    "height",                                      default: 80.0
+    t.boolean  "is_preset",                                   default: false
+    t.integer  "posX",                                        default: 0
+    t.integer  "posY",                                        default: 0
+    t.integer  "rotation",                                    default: 0
+    t.string   "url_default_image"
+    t.string   "url_image2"
+    t.string   "url_image3"
+    t.string   "url_image4"
+    t.string   "url_image5"
+    t.string   "url_image6"
+    t.float    "depth",                                       default: 0.0
   end
 
   add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id"
