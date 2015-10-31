@@ -1,0 +1,48 @@
+.header-navbar {
+    font-family: 'TrajanPro-Regular' !important;
+    padding: 0 0 0 0 !important;
+    margin-bottom: 0 !important;
+    background-color: white !important;
+    border-color: white !important;
+}
+.header-navbar .navbar-brand {
+    color: black !important;
+}
+
+.header-navbar .navbar-nav > li > a {
+    color: black !important;
+}
+
+#search-button {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  left: -25px;
+  top: 3px;
+  background: url("search-button.png");
+}
+
+.error-messages-block {
+    color: white;
+    padding-left: 20px;
+}
+
+.error-messages-block {
+    width: 100%;
+    min-height: 19px;
+    background-color: black;
+    margin-top: 15px;
+}
+
+#header-search{
+    height: 30px;
+}
+
+.navbar-right {
+  margin-top:10px !important;
+}
+
+.header-search-form {
+  margin-top:10px;
+}

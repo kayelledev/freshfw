@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   end
 
   get 'welcome/index'
-  get 'welcome/about_us', to: 'welcome#about_us', as: 'about_us'
-  
+  get 'about_us', to: 'welcome#about_us', as: 'about_us'
+  get 'blog', to: 'welcome#blog', as: 'blog'
+  get 'account', to: 'welcome#account', as: 'account'
+
   resources :charges
 
   #show, buying products
@@ -22,16 +24,18 @@ Rails.application.routes.draw do
       post 'buy'
     end
   end
-  
+  post 'products/destroy_img' => 'products#destroy_img'
+
   #show product_categories
   get "room_type", to: "product_categories#index_type"
   get "room_size", to: "product_categories#index_size"
+  get "category_tree", to: "product_categories#category_tree"
 
   #adding products to basket
   get "cart", to: "orders#show"
   delete "cart", to: "orders#destroy"
   post 'cart/:order_item_id', to: 'orders#remove', as: :remove_from_order
-  
+
   #checking out
   match "checkout", to: "orders#checkout", as: "checkout", via: [:get, :patch]
   match "checkout/pay", to: "orders#payment", as: "checkout_payment", via: [:get, :post]
@@ -41,11 +45,15 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   get 'room_editor', to: 'room#index'
+  get 'room_editor/edit', to: 'room#edit'
+  post 'room_editor/save', to: 'room#save'
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-#Karen added to test all functions with Users 
+  get 'search', to: 'search#index'
+  post 'change_user_country', to: 'welcome#change_user_country'
+#Karen added to test all functions with Users
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

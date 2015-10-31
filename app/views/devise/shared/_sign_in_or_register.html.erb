@@ -1,0 +1,102 @@
+<div class="container-fluid sign-in-or-register">
+    <div class='row title'>
+        <div class='col-md-4 form-title'>
+            <center><p>SIGN IN</p></center>
+        </div>
+        <div class='col-md-4'>
+            <center><p>FACEBOOK</p></center>
+        </div>
+        <div class='col-md-4'>
+            <center><p>TWITTER</p></center>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-4'>
+            <div class='sign-in-or-register-forms content'>
+                <div class='sign-in'>
+                    <div class='sign-in-form'>
+                        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                            <div class="form-group">
+                                <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address' %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+                            </div>
+
+                            <% if devise_mapping.rememberable? -%>
+                                <div class="form-group">
+                                    <%= f.check_box :remember_me %>
+                                    <%= f.label :remember_me %>
+                                </div>
+                            <% end -%>
+
+                        <div class="actions">
+                          <%= f.submit "SIGN IN", class: 'btn btn-default btn-lg btn-block submit-button' %>
+                        </div>
+                      <% end %>
+                    </div>
+                </div>
+                <div class='create-account'>
+                    <div class='create-account-form'>
+                        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                            <% content_for :form_errors do %>
+                                <%= devise_error_messages! %>
+                            <% end %>
+
+                            <div class="form-group">
+                                <%= f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: 'First Name' %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address' %>
+                            </div>
+
+                            <div class="form-group">
+                                <% if @minimum_password_length %>
+                                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                                <% end %>
+                                <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+                            </div>
+
+                            <div class="form-group">
+                                <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "Confirm Password (only if you are creating an account)" %>
+                            </div>
+
+                            <div class="actions">
+                                <%= f.submit "CREATE ACCOUNT", class: 'btn btn-default btn-lg btn-block submit-button' %>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <div class='forms-links'>
+                    <%= link_to "#", id: 'change-form' do %>
+                        <p>CREATE ACCOUNT</p>
+                    <% end %>
+
+                    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+                        <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+                    <% end -%>
+
+                    <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+                        <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+                    <% end -%>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4 facebook'>
+            <div class="social-button content">
+                <%= link_to "CONNECT WITH FACEBOOK", omniauth_authorize_path(resource_name, :facebook), class: 'btn btn-default btn-lg btn-block submit-button' %>
+            </div>
+        </div>
+        <div class='col-md-4 twitter'>
+            <div class="social-button content">
+                <%= link_to "CONNECT WITH TWITTER", omniauth_authorize_path(resource_name, :twitter), class: 'btn btn-default btn-lg btn-block submit-button' %>
+            </div>
+        </div>
+    </div>
+</div>

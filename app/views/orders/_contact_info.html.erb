@@ -1,0 +1,8 @@
+<div class='account-form'>
+    <div class="form-group">
+        <%= text_field_tag 'account[email]', '', class: 'form-control', placeholder: 'Email Address', value: current_user.email if user_signed_in? %>
+    </div>
+    <div class="form-group">
+        <%= text_field_tag 'account[phone]', '', class: 'form-control', placeholder: "Phone (optional)" %>
+    </div>
+</div>

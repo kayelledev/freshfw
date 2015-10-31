@@ -1,0 +1,33 @@
+<div class='remove-item col-md-1 col-sm-1 col-xs-1'>
+    <%= link_to remove_from_order_path(item), method: :post, remote: true do %>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    <% end %>
+</div>
+
+<div class='image-with-title col-md-6 col-sm-6 col-xs-3 row'>
+                  <div class='image col-md-4 col-sm-4 col-xs-12 collaps-collumn'>
+                          <%= link_to product_path(item.ordered_item.permalink) do %>
+                              <%= image_tag item.ordered_item.default_image.thumb, class: "img-responsive item-img", alt: "#{item.ordered_item.full_name}" %>
+                          <% end %>
+                  </div>
+                  <div class='name col-md-8 col-sm-8 col-xs-12 collaps-collumn'>
+                      <%= link_to product_path(item.ordered_item.permalink) do %>
+                          <b><%= item.ordered_item.full_name %></b>
+                      <% end %>
+                  </div>
+</div>
+
+<div class='price col-md-1 col-sm-1 col-xs-2'>
+   <center> <p><%= number_to_currency(currency_price(item, true), unit: "$", format: "%u%n") %></p></center>
+</div>
+
+<div class='quantity col-md-1 col-sm-1 col-xs-2' data-refresh-path="<%= refresh_order_items_path(current_order) %>">
+    <center><%= select_tag 'quantity', options_for_select((1..20).to_a, item.quantity), class: "form-control quantity-select", data: { itemId: item.id } %></center>
+</div>
+
+<div class='col-md-2 col-sm-2 col-xs-2'>
+</div>
+
+<div class='total col-md-1 col-sm-1 col-xs-2'>
+    <center><p><%= number_to_currency(item.sub_total, unit: "$", format: "%u%n") %></p></center>
+</div>

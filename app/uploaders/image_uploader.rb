@@ -8,7 +8,7 @@ class ImageUploader < CarrierWave::Uploader::Base
    require 'fog/aws'
 
   # Choose what kind of storage to use for this uploader:
-  if Rails.env.production?
+  unless Rails.env.development?
     storage :fog
   else
     storage :file

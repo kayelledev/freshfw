@@ -43,6 +43,17 @@ $ ->
   $('select.chosen').chosen()
   $('select.chosen-with-deselect').chosen({allow_single_deselect: true})
   $('select.chosen-basic').chosen({disable_search_threshold:100})
+
+  #  Redo this added to improve speed
+  #  Have no task to explain it for now
+  $('#product_is_preset').on 'click', ->
+    if this.checked
+      $(this).val('true')
+    else
+      $(this).val('false')
+
+  # Sort users table
+  $('table.data').tablesorter()
   
   # Printables
   $('a[rel=print]').on 'click', ->

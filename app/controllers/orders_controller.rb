@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   helper_method :current_order, :has_order?
+  before_action :authenticate_user!, only: :checkout
 
   def destroy
     current_order.destroy
@@ -12,7 +13,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = current_order
-
+    @order.update(currency: cookies[:currency])
     order_tax = 0.0;
     @order.order_items.each do |item|
       item.update(tax_rate: params[:order_tax_rate])
@@ -26,20 +27,22 @@ class OrdersController < ApplicationController
     @order = current_order
     #TODO don't commit debug tools
     puts "in remove method: order #{@order.order_items.first.id} and params #{params}"
-
-    item = @order.order_items.find(params[:order_item_id])
-    item.destroy
+    @item = @order.order_items.find(params[:order_item_id])
+    @order.order_items.delete(@item)
 
     if @order.order_items.empty?
       flash.now[:notice] = "You have no more item in the cart."
     end
 
-    redirect_to cart_path
+    respond_to do |format|
+      format.html { redirect_to cart_path }
+      format.js { render 'remove.js.erb'}
+    end
   end
 
   def checkout
     @order = current_order
-
+    @order.update(currency: cookies[:currency])
     if request.get?
       #TODO don't commit debug tools
       puts current_order.total
@@ -69,9 +72,9 @@ class OrdersController < ApplicationController
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
 
-      process_user if params[:signup][:email]
-
       @order.separate_delivery_address = params[:order][:separate_delivery_address]
+      @order.phone_number = params[:account][:phone]
+      @order.email_address = params[:account][:email]
 
       proceed_params = @order.separate_delivery_address ?
         with_deliver_params : without_deliver_params
@@ -80,14 +83,25 @@ class OrdersController < ApplicationController
         redirect_to new_charge_path
       else
         flash.now[:notice] = "Some key information is missing. Please try again."
+        render :checkout
       end
-
+      logger.debug '========='
+      logger.debug @order.email_address
+      logger.debug @order.phone_number
     end
   end
 
   def refresh_items
     @order = current_order
-    @order.update(delivery_service_id: params[:delivery_service_id])
+    if params[:delivery_service_id]
+      @order.update_attributes(delivery_service_id: params[:delivery_service_id] )
+    end
+    if params[:item_quantity]
+      item_id = params[:item_id]
+      item_quantity = params[:item_quantity]
+      @item = @order.order_items.find(item_id)
+      @item.update_attributes(quantity: item_quantity)
+    end
 
     respond_to do |format|
       format.js
@@ -124,7 +138,7 @@ class OrdersController < ApplicationController
       :first_name, :last_name, :company,
       :billing_address1, :billing_address2, :billing_address3, :billing_address4, :billing_postcode, :billing_country_id,
       :separate_delivery_address,
-      :delivery_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id,
+      :delivery_first_name, :delivery_last_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country_id,
       :delivery_price, :delivery_service_id, :delivery_tax_amount,
       :email_address, :phone_number,
       :notes,
@@ -150,7 +164,7 @@ class OrdersController < ApplicationController
       :billing_address3, :billing_address4,
       :billing_country_id, :billing_postcode,
       :email_address, :phone_number,
-      :separate_delivery_address, :delivery_name,
+      :separate_delivery_address, :delivery_first_name, :delivery_last_name,
       :delivery_address1, :delivery_address2, :delivery_address3,
       :delivery_address4, :delivery_postcode, :delivery_country_id,
       :delivery_service_id
@@ -164,18 +178,4 @@ class OrdersController < ApplicationController
     true
   end
 
-  def process_user
-    if (user = ::User.find_or_initialize_by(email: params[:signup][:email])).persisted?
-      return unless user.valid_password?(params[:signup][:password])
-      sign_in user
-    else
-      user.assign_attributes(user_params.merge(confirmed_at: Time.now))
-      sign_in user if user.save
-    end
-  end
-
-  def user_params
-    params.require(:signup).permit(:password, :password_confirmation).merge(
-      params.require(:order).permit(:first_name, :last_name))
-  end
 end

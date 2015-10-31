@@ -1,0 +1,216 @@
+.cart-view .shopping-cart {
+    margin-left: 1em;
+}
+
+.cart-view .breadcrumbs {
+    margin: 25px 0px;
+}
+
+.cart-view .breadcrumbs p {
+    color: #777;
+    margin-left: 1em;
+}
+
+.cart-view .breadcrumbs p span {
+    margin: 0 10px;
+}
+
+.cart-view .breadcrumbs p .active a {
+    color: black;
+    text-decoration: none;
+}
+
+.cart-view .breadcrumbs p .active {
+    margin: 0 0;
+}
+
+.cart-view .shopping-cart {
+    border: 1px solid #dedede;
+}
+
+.cart-view .shopping-cart .title {
+    width: 100%;
+    height: 25px;
+    background-color: #dedede;
+}
+
+.cart-view .shopping-cart .title p {
+    position: absolute;
+    margin-left: 1em;
+}
+
+.cart-view .shopping-cart .title .row {
+    width: 100%;
+}
+
+.cart-view .shopping-cart .title .row .column-name {
+    color: #888888;
+    padding: 0;
+}
+
+.cart-view .shopping-cart .title .row .column-name .quantity-title {
+    /*padding-left: 12%;*/
+}
+
+
+.cart-view .shopping-cart .description {
+    width: 100%;
+    height: 25px;
+    background-color: #f6f6f6;
+}
+
+.cart-view .shopping-cart .description p {
+    font-style: italic;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item  {
+    margin: 0;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item a {
+    color: #dedede;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item div {
+    vertical-align: middle;
+    padding: 20px 0;
+}
+
+
+.cart-view .shopping-cart .order-items-list .order-item .remove-item {
+    vertical-align: top;
+    padding-left: 2%;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .image .item-img {
+    width: 90px;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .image  {
+    padding: 0;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .name a {
+    color: black;
+    text-decoration: none;
+    /*margin-left: 15px;*/
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .name  {
+    /*padding: 0;*/
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .price {
+    min-width: 25px;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .price p {
+    margin-bottom: 0
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .quantity select {
+    border-radius: 0px;
+    width: 70px;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .total p {
+    margin-bottom: 0
+}
+
+.cart-view .cart-order-summary {
+    margin-left: 1em;
+    margin-right: 1em;
+    background-color: #f7f7f7;
+    border: 1px solid #dedede;
+}
+.cart-view .cart-order-summary .title {
+    width: 100%;
+    height: 25px;
+    background-color: #e6e6e6;
+}
+
+.cart-view .cart-order-summary .title p {
+    vertical-align: middle;
+    margin-left: 1em;
+}
+
+.cart-view .cart-order-summary .box {
+    padding: 12px;
+}
+
+.cart-view .cart-order-summary .box .inside-box {
+    border: 1px solid #dedede;
+}
+
+.cart-view .cart-order-summary .box .inside-box .info {
+    background-color: white;
+}
+
+.cart-view .cart-order-summary .box .inside-box .info {
+    display: table;
+    width: 100%;
+    padding: 12px;
+}
+
+.cart-view .cart-order-summary .box .inside-box .info .row {
+   display: table-row;
+}
+
+.cart-view .cart-order-summary .box .inside-box .info .cell {
+   display: table-cell;
+}
+
+.cart-view .cart-order-summary .box .inside-box .info .total .cell {
+    border-top: 1px solid #e6e6e6;
+    padding: 10px;
+}
+
+.cart-view #proceed-to-payment {
+    padding: .5em .5em;
+    margin: .5em 0em;
+    border-color: #F49224;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #F49224;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item {
+    margin: 1em 0;
+}
+
+.cart-view .shopping-cart .order-items-list .order-item .image-with-title  {
+    margin: 0;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+@media(max-width:767px){
+    .cart-view .shopping-cart .order-items-list .order-item .image-with-title {
+        display: block;
+    }
+
+    .cart-view .shopping-cart .order-items-list .order-item .name  {
+        padding: 10px 0 0 0;
+    }
+
+    .price, .total, .quantity, .column-name {
+        text-align: center;
+    }
+}
+
+@media(max-width:991px){
+    .cart-view .shopping-cart {
+        margin-right: 1em;
+        margin-bottom: 3em;
+    }
+}

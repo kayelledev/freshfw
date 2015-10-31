@@ -10,11 +10,22 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @items = Shoppe::Product.all
+    @categories = Shoppe::ProductCategory.all
   end
 
   def buy
     current_order.order_items.add_item(@product, 1)
-    redirect_to product_path(id: root_product.permalink), :notice => "Product has been added successfuly! #{link_to 'View Your Cart', cart_path}"
+    redirect_to product_path(id: root_product.permalink), :notice => "Product has been added successfuly! #{link_to 'View your Cart', cart_path}"
+  end
+
+  def destroy_img
+    product = Shoppe::Product.find(params[:id])
+    product.update(params[:img_id].to_sym => nil)
+    product.update("url_#{params[:img_id]}".to_sym => nil)
+    product.send "remove_#{params[:img_id]}!"
+    product.save!
+    render json: { status: 'ok', status_code: 200 }
   end
 
   private

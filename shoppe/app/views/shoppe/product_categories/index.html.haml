@@ -1,22 +1,54 @@
+%link{:rel => :stylesheet, :type => :"text/css", :href => "/assets/bootstrap.min.css"}
+
+:css
+  div#tree.treeview .glyphicon{
+    font-size: 10px;
+  }
+
+= javascript_include_tag "bootstrap-treeview.min.js"
+
+
 - @page_title = t('shoppe.product_category.product_categories')
 
 = content_for :header do
   %p.buttons=link_to t('shoppe.product_category.new_category'), :new_product_category, :class => 'button green'
   %h2.products= t('shoppe.product_category.product_categories')
 
-.table
-  %table.data
-    %thead
-      %tr
-        %th= t('shoppe.product_category.name')
-    %tbody
-      - if @product_categories.empty?
-        %tr.empty
-          %td= t('shoppe.product_category.no_categories')
-      - else
-        - for cat in @product_categories
-          %tr
-            - if cat.parent_id == nil
-              %td= link_to cat.name, [:edit, cat]
-              - Shoppe::ProductCategory.where(parent_id: cat.id ).each do |subcat|
-                %td= link_to subcat.name, [:edit, subcat]
+/ .table
+/   %table.data
+/     %thead
+/       %tr
+/         %th= t('shoppe.product_category.name')
+/     %tbody
+/       - if @product_categories.empty?
+/         %tr.empty
+/           %td= t('shoppe.product_category.no_categories')
+/       - else
+/         - for cat in @product_categories
+/           %tr
+/             - if cat.parent_id == nil
+/               %td= link_to cat.name, [:edit, cat]
+/               - Shoppe::ProductCategory.where(parent_id: cat.id ).each do |subcat|
+/                 %td= link_to subcat.name, [:edit, subcat]
+
+
+#tree
+
+:javascript
+  $('header.logo').css('height','auto');
+
+  $.ajax({
+      type: 'get',
+      headers: {
+        'X-CSRF-Token': "#{form_authenticity_token.to_s}"
+      },
+      url: "/category_tree",
+      success: function(response) {
+        $('#tree').treeview({
+          data: response,         // data is not optional
+          levels: 10,
+          enableLinks: true
+        });
+        $('div.table').remove();
+      }
+    });

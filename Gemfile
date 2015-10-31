@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -25,8 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #Bootstrap-sass
 gem 'bootstrap-sass', '~> 3.3.4'
 
-#Shoppe 
-#gem 'shoppe', '~> 1.0' 
+#Shoppe
+#gem 'shoppe', '~> 1.0'
 #gem "shoppe-stripe", require: "shoppe/stripe"
 gem 'shoppe', path: "shoppe"
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
@@ -50,6 +51,8 @@ gem "figaro"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'pg'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
@@ -63,10 +66,19 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'letter_opener'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-unicorn'
+  gem 'capistrano-rails'
 end
 
 group :production do
-  gem 'pg'
   #gem 'mysql2'
-  gem'rails_12factor'
+  #gem 'rails_12factor'
+end
+
+group :production, :staging do
+  gem 'unicorn'
 end

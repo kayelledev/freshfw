@@ -1,14 +1,177 @@
-<% content_for :custom_scripts do %>
-  <%= javascript_include_tag 'checkout/items_refresh' %>
-<% end %>
+<div class="container-fluid checkout">
+    <div class='breadcrumbs'>
+        <p>
+            <%= link_to 'VIEW CART', cart_path %>
+            <span>>></span>
+            <span class="active"><%= link_to 'BILLING AND SHIPPING INFO', checkout_path %></span>
+            <span>>></span>
+            PAYMENT
+            <span>>></span>
+            REVIEW AND CONFIRM
+        </p>
+    </div>
+    <%= form_for @order, url: checkout_path, html: { class: 'form-inline', id: 'checkout-form'} do |f| %>
+        <%= form_errors_for @order %>
+        <div class="row">
+            <div class='col-md-8'>
+                <div class='checkout left-side-checkout'>
+                    <div class='billing-info'>
+                        <div class='row'>
+                            <div class='col-md-11'>
+                                <div class='form-title'>
+                                    <p><b>BILLING INFO</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-fields">
+                            <div class='col-md-9 billing-info-col'>
+                                <div class='control-group'>
+                                    <div class="row">
+                                        <div class='form-group col-md-6'>
+                                            <%= f.text_field :first_name, class: 'form-control', placeholder: 'First Name', value: current_user.first_name if user_signed_in? %>
+                                        </div>
+                                        <div class='form-group col-md-6'>
+                                            <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last Name', value: current_user.last_name if user_signed_in? %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <%= f.text_field :billing_address1, class: 'form-control', placeholder: 'Address 1'%>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <%= f.text_field :billing_address2, class: 'form-control', placeholder: 'Address 2'%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <%= f.text_field :billing_address3, class: 'form-control', placeholder: 'Town / City'%>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <%= f.collection_select :billing_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province, {}, {class: "form-control"} %>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <%= f.text_field :billing_postcode, class: 'form-control', placeholder: 'Zip'%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<div class="container">	  
+                    <div class='shipping-info'>
+                        <div class='row'>
+                            <div class='col-md-11'>
+                                <div class='form-title'>
+                                    <p><b>SHIPPING INFO</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-fields">
+                            <div class='col-md-9 shippingg-info-col'>
+                                <div class='control-group'>
+                                    <%= f.label :separate_delivery_address do %>
+                                        <%= f.check_box :separate_delivery_address, id: 'separate_delivery_address_checkbox' %>
+                                        If shipping address is different
+                                    <% end %>
+                                </div>
+                                <div id="shipping_fields">
+                                    <div class='control-group'>
+                                        <div class="row">
+                                            <div class='form-group col-md-6'>
+                                                <%= f.text_field :delivery_first_name, class: 'form-control', placeholder: 'First Name' %>
+                                            </div>
+                                            <!--!!!!!!!!!!!!!!!!!-->
+                                            <div class='form-group col-md-6'>
+                                                <%= f.text_field :delivery_last_name, class: 'form-control', placeholder: 'Last Name' %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='control-group'>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <%= f.text_field :delivery_address1, class: 'form-control', placeholder: 'Address 1' %>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <%= f.text_field :delivery_address2, class: 'form-control', placeholder: 'Address 2' %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='control-group'>
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <%= f.text_field :delivery_address3, class: 'form-control', placeholder: 'Town / City' %>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province, {}, {class: "form-control"} %>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <%= f.text_field :delivery_postcode, class: 'form-control', placeholder: 'Zip'%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-	<h2 style='padding-left: 2em; padding-top: 1em; '>Step 2 of 3: Add Billing and Delivery Info</h2>
+                    <div class='delivery-service'>
+                        <div class='row'>
+                            <div class='col-md-11'>
+                                <div class='form-title'>
+                                    <p><b>DELIVERY SERVICE</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-fields">
+                            <div class='col-md-9 delivery-service-col'>
+                                <% @order.available_delivery_services.each do |service| %>
+                                    <div style="display: block;" data-refresh-path="<%= refresh_order_items_path(@order) %>" class='delivery-service-radio-button'>
+                                        <div class='radio-button'>
+                                            <%= f.radio_button :delivery_service_id, service.id, checked: (current_system(@order, service) || service.default?)  %>
+                                        </div>
+                                        <div class='radio-button-label'>
+                                            <p class='service-name'><%= "#{service.name} Delivery" %></p>
+                                            <p class='service-description'><%= service.description %></p>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <div id='final_items'>
-    <%= render 'final_items', :order => @order %>
-	</div>
+            <div class='col-md-4'>
+                <div class='checkout right-side-checkout'>
+                    <div class='contact-info'>
+                        <div class='form-title'>
+                            <p><b>CONTACT INFO</b></p>
+                        </div>
+                        <%= render 'contact_info' %>
+                    </div>
 
-  <%= render 'addresses', :order => @order %>
+                    <div class='order-summary'>
+                        <div class='title'>
+                            <p><b>ORDER SUMMARY</b></p>
+                        </div>
+                        <div class='box'>
+                            <div class='inside-box'>
+                                <div class='info' id='order-summary-info'>
+                                    <%= render 'order_summary_info', :order => @order %>
+                                </div>
+                            </div>
+                            <center>
+                                <p><b>PROMOCODE OR STORE CREDIT</b></p>
+                                <%= f.submit "PROCEED TO PAYMENT", class: 'btn btn-default btn-lg btn-block', id: 'proceed-to-payment' %>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
 </div>

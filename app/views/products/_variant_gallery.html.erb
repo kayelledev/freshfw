@@ -1,37 +1,41 @@
 <div class="col-full">
   <div id="ProductCarousel" class="carousel slide" data-ride="carousel" style="">
-	  <div class="carousel-outer">
-		  <div class="carousel-inner" role="listbox">
-		     <div class="item active" ><%= image_tag product.default_image,  class: "img-responsive", alt: "product" %>
-		     </div>
-
-		      <% if product.image2.url %>
-		        <div class="item" style="margin: auto; padding: auto;"><%= image_tag product.image2, class: "img-responsive", alt: "product" %></div>
-		      <% end %>
-		      <% if product.image3.url %>
-		        <div class="item"><%= image_tag product.image3, class: "img-responsive", alt: "product" %></div>
-		      <% end %>
-		      <% if product.image4.url %>
-		        <div class="item"><%= image_tag product.image4, class: "img-responsive", alt: "product" %></div>
-		      <% end %>
-		      <% if product.image5.url %>
-		        <div class="item"><%= image_tag product.image5, class: "img-responsive", alt: "product" %></div>
-		      <% end %>
-		      <% if product.image6.url %>
-		        <div class="item"><%= image_tag product.image6, class: "img-responsive", alt: "product" %></div>
-		      <% end %>
-		  </div>
-		    <!-- Controls -->
-		    <a class="left carousel-control" href="#ProductCarousel" role="button" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-		    <a class="right carousel-control" href="#ProductCarousel" role="button" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-		</div>
+    <div class="carousel-outer">
+      <div class="carousel-inner" role="listbox" id='carousel-inner-product'>
+        <% array_images.each do |img|%>
+          <% if image_link(product, img) %>
+            <div class="item<%= img.eql?('default_image') ? ' active' : nil %> carousel-item-product">
+              <%= image_tag image_link(product, img),  class: "img-responsive", alt: "product" %>
+            </div>
+          <% end %>
+        <% end %>
+        <% @product.included_products.each do |item| %>
+          <% if image_link(item, 'default_image') %>
+            <div class="item carousel-item-product">
+              <%= image_tag image_link(item, 'default_image'), class: "img-responsive", alt: "product" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#ProductCarousel" role="button" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        <a class="right carousel-control" href="#ProductCarousel" role="button" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+    </div>
     <ol class='carousel-indicators mCustomScrollbar'>
-      <li data-target='#ProductCarousel' data-slide-to='0' class='active'><%= image_tag product.default_image.thumb, class: "img-responsive", alt: "product" %></li>
-      <li data-target='#ProductCarousel' data-slide-to='1'><%= image_tag product.image2.thumb, class: "img-responsive", alt: "product" %></li>
-      <li data-target='#ProductCarousel' data-slide-to='2'><%= image_tag product.image3.thumb, class: "img-responsive", alt: "product" %></li>
-      <li data-target='#ProductCarousel' data-slide-to='3'><%= image_tag product.image4.thumb, class: "img-responsive", alt: "product" %></li>
-      <li data-target='#ProductCarousel' data-slide-to='4'><%= image_tag product.image5.thumb, class: "img-responsive", alt: "product" %></li>
-      <li data-target='#ProductCarousel' data-slide-to='5'><%= image_tag product.image6.thumb, class: "img-responsive", alt: "product" %></li>
+      <% array_images.each_with_index do |img, index|%>
+        <% if image_link(product, img) %>
+          <li data-target='#ProductCarousel' data-slide-to="<%= index %>" class="<%= img.eql?('default_image') ? 'active' : nil %>">
+            <%= image_tag image_link(product, img), class: "img-responsive carousel-indicators-image", alt: "product", width: 150, height: 100 %>
+          </li>
+        <% end %>
+      <% end %>
+      <% @product.included_products.each_with_index do |item, index| %>
+        <% if image_link(item, 'default_image') %>
+          <li data-target='#ProductCarousel' data-slide-to="<%= index+6 %>">
+            <%= image_tag image_link(item, 'default_image'), class: "img-responsive carousel-indicators-image", alt: "product", width: 150, height: 100 %>
+          </li>
+        <% end %>
+      <% end %>
     </ol>
-	</div>
+  </div>
 </div>

@@ -2,12 +2,15 @@
   = f.error_messages
   = field_set_tag t('shoppe.delivery_services.details') do
     .splitContainer
-      %dl.half
+      %dl.third
         %dt= f.label :name, t('shoppe.delivery_services.name')
         %dd= f.text_field :name, :class => 'focus text'
-      %dl.half
+      %dl.third
         %dt= f.label :code, t('shoppe.delivery_services.code')
         %dd= f.text_field :code, :class => 'text'
+      %dl.third
+        %dt= f.label :description
+        %dd= f.text_field :description, :class => 'text'
     .splitContainer
       %dl.half
         %dt= f.label :active, t('shoppe.delivery_services.active')

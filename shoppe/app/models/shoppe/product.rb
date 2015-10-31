@@ -18,7 +18,7 @@ module Shoppe
     mount_uploader :image4, ImageUploader
     mount_uploader :image5, ImageUploader
     mount_uploader :image6, ImageUploader
-    
+
     # Products have a default_image and a data_sheet
     #attachment :default_image
     #attachment :image2
@@ -57,10 +57,13 @@ module Shoppe
       product.validates :description, :presence => true
       product.validates :short_description, :presence => true
     end
-    validates :name, :presence => true
+    validates :name, :presence => true, :uniqueness => true
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true
-    validates :sku, :presence => true
+    validates :sku, :presence => true, :uniqueness => true
     validates :weight, :numericality => true
+    validates :width, numericality: {only_float: true}
+    validates :height, numericality: {only_float: true}
+    validates :depth, numericality: {only_float: true}
     validates :price, :numericality => true
     validates :cost_price, :numericality => true, :allow_blank => true
 
@@ -148,7 +151,7 @@ module Shoppe
       product_ids = Shoppe::ProductAttribute.searchable.where(:key => key, :value => values).pluck(:product_id).uniq
       where(:id => product_ids)
     end
-  
+
     # Imports products from a spreadsheet file
     # Example:
     #

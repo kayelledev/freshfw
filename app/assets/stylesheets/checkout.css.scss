@@ -1,0 +1,190 @@
+.checkout input[type="text"] {
+    width: 100% !important;
+    border-radius: 0px;
+}
+
+.checkout input[type="password"] {
+    width: 100% !important;
+    border-radius: 0px;
+}
+
+.checkout input[type="email"] {
+    width: 100% !important;
+    border-radius: 0px;
+}
+
+.checkout select {
+    width: 100% !important;
+    border-radius: 0px;
+}
+
+.checkout .control-group {
+    margin-top: 11px;
+    margin-bottom: 0px;
+}
+
+.checkout .billing-info {
+    margin-bottom: 50px;
+}
+
+.checkout .left-side-checkout {
+    margin-left: 1em;
+}
+
+.checkout .left-side-checkout .form-fields {
+    margin-left: 12px;
+}
+
+.checkout .form-title {
+    width: 100%;
+    height: 25px;
+    background-color: #e6e6e6;
+}
+
+.checkout .form-title p {
+    vertical-align: middle;
+    margin-left: 1em;
+}
+
+.checkout .shipping-info {
+    margin-bottom: 50px;
+}
+
+
+.checkout .right-side-checkout {
+    margin-right: 1em;
+}
+
+.checkout .right-side-checkout .form-group {
+    width: 100%;
+    margin-bottom: 0px;
+    margin-top: 12px;
+}
+
+.checkout .contact-info {
+    margin-bottom: 50px;
+}
+
+.checkout .order-summary {
+    margin-left: 1em;
+    margin-right: 1em;
+    background-color: #f7f7f7;
+}
+.checkout .order-summary .title {
+    width: 100%;
+    height: 25px;
+    background-color: #e6e6e6;
+}
+
+.checkout .order-summary .title p {
+    vertical-align: middle;
+    margin-left: 1em;
+}
+
+.checkout .order-summary .box {
+    padding: 12px;
+}
+
+.checkout .order-summary .box .inside-box {
+    background-color: white;
+    border: 1px solid #e6e6e6;
+}
+
+.checkout #proceed-to-payment {
+    padding: .5em .5em;
+    margin: .5em 0em;
+    border-color: #F49224;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #F49224;
+}
+
+.checkout .order-summary .box .inside-box .info {
+    display: table;
+    width: 100%;
+    padding: 12px;
+}
+
+.checkout .order-summary .box .inside-box .info .row {
+   display: table-row;
+}
+
+.checkout .order-summary .box .inside-box .info .cell {
+   display: table-cell;
+}
+
+.checkout .order-summary .box .inside-box .info .total .cell {
+    border-top: 1px solid #e6e6e6;
+    padding: 10px;
+}
+
+.checkout #shipping_fields {
+    display: none;
+}
+
+.checkout .breadcrumbs {
+    margin: 25px 0px;
+}
+
+.checkout .breadcrumbs p {
+    color: #777;
+    margin-left: 1em;
+}
+
+.checkout .breadcrumbs p .active a {
+    color: black;
+}
+
+.checkout .breadcrumbs p .active {
+    margin: 0 0;
+}
+
+.checkout .breadcrumbs p span {
+    margin: 0 10px;
+}
+
+.checkout .breadcrumbs p a {
+    color: #777777;
+    text-decoration: none;
+}
+
+.checkout .delivery-service-radio-button .radio-button {
+    vertical-align: top;
+    margin-top: 15px;
+}
+
+.checkout .delivery-service-radio-button .radio-button-label p {
+    margin: 0 0 0 0;
+}
+
+.checkout .delivery-service-radio-button .radio-button-label .service-description {
+    color: #777777;
+    font-style: italic;
+}
+
+.checkout .delivery-service-radio-button .radio-button-label {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.checkout .delivery-service-radio-button div {
+    display: inline-block;
+}
+
+.checkout .contact-info .account-form .fields-for-registration {
+    display: none;
+}
+
+@media(max-width:991px){
+    .checkout .right-side-checkout {
+        margin-left: 1em;
+    }
+
+    .checkout .left-side-checkout {
+        margin-right: 1em;
+        margin-bottom: 50px;
+    }
+}

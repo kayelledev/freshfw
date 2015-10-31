@@ -80,14 +80,17 @@ en:
         method: Method
         reference: Reference
       shoppe/product:
-        cost_price: Cost price
+        cost_price: USD$
         description: Description
         name: Name
         permalink: Permalink
-        price: Price
+        price: CAD$
         short_description: Short description
         sku: SKU
         weight: Weight
+        widht: Width inches
+        height: Height inches
+        is_room: Is room
       shoppe/product_attribute:
         key: Key
       shoppe/product_category:
@@ -109,6 +112,8 @@ en:
         email_address: E-Mail address
         first_name: First name
         last_name: Last name
+        admin: Admin
+        reg_date: Registration date
         password: Password
         password_confirmation: Password confirmation
     errors:
@@ -404,7 +409,7 @@ en:
       attachments: Attachments
       attributes: Attributes
       back_to_products: Back to product list
-      cost_price: Cost price
+      cost_price: USD$
       create_notice: Product has been created successfully
       datasheet: Datasheet
       default_image: Default Image
@@ -424,7 +429,7 @@ en:
       on_sale?: On sale?
       on_sale_info:  If checked, this product will be displayed within the public store
       permalink: Permalink
-      price: Price
+      price: CAD$
       price_variants: Price/Variants
       pricing: Pricing
       product_category: Product category

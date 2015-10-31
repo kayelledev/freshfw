@@ -3,8 +3,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+  before_action :set_user_currency, unless: :location_in_cookies? 
   private
+
+    def location_in_cookies?
+      cookies[:currency].present?
+    end
+
 
     def current_order
       @current_order ||= begin
@@ -15,14 +20,20 @@ class ApplicationController < ActionController::Base
           @current_order
         else
           @ip_address = request.ip
-          order = Shoppe::Order.create(:ip_address => @ip_address) 
+          order = Shoppe::Order.create(:ip_address => @ip_address)
           session[:order_id] = order.id
-          
           set_tax_rate(@ip_address, order)
-          
           order
-          
         end
+      end
+    end
+
+    def set_user_currency
+      @ip_address = request.ip
+      begin
+        cookies[:currency] = Geocoder.search(@ip_address).first.country == 'Canada' ? 'ca' : 'us'
+      rescue
+        cookies[:currency] = 'us'
       end
     end
 
@@ -32,20 +43,21 @@ class ApplicationController < ActionController::Base
         @current_order = Shoppe::Order.includes(:order_items => :ordered_item).find_by_id(session[:order_id])
       )
     end
-  
+
     helper_method :current_order, :has_order?
-  
+
     def set_tax_rate(ip_address, order)
-      begin 
+      begin
         @user_city = Geocoder.search(ip_address).first.city
         @user_state = Geocoder.search(ip_address).first.state_code
         @user_country = Geocoder.search(ip_address).first.country
-      rescue 
+      rescue
         @user_city = 'Toronto'
         @user_state = Rails.application.config.state_code
         @user_country = Rails.application.config.country
-      end 
-      @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+       @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+      #@db_tax_rate = 0.13 #Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+
 
       puts "show the db tax rate for ON: #{@db_tax_rate}"
       @db_country = Shoppe::Country.where(name: @user_country).first
@@ -56,19 +68,19 @@ class ApplicationController < ActionController::Base
         order.update(billing_country: Shoppe::Country.where(name: Rails.application.config.country).first)
       end
 
-      if @user_state != nil      
+      if @user_state != nil
         order.billing_address4 = @user_state
         begin
           @db_tax_rate = Shoppe::TaxRate.find_by_province(@user_state).first.rate
         rescue
-    
-        end 
+
+        end
       else
         order.billing_address4 = Rails.application.config.state_code
       end
 
       params[:order_tax_rate] = @db_tax_rate
-      
+
     end
 
   def configure_permitted_parameters

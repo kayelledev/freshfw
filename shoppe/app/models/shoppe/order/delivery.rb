@@ -21,7 +21,8 @@ module Shoppe
 
     # Validations
     with_options :if => :separate_delivery_address? do |order|
-      order.validates :delivery_name, :presence => true
+      order.validates :delivery_first_name, :presence => true
+      order.validates :delivery_last_name, :presence => true
       order.validates :delivery_address1, :presence => true
       order.validates :delivery_address4, :presence => true
       order.validates :delivery_postcode, :presence => true
@@ -62,7 +63,8 @@ module Shoppe
     # If there isn't a seperate address needed, clear all the fields back to nil
     before_validation do
       unless separate_delivery_address?
-        self.delivery_name = nil
+        self.delivery_first_name = nil
+        self.delivery_last_name = nil
         self.delivery_address1 = nil
         self.delivery_address2 = nil
         self.delivery_address3 = nil
@@ -74,7 +76,7 @@ module Shoppe
 
     # Create some delivery_ methods which will mimic the billing methods if the order does
     # not need a seperate address.
-    [:delivery_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country].each do |f|
+    [:delivery_name, :delivery_first_name, :delivery_last_name, :delivery_address1, :delivery_address2, :delivery_address3, :delivery_address4, :delivery_postcode, :delivery_country].each do |f|
       define_method(f) do
         separate_delivery_address? ? super() : send(f.to_s.gsub('delivery_', 'billing_'))
       end

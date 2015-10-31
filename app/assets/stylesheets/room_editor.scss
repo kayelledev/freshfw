@@ -1,19 +1,146 @@
 
 .editor-container {
-  width: 90%;
-  height: 400px;
+  width: 100%;
+  height: 100%;
   border: 1px solid black;
-  margin: 200px auto;
+  margin: 10px auto;
   position: relative;
 }
 
 .editor-container .draggable {
-  width: 100px;
-  height: 100px;
-  border: 1px solid black;
+  //width: 100px;
+  //height: 100px;
+  border: 1px solid white;
   position: absolute;
+  transform-origin: top left;
+}
+
+.editor-container .draggable:hover {
+  border-color: #ffac00;
 }
 
 .editor-container .draggable.active {
   border-color: #3eff00;
+}
+
+.editor-container .draggable.collision {
+  border-color: red;
+}
+
+.editor-width {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.editor-width input,
+.editor-height input {
+  width: 50px;
+}
+
+.rotation-manager {
+  width: 40px;
+}
+
+.editor-height {
+  float: right;
+  position: relative;
+  width: 9%;
+  margin-top: 10px;
+  left: 10%;
+  height: 600px;
+}
+
+.editor-height img {
+  transform: rotate(90deg);
+  position: absolute;
+  top: 295px;
+  left: -300px;
+  width: 600px;
+}
+
+.height-manager {
+  position: relative;
+  top: 300px;
+  left: 10px;
+}
+
+.editor-width img {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.rotate-angle {
+  position: relative;
+  top: 300px;
+  left: -90px;
+}
+
+.rotation-arrow {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+}
+
+.save-preset {
+  margin-top: 10px;
+}
+
+.measure-width {
+  position: absolute;
+  background-color: white;
+  padding: 0 7px;
+  bottom: 0px;
+  right: 45%;
+}
+
+.editor-line {
+  z-index: -1;
+}
+
+.measure-height {
+  position: absolute;
+  background-color: white;
+  padding: 7px 0;
+  bottom: 50%;
+}
+
+.btn-guideline{
+  padding: .5em .5em;
+  margin: .5em 0em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #777777;
+  font-family: 'roboto_condensedregular', sans-serif !important;
+}
+
+.btn-guideline:hover {
+    color: #ffffff !important;
+}
+
+
+#dimensions-dialog .form-group .form-control {
+  width: 100px;
+}
+
+#dimensions-dialog .form-group .form-control {
+  display: inline-block;
+}
+
+#dimensions-dialog {
+  font-family: 'roboto_condensedregular', sans-serif !important;
+}
+
+#dimensions-dialog input {
+  font-family: 'roboto_condensedregular', sans-serif !important;
+}
+
+button.ui-dialog-titlebar-close {
+  width: 22px !important;
+  height: 22px !important;
 }

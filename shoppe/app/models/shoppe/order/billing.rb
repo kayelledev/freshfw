@@ -5,7 +5,7 @@ module Shoppe
     #
     # @return [Shoppe::Country]
     belongs_to :billing_country, :class_name => 'Shoppe::Country', :foreign_key => 'billing_country_id'
-    
+
     # The tax rate which this order should be charged
     #
     # @return [Shoppe::Tax_Rate]
@@ -30,6 +30,15 @@ module Shoppe
     def billing_name
       company.blank? ? full_name : "#{full_name} (#{company})"
     end
+
+    def billing_first_name
+      company.blank? ? return_first_name : "#{return_first_name} (#{company})"
+    end
+
+    def billing_last_name
+      company.blank? ? return_last_name : "#{return_last_name} (#{company})"
+    end
+
 
     # The total cost of the order
     #

@@ -6,7 +6,17 @@
 
 body {
     overflow-x: hidden;
-    font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
+}
+
+h1 {
+    font-size: 18px
+}
+h2 {
+    font-size: 16px
+}
+h3 {
+    font-size: 14px
 }
 
 .text-muted {
@@ -45,14 +55,11 @@ a.active {
     color: #fec503;
 }
 
-h1,
-h2,
-h3,
 h4,
 h5,
 h6 {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-weight: 700;
 }
 
@@ -69,15 +76,13 @@ h6 {
 }
 
 .btn-landing {
-    border-color: #f6bf01;
+    border: 5px solid white;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 800;
-    border-radius: 5px;
+    font-family: 'roboto_condensedregular', sans-serif !important;
+    font-weight: bold;
 	font-size: 24px;
     color: #fff;
 	padding: 10px 20px;
-    background-color: #fec503; 
 }
 
 .btn-landing:hover,
@@ -85,9 +90,25 @@ h6 {
 .btn-landing:active,
 .btn-landing.active,
 .open .dropdown-toggle.btn-landing {
-    border-color: #f6bf01;
-    color: #fff;
-    background-color: #Fed536;
+  color: white;
+}
+
+.container .btn-landing {
+  border: 5px solid #ffb300;
+  text-transform: uppercase;
+  font-family: 'roboto_condensedregular', sans-serif !important;
+  font-weight: bold;
+  font-size: 24px;
+  color: #ffb300;
+  padding: 10px 20px;
+}
+
+.container .btn-landing:hover,
+.container .btn-landing:focus,
+.container .btn-landing:active,
+.container .btn-landing.active,
+.container .open .dropdown-toggle.btn-landing {
+  color: #ffb300;
 }
 
 .btn-landing:active,
@@ -120,7 +141,7 @@ fieldset[disabled] .btn-landing.active {
     border-color: #FED536;
     border-radius: 3px;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 18px;
     font-weight: 700;
     color: #fff;
@@ -174,7 +195,7 @@ fieldset[disabled] .btn-xl.active {
 }
 
 .navbar-default .navbar-brand {
-    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     color: #FED536;
 }
 
@@ -205,7 +226,7 @@ fieldset[disabled] .btn-xl.active {
 
 .navbar-default .nav li a {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-weight: 400;
     letter-spacing: 1px;
     color: #fff;
@@ -279,7 +300,7 @@ header .intro-text {
 
 header .intro-text .intro-lead-in {
     margin-bottom: 25px;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 22px;
     font-style: italic;
     line-height: 22px;
@@ -288,7 +309,7 @@ header .intro-text .intro-lead-in {
 header .intro-text .intro-heading {
     margin-bottom: 25px;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 50px;
     font-weight: 700;
     line-height: 50px;
@@ -302,7 +323,7 @@ header .intro-text .intro-heading {
 
     header .intro-text .intro-lead-in {
         margin-bottom: 25px;
-        font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: 'roboto_condensedregular', sans-serif !important;
         font-size: 40px;
         font-style: italic;
         line-height: 40px;
@@ -311,7 +332,7 @@ header .intro-text .intro-heading {
     header .intro-text .intro-heading {
         margin-bottom: 50px;
         text-transform: uppercase;
-        font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: 'roboto_condensedregular', sans-serif !important;
         font-size: 75px;
         font-weight: 700;
         line-height: 75px;
@@ -337,7 +358,7 @@ div h2.section-heading {
 section h3.section-subheading {
     margin-bottom: 75px;
     text-transform: none;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 16px;
     font-style: italic;
     font-weight: 400;
@@ -346,7 +367,7 @@ section h3.section-subheading {
 div h3.section-subheading {
     margin-bottom: 75px;
     text-transform: none;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 16px;
     font-style: italic;
     font-weight: 400;
@@ -365,7 +386,7 @@ section h1.section-heading {
 section h1.section-subheading {
     margin-bottom: 75px;
     text-transform: none;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 40px;
     font-style: italic;
     font-weight: 400;
@@ -448,7 +469,7 @@ section h1.section-subheading {
 
 #portfolio .portfolio-item .portfolio-caption p {
     margin: 0;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 16px;
     font-style: italic;
 }
@@ -722,28 +743,28 @@ section#contact .form-control:focus {
 
 section#contact::-webkit-input-placeholder {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-weight: 700;
     color: #bbb;
 }
 
 section#contact:-moz-placeholder {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-weight: 700;
     color: #bbb;
 }
 
 section#contact::-moz-placeholder {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-weight: 700;
     color: #bbb;
 }
 
 section#contact:-ms-input-placeholder {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-weight: 700;
     color: #bbb;
 }
@@ -760,7 +781,7 @@ footer {
 footer span.copyright {
     text-transform: uppercase;
     text-transform: none;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     line-height: 40px;
 }
 
@@ -768,7 +789,7 @@ footer ul.quicklinks {
     margin-bottom: 0;
     text-transform: uppercase;
     text-transform: none;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     line-height: 40px;
 }
 
@@ -826,7 +847,7 @@ ul.social-buttons li a:active {
 
 .portfolio-modal .modal-content p.item-intro {
     margin: 20px 0 30px;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 16px;
     font-style: italic;
 }
@@ -910,7 +931,7 @@ body {
 }
 
 .back-link {
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 16px;
 	color: #777777;
 	margin: 0px 10px;
@@ -921,7 +942,7 @@ body {
     border-color: #777777;
     border-radius: 3px;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 18px;
     font-weight: 700;
     color: #ffffff;
@@ -938,7 +959,7 @@ body {
 
 .breadcrumb-fw a, .breadcrumb-fw span {
   text-transform: uppercase;
-  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: 'roboto_condensedregular', sans-serif !important;
   font-weight: 400;
   letter-spacing: 1px;
   color: #777;
@@ -962,30 +983,38 @@ body {
 
 .floating-text-container{
 	position: absolute;
-	padding-top: 15%;
-	right: 0;
-	left: 0;
+    left: 10%;
+    bottom: 0;
 	z-index: 2;
-	text-align: center;
 }
-	
+
+.intro-header {
+
+  position: relative;
+}
+
 .floating-text{
 	padding: 3em 5em;
 	display: inline-block;
-	background-color: rgba(255,255,255,0.8);
-	text-align: center;
-	color: #000;
+    color: white;
+	text-align: left;
+}
+
+.floating-text h1 {
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 40px;
 }
 
 .homepage-section {
-	width: 100%; 
-	margin: 0; 
-	color: #777; 
+	width: 100%;
+	margin: 0 !important;
+	color: #777;
 	padding: 4em 0;
 }
 
-#ProductCarousel { 
-	overflow: hidden; 
+#ProductCarousel {
+	overflow: hidden;
 	/* height: 80vh; */
 }
 @media (max-width: 768px) {
@@ -1038,14 +1067,32 @@ p {
     position: relative;
 }
 
-.row .included-product {
-    margin-bottom: 25px;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+.included-product {
+    /*margin-bottom: 35px;*/
+    margin-top: 1em;
+    margin-right: 1px;
+    font-family: 'roboto_condensedregular', sans-serif !important;
     font-weight: 400;
     letter-spacing: 1px;
     color: #777;
+    /*display: inline-block;*/
+    /*width: 50%;*/
+    vertical-align:top;
+    border: 4px solid white;
 }
 
+.included-product:hover {
+   border: 4px solid #F49224;
+}
+
+.active-product {
+    /*border: 1px solid #ff7c00;*/
+    border: 4px solid #F49224;
+}
+
+#product-gallery .carousel-inner > .item {
+  height: 800px;
+}
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
       width: 100%;
@@ -1061,12 +1108,12 @@ p {
     color: #777777;
 }
 #product-gallery{
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'roboto_condensedregular', sans-serif !important;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
     color: #777777 !important;
-    cursor: default;  
+    cursor: default;
     border: none;
 }
 .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
@@ -1075,7 +1122,7 @@ p {
     border: none;
 }
 .nav-tabs > li > a {
-    margin-right: 0px;
+    margin-right: 30px !important;
     border-left: none !important; 
     border-right: none !important; 
     border-top: none !important; 
@@ -1093,8 +1140,102 @@ p {
     margin-bottom:5px !important;
 }
 
+.desc {
+  margin-bottom: 14px;
+  margin-top: 14px;
+}
+
+.products-list {
+  padding: 40px;
+  margin-top: 40px;
+  float: left;
+  width: 100%;
+}
+
+.included {
+  margin-top: 40px;
+}
+
+.included ul li {
+  list-style-type: none;
+}
+
 @media (max-width: 768px) {
     #product-gallery{
         padding-left: 15px;
     }
+}
+#countrySelectCurrency .dropdown-menu a{
+  color: #252525;
+}
+#countrySelectCurrency .dropdown-menu a:hover{
+  color: #252525;
+}
+// .flag-us{
+//   background-image: asset-url('ca_us_flags.png');
+// }
+// .flag-ca{
+//   background-image: assets-url('ca_us_flags.png');
+// }
+#countrySelectCurrency .icon {
+  float: left;
+  background-image: url("ca_us_flags.png");
+  width: 15px;
+  height: 11px;
+  margin-right: 3px;
+  margin-top: 5px;
+}
+#countrySelectCurrency .icon.flag-ca {
+  background-position: -17px 0;
+}
+#changeCurrencyModal .change-currency-button{
+  background: #111;
+  color: #fff;
+}
+#changeCurrencyModal .change-currency-button:hover{
+  background-color: #333; 
+}
+#countrySelectCurrency .dropdown-menu > li > a{
+  text-align: center;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+#countrySelectCurrency .dropdown-menu{
+  min-width: 130px;  
+}
+@media(max-width:768px) {
+  #countrySelectCurrency a span:nth-child(2){
+    display: none;
+  }
+}
+#changeCurrencyModal{
+  @media(min-width:768px) {
+    .vertical-alignment-helper {
+      display:table;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .vertical-align-center {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  .modal-dialog{
+    width: 500px;
+  }
+  @media(max-width:768px) {
+    .modal-dialog{
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .modal-header{
+    padding: 25px 50px 10px 50px;
+  }
+  .modal-body{
+    padding:20px 40px;
+  }
+
 }

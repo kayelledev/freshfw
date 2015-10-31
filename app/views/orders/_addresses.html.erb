@@ -1,6 +1,6 @@
 <%= form_for @order, :url => checkout_path, :class=> 'form-horizontal' do |f| %>
 
-	<div class="row"><%= f.error_messages %></div>
+	<%= form_errors_for @order %>
 	<div class="row">
 		<div class="col-md-6" style="padding: 5px; ">
 			<h5>Billing Address</h5>
@@ -41,7 +41,7 @@
 		  <div style="display: block;" data-refresh-path="<%= refresh_order_items_path(@order) %>">
         <%= f.radio_button :delivery_service_id, service.id, checked: (current_system(@order, service) ||service.default?)  %>
         <%= "#{service.name}
-          ( #{number_to_currency(service.delivery_service_prices.first.price)} $ )" %>
+          ( #{number_to_currency(currency_price(service.delivery_service_prices.first))} $ )" %>
 			</div>
     <% end %>
 	</div>

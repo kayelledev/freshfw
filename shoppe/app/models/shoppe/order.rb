@@ -22,8 +22,8 @@ module Shoppe
     # Validations
     validates :token, :presence => true
     with_options :if => Proc.new { |o| !o.building? } do |order|
-      order.validates :email_address, :format => {:with => /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i}
-      order.validates :phone_number, :format => {:with => /\A[\d\ \-x\(\)]{7,}\z/}
+      order.validates :email_address, :format => {:with => /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i}, allow_blank: false, allow_nil: false, presence: true
+      order.validates :phone_number, :format => {:with => /\A[\d\ \-x\(\)]{7,}\z/}, allow_blank: true
     end
 
     # Set some defaults
@@ -60,6 +60,14 @@ module Shoppe
       "#{first_name} #{last_name}"
     end
 
+    def return_first_name
+      "#{first_name}"
+    end
+
+    def return_last_name
+      "#{last_name}"
+    end
+
     # Is this order empty? (i.e. doesn't have any items associated with it)
     #
     # @return [Boolean]
@@ -79,6 +87,14 @@ module Shoppe
     # @return [Integer]
     def total_items
       order_items.inject(0) { |t,i| t + i.quantity }
+    end
+
+    def cart_total_cost
+        if order_items.count > 0
+            order_items.inject(0) { |t,i| t + i.send(currency=='us' ? 'unit_cost_price' : 'unit_price') * i.quantity }
+        else
+            0
+        end
     end
 
     def self.ransackable_attributes(auth_object = nil)

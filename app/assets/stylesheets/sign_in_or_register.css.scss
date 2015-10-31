@@ -1,0 +1,43 @@
+.sign-in-or-register {
+    margin-top: 60px;
+}
+
+.sign-in-or-register .col-md-4 form .form-group {
+    margin-bottom: 5px;
+}
+
+.sign-in-or-register .col-md-4 form .form-group input {
+    border-radius: 0px;
+}
+
+.sign-in-or-register .sign-in-or-register-forms .create-account {
+    display: none;
+}
+.sign-in-or-register .sign-in-or-register-forms .forms-links a {
+    color: black;
+}
+
+.sign-in-or-register .col-md-4 .social-button {
+    padding-top: 50px;
+}
+
+.sign-in-or-register .facebook {
+    height: 190px;
+    border-left: 2px solid #c1c1c1;
+    border-right: 2px solid #c1c1c1;
+}
+
+.sign-in-or-register .content {
+    margin: 0 30px;
+}
+
+.sign-in-or-register .submit-button {
+    border-radius: 0px;
+    color: white;
+    background-color: black;
+}
+
+.sign-in-or-register .submit-button:hover {
+    color: #D0D0D0 !important;
+    background-color: black !important;
+}

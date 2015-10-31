@@ -1,11 +1,17 @@
+<div class='content-page-image-block'>
+    <img class="content-page-image" src="<%= Rails.application.config.carousel_shop_about_blog   %>">
+    <div class='page-name'>
+        <b>SHOP</b>
+    </div>
+</div>
+
 <div class="col-full">
   <ul>
     <% room_categories.each do |r| %>
-		<% room = Shoppe::ProductCategory.where(permalink: r).first %>
-		<% if room != nil %>
-			<h2><%= link_to "#{room.name}", room_size_path(:room => room.id) %></h2>
-		<% end %>					
-	<% end %>
-	
+        <% room = Shoppe::ProductCategory.where(permalink: r).first %>
+        <% if room != nil %>
+            <h2><%= link_to "#{room.name}", room_size_path(:room => room.id) %></h2>
+        <% end %>
+    <% end %>
   </ul>
 </div>
