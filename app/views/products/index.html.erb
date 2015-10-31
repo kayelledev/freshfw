@@ -6,7 +6,7 @@
 		<ul>
 		  <% products.each do |product| %>
 		    <div class="col-md-4 portfolio-item">
-		        <h4 style="color: #333;" ><%= link_to product.name, product_path(product.permalink) %></h4>
+		        <h5 style="color: #333;" ><%= link_to product.name, product_path(product.permalink) %></h5>
 		        <p>
 		          <a href="<%= product_path(product.permalink) %>">
 		            <%= default_image(product) if default_image(product) %>

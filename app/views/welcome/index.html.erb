@@ -10,72 +10,90 @@
 		</div>
 	</div>
 <!--</div>-->
-<div id="myCarousel" class="carousel slide" data-ride="carousel" >
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel" >
+	  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+	    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	    <li data-target="#myCarousel" data-slide-to="1"></li>
+	    <li data-target="#myCarousel" data-slide-to="2"></li>
+	  </ol>
 
-  <div class="carousel-inner" role="listbox" id="carousel-inner-main">
-    <div class="item carousel-item active">
-      <img class="first-slide slide-img" src="<%= Rails.application.config.carousel1s3path %>" alt="First slide">
-      <div class="container">
+	  <div class="carousel-inner" role="listbox" id="carousel-inner-main">
+	    <div class="item carousel-item active">
+	      <img class="first-slide slide-img" src="<%= Rails.application.config.carousel1s3path %>" alt="First slide">
+	      <div class="container">
 
-      </div>
-    </div>
-
-    <div class="item carousel-item">
-      <img class="fill slide-img" src="<%= Rails.application.config.carousel2s3path %>" alt="Second slide">
-      <div class="container">
-        <div class="carousel-caption">
-
+	      </div>
 	    </div>
-      </div>
-    </div>
-    <div class="item carousel-item">
-      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel3s3path %>" alt="Third slide">
-      <div class="container">
-        <div class="carousel-caption">
 
-        </div>
-      </div>
-    </div>
-    <div class="item carousel-item">
-      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel4s3path %>" alt="Third slide" >
-      <div class="container">
-        <div class="carousel-caption">
+	    <div class="item carousel-item">
+	      <img class="fill slide-img" src="<%= Rails.application.config.carousel2s3path %>" alt="Second slide">
+	      <div class="container">
+	        <div class="carousel-caption">
 
-        </div>
-      </div>
-    </div>
-  </div>
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div><!-- /.carousel -->
+		    </div>
+	      </div>
+	    </div>
+	    <div class="item carousel-item">
+	      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel3s3path %>" alt="Third slide">
+	      <div class="container">
+	        <div class="carousel-caption">
+
+	        </div>
+	      </div>
+	    </div>
+	    <div class="item carousel-item">
+	      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel4s3path %>" alt="Third slide" >
+	      <div class="container">
+	        <div class="carousel-caption">
+
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div><!-- /.carousel -->
 </header>
-
-<div class="row homepage-section" style="background-color: rgba(200,200,200,0.8); ">  
-
-  <div class="col-md-4 " style="text-align: center;">
-          <h2 class="featurette-heading">Functional</h1>
-          <p class="lead">We believe your living space needs to be functional, no matter how small or large the space is. These rooms we curate must serve this purpose.</p>
-  </div>
-  <div class="col-md-4" style="text-align: center;">
-          <h2 class="featurette-heading">Beautiful</h1>
-          <p class="lead">We curate from established manufacturers with reputable quality and timelessness in product design.</p>
-  </div>
-  <div class="col-md-4 " style="text-align: center;">
-          <h2 class="featurette-heading">Convenient</h1>
-          <p class="lead">We value excellence in the overall shopping and delivery experience. You order. We deliver. And we pick up if need to return.</p>
-  </div>
+<br>
+<div class="container" id="featured_rooms" >
+	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin-bottom: 15px; " ><h4 class="section-heading" style="color: #333;">Featured Rooms</h4></div>
+    <div class="col-md-4 portfolio-item">
+        <p>
+		  <% livingroomId = Shoppe::ProductCategory.where(permalink: "living-rooms") %>
+		  <% product1= Shoppe::Product.where(product_category_id: livingroomId ).first %>
+          <a href="<%=  product_path(product1.permalink)  %>">
+            <%= default_image(product1) if default_image(product1) %>
+          </a>
+          <h5 style="color: #333;" ><%= link_to product1.name, product_path(product1.permalink) %></h5>
+		  
+        </p>
+      </div>
+      <div class="col-md-4 portfolio-item">
+          <p>
+		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>
+          <a href="<%= product_path(product2.permalink)  %>">
+              <%= default_image(product2) if default_image(product2) %>
+            </a>
+          <h5 style="color: #333;" ><%= link_to product2.name, product_path(product2.permalink) %></h5>
+          </p>
+        </div>
+      <div class="col-md-4 portfolio-item">
+        <p>
+		  <% diningroomId = Shoppe::ProductCategory.where(permalink: "dining-rooms") %>
+		  <% product3= Shoppe::Product.where(product_category_id: livingroomId).first%>
+          <a href="<%= product_path(product3.permalink) %>">
+              <%= default_image(product3) if default_image(product3) %>
+            </a>
+          <h5 style="color: #333;" ><%= link_to product3.name, product_path(product3.permalink) %></h5>
+          </p>
+        </div>
 </div>
 
 <!-- How it works -->
