@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="portfolio">
   <br>
   <% @products.each do |category, products| %>
       <% if category.parent_id != nil && Shoppe::ProductCategory.find_by_permalink('rooms').id == category.parent_id %>
@@ -6,14 +6,19 @@
 		<ul>
 		  <% products.each do |product| %>
 		    <div class="col-md-4 portfolio-item">
-		        <h5 style="color: #333;" ><%= link_to product.name, product_path(product.permalink) %></h5>
-		        <p>
-		          <a href="<%= product_path(product.permalink) %>">
-		            <%= default_image(product) if default_image(product) %>
-		          </a>
-		        </p>
-		        <% if product.has_variants? %>
-		           <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
+		        <a href="<%= product_path(product.permalink) %>" class="portfolio-link" data-toggle="modal" >
+				  <div class="portfolio-hover" >
+				      <div class="portfolio-hover-content">
+						  <%= product.name %>
+				      </div>
+				  </div>
+				  <div class="portfolio-image"><%= default_image(product) if default_image(product) %></div>
+				</a>
+	
+				<% if product.has_variants? %>
+					<p>
+			           <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
+				   </p>
 		        <% else%>
 		            <p>
 		              <% if (product.in_stock? && product.stock_control) || !product.stock_control %>

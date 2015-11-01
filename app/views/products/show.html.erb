@@ -7,9 +7,9 @@
         <div class="row">
             <div class="col-md-4">
                 <div class='product-info'>
-                    <h1 class='product-name'><%= @product.name %></h1>
+                    <h3 class='product-name'><%= @product.name %></h3>
                     <p class='product-description'>
-                        <%= @product.description %>
+                        <%= @product.short_description %>
                     </p>
                     <% if @product.has_variants? %>
                         <p class='option'>Options</p>
@@ -111,6 +111,8 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active" id="home">
+
+                        <p><%= @product.description %></p>
                         <% @product.included_products.each_slice(2) do |item_group|%>
                             <div class="row">
                                 <% item_group.each do |item| %>
