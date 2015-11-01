@@ -74,8 +74,8 @@
                             <% end %>
                         <% elsif @product.included_products.count > 0 %>
                             <div class="col-full">
-                                <h3 style="text-transform: uppercase;">
-                                    What's Included: </h3>
+                                <h4 style="text-transform: uppercase;">
+                                    What's Included: </h4>
                             </div>
                             <% items = @product.included_products %>
                             <% items.each do |item|%>
@@ -100,12 +100,12 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation col-md-4" class="active">
                         <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-                            <h2>DETAILS AND DIMENSIONS</h2>
+                            <h4>DETAILS AND DIMENSIONS</h4>
                         </a>
                     </li>
                     <li role="presentation col-md-8">
                         <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-                            <h2>SHIPPING AND DELIVERY INFO</h2>
+                            <h4>SHIPPING AND DELIVERY INFO</h4>
                         </a>
                     </li>
                 </ul>
@@ -146,7 +146,7 @@
                             </div>
                         <% end %>
                         <% if @product.is_preset %>
-                            <h2>LAYOUT OPTIONS</h2>
+                            <h4>LAYOUT OPTIONS</h4>
                             <div class='room-editor-container' style="margin: 0 auto; clear: both;">
                                 <%= render 'shared/room_editor', product: @product %>
                             </div>
