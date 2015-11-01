@@ -108,6 +108,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def country_changing
+    @provinces = Shoppe::TaxRate.ordered.where(country:params[:country_name]).map{|s| [s.province, s.id]}
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def check_country
     @order = current_order
     proceed_params = @order.separate_delivery_address ?

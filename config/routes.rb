@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   match "checkout/confirm", to: "orders#confirmation", as: "checkout_confirmation", via: [:get, :post]
   match "order/:id/refresh_items", to: "orders#refresh_items", as: "refresh_order_items", via: [:get, :post]
   patch "check_country", to: "orders#check_country", as: "check_country"
+  post 'country_changing', to: 'orders#country_changing'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
