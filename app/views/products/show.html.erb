@@ -161,6 +161,7 @@
                         <% if @product.is_preset %>
                             <h2>LAYOUT OPTIONS</h2>
                             <div class='room-editor-container' style="margin: 0 auto; clear: both;">
+                                <center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %></center>
                                 <%= render 'shared/room_editor', product: @product %>
                             </div>
                         <% end %>

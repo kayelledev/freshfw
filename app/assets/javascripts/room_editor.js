@@ -169,54 +169,45 @@
           // init draggable
           interact('.' + elementsClass).draggable(controller.$options);
 
-          var scalingX = parseFloat(controller.$holder.data('width')) / controller.$holder.width(),
-              scalingY = parseFloat(controller.$holder.data('height')) / controller.$holder.height();
-
           // target elements with the "draggable" class
           $('.' + elementsClass).each(function() {
               //$(this).attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
               //$(this).attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
 
-              $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
-              $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
-
-              //$(this).css({
-              //    'width': $(this).data('width'),
-              //    'height': $(this).data('heigh'),
-              //    '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-              //    '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-              //    '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-              //    'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
-              //});
+              $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling || $(this).width()/2.0);
+              $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling || $(this).height()/2.0);
 
               $(this).parent().css({
                   'width': $(this).data('width') / scaling,
                   'height': $(this).data('heigh') / scaling,
                   // 'width': $(this).data('width'),
                   // 'height': $(this).data('heigh'),
-                  '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                  'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+                  '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                  'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
               });
 
               // replase item to top and left if room is too small
-              // if( +$(this).data('x') + +$(this).data('width')/scalingX > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).data('height')/scalingY > +$('.editor-container').data('height') ) {
-              //   console.log('TOO SMALL');
-              //   $(this).parent().css({
-              //     '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
-              //     '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
-              //     '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
-              //     'transform': 'translate(0px, 0px) rotate(0deg)',
-              //   });
+              if( +$(this).data('x') + +$(this).data('width') > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).data('height') > +$('.editor-container').data('height') ) {
+                // console.log('small room');
+                // console.log(+$(this).data('x'));
+                // console.log(+$(this).data('width'));
+                // console.log(+$('.editor-container').data('width'));
+                $(this).parent().css({
+                  '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                  '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                  '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                  'transform': 'translate(0px, 0px) rotate(0deg)',
+                });
 
-              //   $(this).parent().attr('data-rotation', '0');
-              //   $(this).parent().attr('data-x', '0');
-              //   $(this).parent().attr('data-y', '0');
-              //   $(this).attr('data-rotation', '0');
-              //   $(this).attr('data-x', '0');
-              //   $(this).attr('data-y', '0');
-              // }
+                $(this).parent().attr('data-rotation', '0');
+                $(this).parent().attr('data-x', '0');
+                $(this).parent().attr('data-y', '0');
+                $(this).attr('data-rotation', '0');
+                $(this).attr('data-x', '0');
+                $(this).attr('data-y', '0');
+              }
 
               $(this).parent().children('.rotation-arrow').css('bottom', '0px')
               $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
@@ -628,14 +619,11 @@
         $('span#measure-height-ft').html(newHeightFt);
         $('span#measure-height-inch').html(newHeightInch);
 
-        var scalingX = parseFloat($('.editor-container').data('width')) / $('.editor-container').width(),
-            scalingY = parseFloat($('.editor-container').data('height')) / $('.editor-container').height();
-
         // scale items according to new dimensions
         $('.' + elementsClass).each(function() {
 
-            $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
-            $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
+            $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling || $(this).width()/2.0);
+            $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling || $(this).height()/2.0);
 
 
             $(this).parent().css({
@@ -643,10 +631,10 @@
                 'height': $(this).data('heigh') / scaling,
                 // 'width': $(this).data('width'),
                 // 'height': $(this).data('heigh'),
-                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                'transform': 'translate(' + parseFloat($(this).data('x'))/scalingX + 'px,' + $(this).data('y')/scalingY + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
             });
 
             $(this).parent().children('.rotation-arrow').css('bottom', '0px')
