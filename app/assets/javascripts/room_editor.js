@@ -209,8 +209,10 @@
                 $(this).attr('data-y', '0');
               }
 
+              var itemHeight = $(this).height();
+
               $(this).parent().children('.rotation-arrow').css('bottom', '0px')
-              $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
+              $(this).parent().children('.rotation-arrow').css('top', itemHeight + 5 + 'px')
 
           });
 
