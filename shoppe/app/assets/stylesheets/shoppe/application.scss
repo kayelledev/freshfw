@@ -19,7 +19,7 @@ nav.sidebar {
 	bottom:0;
 	header.logo {
 		height:57px;
-		background:image-url('shoppe/logo.svg') #9AC835 no-repeat 22px 25px;
+		background:image-url('shoppe/4-walls-logo.png') #F49224 no-repeat 22px 25px; /* #9AC835 the original green of SHOPPE */
 		background-size:45px;
 		padding-left:80px;
 		padding-top:28px;
@@ -487,7 +487,7 @@ footer {
 	}
 }
 
-span.boolean span.true { color:#96BF48}
+span.boolean span.true { color:#F49224} /* original button colors #F49224 */
 span.boolean span.false { color:#c04a4a}
 
 .float-right { float:right;}
@@ -513,7 +513,7 @@ input.text, textarea.text {
   box-sizing: border-box;         /* Opera/IE 8+ */
 	font-size:1.1em;
 	font-family:$font;
-	&:focus { border-color:#9AC835; }
+	&:focus { border-color:#F49224; }
 	&.short { width:100px;}
 }
 
@@ -553,7 +553,7 @@ table.data {
 	tbody tr.form {
 		td { background:#f2f6fb;}
 		input[type=text] { border:1px solid #CFD4DD; padding:5px;}
-		input[type=text]:focus { border-color:#9AC835;}
+		input[type=text]:focus { border-color:#F49224;}
 		td.desc input[type=text] { width:95%;}
 		td.adjustment input[type=text] { width:50px; margin-right:5px;}
 	}
@@ -574,7 +574,7 @@ nav.pagination {
 		margin-right:3px;
 		color:#333;
 		background:#fff;
-		&.current { background:#9AC835; border-color:#7B9F26; color:#fff; font-weight:600; padding:5px 10px;}
+		&.current { background:#F49224; border-color:#7B9F26; color:#fff; font-weight:600; padding:5px 10px;}
 		a {
 			padding:5px 10px;
 			display:inline-block;

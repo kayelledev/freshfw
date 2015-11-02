@@ -43,8 +43,8 @@ module Shoppe
         if params[:import].nil?
           redirect_to import_products_path, :flash => {:alert => I18n.t('shoppe.imports.errors.no_file')}
         else
-          Shoppe::Product.import(params[:import][:import_file])
-          redirect_to products_path, :flash => {:notice => I18n.t("shoppe.products.imports.success")}
+          status = Shoppe::Product.import(params[:import][:import_file])
+          redirect_to products_path, :flash => {:notice => status}
         end
       end
     end

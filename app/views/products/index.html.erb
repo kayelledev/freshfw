@@ -1,103 +1,44 @@
-<div class="container">
+<div class="container" id="portfolio">
   <br>
   <% @products.each do |category, products| %>
-    <div class="col-full">
-      <ul>
-        <% products.each do |product| %>
-          <% if params["room_size"] == nil && params["room_size_name"] == nil %>
-              <div class="col-md-4 col-sm-6 portfolio-item">
-                  <h4 style="color: #333;" ><%= link_to product.name, product_path(product.permalink) %></h4>
-                  <p>
-                    <a href="<%= product_path(product.permalink) %>">
-                      <%= default_image(product) if default_image(product) %>
-                    </a>
-                  </p>
-                  <% if product.has_variants? %>
-                     <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
-                  <% else%>
-                      <p>
-                        <% if (product.in_stock? && product.stock_control) || !product.stock_control %>
-                          <%= link_to buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl" do %>
-                            <i class="fa fa-shopping-cart"></i>
-                          <% end %>
-                        <% else %>
-                          <%= link_to product_path(product.permalink), :class => "btn btn-xl" do %>
-                            View details
-                          <% end %>
-                        <% end %>
-                        <b style="margin-left: 10px; ">
-                          <%= number_to_currency(currency_price(product), unit: "$", format: "%u%n") %>
-                        </b>
-                      </p>
-                  <% end %>
-              </div>
-          <% end %>
-          <% if product.product_category_id == params["room_size"].to_i %>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <h4 style="color: #333;" >
-                  <%= link_to product.name, product_path(product.permalink) %>
-                </h4>
-                <p>
-                  <a href="<%= product_path(product.permalink) %>">
-                    <%= default_image(product) if default_image(product) %>
-                  </a>
-                </p>
-                <%  if product.has_variants? %>
-                   <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
-                <% else%>
-                  <p>
-                    <% if (product.in_stock? && product.stock_control) || !product.stock_control %>
-                      <%= link_to buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl" do %>
-                        <i class="fa fa-shopping-cart"></i>
-                      <% end %>
-                    <% else %>
-                      <%= link_to product_path(product.permalink), :class => "btn btn-xl" do %>
-                        View details
-                       <% end %>
-                    <% end %>
-                    <b style="margin-left: 10px; ">
-                      <%= number_to_currency(currency_price(product), unit: "$", format: "%u%n") %>
-                    </b>
-                  </p>
-                <% end %>
-            </div>
-          <% end %>
-          <% if params["room_size_name"] != nil %>
-            <% Shoppe::ProductCategory.where(name: "#{params["room_size_name"]}").each do |r| %>
-              <% if product.product_category_id == r.id %>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                  <h4 style="color: #333;" >
-                    <%= link_to product.name, product_path(product.permalink) %>
-                  </h4>
-                  <p>
-                    <a href="<%= product_path(product.permalink) %>">
-                      <%= default_image(product) if default_image(product) %>
-                    </a>
-                  </p>
-                  <% if product.has_variants? %>
-                    <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
-                  <% else%>
-                    <p>
-                      <% if (product.in_stock? && product.stock_control) || !product.stock_control %>
-                        <%= link_to buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl" do %>
-                          <i class="fa fa-shopping-cart"></i>
-                        <% end %>
-                      <% else %>
-                        <%= link_to product_path(product.permalink), :class => "btn btn-xl" do %>
-                          View details
-                        <% end %>
-                      <% end %>
-                      <b style="margin-left: 10px; ">
-                        <%= number_to_currency(currency_price(product), unit: "$", format: "%u%n") %>
-                      </b>
-                    </p>
-                  <% end %>
-                </div>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
+      <% if category.parent_id != nil && Shoppe::ProductCategory.find_by_permalink('rooms').try(:id) == category.parent_id %>
+		<h3 style="color: #333; display: block; float: left; width: 100%;" ><%=  category.name.upcase %></h3>
+		<ul>
+		  <% products.each do |product| %>
+		    <div class="col-md-4 portfolio-item">
+		        <a href="<%= product_path(product.permalink) %>" class="portfolio-link" data-toggle="modal" >
+				  <div class="portfolio-hover" >
+				      <div class="portfolio-hover-content">
+						  <%= product.name %>
+				      </div>
+				  </div>
+				  <div class="portfolio-image"><%= default_image(product) if default_image(product) %></div>
+				</a>
+	
+				<% if product.has_variants? %>
+					<p>
+			           <%= link_to "View Options", product_path(product.permalink), :class => "btn btn-xl" %>
+				   </p>
+		        <% else%>
+		            <p>
+		              <% if (product.in_stock? && product.stock_control) || !product.stock_control %>
+		                <%= link_to buy_product_path(product.permalink), :method => :post, :class => "btn btn-xl" do %>
+		                  <i class="fa fa-shopping-cart"></i>
+		                <% end %>
+		              <% else %>
+		                <%= link_to product_path(product.permalink), :class => "btn btn-xl" do %>
+		                  View details
+		                <% end %>
+		              <% end %>
+		              <b style="margin-left: 10px; ">
+		                <%= number_to_currency(currency_price(product), unit: "$", format: "%u%n") %>
+		              </b>
+		            </p>
+		        <% end %>
+		      </div>
+		  	<% end %>
+
+		 </ul>
+	  <% end %>
   <% end %>
 </div>

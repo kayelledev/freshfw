@@ -22,8 +22,8 @@
   }
   
   &.green {
-    background-color:#96BF48;
-    border-color:#96BF48;
+    background-color:#F49224; /* original button color #96BF48 */
+    border-color:#F49224;
     border-bottom-color:#86a350;
     &:active { background-color:#A8D750}
   }
@@ -63,7 +63,7 @@
 	
 	&.white-green {
 		background-color:#fff;
-		color:#96BF48 !important;
+		color:#F49224 !important;
 	}
   
   

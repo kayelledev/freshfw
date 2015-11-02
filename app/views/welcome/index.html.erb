@@ -4,249 +4,243 @@
 <!--<div class="col-full">-->
 	<div class="floating-text-container">
 		<div class="floating-text featurette-heading">
-			<h3 class="section-heading">Furniture your entire room in one package</h3>
+			<h3 class="section-heading">Furnish your entire room in one package</h3>
 			<h1>ROOM IN A BOX</h1>
 			<h3><%= link_to "Shop now", products_url, class: "btn-landing" %></h3>
 		</div>
 	</div>
 <!--</div>-->
-<div id="myCarousel" class="carousel slide" data-ride="carousel" >
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel" >
+	  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+	    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	    <li data-target="#myCarousel" data-slide-to="1"></li>
+	    <li data-target="#myCarousel" data-slide-to="2"></li>
+	  </ol>
 
-  <div class="carousel-inner" role="listbox" id="carousel-inner-main">
-    <div class="item carousel-item active">
-      <img class="first-slide slide-img" src="<%= Rails.application.config.carousel1s3path %>" alt="First slide">
-      <div class="container">
+	  <div class="carousel-inner" role="listbox" id="carousel-inner-main">
+	    <div class="item carousel-item active">
+	      <img class="first-slide slide-img" src="<%= Rails.application.config.carousel1s3path %>" alt="First slide">
+	      <div class="container">
 
-      </div>
-    </div>
-
-    <div class="item carousel-item">
-      <img class="fill slide-img" src="<%= Rails.application.config.carousel2s3path %>" alt="Second slide">
-      <div class="container">
-        <div class="carousel-caption">
-
+	      </div>
 	    </div>
-      </div>
-    </div>
-    <div class="item carousel-item">
-      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel3s3path %>" alt="Third slide">
-      <div class="container">
-        <div class="carousel-caption">
 
-        </div>
-      </div>
-    </div>
-    <div class="item carousel-item">
-      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel4s3path %>" alt="Third slide" >
-      <div class="container">
-        <div class="carousel-caption">
+	    <div class="item carousel-item">
+	      <img class="fill slide-img" src="<%= Rails.application.config.carousel2s3path %>" alt="Second slide">
+	      <div class="container">
+	        <div class="carousel-caption">
 
-        </div>
-      </div>
-    </div>
-  </div>
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div><!-- /.carousel -->
+		    </div>
+	      </div>
+	    </div>
+	    <div class="item carousel-item">
+	      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel3s3path %>" alt="Third slide">
+	      <div class="container">
+	        <div class="carousel-caption">
+
+	        </div>
+	      </div>
+	    </div>
+	    <div class="item carousel-item">
+	      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel4s3path %>" alt="Third slide" >
+	      <div class="container">
+	        <div class="carousel-caption">
+
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div><!-- /.carousel -->
 </header>
-
-<div class="row homepage-section" style="background-color: rgba(200,200,200,0.8); ">  
-
-  <div class="col-md-4 " style="text-align: center;">
-          <h2 class="featurette-heading">Functional</h1>
-          <p class="lead">We believe your living space needs to be functional, no matter how small or large the space is. These rooms we curate must serve this purpose.</p>
-  </div>
-  <div class="col-md-4" style="text-align: center;">
-          <h2 class="featurette-heading">Beautiful</h1>
-          <p class="lead">We curate from established manufacturers with reputable quality and timelessness in product design.</p>
-  </div>
-  <div class="col-md-4 " style="text-align: center;">
-          <h2 class="featurette-heading">Convenient</h1>
-          <p class="lead">We value excellence in the overall shopping and delivery experience. You order. We deliver. And we pick up if need to return.</p>
-  </div>
-</div>
-
-<!-- How it works -->
-<div class="row homepage-section" style="background-color: rgba(255,255,255,0.8); color: #000; margin-bottom: -4em;">          
-        <h2 class="section-heading text-center">How It Works</h2>
-	    <div class="col-md-4" style="text-align: center;">
-		  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/how-it-works-roomtype.png" width="50%" height="auto" style="margin: 0 auto;">
-		  <h3>1. Choose the room type</h3>
-	      <h3 class="section-subheading text-muted"><%= link_to "Living room, dining room or bedroom", room_type_path %></h3>         
-		</div>
-		<div class="col-md-4" style="text-align: center;">
-			  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/how-it-works-roomsize.png" width="50%" height="auto" style="margin: 0 auto;">
-			  <h3>2. Choose the room size</h3>
-		      <h3 class="section-subheading text-muted"><%= link_to "Small, medium, large", room_size_path, class: "section-subheading text-muted"%></h3> 
-		</div>
-		<div class="col-md-4" style="text-align: center;">
-			  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/how-it-works-getroom.png" width="50%" height="auto" style="margin: 0 auto;">
-			  <h3>3. Get your favourite room</h3>
-			  <h3 class="section-subheading text-muted"><%= link_to "See the rooms", products_url, class: "section-subheading text-muted" %></h3>
-		</div>
-	</div>
-
-<section style="background-image: url(https://s3.amazonaws.com/gofourwalls/globalimages/banner-autumn-livingdining-dark.jpg);  margin: 0; width: 100%; height: 30em;">
+<br>
+<div class="container" id="portfolio" >
 	
-	<!-- Begin MailChimp Signup Form -->
-	<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
-	<style type="text/css">
-		#mc_embed_signup{background:#fff; clear:left; font:14px Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif; }
-		/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-		   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-	</style>
-	<div id="mc_embed_signup" style="background: none; ">
-	<form action="//gofourwalls.us9.list-manage.com/subscribe/post?u=2925a3a7e8e3d72d2bf106eca&amp;id=82d02b4614" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-	    <div id="mc_embed_signup_scroll">
-		<h2 style="color: #fff; font-size: 24px; text-align: center; font-style: Montserrat; ">Join our mailing list </h2>
-		<P style="color: #fff; font-size: 20px; text-align: center;">to get new rooms, new designs and new offers!</p>
-	<div class="mc-field-group" style="max-width: 40%; margin-left: 30%; padding: 10px 0 0px 0; ">
-		<label for="mce-EMAIL" style="color: #fff;">Email Address </label>
-		<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-	</div>
-    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn-landing" style="min-width: 90px; margin-left: 30%; font-size: 20px; "></div>
+	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin: 30px 0 10px 0; " ><h4 class="section-heading" style="color: #333;">Featured Rooms</h4></div>
+    <div class="col-md-4 col-sm-6 portfolio-item">
+          <% livingroomId = Shoppe::ProductCategory.where(permalink: "living-rooms") %>
+		  <% product1= Shoppe::Product.where(product_category_id: livingroomId ).first %>
+  		  <a href="<%= product_path(product1.permalink) if product1.present?  %>" class="portfolio-link" data-toggle="modal">
+                <div class="portfolio-hover" >
+                    <div class="portfolio-hover-content">
+  					  <%= product1.name if product1.present?  %>
+                    </div>
+                </div>
+                <%= default_image(product1) if product1.present? && default_image(product1) %>
+            </a>
+          </div>
+      <div class="col-md-4 col-sm-6 portfolio-item">
+		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>		  
+		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal"> 
+              <div class="portfolio-hover" >
+                  <div class="portfolio-hover-content">
+					  <%= product2.name if product2.present? %>
+                  </div>
+              </div>
+              <%= default_image(product2) if product2.present? && default_image(product2) %>
+          </a>
+        </div>
+      <div class="col-md-4 col-sm-6 portfolio-item">
+         <% diningroomId = Shoppe::ProductCategory.where(permalink: "dining-rooms") %>
+		  <% product3= Shoppe::Product.where(product_category_id: diningroomId).first%>
+  		  <a href="<%= product_path(product3.permalink) if product3.present? %>" class="portfolio-link" data-toggle="modal">
+            <div class="portfolio-hover" >
+                <div class="portfolio-hover-content">
+				  <%= product3.name if product3.present? %>
+                </div>
+            </div>
+            <%= default_image(product3) if product3.present? && default_image(product3) %>
+        </a>
     </div>
-		<div id="mce-responses" class="clear" style="width: 40%; word-wrap: normal; margin-left: 30%; max-width: 60%;">
-			<div class="response" id="mce-error-response" style="display:none"></div>
-			<div class="response" id="mce-success-response" style="display:none; color: #777777;"></div>
-		</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-	    <div style="position: absolute; left: -5000px;"><input type="text" name="b_2925a3a7e8e3d72d2bf106eca_82d02b4614" tabindex="-1" value=""></div>
-	    
-	</form>
+	
+	<br><br>
+	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%;  margin: 50px 0 10px 0;  " >
+		<h4 class="section-heading" style="color: #333;">Featured Accents</h4>
 	</div>
-	<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='UBPAGEID';ftypes[3]='text';fnames[4]='UBVARIANT';ftypes[4]='text';fnames[5]='UBDATE';ftypes[5]='date';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-	<!--End mc_embed_signup-->
-</section>
-
-
-<!-- Services Section -->
-<section id="services" style="border: 1px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Room Sizes</h2>
-                <h3 class="section-subheading text-muted">Each room has 3 sizes. Each option includes a different set of furniture best suited for your space.</h3>
-				<div style="margin-top: 2em; margin-bottom: 2em;"><%= link_to "Shop now", products_url, class: "btn-landing"%></div>
+    <div class="col-md-4 col-sm-6 portfolio-item">
+          <% accentsId = Shoppe::ProductCategory.where(permalink: "accents") %>
+		  <% accent1= Shoppe::Product.where(product_category_id: accentsId ).first %>
+  		  <a href="<%= product_path(accent1.permalink) if accent1.present?  %>" class="portfolio-link" data-toggle="modal">
+                <div class="portfolio-hover" >
+                    <div class="portfolio-hover-content">
+  					  <%= accent1.name if accent1.present? %>
+                    </div>
+                </div>
+                <%= default_image(accent1) if accent1.present? && default_image(accent1) %>
+            </a>
+      </div>
+      <div class="col-md-4 col-sm-6 portfolio-item">
+		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>		  
+		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal">
+              <div class="portfolio-hover" >
+                  <div class="portfolio-hover-content">
+					  <%= product2.name if product2.present? %>
+                  </div>
+              </div>
+              <%= default_image(product2) if product2.present? && default_image(product2) %>
+          </a>
+	    </div>
+      <div class="col-md-4 col-sm-6 portfolio-item">
+         <% diningroomId = Shoppe::ProductCategory.where(permalink: "dining-rooms") %>
+		  <% product3= Shoppe::Product.where(product_category_id: livingroomId).first%>
+  		  <a href="<%= product_path(product3.permalink) if product3.present? %>" class="portfolio-link" data-toggle="modal">
+            <div class="portfolio-hover" >
+                <div class="portfolio-hover-content">
+				  <%= product3.name if product3.present? %>
+                </div>
             </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-md-4" style="padding: 5px; ">
-                <div class="highlight_box">
-			        <h2><%= link_to "Small", products_url, style: "color: #000;" %></h2>
-			        <h3>$1499</h3>
-			        <h5>Room size 7'x9' or 60+ sqr.ft.</h5>
-				</div>
-            </div>
-           <div class="col-md-4" style="padding: 5px; ">
-                <div class="highlight_box">
-			        <h2><%= link_to "Medium", products_url, style: "color: #000;" %></h2>
-			        <h3>$1999</h3>
-			        <h5>Room size 8'x9' or 70+ sqr.ft.</h5>
-				</div>
-		        <h5 style="background-color: #333333; opacity: .85; color: #fff; text-align: center; margin-top: 2px; padding: 6px; ">BEST VALUE</h5>
-            </div>
-            <div class="col-md-4" style="padding: 5px; ">
-                <div class="highlight_box">
-			        <h2><%= link_to "Large", products_url, style: "color: #000;" %></h2>
-			        <h3>$2499</h3>
-			        <h5>Room size 9'x11' or 90+ sqr.ft.</h5>
-				</div>
-            </div>
-        </div>
+            <%= default_image(product3) if product3.present? && default_image(product3) %>
+        </a>
+    </div>
+	
+	<br>
+	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin: 50px 0 10px 0; ">
+		<h4 class="section-heading" >News</h4>
 		
-    </div>
-</section>
+	</div>
+	<div class="col-md-4" style=" " >
+		<table>
+			<tr style="border-bottom: 1px solid #ccc;">
+				<td width="100%" style="text-align: center;">
+						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/vandyk-logo.jpeg" alt="VANDYK" width="40%" height="auto" style="padding: 5px;">
+						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/wotg-logo.png" alt="VANDYK - Windows on the Green" width="30%" height="auto" style="padding: 5px;">
+						<p>Checkout the model suite Four Walls just furnished for VANDYK's Windows On The Green project in Mississauga, Canada. Read <a href="http://blog.gofourwalls.com/2015/10/13/vandyk-windows-on-the-green/" style="color: #F49224;">more</a>.</p>
+				</td>
+			</tr>
+			<tr style="border-bottom: 1px solid #ccc;" >
+				<td width="100%">
+						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Fit+Factory+Fitness/fit-factory-logo.jpeg" alt="Fit Factory Fitness - Toronto" width="100%" height="auto" style="padding-top: 20px; " >
+						<p>Our first showroom in Toronto is coming soon! You can check out our products in <a href="http://fitfactoryfitness.com/" style="color: #F49224;">Fit Factory Fitness</a> and do a military-style workout!</p>
+				</td>
+			</tr>
+			<tr style="border-bottom: 1px solid #ccc;">
+				<td width="100%">
+					<!-- Begin MailChimp Signup Form -->
+					<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
+					<style type="text/css">
+						#mc_embed_signup{background:#fff; clear:left; border-color: #F49224;}
+						/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+						   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+					</style>
+					<div id="mc_embed_signup" style="background: none; ">
+						<form action="//gofourwalls.us9.list-manage.com/subscribe/post?u=2925a3a7e8e3d72d2bf106eca&amp;id=82d02b4614" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+						    <div id="mc_embed_signup_scroll">
+								<h4 style="color: #F49224;text-align: center; text-transform: capitalize;">Get the newest designs and new offers</h4>
+								<div class="mc-field-group" style="width: 100%; ">
+									<label for="mce-EMAIL" style="color: #777;">Email Address </label>
+									<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" style="min-width: 50%;">
+								</div>
+							    <div class="clear">
+									<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="sub-btn" style="">
+								</div>
+						    </div>
+							<div id="mce-responses" class="clear" style="width: 40%; word-wrap: normal; margin-left: 30%; max-width: 60%;">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none; color: #777777;"></div>
+							</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+						    <div style="position: absolute; left: -5000px;">
+								<input type="text" name="b_2925a3a7e8e3d72d2bf106eca_82d02b4614" tabindex="-1" value="">
+							</div>
+						</form>
+					</div>
+					<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='UBPAGEID';ftypes[3]='text';fnames[4]='UBVARIANT';ftypes[4]='text';fnames[5]='UBDATE';ftypes[5]='date';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+					<!--End mc_embed_signup-->
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-8"  >
+		<div id="partnerCarousel" class="carousel slide" data-ride="carousel" >
+		  <!-- Indicators -->
+		  <ol class="carousel-indicators">
+		    <li data-target="#partnerCarousel" data-slide-to="0" class="active"></li>
+		    <li data-target="#partnerCarousel" data-slide-to="1"></li>
+		    <li data-target="#partnerCarousel" data-slide-to="2"></li>
+		  </ol>
 
-<div class="row homepage-section" style="background-color: rgba(200,200,200,0.8);">
+		  <div class="carousel-inner" role="listbox" id="carousel-inner-main">
+		    <div class="item carousel-item active" style="height: auto;">
+		      <img class="first-slide slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/living-dining-room-v2-1200x800.jpg" alt="First slide">
+		      <div class="container">
 
-     <div class="col-md-6" style="text-align: center; padding: 0 5%;">
+		      </div>
+		    </div>
+
+		    <div class="item carousel-item"  style="height: auto;">
+		      <img class="fill slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/bedroom-1200x800.jpg" alt="Second slide">
+		      <div class="container">
+		        <div class="carousel-caption">
+
+			    </div>
+		      </div>
+		    </div>
+		    <div class="item carousel-item" style="height: auto;">
+		      <img class="third-slide slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/living-room-v2-1200x800.jpg" alt="Third slide" >
+		      <div class="container">
+		        <div class="carousel-caption">
+
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+		    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		</div><!-- /.carousel -->
+	</div>
+	<br>
 	
-		<h2 class="section-heading">Our Mission</h2>
-		<p class="lead">Maximize function in small spacesOptimize style with condo-friendly furnitureSimplify the furnishing process</p>
-	</div>
-     <div class="col-md-6" style="text-align: center; padding: 0 5%;">
-
-		<h2 class="section-heading">Our Solution</h2>
-		<p class="lead">Four Walls provides you with high quality and beautifully designed products packaged into functional and stylish rooms. All you need to do is pick the room you want. Each room is offered in three different tiers: basic, regular, premium.</p>
-	</div>
 </div>
-<!-- About Us -->
-<div class="col-full" style="display: none;">
-    <h2 class="section-heading text-center" style="margin-top: 2em;">About Us</h2>
-	<h3 class="section-subheading"></h3>
-    <div class="row">
-        <div class="col-lg-12">
-            <ul class="timeline">
-                <li>
-                    <div class="timeline-image">
-                        <img class="img-circle img-responsive" src="https://s3.amazonaws.com/gofourwalls/globalimages/homepage-howitworks.jpg" alt="Browse the rooms">
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>Shop the rooms</h4>
-                            <h4 class="subheading">from the comfort of your home</h4>
-                        </div>
-                        <div class="timeline-body">
-                            <p class="text-muted">We love interior design. We only curate furniture that appeal to a design-savvy eye. Our style is practical modernism with a midcentury touch. Each piece of furniture in our room has a timeless quality.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted">
-                    <div class="timeline-image">
-                        <img class="img-circle img-responsive" src="https://s3.amazonaws.com/gofourwalls/globalimages/homepage-howitworks-pickroom.jpg" alt="Pick a room">
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>Choose one of the tiers</h4>
-                            <h4 class="subheading">Basic, Regular, Premium</h4>
-                        </div>
-                        <div class="timeline-body">
-                            <p class="text-muted">Our team of designers are condo dwellers who care about maximizing function in small spaces. We curate furniture that are condo-friendly in sizes and functions. The furniture often serve multiple purposes.</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="timeline-image" style="padding-top: 2.5em;">
-                        <i class="img-circle img-responsive fa-stack fa-4x fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                    </div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>Add To Cart</h4>
-                            <h4 class="subheading">Get it delivered!</h4>
-                        </div>
-                        <div class="timeline-body">
-                            <p class="text-muted">We offer top-knotch white glove services to deliver and assemble your room. Completely hassle-free!</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="timeline-inverted">
-                    <div class="timeline-image" style="background-color: #000; opacity: .7;">
-                        <a href="<%= products_url %>" style="color: #fff; "><h4>Get your
-                            <br>room in a box
-                            <br>now!</h4></a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-<section style="background-image: url(https://s3.amazonaws.com/gofourwalls/globalimages/banner-loft-living-kitchen.jpg);  margin: 0; width: 100%;">
-	<div class="col-full">
-		<h1 class="section-heading">Room In A Box</h1>
-	</div>
-</section>
-
