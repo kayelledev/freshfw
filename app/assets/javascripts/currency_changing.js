@@ -14,17 +14,22 @@ $(document).ready(function(){
   }); 
 
   $('#checkout-form').submit(function() { 
-    var country_id = $('#order_billing_country_id').val();
+    var different_address = $('#separate_delivery_address_checkbox').is(':checked');
+    var country_id = (different_address == true) ? $('#order_delivery_country_id').val() : $('#order_billing_country_id').val();
     var result = false;
-    $.ajax({
+    // if (different_address) {
+      // result = true;
+    // } else {
+      $.ajax({
         type: "POST",
         url: "/check_country", 
         data: {country_id: country_id},
         async: false,
-    }).success(function(is_equal){
+      }).success(function(is_equal){
         result = is_equal;
         if (! is_equal) $("#changeCurrencyCheckoutModal").modal('show');
-    });
+      });
+    // }
     return result;
   });
 });

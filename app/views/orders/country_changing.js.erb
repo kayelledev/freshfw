@@ -1,2 +1,5 @@
-
-$('#order_billing_address4').html("<%= escape_javascript(options_for_select(@provinces)) %>");
+<% if @country_type == "billing" %> 
+  $('#order_billing_address4').html("<%= escape_javascript(options_for_select(@provinces)) %>");
+<% else %>
+  $('#order_delivery_address4').html("<%= escape_javascript(options_for_select(@provinces)) %>");
+<% end %>

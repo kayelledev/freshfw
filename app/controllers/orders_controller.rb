@@ -110,6 +110,7 @@ class OrdersController < ApplicationController
 
   def country_changing
     @provinces = Shoppe::TaxRate.ordered.where(country:params[:country_name]).map{|s| [s.province, s.id]}
+    @country_type = params[:country_type]
     respond_to do |format|
       format.js
     end
