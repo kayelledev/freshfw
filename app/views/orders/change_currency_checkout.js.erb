@@ -1,0 +1,7 @@
+$('#countrySelectCurrency').replaceWith("<%=  j (render 'layouts/currency_checker') %>");
+$('#changeCurrencyCheckoutModal').modal('hide');
+$('.change-currency-checkout-button').data("currency", "<%= dropdown_currency %>");
+$('#order-summary-info').html("<%= j (render 'order_summary_info', order: current_order)  %>");
+$(document).on('click','.select-new-currency',function(){
+  $("#changeCurrencyModal").modal('show');
+});

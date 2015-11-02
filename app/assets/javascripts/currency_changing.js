@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#selectNewCurrency').on('click', function(e){
+  $('.select-new-currency').click(function(e){
     $("#changeCurrencyModal").modal('show');
   });  
   $('.change-currency-button').on('click', function(){
@@ -8,23 +8,20 @@ $(document).ready(function(){
         type: "POST",
         data: { currency: $(this).data("currency") }, 
         success: function(response) {
-            console.log(response);
             location.reload(true);
         }
     });
   }); 
 
   $('#checkout-form').submit(function() { 
-    var valuesToSubmit = $(this).serialize();
+    var country_id = $('#order_billing_country_id').val();
     var result = false;
     $.ajax({
         type: "POST",
-        url: "/check_country", //sumbits it to the given url of the form
-        data: valuesToSubmit,
+        url: "/check_country", 
+        data: {country_id: country_id},
         async: false,
-        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
     }).success(function(is_equal){
-        console.log("success", is_equal);
         result = is_equal;
         if (! is_equal) $("#changeCurrencyCheckoutModal").modal('show');
     });
