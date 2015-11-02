@@ -425,43 +425,14 @@
     };
 
     /**
-     * Clear area
+     * Open Dimensions Form
      */
-    Controller.prototype.clearArea = function(elementsClass) {
-      var $setDimensionsButton = $('#set-dimensions');
-      var $dimensionsDialog = $('div#dimensions-dialog');
+    Controller.prototype.openDimensionsForm = function(elementsClass) {
+      var setDimensionsButton = $('#set-dimensions');
+      var dimensionsDialog = $('div#dimensions-dialog');
 
-      //clear area
-      function clearArea(){
-        $setDimensionsButton.on('click', function(){
-          $('.' + elementsClass).each(function() {
-             $(this).css('display', 'none');
-          });
-          // open dialog
-          $dimensionsDialog.dialog('open');
-
-          //set measure to inputs value
-          $('input#width-ft').val($('span#measure-width-ft').text());
-          $('input#width-inch').val($('span#measure-width-inch').text());
-          $('input#height-ft').val($('span#measure-height-ft').text());
-          $('input#height-inch').val($('span#measure-height-inch').text());
-
-        });
-      }
-
-      // restore area
-      function restoreArea(){
-        $('.' + elementsClass).each(function() {
-          if ($('.editor-items-panel').css('display') === 'none') {
-            $(this).css('display', 'block');
-          } else {
-            $(this).css('display', 'none');
-          }
-        });
-      }
-
-      // define dialog
-      $dimensionsDialog.dialog({
+      // define form dialog
+      dimensionsDialog.dialog({
         autoOpen: false,
         minWidth: 350,
         minHeight: 210,
@@ -477,8 +448,29 @@
         }
       });
 
-      clearArea();
+      // open dialog form and clear area
+      setDimensionsButton.on('click', function(){
+        clearArea();
+        dimensionsDialog.dialog('open');
+      });
 
+      //clear area
+      function clearArea(){
+        $('.' + elementsClass).each(function() {
+           $(this).css('display', 'none');
+        });
+      }
+
+      // restore area
+      function restoreArea(){
+        $('.' + elementsClass).each(function() {
+          if ($('.editor-items-panel').css('display') === 'none') {
+            $(this).css('display', 'block');
+          } else {
+            $(this).css('display', 'none');
+          }
+        });
+      }
     };
 
     /**
@@ -486,52 +478,10 @@
      */
     Controller.prototype.resizeArea = function(elementsClass) {
       var controller = this;
-      var $dimensionsDialog = $('div#dimensions-dialog');
-
+      var dimensionsDialog = $('div#dimensions-dialog');
       $('#submit-new-dimensions').on('click', function(e) {
         e.preventDefault();
 
-        // reset items panel
-        $('.items-panel-elem').each(function() {
-          $(this).show();
-          $(this).attr('data-x', '0');
-          $(this).attr('data-y', '0');
-
-          $(this).css({
-                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
-                '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
-                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
-                'transform': 'translate(0px, 0px) rotate(0deg)',
-              });
-        });
-
-        // validate number
-        function isNumber(n) {
-          return !isNaN(parseFloat(n)) && isFinite(n) && n >= 0;
-        }
-
-        // form validation
-        function validateForm() {
-          var validInputs = 0;
-          $('.dialog-input').each(function(index) {
-            if ( !isNumber( $(this).val() ) ){
-              $(this).css('border-color', '#A94442');
-            } else {
-              $(this).css('border-color', '#ccc');
-              validInputs++;
-            }
-          });
-          if (validInputs < 4) {
-            return false;
-          } else {
-            return true;
-          }
-        }
-
-        //return if form invalid
-        if (!validateForm()){ return; }
-
-        // new dimensions
         var newWidthFt = +$('#width-ft').val();
         var newWidthInch = +$('#width-inch').val();
         var newHeightFt = +$('#height-ft').val();
@@ -540,20 +490,78 @@
         var newWidth = ( newWidthFt * 12 ) + newWidthInch;
         var newHeight = ( newHeightFt * 12 ) + newHeightInch;
 
-        // set new dimetsion to container data
-        $('.editor-container').data( 'width', newWidth );
-        $('.editor-container').data( 'height', newHeight );
+        if ( !validateForm( $('.dialog-input') ) ) { return; }
 
-        // scaling
-        var scaling = parseFloat($('.editor-container').data('width')) / $('.editor-container').width();
+        setNewDimensionsToArea(newWidth, newHeight);
 
-        var newEditorContainerWidth =  +$('.editor-container').data( 'width' );
-        var newEditorContainerHeight =  +$('.editor-container').data( 'height' );
-        var invalidItemWidth = 0
-        var invalidItemHeight = 0
+        var scaling = +$('.editor-container').data('width') / +$('.editor-container').width();
+
+        if ( !renderFormErrors( validateNewRoomDimensions(scaling) ) ) { return; }
+
+        scaleAreaHeight(scaling);
+
+        scaleEditorHeightLine();
+
+        updateMeasureDescription(newWidthFt, newWidthInch, newHeightFt, newHeightInch);
+
+        scaleItems(scaling);
+
+        resetItemsInPanel( $('.items-panel-elem') );
+
+        controller.initItemsPanelArea();
+
+        dimensionsDialog.dialog('close');
+
+      });
+
+      function resetItemsInPanel(items) {
+        items.each(function() {
+          $(this).attr('data-x', '0');
+          $(this).attr('data-y', '0');
+
+          $(this).css({
+            '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+               '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                    'transform': 'translate(0px, 0px) rotate(0deg)',
+          });
+
+          $(this).show();
+        });
+      }
+
+      function isNumber(number) { return !isNaN(parseFloat(number)) && isFinite(number) && number >= 0; }
+
+      function validateForm(imputs) {
+        var validInputs = 0;
+        imputs.each(function(index) {
+          if ( !isNumber( $(this).val() ) ) {
+            $(this).css('border-color', '#A94442');
+          } else {
+            $(this).css('border-color', '#ccc');
+            validInputs++;
+          }
+        });
+
+        if (validInputs < 4) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      function setNewDimensionsToArea(width, height) {
+        $('.editor-container').data('width', width);
+        $('.editor-container').data('height', height);
+      }
+
+      function validateNewRoomDimensions(scaling) {
+        var newEditorContainerWidth =  +$('.editor-container').data('width');
+        var newEditorContainerHeight =  +$('.editor-container').data('height');
+        var invalidItemWidth = 0;
+        var invalidItemHeight = 0;
 
         // validate width and heigh of room
-
         $('.' + elementsClass).each(function() {
           var newItemWidth = $(this).data('width');
           var newItemHeight = $(this).data('height');
@@ -566,9 +574,16 @@
           }
         });
 
+        return { invalidItemWidth: invalidItemWidth, invalidItemHeight: invalidItemHeight };
+      }
+
+      function renderFormErrors(errors) {
+        console.log(errors);
+        var invalidItemWidth = errors.invalidItemWidth;
+        var invalidItemHeight = errors.invalidItemHeight;
         // render errors
-        if(invalidItemWidth > 0 || invalidItemHeight > 0) {
-          if(invalidItemWidth > 0 && invalidItemHeight === 0) {
+        if (invalidItemWidth > 0 || invalidItemHeight > 0) {
+          if (invalidItemWidth > 0 && invalidItemHeight === 0) {
             $('#dialog-form-errors').html("<center><p><b>New room width is too small for the furniture included. Please enlarge it.</b></p></center");
             $('.dialog-input-width').each(function(index) {
                 $(this).css('border-color', '#A94442');
@@ -592,48 +607,45 @@
                 $(this).css('border-color', '#A94442');
             });
           }
-          return;
+          console.log(false);
+          return false;
+        } else {
+          console.log(true);
+          return true;
         }
+      }
 
-        // change container height
+      function scaleAreaHeight(scaling) {
         $('.editor-container').height($('.editor-container').data('height') / scaling);
+      }
 
-        // change editor height line
+      function scaleEditorHeightLine(scaling) {
         $('.editor-height').height($('.editor-container').height());
         $('.editor-height img').height($('.editor-container').height());
+      }
 
-        // change measure description
-        $('span#measure-width-ft').html(newWidthFt);
-        $('span#measure-width-inch').html(newWidthInch);
-        $('span#measure-height-ft').html(newHeightFt);
-        $('span#measure-height-inch').html(newHeightInch);
+      function updateMeasureDescription(widthFt, widthInch, heightFt, heightInch) {
+        $('span#measure-width-ft').html(widthFt);
+        $('span#measure-width-inch').html(widthInch);
+        $('span#measure-height-ft').html(heightFt);
+        $('span#measure-height-inch').html(heightInch);
+      }
 
-        // scale items according to new dimensions
+      function scaleItems(scaling) {
         $('.' + elementsClass).each(function() {
+          $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling || $(this).width()/2.0);
+          $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling || $(this).height()/2.0);
 
-            $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling || $(this).width()/2.0);
-            $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling || $(this).height()/2.0);
-
-            $(this).parent().css({
-                'width': $(this).data('width') / scaling,
-                'height': $(this).data('heigh') / scaling,
-                // 'width': $(this).data('width'),
-                // 'height': $(this).data('heigh'),
-                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
-            });
-
+          $(this).parent().css({
+            'width': $(this).data('width') / scaling,
+            'height': $(this).data('heigh') / scaling,
+            '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+            '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+            '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+            'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+          });
         });
-
-        // init items panel
-        controller.initItemsPanelArea();
-
-        // close dialog
-        $dimensionsDialog.dialog('close');
-
-      });
+      }
 
     };
 
@@ -801,7 +813,7 @@
         //this.manageHolderScaling();
         //this.manageCats();
         this.initMouseRotation();
-        this.clearArea(this.$initialElenemts);
+        this.openDimensionsForm(this.$initialElenemts);
         this.resizeArea(this.$initialElenemts);
         // this.adaptArea(this.$initialElenemts);
     };
