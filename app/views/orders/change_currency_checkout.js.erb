@@ -5,3 +5,4 @@ $('#order-summary-info').html("<%= j (render 'order_summary_info', order: curren
 $(document).on('click','.select-new-currency',function(){
   $("#changeCurrencyModal").modal('show');
 });
+$('.currency-change-header').replaceWith("<div class='text-center currency-change-header'>Change the Currency from <%= current_currency_name %> to <%= dropdown_currency_name %>?</div>");
