@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   before_action :find_product, except: [:index]
 
   def index
-    @products = Shoppe::Product.root.ordered.includes(:product_category, :variants)
+    @products = Shoppe::Product.root.includes(:product_category, :variants).order(:parent_id)
     @products = @products.group_by(&:product_category)
   end
 

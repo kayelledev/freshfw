@@ -10,9 +10,9 @@ module ProductsHelper
 
   def default_image(product)
     if (product.url_default_image).present?
-      image_tag product.url_default_image, class: "img-responsive", alt: "#{product.full_name}"
+      image_tag product.url_default_image, class: "img-responsive portfolio-image", alt: "#{product.full_name}"
     elsif (product.default_image).present?
-      image_tag product.default_image.catalog, class: "img-responsive", alt: "#{product.full_name}"
+      image_tag product.default_image.catalog, class: "img-responsive portfolio-image", alt: "#{product.full_name}"
     else
       nil
     end
