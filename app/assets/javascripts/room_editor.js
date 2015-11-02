@@ -698,12 +698,12 @@
 
           // restrict position
           if ( newPositionX + +realItem.width() >= +$('.editor-container').width() ) {
-            var diffX = ( newPositionX + +realItem.width() - +$('.editor-container').width() ) + 2;
+            var diffX = ( newPositionX + +realItem.width() - +$('.editor-container').width() ) + 3;
             newPositionX -= diffX;
           }
 
           if ( newPositionY + +realItem.height() >= +$('.editor-container').height() ) {
-            var diffY = ( newPositionY + +realItem.height() - +$('.editor-container').height() ) + 2;
+            var diffY = ( newPositionY + +realItem.height() - +$('.editor-container').height() ) + 3;
             newPositionY -= diffY;
             console.log(diffY);
             console.log(newPositionY);
