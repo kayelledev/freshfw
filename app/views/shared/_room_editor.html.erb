@@ -115,16 +115,16 @@
       <div class="form-group">
         <label class='col-sm-3 control-label'>Width:</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control dialog-input dialog-input-width" id="width-ft" placeholder="ft." required>
-          <input type="number" class="form-control dialog-input dialog-input-width" id="width-inch" placeholder="inch." required>
+          <input type="number" class="form-control dialog-input dialog-input-width" id="width-ft" placeholder="ft." required value="<%= full_measure( @product.width )[:ft] %>">
+          <input type="number" class="form-control dialog-input dialog-input-width" id="width-inch" placeholder="inch." required value="<%= full_measure( @product.width )[:inch] %>">
         </div>
       </div>
 
       <div class="form-group">
         <label class='col-sm-3 control-label'>Depth:</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control dialog-input dialog-input-height" id="height-ft" placeholder="ft." required>
-          <input type="number" class="form-control dialog-input dialog-input-height" id="height-inch" placeholder="inch." required>
+          <input type="number" class="form-control dialog-input dialog-input-height" id="height-ft" placeholder="ft." required value="<%= full_measure( @product.depth )[:ft] %>">
+          <input type="number" class="form-control dialog-input dialog-input-height" id="height-inch" placeholder="inch." required value="<%= full_measure( @product.depth )[:inch] %>">
         </div>
       </div>
 

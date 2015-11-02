@@ -427,41 +427,12 @@
     /**
      * Clear area
      */
-    Controller.prototype.clearArea = function(elementsClass) {
-      var $setDimensionsButton = $('#set-dimensions');
-      var $dimensionsDialog = $('div#dimensions-dialog');
+    Controller.prototype.openDimensionsForm = function(elementsClass) {
+      var setDimensionsButton = $('#set-dimensions');
+      var dimensionsDialog = $('div#dimensions-dialog');
 
-      //clear area
-      function clearArea(){
-        $setDimensionsButton.on('click', function(){
-          $('.' + elementsClass).each(function() {
-             $(this).css('display', 'none');
-          });
-          // open dialog
-          $dimensionsDialog.dialog('open');
-
-          //set measure to inputs value
-          $('input#width-ft').val($('span#measure-width-ft').text());
-          $('input#width-inch').val($('span#measure-width-inch').text());
-          $('input#height-ft').val($('span#measure-height-ft').text());
-          $('input#height-inch').val($('span#measure-height-inch').text());
-
-        });
-      }
-
-      // restore area
-      function restoreArea(){
-        $('.' + elementsClass).each(function() {
-          if ($('.editor-items-panel').css('display') === 'none') {
-            $(this).css('display', 'block');
-          } else {
-            $(this).css('display', 'none');
-          }
-        });
-      }
-
-      // define dialog
-      $dimensionsDialog.dialog({
+      // define form dialog
+      dimensionsDialog.dialog({
         autoOpen: false,
         minWidth: 350,
         minHeight: 210,
@@ -477,7 +448,30 @@
         }
       });
 
-      clearArea();
+      // open dialog form and clear area
+      setDimensionsButton.on('click', function(){
+        clearArea();
+        dimensionsDialog.dialog('open');
+      });
+
+      //clear area
+      function clearArea(){
+        $('.' + elementsClass).each(function() {
+           $(this).css('display', 'none');
+        });
+      }
+
+      // restore area
+      function restoreArea(){
+        $('.' + elementsClass).each(function() {
+          if ($('.editor-items-panel').css('display') === 'none') {
+            $(this).css('display', 'block');
+          } else {
+            $(this).css('display', 'none');
+          }
+        });
+      }
+
 
     };
 
@@ -801,7 +795,7 @@
         //this.manageHolderScaling();
         //this.manageCats();
         this.initMouseRotation();
-        this.clearArea(this.$initialElenemts);
+        this.openDimensionsForm(this.$initialElenemts);
         this.resizeArea(this.$initialElenemts);
         // this.adaptArea(this.$initialElenemts);
     };
