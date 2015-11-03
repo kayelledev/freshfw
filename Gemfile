@@ -52,6 +52,8 @@ gem "figaro"
 # gem 'capistrano-rails', group: :development
 
 gem 'pg'
+gem 'sinatra', :require => nil
+gem 'sidekiq'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

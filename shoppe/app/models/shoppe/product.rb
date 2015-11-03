@@ -73,7 +73,7 @@ module Shoppe
     validates :cost_price, :numericality => true, :allow_blank => true
 
     # Before validation, set the permalink if we don't already have one
-    before_validation { self.permalink = "#{self.sku}-#{self.name.parameterize}" if self.permalink.blank? && self.name.is_a?(String) }
+    before_validation { self.permalink = "#{self.name.parameterize}-#{self.sku}" if self.permalink.blank? && self.name.is_a?(String) }
 
     # All active products
     scope :active, -> { where(:active => true) }
@@ -202,6 +202,7 @@ module Shoppe
           product.save!
           field_array.each{|element| row.delete(element)}
           row.each do |key, value|
+            next unless value.present?
             product_attr = Shoppe::ProductAttribute.where(product_id: product.id, key: key).first_or_create
             product_attr.public = attr_active_array.include?(key)
             product_attr.searchable = false
