@@ -75,7 +75,10 @@ class ImportWorker
         errors.unshift("Success imported #{success_count} rows", "")
       end
     end
-    Shoppe::ImportMailer.imported(email, errors).deliver_now
+    begin
+      Shoppe::ImportMailer.imported(email, errors).deliver_now
+    rescue
+    end
   end
 
 end
