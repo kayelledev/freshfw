@@ -163,6 +163,7 @@ module Shoppe
     #   Shoppe:Product.import("path/to/file.csv")
     def self.import(file, email)
       ImportWorker.perform_async(file.path, email)
+      sleep 3
       "The file is sent to the background task. Import results will be sent to your email."
     end
 
