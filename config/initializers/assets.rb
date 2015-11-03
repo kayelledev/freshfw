@@ -11,3 +11,5 @@ Rails.application.config.assets.paths << 'fonts'
 Rails.application.config.assets.precompile += %w( products/products.js )
 Rails.application.config.assets.precompile += %w( checkout/* )
 Rails.application.config.assets.precompile += %w( bootstrap-treeview.min.js )
+Rack::Utils.multipart_part_limit = 0 if Rails.env.development?
+

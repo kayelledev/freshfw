@@ -13,6 +13,8 @@ stdout_path "#{app_path}/shared/log/unicorn.stdout.log"
 # workers
 worker_processes 1
 
+#TODO - remove this after import_product => sidekiq
+timeout 3000
 
 # use correct Gemfile on restarts
 before_exec do |server|

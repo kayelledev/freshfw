@@ -55,12 +55,16 @@ module Shoppe
     # Validations
     with_options :if => Proc.new { |p| p.parent.nil? } do |product|
       product.validates :product_category_id, :presence => true
-      product.validates :description, :presence => true
-      product.validates :short_description, :presence => true
+      product.validates :product_subcategory_id, :presence => true
+      #product.validates :description, :presence => true
+      #product.validates :short_description, :presence => true
     end
-    validates :name, :presence => true, :uniqueness => true
+    validates :name, :presence => true
+    validates :sku, :presence => true
+    validates_uniqueness_of :name, :scope => :sku
+    validates_uniqueness_of :sku, :scope => :name
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true
-    validates :sku, :presence => true, :uniqueness => true
+
     validates :weight, :numericality => true
     validates :width, numericality: {only_float: true}
     validates :height, numericality: {only_float: true}
@@ -69,7 +73,7 @@ module Shoppe
     validates :cost_price, :numericality => true, :allow_blank => true
 
     # Before validation, set the permalink if we don't already have one
-    before_validation { self.permalink = self.name.parameterize if self.permalink.blank? && self.name.is_a?(String) }
+    before_validation { self.permalink = "#{self.sku}-#{self.name.parameterize}" if self.permalink.blank? && self.name.is_a?(String) }
 
     # All active products
     scope :active, -> { where(:active => true) }
@@ -174,7 +178,7 @@ module Shoppe
           product = Shoppe::Product.where(name: row["Product Name"], sku: row['SKU']).first_or_create
           product.product_category_id = Shoppe::ProductCategory.where(name: row["Category Name"]).first_or_create.id
           product.product_subcategory_id = Shoppe::ProductCategory.where(name: row["Subcategory Name"]).first_or_create.id
-          product.permalink = row["Permalink"] if row["Permalink"]
+          #product.permalink = row["Permalink"] if row["Permalink"]
           product.description = row["Description"] if row["Description"]
           product.short_description = row["Short Description"] if row["Short Description"]
           product.save!
@@ -206,10 +210,10 @@ module Shoppe
           end
         success_count += 1
         rescue => error
-          errors << {error: error.message, row: index}
+          errors << {error: error.message, row_index: index, row: row}
         end
       end
-      errors.empty? ? 'Import success' : "Success row count: #{success_count}. Column #{errors.first[:row]}, error: #{errors.first[:error]}"
+      errors.empty? ? 'Import success' : "Success row count: #{success_count}. Column #{errors.first[:row_index]}, error: #{errors.first[:error]}."
     end
 
     def self.open_spreadsheet(file)
