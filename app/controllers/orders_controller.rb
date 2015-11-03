@@ -108,6 +108,31 @@ class OrdersController < ApplicationController
     end
   end
 
+  def country_changing
+    @provinces = Shoppe::TaxRate.ordered.where(country:params[:country_name]).map{|s| [s.province, s.id]}
+    @country_type = params[:country_type]
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def check_country
+    @country = Shoppe::Country.find(params[:country_id])
+    current_country = cookies[:currency] == 'us' ? 'Other' : 'Canada'
+    order_country = @country.try(:name) == 'Canada' ? 'Canada' : 'Other'    
+    country_equal = current_country == order_country
+    render json: country_equal.try(:to_json)
+  end
+
+  def change_currency_checkout
+    cookies[:currency] = params[:currency] if params[:currency].present?
+    @order = current_order
+    @order.update(currency: cookies[:currency])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def payment
     @order = current_order
     puts @order.id

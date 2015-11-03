@@ -1,4 +1,3 @@
-<center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %></center>
 <div class="navigation-holder">
   <!--<div>-->
     <!--Position X-->
@@ -34,66 +33,98 @@
   <input type="number" class="rotation-manager" min="0" max="360" step="1">
 </div>
 
+
+
 <div class="editor-width">
   <hr>
   <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
-  <div class='measure-width'><%= full_measure( @product.width ) %></div>
+  <div class='measure-width'>
+    <span id='measure-width-ft'><%= full_measure( @product.width )[:ft] %></span>
+    ft
+    <span id='measure-width-inch'><%= full_measure( @product.width )[:inch] %></span>
+    in
+  </div>
   <%= image_tag 'line.png', class: 'editor-line' %>
 </div>
 
+
+
 <div class="editor-height">
-  <%= image_tag 'line.png' %>
+  <%= image_tag 'vertical-line.png' %>
     <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
-    <div class='measure-height'><%= full_measure( @product.depth )%></div>
+    <div class='measure-height'>
+      <span id='measure-height-ft'><%= full_measure( @product.depth )[:ft] %></span>
+      ft
+      <span id='measure-height-inch'><%= full_measure( @product.depth )[:inch] %></span>
+      in
+    </div>
 </div>
+
+
+<div class='dragg'>
+
+<div class="editor-items-panel">
+  <% @product.included_products.each do |item| %>
+    <div class='draggable2 items-panel-elem' data-id="<%= item.id %>">
+        <% if image_link(item, 'image6') %>
+              <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%' %>
+          <% end %>
+    </div>
+  <% end %>
+</div>
+
+
 
 <div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.depth %>" style="height: 600px;">
   <% @product.included_products.each do |item| %>
     <% if @product.width > item.width && @product.depth > item.depth %>
       <% item.posX = @product.width / 2 if item.posX > @product.width || item.posX < 0 %>
       <% item.posY = @product.depth / 2 if item.posY > @product.depth || item.posY < 0 %>
-      <span style="position: absolute;" data-width="<%= item.width %>" data-heigh="<%= item.depth %>"
+      <span style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>"
             data-rotation="<%= item.rotation %>"
             data-x="<%= item.posX %>"
             data-y="<%= item.posY %>"
             data-toggle="tooltip" title="<%= item.product_category.name %>">
 
-        <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-heigh="<%= item.depth %>"
+        <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>"
              data-rotation="<%= item.rotation %>"
              data-x="<%= item.posX %>"
              data-y="<%= item.posY %>"
-             style="width: <%= item.width %>px; height: <%= item.depth %>px;">
+             >
           <% if image_link(item, 'image6') %>
-              <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%' %>
+              <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image'%>
           <% end %>
         </div>
         <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
       </span>
     <% else %>
       <script>
-        $('.editor-container').parent().hide()
-        alert('<%= "Size #{item.name} (#{item.width}*#{item.depth}) more than room size (#{@product.width}*#{@product.depth})" %>');
+        $('.room-editor-container').hide();
+        alert('<%= "Room dimensions (#{@product.width} x #{@product.depth}) are not enough for #{item.name} (#{item.width} x #{item.depth})" %>');
       </script>
     <% end %>
   <% end %>
 </div>
 
+</div>
+
 <div id="dimensions-dialog" title="Set dimensions">
+    <div id='dialog-form-errors'></div>
     <form class="form-horizontal" id='dialog-form'>
 
       <div class="form-group">
         <label class='col-sm-3 control-label'>Width:</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control dialog-input" id="width-ft" placeholder="ft." required>
-          <input type="number" class="form-control dialog-input" id="width-inch" placeholder="inch." required>
+          <input type="number" class="form-control dialog-input dialog-input-width" id="width-ft" placeholder="ft." required value="<%= full_measure( @product.width )[:ft] %>">
+          <input type="number" class="form-control dialog-input dialog-input-width" id="width-inch" placeholder="inch." required value="<%= full_measure( @product.width )[:inch] %>">
         </div>
       </div>
 
       <div class="form-group">
-        <label class='col-sm-3 control-label'>Height:</label>
+        <label class='col-sm-3 control-label'>Depth:</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control dialog-input" id="height-ft" placeholder="ft." required>
-          <input type="number" class="form-control dialog-input" id="height-inch" placeholder="inch." required>
+          <input type="number" class="form-control dialog-input dialog-input-height" id="height-ft" placeholder="ft." required value="<%= full_measure( @product.depth )[:ft] %>">
+          <input type="number" class="form-control dialog-input dialog-input-height" id="height-inch" placeholder="inch." required value="<%= full_measure( @product.depth )[:inch] %>">
         </div>
       </div>
 

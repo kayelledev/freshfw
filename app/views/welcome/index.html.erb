@@ -68,36 +68,36 @@
     <div class="col-md-4 col-sm-6 portfolio-item">
           <% livingroomId = Shoppe::ProductCategory.where(permalink: "living-rooms") %>
 		  <% product1= Shoppe::Product.where(product_category_id: livingroomId ).first %>
-  		  <a href="<%= product_path(product1.permalink)  %>" class="portfolio-link" data-toggle="modal">
+  		  <a href="<%= product_path(product1.permalink) if product1.present?  %>" class="portfolio-link" data-toggle="modal">
                 <div class="portfolio-hover" >
                     <div class="portfolio-hover-content">
-  					  <%= product1.name %>
+  					  <%= product1.name if product1.present?  %>
                     </div>
                 </div>
-                <%= default_image(product1) if default_image(product1) %>
+                <%= default_image(product1) if product1.present? && default_image(product1) %>
             </a>
           </div>
       <div class="col-md-4 col-sm-6 portfolio-item">
 		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>		  
-		  <a href="<%= product_path(product2.permalink)  %>" class="portfolio-link" data-toggle="modal">
+		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal"> 
               <div class="portfolio-hover" >
                   <div class="portfolio-hover-content">
-					  <%= product2.name %>
+					  <%= product2.name if product2.present? %>
                   </div>
               </div>
-              <%= default_image(product2) if default_image(product2) %>
+              <%= default_image(product2) if product2.present? && default_image(product2) %>
           </a>
         </div>
       <div class="col-md-4 col-sm-6 portfolio-item">
          <% diningroomId = Shoppe::ProductCategory.where(permalink: "dining-rooms") %>
 		  <% product3= Shoppe::Product.where(product_category_id: diningroomId).first%>
-  		  <a href="<%= product_path(product3.permalink)  %>" class="portfolio-link" data-toggle="modal">
+  		  <a href="<%= product_path(product3.permalink) if product3.present? %>" class="portfolio-link" data-toggle="modal">
             <div class="portfolio-hover" >
                 <div class="portfolio-hover-content">
-				  <%= product3.name %>
+				  <%= product3.name if product3.present? %>
                 </div>
             </div>
-            <%= default_image(product3) if default_image(product3) %>
+            <%= default_image(product3) if product3.present? && default_image(product3) %>
         </a>
     </div>
 	
@@ -108,36 +108,36 @@
     <div class="col-md-4 col-sm-6 portfolio-item">
           <% accentsId = Shoppe::ProductCategory.where(permalink: "accents") %>
 		  <% accent1= Shoppe::Product.where(product_category_id: accentsId ).first %>
-  		  <a href="<%= product_path(accent1.permalink)  %>" class="portfolio-link" data-toggle="modal">
+  		  <a href="<%= product_path(accent1.permalink) if accent1.present?  %>" class="portfolio-link" data-toggle="modal">
                 <div class="portfolio-hover" >
                     <div class="portfolio-hover-content">
-  					  <%= accent1.name %>
+  					  <%= accent1.name if accent1.present? %>
                     </div>
                 </div>
-                <%= default_image(accent1) if default_image(accent1) %>
+                <%= default_image(accent1) if accent1.present? && default_image(accent1) %>
             </a>
       </div>
       <div class="col-md-4 col-sm-6 portfolio-item">
 		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>		  
-		  <a href="<%= product_path(product2.permalink)  %>" class="portfolio-link" data-toggle="modal">
+		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal">
               <div class="portfolio-hover" >
                   <div class="portfolio-hover-content">
-					  <%= product2.name %>
+					  <%= product2.name if product2.present? %>
                   </div>
               </div>
-              <%= default_image(product2) if default_image(product2) %>
+              <%= default_image(product2) if product2.present? && default_image(product2) %>
           </a>
 	    </div>
       <div class="col-md-4 col-sm-6 portfolio-item">
          <% diningroomId = Shoppe::ProductCategory.where(permalink: "dining-rooms") %>
 		  <% product3= Shoppe::Product.where(product_category_id: livingroomId).first%>
-  		  <a href="<%= product_path(product3.permalink)  %>" class="portfolio-link" data-toggle="modal">
+  		  <a href="<%= product_path(product3.permalink) if product3.present? %>" class="portfolio-link" data-toggle="modal">
             <div class="portfolio-hover" >
                 <div class="portfolio-hover-content">
-				  <%= product3.name %>
+				  <%= product3.name if product3.present? %>
                 </div>
             </div>
-            <%= default_image(product3) if default_image(product3) %>
+            <%= default_image(product3) if product3.present? && default_image(product3) %>
         </a>
     </div>
 	

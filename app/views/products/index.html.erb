@@ -1,7 +1,7 @@
 <div class="container" id="portfolio">
   <br>
   <% @products.each do |category, products| %>
-      <% if category.parent_id != nil && Shoppe::ProductCategory.find_by_permalink('rooms').id == category.parent_id %>
+      <% if category.parent_id != nil && Shoppe::ProductCategory.find_by_permalink('rooms').try(:id) == category.parent_id %>
 		<h3 style="color: #333; display: block; float: left; width: 100%;" ><%=  category.name.upcase %></h3>
 		<ul>
 		  <% products.each do |product| %>

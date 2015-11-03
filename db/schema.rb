@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20151027212207) do
     t.string  "value"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "room_items", force: :cascade do |t|
     t.integer  "room_id"
     t.integer  "item_id"
@@ -268,7 +275,7 @@ ActiveRecord::Schema.define(version: 20151027212207) do
   add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink"
   add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id"
   add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku"
-
+  
   create_table "shoppe_settings", force: :cascade do |t|
     t.string "key"
     t.string "value"

@@ -1,0 +1,58 @@
+<div class='content-page-image-block'>
+    <img class="content-page-image" src="<%= Rails.application.config.carousel_shop_about_blog %>">
+    <div class='page-name'>
+        <b>ACCOUNT</b>
+    </div>
+</div>
+<% if @orders.present? %>
+  <div class='orders-data'> 
+  <h2>Order history</h2>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t('shoppe.orders.number') %></th>
+        <th><%= t('shoppe.orders.status') %></th>
+        <th><%= t('shoppe.orders.products') %></th>	
+        <th><%= t('shoppe.orders.total') %></th>	
+        <th><%= t('shoppe.orders.payment') %></th>	
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.number %></td>
+          <td><%= order.status %></td>
+      	  <td>
+      	  	<ul>
+                <%- for item in order.order_items %>
+                  <li><%= "#{item.quantity} x #{item.ordered_item.full_name}" %></li>
+                <% end %>
+            </ul>
+      	  </td>
+      	  <td><%= number_to_currency order.total %></td>
+      	  <td><%= boolean_tag order.paid_in_full?, nil, :true_text => number_to_currency(order.amount_paid), :false_text => number_to_currency(order.amount_paid) %></td>
+      	  <td><%= order.created_at.strftime('%F') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+<% end %>
+<% if @products.present? %>
+  <div class='products-data'> 
+    <h2>Last visited products</h2>
+    <ul>
+      <% @products.each do |product| %>
+        <li>
+          <h4 style="color: #333;" ><%= link_to product.name, product_path(product.permalink) %></h4>
+          <a href="<%= product_path(product.permalink) %>">
+            <span>
+              <%= image_tag product.default_image, class: "img-responsive item-img", alt: "#{product.full_name}" %>
+            </span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

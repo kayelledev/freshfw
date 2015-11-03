@@ -31,20 +31,3 @@ $('body > *').not('nav').click(function() {
         $('.navbar-toggle:visible').click();
     }
 });
-// todo maybe it will be better transfer this code to another place
-$(document).ready(function(){
-  $('#selectNewCurrency').on('click', function(e){
-    $("#changeCurrencyModal").modal('show');
-  });  
-  $('.change-currency-button').on('click', function(){
-    $.ajax({
-        url: "/change_user_country", 
-        type: "POST",
-        data: { currency: $(this).data("currency") }, 
-        success: function(response) {
-            console.log(response);
-            location.reload(true);
-        }
-    });
-  }); 
-});

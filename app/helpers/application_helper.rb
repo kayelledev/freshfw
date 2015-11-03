@@ -20,7 +20,19 @@ module ApplicationHelper
     cookies[:currency] == 'us' ? 'ca' : 'us'
   end
 
+  def current_currency_name
+    cookies[:currency] + 'd'
+  end
+
+  def dropdown_currency_name
+    (cookies[:currency] == 'us' ? 'ca' : 'us') + 'd'
+  end
+
   def dropdown_currency_label(currency)
     currency == 'us' ? ' $USD' : ' $CAD'
+  end
+
+  def dimension_if_positive(message, field)
+    "#{message}: #{field}" if field > 0
   end
 end
