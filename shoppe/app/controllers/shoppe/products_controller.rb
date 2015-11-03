@@ -40,10 +40,10 @@ module Shoppe
 
     def import
       if request.post?
-        if params[:import].nil?
+        if params[:import][:import_file].nil?
           redirect_to import_products_path, :flash => {:alert => I18n.t('shoppe.imports.errors.no_file')}
         else
-          status = Shoppe::Product.import(params[:import][:import_file])
+          status = Shoppe::Product.import(params[:import][:import_file], params[:import][:email])
           redirect_to products_path, :flash => {:notice => status}
         end
       end
