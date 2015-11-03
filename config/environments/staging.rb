@@ -70,13 +70,13 @@ Rails.application.configure do
     :user_name => "info@gofourwalls.com",
     :password  => "fourwalls7165165", # SMTP password is any valid API key
     :authentication => 'plain', # Mandrill supports 'plain' or 'login'
-    :domain => 'fresh-fw.herokuapp.com', # your domain to identify your server when connecting
+    :domain => 'fresh-fw-stage.sloboda-studio.com', # your domain to identify your server when connecting
     :ssl => true
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.default_options = {from: "GoFourWalls <info@gofourwalls.com>"}
-  config.action_mailer.default_url_options = {:host => 'fresh-fw.herokuapp.com'}
+  config.action_mailer.default_url_options = {:host => 'fresh-fw-stage.sloboda-studio.com'}
 
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
