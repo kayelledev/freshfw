@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Shoppe::Engine.routes.draw do
 
   get 'attachment/:id/:filename.:extension' => 'attachments#show'
@@ -40,6 +41,10 @@ Shoppe::Engine.routes.draw do
   match 'login/reset' => 'sessions#reset', :via => [:get, :post]
 
   delete 'logout' => 'sessions#destroy'
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   root :to => 'dashboard#home'
 end
