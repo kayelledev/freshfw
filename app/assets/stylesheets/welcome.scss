@@ -16,3 +16,18 @@
     color: white;
     font-size: 50px;
 }
+
+
+@media (max-width: 767px) {
+    .floating-text-container h1 {
+        font-size: 20px;
+    }
+    .floating-text-container h3 {
+        font-size: 12px;
+    }
+    .floating-text-container .btn-landing {
+        font-size: 12px;
+        padding: 5px 10px;
+        border-width: 3px;
+    }
+}
