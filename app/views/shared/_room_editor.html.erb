@@ -1,3 +1,8 @@
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag "http://bxslider.com/lib/jquery.bxslider.js" %>
+<% end %>
+
+
 <div class="navigation-holder">
   <!--<div>-->
     <!--Position X-->
@@ -109,31 +114,54 @@
 </div>
 
 <div id="dimensions-dialog" title="Set dimensions">
-    <div id='dialog-form-errors'></div>
-    <form class="form-horizontal" id='dialog-form'>
+  <div id='room-slider'>
+    <div class="slide active-slider" data-room='0'><%= image_tag 'rooms/room_0.png' %></div>
+    <div class="slide" data-room='1'><%= image_tag 'rooms/room_1.png' %></div>
+    <div class="slide" data-room='2'><%= image_tag 'rooms/room_2.png' %></div>
+    <div class="slide" data-room='3'><%= image_tag 'rooms/room_3.png' %></div>
+    <div class="slide" data-room='4'><%= image_tag 'rooms/room_4.png' %></div>
+    <div class="slide" data-room='5'><%= image_tag 'rooms/room_5.png' %></div>
+    <div class="slide" data-room='6'><%= image_tag 'rooms/room_6.png' %></div>
+    <div class="slide" data-room='7'><%= image_tag 'rooms/room_7.png' %></div>
+    <div class="slide" data-room='8'><%= image_tag 'rooms/room_8.png' %></div>
+  </div>
 
-      <div class="form-group">
-        <label class='col-sm-3 control-label'>Width:</label>
-        <div class="col-sm-9">
-          <input type="number" class="form-control dialog-input dialog-input-width" id="width-ft" placeholder="ft." required value="<%= full_measure( @product.width )[:ft] %>">
-          <input type="number" class="form-control dialog-input dialog-input-width" id="width-inch" placeholder="inch." required value="<%= full_measure( @product.width )[:inch] %>">
-        </div>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <div id='room-preview'>
+        <%= image_tag 'rooms/room_0.png' %>
       </div>
+    </div>
+    <div class='col-sm-6'>
+      <div id='dialog-form-errors'></div>
+      <form class="form-horizontal" id='dialog-form'>
 
-      <div class="form-group">
-        <label class='col-sm-3 control-label'>Depth:</label>
-        <div class="col-sm-9">
-          <input type="number" class="form-control dialog-input dialog-input-height" id="height-ft" placeholder="ft." required value="<%= full_measure( @product.depth )[:ft] %>">
-          <input type="number" class="form-control dialog-input dialog-input-height" id="height-inch" placeholder="inch." required value="<%= full_measure( @product.depth )[:inch] %>">
+        <div class="form-group">
+          <label class='col-sm-3 control-label'>Width:</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control dialog-input dialog-input-width" id="width-ft" placeholder="ft." required value="<%= full_measure( @product.width )[:ft] %>">
+            <input type="number" class="form-control dialog-input dialog-input-width" id="width-inch" placeholder="inch." required value="<%= full_measure( @product.width )[:inch] %>">
+          </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-          <button class="btn btn-guideline" id='submit-new-dimensions'>Submit</button>
+        <div class="form-group">
+          <label class='col-sm-3 control-label'>Depth:</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control dialog-input dialog-input-height" id="height-ft" placeholder="ft." required value="<%= full_measure( @product.depth )[:ft] %>">
+            <input type="number" class="form-control dialog-input dialog-input-height" id="height-inch" placeholder="inch." required value="<%= full_measure( @product.depth )[:inch] %>">
+          </div>
         </div>
-      </div>
-    </form>
+
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-guideline" id='submit-new-dimensions'>Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
 </div>
 
 <script>

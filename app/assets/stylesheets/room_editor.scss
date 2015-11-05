@@ -166,3 +166,23 @@ div#dialog-form-errors {
 .items-panel-elem {
   padding: 5px;
 }
+
+#room-slider .slide {
+  border: 2px solid white;
+}
+
+#room-slider .slide:hover {
+  cursor: pointer;
+}
+
+.bx-prev, .bx-next {
+  top: 130% !important;
+}
+
+.active-slider {
+  border: 2px solid #FED536 !important;
+}
+
+#room-preview img {
+  width: 100%;
+}

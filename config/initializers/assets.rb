@@ -11,3 +11,4 @@ Rails.application.config.assets.paths << 'fonts'
 Rails.application.config.assets.precompile += %w( products/products.js )
 Rails.application.config.assets.precompile += %w( checkout/* )
 Rails.application.config.assets.precompile += %w( bootstrap-treeview.min.js )
+Rails.application.config.assets.precompile += %w( bx_loader.gif controls.png

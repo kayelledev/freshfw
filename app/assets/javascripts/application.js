@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bxslider
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require_directory .

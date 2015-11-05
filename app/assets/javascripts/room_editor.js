@@ -434,7 +434,7 @@
       // define form dialog
       dimensionsDialog.dialog({
         autoOpen: false,
-        minWidth: 350,
+        minWidth: 650,
         minHeight: 210,
         resizable: false,
         modal: true,
