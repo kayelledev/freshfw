@@ -16,7 +16,7 @@ module Shoppe
     
     # All orders which have this country set as their delivery country
     has_many :delivered_orders, :dependent => :restrict_with_exception, :class_name => 'Shoppe::Order', :foreign_key => 'delivery_country_id'
-    
+    has_many :cities
     # All countries ordered by their name asending
     scope :ordered, -> { order(:name => :asc) }
     

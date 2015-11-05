@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# TODO create seeds data logistics
+# Logistic
+
 # Create tax rate for Ontario
 tax_rate = Shoppe::TaxRate.create!(:name => "HST", :rate => 13.0, :province => "ON", :country => "Canada")
 

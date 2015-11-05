@@ -72,6 +72,22 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "shoppe_cities", force: :cascade do |t|
+    t.integer "country_id"
+    t.string  "name"
+    t.string  "province"
+  end
+
+  add_index "shoppe_cities", ["country_id"], name: "index_shoppe_cities_on_country_id"
+
+  create_table "shoppe_cities_zones", force: :cascade do |t|
+    t.integer "city_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_cities_zones", ["city_id"], name: "index_shoppe_cities_zones_on_city_id"
+  add_index "shoppe_cities_zones", ["zone_id"], name: "index_shoppe_cities_zones_on_zone_id"
+
   create_table "shoppe_countries", force: :cascade do |t|
     t.string  "name"
     t.string  "code2"
@@ -114,10 +130,53 @@ ActiveRecord::Schema.define(version: 20153002432638) do
 
   add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active"
 
+  create_table "shoppe_freight_companies", force: :cascade do |t|
+    t.string "name"
+    t.string "dc"
+    t.string "website"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_freight_companies_zones", force: :cascade do |t|
+    t.integer "freight_company_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_freight_companies_zones", ["freight_company_id"], name: "index_shoppe_freight_companies_zones_on_freight_company_id"
+  add_index "shoppe_freight_companies_zones", ["zone_id"], name: "index_shoppe_freight_companies_zones_on_zone_id"
+
+  create_table "shoppe_freight_routes", force: :cascade do |t|
+    t.integer "trevel_days"
+    t.string  "warehouse"
+    t.string  "website"
+    t.integer "freight_company_id"
+    t.integer "zone_id"
+    t.integer "suppliers_zone_id"
+  end
+
+  add_index "shoppe_freight_routes", ["freight_company_id"], name: "index_shoppe_freight_routes_on_freight_company_id"
+  add_index "shoppe_freight_routes", ["suppliers_zone_id"], name: "index_shoppe_freight_routes_on_suppliers_zone_id"
+  add_index "shoppe_freight_routes", ["zone_id"], name: "index_shoppe_freight_routes_on_zone_id"
+
   create_table "shoppe_included_products", force: :cascade do |t|
     t.integer "parent_product_id"
     t.integer "included_product_id"
   end
+
+  create_table "shoppe_last_mile_companies", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "address"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_last_mile_companies_zones", force: :cascade do |t|
+    t.integer "last_mile_company_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id"], name: "index_shoppe_last_mile_companies_zones_on_last_mile_company_id"
+  add_index "shoppe_last_mile_companies_zones", ["zone_id"], name: "index_shoppe_last_mile_companies_zones_on_zone_id"
 
   create_table "shoppe_order_items", force: :cascade do |t|
     t.integer  "order_id"
@@ -256,6 +315,22 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_stock_level_adjustments", ["item_id", "item_type"], name: "index_shoppe_stock_level_adjustments_items"
   add_index "shoppe_stock_level_adjustments", ["parent_id", "parent_type"], name: "index_shoppe_stock_level_adjustments_parent"
 
+  create_table "shoppe_suppliers", force: :cascade do |t|
+    t.string "warehouse"
+    t.string "website"
+    t.string "prime"
+    t.text   "notes"
+    t.string "name"
+  end
+
+  create_table "shoppe_suppliers_zones", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_suppliers_zones", ["supplier_id"], name: "index_shoppe_suppliers_zones_on_supplier_id"
+  add_index "shoppe_suppliers_zones", ["zone_id"], name: "index_shoppe_suppliers_zones_on_zone_id"
+
   create_table "shoppe_tax_rates", force: :cascade do |t|
     t.string   "name"
     t.decimal  "rate",         precision: 8, scale: 2
@@ -288,6 +363,10 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   end
 
   add_index "shoppe_users", ["email_address"], name: "index_shoppe_users_on_email_address"
+
+  create_table "shoppe_zones", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
