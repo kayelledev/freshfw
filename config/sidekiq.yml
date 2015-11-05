@@ -1,0 +1,6 @@
+:concurrency: 1
+:pidfile: tmp/pids/sidekiq.pid
+
+:queues:
+    - [mass_import, 1]
+

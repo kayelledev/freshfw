@@ -73,7 +73,7 @@ module Shoppe
     validates :cost_price, :numericality => true, :allow_blank => true
 
     # Before validation, set the permalink if we don't already have one
-    before_validation { self.permalink = "#{self.name.parameterize}-#{self.sku}" if self.permalink.blank? && self.name.is_a?(String) }
+    before_validation :set_permalink
 
     # All active products
     scope :active, -> { where(:active => true) }
@@ -162,9 +162,21 @@ module Shoppe
     #
     #   Shoppe:Product.import("path/to/file.csv")
     def self.import(file, email)
-      ImportWorker.perform_async(file.path, email)
-      sleep 3
+      ext_name = File.extname(file.original_filename)
+      file_name = "#{Rails.root}/tmp/#{Time.now.strftime('%Y-%m-%d___%H_%M_%S_%L')}#{ext_name}"
+      FileUtils::copy_file(file.path, file_name)
+      ImportWorker.perform_async(file_name, email)
       "The file is sent to the background task. Import results will be sent to your email."
+    end
+
+    def set_permalink
+      if self.permalink.blank? && self.name.is_a?(String)
+        if Shoppe::Product.where(permalink: self.name.parameterize).empty?
+          self.permalink = "#{self.name.parameterize}"
+        else
+          self.permalink = "#{self.name.parameterize}-#{self.sku.parameterize}"
+        end
+      end
     end
 
   end
