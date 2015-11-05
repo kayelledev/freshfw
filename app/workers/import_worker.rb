@@ -3,6 +3,7 @@ require 'roo'
 class ImportWorker
 
   include Sidekiq::Worker
+  sidekiq_options :queue => :mass_import
 
   def perform(file, email)
     field_array = ['Product Name', 'SKU', 'Category Name', 'Subcategory Name', 'Permalink', 'Description', 'Short Description', 'Featured',
