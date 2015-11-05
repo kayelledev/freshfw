@@ -54,7 +54,7 @@ module Shoppe
 
     # Validations
     with_options :if => Proc.new { |p| p.parent.nil? } do |product|
-      #product.validates :product_category_id, :presence => true
+      product.validates :product_category_id, :presence => true
       product.validates :product_subcategory_id, :presence => true
       #product.validates :description, :presence => true
       #product.validates :short_description, :presence => true
