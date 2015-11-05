@@ -30,7 +30,11 @@ class ImportWorker
         begin
           row = Hash[[header, spreadsheet.row(i)].transpose]
           product = Shoppe::Product.where(name: row["Product Name"], sku: row['SKU']).first_or_create
-          product.product_category_id = Shoppe::ProductCategory.where(name: row["Category Name"]).first_or_create.id
+          if row["Category Name"].present?
+            product.product_category_id = Shoppe::ProductCategory.where(name: row["Category Name"]).first_or_create.id
+          else
+            product.product_category_id = nil
+          end
           product.product_subcategory_id = Shoppe::ProductCategory.where(name: row["Subcategory Name"]).first_or_create.id
           #product.permalink = row["Permalink"] if row["Permalink"]
           product.description = row["Description"] if row["Description"]
@@ -77,6 +81,7 @@ class ImportWorker
     end
     begin
       Shoppe::ImportMailer.imported(email, errors).deliver_now
+      FileUtils::rm(file)
     rescue
     end
   end

@@ -54,7 +54,7 @@ module Shoppe
 
     # Validations
     with_options :if => Proc.new { |p| p.parent.nil? } do |product|
-      product.validates :product_category_id, :presence => true
+      #product.validates :product_category_id, :presence => true
       product.validates :product_subcategory_id, :presence => true
       #product.validates :description, :presence => true
       #product.validates :short_description, :presence => true
@@ -162,8 +162,10 @@ module Shoppe
     #
     #   Shoppe:Product.import("path/to/file.csv")
     def self.import(file, email)
-      ImportWorker.perform_async(file.path, email)
-      sleep 3
+      ext_name = File.extname(file.original_filename)
+      file_name = "#{Rails.root}/tmp/#{Time.now.strftime('%Y-%m-%d___%H_%M_%S_%L')}#{ext_name}"
+      FileUtils::copy_file(file.path, file_name)
+      ImportWorker.perform_async(file_name, email)
       "The file is sent to the background task. Import results will be sent to your email."
     end
 
