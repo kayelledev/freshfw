@@ -3,6 +3,7 @@ require 'roo'
 class ImportWorker
 
   include Sidekiq::Worker
+  sidekiq_options :queue => :mass_import
 
   def perform(file, email)
     field_array = ['Product Name', 'SKU', 'Category Name', 'Subcategory Name', 'Permalink', 'Description', 'Short Description', 'Featured',
@@ -30,8 +31,13 @@ class ImportWorker
         begin
           row = Hash[[header, spreadsheet.row(i)].transpose]
           product = Shoppe::Product.where(name: row["Product Name"], sku: row['SKU']).first_or_create
-          product.product_category_id = Shoppe::ProductCategory.where(name: row["Category Name"]).first_or_create.id
-          product.product_subcategory_id = Shoppe::ProductCategory.where(name: row["Subcategory Name"]).first_or_create.id
+          if row["Subcategory Name"].present?
+            product.product_category_id = Shoppe::ProductCategory.where(name: row["Subcategory Name"]).first_or_create.id
+          else
+            product.product_category_id = nil
+          end
+          row["Category Name"] = nil
+          #product.product_subcategory_id = Shoppe::ProductCategory.where(name: row["Subcategory Name"]).first_or_create.id
           #product.permalink = row["Permalink"] if row["Permalink"]
           product.description = row["Description"] if row["Description"]
           product.short_description = row["Short Description"] if row["Short Description"]
@@ -77,6 +83,7 @@ class ImportWorker
     end
     begin
       Shoppe::ImportMailer.imported(email, errors).deliver_now
+      FileUtils::rm(file)
     rescue
     end
   end
