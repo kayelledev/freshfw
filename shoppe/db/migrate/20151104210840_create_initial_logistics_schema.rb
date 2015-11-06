@@ -54,8 +54,6 @@ class CreateInitialLogisticsSchema < ActiveRecord::Migration
 
     create_table "shoppe_freight_routes" do |t|
       t.integer  "trevel_days"
-      t.string  "warehouse"
-      t.string  "website"
       t.references :freight_company, index: true
       t.references :zone, index: true
       t.references :suppliers_zone, index: true

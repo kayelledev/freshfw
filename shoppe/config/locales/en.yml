@@ -598,6 +598,7 @@ en:
         orders: Orders
         products: Products
         product_categories: Product Categories
+        logistics: Logistics
         delivery_services: Delivery Services
         tax_rates: Tax Rates
         users: Users

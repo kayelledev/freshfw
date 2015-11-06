@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer "zone_id"
   end
 
+  add_index "shoppe_cities_zones", ["city_id", "zone_id"], name: "index_shoppe_cities_zones_on_city_id_and_zone_id", unique: true
   add_index "shoppe_cities_zones", ["city_id"], name: "index_shoppe_cities_zones_on_city_id"
   add_index "shoppe_cities_zones", ["zone_id"], name: "index_shoppe_cities_zones_on_zone_id"
 
@@ -142,6 +143,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer "zone_id"
   end
 
+  add_index "shoppe_freight_companies_zones", ["freight_company_id", "zone_id"], name: "freight_company_zone_index", unique: true
   add_index "shoppe_freight_companies_zones", ["freight_company_id"], name: "index_shoppe_freight_companies_zones_on_freight_company_id"
   add_index "shoppe_freight_companies_zones", ["zone_id"], name: "index_shoppe_freight_companies_zones_on_zone_id"
 
@@ -175,6 +177,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer "zone_id"
   end
 
+  add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id", "zone_id"], name: "last_mile_company_zone_index", unique: true
   add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id"], name: "index_shoppe_last_mile_companies_zones_on_last_mile_company_id"
   add_index "shoppe_last_mile_companies_zones", ["zone_id"], name: "index_shoppe_last_mile_companies_zones_on_zone_id"
 
@@ -328,6 +331,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer "zone_id"
   end
 
+  add_index "shoppe_suppliers_zones", ["supplier_id", "zone_id"], name: "index_shoppe_suppliers_zones_on_supplier_id_and_zone_id", unique: true
   add_index "shoppe_suppliers_zones", ["supplier_id"], name: "index_shoppe_suppliers_zones_on_supplier_id"
   add_index "shoppe_suppliers_zones", ["zone_id"], name: "index_shoppe_suppliers_zones_on_zone_id"
 

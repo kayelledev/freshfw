@@ -1,0 +1,19 @@
+- @page_title = t('shoppe.logistics.title')
+
+= content_for :header do
+  %p.buttons
+    =# link_to t('shoppe.orders.new_order'), :new_order, :class => 'button green'
+    =# link_to t('shoppe.orders.search_orders'), '#', :class => 'button', :rel => 'searchOrders'
+  %h2.orders
+    = t('shoppe.logistics.title')
+    %span=# page_entries_info @orders
+
+=# render 'search_form'
+
+.splitContainer
+  %dl.half
+    %dt dfsf
+    %dd sdf
+  %dl.half
+    %dt sdf
+    %dd sdfs
