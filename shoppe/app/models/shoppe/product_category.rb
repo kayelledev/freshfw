@@ -89,7 +89,7 @@ module Shoppe
         temp.each do |t|
           t.parent
           if data.include?(t.parent)
-            data.insert( data.index(t.parent) + 1, t)
+            data.insert( data.index(t.parent), t)
           end
         end
         temp -= data
