@@ -430,6 +430,7 @@
     Controller.prototype.openDimensionsForm = function(elementsClass) {
       var setDimensionsButton = $('#set-dimensions');
       var dimensionsDialog = $('div#dimensions-dialog');
+      var roomsOnSlide = 9;
 
       // define form dialog
       dimensionsDialog.dialog({
@@ -465,26 +466,47 @@
       function initSlider() {
         slider.bxSlider({
           slideWidth: 200,
-          minSlides: 9,
-          maxSlides: 9,
+          minSlides: roomsOnSlide,
+          maxSlides: roomsOnSlide,
           slideMargin: 5,
+          moveSlides: 1
         });
       }
 
       function interactSlide() {
         $('#room-slider .slide').click(function(){
-          var image = $(this).children('img');
+          // move slider
+          var currentSlide = slider.getCurrentSlide();
+          var currlenElemIndex = $(this).index();
+          var sliderElemPosition = currlenElemIndex - currentSlide - roomsOnSlide;
+          var slidesCount = slider.getSlideCount();
+          if (roomsOnSlide % 2 > 0){
+            var slideCenter = Math.floor(roomsOnSlide / 2);
+            var toSlide = currentSlide - (slideCenter - sliderElemPosition);
+
+            if (toSlide < 0) {
+              toSlide = slidesCount + toSlide;
+            } else if (toSlide > 30) {
+              toSlide = toSlide - slidesCount;
+            }
+            slider.goToSlide(toSlide);
+          }
+
           // yellow border
+          var dataRoomId = $(this).attr('data-room-id');
           $('#room-slider .slide img').removeClass('active-slider');
-          image.addClass('active-slider');
+          $('#room-slider .slide[data-room-id="' + dataRoomId + '"]').children('img').addClass('active-slider');
+
           // set preview image
           var previewImage = $(this).find('img').clone();
           previewImage.removeClass('active-slider');
+          previewImage.removeClass('slider');
           $('#room-preview').html(previewImage);
           // display inputs
           var roomId = $(this).attr('data-room-id');
           $('.room-imputs').removeClass('active-room-imputs');
           $(".room-imputs[data-room-id='" + roomId + "']").addClass('active-room-imputs');
+
         });
       }
 
