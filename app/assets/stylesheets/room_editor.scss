@@ -167,16 +167,12 @@ div#dialog-form-errors {
   padding: 5px;
 }
 
-#room-slider .slide {
+#room-slider .slide img {
   border: 2px solid white;
 }
 
 #room-slider .slide:hover {
   cursor: pointer;
-}
-
-.bx-prev, .bx-next {
-  top: 130% !important;
 }
 
 .active-slider {
@@ -185,4 +181,16 @@ div#dialog-form-errors {
 
 #room-preview img {
   width: 100%;
+}
+
+#dialog-form .room-imputs {
+  display: none;
+}
+
+.active-room-imputs {
+  display: block !important;
+}
+
+.form-group .equal {
+  padding-top: 10px;
 }

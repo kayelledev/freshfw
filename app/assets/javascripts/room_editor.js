@@ -434,7 +434,8 @@
       // define form dialog
       dimensionsDialog.dialog({
         autoOpen: false,
-        minWidth: 650,
+        minWidth: 850,
+        maxWidth: 850,
         minHeight: 210,
         resizable: false,
         modal: true,
@@ -447,21 +448,52 @@
           restoreArea();
         }
       });
+      var slider = $('#room-slider');
+      var clicked = false;
 
-      // open dialog form and clear area
+      // open dialog form
       setDimensionsButton.on('click', function(){
         clearArea();
         dimensionsDialog.dialog('open');
+        if (clicked === false) {
+          initSlider();
+        }
+        interactSlide();
+        clicked = true;
       });
 
-      //clear area
+      function initSlider() {
+        slider.bxSlider({
+          slideWidth: 200,
+          minSlides: 9,
+          maxSlides: 9,
+          slideMargin: 5,
+        });
+      }
+
+      function interactSlide() {
+        $('#room-slider .slide').click(function(){
+          var image = $(this).children('img');
+          // yellow border
+          $('#room-slider .slide img').removeClass('active-slider');
+          image.addClass('active-slider');
+          // set preview image
+          var previewImage = $(this).find('img').clone();
+          previewImage.removeClass('active-slider');
+          $('#room-preview').html(previewImage);
+          // display inputs
+          var roomId = $(this).attr('data-room-id');
+          $('.room-imputs').removeClass('active-room-imputs');
+          $(".room-imputs[data-room-id='" + roomId + "']").addClass('active-room-imputs');
+        });
+      }
+
       function clearArea(){
         $('.' + elementsClass).each(function() {
            $(this).css('display', 'none');
         });
       }
 
-      // restore area
       function restoreArea(){
         $('.' + elementsClass).each(function() {
           if ($('.editor-items-panel').css('display') === 'none') {
