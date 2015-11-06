@@ -6,7 +6,7 @@ module Shoppe
 
     def index
       #@products = Shoppe::Product.root.includes(:stock_level_adjustments, :product_category, :variants).order(:name).group_by(&:product_category).sort_by { |cat,pro| cat.id }
-      @products = Shoppe::Product.root.includes(:stock_level_adjustments, :product_category, :variants).order(:name)
+      @products = Shoppe::Product.root.includes(:stock_level_adjustments, :product_category, :variants).order(:name, :sku)
       @categories = Shoppe::ProductCategory.category_with_subcategories
     end
 
