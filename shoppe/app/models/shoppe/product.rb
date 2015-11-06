@@ -60,7 +60,10 @@ module Shoppe
       #product.validates :short_description, :presence => true
     #end
 
-    validates :product_category_id, presence: { message: "Subcategory is required" }
+    validate do |product|
+      product.errors.add('product_subcategory_id',"can't be blank") if product.product_category_id.nil?
+    end
+
     validates :name, :presence => true
     validates :sku, :presence => true
     validates_uniqueness_of :name, :scope => :sku
