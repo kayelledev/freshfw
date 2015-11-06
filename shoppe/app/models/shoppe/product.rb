@@ -32,7 +32,7 @@ module Shoppe
     #
     # @return [Shoppe::ProductCategory]
     belongs_to :product_category, :class_name => 'Shoppe::ProductCategory'
-    belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
+    #belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
 
     # The product's tax rate
     #
@@ -53,12 +53,14 @@ module Shoppe
     has_many :included_products, through: :product_associations, dependent: :destroy, class_name: 'Shoppe::Product'
 
     # Validations
-    with_options :if => Proc.new { |p| p.parent.nil? } do |product|
-      product.validates :product_category_id, :presence => true
-      product.validates :product_subcategory_id, :presence => true
+    #with_options :if => Proc.new { |p| p.parent.nil? } do |product|
+      #product.validates :product_category_id, :presence => true
+      #product.validates :product_subcategory_id, :presence => true
       #product.validates :description, :presence => true
       #product.validates :short_description, :presence => true
-    end
+    #end
+
+    validates :product_category_id, presence: { message: "Subcategory is required" }
     validates :name, :presence => true
     validates :sku, :presence => true
     validates_uniqueness_of :name, :scope => :sku
