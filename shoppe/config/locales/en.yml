@@ -647,7 +647,51 @@ en:
         email_address: sales@example.com
         store_name: Widgets Inc.
         tax_name: Tax
+    logistics:
+      main_title: Logistics
+      new_freight_company: New Freight Company
+      new_route: New Route
+      new_supplier: New Supplier
+      titles:
+        zones: Zones
+        freight_routes: Freight Routes
+        suppliers: Suppliers
+        last_mile_companies: Last Mile Companies
+        freight_companies: Freight Companies
+      search:
+        supplier: Supplier
+        customer: Customer
+        search_button: Search
+        title: Search freight routes
+      zones:
+        zone: Zone
+        province: Province/State
+        country: Country
+        dest_city: Dest. City
+      freight_routes:
+        freight_company: Freight Company
+        customer_zone: Customer Zone
+        supplier_zone: Supplier Zone
+        trevel_days: Trevel Days
+      last_mile_companies:
+        name: Company
+        zone: Zone
+        city: City
+        address: Address
+      freight_companies:
+        name: Name
+        dc: DC
+        zone: Zone
+        website: Website
+      suppliers:
+        name: Name
+        warehouse: Warehouse
+        zone: Zone
+        website: Website
 
+      links:
+        action: Action
+        show: Show
   layouts:
     shoppe:
       application:

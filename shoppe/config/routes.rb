@@ -31,7 +31,12 @@ Shoppe::Engine.routes.draw do
   resources :tax_rates
   resources :users
   resources :countries
-  resources :logistics
+  resources :logistics do
+    collection do
+      post :search
+    end
+  end
+  resources :freight_routes 
   resources :attachments, :only => :destroy
 
   get 'settings'=> 'settings#edit'
