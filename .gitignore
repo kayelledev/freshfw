@@ -64,3 +64,5 @@ config/secrets.yml
 config/social.yml
 config/secrets.yml
 ./idea
+
+/db/fresh_fw_stage_dev.sql

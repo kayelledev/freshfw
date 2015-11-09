@@ -469,7 +469,25 @@
           minSlides: roomsOnSlide,
           maxSlides: roomsOnSlide,
           slideMargin: 5,
-          moveSlides: 1
+          moveSlides: 1,
+          pager: false,
+          onSlideAfter: function($slideElement, oldIndex, newIndex){
+            var currentSlideDataID = +$slideElement.attr('data-room-id');
+            var newSlideDataID;
+            if (currentSlideDataID >= 0 && currentSlideDataID <= 26) {
+              newSlideDataID = currentSlideDataID + 4;
+            } else {
+              newSlideDataID = 3 - (30 - currentSlideDataID);
+            }
+            // if (newSlideDataID >= 27 && newSlideDataID <= 4) {
+            //   var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
+            // } else ()
+            var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
+            console.log(newSlide);
+            addYellowBorder( newSlide );
+            setPreviewImage( newSlide );
+            displayInputs( newSlide );
+          }
         });
       }
 
@@ -491,22 +509,6 @@
             }
             slider.goToSlide(toSlide);
           }
-
-          // yellow border
-          var dataRoomId = $(this).attr('data-room-id');
-          $('#room-slider .slide img').removeClass('active-slider');
-          $('#room-slider .slide[data-room-id="' + dataRoomId + '"]').children('img').addClass('active-slider');
-
-          // set preview image
-          var previewImage = $(this).find('img').clone();
-          previewImage.removeClass('active-slider');
-          previewImage.removeClass('slider');
-          $('#room-preview').html(previewImage);
-          // display inputs
-          var roomId = $(this).attr('data-room-id');
-          $('.room-imputs').removeClass('active-room-imputs');
-          $(".room-imputs[data-room-id='" + roomId + "']").addClass('active-room-imputs');
-
         });
       }
 
@@ -524,6 +526,31 @@
             $(this).css('display', 'none');
           }
         });
+      }
+
+      function addYellowBorder(slide) {
+        $('#room-slider img').removeClass('active-slider');
+        $(slide).each(function(){
+          $(this).find('img').addClass('active-slider');
+        })
+
+
+      }
+
+      function setPreviewImage(slide) {
+        if (slide[1]) {
+          slide = slide[1];
+        }
+        var previewImage = $(slide).find('img').clone();
+        previewImage.removeClass('active-slider');
+        previewImage.removeClass('slider');
+        $('#room-preview').html(previewImage);
+      }
+
+      function displayInputs(slide) {
+        var roomId = $(slide).attr('data-room-id');
+        $('.room-imputs').removeClass('active-room-imputs');
+        $(".room-imputs[data-room-id='" + roomId + "']").addClass('active-room-imputs');
       }
     };
 
