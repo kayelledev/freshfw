@@ -3,7 +3,7 @@ module Shoppe
 
     def imported(email, errors)
       @errors = errors
-      mail :from => "GoFourWalls <karen@gofourwalls.com>", :to => email, :subject => "Import products complete."
+      mail :from => "GoFourWalls <info@gofourwalls.com>", :to => email, :subject => "Import products complete."
     end
 
   end
