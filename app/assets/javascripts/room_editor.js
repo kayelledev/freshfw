@@ -72,76 +72,6 @@
          */
         this.$catsManager = $('.categories-manager');
 
-        this.$options = {
-            // enable inertial throwing
-            inertia: true,
-            // keep the element within the area of it's parent
-            restrict: {
-                restriction: '.dragg',
-                endOnly: true,
-                elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-            },
-
-            // call this function on every dragmove event
-            onmove: function(event) {
-                var target = event.target.parentNode,
-                // keep the dragged position in the data-x/data-y attributes
-                    x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-                    y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy,
-                    r = (parseFloat(event.target.getAttribute('data-rotation')) || 0),
-                    $positionPanelX = $('.position-x'),
-                    $positionPanelY = $('.position-y');
-
-                // translate the element
-                target.style.webkitTransform =
-                    target.style.transform =
-                        'translate(' + x + 'px, ' + y + 'px) rotate(' + r + 'deg)';
-
-                // update the posiion attributes
-                target.setAttribute('data-x', x);
-                target.setAttribute('data-y', y);
-                target.setAttribute('data-rotation', r);
-
-                event.target.setAttribute('data-x', x);
-                event.target.setAttribute('data-y', y);
-                event.target.setAttribute('data-rotation', r);
-
-                //$('.rotation-arrow').hide();
-
-                $positionPanelX.val(x);
-                $positionPanelY.val(y);
-
-            },
-            // call this function on every dragend event
-            onend: function (event) {
-                var createRect = function($element) {
-                    //return new SAT.Polygon(new SAT.Vector($element.attr('data-x'), $element.attr('data-y')), [
-                    //    new SAT.Vector(parseFloat($element.attr('data-x')) - $element.width()/2.0, parseFloat($element.attr('data-y')) + $element.height()/2.0),
-                    //    new SAT.Vector(parseFloat($element.attr('data-x')) - $element.width()/2.0, parseFloat($element.attr('data-y')) - $element.height()/2.0),
-                    //    new SAT.Vector(parseFloat($element.attr('data-x')) + $element.width()/2.0, parseFloat($element.attr('data-y')) - $element.height()/2.0),
-                    //    new SAT.Vector(parseFloat($element.attr('data-x')) + $element.width()/2.0, parseFloat($element.attr('data-y')) + $element.height()/2.0)
-                    //]).setAngle(parseInt($element.attr('data-rotation')));
-
-                        return new SAT.Box(
-                            new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
-                            $element.parent().width(),
-                            $element.parent().height()
-
-                        ).toPolygon().setAngle(parseInt($element.attr('data-rotation')) * Math.PI/180.0);
-                },
-                    $elements = $('.editor-container div').not('.active'),
-                    activeRect = createRect($(event.target));
-
-                $elements.removeClass('collision');
-
-                $elements.each(function() {
-                    if(SAT.testPolygonPolygon(createRect($(this)), activeRect)) {
-                        $(this).addClass('collision');
-                        //console.log('Yes');
-                    }
-                });
-            }
-        };
     }
 
     /**
@@ -150,10 +80,13 @@
      * @param elementsClass
      */
     Controller.prototype.initElements = function(elementsClass) {
+        var controller = this;
         // set container width
         var documentWidth = $(window).width();
         $('.room-editor-container').width(documentWidth * 0.6);
         $('.editor-container').width(documentWidth * 0.6);
+
+        $('.dragg').width( $('.editor-container').css('width') );
 
         // set container height according width
         var scaling = parseFloat(this.$holder.data('width')) / this.$holder.width();
@@ -163,7 +96,70 @@
         $('.editor-height img').height($('.editor-container').height());
 
         // init draggable
-        interact('.' + elementsClass).draggable(this.$options);
+        interact('.' + elementsClass).draggable({
+          // enable inertial throwing
+          inertia: false,
+          // keep the element within the area of it's parent
+          restrict: {
+              restriction: '.dragg',
+              endOnly: true,
+              elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+          },
+
+          // call this function on every dragmove event
+          onmove: function(event) {
+            var target = event.target.parentNode,
+            // keep the dragged position in the data-x/data-y attributes
+                x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+                y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy,
+                r = (parseFloat(event.target.getAttribute('data-rotation')) || 0),
+                $positionPanelX = $('.position-x'),
+                $positionPanelY = $('.position-y');
+
+            // translate the element
+            target.style.webkitTransform =
+                target.style.transform =
+                    'translate(' + x + 'px, ' + y + 'px) rotate(' + r + 'deg)';
+
+            // update the posiion attributes
+            target.setAttribute('data-x', x);
+            target.setAttribute('data-y', y);
+            target.setAttribute('data-rotation', r);
+
+            event.target.setAttribute('data-x', x);
+            event.target.setAttribute('data-y', y);
+            event.target.setAttribute('data-rotation', r);
+
+            //$('.rotation-arrow').hide();
+
+            $positionPanelX.val(x);
+            $positionPanelY.val(y);
+
+          },
+          // call this function on every dragend event
+          onend: function (event) {
+            var createRect = function($element) {
+              return new SAT.Box(
+                new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
+                $element.parent().width(),
+                $element.parent().height()
+              ).toPolygon().setAngle(parseInt($element.attr('data-rotation')) * Math.PI/180.0);
+            },
+
+            $elements = $('.editor-container div').not('.active'),
+            activeRect = createRect($(event.target));
+
+            $elements.removeClass('collision');
+
+            $elements.each(function() {
+              if(SAT.testPolygonPolygon(createRect($(this)), activeRect)) {
+                $(this).addClass('collision');
+              }
+            });
+
+            controller.restrictAreaHoles(event.target);
+          }
+        });
 
         // target elements with the "draggable" class
         $('.' + elementsClass).each(function() {
@@ -479,9 +475,6 @@
             } else {
               newSlideDataID = 3 - (30 - currentSlideDataID);
             }
-            // if (newSlideDataID >= 27 && newSlideDataID <= 4) {
-            //   var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
-            // } else ()
             var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
             console.log(newSlide);
             addYellowBorder( newSlide );
@@ -533,8 +526,6 @@
         $(slide).each(function(){
           $(this).find('img').addClass('active-slider');
         })
-
-
       }
 
       function setPreviewImage(slide) {
@@ -549,184 +540,575 @@
 
       function displayInputs(slide) {
         var roomId = $(slide).attr('data-room-id');
-        $('.room-imputs').removeClass('active-room-imputs');
-        $(".room-imputs[data-room-id='" + roomId + "']").addClass('active-room-imputs');
+        $('.room-inputs').removeClass('active-room-inputs');
+        $(".room-inputs[data-room-id='" + roomId + "']").addClass('active-room-inputs');
       }
     };
 
     /**
      * Resize area
      */
-    Controller.prototype.resizeArea = function(elementsClass) {
+    Controller.prototype.setNewArea = function(elementsClass) {
       var controller = this;
       var dimensionsDialog = $('div#dimensions-dialog');
       $('#submit-new-dimensions').on('click', function(e) {
         e.preventDefault();
+        $('.hole').remove();
+        var roomId = +$('.active-room-inputs input[name="room-id"]').val();
+        switch (roomId) {
+          case 0:
+            newRect0();
+            break;
+          case 1:
+            newL0();
+            break;
+          case 2:
+            newL1();
+            break;
+          case 3:
+            newL2();
+            break;
+          case 4:
+            newL3();
+            break;
+        }
 
-        var newWidthFt = +$('#width-ft').val();
-        var newWidthInch = +$('#width-inch').val();
-        var newHeightFt = +$('#height-ft').val();
-        var newHeightInch = +$('#height-inch').val();
+        function newRect0() {
+          var rect0Form = $(".room-inputs[data-room-id='0']");
+          var rect0Inputs = rect0Form.find('.dialog-input');
+          var inputsCount = 4;
+          var newWidthFt = +rect0Form.find('.n-s-ft').val();
+          var newWidthInch = +rect0Form.find('.n-s-inch').val();
+          var newHeightFt = +rect0Form.find('.e-w-ft').val();
+          var newHeightInch = +rect0Form.find('.e-w-inch').val();
 
-        var newWidth = ( newWidthFt * 12 ) + newWidthInch;
-        var newHeight = ( newHeightFt * 12 ) + newHeightInch;
+          var newWidth = ( newWidthFt * 12 ) + newWidthInch;
+          var newHeight = ( newHeightFt * 12 ) + newHeightInch;
 
-        if ( !validateForm( $('.dialog-input') ) ) { return; }
+          var scaling = newWidth / +$('.editor-container').width();
+          console.log(scaling)
 
-        setNewDimensionsToArea(newWidth, newHeight);
+          if ( !validateNumbersInForm(rect0Inputs, inputsCount) ) { return; }
 
-        var scaling = +$('.editor-container').data('width') / +$('.editor-container').width();
+          if ( !renderFormErrors( validateNewRoomDimensions(scaling), rect0Inputs ) ) { return; }
 
-        if ( !renderFormErrors( validateNewRoomDimensions(scaling) ) ) { return; }
+          setNewDimensionsToArea(newWidth, newHeight);
 
-        scaleAreaHeight(scaling);
+          scaleAreaHeight(scaling);
 
-        scaleEditorHeightLine();
+          scaleEditorHeightLine();
 
-        updateMeasureDescription(newWidthFt, newWidthInch, newHeightFt, newHeightInch);
+          updateMeasureDescription(newWidthFt, newWidthInch, newHeightFt, newHeightInch);
 
-        scaleItems(scaling);
+          scaleItems(scaling);
 
-        resetItemsInPanel( $('.items-panel-elem') );
+          resetItemsInPanel();
 
-        controller.initItemsPanelArea();
+          controller.initItemsPanelArea();
 
-        dimensionsDialog.dialog('close');
+          dimensionsDialog.dialog('close');
+
+
+          function validateNewRoomDimensions(scaling) {
+            var newEditorContainerWidth =  +$('.editor-container').data('width');
+            var newEditorContainerHeight =  +$('.editor-container').data('height');
+            var invalidItemWidth = 0;
+            var invalidItemHeight = 0;
+
+            // validate width and heigh of room
+            $('.' + elementsClass).each(function() {
+              var newItemWidth = $(this).data('width');
+              var newItemHeight = $(this).data('height');
+
+              if(newItemWidth > newEditorContainerWidth) {
+                invalidItemWidth++;
+              }
+              if (newItemHeight > newEditorContainerHeight) {
+                invalidItemHeight++;
+              }
+            });
+
+            return { invalidItemWidth: invalidItemWidth, invalidItemHeight: invalidItemHeight };
+          }
+
+          function renderFormErrors(errors) {
+            console.log(errors);
+            var invalidItemWidth = errors.invalidItemWidth;
+            var invalidItemHeight = errors.invalidItemHeight;
+
+            if (invalidItemWidth > 0 || invalidItemHeight > 0) {
+              if (invalidItemWidth > 0 && invalidItemHeight === 0) {
+                $('#dialog-form-errors').html("<center><p><b>New room width is too small for the furniture included. Please enlarge it.</b></p></center");
+                $('.dialog-input-width').each(function(index) {
+                    $(this).css('border-color', '#A94442');
+                });
+                $('.dialog-input-height').each(function(index) {
+                    $(this).css('border-color', '#ccc');
+                });
+
+              } else if (invalidItemWidth === 0 && invalidItemHeight > 0) {
+                $('#dialog-form-errors').html("<center><p><b>New room depth is too small for the furniture included. Please enlarge it.</b></p></center>");
+                $('.dialog-input-width').each(function(index) {
+                    $(this).css('border-color', '#ccc');
+                });
+                $('.dialog-input-height').each(function(index) {
+                    $(this).css('border-color', '#A94442');
+                });
+
+              } else if (invalidItemWidth > 0 && invalidItemHeight > 0) {
+                $('#dialog-form-errors').html("<center><p><b>New room dimensions are not enough for all the furniture included. Please, enlarge them both.</b></p></center");
+                $('.dialog-input').each(function(index) {
+                    $(this).css('border-color', '#A94442');
+                });
+              }
+              return false;
+            } else {
+              return true;
+            }
+          }
+        }
+
+        function newL0() {
+          var form = $(".room-inputs[data-room-id='1']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+          var sFt = form.find('.s-ft');
+          var sInch = form.find('.s-inch');
+          var wFt = form.find('.w-ft');
+          var wInch = form.find('.w-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var s = toInches( sFt.val(), sInch.val() );
+          var w = toInches( wFt.val(), wInch.val() );
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+           if ( !renderFormErrors( validateNewRoomDimensions(s, w, formInputs), formInputs ) ) { return; }
+
+          var scaling = s / +$('.editor-container').width();
+
+          setNewDimensionsToArea(s, w);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          updateMeasureDescription( sFt.val(), sInch.val(), wFt.val(), wInch.val() );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(s === n1 + n2) ) {
+              invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch, sFt, sInch);
+              errorMessages.push('S have to be equal N1+N2');
+            }
+            if ( !(w === e1 + e2) ) {
+              invalidInputs.push(e1Ft, e1Inch, e2Ft, e2Inch, wFt, wInch);
+              errorMessages.push('W have to be equal E1+E2');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole'></div>");
+            $('.hole').css({
+              'width': n2 / scaling,
+              'height': e1 / scaling,
+              'border-bottom': '1px solid black',
+              'border-left': '1px solid black',
+              'top': 0,
+              'right': 0
+            })
+          }
+        }
+
+        function newL1() {
+          var form = $(".room-inputs[data-room-id='2']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var nFt = form.find('.n-ft');
+          var nInch = form.find('.n-inch');
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+          var wFt = form.find('.w-ft');
+          var wInch = form.find('.w-inch');
+
+          var n = toInches( nFt.val(), nInch.val() );
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var w = toInches( wFt.val(), wInch.val() );
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+           if ( !renderFormErrors( validateNewRoomDimensions(s, w, formInputs), formInputs ) ) { return; }
+
+          var scaling = n / +$('.editor-container').width();
+
+          setNewDimensionsToArea(n, w);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          updateMeasureDescription( nFt.val(), nInch.val(), wFt.val(), wInch.val() );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(n === s1 + s2) ) {
+              invalidInputs.push(s1Ft, s1Inch, s2Ft, s2Inch, nFt, nInch);
+              errorMessages.push('N have to be equal S1+S2');
+            }
+            if ( !(w === e1 + e2) ) {
+              invalidInputs.push(e1Ft, e1Inch, e2Ft, e2Inch, wFt, wInch);
+              errorMessages.push('W have to be equal E1+E2');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole'></div>");
+            $('.hole').css({
+              'width': s2 / scaling,
+              'height': e2 / scaling,
+              'border-top': '1px solid black',
+              'border-left': '1px solid black',
+              'bottom': 0,
+              'right': 0
+            })
+          }
+        }
+
+        function newL2() {
+          var form = $(".room-inputs[data-room-id='3']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var nFt = form.find('.n-ft');
+          var nInch = form.find('.n-inch');
+          var eFt = form.find('.e-ft');
+          var eInch = form.find('.e-inch');
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+
+          var n = toInches( nFt.val(), nInch.val() );
+          var e = toInches( eFt.val(), eInch.val() );
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+           if ( !renderFormErrors( validateNewRoomDimensions(n, e, formInputs), formInputs ) ) { return; }
+
+          var scaling = n / +$('.editor-container').width();
+
+          setNewDimensionsToArea(n, e);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          updateMeasureDescription( nFt.val(), nInch.val(), eFt.val(), eInch.val() );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(n === s1 + s2) ) {
+              invalidInputs.push(s1Ft, s1Inch, s2Ft, s2Inch, nFt, nInch);
+              errorMessages.push('N have to be equal S1+S2');
+            }
+            if ( !(e === w1 + w2) ) {
+              invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, eFt, eInch);
+              errorMessages.push('E have to be equal W1+W2');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole'></div>");
+            $('.hole').css({
+              'width': s1 / scaling,
+              'height': w2 / scaling,
+              'border-top': '1px solid black',
+              'border-right': '1px solid black',
+              'bottom': 0,
+              'left': 0
+            })
+          }
+        }
+
+        function newL3() {
+          var form = $(".room-inputs[data-room-id='4']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+          var eFt = form.find('.e-ft');
+          var eInch = form.find('.e-inch');
+          var sFt = form.find('.s-ft');
+          var sInch = form.find('.s-inch');
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+          var e = toInches( eFt.val(), eInch.val() );
+          var s = toInches( sFt.val(), sInch.val() );
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(s, e, formInputs), formInputs ) ) { return; }
+
+          var scaling = s / +$('.editor-container').width();
+
+          setNewDimensionsToArea(s, e);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          updateMeasureDescription( sFt.val(), sInch.val(), eFt.val(), eInch.val() );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(s === n1 + n2) ) {
+              invalidInputs.push(s1Ft, s1Inch, s2Ft, s2Inch, nFt, nInch);
+              errorMessages.push('S have to be equal N1+N2');
+            }
+            if ( !(e === w1 + w2) ) {
+              invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, eFt, eInch);
+              errorMessages.push('E have to be equal W1+W2');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole'></div>");
+            $('.hole').css({
+              'width': n1 / scaling,
+              'height': w1 / scaling,
+              'border-bottom': '1px solid black',
+              'border-right': '1px solid black',
+              'top': 0,
+              'left': 0
+            })
+          }
+        }
+
+
+
+
+
+
+
+        // common function
+
+        function toInches(ft, inch) { return ( +ft * 12 ) + +inch; }
+
+        function isNumber(number) { return !isNaN(parseFloat(number)) && isFinite(number) && number >= 0; }
+
+        function validateNumbersInForm(inputs, count) {
+          var validInputs = 0;
+          inputs.each(function(index) {
+            if ( !isNumber( $(this).val() ) ) {
+              $(this).css('border-color', '#A94442');
+            } else {
+              $(this).css('border-color', '#ccc');
+              validInputs++;
+            }
+          });
+
+          if (validInputs < count) {
+            return false;
+          } else {
+            return true;
+          }
+        }
+
+        function renderFormErrors(validation, inputs) {
+          var invalidInputs = validation.invalidInputs;
+          var errorMessages = validation.errorMessages;
+          $(inputs).css('border-color', '#ccc');
+          $('#dialog-form-errors').empty();
+          if (invalidInputs.length > 0) {
+            $(invalidInputs).each(function() {
+              $(this).css('border-color', '#A94442');
+            });
+            $(errorMessages).each(function() {
+              $('#dialog-form-errors').append("<center><p><b>" + this + "</b></p></center");
+            })
+            return false;
+          } else {
+            return true;
+          }
+        }
+
+        function validateNewRoomDimensions(width, height, inputs) {
+          var invalidInputs = [];
+          var errorMessages = [];
+          var newEditorContainerWidth = width;
+          var newEditorContainerHeight = height;
+          var haveErrors = false;
+
+          // validate width and heigh of room
+          $('.' + elementsClass).each(function() {
+            var newItemWidth = $(this).data('width');
+            var newItemHeight = $(this).data('height');
+
+            if(newItemWidth > newEditorContainerWidth || newItemHeight > newEditorContainerHeight) {
+              haveErrors = true;
+            }
+          });
+          if (haveErrors) {
+            invalidInputs = inputs;
+            errorMessages.push('New room dimensions are not enough for all the furniture included. Please, enlarge them');
+          }
+          return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+        }
+
+        function setNewDimensionsToArea(width, height) {
+          $('.editor-container').attr('data-width', width);
+          $('.editor-container').attr('data-height', height);
+        }
+
+        function scaleAreaHeight(scaling) {
+          $('.editor-container').height(+$('.editor-container').attr('data-height') / scaling)
+        }
+
+        function scaleEditorHeightLine() {
+          $('.editor-height').height($('.editor-container').height());
+          $('.editor-height img').height($('.editor-container').height());
+        }
+
+        function scaleItems(scaling) {
+            $('.' + elementsClass).each(function() {
+              $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
+              $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
+
+              $(this).parent().css({
+                'width': $(this).data('width') / scaling,
+                'height': $(this).data('heigh') / scaling,
+                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+              });
+            });
+        }
+
+        function updateMeasureDescription(widthFt, widthInch, heightFt, heightInch) {
+            $('span#measure-width-ft').html(widthFt);
+            $('span#measure-width-inch').html(widthInch);
+            $('span#measure-height-ft').html(heightFt);
+            $('span#measure-height-inch').html(heightInch);
+        }
+
+        function resetItemsInPanel() {
+          $('.items-panel-elem').each(function() {
+            $(this).attr('data-x', '0');
+            $(this).attr('data-y', '0');
+
+            $(this).css({
+              '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                 '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                  '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                      'transform': 'translate(0px, 0px) rotate(0deg)',
+            });
+
+            $(this).show();
+          });
+        }
 
       });
 
-      function resetItemsInPanel(items) {
-        items.each(function() {
-          $(this).attr('data-x', '0');
-          $(this).attr('data-y', '0');
-
-          $(this).css({
-            '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
-               '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
-                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
-                    'transform': 'translate(0px, 0px) rotate(0deg)',
-          });
-
-          $(this).show();
-        });
-      }
-
-      function isNumber(number) { return !isNaN(parseFloat(number)) && isFinite(number) && number >= 0; }
-
-      function validateForm(imputs) {
-        var validInputs = 0;
-        imputs.each(function(index) {
-          if ( !isNumber( $(this).val() ) ) {
-            $(this).css('border-color', '#A94442');
-          } else {
-            $(this).css('border-color', '#ccc');
-            validInputs++;
-          }
-        });
-
-        if (validInputs < 4) {
-          return false;
-        } else {
-          return true;
-        }
-      }
-
-      function setNewDimensionsToArea(width, height) {
-        $('.editor-container').data('width', width);
-        $('.editor-container').data('height', height);
-      }
-
-      function validateNewRoomDimensions(scaling) {
-        var newEditorContainerWidth =  +$('.editor-container').data('width');
-        var newEditorContainerHeight =  +$('.editor-container').data('height');
-        var invalidItemWidth = 0;
-        var invalidItemHeight = 0;
-
-        // validate width and heigh of room
-        $('.' + elementsClass).each(function() {
-          var newItemWidth = $(this).data('width');
-          var newItemHeight = $(this).data('height');
-
-          if(newItemWidth > newEditorContainerWidth) {
-            invalidItemWidth++;
-          }
-          if (newItemHeight > newEditorContainerHeight) {
-            invalidItemHeight++;
-          }
-        });
-
-        return { invalidItemWidth: invalidItemWidth, invalidItemHeight: invalidItemHeight };
-      }
-
-      function renderFormErrors(errors) {
-        console.log(errors);
-        var invalidItemWidth = errors.invalidItemWidth;
-        var invalidItemHeight = errors.invalidItemHeight;
-        // render errors
-        if (invalidItemWidth > 0 || invalidItemHeight > 0) {
-          if (invalidItemWidth > 0 && invalidItemHeight === 0) {
-            $('#dialog-form-errors').html("<center><p><b>New room width is too small for the furniture included. Please enlarge it.</b></p></center");
-            $('.dialog-input-width').each(function(index) {
-                $(this).css('border-color', '#A94442');
-            });
-            $('.dialog-input-height').each(function(index) {
-                $(this).css('border-color', '#ccc');
-            });
-
-          } else if (invalidItemWidth === 0 && invalidItemHeight > 0) {
-            $('#dialog-form-errors').html("<center><p><b>New room depth is too small for the furniture included. Please enlarge it.</b></p></center>");
-            $('.dialog-input-width').each(function(index) {
-                $(this).css('border-color', '#ccc');
-            });
-            $('.dialog-input-height').each(function(index) {
-                $(this).css('border-color', '#A94442');
-            });
-
-          } else if (invalidItemWidth > 0 && invalidItemHeight > 0) {
-            $('#dialog-form-errors').html("<center><p><b>New room dimensions are not enough for all the furniture included. Please, enlarge them both.</b></p></center");
-            $('.dialog-input').each(function(index) {
-                $(this).css('border-color', '#A94442');
-            });
-          }
-          console.log(false);
-          return false;
-        } else {
-          console.log(true);
-          return true;
-        }
-      }
-
-      function scaleAreaHeight(scaling) {
-        $('.editor-container').height($('.editor-container').data('height') / scaling);
-      }
-
-      function scaleEditorHeightLine(scaling) {
-        $('.editor-height').height($('.editor-container').height());
-        $('.editor-height img').height($('.editor-container').height());
-      }
-
-      function updateMeasureDescription(widthFt, widthInch, heightFt, heightInch) {
-        $('span#measure-width-ft').html(widthFt);
-        $('span#measure-width-inch').html(widthInch);
-        $('span#measure-height-ft').html(heightFt);
-        $('span#measure-height-inch').html(heightInch);
-      }
-
-      function scaleItems(scaling) {
-        $('.' + elementsClass).each(function() {
-          $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling || $(this).width()/2.0);
-          $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling || $(this).height()/2.0);
-
-          $(this).parent().css({
-            'width': $(this).data('width') / scaling,
-            'height': $(this).data('heigh') / scaling,
-            '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-            '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-            '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-            'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
-          });
-        });
-      }
 
     };
 
@@ -734,6 +1116,7 @@
      * Init items panel area
      */
     Controller.prototype.initItemsPanelArea = function() {
+      var controller = this;
       // show items panel
       $('.editor-items-panel').show();
 
@@ -756,84 +1139,81 @@
           onend: dropElem
         });
 
-        function dropElem (event) {
-          console.log(event);
-          var item = event.target;
-          var itemId = $(item).data('id');
-          // new position
-          var newPositionX = +$(item).offset().left - +$('.editor-container').offset().left;
-          var newPositionY = +$(item).offset().top - +$('.editor-container').offset().top;
+      function dropElem (event) {
+        var item = event.target;
+        var itemId = $(item).data('id');
+        // new position
+        var newPositionX = +$(item).offset().left - +$('.editor-container').offset().left;
+        var newPositionY = +$(item).offset().top - +$('.editor-container').offset().top;
 
-          $(item).hide();
+        $(item).hide();
 
-          // show real item
-          var realItem = $('#' + itemId);
-          realItem.show();
-
-
-          // restrict position
-          if ( newPositionX + +realItem.width() >= +$('.editor-container').width() ) {
-            var diffX = ( newPositionX + +realItem.width() - +$('.editor-container').width() ) + 3;
-            newPositionX -= diffX;
-          }
-
-          if ( newPositionY + +realItem.height() >= +$('.editor-container').height() ) {
-            var diffY = ( newPositionY + +realItem.height() - +$('.editor-container').height() ) + 3;
-            newPositionY -= diffY;
-            console.log(diffY);
-            console.log(newPositionY);
-            console.log(+realItem.height());
-            console.log(+$('.editor-container').height());
-          }
-
-          // set new position
-          realItem.parent().attr('data-rotation', 0);
-          realItem.parent().attr('data-x', newPositionX);
-          realItem.parent().attr('data-y', newPositionY);
-          realItem.attr('data-rotation', 0);
-          realItem.attr('data-x', newPositionX);
-          realItem.attr('data-y', newPositionY);
-
-          realItem.parent().css({
-            '-webkit-transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
-            '-moz-transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
-            '-ms-transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
-            'transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
-          });
-
-          // console.log( newPositionX );
-          // console.log( newPositionX + +realItem.width() );
-          // console.log( +$('.editor-container').width() );
+        // show real item
+        var realItem = $('#' + itemId);
+        realItem.show();
 
 
-          if ( $('.editor-items-panel').height() == 0 ){
-            $('.editor-items-panel').hide();
-          }
-
+        // restrict position
+        if ( newPositionX + +realItem.width() >= +$('.editor-container').width() ) {
+          var diffX = ( newPositionX + +realItem.width() - +$('.editor-container').width() ) + 3;
+          newPositionX -= diffX;
         }
 
-        function dragMoveListener (event) {
-          var target = event.target,
-              // keep the dragged position in the data-x/data-y attributes
-              x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-              y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-          // translate the element
-          target.style.webkitTransform =
-          target.style.transform =
-            'translate(' + x + 'px, ' + y + 'px)';
-
-          // update the posiion attributes
-          target.setAttribute('data-x', x);
-          target.setAttribute('data-y', y);
+        if ( newPositionY + +realItem.height() >= +$('.editor-container').height() ) {
+          var diffY = ( newPositionY + +realItem.height() - +$('.editor-container').height() ) + 3;
+          newPositionY -= diffY;
+          console.log(diffY);
+          console.log(newPositionY);
+          console.log(+realItem.height());
+          console.log(+$('.editor-container').height());
         }
 
-        // console.log($('.editor-container').offset());
+        // set new position
+        realItem.parent().attr('data-rotation', 0);
+        realItem.parent().attr('data-x', newPositionX);
+        realItem.parent().attr('data-y', newPositionY);
+        realItem.attr('data-rotation', 0);
+        realItem.attr('data-x', newPositionX);
+        realItem.attr('data-y', newPositionY);
 
-        $('.items-panel-elem').each(function(){
-          console.log(+$('.editor-container').offset().top - +$(this).offset().top);
-          console.log(+$('.editor-container').offset().left - +$(this).offset().left);
+        realItem.parent().css({
+          '-webkit-transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
+          '-moz-transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
+          '-ms-transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
+          'transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
         });
+
+
+        if ( $('.editor-items-panel').height() == 0 ){
+          $('.editor-items-panel').hide();
+        }
+
+        controller.restrictAreaHoles(realItem);
+
+      }
+
+      function dragMoveListener (event) {
+        var target = event.target,
+            // keep the dragged position in the data-x/data-y attributes
+            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+            y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+        // translate the element
+        target.style.webkitTransform =
+        target.style.transform =
+          'translate(' + x + 'px, ' + y + 'px)';
+
+        // update the posiion attributes
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+      }
+
+      // console.log($('.editor-container').offset());
+
+      $('.items-panel-elem').each(function(){
+        console.log(+$('.editor-container').offset().top - +$(this).offset().top);
+        console.log(+$('.editor-container').offset().left - +$(this).offset().left);
+      });
 
     };
 
@@ -881,6 +1261,84 @@
         });
     }
 
+    Controller.prototype.restrictAreaHoles = function(elem) {
+      var elemPoints = defineElemPoints(elem);
+      var holesPoligons = defineHoles( $('.hole') );
+
+      restrictHoles(elemPoints, holesPoligons, elem);
+
+      function defineElemPoints(elem) {
+        var elemTop = +$(elem).offset().top;
+        var elemLeft = +$(elem).offset().left;
+        var elemWidth = +$(elem).width();
+        var elemHeight = +$(elem).height();
+
+        var elemTopLeft = [elemTop, elemLeft];
+        var elemTopRight = [elemTop, elemLeft + elemWidth];
+        var elemBottomLeft = [elemTop + elemHeight, elemLeft];
+        var elemBottomRight = [elemTop + elemHeight, elemLeft + elemWidth];
+
+        var elemPoints = [elemTopLeft, elemTopRight, elemBottomLeft, elemBottomRight];
+
+        return elemPoints;
+      }
+
+      function defineHoles(holesClass) {
+        var holes = [];
+        $(holesClass).each(function() {
+          var top = +$(this).offset().top;
+          var left = +$(this).offset().left;
+          var width = +$(this).width();
+          var height = +$(this).height();
+
+          var leftTop = [top, left]
+          var rightTop = [top, left + width]
+          var rightBottom = [top + height, left + width]
+          var leftBottom = [top + height, left]
+
+          var hole = [leftTop, rightTop, rightBottom, leftBottom];
+          holes.push(hole);
+        });
+        return holes;
+      }
+
+
+      function restrictHoles(points, holes, elem) {
+        var inHole = [];
+        console.log(points);
+        console.log(holes);
+        $.each(points, function(index, point) {
+          $.each(holes, function(index, hole) {
+            inHole.push( checkInsideHole(point, hole) );
+          });
+        });
+        if (inHole.indexOf(true) != -1) {
+          console.log('out');
+          $(elem).addClass('out-of-area');
+        } else {
+          console.log('in');
+          $(elem).removeClass('out-of-area');
+        }
+
+        // console.log( inside([ 1.5, 1.5 ], polygon) );
+      }
+
+      function checkInsideHole(point, vs) {
+        // ray-casting algorithm based on
+        // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+        var x = point[0], y = point[1];
+        var inside = false;
+          for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+              var xi = vs[i][0], yi = vs[i][1];
+              var xj = vs[j][0], yj = vs[j][1];
+              var intersect = ((yi > y) != (yj > y))
+                  && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+              if (intersect) inside = !inside;
+          }
+        return inside;
+      };
+    }
+
     /**
      * Init all Class methods
      *
@@ -895,7 +1353,7 @@
         //this.manageCats();
         this.initMouseRotation();
         this.openDimensionsForm(this.$initialElenemts);
-        this.resizeArea(this.$initialElenemts);
+        this.setNewArea(this.$initialElenemts);
         // this.adaptArea(this.$initialElenemts);
     };
 

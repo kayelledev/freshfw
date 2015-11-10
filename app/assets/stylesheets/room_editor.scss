@@ -148,8 +148,8 @@ div#dialog-form-errors {
 .editor-items-panel{
   float: left;
   position: absolute;
-  width: 5%;
-  left: 14%;
+  width: 10%;
+  left: -10%;
   border: 1px solid black;
   display: none;
   height: auto;
@@ -161,6 +161,7 @@ div#dialog-form-errors {
   height:auto;
   -webkit-transform: translate(0px, 0px);
           transform: translate(0px, 0px);
+  z-index: 2;
 }
 
 .items-panel-elem {
@@ -183,11 +184,11 @@ div#dialog-form-errors {
   width: 100%;
 }
 
-#dialog-form .room-imputs {
+#dialog-form .room-inputs {
   display: none;
 }
 
-.active-room-imputs {
+.active-room-inputs {
   display: block !important;
 }
 
@@ -207,3 +208,21 @@ div#dialog-form-errors {
   right: -20px !important;
 }
 
+.hole {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+
+}
+
+.dragg {
+  position: relative;
+}
+
+.room-item {
+  z-index: 2;
+}
+
+.out-of-area {
+  border: 2px solid red !important;
+}

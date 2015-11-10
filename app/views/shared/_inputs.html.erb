@@ -1,22 +1,24 @@
-<div class='room-imputs active-room-imputs' data-room-id='0' data-room-type='rect'>
+<div class='room-inputs active-room-inputs' data-room-id='0' data-room-type='rect'>
+  <%= hidden_field_tag 'room-id', '0' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)<br>South (S)</label>
     <div class="col-sm-9 equal">
-      <input type="number" class="form-control dialog-input dialog-input-n-s" id="n-s-ft" placeholder="ft." required value="<%= full_measure( @product.width )[:ft] %>">
-      <input type="number" class="form-control dialog-input dialog-input-n-s" id="n-s-inch" placeholder="inch." required value="<%= full_measure( @product.width )[:inch] %>">
+      <input type="number" class="form-control dialog-input n-s-ft" placeholder="ft." required value="<%= full_measure( @product.width )[:ft] %>">
+      <input type="number" class="form-control dialog-input n-s-inch" placeholder="inch." required value="<%= full_measure( @product.width )[:inch] %>">
     </div>
   </div>
 
   <div class="form-group">
     <label class='col-sm-3 control-label'>East (E)<br>West (W)</label>
     <div class="col-sm-9 equal">
-      <input type="number" class="form-control dialog-input dialog-input-e-w" id="e-w-ft" placeholder="ft." required value="<%= full_measure( @product.depth )[:ft] %>">
-      <input type="number" class="form-control dialog-input dialog-input-e-w" id="e-w-inch" placeholder="inch." required value="<%= full_measure( @product.depth )[:inch] %>">
+      <input type="number" class="form-control dialog-input e-w-ft" id="e-w-ft" placeholder="ft." required value="<%= full_measure( @product.depth )[:ft] %>">
+      <input type="number" class="form-control dialog-input e-w-inch" id="e-w-inch" placeholder="inch." required value="<%= full_measure( @product.depth )[:inch] %>">
     </div>
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='1' data-room-type='l'>
+<div class='room-inputs' data-room-id='1' data-room-type='l'>
+  <%= hidden_field_tag 'room-id', '1' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -61,7 +63,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='2' data-room-type='l'>
+<div class='room-inputs' data-room-id='2' data-room-type='l'>
+  <%= hidden_field_tag 'room-id', '2' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
     <div class="col-sm-9">
@@ -106,7 +109,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='3' data-room-type='l'>
+<div class='room-inputs' data-room-id='3' data-room-type='l'>
+  <%= hidden_field_tag 'room-id', '3' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
     <div class="col-sm-9">
@@ -151,7 +155,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='4' data-room-type='l'>
+<div class='room-inputs' data-room-id='4' data-room-type='l'>
+  <%= hidden_field_tag 'room-id', '4' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -196,7 +201,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='5' data-room-type='k'>
+<div class='room-inputs' data-room-id='5' data-room-type='k'>
+  <%= hidden_field_tag 'room-id', '5' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
     <div class="col-sm-9">
@@ -262,7 +268,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='6' data-room-type='k'>
+<div class='room-inputs' data-room-id='6' data-room-type='k'>
+  <%= hidden_field_tag 'room-id', '6' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -328,7 +335,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='7' data-room-type='k'>
+<div class='room-inputs' data-room-id='7' data-room-type='k'>
+  <%= hidden_field_tag 'room-id', '7' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -394,7 +402,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='8' data-room-type='k'>
+<div class='room-inputs' data-room-id='8' data-room-type='k'>
+  <%= hidden_field_tag 'room-id', '8' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -460,7 +469,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='9' data-room-type='c'>
+<div class='room-inputs' data-room-id='9' data-room-type='c'>
+  <%= hidden_field_tag 'room-id', '9' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -526,7 +536,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='10' data-room-type='c'>
+<div class='room-inputs' data-room-id='10' data-room-type='c'>
+  <%= hidden_field_tag 'room-id', '10' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
     <div class="col-sm-9">
@@ -592,7 +603,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='11' data-room-type='c'>
+<div class='room-inputs' data-room-id='11' data-room-type='c'>
+  <%= hidden_field_tag 'room-id', '11' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -658,7 +670,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='12' data-room-type='c'>
+<div class='room-inputs' data-room-id='12' data-room-type='c'>
+  <%= hidden_field_tag 'room-id', '12' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -724,7 +737,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='13' data-room-type='e'>
+<div class='room-inputs' data-room-id='13' data-room-type='e'>
+  <%= hidden_field_tag 'room-id', '13' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -822,7 +836,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='14' data-room-type='e'>
+<div class='room-inputs' data-room-id='14' data-room-type='e'>
+  <%= hidden_field_tag 'room-id', '14' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
     <div class="col-sm-9">
@@ -920,7 +935,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='15' data-room-type='e'>
+<div class='room-inputs' data-room-id='15' data-room-type='e'>
+  <%= hidden_field_tag 'room-id', '15' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1018,7 +1034,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='16' data-room-type='e'>
+<div class='room-inputs' data-room-id='16' data-room-type='e'>
+  <%= hidden_field_tag 'room-id', '16' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1116,7 +1133,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='17' data-room-type='f'>
+<div class='room-inputs' data-room-id='17' data-room-type='f'>
+  <%= hidden_field_tag 'room-id', '17' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1198,7 +1216,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='18' data-room-type='f'>
+<div class='room-inputs' data-room-id='18' data-room-type='f'>
+  <%= hidden_field_tag 'room-id', '18' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
     <div class="col-sm-9">
@@ -1280,7 +1299,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='19' data-room-type='f'>
+<div class='room-inputs' data-room-id='19' data-room-type='f'>
+  <%= hidden_field_tag 'room-id', '19' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1362,7 +1382,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='20' data-room-type='f'>
+<div class='room-inputs' data-room-id='20' data-room-type='f'>
+  <%= hidden_field_tag 'room-id', '20' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1444,7 +1465,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='21' data-room-type='fl'>
+<div class='room-inputs' data-room-id='21' data-room-type='fl'>
+  <%= hidden_field_tag 'room-id', '21' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1526,7 +1548,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='22' data-room-type='fl'>
+<div class='room-inputs' data-room-id='22' data-room-type='fl'>
+  <%= hidden_field_tag 'room-id', '22' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1608,7 +1631,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='23' data-room-type='fl'>
+<div class='room-inputs' data-room-id='23' data-room-type='fl'>
+  <%= hidden_field_tag 'room-id', '23' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1690,7 +1714,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='24' data-room-type='fl'>
+<div class='room-inputs' data-room-id='24' data-room-type='fl'>
+  <%= hidden_field_tag 'room-id', '24' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1772,7 +1797,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='25' data-room-type='cross'>
+<div class='room-inputs' data-room-id='25' data-room-type='cross'>
+  <%= hidden_field_tag 'room-id', '25' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1870,7 +1896,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='26' data-room-type='pcross'>
+<div class='room-inputs' data-room-id='26' data-room-type='pcross'>
+  <%= hidden_field_tag 'room-id', '26' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -1952,7 +1979,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='27' data-room-type='pcross'>
+<div class='room-inputs' data-room-id='27' data-room-type='pcross'>
+  <%= hidden_field_tag 'room-id', '27' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -2034,7 +2062,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='28' data-room-type='pcross'>
+<div class='room-inputs' data-room-id='28' data-room-type='pcross'>
+  <%= hidden_field_tag 'room-id', '28' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -2116,7 +2145,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='29' data-room-type='pcross'>
+<div class='room-inputs' data-room-id='29' data-room-type='pcross'>
+  <%= hidden_field_tag 'room-id', '29' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
     <div class="col-sm-9">
@@ -2198,7 +2228,8 @@
   </div>
 </div>
 
-<div class='room-imputs' data-room-id='30' data-room-type='o'>
+<div class='room-inputs' data-room-id='30' data-room-type='o'>
+  <%= hidden_field_tag 'room-id', '30' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)<br>South 1 (S1)</label>
     <div class="col-sm-9 equal">
