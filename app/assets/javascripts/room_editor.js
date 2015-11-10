@@ -461,6 +461,7 @@
 
       function initSlider() {
         slider.bxSlider({
+          speed: 250,
           slideWidth: 200,
           minSlides: roomsOnSlide,
           maxSlides: roomsOnSlide,
@@ -554,6 +555,7 @@
       $('#submit-new-dimensions').on('click', function(e) {
         e.preventDefault();
         $('.hole').remove();
+
         var roomId = +$('.active-room-inputs input[name="room-id"]').val();
         switch (roomId) {
           case 0:
@@ -570,6 +572,30 @@
             break;
           case 4:
             newL3();
+            break;
+          case 5:
+            newT0();
+            break;
+          case 6:
+            newT1();
+            break;
+          case 7:
+            newT2();
+            break;
+          case 8:
+            newT3();
+            break;
+          case 9:
+            newC0();
+            break;
+          case 10:
+            newC1();
+            break;
+          case 11:
+            newC2();
+            break;
+          case 12:
+            newC3();
             break;
         }
 
@@ -667,7 +693,6 @@
             }
           }
         }
-
         function newL0() {
           var form = $(".room-inputs[data-room-id='1']");
           var formInputs = form.find('.dialog-input');
@@ -745,7 +770,6 @@
             })
           }
         }
-
         function newL1() {
           var form = $(".room-inputs[data-room-id='2']");
           var formInputs = form.find('.dialog-input');
@@ -824,7 +848,6 @@
             })
           }
         }
-
         function newL2() {
           var form = $(".room-inputs[data-room-id='3']");
           var formInputs = form.find('.dialog-input');
@@ -903,7 +926,6 @@
             })
           }
         }
-
         function newL3() {
           var form = $(".room-inputs[data-room-id='4']");
           var formInputs = form.find('.dialog-input');
@@ -982,8 +1004,795 @@
             })
           }
         }
+        function newT0() {
+          var form = $(".room-inputs[data-room-id='5']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var nFt = form.find('.n-ft');
+          var nInch = form.find('.n-inch');
+
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+          var s3Ft = form.find('.s3-ft');
+          var s3Inch = form.find('.s3-inch');
+
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+
+          var n = toInches( nFt.val(), nInch.val() );
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var s3 = toInches( s3Ft.val(), s3Inch.val() );
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+
+          var roomWidth = n;
+          var roomHeight = e1 + e2;
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          // updateMeasureDescription( );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
 
 
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(w1 + w2 === e1 + e2) ) {
+              invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, e1Ft, e1Inch, e2Ft, e2Inch);
+              errorMessages.push('W1+W2 have to be equal E1+E2');
+            }
+            if ( !(n === s1 + s2 + s3) ) {
+              invalidInputs.push(s1Ft, s1Inch, s2Ft, s2Inch, s3Ft, s3Inch, nFt, nInch);
+              errorMessages.push('N have to be equal S1+S2+S3');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+            $('.dragg').append("<div class='hole' data-hole-id='2'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-top hole-border-left');
+            $("div[data-hole-id='1']").css({
+              'width': s3 / scaling,
+              'height': e2 / scaling,
+              'bottom': 0,
+              'right': 0
+            });
+
+            $("div[data-hole-id='2']").addClass('hole-border-top hole-border-right')
+            $("div[data-hole-id='2']").css({
+              'width': s1 / scaling,
+              'height': w2 / scaling,
+              'bottom': 0,
+              'left': 0
+            })
+          }
+        }
+        function newT1() {
+          var form = $(".room-inputs[data-room-id='6']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+
+          var eFt = form.find('.e-ft');
+          var eInch = form.find('.e-inch');
+
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+          var w3Ft = form.find('.w3-ft');
+          var w3Inch = form.find('.w3-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+          var e = toInches( eFt.val(), eInch.val() );
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+          var w3 = toInches( w3Ft.val(), w3Inch.val() );
+
+          var roomWidth = n1 + n2;
+          var roomHeight = e;
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          // updateMeasureDescription( );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(n1 + n2 === s1 + s2) ) {
+              invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch, s1Ft, s1Inch, s2Ft, s2Inch);
+              errorMessages.push('N1+N2 have to be equal S1+S2');
+            }
+            if ( !(e === w1 + w2 + w3) ) {
+              invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, w3Ft, w3Inch, eFt, eInch);
+              errorMessages.push('E have to be equal W1+W2+W3');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+            $('.dragg').append("<div class='hole' data-hole-id='2'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-bottom hole-border-right')
+            $("div[data-hole-id='1']").css({
+              'width': n1 / scaling,
+              'height': w1 / scaling,
+              'top': 0,
+              'left': 0
+            });
+
+            $("div[data-hole-id='2']").addClass('hole-border-top hole-border-right');
+            $("div[data-hole-id='2']").css({
+              'width': s1 / scaling,
+              'height': w3 / scaling,
+              'bottom': 0,
+              'left': 0
+            });
+          }
+        }
+        function newT2() {
+          var form = $(".room-inputs[data-room-id='7']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+          var n3Ft = form.find('.n3-ft');
+          var n3Inch = form.find('.n3-inch');
+
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+
+          var sFt = form.find('.s-ft');
+          var sInch = form.find('.s-inch');
+
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+          var n3 = toInches( n3Ft.val(), n3Inch.val() );
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var s = toInches( sFt.val(), sInch.val() );
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+
+          var roomWidth = s;
+          var roomHeight = w1 + w2;
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          // updateMeasureDescription( );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(w1 + w2 === e1 + e2) ) {
+              invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, e1Ft, e1Inch, e2Ft, e2Inch);
+              errorMessages.push('W1+W2 have to be equal E1+E2');
+            }
+            if ( !(s === n1 + n2 + n3) ) {
+              invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch, n3Ft, n3Inch, sFt, sInch);
+              errorMessages.push('S have to be equal N1+N2+N3');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+            $('.dragg').append("<div class='hole' data-hole-id='2'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-bottom hole-border-right')
+            $("div[data-hole-id='1']").css({
+              'width': n1 / scaling,
+              'height': w1 / scaling,
+              'top': 0,
+              'left': 0
+            });
+
+            $("div[data-hole-id='2']").addClass('hole-border-bottom hole-border-left');
+            $("div[data-hole-id='2']").css({
+              'width': n3 / scaling,
+              'height': e1 / scaling,
+              'top': 0,
+              'right': 0
+            });
+          }
+        }
+        function newT3() {
+          var form = $(".room-inputs[data-room-id='8']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+          var e3Ft = form.find('.e3-ft');
+          var e3Inch = form.find('.e3-inch');
+
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+
+          var wFt = form.find('.w-ft');
+          var wInch = form.find('.w-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var e3 = toInches( e3Ft.val(), e3Inch.val() );
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var w = toInches( wFt.val(), wInch.val() );
+
+          var roomWidth = n1 + n2;
+          var roomHeight = w;
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          // updateMeasureDescription( );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(n1 + n2 === s1 + s2) ) {
+              invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch, s1Ft, s1Inch, s2Ft, s2Inch);
+              errorMessages.push('N1+N2 have to be equal S1+S2');
+            }
+            if ( !(w === e1 + e2 + e3) ) {
+              invalidInputs.push(e1Ft, e1Inch, e2Ft, e2Inch, e3Ft, e3Inch, wFt, wInch);
+              errorMessages.push('W have to be equal E1+E2+E3');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+            $('.dragg').append("<div class='hole' data-hole-id='2'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-bottom hole-border-left')
+            $("div[data-hole-id='1']").css({
+              'width': n2 / scaling,
+              'height': e1 / scaling,
+              'top': 0,
+              'right': 0
+            });
+
+            $("div[data-hole-id='2']").addClass('hole-border-top hole-border-left');
+            $("div[data-hole-id='2']").css({
+              'width': s2 / scaling,
+              'height': e3 / scaling,
+              'bottom': 0,
+              'right': 0
+            });
+          }
+        }
+        function newC0() {
+          var form = $(".room-inputs[data-room-id='9']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+          var e3Ft = form.find('.e3-ft');
+          var e3Inch = form.find('.e3-inch');
+
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+
+          var wFt = form.find('.w-ft');
+          var wInch = form.find('.w-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var e3 = toInches( e3Ft.val(), e3Inch.val() );
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var w = toInches( wFt.val(), wInch.val() );
+
+          var roomWidth = n1;
+          var roomHeight = w;
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          // updateMeasureDescription( );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(n1 === s1) ) {
+              invalidInputs.push(n1Ft, n1Inch, s1Ft, s1Inch);
+              errorMessages.push('N1 have to be equal S1');
+            }
+            if ( !(n2 === s2) ) {
+              invalidInputs.push(n2Ft, n2Inch, s2Ft, s2Inch);
+              errorMessages.push('N2 have to be equal S2');
+            }
+            if ( !(w === e1 + e2 + e3) ) {
+              invalidInputs.push(e1Ft, e1Inch, e2Ft, e2Inch, e3Ft, e3Inch, wFt, wInch);
+              errorMessages.push('W have to be equal E1+E2+E3');
+            }
+
+            if ( !(n1 + s1 > n2 + s2) ) {
+              invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch, s1Ft, s1Inch, s2Ft, s2Inch);
+              errorMessages.push('N1+S1 have to be greater than N2+S2');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-top hole-border-bottom hole-border-left')
+            $("div[data-hole-id='1']").css({
+              'width': s2 / scaling,
+              'height': e2 / scaling,
+              'top': e1 / scaling + 'px',
+              'right': 0
+            });
+
+          }
+        }
+        function newC1() {
+          var form = $(".room-inputs[data-room-id='10']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var nFt = form.find('.n-ft');
+          var nInch = form.find('.n-inch');
+
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+          var s3Ft = form.find('.s3-ft');
+          var s3Inch = form.find('.s3-inch');
+
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+
+          var n = toInches( nFt.val(), nInch.val() );
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var s3 = toInches( s3Ft.val(), s3Inch.val() );
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+
+          var roomWidth = n;
+          var roomHeight = w1;
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          // updateMeasureDescription( );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(w1 === e1) ) {
+              invalidInputs.push(w1Ft, w1Inch, e1Ft, e1Inch);
+              errorMessages.push('W1 have to be equal E1');
+            }
+            if ( !(w2 === e2) ) {
+              invalidInputs.push(w2Ft, w2Inch, e2Ft, e2Inch);
+              errorMessages.push('W2 have to be equal E2');
+            }
+            if ( !(n === s1 + s2 + s3) ) {
+              invalidInputs.push(s1Ft, s1Inch, s2Ft, s2Inch, s3Ft, s3Inch, nFt, nInch);
+              errorMessages.push('N have to be equal S1+S2+S3');
+            }
+
+            if ( !(w1 + e1 > w2 + e2) ) {
+              invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, e1Ft, e1Inch, e2Ft, e2Inch);
+              errorMessages.push('W1+E1 have to be greater than W2+E2');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-top hole-border-right hole-border-left')
+            $("div[data-hole-id='1']").css({
+              'width': s2 / scaling,
+              'height': e2 / scaling,
+              'bottom': 0,
+              'left': s1 / scaling + 'px'
+            });
+
+          }
+        }
+        function newC2() {
+          var form = $(".room-inputs[data-room-id='11']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+
+          var eFt = form.find('.e-ft');
+          var eInch = form.find('.e-inch');
+
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+          var w3Ft = form.find('.w3-ft');
+          var w3Inch = form.find('.w3-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+          var e = toInches( eFt.val(), eInch.val() );
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+          var w3 = toInches( w3Ft.val(), w3Inch.val() );
+
+          var roomWidth = n1;
+          var roomHeight = e;
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          // updateMeasureDescription( );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(n1 === s2) ) {
+              invalidInputs.push(n1Ft, n1Inch, s2Ft, s2Inch);
+              errorMessages.push('N1 have to be equal S2');
+            }
+            if ( !(n2 === s1) ) {
+              invalidInputs.push(n2Ft, n2Inch, s1Ft, s1Inch);
+              errorMessages.push('N2 have to be equal S1');
+            }
+            if ( !(e === w1 + w2 + w3) ) {
+              invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, w3Ft, w3Inch, eFt, eInch);
+              errorMessages.push('E have to be equal W1+W2+W3');
+            }
+
+            if ( !(n1 + s2 > s1 + n2) ) {
+              invalidInputs.push(n1Ft, n1Inch, s2Ft, s2Inch, s1Ft, s1Inch, n2Ft, n2Inch);
+              errorMessages.push('N1+S2 have to be greater than S1+N2');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-top hole-border-right hole-border-bottom')
+            $("div[data-hole-id='1']").css({
+              'width': s1 / scaling,
+              'height': w2 / scaling,
+              'top': w1 / scaling + 'px',
+              'left': 0
+            });
+
+          }
+        }
+        function newC3() {
+          var form = $(".room-inputs[data-room-id='12']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+          var n3Ft = form.find('.n3-ft');
+          var n3Inch = form.find('.n3-inch');
+
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+
+          var sFt = form.find('.s-ft');
+          var sInch = form.find('.s-inch');
+
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+          var n3 = toInches( n3Ft.val(), n3Inch.val() );
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var s = toInches( sFt.val(), sInch.val() );
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+
+          var roomWidth = s;
+          var roomHeight = w1;
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          // updateMeasureDescription( );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(w1 === e2) ) {
+              invalidInputs.push(w1Ft, w1Inch, e2Ft, e2Inch);
+              errorMessages.push('W1 have to be equal E2');
+            }
+            if ( !(e1 === w2) ) {
+              invalidInputs.push(e1Ft, e1Inch, w1Ft, w1Inch);
+              errorMessages.push('E1 have to be equal W2');
+            }
+            if ( !(s === n1 + n2 + n3) ) {
+              invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch, n3Ft, n3Inch, sFt, sInch);
+              errorMessages.push('S have to be equal N1+N2+N3');
+            }
+
+            if ( !(w1 + e2 > e1 + w2) ) {
+              invalidInputs.push(w1Ft, w1Inch, e2Ft, e2Inch, e1Ft, e1Inch, w2Ft, w2Inch);
+              errorMessages.push('W1+E2 have to be greater than E1+W2');
+            }
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-left hole-border-right hole-border-bottom')
+            $("div[data-hole-id='1']").css({
+              'width': n2 / scaling,
+              'height': e1 / scaling,
+              'top': 0,
+              'left': n1 / scaling + 'px'
+            });
+
+          }
+        }
 
 
 
