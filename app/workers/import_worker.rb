@@ -58,6 +58,11 @@ class ImportWorker
           product.url_image4 = row["Image4"] if row["Image4"]
           product.url_image5 = row["Image5"] if row["Image5"]
           product.url_image6 = row["Image6"] if row["Image6"]
+          if row["Supplier"].present?
+            product.supplier_id = Shoppe::Supplier.where(name: row["Supplier"]).first_or_create.id
+          else
+            product.supplier_id = nil
+          end
           product.save!
           field_array.each{|element| row.delete(element)}
           row.each do |key, value|
