@@ -609,6 +609,12 @@
           case 16:
             newE3();
             break;
+          case 17:
+            newF0();
+            break;
+          case 18:
+            newF1();
+            break;
         }
 
         function newRect0() {
@@ -734,7 +740,7 @@
 
           if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
 
-           if ( !renderFormErrors( validateNewRoomDimensions(s, w, formInputs), formInputs ) ) { return; }
+          if ( !renderFormErrors( validateNewRoomDimensions(s, w, formInputs), formInputs ) ) { return; }
 
           var scaling = s / +$('.editor-container').width();
 
@@ -1053,6 +1059,13 @@
           var roomWidth = n;
           var roomHeight = e1 + e2;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
 
           if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
@@ -1067,7 +1080,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1152,6 +1165,13 @@
           var roomWidth = n1 + n2;
           var roomHeight = e;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
 
           if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
@@ -1166,7 +1186,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1250,6 +1270,13 @@
           var roomWidth = s;
           var roomHeight = w1 + w2;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
 
           if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
@@ -1264,7 +1291,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1348,6 +1375,13 @@
           var roomWidth = n1 + n2;
           var roomHeight = w;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
 
           if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
@@ -1362,7 +1396,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1446,6 +1480,13 @@
           var roomWidth = n1;
           var roomHeight = w;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           var scaling = roomWidth / +$('.editor-container').width();
 
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
@@ -1460,7 +1501,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1545,6 +1586,13 @@
           var roomWidth = n;
           var roomHeight = w1;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           var scaling = roomWidth / +$('.editor-container').width();
 
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
@@ -1559,7 +1607,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1644,6 +1692,13 @@
           var roomWidth = n1;
           var roomHeight = e;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           var scaling = roomWidth / +$('.editor-container').width();
 
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
@@ -1658,7 +1713,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1743,6 +1798,13 @@
           var roomWidth = s;
           var roomHeight = w1;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           var scaling = roomWidth / +$('.editor-container').width();
 
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
@@ -1757,7 +1819,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1854,6 +1916,13 @@
           var roomWidth = s3;
           var roomHeight = w;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           var scaling = roomWidth / +$('.editor-container').width();
 
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
@@ -1868,7 +1937,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -1979,9 +2048,15 @@
           var w2 = toInches( w2Ft.val(), w2Inch.val() );
           var w3 = toInches( w3Ft.val(), w3Inch.val() );
 
-
           var roomWidth = n;
           var roomHeight = w1;
+
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
 
           var scaling = roomWidth / +$('.editor-container').width();
 
@@ -1997,7 +2072,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -2111,6 +2186,13 @@
           var roomWidth = n1;
           var roomHeight = e;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           var scaling = roomWidth / +$('.editor-container').width();
 
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
@@ -2125,7 +2207,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -2242,6 +2324,13 @@
           var roomWidth = s;
           var roomHeight = w1;
 
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
           var scaling = roomWidth / +$('.editor-container').width();
 
           if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
@@ -2256,7 +2345,7 @@
 
           addHoles();
 
-          // updateMeasureDescription( );
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
 
           scaleEditorHeightLine();
 
@@ -2321,6 +2410,262 @@
 
           }
         }
+        function newF0() {
+          var form = $(".room-inputs[data-room-id='17']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var n1Ft = form.find('.n1-ft');
+          var n1Inch = form.find('.n1-inch');
+          var n2Ft = form.find('.n2-ft');
+          var n2Inch = form.find('.n2-inch');
+
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+          var e3Ft = form.find('.e3-ft');
+          var e3Inch = form.find('.e3-inch');
+          var e4Ft = form.find('.e4-ft');
+          var e4Inch = form.find('.e4-inch');
+
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+          var s3Ft = form.find('.s3-ft');
+          var s3Inch = form.find('.s3-inch');
+
+          var wFt = form.find('.w-ft');
+          var wInch = form.find('.w-inch');
+
+          var n1 = toInches( n1Ft.val(), n1Inch.val() );
+          var n2 = toInches( n2Ft.val(), n2Inch.val() );
+
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+          var e3 = toInches( e3Ft.val(), e3Inch.val() );
+          var e4 = toInches( e4Ft.val(), e4Inch.val() );
+
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var s3 = toInches( s3Ft.val(), s3Inch.val() );
+
+          var w = toInches( wFt.val(), wInch.val() );
+
+          var roomWidth = n1;
+          var roomHeight = w;
+
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(w === e1 + e2 + e3 + e4) ) {
+              invalidInputs.push(e1Ft, e1Inch, e2Ft, e2Inch, e3Ft, e3Inch, e4Ft, e4Inch, wFt, wInch);
+              errorMessages.push('W have to be equal E1+E2+E3+E4');
+            }
+            if ( !(n1 === s3 + s2) ) {
+              invalidInputs.push(n1Ft, n1Inch, s3Ft, s3Inch, s2Ft, s2Inch);
+              errorMessages.push('N1 have to be equal S1+S2');
+            }
+            if ( !(n1 > s1) ) {
+              invalidInputs.push(n1Ft, n1Inch, s1Ft, s1Inch);
+              errorMessages.push('N1 have to be greater than S1');
+            }
+            if ( !(n1 > n2) ) {
+              invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch);
+              errorMessages.push('N1 have to be greater than N2');
+            }
+            if ( !(s1 === n2) ) {
+              invalidInputs.push(s1Ft, s1Inch, n2Ft, n2Inch);
+              errorMessages.push('S1 have to be equal N2');
+            }
+
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+            $('.dragg').append("<div class='hole' data-hole-id='2'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-top hole-border-left hole-border-bottom');
+            $("div[data-hole-id='1']").css({
+              'width': s1 / scaling,
+              'height': e2 / scaling,
+              'top': e1 / scaling + 'px',
+              'right': 0
+            });
+
+            $("div[data-hole-id='2']").addClass('hole-border-top hole-border-left');
+            $("div[data-hole-id='2']").css({
+              'width': s2 / scaling,
+              'height': e4 / scaling,
+              'bottom': 0,
+              'right': 0
+            });
+
+          }
+        }
+        function newF1() {
+          var form = $(".room-inputs[data-room-id='18']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = formInputs.lenght;
+
+          var e1Ft = form.find('.e1-ft');
+          var e1Inch = form.find('.e1-inch');
+          var e2Ft = form.find('.e2-ft');
+          var e2Inch = form.find('.e2-inch');
+
+          var s1Ft = form.find('.s1-ft');
+          var s1Inch = form.find('.s1-inch');
+          var s2Ft = form.find('.s2-ft');
+          var s2Inch = form.find('.s2-inch');
+          var s3Ft = form.find('.s3-ft');
+          var s3Inch = form.find('.s3-inch');
+          var s4Ft = form.find('.s4-ft');
+          var s4Inch = form.find('.s4-inch');
+
+          var w1Ft = form.find('.w1-ft');
+          var w1Inch = form.find('.w1-inch');
+          var w2Ft = form.find('.w2-ft');
+          var w2Inch = form.find('.w2-inch');
+          var w3Ft = form.find('.w3-ft');
+          var w3Inch = form.find('.w3-inch');
+
+          var nFt = form.find('.n-ft');
+          var nInch = form.find('.n-inch');
+
+          var n = toInches( nFt.val(), nInch.val() );
+
+          var e1 = toInches( e1Ft.val(), e1Inch.val() );
+          var e2 = toInches( e2Ft.val(), e2Inch.val() );
+
+          var s1 = toInches( s1Ft.val(), s1Inch.val() );
+          var s2 = toInches( s2Ft.val(), s2Inch.val() );
+          var s3 = toInches( s3Ft.val(), s3Inch.val() );
+          var s4 = toInches( s4Ft.val(), s4Inch.val() );
+
+          var w1 = toInches( w1Ft.val(), w1Inch.val() );
+          var w2 = toInches( w2Ft.val(), w2Inch.val() );
+          var w3 = toInches( w3Ft.val(), w3Inch.val() );
+
+          var roomWidth = n;
+          var roomHeight = e1;
+
+          var fullroomWidth = toFoolMeasure(roomWidth);
+          var fullroomHeight = toFoolMeasure(roomHeight);
+          var roomWidthFt = fullroomWidth.ft;
+          var roomWidthinch = fullroomWidth.inch;
+          var roomHeightFt = fullroomHeight.ft;
+          var roomHeightInch = fullroomHeight.inch;
+
+          var scaling = roomWidth / +$('.editor-container').width();
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(roomWidth, roomHeight, formInputs), formInputs ) ) { return; }
+
+          setNewDimensionsToArea(roomWidth, roomHeight);
+
+          scaleAreaHeight(scaling);
+
+          addHoles();
+
+          updateMeasureDescription( roomWidthFt, roomWidthinch, roomHeightFt, roomHeightInch );
+
+          scaleEditorHeightLine();
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+          function validateShape() {
+            var invalidInputs = [];
+            var errorMessages = [];
+            if ( !(n === s1 + s2 + s3 + s4) ) {
+              invalidInputs.push(s1Ft, s1Inch, s2Ft, s2Inch, s3Ft, s3Inch, s4Ft, s4Inch, nFt, nInch);
+              errorMessages.push('N have to be equal S1+S2+S3+S4');
+            }
+            if ( !(e1 === w1 + w2) ) {
+              invalidInputs.push(e1Ft, e1Inch, w1Ft, w1Inch, w2Ft, w2Inch);
+              errorMessages.push('E1 have to be equal W1+W2');
+            }
+            if ( !(e1 > w3) ) {
+              invalidInputs.push(e1Ft, e1Inch, w3Ft, w3Inch);
+              errorMessages.push('E1 have to be greater than W3');
+            }
+            if ( !(e1 > e2) ) {
+              invalidInputs.push(e1Ft, e1Inch, e2Ft, e2Inch);
+              errorMessages.push('E1 have to be greater than E2');
+            }
+            if ( !(e2 === w3) ) {
+              invalidInputs.push(e2Ft, e2Inch, w3Ft, w3Inch);
+              errorMessages.push('E2 have to be equal W3');
+            }
+
+            return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+          }
+
+          function addHoles() {
+            $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
+            $('.dragg').append("<div class='hole' data-hole-id='2'></div>");
+
+            $("div[data-hole-id='1']").addClass('hole-border-top hole-border-right');
+            $("div[data-hole-id='1']").css({
+              'width': s1 / scaling,
+              'height': w2 / scaling,
+              'bottom': 0,
+              'left': 0
+            });
+
+            $("div[data-hole-id='2']").addClass('hole-border-top hole-border-left hole-border-right');
+            $("div[data-hole-id='2']").css({
+              'width': s3 / scaling,
+              'height': w3 / scaling,
+              'bottom': 0,
+              'right': s4 / scaling
+            });
+
+          }
+        }
 
 
 
@@ -2329,7 +2674,30 @@
 
         function toInches(ft, inch) { return ( +ft * 12 ) + +inch; }
 
+        function toFoolMeasure(totalInch) {
+          ft = Math.floor(totalInch / 12);
+          inch = totalInch % 12;
+          return { ft: ft, inch: inch };
+        }
+
         function isNumber(number) { return !isNaN(parseFloat(number)) && isFinite(number) && number >= 0; }
+
+        function getSum(ft, inch) {
+          var totalFt = 0;
+          var totalInch = 0;
+          for(var i = 0, length = ft.length; i < length; i++) {
+            totalFt += +ft[i];
+          }
+          for(var i = 0, length = inch.length; i < length; i++) {
+            totalInch += +inch[i];
+          }
+          if (totalInch >= 12) {
+            var addToFt = Math.floor(totalInch / 12);
+            totalFt += addToFt;
+            totalInch = totalInch % 12;
+          }
+          return { ft: totalFt, inch: totalInch };
+        }
 
         function validateNumbersInForm(inputs, count) {
           var validInputs = 0;
