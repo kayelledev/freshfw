@@ -77,7 +77,12 @@
 .rotation-arrow {
   position: absolute;
   right: -20px;
-  /*bottom: -20px;*/
+}
+
+.remove-icon {
+  position: absolute;
+  right: -15px;
+  top: -15px
 }
 
 .save-preset {
@@ -145,7 +150,7 @@ div#dialog-form-errors {
   color: #A94442;
 }
 
-.editor-items-panel{
+.editor-items-panel {
   float: left;
   position: absolute;
   width: 10%;
@@ -155,6 +160,9 @@ div#dialog-form-errors {
   height: auto;
 }
 
+.items-panel-elem {
+  display: none;
+}
 
 .draggable2 {
   width:100%;
