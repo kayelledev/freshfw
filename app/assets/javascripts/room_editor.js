@@ -408,6 +408,33 @@
             controller.$currentElement.attr('data-rotation', degree);
         }
 
+        function rotateOnMouseClick() {
+          currentElem = controller.$currentElement.parent();
+          var matrix = currentElem.css("-webkit-transform") ||
+            currentElem.css("-moz-transform")    ||
+            currentElem.css("-ms-transform")     ||
+            currentElem.css("-o-transform")      ||
+            currentElem.css("transform");
+
+          var values = matrix.split('(')[1].split(')')[0].split(',');
+          var a = values[0];
+          var b = values[1];
+          var degree = Math.round(Math.atan2(b, a) * (180/Math.PI));
+
+          degree = +degree + 90;
+          console.log(degree);
+          var offsetX = parseFloat(currentElem.attr('data-x')),
+              offsetY = parseFloat(currentElem.attr('data-y'));
+
+          currentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          currentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          currentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          currentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+
+          controller.$currentElement.attr('data-rotation', degree);
+
+        }
+
         $('.rotation-arrow').mousedown(function(e) {
             e.preventDefault(); // prevents the dragging of the image.
             $(document).bind('mousemove.rotateImg', function(e2) {
@@ -417,6 +444,11 @@
 
         $(document).mouseup(function(e) {
             $(document).unbind('mousemove.rotateImg');
+        });
+
+        $('.rotation-arrow').click(function(e) {
+          e.preventDefault();
+          rotateOnMouseClick();
         });
     };
 
