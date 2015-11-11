@@ -5,13 +5,14 @@ class ImportWorker
   include Sidekiq::Worker
   sidekiq_options :queue => :mass_import
 
-  def perform(file, email)
+  def perform(file, email, import_log_id)
     field_array = ['Product Name', 'SKU', 'Category Name', 'Subcategory Name', 'Permalink', 'Description', 'Short Description', 'Featured',
                    "What's in the box?", 'Width', 'Height', 'Depth', 'Seat Width', 'Seat Depth', 'Seat Height', 'Arm Height',
                    'CAD Price', 'USA Price', 'Default Image', 'Image2', 'Image3', 'Image4', 'Image5', 'Image6']
     attr_active_array = ['Color', 'Item 2 Width', 'Item 2 Depth', 'Item 2 Height', 'Item 3 Width', 'Item 3 Depth', 'Item 3 Height', 'NW', 'Technical Description',
                          'Features', 'Instructions', 'Outdoor']
     errors = []
+    import_log = Shoppe::ImportLog.find(import_log_id)
     begin
       spreadsheet = case File.extname(file)
         when ".csv" then Roo::CSV.new(file)
@@ -19,8 +20,9 @@ class ImportWorker
         when ".xlsx" then Roo::Excelx.new(file)
         else raise I18n.t('shoppe.imports.errors.unknown_format', filename: File.original_filename)
       end
-    rescue => error
-      errors << {error: error.message}
+    rescue
+      errors << "Unknown file format"
+      import_log.update(import_status: 2, finish_time: Time.now, log_errors: errors.join("\n"))
     end
     if errors.empty?
       spreadsheet.default_sheet = spreadsheet.sheets.first
@@ -76,9 +78,12 @@ class ImportWorker
       end
       if errors.empty?
         errors << 'Import succeess'
+        errors << "Success imported #{success_count} rows"
+        import_log.update(import_status: 1, finish_time: Time.now, log_errors: errors.join("\n"))
       else
         errors = errors.map{ |e| "Row number #{e[:row_index]}. Error: #{e[:error]}" }
         errors.unshift("Success imported #{success_count} rows", "")
+        import_log.update(import_status: 2, finish_time: Time.now, log_errors: errors.join("\n"))
       end
     end
     begin

@@ -262,6 +262,25 @@ header.main {
 					width:auto;
 				}
 			}
+
+			table.importLog {
+				@extend table.productAttributes;
+				tr:nth-last-child(2) td {
+					border-bottom: none;
+				}
+				tr.tear-off td {
+					border:none;
+					background:image-url('shoppe/table-tear-off.png') repeat-x 0 0;
+					height:5px;
+					padding:0;
+				}
+				td {
+					border:1px solid #ddd;
+					font-size:0.9em;
+					width:auto;
+				}
+			}
+
 		}
 		p.submit {margin:0; background:#fff; border:1px solid #5B6270; padding:25px; }
 		p.submit .button {
