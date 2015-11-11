@@ -166,3 +166,44 @@ div#dialog-form-errors {
 .items-panel-elem {
   padding: 5px;
 }
+
+#room-slider .slide img {
+  border: 2px solid white;
+}
+
+#room-slider .slide:hover {
+  cursor: pointer;
+}
+
+.active-slider {
+  border: 2px solid #FED536 !important;
+}
+
+#room-preview img {
+  width: 100%;
+}
+
+#dialog-form .room-imputs {
+  display: none;
+}
+
+.active-room-imputs {
+  display: block !important;
+}
+
+.form-group .equal {
+  padding-top: 10px;
+}
+
+.bx-wrapper {
+  margin-bottom: 10px !important;
+}
+
+.bx-prev {
+  left: -20px !important;
+}
+
+.bx-next {
+  right: -20px !important;
+}
+

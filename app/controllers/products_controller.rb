@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
     @items = Shoppe::Product.all
     @categories = Shoppe::ProductCategory.all
     reviewed_product = Product.find_by_permalink(params[:id])
-    current_user.reviews.create(product: reviewed_product) if current_user && ! current_user.products.include?(reviewed_product)
+    review = current_user.reviews.find_or_create_by(product: reviewed_product) if current_user
+    review.touch if review
   end
 
   def buy

@@ -34,6 +34,8 @@ module Shoppe
     belongs_to :product_category, :class_name => 'Shoppe::ProductCategory'
     belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
     belongs_to :supplier, :class_name => 'Shoppe::Supplier'
+    #belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
+
     # The product's tax rate
     #
     # @return [Shoppe::TaxRate]
@@ -53,12 +55,17 @@ module Shoppe
     has_many :included_products, through: :product_associations, dependent: :destroy, class_name: 'Shoppe::Product'
 
     # Validations
-    with_options :if => Proc.new { |p| p.parent.nil? } do |product|
-      product.validates :product_category_id, :presence => true
-      product.validates :product_subcategory_id, :presence => true
+    #with_options :if => Proc.new { |p| p.parent.nil? } do |product|
+      #product.validates :product_category_id, :presence => true
+      #product.validates :product_subcategory_id, :presence => true
       #product.validates :description, :presence => true
       #product.validates :short_description, :presence => true
+    #end
+
+    validate do |product|
+      product.errors.add('product_subcategory_id',"can't be blank") if product.product_category_id.nil?
     end
+
     validates :name, :presence => true
     validates :sku, :presence => true
     validates_uniqueness_of :name, :scope => :sku
@@ -161,11 +168,12 @@ module Shoppe
     # Example:
     #
     #   Shoppe:Product.import("path/to/file.csv")
-    def self.import(file, email)
+    def self.import(file, email, user)
       ext_name = File.extname(file.original_filename)
       file_name = "#{Rails.root}/tmp/#{Time.now.strftime('%Y-%m-%d___%H_%M_%S_%L')}#{ext_name}"
       FileUtils::copy_file(file.path, file_name)
-      ImportWorker.perform_async(file_name, email)
+      import_log = Shoppe::ImportLog.create(filename: file.original_filename, user_id: user.id, import_status: 0, start_time: Time.now)
+      ImportWorker.perform_async(file_name, email, import_log.id)
       "The file is sent to the background task. Import results will be sent to your email."
     end
 

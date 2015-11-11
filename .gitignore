@@ -65,3 +65,5 @@ config/social.yml
 config/secrets.yml
 vendor/cache
 ./idea
+vendor/cache
+/db/fresh_fw_stage_dev.sql

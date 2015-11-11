@@ -5,7 +5,9 @@ module Shoppe
     before_filter { params[:id] && @product = Shoppe::Product.root.find(params[:id]) }
 
     def index
-      @products = Shoppe::Product.root.includes(:stock_level_adjustments, :product_category, :variants).order(:name).group_by(&:product_category).sort_by { |cat,pro| cat.id }
+      #@products = Shoppe::Product.root.includes(:stock_level_adjustments, :product_category, :variants).order(:name).group_by(&:product_category).sort_by { |cat,pro| cat.id }
+      @products = Shoppe::Product.root.includes(:stock_level_adjustments, :product_category, :variants).order(:name, :sku)
+      @categories = Shoppe::ProductCategory.category_with_subcategories
     end
 
     def new
@@ -39,11 +41,12 @@ module Shoppe
     end
 
     def import
+      @import_logs =  Shoppe::ImportLog.order(start_time: :desc).includes(:user).limit(50)
       if request.post?
         if params[:import][:import_file].nil?
           redirect_to import_products_path, :flash => {:alert => I18n.t('shoppe.imports.errors.no_file')}
         else
-          status = Shoppe::Product.import(params[:import][:import_file], params[:import][:email])
+          status = Shoppe::Product.import(params[:import][:import_file], params[:import][:email], current_user)
           redirect_to products_path, :flash => {:notice => status}
         end
       end

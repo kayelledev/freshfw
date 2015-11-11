@@ -430,11 +430,13 @@
     Controller.prototype.openDimensionsForm = function(elementsClass) {
       var setDimensionsButton = $('#set-dimensions');
       var dimensionsDialog = $('div#dimensions-dialog');
+      var roomsOnSlide = 9;
 
       // define form dialog
       dimensionsDialog.dialog({
         autoOpen: false,
-        minWidth: 350,
+        minWidth: 850,
+        maxWidth: 850,
         minHeight: 210,
         resizable: false,
         modal: true,
@@ -447,21 +449,75 @@
           restoreArea();
         }
       });
+      var slider = $('#room-slider');
+      var clicked = false;
 
-      // open dialog form and clear area
+      // open dialog form
       setDimensionsButton.on('click', function(){
         clearArea();
         dimensionsDialog.dialog('open');
+        if (clicked === false) {
+          initSlider();
+        }
+        interactSlide();
+        clicked = true;
       });
 
-      //clear area
+      function initSlider() {
+        slider.bxSlider({
+          slideWidth: 200,
+          minSlides: roomsOnSlide,
+          maxSlides: roomsOnSlide,
+          slideMargin: 5,
+          moveSlides: 1,
+          pager: false,
+          onSlideAfter: function($slideElement, oldIndex, newIndex){
+            var currentSlideDataID = +$slideElement.attr('data-room-id');
+            var newSlideDataID;
+            if (currentSlideDataID >= 0 && currentSlideDataID <= 26) {
+              newSlideDataID = currentSlideDataID + 4;
+            } else {
+              newSlideDataID = 3 - (30 - currentSlideDataID);
+            }
+            // if (newSlideDataID >= 27 && newSlideDataID <= 4) {
+            //   var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
+            // } else ()
+            var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
+            console.log(newSlide);
+            addYellowBorder( newSlide );
+            setPreviewImage( newSlide );
+            displayInputs( newSlide );
+          }
+        });
+      }
+
+      function interactSlide() {
+        $('#room-slider .slide').click(function(){
+          // move slider
+          var currentSlide = slider.getCurrentSlide();
+          var currlenElemIndex = $(this).index();
+          var sliderElemPosition = currlenElemIndex - currentSlide - roomsOnSlide;
+          var slidesCount = slider.getSlideCount();
+          if (roomsOnSlide % 2 > 0){
+            var slideCenter = Math.floor(roomsOnSlide / 2);
+            var toSlide = currentSlide - (slideCenter - sliderElemPosition);
+
+            if (toSlide < 0) {
+              toSlide = slidesCount + toSlide;
+            } else if (toSlide > 30) {
+              toSlide = toSlide - slidesCount;
+            }
+            slider.goToSlide(toSlide);
+          }
+        });
+      }
+
       function clearArea(){
         $('.' + elementsClass).each(function() {
            $(this).css('display', 'none');
         });
       }
 
-      // restore area
       function restoreArea(){
         $('.' + elementsClass).each(function() {
           if ($('.editor-items-panel').css('display') === 'none') {
@@ -470,6 +526,31 @@
             $(this).css('display', 'none');
           }
         });
+      }
+
+      function addYellowBorder(slide) {
+        $('#room-slider img').removeClass('active-slider');
+        $(slide).each(function(){
+          $(this).find('img').addClass('active-slider');
+        })
+
+
+      }
+
+      function setPreviewImage(slide) {
+        if (slide[1]) {
+          slide = slide[1];
+        }
+        var previewImage = $(slide).find('img').clone();
+        previewImage.removeClass('active-slider');
+        previewImage.removeClass('slider');
+        $('#room-preview').html(previewImage);
+      }
+
+      function displayInputs(slide) {
+        var roomId = $(slide).attr('data-room-id');
+        $('.room-imputs').removeClass('active-room-imputs');
+        $(".room-imputs[data-room-id='" + roomId + "']").addClass('active-room-imputs');
       }
     };
 
