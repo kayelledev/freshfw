@@ -2,20 +2,21 @@
   %table.data
     %thead
       %tr
-        %th{:width => '20%'}= t('shoppe.products.sku')
+        %th{:width => '10%'}= t('shoppe.products.sku')
         %th{:width => '40%'}= t('shoppe.products.name')
         %th{:width => '25%'}= t('shoppe.products.price_variants')
         %th{:width => '15%'}= t('shoppe.products.stock')
+        %th{:width => '10%'}= "Updated at"
     %tbody
       - displayed = {}
       - if @products.empty?
         %tr.empty
-          %td{:colspan => 4}= t('shoppe.products.no_products')
+          %td{:colspan => 5}= t('shoppe.products.no_products')
       - else
         - @categories.each do |category|
           - if @products.where(product_category_id: category.id).present?
             %tr
-              %th{:colspan => 4}
+              %th{:colspan => 5}
                 = (category.all_parents.compact.map(&:name) << category.name ).join(" : ")
             - @products.where(product_category_id: category.id).each do |product|
               %tr
@@ -42,3 +43,4 @@
                       = boolean_tag(product.in_stock?, nil, :true_text => product.stock, :false_text => t('shoppe.products.no_stock'))
                     - else
                       &#8734;
+                %td= product.updated_at
