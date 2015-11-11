@@ -3,10 +3,10 @@
     %thead
       %tr
         %th{:width => '10%'}= t('shoppe.products.sku')
-        %th{:width => '40%'}= t('shoppe.products.name')
+        %th{:width => '35%'}= t('shoppe.products.name')
         %th{:width => '25%'}= t('shoppe.products.price_variants')
         %th{:width => '15%'}= t('shoppe.products.stock')
-        %th{:width => '10%'}= "Updated at"
+        %th{:width => '15%'}= "Updated at"
     %tbody
       - displayed = {}
       - if @products.empty?
