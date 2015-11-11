@@ -8,6 +8,7 @@ module Shoppe
     has_many  :last_mile_companies, through: :last_mile_companies_zones, :class_name => 'Shoppe::LastMileCompany'
     has_many  :cities_zones, dependent: :destroy, :class_name => 'Shoppe::CitiesZone'
     has_many  :cities, through: :cities_zones, :class_name => 'Shoppe::City'
+    accepts_nested_attributes_for :cities #, :allow_destroy => true, :reject_if => Proc.new { |a| a['city_id'].blank? }
     validates :name, :presence => true
   end
 end

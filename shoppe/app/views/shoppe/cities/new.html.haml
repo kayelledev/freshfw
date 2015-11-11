@@ -1,0 +1,9 @@
+- @page_title = t('shoppe.logistics.cities.new')
+
+= content_for :header do
+  %p.buttons
+    = link_to t('shoppe.logistics.links.back'), :back, :class => 'button green'
+    = link_to t('shoppe.logistics.back_to_logistictics') , :logistics, :class => 'button'
+  %h2.zones= t('shoppe.logistics.cities.new')
+
+= render 'form'

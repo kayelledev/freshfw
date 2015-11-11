@@ -3,5 +3,6 @@ module Shoppe
   	has_many  :suppliers_zones, dependent: :destroy, :class_name => 'Shoppe::SuppliersZone'
     has_many  :zones, through: :suppliers_zones, :class_name => 'Shoppe::Zone'
     validates :name, :presence => true
+    accepts_nested_attributes_for :zones
   end
 end

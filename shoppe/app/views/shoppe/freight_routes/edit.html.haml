@@ -1,0 +1,8 @@
+- @page_title = t('shoppe.logistics.freight_routes.edit_freight_route')
+
+= content_for :header do
+  %p.buttons
+    = link_to t('shoppe.logistics.freight_routes.new_freight_route'), :new_freight_route, :class => 'button green'
+    = link_to t('shoppe.logistics.back_to_logistictics') , :logistics, :class => 'button'
+  %h2.zones= t('shoppe.logistics.freight_routes.edit_freight_route')
+= render 'form'

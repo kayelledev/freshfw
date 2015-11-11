@@ -70,9 +70,11 @@
 
 = content_for :header do
   %p.buttons
-    = link_to t('shoppe.logistics.new_freight_company'), '#', :class => 'button green'
-    = link_to t('shoppe.logistics.new_route'), '#', :class => 'button green'
-    = link_to t('shoppe.logistics.new_supplier'), '#', :class => 'button green'
+    = link_to t('shoppe.logistics.zones.new_zone'), :new_zone, :class => 'button green'
+    = link_to t('shoppe.logistics.freight_companies.new_freight_company'), :new_freight_company, :class => 'button green'
+    = link_to t('shoppe.logistics.freight_routes.new_route'), :new_freight_route, :class => 'button green'
+    = link_to t('shoppe.logistics.suppliers.new_supplier'), :new_supplier, :class => 'button green'
+    = link_to t('shoppe.logistics.suppliers.new_last_mile_company'), :new_last_mile_company, :class => 'button green'
   %h2.orders
     = t('shoppe.logistics.main_title')
 .main-container
@@ -93,108 +95,22 @@
             .dd
               = submit_tag t('shoppe.logistics.search.search_button')
     .half2
-      %h2= t('shoppe.logistics.titles.zones')
-      .table-container
-        %table
-          %thead
-            %tr
-              %th= t('shoppe.logistics.zones.zone')
-              %th= t('shoppe.logistics.zones.province')
-              %th= t('shoppe.logistics.zones.country')
-              %th= t('shoppe.logistics.zones.dest_city')
-              %th= t('shoppe.logistics.links.action')
-          %tbody
-            - @zones.each do |zone|
-              - zone.cities.each do |city|
-                %tr
-                  %td= zone.name
-                  %td= city.province
-                  %td= city.country.name
-                  %td= city.name
-                  %td= link_to t('shoppe.logistics.links.show')
+      = render 'zones_table'
 .main-container
   .split-contailner
     .half1
-      Supplier: zone B 
-      %br
-      Customer: zone A
-      %h2= t('shoppe.logistics.titles.freight_routes')
-      .table-container
-        %table
-          %thead
-            %tr
-              %th= t('shoppe.logistics.freight_routes.freight_company')
-              %th= t('shoppe.logistics.freight_routes.customer_zone')
-              %th= t('shoppe.logistics.freight_routes.supplier_zone')
-              %th= t('shoppe.logistics.freight_routes.trevel_days')
-              %th= t('shoppe.logistics.links.action')
-          %tbody
-            - @freight_routes.each do |route|
-              %tr
-                %td= route.freight_company.name
-                %td= route.zone.name
-                %td= route.suppliers_zone.zone.name
-                %td= route.trevel_days
-                %td= link_to t('shoppe.logistics.links.show')
+      .search-result 
+        - if params[:action] == 'search'
+          Supplier: zone B 
+          %br
+          Customer: zone A
+      = render 'freight_routes_table'
     .half2
-      %h2= t('shoppe.logistics.titles.suppliers')
-      .table-container
-        %table
-          %thead
-            %tr
-              %th= t('shoppe.logistics.suppliers.name')
-              %th= t('shoppe.logistics.suppliers.warehouse')
-              %th= t('shoppe.logistics.suppliers.zone')
-              %th= t('shoppe.logistics.suppliers.website')
-              %th= t('shoppe.logistics.links.action')
-          %tbody
-            - @suppliers.each do |supplier|
-              - supplier.zones.each do |zone|
-                %tr
-                  %td= supplier.name
-                  %td= supplier.warehouse
-                  %td= zone.name
-                  %td= supplier.website
-                  %td= link_to t('shoppe.logistics.links.show')
+      = render 'suppliers_table'
 .main-container
   .split-contailner
     .half1
-      %h2= t('shoppe.logistics.titles.last_mile_companies')
-      .table-container
-        %table
-          %thead
-            %tr
-              %th= t('shoppe.logistics.last_mile_companies.name')
-              %th= t('shoppe.logistics.last_mile_companies.zone')
-              %th= t('shoppe.logistics.last_mile_companies.city')
-              %th= t('shoppe.logistics.last_mile_companies.address')
-              %th= t('shoppe.logistics.links.action')
-          %tbody
-            - @last_mile_companies.each do |last_mile_company|
-              - last_mile_company.zones.each do |zone|
-                %tr
-                  %td= last_mile_company.name
-                  %td= zone.name
-                  %td= last_mile_company.city
-                  %td= last_mile_company.address
-                  %td= link_to t('shoppe.logistics.links.show')
+      = render 'last_mile_companies_table'
     .half2
-      %h2= t('shoppe.logistics.titles.freight_companies')
-      .table-container
-        %table
-          %thead
-            %tr
-              %th= t('shoppe.logistics.freight_companies.name')
-              %th= t('shoppe.logistics.freight_companies.dc')
-              %th= t('shoppe.logistics.freight_companies.zone')
-              %th= t('shoppe.logistics.freight_companies.website')
-              %th= t('shoppe.logistics.freight_companies.action')
-          %tbody
-            - @freight_companies.each do |freight_company|
-              - freight_company.zones.each do |zone|
-                %tr
-                  %td= freight_company.name
-                  %td= freight_company.dc
-                  %td= zone.name
-                  %td= freight_company.website
-                  %td= link_to t('shoppe.logistics.links.show')
+      = render 'freight_companies_table'
+    .half2

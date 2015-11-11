@@ -1,0 +1,19 @@
+%h2= "Zone: #{@zone.name}"
+- if @zone.cities.present?
+  %h2 Cities
+  %table.data.orderItems
+    %thead
+      %tr
+        %th.name= t('shoppe.logistics.cities.name')
+        %th.province= t('shoppe.logistics.cities.province')
+        %th.country= t('shoppe.logistics.cities.country')
+        %th.action= t('shoppe.logistics.links.action')
+    %tbody
+      - @zone.cities.each do |city|
+        %tr.item{:class => 'existing'}
+          %td.name= city.name
+          %td.province= city.province
+          %td.country= city.country.name
+          %td.action= link_to t('shoppe.logistics.cities.edit'), edit_zone_city_path(@zone, city.id), :class => 'button green'
+- else
+  Please add city for this zone

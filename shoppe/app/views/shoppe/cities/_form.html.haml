@@ -1,0 +1,10 @@
+- countries = Shoppe::Country.all
+= form_for [@zone, @city], :html => {:multipart => true} do |f|
+  = f.error_messages
+  = f.label :name, t('shoppe.logistics.cities.name')
+  = f.text_field :name, :class => 'text'
+  = f.label :province, t('shoppe.logistics.cities.province')
+  = f.text_field :province, :class => 'text'
+  = f.label :country_id, t('shoppe.logistics.cities.country')
+  = f.collection_select :country_id, countries, :id, :name
+  = f.submit t('shoppe.submit'), :class => 'button green'

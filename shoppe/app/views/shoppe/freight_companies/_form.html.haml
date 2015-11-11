@@ -1,0 +1,12 @@
+= form_for @freight_company, :html => {:multipart => true} do |f|
+  = f.error_messages
+  = f.label :name, t('shoppe.logistics.freight_companies.name')
+  = f.text_field :name, :class => 'text'
+  = f.label :dc, t('shoppe.logistics.freight_companies.dc')
+  = f.text_field :dc, :class => 'text'
+  = f.label :website, t('shoppe.logistics.freight_companies.website')
+  = f.text_field :website, :class => 'text'
+  = f.label :notes, t('shoppe.logistics.freight_companies.notes')
+  = f.text_area :notes, :class => 'text'
+  = render 'zones_form', :f => f
+  = f.submit t('shoppe.submit'), :class => 'button green'

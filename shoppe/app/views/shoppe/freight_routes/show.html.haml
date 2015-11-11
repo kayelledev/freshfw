@@ -1,0 +1,7 @@
+- @page_title = "#{t('shoppe.logistics.freight_routes.freight_route')} ##{@freight_route.id}"
+
+= content_for :header do
+  %p.buttons= link_to t('shoppe.edit'), [:edit, @freight_route], :class => 'button'
+  %h2.zones= "#{t('shoppe.logistics.freight_routes.freight_route')} ##{@freight_route.id}"
+#zone
+  = render 'freight_route_details'

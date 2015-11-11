@@ -36,7 +36,13 @@ Shoppe::Engine.routes.draw do
       post :search
     end
   end
+  resources :zones do
+    resources :cities
+  end
   resources :freight_routes 
+  resources :suppliers
+  resources :last_mile_companies
+  resources :freight_companies
   resources :attachments, :only => :destroy
 
   get 'settings'=> 'settings#edit'

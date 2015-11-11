@@ -1,0 +1,33 @@
+%h2= t('shoppe.logistics.titles.last_mile_companies')
+.table-container
+  %table
+    %thead
+      %tr
+        %th= t('shoppe.logistics.last_mile_companies.name')
+        %th= t('shoppe.logistics.last_mile_companies.zone')
+        %th= t('shoppe.logistics.last_mile_companies.city')
+        %th= t('shoppe.logistics.last_mile_companies.address')
+        %th= t('shoppe.logistics.links.action')
+    %tbody
+      - @last_mile_companies.each do |last_mile_company|
+        - if last_mile_company.zones.present?
+          - last_mile_company.zones.each_with_index do |zone,index|
+            %tr 
+              - if index.zero?
+                %td{rowspan:"#{last_mile_company.zones.count}"}= last_mile_company.name
+                %td{rowspan:"#{last_mile_company.zones.count}"}= last_mile_company.city
+                %td{rowspan:"#{last_mile_company.zones.count}"}= last_mile_company.address
+              %td= zone.name
+              - if index.zero?
+                %td{rowspan:"#{last_mile_company.zones.count}"}
+                  = link_to t('shoppe.logistics.links.show'), last_mile_company, :class => 'button green'
+                  = link_to t('shoppe.logistics.links.delete'), last_mile_company, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.logistics.last_mile_companies.delete_confirmation')}
+        - else
+          %tr 
+            %td= last_mile_company.name
+            %td= last_mile_company.city
+            %td= last_mile_company.address
+            %td
+            %td
+              = link_to t('shoppe.logistics.links.show'), last_mile_company, :class => 'button green'
+              = link_to t('shoppe.logistics.links.delete'), last_mile_company, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.logistics.last_mile_companies.delete_confirmation')}
