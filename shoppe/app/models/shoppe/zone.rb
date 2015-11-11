@@ -10,5 +10,13 @@ module Shoppe
     has_many  :cities, through: :cities_zones, :class_name => 'Shoppe::City'
     accepts_nested_attributes_for :cities #, :allow_destroy => true, :reject_if => Proc.new { |a| a['city_id'].blank? }
     validates :name, :presence => true
+    
+    def self.customer_search(query)
+      query.present? ? Shoppe::Zone.joins(:cities).where('((shoppe_cities.name LIKE ?) OR (shoppe_zones.name LIKE ?))', "%#{query}%", "%#{query}%").uniq : nil
+    end
+
+    def self.supplier_search(query)
+      query.present? ? Shoppe::Zone.joins(:cities, :suppliers).where('((shoppe_cities.name LIKE ?) OR (shoppe_suppliers.name LIKE ?) OR (shoppe_suppliers.warehouse LIKE ?) OR (shoppe_zones.name LIKE ?))', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%").uniq : nil
+    end
   end
 end

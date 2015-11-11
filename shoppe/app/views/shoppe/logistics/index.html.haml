@@ -6,7 +6,7 @@
     overflow: hidden;
     / height: 50px;
   }
-  .split-contailner{
+  .logistic-container{
     float: left;
     width: 100%;
     position: relative;
@@ -60,7 +60,7 @@
     border: 1px solid #cfd4dd;
     background: #fff;
   }
-  .split-contailner h2{
+  .logistic-container h2{
     font-size: 1.2em;
     color: #333;
     padding-top: 28px;
@@ -78,7 +78,7 @@
   %h2.orders
     = t('shoppe.logistics.main_title')
 .main-container
-  .split-contailner
+  .logistic-container
     .half1
       %h2=t('shoppe.logistics.search.title')
       .routeSearch{:style => action_name == 'search' ? "display:block" : ''}
@@ -87,28 +87,28 @@
             .dt
               = label_tag t('shoppe.logistics.search.supplier')
             .dd
-              = text_field_tag :supplier
+              = text_field_tag :supplier, @supplier
             .dt
               = label_tag t('shoppe.logistics.search.customer')
             .dd
-              = text_field_tag :customer
+              = text_field_tag :customer, @customer
             .dd
               = submit_tag t('shoppe.logistics.search.search_button')
     .half2
       = render 'zones_table'
 .main-container
-  .split-contailner
+  .logistic-container
     .half1
       .search-result 
-        - if params[:action] == 'search'
-          Supplier: zone B 
+        - if @customer_zones || @supplier_zones
+          = "Supplier zones: #{@supplier_zones.map(&:name).join(", ") }" if @supplier_zones.present?
           %br
-          Customer: zone A
+          = "Customer zones: #{@customer_zones.map(&:name).join(", ") }" if @customer_zones.present?
       = render 'freight_routes_table'
     .half2
       = render 'suppliers_table'
 .main-container
-  .split-contailner
+  .logistic-container
     .half1
       = render 'last_mile_companies_table'
     .half2
