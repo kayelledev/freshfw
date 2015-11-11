@@ -37,7 +37,7 @@ module Shoppe
     private
 
     def safe_params
-      params[:freight_route].permit(:trevel_days, :zone_id, :suppliers_zone_id, :freight_company_id)
+      params[:freight_route].permit(:travel_days, :zone_id, :suppliers_zone_id, :freight_company_id)
     end
   end
 end

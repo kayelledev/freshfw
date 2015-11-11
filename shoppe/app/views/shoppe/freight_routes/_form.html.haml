@@ -6,7 +6,7 @@
   = f.collection_select :zone_id, Shoppe::Zone.all, :id, :name, {:include_blank => false}
   = f.label :suppliers_zone_id, t('shoppe.logistics.freight_routes.supplier_zone')
   = f.collection_select :suppliers_zone_id, Shoppe::SuppliersZone.all, :id, :supplier_zone, {:include_blank => false}
-  = f.label :trevel_days, t('shoppe.logistics.freight_routes.trevel_days')
-  = f.text_field :trevel_days, :class => 'number'
+  = f.label :travel_days, t('shoppe.logistics.freight_routes.travel_days')
+  = f.text_field :travel_days, :class => 'number'
   = f.submit t('shoppe.submit'), :class => 'button green'
 

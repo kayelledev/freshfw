@@ -12,11 +12,11 @@ module Shoppe
     validates :name, :presence => true
     
     def self.customer_search(query)
-      query.present? ? Shoppe::Zone.joins(:cities).where('((shoppe_cities.name LIKE ?) OR (shoppe_zones.name LIKE ?))', "%#{query}%", "%#{query}%").uniq : nil
+      query.present? ? Shoppe::Zone.joins(:cities).where('((lower(shoppe_cities.name) LIKE ?) OR (lower(shoppe_zones.name) LIKE ?))', "%#{query.downcase}%", "%#{query.downcase}%").uniq : Shoppe::Zone.none
     end
 
     def self.supplier_search(query)
-      query.present? ? Shoppe::Zone.joins(:cities, :suppliers).where('((shoppe_cities.name LIKE ?) OR (shoppe_suppliers.name LIKE ?) OR (shoppe_suppliers.warehouse LIKE ?) OR (shoppe_zones.name LIKE ?))', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%").uniq : nil
+      query.present? ? Shoppe::Zone.joins(:cities, :suppliers).where('((lower(shoppe_cities.name) LIKE ?) OR (lower(shoppe_suppliers.name) LIKE ?) OR (lower(shoppe_suppliers.warehouse) LIKE ?) OR (lower(shoppe_zones.name) LIKE ?))', "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%").uniq : Shoppe::Zone.none
     end
   end
 end

@@ -6,15 +6,15 @@
         %th= t('shoppe.logistics.freight_routes.freight_company')
         %th= t('shoppe.logistics.freight_routes.customer_zone')
         %th= t('shoppe.logistics.freight_routes.supplier_zone')
-        %th= t('shoppe.logistics.freight_routes.trevel_days')
+        %th= t('shoppe.logistics.freight_routes.travel_days')
         %th= t('shoppe.logistics.links.action')
     %tbody
       - @freight_routes.each do |route|
         %tr
           %td= route.freight_company.try(:name)
-          %td= route.suppliers_zone.try(:zone).try(:name)
           %td= route.zone.name
-          %td= route.trevel_days
+          %td= route.suppliers_zone.try(:zone).try(:name)
+          %td= route.travel_days
           %td
             = link_to t('shoppe.logistics.links.show'), route, :class => 'button green'
             = link_to t('shoppe.logistics.links.delete'), route, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.logistics.freight_routes.delete_confirmation')}

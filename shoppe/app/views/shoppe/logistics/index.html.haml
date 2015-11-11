@@ -4,7 +4,7 @@
     float: left;
     width: 100%;
     overflow: hidden;
-    / height: 50px;
+    height: 50px;
   }
   .logistic-container{
     float: left;
@@ -66,8 +66,16 @@
     padding-top: 28px;
     padding-bottom: 8px;
   }
+  .right{
+    float: right;
+  }
+  .routeSearch {
+    max-width: 300px;
+  }
+  .routeSearch .button{
+    margin-top: 20px;
+  }
 - @page_title = t('shoppe.logistics.main_title')
-
 = content_for :header do
   %p.buttons
     = link_to t('shoppe.logistics.zones.new_zone'), :new_zone, :class => 'button green'
@@ -81,19 +89,20 @@
   .logistic-container
     .half1
       %h2=t('shoppe.logistics.search.title')
-      .routeSearch{:style => action_name == 'search' ? "display:block" : ''}
+      .routeSearch
         = form_tag search_logistics_path, :html => { :method => :post } do
           .dl
             .dt
               = label_tag t('shoppe.logistics.search.supplier')
             .dd
-              = text_field_tag :supplier, @supplier
+              = text_field_tag :supplier, @supplier, :class => 'text'
             .dt
               = label_tag t('shoppe.logistics.search.customer')
             .dd
-              = text_field_tag :customer, @customer
+              = text_field_tag :customer, @customer, :class => 'text'
             .dd
-              = submit_tag t('shoppe.logistics.search.search_button')
+              .right
+                = submit_tag t('shoppe.logistics.search.search_button'), :class => 'button'
     .half2
       = render 'zones_table'
 .main-container
@@ -104,6 +113,8 @@
           = "Supplier zones: #{@supplier_zones.map(&:name).join(", ") }" if @supplier_zones.present?
           %br
           = "Customer zones: #{@customer_zones.map(&:name).join(", ") }" if @customer_zones.present?
+        - else 
+          = "Any results" if action_name == 'search' 
       = render 'freight_routes_table'
     .half2
       = render 'suppliers_table'

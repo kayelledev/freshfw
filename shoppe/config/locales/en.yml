@@ -681,7 +681,7 @@ en:
         freight_company: Freight Company
         customer_zone: Customer Zone
         supplier_zone: Supplier Zone
-        trevel_days: Trevel Days
+        travel_days: Travel Days
         freight_route: Freight Route
         new_freight_route: New Freight Route
         edit_freight_route: Edit Freight Route

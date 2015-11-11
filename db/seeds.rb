@@ -7,13 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Logistic
-# delete destroying, use only for test
-Shoppe::Zone.destroy_all
-Shoppe::City.destroy_all
-Shoppe::Supplier.destroy_all
-Shoppe::FreightCompany.destroy_all
-Shoppe::LastMileCompany.destroy_all
-Shoppe::FreightRoute.destroy_all
 # zone generation
 zoneA = Shoppe::Zone.where(name: "A").first_or_create
 zoneB = Shoppe::Zone.where(name: "B").first_or_create
@@ -36,7 +29,7 @@ lmcompany1.zones << zoneA
 lmcompany2 = Shoppe::LastMileCompany.where(name: "VA Transport", city: "Toronto", address: "Bolton").first_or_create
 lmcompany2.zones << zoneA
 # freight routes
-route1 = Shoppe::FreightRoute.where(trevel_days: 4, freight_company_id: fcompany1.id, zone_id: zoneA.id, suppliers_zone_id: supplier1_zone).first_or_create
+route1 = Shoppe::FreightRoute.where(travel_days: 4, freight_company_id: fcompany1.id, zone_id: zoneA.id, suppliers_zone_id: supplier1_zone).first_or_create
 
 # # Create tax rate for Ontario
 # tax_rate = Shoppe::TaxRate.create!(:name => "HST", :rate => 13.0, :province => "ON", :country => "Canada")

@@ -53,7 +53,7 @@ class CreateInitialLogisticsSchema < ActiveRecord::Migration
     end
     
     create_table "shoppe_freight_routes" do |t|
-      t.integer    "trevel_days"
+      t.integer    "travel_days"
       t.references :freight_company, index: true
       t.references :zone, index: true
       t.references :suppliers_zone, index: true
