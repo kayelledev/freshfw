@@ -13,11 +13,16 @@ module Shoppe
     validates :name, :presence => true
     
     def self.customer_search(query)
-      query.present? ? Shoppe::Zone.joins(:cities).where('((lower(shoppe_cities.name) LIKE ?) OR (lower(shoppe_zones.name) LIKE ?))', "%#{query.downcase}%", "%#{query.downcase}%").uniq : Shoppe::Zone.none
+      zone_cities = self.joins(:cities).where('((lower(shoppe_cities.name) LIKE ?) OR (lower(shoppe_zones.name) LIKE ?))', "%#{query.downcase}%", "%#{query.downcase}%")
+      zone_results = (self.where('lower(name) LIKE ?', "%#{query.downcase}%") + zone_cities).uniq
+      query.present? ? zone_results : self.none
     end
 
     def self.supplier_search(query)
-      query.present? ? Shoppe::Zone.joins(:cities, :suppliers).where('((lower(shoppe_cities.name) LIKE ?) OR (lower(shoppe_suppliers.name) LIKE ?) OR (lower(shoppe_suppliers.warehouse) LIKE ?) OR (lower(shoppe_zones.name) LIKE ?))', "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%").uniq : Shoppe::Zone.none
+      zone_cities = self.joins(:cities, :suppliers).where('((lower(shoppe_cities.name) LIKE ?) OR (lower(shoppe_suppliers.name) LIKE ?) OR (lower(shoppe_suppliers.warehouse) LIKE ?) OR (lower(shoppe_zones.name) LIKE ?))', "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%")
+      zone_suppliers = self.joins(:suppliers).where('((lower(shoppe_zones.name) LIKE ?) OR (lower(shoppe_suppliers.name) LIKE ?) OR (lower(shoppe_suppliers.warehouse) LIKE ?))', "%#{query.downcase}%", "%#{query.downcase}%", "%#{query.downcase}%")
+      zone_results = zone_suppliers + zone_cities
+      query.present? ? zone_results.uniq : self.none
     end
   end
 end

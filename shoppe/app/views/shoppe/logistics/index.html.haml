@@ -24,8 +24,10 @@
             .dd
               = text_field_tag :customer, @customer, :class => 'text', placeholder: "city or zone"
             .dd
+              .left
+                = link_to t('shoppe.logistics.links.clear') , :logistics, :class => 'button green' if action_name == 'search' 
               .right
-                = submit_tag t('shoppe.logistics.search.search_button'), :class => 'button'
+                = submit_tag t('shoppe.logistics.search.search_button'), :class => 'button green'
     .half2
       = render 'zones_table'
 .main-container

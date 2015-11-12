@@ -743,6 +743,7 @@ en:
         show: Show
         back: Back
         delete: Delete
+        clear: Clear
   layouts:
     shoppe:
       application:
