@@ -123,6 +123,7 @@
 
           // call this function on every dragmove event
           onmove: function(event) {
+
             controller.restrictAreaHoles(event.target);
             var target = event.target.parentNode,
             // keep the dragged position in the data-x/data-y attributes
@@ -151,9 +152,12 @@
             $positionPanelX.val(x);
             $positionPanelY.val(y);
 
+
+
           },
           // call this function on every dragend event
           onend: function (event) {
+            controller.moveInsideArea(event);
             console.log(event);
             var createRect = function($element) {
               return new SAT.Box(
@@ -3019,26 +3023,10 @@
 
     Controller.prototype.restrictAreaHoles = function(elem) {
       var controller = this;
-      console.log('restr');
       var elemPoints = defineElemPoints(elem);
       var holesPoligons = defineHoles( $('.hole') );
 
-      restrictHoles(elemPoints, holesPoligons, elem);
-
       function defineElemPoints(elem) {
-        var elemDegree = controller.getDegreeOfElement( $(elem).parent() );
-
-        function elemDegreeCos(elemAngle) {
-
-          function toRadians (angle) {
-            return angle * (Math.PI / 180);
-          }
-
-          return cos = Math.cos( toRadians(elemAngle) );
-
-        }
-
-        var cos = elemDegreeCos(elemDegree);
 
         var pointTopLeft = $(elem).children('.left-top');
         var pointTopRight = $(elem).children('.right-top');
@@ -3046,12 +3034,11 @@
         var pointBottomRight = $(elem).children('.right-bottom');
 
         var elemTopLeft = [+pointTopLeft.offset().top, +pointTopLeft.offset().left];
-        var elemTopRight = [+pointTopRight.offset().top, pointTopRight.offset().left];
-        var elemBottomLeft = [pointBottomLeft.offset().top + pointBottomLeft.offset().left];
-        var elemBottomRight = [pointBottomRight.offset().top, pointBottomRight.offset().left];
+        var elemTopRight = [+pointTopRight.offset().top, +pointTopRight.offset().left];
+        var elemBottomLeft = [+pointBottomLeft.offset().top, +pointBottomLeft.offset().left];
+        var elemBottomRight = [+pointBottomRight.offset().top, +pointBottomRight.offset().left];
 
         var elemPoints = [elemTopLeft, elemTopRight, elemBottomLeft, elemBottomRight];
-
         return elemPoints;
       }
 
@@ -3076,7 +3063,6 @@
 
       function restrictHoles(points, holes, elem) {
         var inHole = [];
-        console.log(points[0]);
         // console.log(holes);
         $.each(points, function(index, point) {
           $.each(holes, function(index, hole) {
@@ -3085,8 +3071,10 @@
         });
         if (inHole.indexOf(true) != -1) {
           $(elem).addClass('out-of-area');
+          return true;
         } else {
           $(elem).removeClass('out-of-area');
+          return false;
         }
 
         // console.log( inside([ 1.5, 1.5 ], polygon) );
@@ -3106,6 +3094,41 @@
           }
         return inside;
       };
+      return restrictHoles(elemPoints, holesPoligons, elem);
+    }
+
+    Controller.prototype.moveInsideArea = function(event) {
+      var controller = this;
+      if ( controller.restrictAreaHoles(event.target) ) {
+        $(event.target).parent().css('visibility', 'hidden');
+        var coX = 1;
+        var coY = 1;
+        if( Math.abs(event.dx) === 0 || Math.abs(event.dy) === 0 ) {
+          if ( Math.abs(event.dx) === 0 ) {
+            coX = 0;
+          } else if ( Math.abs(event.dy) === 0 ) {
+            coY = 0;
+          }
+        } else if ( Math.abs(event.dx) > 1 && Math.abs(event.dy) > 1 ) {
+          if ( Math.abs(event.dx) > Math.abs(event.dy) ) {
+            coX = Math.abs(event.dx) / Math.abs(event.dy);
+          } else {
+            coY = Math.abs(event.dy) / Math.abs(event.dx);
+          }
+        }
+        var top = $(event.target).offset().top;
+        var left = $(event.target).offset().left;
+        while ( controller.restrictAreaHoles(event.target) ) {
+          top -= ( event.dy / Math.abs(event.dy) ) *coY;
+          left -= ( event.dx / Math.abs(event.dx) ) *coX;
+          // console.log(top, left, coX, coY);
+          $(event.target).parent().offset({
+            top: top,
+            left: left
+          });
+        }
+        $(event.target).parent().css('visibility', 'visible');
+      }
     }
 
     /**
