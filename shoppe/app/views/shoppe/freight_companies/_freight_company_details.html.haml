@@ -1,0 +1,8 @@
+.logistics_details
+  %h2= "Freight Company Name: #{@freight_company.name}"
+  - if @freight_company.zones.present?
+    %h2 Freight Company Zones
+    = render 'shoppe/zones/zones_table', zones: @freight_company.zones
+  - else
+    You can add zone for this freight company
+         

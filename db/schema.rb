@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20153002432638) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
     t.string   "item_name"
@@ -72,6 +75,23 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "shoppe_cities", force: :cascade do |t|
+    t.integer "country_id"
+    t.string  "name"
+    t.string  "province"
+  end
+
+  add_index "shoppe_cities", ["country_id"], name: "index_shoppe_cities_on_country_id", using: :btree
+
+  create_table "shoppe_cities_zones", force: :cascade do |t|
+    t.integer "city_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_cities_zones", ["city_id", "zone_id"], name: "index_shoppe_cities_zones_on_city_id_and_zone_id", unique: true, using: :btree
+  add_index "shoppe_cities_zones", ["city_id"], name: "index_shoppe_cities_zones_on_city_id", using: :btree
+  add_index "shoppe_cities_zones", ["zone_id"], name: "index_shoppe_cities_zones_on_zone_id", using: :btree
+
   create_table "shoppe_countries", force: :cascade do |t|
     t.string  "name"
     t.string  "code2"
@@ -95,10 +115,10 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.text     "country_ids"
   end
 
-  add_index "shoppe_delivery_service_prices", ["delivery_service_id"], name: "index_shoppe_delivery_service_prices_on_delivery_service_id"
-  add_index "shoppe_delivery_service_prices", ["max_weight"], name: "index_shoppe_delivery_service_prices_on_max_weight"
-  add_index "shoppe_delivery_service_prices", ["min_weight"], name: "index_shoppe_delivery_service_prices_on_min_weight"
-  add_index "shoppe_delivery_service_prices", ["price"], name: "index_shoppe_delivery_service_prices_on_price"
+  add_index "shoppe_delivery_service_prices", ["delivery_service_id"], name: "index_shoppe_delivery_service_prices_on_delivery_service_id", using: :btree
+  add_index "shoppe_delivery_service_prices", ["max_weight"], name: "index_shoppe_delivery_service_prices_on_max_weight", using: :btree
+  add_index "shoppe_delivery_service_prices", ["min_weight"], name: "index_shoppe_delivery_service_prices_on_min_weight", using: :btree
+  add_index "shoppe_delivery_service_prices", ["price"], name: "index_shoppe_delivery_service_prices_on_price", using: :btree
 
   create_table "shoppe_delivery_services", force: :cascade do |t|
     t.string   "name"
@@ -112,12 +132,64 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "description"
   end
 
-  add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active"
+  add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active", using: :btree
+
+  create_table "shoppe_freight_companies", force: :cascade do |t|
+    t.string "name"
+    t.string "dc"
+    t.string "website"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_freight_companies_zones", force: :cascade do |t|
+    t.integer "freight_company_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_freight_companies_zones", ["freight_company_id", "zone_id"], name: "freight_company_zone_index", unique: true, using: :btree
+  add_index "shoppe_freight_companies_zones", ["freight_company_id"], name: "index_shoppe_freight_companies_zones_on_freight_company_id", using: :btree
+  add_index "shoppe_freight_companies_zones", ["zone_id"], name: "index_shoppe_freight_companies_zones_on_zone_id", using: :btree
+
+  create_table "shoppe_freight_routes", force: :cascade do |t|
+    t.integer "trevel_days"
+    t.integer "freight_company_id"
+    t.integer "zone_id"
+    t.integer "suppliers_zone_id"
+  end
+
+  add_index "shoppe_freight_routes", ["freight_company_id"], name: "index_shoppe_freight_routes_on_freight_company_id", using: :btree
+  add_index "shoppe_freight_routes", ["suppliers_zone_id"], name: "index_shoppe_freight_routes_on_suppliers_zone_id", using: :btree
+  add_index "shoppe_freight_routes", ["zone_id"], name: "index_shoppe_freight_routes_on_zone_id", using: :btree
+
+  create_table "shoppe_import_logs", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "finish_time"
+    t.string   "filename"
+    t.integer  "import_status"
+    t.text     "log_errors"
+    t.integer  "user_id"
+  end
 
   create_table "shoppe_included_products", force: :cascade do |t|
     t.integer "parent_product_id"
     t.integer "included_product_id"
   end
+
+  create_table "shoppe_last_mile_companies", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "address"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_last_mile_companies_zones", force: :cascade do |t|
+    t.integer "last_mile_company_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id", "zone_id"], name: "last_mile_company_zone_index", unique: true, using: :btree
+  add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id"], name: "index_shoppe_last_mile_companies_zones_on_last_mile_company_id", using: :btree
+  add_index "shoppe_last_mile_companies_zones", ["zone_id"], name: "index_shoppe_last_mile_companies_zones_on_zone_id", using: :btree
 
   create_table "shoppe_order_items", force: :cascade do |t|
     t.integer  "order_id"
@@ -133,8 +205,8 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at"
   end
 
-  add_index "shoppe_order_items", ["order_id"], name: "index_shoppe_order_items_on_order_id"
-  add_index "shoppe_order_items", ["ordered_item_id", "ordered_item_type"], name: "index_shoppe_order_items_ordered_item"
+  add_index "shoppe_order_items", ["order_id"], name: "index_shoppe_order_items_on_order_id", using: :btree
+  add_index "shoppe_order_items", ["ordered_item_id", "ordered_item_type"], name: "index_shoppe_order_items_ordered_item", using: :btree
 
   create_table "shoppe_orders", force: :cascade do |t|
     t.string   "token"
@@ -183,9 +255,9 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "currency",                                          default: "ca"
   end
 
-  add_index "shoppe_orders", ["delivery_service_id"], name: "index_shoppe_orders_on_delivery_service_id"
-  add_index "shoppe_orders", ["received_at"], name: "index_shoppe_orders_on_received_at"
-  add_index "shoppe_orders", ["token"], name: "index_shoppe_orders_on_token"
+  add_index "shoppe_orders", ["delivery_service_id"], name: "index_shoppe_orders_on_delivery_service_id", using: :btree
+  add_index "shoppe_orders", ["received_at"], name: "index_shoppe_orders_on_received_at", using: :btree
+  add_index "shoppe_orders", ["token"], name: "index_shoppe_orders_on_token", using: :btree
 
   create_table "shoppe_payments", force: :cascade do |t|
     t.integer  "order_id"
@@ -201,8 +273,8 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at"
   end
 
-  add_index "shoppe_payments", ["order_id"], name: "index_shoppe_payments_on_order_id"
-  add_index "shoppe_payments", ["parent_payment_id"], name: "index_shoppe_payments_on_parent_payment_id"
+  add_index "shoppe_payments", ["order_id"], name: "index_shoppe_payments_on_order_id", using: :btree
+  add_index "shoppe_payments", ["parent_payment_id"], name: "index_shoppe_payments_on_parent_payment_id", using: :btree
 
   create_table "shoppe_product_attributes", force: :cascade do |t|
     t.integer  "product_id"
@@ -215,9 +287,9 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.boolean  "public",     default: true
   end
 
-  add_index "shoppe_product_attributes", ["key"], name: "index_shoppe_product_attributes_on_key"
-  add_index "shoppe_product_attributes", ["position"], name: "index_shoppe_product_attributes_on_position"
-  add_index "shoppe_product_attributes", ["product_id"], name: "index_shoppe_product_attributes_on_product_id"
+  add_index "shoppe_product_attributes", ["key"], name: "index_shoppe_product_attributes_on_key", using: :btree
+  add_index "shoppe_product_attributes", ["position"], name: "index_shoppe_product_attributes_on_position", using: :btree
+  add_index "shoppe_product_attributes", ["product_id"], name: "index_shoppe_product_attributes_on_product_id", using: :btree
 
   create_table "shoppe_product_categories", force: :cascade do |t|
     t.string   "name"
@@ -229,10 +301,58 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "default_image"
   end
 
-  add_index "shoppe_product_categories", ["permalink"], name: "index_shoppe_product_categories_on_permalink"
+  add_index "shoppe_product_categories", ["permalink"], name: "index_shoppe_product_categories_on_permalink", using: :btree
 
-# Could not dump table "shoppe_products" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "shoppe_products", force: :cascade do |t|
+    t.integer  "parent_id"
+    t.integer  "product_category_id"
+    t.string   "name"
+    t.string   "sku"
+    t.string   "permalink"
+    t.text     "description"
+    t.text     "short_description"
+    t.boolean  "active",                                      default: true
+    t.decimal  "weight",              precision: 8, scale: 3, default: 0.0
+    t.decimal  "price",               precision: 8, scale: 2, default: 0.0
+    t.decimal  "cost_price",          precision: 8, scale: 2, default: 0.0
+    t.integer  "tax_rate_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "featured",                                    default: false
+    t.text     "in_the_box"
+    t.boolean  "stock_control",                               default: true
+    t.boolean  "default",                                     default: false
+    t.string   "default_image"
+    t.string   "image2"
+    t.string   "image3"
+    t.string   "image4"
+    t.string   "image5"
+    t.string   "image6"
+    t.float    "width",                                       default: 80.0
+    t.float    "height",                                      default: 80.0
+    t.boolean  "is_preset",                                   default: false
+    t.integer  "posX",                                        default: 0
+    t.integer  "posY",                                        default: 0
+    t.integer  "rotation",                                    default: 0
+    t.string   "url_default_image"
+    t.string   "url_image2"
+    t.string   "url_image3"
+    t.string   "url_image4"
+    t.string   "url_image5"
+    t.string   "url_image6"
+    t.float    "depth",                                       default: 0.0
+    t.float    "seat_width",                                  default: 0.0
+    t.float    "seat_depth",                                  default: 0.0
+    t.float    "seat_height",                                 default: 0.0
+    t.float    "arm_height",                                  default: 0.0
+    t.text     "other_details"
+    t.integer  "supplier_id"
+  end
+
+  add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id", using: :btree
+  add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink", using: :btree
+  add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id", using: :btree
+  add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku", using: :btree
 
   create_table "shoppe_settings", force: :cascade do |t|
     t.string "key"
@@ -240,7 +360,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string "value_type"
   end
 
-  add_index "shoppe_settings", ["key"], name: "index_shoppe_settings_on_key"
+  add_index "shoppe_settings", ["key"], name: "index_shoppe_settings_on_key", using: :btree
 
   create_table "shoppe_stock_level_adjustments", force: :cascade do |t|
     t.integer  "item_id"
@@ -253,8 +373,25 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at"
   end
 
-  add_index "shoppe_stock_level_adjustments", ["item_id", "item_type"], name: "index_shoppe_stock_level_adjustments_items"
-  add_index "shoppe_stock_level_adjustments", ["parent_id", "parent_type"], name: "index_shoppe_stock_level_adjustments_parent"
+  add_index "shoppe_stock_level_adjustments", ["item_id", "item_type"], name: "index_shoppe_stock_level_adjustments_items", using: :btree
+  add_index "shoppe_stock_level_adjustments", ["parent_id", "parent_type"], name: "index_shoppe_stock_level_adjustments_parent", using: :btree
+
+  create_table "shoppe_suppliers", force: :cascade do |t|
+    t.string "warehouse"
+    t.string "name"
+    t.string "website"
+    t.string "prime"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_suppliers_zones", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_suppliers_zones", ["supplier_id", "zone_id"], name: "index_shoppe_suppliers_zones_on_supplier_id_and_zone_id", unique: true, using: :btree
+  add_index "shoppe_suppliers_zones", ["supplier_id"], name: "index_shoppe_suppliers_zones_on_supplier_id", using: :btree
+  add_index "shoppe_suppliers_zones", ["zone_id"], name: "index_shoppe_suppliers_zones_on_zone_id", using: :btree
 
   create_table "shoppe_tax_rates", force: :cascade do |t|
     t.string   "name"
@@ -287,7 +424,11 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.boolean  "admin",                  default: false
   end
 
-  add_index "shoppe_users", ["email_address"], name: "index_shoppe_users_on_email_address"
+  add_index "shoppe_users", ["email_address"], name: "index_shoppe_users_on_email_address", using: :btree
+
+  create_table "shoppe_zones", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -308,8 +449,8 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.boolean  "admin",                  default: false
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

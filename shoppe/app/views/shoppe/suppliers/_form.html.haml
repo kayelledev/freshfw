@@ -1,0 +1,11 @@
+.logistics_form
+  = form_for @supplier, :html => {:multipart => true} do |f|
+    = f.error_messages
+    = f.label :name, t('shoppe.logistics.suppliers.name')
+    = f.text_field :name, :class => 'text'
+    = f.label :warehouse, t('shoppe.logistics.suppliers.warehouse')
+    = f.text_field :warehouse, :class => 'text'
+    = f.label :website, t('shoppe.logistics.suppliers.website')
+    = f.text_field :website, :class => 'text'
+    = render 'zones_form', :f => f
+    = f.submit t('shoppe.submit'), :class => 'button green'

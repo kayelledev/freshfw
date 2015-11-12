@@ -1,0 +1,33 @@
+%h2= t('shoppe.logistics.titles.freight_companies')
+.table-container
+  %table
+    %thead
+      %tr
+        %th= t('shoppe.logistics.freight_companies.name')
+        %th= t('shoppe.logistics.freight_companies.dc')
+        %th= t('shoppe.logistics.freight_companies.website')
+        %th= t('shoppe.logistics.freight_companies.zone')
+        %th= t('shoppe.logistics.freight_companies.action')
+    %tbody
+      - @freight_companies.each do |freight_company|
+        - if freight_company.zones.present?
+          - freight_company.zones.each_with_index do |zone,index|
+            %tr
+              - if index.zero?
+                %td{rowspan:"#{freight_company.zones.count}"}= freight_company.name
+                %td{rowspan:"#{freight_company.zones.count}"}= freight_company.dc
+                %td{rowspan:"#{freight_company.zones.count}"}= freight_company.website
+              %td= link_to zone.name, zone
+              - if index.zero?
+                %td{rowspan:"#{freight_company.zones.count}"}
+                  = link_to t('shoppe.logistics.links.show'), freight_company, :class => 'button green'
+                  = link_to t('shoppe.logistics.links.delete'), freight_company, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.logistics.freight_companies.delete_confirmation')}
+        - else
+          %tr
+            %td= freight_company.name
+            %td= freight_company.dc
+            %td= freight_company.website
+            %td
+            %td
+              = link_to t('shoppe.logistics.links.show'), freight_company, :class => 'button green'
+              = link_to t('shoppe.logistics.links.delete'), freight_company, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.logistics.freight_companies.delete_confirmation')}

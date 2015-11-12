@@ -598,6 +598,7 @@ en:
         orders: Orders
         products: Products
         product_categories: Product Categories
+        logistics: Logistics
         delivery_services: Delivery Services
         tax_rates: Tax Rates
         users: Users
@@ -646,7 +647,102 @@ en:
         email_address: sales@example.com
         store_name: Widgets Inc.
         tax_name: Tax
+    logistics:
+      main_title: Logistics
+      new_freight_company: New Freight Company
+      new_route: New Route
+      new_supplier: New Supplier
+      back_to_logistictics: Back to logistics
+      titles:
+        zones: Zones
+        freight_routes: Freight Routes
+        suppliers: Suppliers
+        last_mile_companies: Last Mile Companies
+        freight_companies: Freight Companies
+      search:
+        supplier: Supplier
+        customer: Customer
+        search_button: Search
+        title: Search freight routes
+      zones:
+        zone: Zone
+        name: Name
+        province: Province/State
+        country: Country
+        dest_city: Dest. City
+        new_zone: New Zone
+        edit_zone: Edit Zone
+        add_item: Change Zone
+        delete_confirmation: Are you sure you wish to remove this zone?
+        create_notice: Zone has been created successfully
+        update_notice: Zone has been updated successfully
+        destroy_notice: Zone has been destroyed successfully
+      freight_routes:
+        freight_company: Freight Company
+        customer_zone: Customer Zone
+        supplier_zone: Supplier Zone
+        travel_days: Travel Days
+        freight_route: Freight Route
+        new_freight_route: New Freight Route
+        edit_freight_route: Edit Freight Route
+        delete_confirmation: Are you sure you wish to remove this route?
+        create_notice: Freight Route has been created successfully
+        update_notice: Freight Route has been updated successfully
+        destroy_notice: Freight Route has been destroyed successfully
+      last_mile_companies:
+        name: Company
+        zone: Zone
+        city: City
+        address: Address
+        notes: Notes
+        last_mile_company: Last Mile Company
+        new_last_mile_company: New Last Mile Company
+        edit_last_mile_company: Edit Last Mile Company
+        delete_confirmation: Are you sure you wish to remove this route?
+        create_notice: Last Mile Company has been created successfully
+        update_notice: Last Mile Company has been updated successfully
+        destroy_notice: Last Mile Company has been destroyed successfully
+      freight_companies:
+        name: Name
+        dc: DC
+        zone: Zone
+        website: Website
+        notes: Notes
+        freight_company: Freight Company
+        new_freight_company: New Freight Company
+        edit_freight_company: Edit Freight Company
+        delete_confirmation: Are you sure you wish to remove this company?
+        create_notice: Freight Company has been created successfully
+        update_notice: Freight Company has been updated successfully
+        destroy_notice: Freight Company has been destroyed successfully
+      suppliers:
+        supplier: Supplier
+        name: Name
+        warehouse: Warehouse
+        zone: Zone
+        website: Website
+        new_supplier: New Supplier
+        edit_supplier: Edit Supplier
+        delete_confirmation: Are you sure you wish to remove this supplier?
+        create_notice: Supplier has been created successfully
+        update_notice: Supplier has been updated successfully
+        destroy_notice: Supplier has been destroyed successfully
+      cities:
+        name: Name
+        country: Country
+        province: Province
+        new: New City
+        edit: Edit City
+        delete_confirmation: Are you sure you wish to remove this city?
+        create_notice: City has been created successfully
+        update_notice: City has been updated successfully
+        destroy_notice: City has been destroyed successfully
 
+      links:
+        action: Actions
+        show: Show
+        back: Back
+        delete: Delete
   layouts:
     shoppe:
       application:

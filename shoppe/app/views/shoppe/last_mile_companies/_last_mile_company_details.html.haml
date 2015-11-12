@@ -1,0 +1,8 @@
+.logistics_details
+  %h2= "Last Mile Company: #{@last_mile_company.name}"
+  - if @last_mile_company.zones.present?
+    %h2 Last Mile Company Zones
+    = render 'shoppe/zones/zones_table', zones: @last_mile_company.zones
+  - else
+    Please add zone for this last mile company
+         

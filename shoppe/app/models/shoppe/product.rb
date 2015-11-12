@@ -32,6 +32,8 @@ module Shoppe
     #
     # @return [Shoppe::ProductCategory]
     belongs_to :product_category, :class_name => 'Shoppe::ProductCategory'
+    belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
+    belongs_to :supplier, :class_name => 'Shoppe::Supplier'
     #belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
 
     # The product's tax rate
