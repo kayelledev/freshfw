@@ -2924,7 +2924,6 @@
         var realItem = $('#' + itemId);
         realItem.show();
 
-
         // restrict position
         if ( newPositionX + +realItem.width() >= +$('.editor-container').width() ) {
           var diffX = ( newPositionX + +realItem.width() - +$('.editor-container').width() ) + 3;
@@ -2950,6 +2949,8 @@
           '-ms-transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
           'transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
         });
+
+        console.log(newPositionX, newPositionY);
 
         if ( $('.editor-items-panel').height() === 0 ){
           $('.editor-items-panel').hide();
@@ -3038,7 +3039,7 @@
         var elemBottomLeft = [+pointBottomLeft.offset().top, +pointBottomLeft.offset().left];
         var elemBottomRight = [+pointBottomRight.offset().top, +pointBottomRight.offset().left];
 
-        var elemPoints = [elemTopLeft, elemTopRight, elemBottomLeft, elemBottomRight];
+        var elemPoints = [elemTopLeft, elemTopRight, elemBottomRight, elemBottomLeft];
         return elemPoints;
       }
 
@@ -3067,6 +3068,12 @@
         $.each(points, function(index, point) {
           $.each(holes, function(index, hole) {
             inHole.push( checkInsideHole(point, hole) );
+          });
+        });
+        $.each(holes, function(index, hole) {
+          $.each(hole, function(index, holepoint) {
+            inHole.push( checkInsideHole(holepoint, points) );
+            // console.log( checkInsideHole(holepoint, points) );
           });
         });
         if (inHole.indexOf(true) != -1) {
