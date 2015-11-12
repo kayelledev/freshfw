@@ -72,6 +72,21 @@
          */
         this.$catsManager = $('.categories-manager');
 
+        this.getDegreeOfElement = function(elem) {
+          var matrix = $(elem).css("-webkit-transform") ||
+            $(elem).css("-moz-transform")    ||
+            $(elem).css("-ms-transform")     ||
+            $(elem).css("-o-transform")      ||
+            $(elem).css("transform");
+
+          var values = matrix.split('(')[1].split(')')[0].split(',');
+          var a = values[0];
+          var b = values[1];
+          var degree = Math.round(Math.atan2(b, a) * (180/Math.PI));
+
+          return +degree;
+        }
+
     }
 
     /**
@@ -102,12 +117,13 @@
           // keep the element within the area of it's parent
           restrict: {
               restriction: '.dragg',
-              endOnly: true,
+              endOnly:true,
               elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
           },
 
           // call this function on every dragmove event
           onmove: function(event) {
+            controller.restrictAreaHoles(event.target);
             var target = event.target.parentNode,
             // keep the dragged position in the data-x/data-y attributes
                 x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
@@ -138,6 +154,7 @@
           },
           // call this function on every dragend event
           onend: function (event) {
+            console.log(event);
             var createRect = function($element) {
               return new SAT.Box(
                 new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
@@ -393,14 +410,12 @@
 
         function rotateOnMouse(e) {
             var offset = controller.$currentElement.offset();
-            console.log(offset);
             var center_x = offset.left;
             var center_y = offset.top;
             var mouse_x = e.pageX;
             var mouse_y = e.pageY;
             var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
             var degree = (radians * (180 / Math.PI) * -1) + 60;
-            console.log(degree);
             var offsetX = parseFloat(controller.$currentElement.parent().attr('data-x')),
                 offsetY = parseFloat(controller.$currentElement.parent().attr('data-y'));
 
@@ -414,19 +429,9 @@
 
         function rotateOnMouseClick() {
           currentElem = controller.$currentElement.parent();
-          var matrix = currentElem.css("-webkit-transform") ||
-            currentElem.css("-moz-transform")    ||
-            currentElem.css("-ms-transform")     ||
-            currentElem.css("-o-transform")      ||
-            currentElem.css("transform");
+          var degree = controller.getDegreeOfElement(currentElem)
+          degree += 90;
 
-          var values = matrix.split('(')[1].split(')')[0].split(',');
-          var a = values[0];
-          var b = values[1];
-          var degree = Math.round(Math.atan2(b, a) * (180/Math.PI));
-
-          degree = +degree + 90;
-          console.log(degree);
           var offsetX = parseFloat(currentElem.attr('data-x')),
               offsetY = parseFloat(currentElem.attr('data-y'));
 
@@ -447,7 +452,8 @@
         });
 
         $(document).mouseup(function(e) {
-            $(document).unbind('mousemove.rotateImg');
+          $(document).unbind('mousemove.rotateImg');
+          controller.restrictAreaHoles( controller.$currentElement );
         });
 
         $('.rotation-arrow').click(function(e) {
@@ -513,7 +519,7 @@
               newSlideDataID = 3 - (30 - currentSlideDataID);
             }
             var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
-            console.log(newSlide);
+            // console.log(newSlide);
             addYellowBorder( newSlide );
             setPreviewImage( newSlide );
             displayInputs( newSlide );
@@ -666,7 +672,6 @@
           var newHeight = ( newHeightFt * 12 ) + newHeightInch;
 
           var scaling = newWidth / +$('.editor-container').width();
-          console.log(scaling)
 
           if ( !validateNumbersInForm(rect0Inputs, inputsCount) ) { return; }
 
@@ -2966,13 +2971,6 @@
         target.setAttribute('data-y', y);
       }
 
-      // console.log($('.editor-container').offset());
-
-      $('.items-panel-elem').each(function(){
-        console.log(+$('.editor-container').offset().top - +$(this).offset().top);
-        console.log(+$('.editor-container').offset().left - +$(this).offset().left);
-      });
-
     };
 
     Controller.prototype.adaptArea = function(elementsClass) {
@@ -3020,21 +3018,37 @@
     }
 
     Controller.prototype.restrictAreaHoles = function(elem) {
+      var controller = this;
+      console.log('restr');
       var elemPoints = defineElemPoints(elem);
       var holesPoligons = defineHoles( $('.hole') );
 
       restrictHoles(elemPoints, holesPoligons, elem);
 
       function defineElemPoints(elem) {
-        var elemTop = +$(elem).offset().top;
-        var elemLeft = +$(elem).offset().left;
-        var elemWidth = +$(elem).width();
-        var elemHeight = +$(elem).height();
+        var elemDegree = controller.getDegreeOfElement( $(elem).parent() );
 
-        var elemTopLeft = [elemTop, elemLeft];
-        var elemTopRight = [elemTop, elemLeft + elemWidth];
-        var elemBottomLeft = [elemTop + elemHeight, elemLeft];
-        var elemBottomRight = [elemTop + elemHeight, elemLeft + elemWidth];
+        function elemDegreeCos(elemAngle) {
+
+          function toRadians (angle) {
+            return angle * (Math.PI / 180);
+          }
+
+          return cos = Math.cos( toRadians(elemAngle) );
+
+        }
+
+        var cos = elemDegreeCos(elemDegree);
+
+        var pointTopLeft = $(elem).children('.left-top');
+        var pointTopRight = $(elem).children('.right-top');
+        var pointBottomLeft = $(elem).children('.left-bottom');
+        var pointBottomRight = $(elem).children('.right-bottom');
+
+        var elemTopLeft = [+pointTopLeft.offset().top, +pointTopLeft.offset().left];
+        var elemTopRight = [+pointTopRight.offset().top, pointTopRight.offset().left];
+        var elemBottomLeft = [pointBottomLeft.offset().top + pointBottomLeft.offset().left];
+        var elemBottomRight = [pointBottomRight.offset().top, pointBottomRight.offset().left];
 
         var elemPoints = [elemTopLeft, elemTopRight, elemBottomLeft, elemBottomRight];
 
@@ -3060,21 +3074,18 @@
         return holes;
       }
 
-
       function restrictHoles(points, holes, elem) {
         var inHole = [];
-        console.log(points);
-        console.log(holes);
+        console.log(points[0]);
+        // console.log(holes);
         $.each(points, function(index, point) {
           $.each(holes, function(index, hole) {
             inHole.push( checkInsideHole(point, hole) );
           });
         });
         if (inHole.indexOf(true) != -1) {
-          console.log('out');
           $(elem).addClass('out-of-area');
         } else {
-          console.log('in');
           $(elem).removeClass('out-of-area');
         }
 
@@ -3117,8 +3128,6 @@
     };
 
     $(document).ready(function() {
-        // console.log($('.dragg').offset().top)
-        // console.log($('.dragg').offset().left)
 
         var controller = new Controller(),
             $presetSelector = $('.preset'),
