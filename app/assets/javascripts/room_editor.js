@@ -221,7 +221,31 @@
 
         });
 
-        $('[data-toggle="tooltip"]').tooltip();
+        // $('[data-toggle="tooltip"]').tooltip();
+
+        $('.room-item').each(function() {
+          $(this).qtip({
+            content: {
+              text: $('#tooltip-' + $(this).find('.draggable').attr('id'))
+            },
+            hide: {
+              delay: 150,
+              fixed: true
+            },
+            position: {
+              my: 'left top',
+              at: 'right center',
+              target: $(this)
+            },
+            style: {
+              classes: 'qtip-bootstrap'
+            },
+            hide: {
+                event: 'mousedown unfocus',
+
+            }
+          });
+        });
 
         this.$holder.find('div')
           .on('mouseover', function() {
@@ -296,6 +320,8 @@
 
                 $(this).parent().find('.rotation-arrow').show();
                 $(this).parent().find('.remove-icon').show();
+
+                // $('.qtip').hide();
             });
 
         $(document).click(function() {
@@ -2862,9 +2888,12 @@
 
     Controller.prototype.removeElement = function() {
       var controller = this;
-      $('.remove-icon').click(function() {
-        var elem = $(this).parent().children('.draggable');
-        var elemId = elem.attr('id');
+      $('.remove-item').click(function() {
+        $(this).parent().parent().parent().hide();
+        var elem = $("#" + $(this).attr('data-item-id'));
+        var elemId = $(elem).attr('id');
+        console.log(elem);
+        console.log(elemId);
         elem.hide();
         var elemInPanel = $('.items-panel-elem[data-id="' + elemId + '"]')
         controller.initItemsPanelArea( elemInPanel );

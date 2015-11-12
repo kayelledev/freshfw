@@ -257,7 +257,12 @@ div#dialog-form-errors {
   position: absolute;
   visibility: hidden;
 }
+
 .left-top { left: 0; top: 0; }
 .right-top {right: 0; top: 0; }
 .right-bottom { right: 0; bottom: 0; }
 .left-bottom { left: 0; bottom: 0; }
+
+.elem-tooltip .glyphicon-trash {
+  cursor:pointer;
+}
