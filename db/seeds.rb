@@ -31,23 +31,23 @@ lmcompany2.zones << zoneA
 # freight routes
 route1 = Shoppe::FreightRoute.where(travel_days: 4, freight_company_id: fcompany1.id, zone_id: zoneA.id, suppliers_zone_id: supplier1_zone).first_or_create
 
-# # Create tax rate for Ontario
-# tax_rate = Shoppe::TaxRate.create!(:name => "HST", :rate => 13.0, :province => "ON", :country => "Canada")
+# Create tax rate for Ontario
+tax_rate = Shoppe::TaxRate.create!(:name => "HST", :rate => 13.0, :province => "ON", :country => "Canada")
 
-# cat1 = Shoppe::ProductCategory.create!(:name => 'Living Rooms')
+cat1 = Shoppe::ProductCategory.create!(:name => 'Living Rooms')
 
-# # Casual Eclectic Living Room
-# desc_casual_eclectic = 'A high style living room with walnut and neutral finishes complemented by chrome and glass pieces to create an eclectic style. Every piece is durable and functional, allowing a casual lifestyle.'
+# Casual Eclectic Living Room
+desc_casual_eclectic = 'A high style living room with walnut and neutral finishes complemented by chrome and glass pieces to create an eclectic style. Every piece is durable and functional, allowing a casual lifestyle.'
 
-# pro = cat1.products.create!(:name => 'Casual Eclectic', :sku => '1000100', :permalink => 'casual-eclectic', :description => desc_casual_eclectic, :short_description => 'A casual eclectic living room', :featured => true)
-# pro.save!
+pro = cat1.products.create!(:name => 'Casual Eclectic', :sku => '1000100', :permalink => 'casual-eclectic', :description => desc_casual_eclectic, :short_description => 'A casual eclectic living room', :featured => true)
+pro.save!
 
-# v1 = pro.variants.create(:name => "Full Style & Function", :sku => "1000201", :permalink => 'casual-electic-full', :price => 1999.00, :tax_rate => tax_rate, :default => true)
-# v1.save!
+v1 = pro.variants.create(:name => "Full Style & Function", :sku => "1000201", :permalink => 'casual-electic-full', :price => 1999.00, :tax_rate => tax_rate, :default => true)
+v1.save!
 
-# v2 = pro.variants.create(:name => "The Bare Minimum", :sku => "1000101", :permalink => 'casual-electic-bare', :price => 1499.00, :tax_rate => tax_rate,:default => false)
-# v2.save!
+v2 = pro.variants.create(:name => "The Bare Minimum", :sku => "1000101", :permalink => 'casual-electic-bare', :price => 1499.00, :tax_rate => tax_rate,:default => false)
+v2.save!
 
-# v3 = pro.variants.create(:name => "Plus One", :sku => "1000301", :permalink => 'casual-electic-plus', :price => 2499.00, :tax_rate => tax_rate, :default => false)
-# v3.save!
+v3 = pro.variants.create(:name => "Plus One", :sku => "1000301", :permalink => 'casual-electic-plus', :price => 2499.00, :tax_rate => tax_rate, :default => false)
+v3.save!
 
