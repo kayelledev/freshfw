@@ -11,9 +11,9 @@
     %tbody
       - @freight_routes.each do |route|
         %tr
-          %td= route.freight_company.try(:name)
-          %td= route.zone.name
-          %td= route.suppliers_zone.try(:zone).try(:name)
+          %td= link_to route.freight_company.name, route.freight_company
+          %td= link_to route.zone.name, route.zone
+          %td= link_to route.suppliers_zone.try(:zone).try(:name), route.suppliers_zone.try(:zone)
           %td= route.travel_days
           %td
             = link_to t('shoppe.logistics.links.show'), route, :class => 'button green'

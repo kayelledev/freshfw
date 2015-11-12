@@ -23,7 +23,7 @@ module Shoppe
 
     def update
       if @freight_route.update(safe_params)
-        redirect_to :logistics, :flash => {:notice => t('shoppe.logistics.freight_routes.update_notice') }
+        redirect_to @freight_route, :flash => {:notice => t('shoppe.logistics.freight_routes.update_notice') }
       else
         render :action => "edit"
       end

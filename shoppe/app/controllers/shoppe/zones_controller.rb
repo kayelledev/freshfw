@@ -23,7 +23,7 @@ module Shoppe
 
     def update
       if @zone.update(safe_params)
-        redirect_to :logistics, :flash => {:notice => t('shoppe.logistics.zones.update_notice') }
+        redirect_to @zone, :flash => {:notice => t('shoppe.logistics.zones.update_notice') }
       else
         render :action => "edit"
       end

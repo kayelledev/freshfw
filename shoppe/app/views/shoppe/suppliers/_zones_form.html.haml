@@ -3,6 +3,5 @@
   %tr
     %th.name= t('shoppe.logistics.titles.zones')
 %tbody
-  - zones = Shoppe::Zone.all
   %tr.item{:class => 'existing'}
     %td.name= f.collection_select(:zone_ids, Shoppe::Zone.order("name"), :id, :name, {:selected => @supplier.zone_ids, include_hidden: false}, {:multiple => true})

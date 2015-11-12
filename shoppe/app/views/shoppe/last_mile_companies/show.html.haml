@@ -2,7 +2,7 @@
 
 = content_for :header do
   %p.buttons
-    = link_to t('shoppe.edit'), [:edit, @last_mile_company], :class => 'button'
+    = link_to t('shoppe.edit'), [:edit, @last_mile_company], :class => 'button green'
     = link_to t('shoppe.logistics.back_to_logistictics') , :logistics, :class => 'button'
   %h2.zones= "#{t('shoppe.logistics.last_mile_companies.last_mile_company')} ##{@last_mile_company.id}"
 #zone

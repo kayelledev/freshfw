@@ -5,5 +5,9 @@ module Shoppe
     has_many  :products, :class_name => 'Shoppe::Product'
     validates :name, :presence => true
     accepts_nested_attributes_for :zones
+
+    def self.search(zones)
+      self.joins(:zones).where("shoppe_zones.id": zones)
+    end
   end
 end

@@ -6,5 +6,5 @@
     = f.label :province, t('shoppe.logistics.cities.province')
     = f.text_field :province, :class => 'text'
     = f.label :country_id, t('shoppe.logistics.cities.country')
-    = f.collection_select :country_id, Shoppe::Country.all, :id, :name
+    = f.collection_select :country_id, Shoppe::Country.all, :id, :name, {:selected => @city.country.present? ? @city.country.id : Shoppe::Country.where(name: "Canada").try(:first).try(:id)}
     = f.submit t('shoppe.submit'), :class => 'button green'

@@ -23,7 +23,7 @@ module Shoppe
 
     def update
       if @last_mile_company.update(safe_params)
-        redirect_to :logistics, :flash => {:notice => t('shoppe.logistics.last_mile_companies.update_notice') }
+        redirect_to @last_mile_company, :flash => {:notice => t('shoppe.logistics.last_mile_companies.update_notice') }
       else
         render :action => "edit"
       end
@@ -37,6 +37,7 @@ module Shoppe
     private
 
     def safe_params
+      params[:last_mile_company][:zone_ids] ||= []
       params[:last_mile_company].permit(:name, :city, :address, :notes, :zone_ids => [])
     end
   end

@@ -1,23 +1,8 @@
-%h2= "Supplier: #{@supplier.name}"
-- if @supplier.zones.present?
-  %h2 Supplier Zones
-  %table.data.orderItems
-    %thead
-      %tr
-        %th= t('shoppe.logistics.zones.zone')
-        %th= t('shoppe.logistics.zones.province')
-        %th= t('shoppe.logistics.zones.country')
-        %th= t('shoppe.logistics.zones.dest_city')
-        %th= t('shoppe.logistics.links.action')
-    %tbody
-      - @supplier.zones.each do |zone|
-        - zone.cities.each do |city|
-          %tr
-            %td= zone.name
-            %td= city.province
-            %td= city.country.name
-            %td= city.name
-            %td= link_to t('shoppe.logistics.links.show'), zone
-- else
-  Please add zone for this supplier
+.logistics_details
+  %h2= "Supplier: #{@supplier.name}"
+  - if @supplier.zones.present?
+    %h2 Supplier Zones
+    = render 'shoppe/zones/zones_table', zones: @supplier.zones
+  - else
+    Please add zone for this supplier
          

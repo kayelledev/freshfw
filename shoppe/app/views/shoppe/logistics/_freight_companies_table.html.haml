@@ -17,7 +17,7 @@
                 %td{rowspan:"#{freight_company.zones.count}"}= freight_company.name
                 %td{rowspan:"#{freight_company.zones.count}"}= freight_company.dc
                 %td{rowspan:"#{freight_company.zones.count}"}= freight_company.website
-              %td= zone.name
+              %td= link_to zone.name, zone
               - if index.zero?
                 %td{rowspan:"#{freight_company.zones.count}"}
                   = link_to t('shoppe.logistics.links.show'), freight_company, :class => 'button green'

@@ -1,12 +1,13 @@
-= form_for @last_mile_company, :html => {:multipart => true} do |f|
-  = f.error_messages
-  = f.label :name, t('shoppe.logistics.last_mile_companies.name')
-  = f.text_field :name, :class => 'text'
-  = f.label :city, t('shoppe.logistics.last_mile_companies.city')
-  = f.text_field :city, :class => 'text'
-  = f.label :address, t('shoppe.logistics.last_mile_companies.address')
-  = f.text_field :address, :class => 'text'
-  = f.label :notes, t('shoppe.logistics.last_mile_companies.notes')
-  = f.text_area :notes, :class => 'text'
-  = render 'zones_form', :f => f
-  = f.submit t('shoppe.submit'), :class => 'button green'
+.logistics_form
+  = form_for @last_mile_company, :html => {:multipart => true} do |f|
+    = f.error_messages
+    = f.label :name, t('shoppe.logistics.last_mile_companies.name')
+    = f.text_field :name, :class => 'text'
+    = f.label :city, t('shoppe.logistics.last_mile_companies.city')
+    = f.text_field :city, :class => 'text'
+    = f.label :address, t('shoppe.logistics.last_mile_companies.address')
+    = f.text_field :address, :class => 'text'
+    = f.label :notes, t('shoppe.logistics.last_mile_companies.notes')
+    = f.text_area :notes, :class => 'text'
+    = render 'zones_form', :f => f
+    = f.submit t('shoppe.submit'), :class => 'button green'

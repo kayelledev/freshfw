@@ -23,7 +23,7 @@ module Shoppe
 
     def update
       if @supplier.update(safe_params)
-        redirect_to :logistics, :flash => {:notice => t('shoppe.logistics.suppliers.update_notice') }
+        redirect_to @supplier, :flash => {:notice => t('shoppe.logistics.suppliers.update_notice') }
       else
         render :action => "edit"
       end
@@ -37,6 +37,7 @@ module Shoppe
     private
 
     def safe_params
+      params[:supplier][:zone_ids] ||= []
       params[:supplier].permit(:name, :warehouse, :website, :prime, :notes, :zone_ids => [])
     end
   end

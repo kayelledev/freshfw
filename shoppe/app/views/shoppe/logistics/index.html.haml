@@ -1,80 +1,3 @@
-:css
-  .main-container {
-    clear: left;
-    float: left;
-    width: 100%;
-    overflow: hidden;
-    height: 50px;
-  }
-  .logistic-container{
-    float: left;
-    width: 100%;
-    position: relative;
-    right: 50%;
-  }
-  .half1 {
-    float: left;
-    width: 46%;
-    position: relative;
-    left: 52%;
-  }
-  .half2 {
-    float: left;
-    width: 46%;
-    position: relative;
-    left: 56%;
-  }
-  .table-container{
-    display: block;
-    overflow: auto;
-
-  }
-  .table-container table th{
-    border: 1px solid #40454D;
-    background: #40454D;
-    text-align: left;
-    font-weight: normal;
-    font-size: 0.9em;
-    color: #fff;
-    cursor: pointer;
-    padding: 10px;
-    vertical-align: middle;
-  }
-  .table-container table{
-    width: 100%;  
-    overflow: auto;
-  }
-  .table-container table tbody th {
-    text-align: left;
-    background: #5B6270;
-    border: 1px solid #5B6270;
-    font-size: 1.2em;
-    color: #fff;
-    cursor: pointer;
-    padding: 10px;
-    vertical-align: middle;
-  }
-  .table-container table tbody td{
-    padding: 10px;
-    vertical-align: middle;
-    border: 1px solid #cfd4dd;
-    background: #fff;
-  }
-  .logistic-container h2{
-    font-size: 1.2em;
-    color: #333;
-    padding-top: 28px;
-    padding-bottom: 8px;
-  }
-  .right{
-    float: right;
-  }
-  .routeSearch {
-    max-width: 300px;
-  }
-  .routeSearch .button{
-    margin-top: 20px;
-  }
 - @page_title = t('shoppe.logistics.main_title')
 = content_for :header do
   %p.buttons
@@ -95,11 +18,11 @@
             .dt
               = label_tag t('shoppe.logistics.search.supplier')
             .dd
-              = text_field_tag :supplier, @supplier, :class => 'text'
+              = text_field_tag :supplier, @supplier, :class => 'text', placeholder: "city, zone, supplier name or warehouse address"
             .dt
               = label_tag t('shoppe.logistics.search.customer')
             .dd
-              = text_field_tag :customer, @customer, :class => 'text'
+              = text_field_tag :customer, @customer, :class => 'text', placeholder: "city or zone"
             .dd
               .right
                 = submit_tag t('shoppe.logistics.search.search_button'), :class => 'button'

@@ -34,6 +34,11 @@ module Shoppe
       end
     end
 
+    def destroy
+      @city.destroy
+      redirect_to @zone, :flash => {:notice => t('shoppe.logistics.cities.destroy_notice')}
+    end
+
 
 
     private

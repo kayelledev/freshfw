@@ -736,6 +736,7 @@ en:
         delete_confirmation: Are you sure you wish to remove this city?
         create_notice: City has been created successfully
         update_notice: City has been updated successfully
+        destroy_notice: City has been destroyed successfully
 
       links:
         action: Actions

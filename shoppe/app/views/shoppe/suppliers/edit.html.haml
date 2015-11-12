@@ -3,6 +3,7 @@
 = content_for :header do
   %p.buttons
     = link_to t('shoppe.logistics.zones.new_zone'), :new_zone, :class => 'button green'
+    = link_to t('shoppe.logistics.links.back'), :back, :class => 'button'
     = link_to t('shoppe.logistics.back_to_logistictics') , :logistics, :class => 'button'
   %h2.zones= t('shoppe.logistics.suppliers.edit_supplier')
 
