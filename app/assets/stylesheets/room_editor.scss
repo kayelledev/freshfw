@@ -1,10 +1,10 @@
-
 .editor-container {
   width: 100%;
   height: 100%;
   border: 1px solid black;
   margin: 10px auto;
   position: relative;
+  background-color: #fff;
 }
 
 .editor-container .draggable {
@@ -119,6 +119,25 @@
     color: #ffffff !important;
 }
 
+.btn-save-as-image{
+  padding: .5em .5em;
+  margin: .5em 0em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #ff6600;
+  border-color: #ff6600;
+  font-family: 'roboto_condensedregular', sans-serif !important;
+}
+
+.btn.btn-save-as-image:hover {
+    color: #ffffff !important;
+}
+.btn.btn-save-as-image:focus, .btn.btn-save-as-image:visited, .btn.btn-save-as-image:active {
+  color: #ffffff;
+}
 
 #dimensions-dialog .form-group .form-control {
   width: 100px;

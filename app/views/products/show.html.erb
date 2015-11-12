@@ -162,11 +162,13 @@
                         <% end %>
                         <% if @product.is_preset %>
                             <h4>LAYOUT OPTIONS</h4>
+                            <center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %></center>
                             <div class='room-editor-container' style="margin: 0 auto; clear: both;">
-                                <center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %></center>
                                 <%= render 'shared/room_editor', product: @product %>
                             </div>
-                        <% end %>
+                            <center><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %>
+                            </center>
+                       <% end %>
                     </div>
                     <div role="tabpanel" class="tab-pane fade  col-md-6" id="profile">
                         <% @product.product_attributes.where(public: true).each do |attribure| %>
@@ -217,5 +219,22 @@
   });
 
 </script>
-
-
+<script language="javascript">
+    $('#save-as-image').click(function downimg(){
+        var container = $('.room-editor-container'),
+        c_width = container.width() + 100,
+        c_height = container.height();
+        console.log('width = ' + c_width + ' height = ' + c_height);
+        html2canvas($('.room-editor-container'), {
+            onrendered: function (canvas) {
+                canvas.toBlob(function(blob) {
+                    saveAs(blob ,"editor-container.jpeg");
+                }, "image/jpeg");
+                console.log('width = ' + c_width + ' height = ' + c_height);
+            },
+            background: '#fff',
+            width: c_width,
+            height: c_height
+        });
+    })
+</script>
