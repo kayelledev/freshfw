@@ -2941,7 +2941,7 @@
             $(this).parent().css({
               top: 0,
               left: 0
-            })
+            });
           });
         }
       });
@@ -2954,6 +2954,25 @@
         var elem = $("#" + $(this).attr('data-item-id'));
         var elemId = $(elem).attr('id');
         elem.hide();
+
+        elem.parent().css({
+          '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+             '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+              '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                  'transform': 'translate(0px, 0px) rotate(0deg)',
+        });
+
+        elem.parent().attr('data-rotation', '0');
+        elem.parent().attr('data-x', '0');
+        elem.parent().attr('data-y', '0');
+        elem.attr('data-rotation', '0');
+        elem.attr('data-x', '0');
+        elem.attr('data-y', '0');
+        elem.parent().css({
+          top: 0,
+          left: 0
+        });
+
         $('.qtip').hide();
         var elemInPanel = $('.items-panel-elem[data-id="' + elemId + '"]')
         controller.initItemsPanelArea( elemInPanel );
