@@ -90,7 +90,7 @@
                     data-y="<%= item.posY %>"
                     data-toggle="tooltip" title="<%= item.product_category.name %>">
 
-          <%= image_tag 'remove.png', class: 'remove-icon remove-item', data: { item: { id: item.id } }, width: '15px', height: '15px', hidden: true %>
+          <%= image_tag 'remove.png', class: 'remove-icon remove-item', 'data-item-id': item.id, width: '15px', height: '15px', hidden: true %>
 
           <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>"
                     data-rotation="<%= item.rotation %>"

@@ -223,18 +223,20 @@
 
         // $('[data-toggle="tooltip"]').tooltip();
 
-        $('.room-item').each(function() {
+        $('.draggable').each(function() {
           $(this).qtip({
             content: {
-              text: $('#tooltip-' + $(this).find('.draggable').attr('id'))
+              text: $('#tooltip-' + $(this).attr('id')),
+              title: ' ',
+              button: true
             },
             hide: {
               delay: 150,
               fixed: true
             },
             position: {
-              my: 'left top',
-              at: 'right center',
+              my: 'right top',
+              at: 'left center',
               target: $(this)
             },
             style: {
@@ -243,6 +245,9 @@
             hide: {
                 event: 'mousedown unfocus',
 
+            },
+            show: {
+              event: 'click'
             }
           });
         });
@@ -2889,14 +2894,13 @@
     Controller.prototype.removeElement = function() {
       var controller = this;
       $('.remove-item').click(function() {
-        $(this).parent().parent().parent().hide();
         var elem = $("#" + $(this).attr('data-item-id'));
         var elemId = $(elem).attr('id');
-        console.log(elem);
-        console.log(elemId);
         elem.hide();
+        $('.qtip').hide();
         var elemInPanel = $('.items-panel-elem[data-id="' + elemId + '"]')
         controller.initItemsPanelArea( elemInPanel );
+
       });
     }
 
@@ -2985,7 +2989,12 @@
           $('.editor-items-panel').hide();
         }
 
-        controller.restrictAreaHoles(realItem);
+        if ( controller.restrictAreaHoles(realItem) ) {
+          console.log('daaa');
+          realItem.hide();
+          $('.qtip').hide();
+          controller.initItemsPanelArea( $(item) );
+        }
 
       }
 
