@@ -184,8 +184,6 @@
 
         // target elements with the "draggable" class
         $('.' + elementsClass).each(function() {
-          //$(this).attr('data-x', parseFloat($(this).data('x'))/scalingX || $(this).width()/2.0);
-          //$(this).attr('data-y', parseFloat($(this).data('y'))/scalingY || $(this).height()/2.0);
 
           $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling || $(this).width()/2.0);
           $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling || $(this).height()/2.0);
@@ -193,8 +191,7 @@
           $(this).parent().css({
               'width': $(this).data('width') / scaling,
               'height': $(this).data('heigh') / scaling,
-              // 'width': $(this).data('width'),
-              // 'height': $(this).data('heigh'),
+
               '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
               '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
               '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
@@ -724,6 +721,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -834,6 +833,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -910,6 +911,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -989,6 +992,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -1066,6 +1071,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -1163,6 +1170,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -1270,6 +1279,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -1374,6 +1385,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -1480,6 +1493,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -1584,6 +1599,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -1691,6 +1708,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -1797,6 +1816,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -1902,6 +1923,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -2020,6 +2043,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -2156,6 +2181,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -2290,6 +2317,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -2429,6 +2458,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -2561,6 +2592,8 @@
 
           resetItemsInPanel();
 
+          resetElemInArea();
+
           controller.initItemsPanelArea();
 
           dimensionsDialog.dialog('close');
@@ -2688,6 +2721,8 @@
           scaleItems(scaling);
 
           resetItemsInPanel();
+
+          resetElemInArea();
 
           controller.initItemsPanelArea();
 
@@ -2850,8 +2885,8 @@
 
         function scaleItems(scaling) {
             $('.' + elementsClass).each(function() {
-              $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
-              $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
+              // $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
+              // $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
 
               $(this).parent().css({
                 'width': $(this).data('width') / scaling,
@@ -2887,6 +2922,23 @@
           });
         }
 
+        function resetElemInArea(){
+          $('.draggable').each(function() {
+            $(this).parent().css({
+              '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                 '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                  '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                      'transform': 'translate(0px, 0px) rotate(0deg)',
+            });
+
+            $(this).parent().attr('data-rotation', '0');
+            $(this).parent().attr('data-x', '0');
+            $(this).parent().attr('data-y', '0');
+            $(this).attr('data-rotation', '0');
+            $(this).attr('data-x', '0');
+            $(this).attr('data-y', '0');
+          });
+        }
       });
 
     };
@@ -3115,10 +3167,10 @@
           });
         });
         if (inHole.indexOf(true) != -1) {
-          $(elem).addClass('out-of-area');
+          // $(elem).addClass('out-of-area');
           return true;
         } else {
-          $(elem).removeClass('out-of-area');
+          // $(elem).removeClass('out-of-area');
           return false;
         }
 
