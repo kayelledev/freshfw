@@ -68,48 +68,67 @@
 
 <div class='dragg'>
 
-<div class="editor-items-panel">
-  <% @product.included_products.each do |item| %>
-    <div class='draggable2 items-panel-elem' data-id="<%= item.id %>">
-        <% if image_link(item, 'image6') %>
-              <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%' %>
-          <% end %>
-    </div>
-  <% end %>
-</div>
-
-
-
-<div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.depth %>" style="height: 600px;">
-  <% @product.included_products.each do |item| %>
-    <% if @product.width > item.width && @product.depth > item.depth %>
-      <% item.posX = @product.width / 2 if item.posX > @product.width || item.posX < 0 %>
-      <% item.posY = @product.depth / 2 if item.posY > @product.depth || item.posY < 0 %>
-      <span style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>"
-            data-rotation="<%= item.rotation %>"
-            data-x="<%= item.posX %>"
-            data-y="<%= item.posY %>"
-            data-toggle="tooltip" title="<%= item.product_category.name %>">
-
-        <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>"
-             data-rotation="<%= item.rotation %>"
-             data-x="<%= item.posX %>"
-             data-y="<%= item.posY %>"
-             >
+  <div class="editor-items-panel">
+    <% @product.included_products.each do |item| %>
+      <div class='draggable2 items-panel-elem' data-id="<%= item.id %>">
           <% if image_link(item, 'image6') %>
-              <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image'%>
-          <% end %>
-        </div>
-        <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
-      </span>
-    <% else %>
-      <script>
-        $('.room-editor-container').hide();
-        alert('<%= "Room dimensions (#{@product.width} x #{@product.depth}) are not enough for #{item.name} (#{item.width} x #{item.depth})" %>');
-      </script>
+                <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%' %>
+            <% end %>
+      </div>
     <% end %>
-  <% end %>
-</div>
+  </div>
+
+
+
+  <div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.depth %>" style="height: 600px;">
+    <% @product.included_products.each do |item| %>
+      <% if @product.width > item.width && @product.depth > item.depth %>
+
+        <span class='room-item' style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>"
+                    data-rotation="<%= item.rotation %>"
+                    data-x="<%= item.posX %>"
+                    data-y="<%= item.posY %>"
+                    data-toggle="tooltip" title="<%= item.product_category.name %>">
+
+          <%= image_tag 'remove.png', class: 'remove-icon remove-item', 'data-item-id': item.id, width: '15px', height: '15px', hidden: true %>
+
+          <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>"
+                    data-rotation="<%= item.rotation %>"
+                    data-x="<%= item.posX %>"
+                    data-y="<%= item.posY %>">
+
+            <% if image_link(item, 'image6') %>
+                <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image'%>
+            <% end %>
+
+            <div class="point left-top"></div>
+            <div class="point right-top"></div>
+            <div class="point left-bottom"></div>
+            <div class="point right-bottom"></div>
+          </div>
+
+          <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
+
+          <div class='elem-tooltip' id="tooltip-<%= item.id %>" style='visibility:hidden;'>
+            <%= link_to item.permalink, target:"_blank" do %>
+              <p><%= item.name %></p>
+            <% end %>
+            <p><b>Width:</b> <%= item.width %><br>
+            <b>Heigh:</b> <%= item.height %><br>
+            <b>Depth:</b> <%= item.depth %></p>
+            <span class="glyphicon glyphicon-trash remove-item" aria-hidden="true" data-item-id="<%= item.id %>"></span>
+          </div>
+
+        </span>
+
+      <% else %>
+        <script>
+          $('.room-editor-container').hide();
+          alert('<%= "Room dimensions (#{@product.width} x #{@product.depth}) are not enough for #{item.name} (#{item.width} x #{item.depth})" %>');
+        </script>
+      <% end %>
+    <% end %>
+  </div>
 
 </div>
 
@@ -160,7 +179,7 @@
       <div id='dialog-form-errors'></div>
       <form class="form-horizontal" id='dialog-form'>
 
-        <%= render partial: 'shared/imputs' %>
+        <%= render partial: 'shared/inputs' %>
 
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">

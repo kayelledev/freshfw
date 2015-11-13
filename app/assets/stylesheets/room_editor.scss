@@ -77,7 +77,14 @@
 .rotation-arrow {
   position: absolute;
   right: -20px;
-  /*bottom: -20px;*/
+  cursor:pointer;
+}
+
+.remove-icon {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  cursor:pointer;
 }
 
 .save-preset {
@@ -164,22 +171,27 @@ div#dialog-form-errors {
   color: #A94442;
 }
 
-.editor-items-panel{
+.editor-items-panel {
   float: left;
   position: absolute;
-  width: 5%;
-  left: 14%;
+  width: 10%;
+  left: -10%;
   border: 1px solid black;
   display: none;
   height: auto;
 }
 
+.items-panel-elem {
+  display: none;
+}
 
 .draggable2 {
   width:100%;
   height:auto;
   -webkit-transform: translate(0px, 0px);
           transform: translate(0px, 0px);
+  z-index: 3;
+  position:relative;
 }
 
 .items-panel-elem {
@@ -202,11 +214,11 @@ div#dialog-form-errors {
   width: 100%;
 }
 
-#dialog-form .room-imputs {
+#dialog-form .room-inputs {
   display: none;
 }
 
-.active-room-imputs {
+.active-room-inputs {
   display: block !important;
 }
 
@@ -226,3 +238,53 @@ div#dialog-form-errors {
   right: -20px !important;
 }
 
+.hole {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+
+}
+
+.dragg {
+  position: relative;
+}
+
+.room-item {
+  z-index: 2;
+}
+
+.out-of-area {
+  border: 2px solid red !important;
+}
+
+.hole-border-top {
+  border-top: 1px solid black;
+}
+
+.hole-border-bottom {
+  border-bottom: 1px solid black;
+}
+
+.hole-border-left {
+  border-left: 1px solid black;
+}
+
+.hole-border-right {
+  border-right: 1px solid black;
+}
+
+.point {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  visibility: hidden;
+}
+
+.left-top { left: 0; top: 0; }
+.right-top {right: 0; top: 0; }
+.right-bottom { right: 0; bottom: 0; }
+.left-bottom { left: 0; bottom: 0; }
+
+.elem-tooltip .glyphicon-trash {
+  cursor:pointer;
+}
