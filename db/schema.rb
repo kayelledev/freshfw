@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -151,7 +152,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_freight_companies_zones", ["zone_id"], name: "index_shoppe_freight_companies_zones_on_zone_id", using: :btree
 
   create_table "shoppe_freight_routes", force: :cascade do |t|
-    t.integer "trevel_days"
+    t.integer "travel_days"
     t.integer "freight_company_id"
     t.integer "zone_id"
     t.integer "suppliers_zone_id"

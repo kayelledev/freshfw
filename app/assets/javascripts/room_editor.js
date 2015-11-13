@@ -2923,6 +2923,7 @@
         }
 
         function resetElemInArea(){
+          console.log('zzzz');
           $('.draggable').each(function() {
             $(this).parent().css({
               '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
@@ -2937,6 +2938,10 @@
             $(this).attr('data-rotation', '0');
             $(this).attr('data-x', '0');
             $(this).attr('data-y', '0');
+            $(this).parent().css({
+              top: 0,
+              left: 0
+            })
           });
         }
       });
