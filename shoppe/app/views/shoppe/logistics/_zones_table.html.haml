@@ -1,0 +1,30 @@
+%h2= t('shoppe.logistics.titles.zones')
+.table-container
+  %table
+    %thead
+      %tr
+        %th= t('shoppe.logistics.zones.zone')
+        %th= t('shoppe.logistics.zones.province')
+        %th= t('shoppe.logistics.zones.country')
+        %th= t('shoppe.logistics.zones.dest_city')
+        %th= t('shoppe.logistics.links.action')
+    %tbody
+      - @zones.each do |zone|
+        - if zone.cities.present?
+          - zone.cities.each_with_index do |city, index|
+            %tr
+              - if index.zero? 
+                %td{rowspan:"#{zone.cities.count}"}= link_to zone.name, zone
+              %td= city.province
+              %td= city.country.name
+              %td= city.name
+              - if index.zero? 
+                %td{rowspan:"#{zone.cities.count}"}
+                  = link_to t('shoppe.logistics.links.show'),zone, :class => 'button green'
+                  = link_to t('shoppe.logistics.links.delete'), zone, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.logistics.zones.delete_confirmation')}
+        - else
+          %tr
+            %td{colspan:'4'}= link_to zone.name, zone
+            %td
+              = link_to t('shoppe.logistics.links.show'),zone, :class => 'button green'
+              = link_to t('shoppe.logistics.links.delete'), zone, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.logistics.zones.delete_confirmation')}

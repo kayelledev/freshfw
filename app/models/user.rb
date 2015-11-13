@@ -4,7 +4,7 @@ class User < Shoppe::User
          :recoverable, :rememberable, :confirmable,
          :omniauthable, :validatable
   
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :products, through: :reviews
   validates_uniqueness_of :email_address
 

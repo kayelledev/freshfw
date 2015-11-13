@@ -1,0 +1,98 @@
+.main-container {
+  clear: left;
+  float: left;
+  width: 100%;
+  overflow: hidden;
+}
+.logistic-container{
+  float: left;
+  width: 100%;
+  position: relative;
+  right: 50%;
+}
+.half1 {
+  float: left;
+  width: 46%;
+  position: relative;
+  left: 52%;
+}
+.half2 {
+  float: left;
+  width: 46%;
+  position: relative;
+  left: 56%;
+}
+.table-container{
+  display: block;
+  overflow: auto;
+}
+.table-container a.button{
+  margin-bottom: 10px;
+}
+.table-container table th{
+  border: 1px solid #40454D;
+  background: #40454D;
+  text-align: left;
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #fff;
+  cursor: auto;
+  padding: 10px;
+  vertical-align: middle;
+}
+.table-container table{
+  width: 100%;  
+  overflow: auto;
+}
+.table-container table tbody th {
+  text-align: left;
+  background: #5B6270;
+  border: 1px solid #5B6270;
+  font-size: 1.2em;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px;
+  vertical-align: middle;
+}
+.table-container table tbody td{
+  padding: 10px;
+  vertical-align: middle;
+  border: 1px solid #cfd4dd;
+  background: #fff;
+}
+.logistic-container h2{
+  font-size: 1.2em;
+  color: #333;
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+.right{
+  float: right;
+}
+.left{
+  float: left;
+}
+.routeSearch {
+  max-width: 300px;
+}
+.routeSearch .button{
+  margin-top: 20px;
+}
+.logistics_form{
+  max-width: 300px;
+}
+.logistics_form .button{
+  float: right;
+  margin-top: 10px;
+}
+.logistics_form .number, .logistics_form label,.logistics_form select{
+  width:100%;
+}
+.logistics_details h2{
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 7px; 
+}
+.main-container:last-child{
+  margin-bottom: 50px;
+}

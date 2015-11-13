@@ -1,0 +1,8 @@
+.logistics_details
+  %h2= "Supplier: #{@supplier.name}"
+  - if @supplier.zones.present?
+    %h2 Supplier Zones
+    = render 'shoppe/zones/zones_table', zones: @supplier.zones
+  - else
+    You can add zone for this supplier
+         

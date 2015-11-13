@@ -32,6 +32,8 @@ module Shoppe
     #
     # @return [Shoppe::ProductCategory]
     belongs_to :product_category, :class_name => 'Shoppe::ProductCategory'
+    belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
+    belongs_to :supplier, :class_name => 'Shoppe::Supplier'
     #belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
 
     # The product's tax rate
@@ -166,11 +168,12 @@ module Shoppe
     # Example:
     #
     #   Shoppe:Product.import("path/to/file.csv")
-    def self.import(file, email)
+    def self.import(file, email, user)
       ext_name = File.extname(file.original_filename)
       file_name = "#{Rails.root}/tmp/#{Time.now.strftime('%Y-%m-%d___%H_%M_%S_%L')}#{ext_name}"
       FileUtils::copy_file(file.path, file_name)
-      ImportWorker.perform_async(file_name, email)
+      import_log = Shoppe::ImportLog.create(filename: file.original_filename, user_id: user.id, import_status: 0, start_time: Time.now)
+      ImportWorker.perform_async(file_name, email, import_log.id)
       "The file is sent to the background task. Import results will be sent to your email."
     end
 

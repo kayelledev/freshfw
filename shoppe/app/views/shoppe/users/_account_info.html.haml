@@ -1,0 +1,38 @@
+- if @orders.present? 
+  = field_set_tag "Order history" do
+    .splitContainer
+      .orders-data 
+        %table
+          %thead
+            %tr
+              %th= t('shoppe.orders.number') 
+              %th= t('shoppe.orders.status')
+              %th= t('shoppe.orders.products') 
+              %th= t('shoppe.orders.total') 
+              %th= t('shoppe.orders.payment')
+              %th
+                Date
+          %tbody
+            - @orders.each do |order|
+              %tr
+                %td= order.number
+                %td= order.status 
+                %td
+                  %ul
+                    - for item in order.order_items
+                      %li= "#{item.quantity} x #{item.ordered_item.full_name}"
+                %td= number_to_currency order.total
+                %td= boolean_tag order.paid_in_full?, nil, :true_text => number_to_currency(order.amount_paid), :false_text => number_to_currency(order.amount_paid) 
+                %td= order.created_at.strftime('%F') 
+- if @products.present?
+  = field_set_tag "Last visited products" do
+    .splitContainer
+      .products-data
+        %ul
+          - @products.each do |product| 
+            %li
+              %h4{style:"color: #333;"} 
+                = link_to product.name, main_app.product_path(product.permalink)
+              %a{href:"#{main_app.product_path(product.permalink)}"}
+                %span
+                  = image_tag product.default_image, class: "img-responsive item-img", alt: "#{product.full_name}" 

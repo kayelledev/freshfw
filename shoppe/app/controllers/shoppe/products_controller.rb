@@ -41,11 +41,12 @@ module Shoppe
     end
 
     def import
+      @import_logs =  Shoppe::ImportLog.order(start_time: :desc).includes(:user).limit(50)
       if request.post?
         if params[:import][:import_file].nil?
           redirect_to import_products_path, :flash => {:alert => I18n.t('shoppe.imports.errors.no_file')}
         else
-          status = Shoppe::Product.import(params[:import][:import_file], params[:import][:email])
+          status = Shoppe::Product.import(params[:import][:import_file], params[:import][:email], current_user)
           redirect_to products_path, :flash => {:notice => status}
         end
       end
