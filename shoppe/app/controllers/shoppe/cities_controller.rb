@@ -13,6 +13,10 @@ module Shoppe
     def edit
     end
 
+    def index
+      redirect_to :logistics
+    end
+
     def create
       @city = @zone.cities.create(safe_params)
       begin

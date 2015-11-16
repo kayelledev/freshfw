@@ -12,6 +12,10 @@ module Shoppe
   	def edit
     end
 
+    def index
+      redirect_to :logistics
+    end
+
     def create
       @supplier = Shoppe::Supplier.new(safe_params)
       if @supplier.save

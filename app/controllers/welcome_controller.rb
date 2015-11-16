@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
 
   def account
     if current_user.present?
-      @orders = Shoppe::Order.where(email_address: current_user.email_address)
+      @orders = Shoppe::Order.where(email_address: current_user.email_address).order('updated_at DESC')
       @products = current_user.reviews.order('updated_at DESC').take(3).map{|review| Shoppe::Product.find(review.product_id) }
     end
   end

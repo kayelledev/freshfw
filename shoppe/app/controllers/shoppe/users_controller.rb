@@ -27,7 +27,7 @@ module Shoppe
     end
 
     def edit
-      @orders = Shoppe::Order.where(email_address: @user.email_address)
+      @orders = Shoppe::Order.where(email_address: @user.email_address).order('updated_at DESC')
       @products = @user.reviews.last_monthly_data.map{|review| Shoppe::Product.find(review.product_id) }
     end
 

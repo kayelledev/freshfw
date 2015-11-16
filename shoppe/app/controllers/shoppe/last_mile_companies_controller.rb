@@ -12,6 +12,10 @@ module Shoppe
   	def edit
     end
 
+    def index
+      redirect_to :logistics
+    end
+
     def create
       @last_mile_company = Shoppe:: LastMileCompany.new(safe_params)
       if @last_mile_company.save

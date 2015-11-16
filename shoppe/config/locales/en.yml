@@ -721,6 +721,7 @@ en:
         warehouse: Warehouse
         zone: Zone
         website: Website
+        notes: Notes
         new_supplier: New Supplier
         edit_supplier: Edit Supplier
         delete_confirmation: Are you sure you wish to remove this supplier?
@@ -728,7 +729,7 @@ en:
         update_notice: Supplier has been updated successfully
         destroy_notice: Supplier has been destroyed successfully
       cities:
-        name: Name
+        name: City Name
         country: Country
         province: Province
         new: New City

@@ -12,6 +12,10 @@ module Shoppe
   	def edit
     end
 
+    def index
+      redirect_to :logistics
+    end
+
     def create
       @zone = Shoppe::Zone.new(safe_params)
       if @zone.save
