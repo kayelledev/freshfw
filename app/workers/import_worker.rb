@@ -32,7 +32,17 @@ class ImportWorker
       (2..spreadsheet.last_row).each_with_index do |i, index|
         begin
           row = Hash[[header, spreadsheet.row(i)].transpose]
-          product = Shoppe::Product.where(name: row["Product Name"], sku: row['SKU']).first_or_create
+          product = Shoppe::Product.where(sku: row['SKU']).first_or_create
+          if product.name != row["Product Name"]
+            product.name = row["Product Name"]
+            if Shoppe::Product.where(permalink: product.name.parameterize).empty?
+              product.permalink = "#{product.name.parameterize}"
+            else
+              product.permalink = "#{product.name.parameterize}-#{product.sku.parameterize}"
+            end
+          end
+
+          product.stock_control = false if product.id.nil? # set stock_control if new record
           if row["Subcategory Name"].present?
             product.product_category_id = Shoppe::ProductCategory.where(name: row["Subcategory Name"]).first_or_create.id
           else
@@ -43,6 +53,7 @@ class ImportWorker
           #product.permalink = row["Permalink"] if row["Permalink"]
           product.description = row["Description"] if row["Description"]
           product.short_description = row["Short Description"] if row["Short Description"]
+
           product.save!
           product.featured = row["Featured"].to_i if row["Featured"]
           product.in_the_box = row["What's in the box?"] if row["What's in the box?"]

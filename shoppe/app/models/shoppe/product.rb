@@ -67,9 +67,9 @@ module Shoppe
     end
 
     validates :name, :presence => true
-    validates :sku, :presence => true
-    validates_uniqueness_of :name, :scope => :sku
-    validates_uniqueness_of :sku, :scope => :name
+    validates :sku, :presence => true, :uniqueness => true
+    #validates_uniqueness_of :name, :scope => :sku
+    #validates_uniqueness_of :sku, :scope => :name
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true
 
     validates :weight, :numericality => true
