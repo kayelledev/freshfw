@@ -42,7 +42,7 @@ class ImportWorker
             end
           end
 
-          product.stock_control = false #if product.stock_control.nil?
+          product.stock_control = false if product.id.nil? # set stock_control if new record
           if row["Subcategory Name"].present?
             product.product_category_id = Shoppe::ProductCategory.where(name: row["Subcategory Name"]).first_or_create.id
           else
