@@ -83,8 +83,10 @@
           var a = values[0];
           var b = values[1];
           var degree = Math.round(Math.atan2(b, a) * (180/Math.PI));
+          var left = values[4];
+          var top = values[5];
 
-          return +degree;
+          return { top: top, left: left, degree: degree };
         }
 
     }
@@ -436,6 +438,8 @@
 
     Controller.prototype.initMouseRotation = function() {
         var controller = this;
+        var currentElem;
+        var positionBefore;
 
         function rotateOnMouse(e) {
             var offset = controller.$currentElement.offset();
@@ -458,31 +462,48 @@
 
         function rotateOnMouseClick() {
           currentElem = controller.$currentElement.parent();
-          var degree = controller.getDegreeOfElement(currentElem)
-          degree += 90;
+          positionBefore = controller.getDegreeOfElement(currentElem);
+
+          var beforeDegree = controller.getDegreeOfElement(currentElem).degree
+          var newDegree = beforeDegree + 90;
 
           var offsetX = parseFloat(currentElem.attr('data-x')),
               offsetY = parseFloat(currentElem.attr('data-y'));
 
-          currentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-          currentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-          currentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-          currentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          setDegree(newDegree);
 
-          controller.$currentElement.attr('data-rotation', degree);
+          if ( controller.restrictAreaHoles( controller.$currentElement ) ) {
+            setDegree(beforeDegree);;
+          }
 
+          function setDegree(degree) {
+            currentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            currentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            currentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            currentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+
+            controller.$currentElement.attr('data-rotation', degree);
+            controller.$currentElement.parent().attr('data-rotation', degree);
+          }
         }
 
         $('.rotation-arrow').mousedown(function(e) {
-            e.preventDefault(); // prevents the dragging of the image.
-            $(document).bind('mousemove.rotateImg', function(e2) {
-                rotateOnMouse(e2);
-            });
+          e.preventDefault(); // prevents the dragging of the image.
+
+          currentElem = controller.$currentElement.parent();
+
+          positionBefore = controller.getDegreeOfElement(currentElem);
+
+          $(document).bind('mousemove.rotateImg', function(e2) {
+            rotateOnMouse(e2);
+          });
         });
 
         $(document).mouseup(function(e) {
           $(document).unbind('mousemove.rotateImg');
-          controller.restrictAreaHoles( controller.$currentElement );
+          if ( controller.restrictAreaHoles( controller.$currentElement ) ) {
+            controller.rotateInsideArea(positionBefore, controller.$currentElement);
+          }
         });
 
         $('.rotation-arrow').click(function(e) {
@@ -3137,6 +3158,7 @@
       var controller = this;
       var elemPoints = defineElemPoints(elem);
       var holesPoligons = defineHoles( $('.hole') );
+      var roomAreaPoints = defineRoomArea();
 
       function defineElemPoints(elem) {
 
@@ -3173,21 +3195,41 @@
         return holes;
       }
 
-      function restrictHoles(points, holes, elem) {
-        var inHole = [];
+      function defineRoomArea() {
+        var top = +$('.editor-container').offset().top;
+        var left = +$('.editor-container').offset().left;
+        var width = +$('.editor-container').width();
+        var height = +$('.editor-container').height();
+
+        var leftTop = [top, left]
+        var rightTop = [top, left + width]
+        var rightBottom = [top + height, left + width]
+        var leftBottom = [top + height, left]
+
+        var roomArea = [leftTop, rightTop, rightBottom, leftBottom];
+        return roomArea;
+      }
+
+      function restrictHoles(points, holes, areaPoints, elem) {
+        var wrongPosition = [];
         // console.log(holes);
+        // check elem point in holes
         $.each(points, function(index, point) {
           $.each(holes, function(index, hole) {
-            inHole.push( checkInsideHole(point, hole) );
+            wrongPosition.push( checkInsideHole(point, hole) );
           });
         });
+        //check holes point in elem
         $.each(holes, function(index, hole) {
           $.each(hole, function(index, holepoint) {
-            inHole.push( checkInsideHole(holepoint, points) );
+            wrongPosition.push( checkInsideHole(holepoint, points) );
             // console.log( checkInsideHole(holepoint, points) );
           });
         });
-        if (inHole.indexOf(true) != -1) {
+        $.each(points, function(index, point) {
+          wrongPosition.push( !checkInsideHole(point, areaPoints) );
+        });
+        if (wrongPosition.indexOf(true) != -1) {
           // $(elem).addClass('out-of-area');
           return true;
         } else {
@@ -3212,7 +3254,7 @@
           }
         return inside;
       };
-      return restrictHoles(elemPoints, holesPoligons, elem);
+      return restrictHoles(elemPoints, holesPoligons, roomAreaPoints, elem);
     }
 
     Controller.prototype.moveInsideArea = function(event) {
@@ -3246,6 +3288,38 @@
           });
         }
         $(event.target).parent().css('visibility', 'visible');
+      }
+    }
+
+    Controller.prototype.rotateInsideArea = function(positionBefore, elem) {
+      var controller = this;
+      var beforeDegree = positionBefore.degree;
+      var beforetTop = positionBefore.top;
+      var beforeLeft = positionBefore.left;
+
+      console.log(elem.parent());
+
+      var afterDegree = controller.getDegreeOfElement(elem.parent()).degree
+
+      console.log(beforeDegree);
+
+      while ( controller.restrictAreaHoles(elem) ) {
+        console.log(afterDegree);
+        $(elem).parent().css({
+          '-webkit-transform': 'translate(' + beforeLeft + 'px,' + beforetTop + 'px) rotate(' + afterDegree +'deg)',
+             '-moz-transform': 'translate(' + beforeLeft + 'px,' + beforetTop + 'px) rotate(' + afterDegree +'deg)',
+              '-ms-transform': 'translate(' + beforeLeft + 'px,' + beforetTop + 'px) rotate(' + afterDegree +'deg)',
+                  'transform': 'translate(' + beforeLeft + 'px,' + beforetTop + 'px) rotate(' + afterDegree +'deg)',
+        });
+        $(elem).attr('data-rotation', afterDegree);
+        $(elem).parent().attr('data-rotation', afterDegree);
+        if ( afterDegree > beforeDegree ) {
+          afterDegree -= 1;
+        } else if ( afterDegree < beforeDegree ) {
+          afterDegree += 1;
+        }else{
+          return;
+        }
       }
     }
 
