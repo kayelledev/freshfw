@@ -1,5 +1,9 @@
 .logistics_details
-  %h2= "Supplier: #{@supplier.name}"
+  %h2= "Name: #{@supplier.name}"
+  %h2= "Warehouse: #{@supplier.warehouse}" if @supplier.warehouse.present?
+  %h2= "Website: #{@supplier.website}" if @supplier.website.present?
+  %h2= "Prime: #{@supplier.prime}" if @supplier.prime.present?
+  %h2= "Notes: #{@supplier.notes}" if @supplier.notes.present?
   - if @supplier.zones.present?
     %h2 Supplier Zones
     = render 'shoppe/zones/zones_table', zones: @supplier.zones

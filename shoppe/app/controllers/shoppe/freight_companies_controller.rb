@@ -12,6 +12,10 @@ module Shoppe
   	def edit
     end
 
+    def index
+      redirect_to :logistics
+    end
+
     def create
       @freight_company = Shoppe::FreightCompany.new(safe_params)
       if @freight_company.save

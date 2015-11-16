@@ -6,6 +6,6 @@
     = link_to t('shoppe.logistics.zones.new_zone'), :new_zone, :class => 'button green'
     = link_to t('shoppe.logistics.cities.new'), new_zone_city_path(@zone), :class => 'button green'
     = link_to t('shoppe.logistics.back_to_logistictics') , :logistics, :class => 'button'
-  %h2.zones= "#{t('shoppe.logistics.zones.zone')} ##{@zone.id}"
+  %h2.zones= "#{@zone.name}"
 #zone
   = render 'zone_details'
