@@ -227,10 +227,6 @@
               title: ' ',
               button: true
             },
-            hide: {
-              delay: 150,
-              fixed: true
-            },
             position: {
               my: 'right top',
               at: 'left center',
@@ -240,8 +236,9 @@
               classes: 'qtip-bootstrap'
             },
             hide: {
-                event: 'mousedown unfocus',
-
+              event: 'mousedown unfocus mouseleave',
+              delay: 150,
+              fixed: true
             },
             show: {
               event: 'mouseover'
