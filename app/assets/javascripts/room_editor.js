@@ -208,12 +208,12 @@
               'transform': 'translate(0px, 0px) rotate(0deg)',
             });
 
-            $(this).parent().attr('data-rotation', '0');
-            $(this).parent().attr('data-x', '0');
-            $(this).parent().attr('data-y', '0');
-            $(this).attr('data-rotation', '0');
-            $(this).attr('data-x', '0');
-            $(this).attr('data-y', '0');
+            $(this).parent().attr('data-rotation', 0);
+            $(this).parent().attr('data-x', 0);
+            $(this).parent().attr('data-y', 0);
+            $(this).attr('data-rotation', 0);
+            $(this).attr('data-x', 0);
+            $(this).attr('data-y', 0);
           }
 
         });
@@ -2932,12 +2932,12 @@
                       'transform': 'translate(0px, 0px) rotate(0deg)',
             });
 
-            $(this).parent().attr('data-rotation', '0');
-            $(this).parent().attr('data-x', '0');
-            $(this).parent().attr('data-y', '0');
-            $(this).attr('data-rotation', '0');
-            $(this).attr('data-x', '0');
-            $(this).attr('data-y', '0');
+            $(this).parent().attr('data-rotation', 0);
+            $(this).parent().attr('data-x', 0);
+            $(this).parent().attr('data-y', 0);
+            $(this).attr('data-rotation', 0);
+            $(this).attr('data-x', 0);
+            $(this).attr('data-y', 0);
             $(this).parent().css({
               top: 0,
               left: 0
