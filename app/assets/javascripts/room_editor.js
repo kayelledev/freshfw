@@ -244,7 +244,7 @@
 
             },
             show: {
-              event: 'click'
+              event: 'mouseover'
             }
           });
         });
