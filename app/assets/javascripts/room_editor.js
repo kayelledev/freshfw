@@ -49,6 +49,10 @@
          */
         this.$currentElement = null;
 
+        this.$parentElem = null;
+
+        this.$positionBefore = null;
+
         /**
          * Calculate Holder width
          */
@@ -438,31 +442,32 @@
 
     Controller.prototype.initMouseRotation = function() {
         var controller = this;
-        var currentElem;
-        var positionBefore;
 
         function rotateOnMouse(e) {
-            var offset = controller.$currentElement.offset();
-            var center_x = offset.left;
-            var center_y = offset.top;
-            var mouse_x = e.pageX;
-            var mouse_y = e.pageY;
-            var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
-            var degree = (radians * (180 / Math.PI) * -1) + 60;
-            var offsetX = parseFloat(controller.$currentElement.parent().attr('data-x')),
-                offsetY = parseFloat(controller.$currentElement.parent().attr('data-y'));
+          // currentElem = controller.$currentElement.parent();
+          // positionBefore = controller.getDegreeOfElement(currentElem);
 
-            controller.$currentElement.parent().css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            controller.$currentElement.parent().css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            controller.$currentElement.parent().css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            controller.$currentElement.parent().css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          var offset = controller.$currentElement.offset();
+          var center_x = offset.left;
+          var center_y = offset.top;
+          var mouse_x = e.pageX;
+          var mouse_y = e.pageY;
+          var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+          var degree = (radians * (180 / Math.PI) * -1) + 60;
+          var offsetX = parseFloat(controller.$currentElement.parent().attr('data-x')),
+              offsetY = parseFloat(controller.$currentElement.parent().attr('data-y'));
 
-            controller.$currentElement.attr('data-rotation', degree);
+          controller.$currentElement.parent().css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          controller.$currentElement.parent().css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          controller.$currentElement.parent().css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          controller.$currentElement.parent().css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+
+          controller.$currentElement.attr('data-rotation', degree);
         }
 
         function rotateOnMouseClick() {
-          currentElem = controller.$currentElement.parent();
-          positionBefore = controller.getDegreeOfElement(currentElem);
+          // currentElem = controller.$currentElement.parent();
+          // positionBefore = controller.getDegreeOfElement(currentElem);
 
           var beforeDegree = controller.getDegreeOfElement(currentElem).degree
           var newDegree = beforeDegree + 90;
@@ -490,10 +495,9 @@
         $('.rotation-arrow').mousedown(function(e) {
           e.preventDefault(); // prevents the dragging of the image.
 
-          currentElem = controller.$currentElement.parent();
-
-          positionBefore = controller.getDegreeOfElement(currentElem);
-
+          controller.$parentElem = controller.$currentElement.parent();
+          controller.$positionBefore = controller.getDegreeOfElement(controller.$parentElem);
+          console.log(controller.$parentElem);
           $(document).bind('mousemove.rotateImg', function(e2) {
             rotateOnMouse(e2);
           });
@@ -501,13 +505,18 @@
 
         $(document).mouseup(function(e) {
           $(document).unbind('mousemove.rotateImg');
+          console.log(controller.$positionBefore);
           if ( controller.restrictAreaHoles( controller.$currentElement ) ) {
-            controller.rotateInsideArea(positionBefore, controller.$currentElement);
+            controller.rotateInsideArea(controller.$positionBefore, controller.$currentElement);
           }
         });
 
         $('.rotation-arrow').click(function(e) {
           e.preventDefault();
+
+          controller.$parentElem = controller.$currentElement.parent();
+          controller.$positionBefore = controller.getDegreeOfElement(controller.$parentElem);
+
           rotateOnMouseClick();
         });
     };
@@ -3297,11 +3306,7 @@
       var beforetTop = positionBefore.top;
       var beforeLeft = positionBefore.left;
 
-      console.log(elem.parent());
-
       var afterDegree = controller.getDegreeOfElement(elem.parent()).degree
-
-      console.log(beforeDegree);
 
       while ( controller.restrictAreaHoles(elem) ) {
         console.log(afterDegree);
@@ -3351,6 +3356,13 @@
         controller.init();
 
         $('.editor-container').bind('DOMNodeInserted', function() {
+          controller.initElements(controller.$initialElenemts);
+          controller.catchElement();
+          controller.rotateElement();
+          controller.initMouseRotation();
+          controller.removeElement();
+        });
+        $(".editor-items-panel").bind('DOMNodeInserted', function() {
           controller.initElements(controller.$initialElenemts);
           controller.catchElement();
           controller.rotateElement();
