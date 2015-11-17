@@ -3351,10 +3351,11 @@
         controller.init();
 
         $('.editor-container').bind('DOMNodeInserted', function() {
-          controller.init();
-        });
-        $(".editor-items-panel").bind('DOMNodeInserted', function() {
-          controller.init();
+          controller.initElements(controller.$initialElenemts);
+          controller.catchElement();
+          controller.rotateElement();
+          controller.initMouseRotation();
+          controller.removeElement();
         });
 
         $presetSelector.on('change', function() {
