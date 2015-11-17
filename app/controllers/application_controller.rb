@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_user_currency, unless: :location_in_cookies? 
+  
+  protected
+
+    def self.permission
+      return name = self.name.gsub('Controller','').singularize.split('::').last.constantize.name rescue nil
+    end
+
   private
 
     def location_in_cookies?

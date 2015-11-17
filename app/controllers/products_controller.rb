@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   include ProductsHelper
-  include ActionView::Helpers::UrlHelper
+  # include ActionView::Helpers::UrlHelper
 
   before_action :find_product, except: [:index]
 

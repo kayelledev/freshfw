@@ -1,5 +1,5 @@
 class ProductCategoriesController < ApplicationController
-  include ActionView::Helpers::UrlHelper
+  # include ActionView::Helpers::UrlHelper
 
   def index_type
     @categories = Shoppe::ProductCategory.all
