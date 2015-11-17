@@ -9,6 +9,7 @@ $(document).ready(function(){
         $(descr_prod).show();;
         $(product_items).show();
         $('#buy').attr('href', product.data('url'));
+        $.get( "get_product", { sku: e.target.value } );
     });
 
     // cut description text

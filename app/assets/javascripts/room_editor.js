@@ -187,8 +187,8 @@
         // target elements with the "draggable" class
         $('.' + elementsClass).each(function() {
 
-          $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling || $(this).width()/2.0);
-          $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling || $(this).height()/2.0);
+          $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
+          $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
 
           $(this).parent().css({
               'width': $(this).data('width') / scaling,
@@ -3349,6 +3349,13 @@
             $button = $('.save-preset');
 
         controller.init();
+
+        $('.editor-container').bind('DOMNodeInserted', function() {
+          controller.init();
+        });
+        $(".editor-items-panel").bind('DOMNodeInserted', function() {
+          controller.init();
+        });
 
         $presetSelector.on('change', function() {
             this.attr('value', $(this).find('option:selected').val());
