@@ -250,11 +250,11 @@
 
         this.$holder.find('div')
           .on('mouseover', function() {
-            $("#product_" + $(this).attr('id')).addClass('active-product');
+            $(".included-product[data-product-id='" + $(this).attr('id') + "']").addClass('active-product');
           })
           .on('mouseout', function() {
             if (!( $(this).hasClass( "active" ) ) ) {
-              $("#product_" + $(this).attr('id')).removeClass('active-product');
+              $(".included-product[data-product-id='" + $(this).attr('id') + "']").removeClass('active-product');
             }
           });
     }
@@ -309,7 +309,7 @@
                 $(this).addClass('active');
 
                 $(".included-product").removeClass('active-product');
-                $("#product_" + $(this).attr('id')).addClass('active-product');
+                $(".included-product[data-product-id='" + $(this).attr('id') + "']").addClass('active-product');
 
                 self.$currentElement = $(this);
                 self.$rotationPanel.val((parseInt($(this).attr('data-rotation')) || 0));
