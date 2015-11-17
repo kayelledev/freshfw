@@ -2,43 +2,13 @@
   <%= javascript_include_tag "http://bxslider.com/lib/jquery.bxslider.js" %>
 <% end %>
 
-
 <div class="navigation-holder">
-  <!--<div>-->
-    <!--Position X-->
-    <!--<input type="number" class="position-x" min="0" step="1">-->
-  <!--</div>-->
-  <!--<div>-->
-    <!--Position Y-->
-    <!--<input type="number" class="position-y" min="0" step="1">-->
-  <!--</div>-->
-  <!--<h3>-->
-    <!--Products-->
-    <!--<select class="products-manager">-->
-      <!--<option>All</option>-->
-      <!--<% @items.each do |item| %>-->
-          <!--<option data-width="<%= item.width %>" data-height="<%= item.depth %>" data-category="<%= item.product_category_id || 0 %>"><%= item.name %></option>-->
-      <!--<% end %>-->
-    <!--</select>-->
-  <!--</h3>-->
-  <!--<h3>-->
-    <!--Category-->
-    <!--<select class="categories-manager">-->
-      <!--<option>All</option>-->
-      <!--<% @categories.each do |item| %>-->
-          <!--<option data-id="<%= item.id %>"><%= item.name %></option>-->
-      <!--<% end %>-->
-    <!--</select>-->
-  <!--</h3>-->
-  <!--<button class="add-draggable">Add element</button>-->
 </div>
 
 <div class="rotate-angle" hidden>
   Angle
   <input type="number" class="rotation-manager" min="0" max="360" step="1">
 </div>
-
-
 
 <div class="editor-width">
   <hr>
@@ -52,8 +22,6 @@
   <%= image_tag 'line.png', class: 'editor-line' %>
 </div>
 
-
-
 <div class="editor-height">
   <%= image_tag 'vertical-line.png' %>
     <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
@@ -65,20 +33,17 @@
     </div>
 </div>
 
-
 <div class='dragg'>
 
   <div class="editor-items-panel">
     <% @product.included_products.each do |item| %>
       <div class='draggable2 items-panel-elem' data-id="<%= item.id %>">
-          <% if image_link(item, 'image6') %>
-                <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%' %>
-            <% end %>
+        <% if image_link(item, 'image6') %>
+          <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%' %>
+        <% end %>
       </div>
     <% end %>
   </div>
-
-
 
   <div class="editor-container" data-width="<%= @product.width %>" data-height="<%= @product.depth %>" style="height: 600px;">
     <% @product.included_products.each do |item| %>
@@ -98,7 +63,7 @@
                     data-y="<%= item.posY %>">
 
             <% if image_link(item, 'image6') %>
-                <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image'%>
+              <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image'%>
             <% end %>
 
             <div class="point left-top"></div>
@@ -192,6 +157,3 @@
 
 
 </div>
-
-<script>
-</script>
