@@ -3174,7 +3174,6 @@
                   'transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
               });
 
-
               $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
            });
         });

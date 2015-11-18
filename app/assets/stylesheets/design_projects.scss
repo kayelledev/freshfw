@@ -1,3 +1,39 @@
-// Place all the styles related to the DesignProjects controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.room-builder-dragg {
+    position: relative;
+    margin: 0 auto;
+}
+.room-builder-editor {
+    border: 1px solid black;
+}
+
+.room-builder-editor-items-panel {
+  float: left;
+  position: absolute;
+  width: 10%;
+  left: -10%;
+  border: 1px solid black;
+  display: none;
+  height: auto;
+}
+
+.room-builder-editor .draggable {
+  border: 1px solid white;
+  position: relative;
+  transform-origin: top left;
+}
+
+.room-builder-editor .draggable.active {
+  border-color: #3eff00;
+}
+
+.room-builder-editor .draggable:hover {
+  border-color: #ffac00;
+}
+
+.room-builder-editor .draggable.collision {
+  border-color: red;
+}
+
+/*.room-builder-editor .draggable img {
+
+}*/
