@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   end
 
   create_table "permissions", force: :cascade do |t|
-    t.integer  "role_id"
     t.string   "name"
     t.string   "subject_class"
     t.integer  "subject_id"
@@ -61,6 +60,11 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.text     "description"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "permissions_roles", id: false, force: :cascade do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -298,6 +302,11 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_payments", ["order_id"], name: "index_shoppe_payments_on_order_id", using: :btree
   add_index "shoppe_payments", ["parent_payment_id"], name: "index_shoppe_payments_on_parent_payment_id", using: :btree
 
+  create_table "shoppe_permissions_roles", id: false, force: :cascade do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
+  end
+
   create_table "shoppe_product_attributes", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "key"
@@ -448,13 +457,6 @@ ActiveRecord::Schema.define(version: 20153002432638) do
 
   add_index "shoppe_users", ["email_address"], name: "index_shoppe_users_on_email_address", using: :btree
 
-  create_table "shoppe_users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
-  end
-
-  add_index "shoppe_users_roles", ["user_id", "role_id"], name: "index_shoppe_users_roles_on_user_id_and_role_id", using: :btree
-
   create_table "shoppe_zones", force: :cascade do |t|
     t.string "name"
   end
@@ -481,5 +483,12 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
 end

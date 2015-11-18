@@ -1,0 +1,7 @@
+%table.data.orderItems
+%thead
+  %tr
+    %th.name= t('shoppe.logistics.titles.zones')
+%tbody
+  %tr.item{:class => 'existing'}
+    %td.name= f.collection_select(:permission_ids, Permission.all, :id, :name, {:selected => @role.permission_ids, include_hidden: false}, {:multiple => true})

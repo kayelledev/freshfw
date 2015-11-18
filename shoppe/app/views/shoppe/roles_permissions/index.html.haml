@@ -1,0 +1,17 @@
+- @page_title = 'Access Management'
+= content_for :header do
+  %p.buttons
+    = link_to 'New Role', :new_role, :class => 'button green'
+    = link_to 'New Permission', :new_permission, :class => 'button green'
+  %h2.orders
+    Access Management
+.main-container
+  .logistic-container
+    .half1
+      = render 'roles_table'
+    .half2
+      = render 'permissions_table'
+.main-container
+  .logistic-container
+    .half1
+      = render 'roles_permissions_table'

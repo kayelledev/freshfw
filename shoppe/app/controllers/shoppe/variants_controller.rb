@@ -1,9 +1,13 @@
 module Shoppe
   class VariantsController < ApplicationController
-
+    load_and_authorize_resource :class => 'Shoppe::VariantsController'
     before_filter { @active_nav = :products }
     before_filter { @product = Shoppe::Product.find(params[:product_id]) }
     before_filter { params[:id] && @variant = @product.variants.find(params[:id]) }
+
+    def self.permission
+      "Shoppe::VariantsController"
+    end 
 
     def index
       @variants = @product.variants.ordered

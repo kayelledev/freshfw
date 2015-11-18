@@ -43,6 +43,11 @@ Shoppe::Engine.routes.draw do
   resources :suppliers
   resources :last_mile_companies
   resources :freight_companies
+  
+  resources :roles_permissions
+  resources :roles
+  resources :permissions
+
   resources :attachments, :only => :destroy
 
   get 'settings'=> 'settings#edit'

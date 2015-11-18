@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_user_currency, unless: :location_in_cookies? 
   
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:alert] = "Access denied. You are not authorized to access the requested page."
+    redirect_to root_path  
+  end
+
   protected
 
     def self.permission

@@ -1,6 +1,6 @@
 module Shoppe
   class PaymentsController < ApplicationController
-
+    # load_and_authorize_resource
     before_filter { @order = Shoppe::Order.find(params[:order_id]) }
     before_filter { params[:id] && @payment = @order.payments.find(params[:id]) }
 

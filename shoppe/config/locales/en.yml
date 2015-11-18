@@ -604,6 +604,7 @@ en:
         users: Users
         countries: Countries
         settings: Settings
+        roles_permissions: Access Management
 
     settings:
 

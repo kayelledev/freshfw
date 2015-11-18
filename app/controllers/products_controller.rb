@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   include ProductsHelper
-  # include ActionView::Helpers::UrlHelper
-
-  before_action :find_product, except: [:index]
+  include ActionView::Helpers::UrlHelper
+  load_and_authorize_resource
+  before_action :find_product, except: [:index, :get_product]
 
   def index
     @products = Shoppe::Product.root.includes(:product_category, :variants).order(:parent_id)
@@ -29,6 +29,13 @@ class ProductsController < ApplicationController
     product.send "remove_#{params[:img_id]}!"
     product.save!
     render json: { status: 'ok', status_code: 200 }
+  end
+
+  def get_product
+    @product = Shoppe::Product.find_by(sku: params[:sku])
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

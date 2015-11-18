@@ -1,7 +1,7 @@
 module Shoppe
   class SuppliersController < Shoppe::ApplicationController
   	before_filter { params[:id] && @supplier = Shoppe::Supplier.find(params[:id]) }
-
+    # load_and_authorize_resource
   	def new
   	  @supplier = Shoppe::Supplier.new
   	end

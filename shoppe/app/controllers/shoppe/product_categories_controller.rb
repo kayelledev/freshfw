@@ -1,6 +1,6 @@
 module Shoppe
   class ProductCategoriesController < Shoppe::ApplicationController
-
+    # load_and_authorize_resource
     before_filter { @active_nav = :product_categories }
     before_filter { params[:id] && @product_category = Shoppe::ProductCategory.find(params[:id]) }
 

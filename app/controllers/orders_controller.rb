@@ -1,6 +1,11 @@
 class OrdersController < ApplicationController
   helper_method :current_order, :has_order?
   before_action :authenticate_user!, only: :checkout
+  # load_and_authorize_resource :class => "OrdersController"
+
+  # def self.permission
+  #   "OrdersController"
+  # end
 
   def destroy
     current_order.destroy

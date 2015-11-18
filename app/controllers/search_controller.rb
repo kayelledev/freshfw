@@ -1,5 +1,10 @@
 class SearchController < ApplicationController
-
+  load_and_authorize_resource :class => 'SearchController'
+  
+  def self.permission
+    "SearchController"
+  end
+  
   def index
     @search_words = params['srch-term'].split(' ').sort
     if @search_words.empty?

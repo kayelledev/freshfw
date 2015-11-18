@@ -1,6 +1,6 @@
 module Shoppe
   class AttachmentsController < Shoppe::ApplicationController
-
+    # load_and_authorize_resource
     def destroy
       @attachment = Nifty::Attachments::Attachment.find(params[:id])
       @attachment.destroy

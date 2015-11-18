@@ -1,6 +1,6 @@
 module Shoppe
   class DeliveryServicesController < Shoppe::ApplicationController
-
+    # load_and_authorize_resource
     before_filter { @active_nav = :delivery_services }
     before_filter { params[:id] && @delivery_service = Shoppe::DeliveryService.find(params[:id]) }
 

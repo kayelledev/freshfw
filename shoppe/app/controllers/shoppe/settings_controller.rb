@@ -1,6 +1,6 @@
 module Shoppe
   class SettingsController < ApplicationController
-
+    # load_and_authorize_resource
     before_filter { @active_nav = :settings }
 
     def update
