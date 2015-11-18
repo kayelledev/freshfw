@@ -93,6 +93,21 @@
           return { top: top, left: left, degree: degree };
         }
 
+        this.checkInsidePoligon = function(point, vs) {
+          // ray-casting algorithm based on
+          // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+          var x = point[0], y = point[1];
+          var inside = false;
+            for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+                var xi = vs[i][0], yi = vs[i][1];
+                var xj = vs[j][0], yj = vs[j][1];
+                var intersect = ((yi > y) != (yj > y))
+                    && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+          return inside;
+        };
+
     }
 
     /**
@@ -165,25 +180,27 @@
           // call this function on every dragend event
           onend: function (event) {
             controller.moveInsideArea(event);
-            console.log(event);
-            var createRect = function($element) {
-              return new SAT.Box(
-                new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
-                $element.parent().width(),
-                $element.parent().height()
-              ).toPolygon().setAngle(parseInt($element.attr('data-rotation')) * Math.PI/180.0);
-            },
+            if ( controller.setCollisions(event.target) ) {
+              console.log('Collisions!!!');
+            }
+            // var createRect = function($element) {
+            //   return new SAT.Box(
+            //     new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
+            //     $element.parent().width(),
+            //     $element.parent().height()
+            //   ).toPolygon().setAngle(parseInt($element.attr('data-rotation')) * Math.PI/180.0);
+            // },
 
-            $elements = $('.editor-container div').not('.active'),
-            activeRect = createRect($(event.target));
+            // $elements = $('.editor-container div').not('.active'),
+            // activeRect = createRect($(event.target));
 
-            $elements.removeClass('collision');
+            // $elements.removeClass('collision');
 
-            $elements.each(function() {
-              if(SAT.testPolygonPolygon(createRect($(this)), activeRect)) {
-                $(this).addClass('collision');
-              }
-            });
+            // $elements.each(function() {
+            //   if(SAT.testPolygonPolygon(createRect($(this)), activeRect)) {
+            //     $(this).addClass('collision');
+            //   }
+            // });
 
             controller.restrictAreaHoles(event.target);
           }
@@ -3220,24 +3237,23 @@
         return roomArea;
       }
 
-      function restrictHoles(points, holes, areaPoints, elem) {
+      function checkOutside(points, holes, areaPoints, elem) {
         var wrongPosition = [];
         // console.log(holes);
         // check elem point in holes
         $.each(points, function(index, point) {
           $.each(holes, function(index, hole) {
-            wrongPosition.push( checkInsideHole(point, hole) );
+            wrongPosition.push( controller.checkInsidePoligon(point, hole) );
           });
         });
         //check holes point in elem
         $.each(holes, function(index, hole) {
-          $.each(hole, function(index, holepoint) {
-            wrongPosition.push( checkInsideHole(holepoint, points) );
-            // console.log( checkInsideHole(holepoint, points) );
+          $.each(hole, function(index, holePoint) {
+            wrongPosition.push( controller.checkInsidePoligon(holePoint, points) );
           });
         });
         $.each(points, function(index, point) {
-          wrongPosition.push( !checkInsideHole(point, areaPoints) );
+          wrongPosition.push( !controller.checkInsidePoligon(point, areaPoints) );
         });
         if (wrongPosition.indexOf(true) != -1) {
           // $(elem).addClass('out-of-area');
@@ -3250,21 +3266,7 @@
         // console.log( inside([ 1.5, 1.5 ], polygon) );
       }
 
-      function checkInsideHole(point, vs) {
-        // ray-casting algorithm based on
-        // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
-        var x = point[0], y = point[1];
-        var inside = false;
-          for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
-              var xi = vs[i][0], yi = vs[i][1];
-              var xj = vs[j][0], yj = vs[j][1];
-              var intersect = ((yi > y) != (yj > y))
-                  && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-              if (intersect) inside = !inside;
-          }
-        return inside;
-      };
-      return restrictHoles(elemPoints, holesPoligons, roomAreaPoints, elem);
+      return checkOutside(elemPoints, holesPoligons, roomAreaPoints, elem);
     }
 
     Controller.prototype.moveInsideArea = function(event) {
@@ -3327,6 +3329,88 @@
           return;
         }
       }
+    }
+
+    Controller.prototype.setCollisions = function(elem) {
+      var controller = this;
+      var elemPoints = defineElemPoints(elem);
+      var neighborsPoligons = defineNeighbors( $('.draggable').not('.active') );
+
+      setCollisions(elemPoints, neighborsPoligons, elem);
+
+      function defineElemPoints(elem) {
+
+        var pointTopLeft = $(elem).children('.left-top');
+        var pointTopRight = $(elem).children('.right-top');
+        var pointBottomLeft = $(elem).children('.left-bottom');
+        var pointBottomRight = $(elem).children('.right-bottom');
+
+        var elemTopLeft = [+pointTopLeft.offset().top, +pointTopLeft.offset().left];
+        var elemTopRight = [+pointTopRight.offset().top, +pointTopRight.offset().left];
+        var elemBottomLeft = [+pointBottomLeft.offset().top, +pointBottomLeft.offset().left];
+        var elemBottomRight = [+pointBottomRight.offset().top, +pointBottomRight.offset().left];
+
+        var elemPoints = [elemTopLeft, elemTopRight, elemBottomRight, elemBottomLeft];
+        return elemPoints;
+      }
+
+      function defineNeighbors(neighborsClass) {
+        var neighbors = [];
+        $(neighborsClass).each(function() {
+          var top = +$(this).offset().top;
+          var left = +$(this).offset().left;
+          var width = +$(this).width();
+          var height = +$(this).height();
+
+          var leftTop = [top, left]
+          var rightTop = [top, left + width]
+          var rightBottom = [top + height, left + width]
+          var leftBottom = [top + height, left]
+
+          var neighbor = { elem: $(this), points: [leftTop, rightTop, rightBottom, leftBottom] };
+          neighbors.push(neighbor);
+        });
+
+        return neighbors;
+      }
+
+      function setCollisions(points, neighbors, elem){
+        var wrongPosition = [];
+        var collNeighbors = [];
+        var found;
+        $.each(points, function(index, point) {
+          $.each(neighbors, function(index, neighbor) {
+            wrongPosition.push( controller.checkInsidePoligon(point, neighbor.points) );
+            if ( controller.checkInsidePoligon(point, neighbor.points) ) {
+              pushIfNotAlready(collNeighbors, neighbor.elem);
+            }
+          });
+        });
+        $.each(neighbors, function(index, neighbor) {
+          $.each(neighbor.points, function(index, neighborPoint) {
+            wrongPosition.push( controller.checkInsidePoligon(neighborPoint, points) );
+            if ( controller.checkInsidePoligon(neighborPoint, points) ) {
+              pushIfNotAlready(collNeighbors, neighbor.elem);
+            }
+          });
+        });
+
+        function pushIfNotAlready(filters, newFilter) {
+          var found = jQuery.inArray(newFilter, filters);
+          if (found === -1) {
+            // Element was not found, add it.
+            filters.push(newFilter);
+          }
+        }
+        $.each(neighbors, function() {
+          this.elem.removeClass('collision');
+        });
+
+        $.each(collNeighbors, function() {
+          $(this).addClass('collision');
+        });
+      }
+
     }
 
     /**
