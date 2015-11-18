@@ -1,0 +1,75 @@
+.account-info {
+    margin-top: 15px;
+}
+.account-info h4{
+  color: #333;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+.account-info a{
+  color: #337ab7;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.orders-data{
+}
+.orders-data table td,.orders-data table th{
+    padding: 15px;
+}
+.orders-data ul{
+    list-style: none;
+    padding-left: 0px;
+}
+.orders-data table{
+    text-align: left;
+    margin: 0 25px;
+}
+@media(max-width:768px) {
+    .orders-data{
+      margin-left: 0;
+    }
+    .orders-data table{
+        width: 100%;
+    }
+    .orders-data table td,.orders-data table th{
+        padding: 5px;
+    }
+}
+.products-data{
+}
+.products-data ul{
+    list-style: none;
+    font-size: 0;
+    text-align: left;
+    padding-left: 0px;
+    margin: 0 25px;
+}
+
+.products-data li {
+    overflow: hidden;
+    list-style: none;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin: 4px;
+    background: #fff;
+    border: 1px solid #dedede;
+    box-shadow: 1px 1px 1px #eaeaea;
+}
+.products-data li span {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 150px;
+    height: 100px;
+}
+.products-data li img{
+    max-width: 100px;
+    max-height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -33,6 +33,8 @@ module Shoppe
     # @return [Shoppe::ProductCategory]
     belongs_to :product_category, :class_name => 'Shoppe::ProductCategory'
     belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
+    belongs_to :supplier, :class_name => 'Shoppe::Supplier'
+    #belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
 
     # The product's tax rate
     #
@@ -53,16 +55,21 @@ module Shoppe
     has_many :included_products, through: :product_associations, dependent: :destroy, class_name: 'Shoppe::Product'
 
     # Validations
-    with_options :if => Proc.new { |p| p.parent.nil? } do |product|
-      product.validates :product_category_id, :presence => true
-      product.validates :product_subcategory_id, :presence => true
+    #with_options :if => Proc.new { |p| p.parent.nil? } do |product|
+      #product.validates :product_category_id, :presence => true
+      #product.validates :product_subcategory_id, :presence => true
       #product.validates :description, :presence => true
       #product.validates :short_description, :presence => true
+    #end
+
+    validate do |product|
+      product.errors.add('product_subcategory_id',"can't be blank") if product.product_category_id.nil?
     end
+
     validates :name, :presence => true
-    validates :sku, :presence => true
-    validates_uniqueness_of :name, :scope => :sku
-    validates_uniqueness_of :sku, :scope => :name
+    validates :sku, :presence => true, :uniqueness => true
+    #validates_uniqueness_of :name, :scope => :sku
+    #validates_uniqueness_of :sku, :scope => :name
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true
 
     validates :weight, :numericality => true
@@ -73,7 +80,7 @@ module Shoppe
     validates :cost_price, :numericality => true, :allow_blank => true
 
     # Before validation, set the permalink if we don't already have one
-    before_validation { self.permalink = "#{self.name.parameterize}-#{self.sku}" if self.permalink.blank? && self.name.is_a?(String) }
+    before_validation :set_permalink
 
     # All active products
     scope :active, -> { where(:active => true) }
@@ -161,16 +168,22 @@ module Shoppe
     # Example:
     #
     #   Shoppe:Product.import("path/to/file.csv")
-    def self.import(file)
-      "It will be in the next sprint"
+    def self.import(file, email, user)
+      ext_name = File.extname(file.original_filename)
+      file_name = "#{Rails.root}/tmp/#{Time.now.strftime('%Y-%m-%d___%H_%M_%S_%L')}#{ext_name}"
+      FileUtils::copy_file(file.path, file_name)
+      import_log = Shoppe::ImportLog.create(filename: file.original_filename, user_id: user.id, import_status: 0, start_time: Time.now)
+      ImportWorker.perform_async(file_name, email, import_log.id)
+      "The file is sent to the background task. Import results will be sent to your email."
     end
 
-    def self.open_spreadsheet(file)
-      case File.extname(file.original_filename)
-      when ".csv" then Roo::CSV.new(file.path)
-      when ".xls" then Roo::Excel.new(file.path)
-      when ".xlsx" then Roo::Excelx.new(file.path)
-      else raise I18n.t('shoppe.imports.errors.unknown_format', filename: File.original_filename)
+    def set_permalink
+      if self.permalink.blank? && self.name.is_a?(String)
+        if Shoppe::Product.where(permalink: self.name.parameterize).empty?
+          self.permalink = "#{self.name.parameterize}"
+        else
+          self.permalink = "#{self.name.parameterize}-#{self.sku.parameterize}"
+        end
       end
     end
 

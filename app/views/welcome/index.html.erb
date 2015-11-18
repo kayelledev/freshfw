@@ -1,4 +1,4 @@
-<!-- Carousel 
+<!-- Carousel
 	================================================== -->
 <header class="intro-header">
 <!--<div class="col-full">-->
@@ -62,8 +62,9 @@
 	</div><!-- /.carousel -->
 </header>
 <br>
+
 <div class="container" id="portfolio" >
-	
+
 	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin: 30px 0 10px 0; " ><h4 class="section-heading" style="color: #333;">Featured Rooms</h4></div>
     <div class="col-md-4 col-sm-6 portfolio-item">
           <% livingroomId = Shoppe::ProductCategory.where(permalink: "living-rooms") %>
@@ -78,8 +79,8 @@
             </a>
           </div>
       <div class="col-md-4 col-sm-6 portfolio-item">
-		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>		  
-		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal"> 
+		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>
+		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal">
               <div class="portfolio-hover" >
                   <div class="portfolio-hover-content">
 					  <%= product2.name if product2.present? %>
@@ -100,7 +101,7 @@
             <%= default_image(product3) if product3.present? && default_image(product3) %>
         </a>
     </div>
-	
+
 	<br><br>
 	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%;  margin: 50px 0 10px 0;  " >
 		<h4 class="section-heading" style="color: #333;">Featured Accents</h4>
@@ -118,7 +119,7 @@
             </a>
       </div>
       <div class="col-md-4 col-sm-6 portfolio-item">
-		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>		  
+		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>
 		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal">
               <div class="portfolio-hover" >
                   <div class="portfolio-hover-content">
@@ -140,11 +141,11 @@
             <%= default_image(product3) if product3.present? && default_image(product3) %>
         </a>
     </div>
-	
+
 	<br>
 	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin: 50px 0 10px 0; ">
 		<h4 class="section-heading" >News</h4>
-		
+
 	</div>
 	<div class="col-md-4" style=" " >
 		<table>
@@ -242,5 +243,5 @@
 		</div><!-- /.carousel -->
 	</div>
 	<br>
-	
+
 </div>

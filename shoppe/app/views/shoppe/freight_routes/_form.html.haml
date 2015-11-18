@@ -1,0 +1,13 @@
+.logistics_form
+  = form_for @freight_route, :html => {:multipart => true} do |f|
+    = f.error_messages
+    = f.label :freight_company_id, t('shoppe.logistics.freight_routes.freight_company')
+    = f.collection_select :freight_company_id, Shoppe::FreightCompany.all, :id, :name, {:include_blank => false}
+    = f.label :zone_id, t('shoppe.logistics.freight_routes.customer_zone')
+    = f.collection_select :zone_id, Shoppe::Zone.all, :id, :name, {:include_blank => false}
+    = f.label :suppliers_zone_id, t('shoppe.logistics.freight_routes.supplier_zone')
+    = f.collection_select :suppliers_zone_id, Shoppe::SuppliersZone.all, :id, :supplier_zone, {:include_blank => false}, :class => 'number'
+    = f.label :travel_days, t('shoppe.logistics.freight_routes.travel_days')
+    = f.text_field :travel_days, :class => 'number', :type => 'number'
+    = f.submit t('shoppe.submit'), :class => 'button green'
+

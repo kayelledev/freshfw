@@ -11,6 +11,12 @@
       %dt= f.label :import_file, t('shoppe.imports.required_formats')
       %dd= f.file_field :import_file
 
+  = field_set_tag t('shoppe.imports.email') do
+    %dl
+      %dt= f.label :email, "Email for report:"
+      %dd= f.text_field :email, value: current_user.email, class: 'text focus'
+
+
   = field_set_tag t('shoppe.imports.example_file') do
     %dl
       %dd
@@ -61,3 +67,26 @@
   %p.submit
     = f.submit t('shoppe.import'), :class => "button green"
     = link_to t('shoppe.cancel'), :products, :class => "button"
+
+  %br
+  = field_set_tag "Import Log" do
+    %dl
+      %dd
+        %table.importLog
+          %thead
+            %tr
+              %th Start time
+              %th Finish time
+              %th Status
+              %th File
+              %th User
+              %th Errors
+          %tbody
+            - @import_logs.each do |log|
+              %tr
+                %td= log.start_time
+                %td= log.finish_time
+                %td= log.import_status
+                %td= log.filename
+                %td= log.user.full_name
+                %td= log.log_errors.split("\n").map{|el| "<p>#{el}</p>"}.join.html_safe if log.log_errors

@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Shoppe::Engine.routes.draw do
 
   get 'attachment/:id/:filename.:extension' => 'attachments#show'
@@ -30,6 +31,18 @@ Shoppe::Engine.routes.draw do
   resources :tax_rates
   resources :users
   resources :countries
+  resources :logistics do
+    collection do
+      post :search
+    end
+  end
+  resources :zones do
+    resources :cities
+  end
+  resources :freight_routes
+  resources :suppliers
+  resources :last_mile_companies
+  resources :freight_companies
   resources :attachments, :only => :destroy
 
   get 'settings'=> 'settings#edit'
@@ -40,6 +53,10 @@ Shoppe::Engine.routes.draw do
   match 'login/reset' => 'sessions#reset', :via => [:get, :post]
 
   delete 'logout' => 'sessions#destroy'
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   root :to => 'dashboard#home'
 end

@@ -63,6 +63,40 @@ module Shoppe
         end
     end
 
+    def all_parents
+      p = self.parent
+      data = [p]
+      while p do
+        p = p.parent
+        data.unshift(p)
+      end
+      data
+    end
+
+    def self.category_with_subcategories
+      temp = Shoppe::ProductCategory.all.order(:name)
+      data = temp.select{|t| t.parent_id.nil?}
+
+      #КОСТЫЛЬ
+      room_cat = data.find{|t| t.name.downcase.eql?('rooms')}
+      if room_cat
+        data.delete(room_cat)
+        data.unshift(room_cat)
+      end
+
+      temp -= data
+      while temp.present?
+        temp.each do |t|
+          t.parent
+          if data.include?(t.parent)
+            data.insert( data.index(t.parent), t)
+          end
+        end
+        temp -= data
+      end
+      data
+    end
+
     def self.categories_to_tree
       categories = Shoppe::ProductCategory.all.order(:name).to_a
       @nodes = categories.map do |category|

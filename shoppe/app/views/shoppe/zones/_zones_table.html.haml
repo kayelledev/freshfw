@@ -1,0 +1,19 @@
+%table.data.orderItems
+  %thead
+    %tr
+      %th= t('shoppe.logistics.zones.zone')
+      %th= t('shoppe.logistics.zones.province')
+      %th= t('shoppe.logistics.zones.country')
+      %th= t('shoppe.logistics.zones.dest_city')
+  %tbody
+    - zones.each do |zone|
+      - if zone.cities.present?
+        - zone.cities.each do |city|
+          %tr
+            %td= link_to zone.name, zone
+            %td= city.province
+            %td= city.country.name
+            %td= link_to city.name, [zone, city]
+      - else
+        %tr
+          %td{colspan:'4'}= link_to zone.name, zone

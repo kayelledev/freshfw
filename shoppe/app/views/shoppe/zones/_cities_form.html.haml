@@ -1,0 +1,21 @@
+City Information
+%table.data.orderItems
+  %thead
+    %tr
+      %th.name= t('shoppe.logistics.cities.name')
+      %th.province= t('shoppe.logistics.cities.province')
+      %th.country= t('shoppe.logistics.cities.country')
+  %tbody
+    - if @zone.cities.present? 
+      = f.fields_for :cities do |of|
+        %tr.item{:class => 'existing'}
+          = of.hidden_field :id
+          %td.name= of.text_field :name, :class => 'text'
+          %td.province= of.text_field :province, :class => 'text'
+          %td.country= of.collection_select :country_id, Shoppe::Country.all, :id, :name
+    - else
+      = f.fields_for :cities, @zone.cities.new do |of|
+        %tr.item{:class => 'existing'}
+          %td.name= of.text_field :name, :class => 'text'
+          %td.province= of.text_field :province, :class => 'text'
+          %td.country= of.collection_select :country_id, Shoppe::Country.all, :id, :name, {:selected => Shoppe::Country.where(name: "Canada").try(:first).try(:id)}

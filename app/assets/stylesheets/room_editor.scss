@@ -1,10 +1,10 @@
-
 .editor-container {
   width: 100%;
   height: 100%;
   border: 1px solid black;
   margin: 10px auto;
   position: relative;
+  background-color: #fff;
 }
 
 .editor-container .draggable {
@@ -77,7 +77,14 @@
 .rotation-arrow {
   position: absolute;
   right: -20px;
-  /*bottom: -20px;*/
+  cursor:pointer;
+}
+
+.remove-icon {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  cursor:pointer;
 }
 
 .save-preset {
@@ -119,6 +126,25 @@
     color: #ffffff !important;
 }
 
+.btn-save-as-image{
+  padding: .5em .5em;
+  margin: .5em 0em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #ff6600;
+  border-color: #ff6600;
+  font-family: 'roboto_condensedregular', sans-serif !important;
+}
+
+.btn.btn-save-as-image:hover {
+    color: #ffffff !important;
+}
+.btn.btn-save-as-image:focus, .btn.btn-save-as-image:visited, .btn.btn-save-as-image:active {
+  color: #ffffff;
+}
 
 #dimensions-dialog .form-group .form-control {
   width: 100px;
@@ -145,24 +171,120 @@ div#dialog-form-errors {
   color: #A94442;
 }
 
-.editor-items-panel{
+.editor-items-panel {
   float: left;
   position: absolute;
-  width: 5%;
-  left: 14%;
+  width: 10%;
+  left: -10%;
   border: 1px solid black;
   display: none;
   height: auto;
 }
 
+.items-panel-elem {
+  display: none;
+}
 
 .draggable2 {
   width:100%;
   height:auto;
   -webkit-transform: translate(0px, 0px);
           transform: translate(0px, 0px);
+  z-index: 3;
+  position:relative;
 }
 
 .items-panel-elem {
   padding: 5px;
+}
+
+#room-slider .slide img {
+  border: 2px solid white;
+}
+
+#room-slider .slide:hover {
+  cursor: pointer;
+}
+
+.active-slider {
+  border: 2px solid #FED536 !important;
+}
+
+#room-preview img {
+  width: 100%;
+}
+
+#dialog-form .room-inputs {
+  display: none;
+}
+
+.active-room-inputs {
+  display: block !important;
+}
+
+.form-group .equal {
+  padding-top: 10px;
+}
+
+.bx-wrapper {
+  margin-bottom: 10px !important;
+}
+
+.bx-prev {
+  left: -20px !important;
+}
+
+.bx-next {
+  right: -20px !important;
+}
+
+.hole {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+
+}
+
+.dragg {
+  position: relative;
+}
+
+.room-item {
+  z-index: 2;
+}
+
+.out-of-area {
+  border: 2px solid red !important;
+}
+
+.hole-border-top {
+  border-top: 1px solid black;
+}
+
+.hole-border-bottom {
+  border-bottom: 1px solid black;
+}
+
+.hole-border-left {
+  border-left: 1px solid black;
+}
+
+.hole-border-right {
+  border-right: 1px solid black;
+}
+
+.point {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  visibility: hidden;
+}
+
+.left-top { left: 0; top: 0; }
+.right-top {right: 0; top: 0; }
+.right-bottom { right: 0; bottom: 0; }
+.left-bottom { left: 0; bottom: 0; }
+
+.elem-tooltip .glyphicon-trash {
+  cursor:pointer;
 }

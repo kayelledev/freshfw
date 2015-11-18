@@ -1,37 +1,30 @@
 $(document).ready(function() {
-    var windowWidth = $(window).width();
-    //resize carousel
-    function resizeCarousel (windowWidth) {
-        if (windowWidth > 1200) {
-            var windowHeight = $(window).height();
-            var headerHeight = $('#header').height();
-            $('#myCarousel').css('height', '100%');
-            $('#carousel-inner-main').css('height', '100%');
-            $('.carousel-item').css('height', '100%');
+  var windowWidth = $(window).width();
+  var windowHeight = $(window).height();
 
-            $('.carousel-item').height(function (index, height) {
-                return (windowHeight - headerHeight);
-            });
+  resizeCarousel(windowWidth, windowHeight);
 
-            $('#myCarousel').height(function (index, height) {
-                return ($('.carousel-item').height());
-            });
+  $( window ).resize(function() {
+    windowWidth = $(window).width();
+    windowHeight = $(window).height();
+    resizeCarousel (windowWidth, windowHeight);
+  });
 
-            $('#carousel-inner-main').height(function (index, height) {
-                return ($('.carousel-item').height());
-            });
-
-        } else {
-            $('#myCarousel').css('height', '');
-            $('#carousel-inner-main').css('height', '');
-            $('.carousel-item').css('height', '');
-        }
+  function resizeCarousel(windowWidth, windowHeight) {
+    var headerHeight = $('#header').height();
+    var newHeight = windowHeight - +headerHeight;
+    $('#myCarousel').css('height', '100%');
+    $('#carousel-inner-main').css('height', '100%');
+    $('.carousel-item').css('height', '100%');
+    // 2.25 - images proportion (1800x800)
+    if (windowWidth / newHeight >= 2.25) {
+      $('#myCarousel').height(newHeight);
+      $('#carousel-inner-main').height(newHeight);
+      $('.carousel-item').height(newHeight);
+    } else {
+      var imageMaxHeight = $('.carousel-item').height();
+      $('#myCarousel').height(imageMaxHeight);
+      $('#carousel-inner-main').height(imageMaxHeight);
     }
-
-    resizeCarousel (windowWidth);
-
-    $( window ).resize(function() {
-        var windowWidth = $(window).width();
-        resizeCarousel (windowWidth);
-    });
+  }
 });

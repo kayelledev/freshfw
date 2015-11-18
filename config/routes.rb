@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     member do
       post 'buy'
     end
+    collection do
+      get 'get_product'
+    end
   end
   post 'products/destroy_img' => 'products#destroy_img'
 
@@ -51,6 +54,7 @@ Rails.application.routes.draw do
   get 'room_editor', to: 'room#index'
   get 'room_editor/edit', to: 'room#edit'
   post 'room_editor/save', to: 'room#save'
+
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

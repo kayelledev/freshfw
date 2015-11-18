@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby "2.2.2"
 
+# Slider
+gem 'bxslider-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 
@@ -52,6 +55,8 @@ gem "figaro"
 # gem 'capistrano-rails', group: :development
 
 gem 'pg'
+gem 'sinatra', :require => nil
+gem 'sidekiq'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -72,6 +77,7 @@ group :development, :test do
   gem 'capistrano-rvm'
   gem 'capistrano3-unicorn'
   gem 'capistrano-rails'
+  gem 'capistrano-sidekiq'
 end
 
 group :production do
