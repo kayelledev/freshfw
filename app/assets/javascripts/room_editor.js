@@ -180,9 +180,7 @@
           // call this function on every dragend event
           onend: function (event) {
             controller.moveInsideArea(event);
-            if ( controller.setCollisions(event.target) ) {
-              console.log('Collisions!!!');
-            }
+            controller.setCollisions(event.target);
             // var createRect = function($element) {
             //   return new SAT.Box(
             //     new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
@@ -478,6 +476,7 @@
           if ( controller.restrictAreaHoles( currentElement ) ) {
             console.log('restr')
             controller.rotateInsideArea(positionBefore, currentElement);
+            controller.setCollisions(parentElement);
           }
         });
 
@@ -524,7 +523,7 @@
           setDegree(newDegree);
 
           if ( controller.restrictAreaHoles( currentElement ) ) {
-            setDegree(beforeDegree);;
+            setDegree(beforeDegree);
           }
 
           function setDegree(degree) {
@@ -3402,8 +3401,8 @@
             filters.push(newFilter);
           }
         }
-        $.each(neighbors, function() {
-          this.elem.removeClass('collision');
+        $('.draggable').each(function(){
+          $(this).removeClass('collision');
         });
 
         $.each(collNeighbors, function() {
