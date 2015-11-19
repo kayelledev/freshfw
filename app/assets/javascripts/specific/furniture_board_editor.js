@@ -119,8 +119,7 @@
           }
       })
       .resizable({
-        preserveAspectRatio: true,
-        square: true,
+        preserveAspectRatio: false,
         edges: { left: true, right: true, bottom: true, top: true }
       })
       .on('resizemove', function (event) {

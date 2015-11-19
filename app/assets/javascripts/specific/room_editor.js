@@ -277,6 +277,62 @@
               $(".included-product[data-product-id='" + $(this).attr('id') + "']").removeClass('active-product');
             }
           });
+
+        if ( $('.dragg').attr('data-status') === 'clear' ) {
+          clearAreaAndInitPanel();
+        }
+
+        function clearAreaAndInitPanel() {
+          clearArea();
+          resetElemInArea();
+          resetItemsInPanel();
+          controller.initItemsPanelArea();
+
+          function clearArea(){
+            $('.' + elementsClass).each(function() {
+               $(this).css('display', 'none');
+            });
+          }
+
+          function resetElemInArea(){
+            console.log('zzzz');
+            $('.draggable').each(function() {
+              $(this).parent().css({
+                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                   '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                    '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                        'transform': 'translate(0px, 0px) rotate(0deg)',
+              });
+
+              $(this).parent().attr('data-rotation', 0);
+              $(this).parent().attr('data-x', 0);
+              $(this).parent().attr('data-y', 0);
+              $(this).attr('data-rotation', 0);
+              $(this).attr('data-x', 0);
+              $(this).attr('data-y', 0);
+              $(this).parent().css({
+                top: 0,
+                left: 0
+              });
+            });
+          }
+
+          function resetItemsInPanel() {
+            $('.items-panel-elem').each(function() {
+              $(this).attr('data-x', '0');
+              $(this).attr('data-y', '0');
+
+              $(this).css({
+                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                   '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                    '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                        'transform': 'translate(0px, 0px) rotate(0deg)',
+              });
+
+              $(this).show();
+            });
+          }
+        }
     }
 
     /**
