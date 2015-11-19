@@ -6,7 +6,7 @@ $(document).ready(function(){
         var product_items = $('#product_items_' + e.target.value);
         $('.variant').hide();
         $(product).show();
-        $(descr_prod).show();;
+        $(descr_prod).show();
         $(product_items).show();
         $('#buy').attr('href', product.data('url'));
         $.get( "get_product", { sku: e.target.value } );
