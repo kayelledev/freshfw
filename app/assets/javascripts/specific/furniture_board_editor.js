@@ -157,6 +157,32 @@
       });
 
     $('.' + elementsClass).hide();
+
+    $('.draggable').each(function() {
+      $(this).qtip({
+        content: {
+          text: $('#tooltip-' + $(this).attr('id')),
+          title: ' ',
+          button: true
+        },
+        position: {
+          my: 'right top',
+          at: 'left center',
+          target: $(this)
+        },
+        style: {
+          classes: 'qtip-bootstrap'
+        },
+        hide: {
+          event: 'mousedown unfocus mouseleave',
+          delay: 150,
+          fixed: true
+        },
+        show: {
+          event: 'mouseover'
+        }
+      });
+    });
   };
 
   Controller.prototype.catchElement = function() {
