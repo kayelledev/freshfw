@@ -7,8 +7,8 @@
   <div class="furniture-board-editor-items-panel">
     <% @project.included_products.each do |item| %>
       <div class='draggable2 items-panel-elem' data-id="<%= item.id %>">
-        <% if image_link(item, 'image6') %>
-          <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%' %>
+        <% if image_link(item, 'default_image') %>
+          <%= image_tag image_link(item, 'default_image'), width: '100%', height: '100%' %>
         <% end %>
       </div>
     <% end %>
@@ -22,8 +22,8 @@
 
         <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>">
 
-          <% if image_link(item, 'image6') %>
-            <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image'%>
+          <% if image_link(item, 'default_image') %>
+            <%= image_tag image_link(item, 'default_image'), width: '100%', height: '100%', class: 'item-image'%>
           <% end %>
 
           <div class="point left-top"></div>
