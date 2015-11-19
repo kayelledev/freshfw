@@ -1,6 +1,10 @@
-<div class='room-builder-dragg'>
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag "specific/furniture_board_editor.js" %>
+<% end %>
 
-  <div class="room-builder-editor-items-panel">
+<div class='furniture-board-dragg'>
+
+  <div class="furniture-board-editor-items-panel">
     <% @project.included_products.each do |item| %>
       <div class='draggable2 items-panel-elem' data-id="<%= item.id %>">
         <% if image_link(item, 'image6') %>
@@ -10,7 +14,7 @@
     <% end %>
   </div>
 
-  <div class="room-builder-editor">
+  <div class="furniture-board-editor">
     <% @project.included_products.each do |item| %>
       <span class='room-item' style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>">
 

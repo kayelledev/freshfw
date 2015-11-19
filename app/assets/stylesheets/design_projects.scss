@@ -1,12 +1,12 @@
-.room-builder-dragg {
+.furniture-board-dragg {
     position: relative;
     margin: 0 auto;
 }
-.room-builder-editor {
+.furniture-board-editor {
     border: 1px solid black;
 }
 
-.room-builder-editor-items-panel {
+.furniture-board-editor-items-panel {
   float: left;
   position: absolute;
   width: 10%;
@@ -16,21 +16,21 @@
   height: auto;
 }
 
-.room-builder-editor .draggable {
+.furniture-board-editor .draggable {
   border: 1px solid white;
   position: relative;
   transform-origin: top left;
 }
 
-.room-builder-editor .draggable.active {
+.furniture-board-editor .draggable.active {
   border-color: #3eff00;
 }
 
-.room-builder-editor .draggable:hover {
+.furniture-board-editor .draggable:hover {
   border-color: #ffac00;
 }
 
-.room-builder-editor .draggable.collision {
+.furniture-board-editor .draggable.collision {
   border-color: red;
 }
 

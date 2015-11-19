@@ -1,7 +1,7 @@
 (function($) {
 
   function Controller() {
-    this.$holder = $('.room-builder-editor');
+    this.$holder = $('.furniture-board-editor');
     this.$initialElenemts = 'draggable';
     this.$currentElement = null;
     this.getPositionOfElement = function(elem) {
@@ -48,16 +48,16 @@
 
     function resizeArea() {
       var documentWidth = $(window).width();
-      $('.room-builder-editor').width(documentWidth * 0.6);
-      $('.room-builder-dragg').width(documentWidth * 0.6);
-      var roomBuilderEditorHeight = ( +$('.room-builder-editor').width() * 3 ) / 5;
-      $('.room-builder-editor').height(roomBuilderEditorHeight);
+      $('.furniture-board-editor').width(documentWidth * 0.6);
+      $('.furniture-board-dragg').width(documentWidth * 0.6);
+      var furnitureBoardEditorHeight = ( +$('.furniture-board-editor').width() * 3 ) / 5;
+      $('.furniture-board-editor').height(furnitureBoardEditorHeight);
 
       $('.' + elementsClass).each(function() {
         $(this).children('img').load(function() {
           var oldWidth = $(this).width();
           var oldHeight = $(this).height();
-          var newWidth = +$('.room-builder-editor').width() / 4;
+          var newWidth = +$('.furniture-board-editor').width() / 4;
           console.log(oldWidth);
           console.log(newWidth);
           c = oldWidth / newWidth;
@@ -77,7 +77,7 @@
           inertia: false,
           // keep the element within the area of it's parent
           restrict: {
-              restriction: '.room-builder-dragg',
+              restriction: '.furniture-board-dragg',
               endOnly: true,
               elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
           },
@@ -206,7 +206,7 @@
   Controller.prototype.initItemsPanelArea = function(elem) {
     var controller = this;
     // show items panel
-    $('.room-builder-editor-items-panel').show();
+    $('.furniture-board-editor-items-panel').show();
     if (elem) {
       $(elem).attr('data-x', '0');
       $(elem).attr('data-y', '0');
@@ -227,7 +227,7 @@
         inertia: false,
         // keep the element within the area of it's parent
         restrict: {
-          restriction: ".room-builder-dragg",
+          restriction: ".furniture-board-dragg",
           endOnly: true,
           elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
         },
@@ -244,8 +244,8 @@
       var item = event.target;
       var itemId = $(item).data('id');
       // new position
-      var newPositionX = +$(item).offset().left - +$('.room-builder-editor').offset().left;
-      var newPositionY = +$(item).offset().top - +$('.room-builder-editor').offset().top;
+      var newPositionX = +$(item).offset().left - +$('.furniture-board-editor').offset().left;
+      var newPositionY = +$(item).offset().top - +$('.furniture-board-editor').offset().top;
 
       $(item).hide();
 
@@ -254,13 +254,13 @@
       realItem.show();
 
       // restrict position
-      if ( newPositionX + +realItem.width() >= +$('.room-builder-editor').width() ) {
-        var diffX = ( newPositionX + +realItem.width() - +$('.room-builder-editor').width() ) + 3;
+      if ( newPositionX + +realItem.width() >= +$('.furniture-board-editor').width() ) {
+        var diffX = ( newPositionX + +realItem.width() - +$('.furniture-board-editor').width() ) + 3;
         newPositionX -= diffX;
       }
 
-      if ( newPositionY + +realItem.height() >= +$('.room-builder-editor').height() ) {
-        var diffY = ( newPositionY + +realItem.height() - +$('.room-builder-editor').height() ) + 3;
+      if ( newPositionY + +realItem.height() >= +$('.furniture-board-editor').height() ) {
+        var diffY = ( newPositionY + +realItem.height() - +$('.furniture-board-editor').height() ) + 3;
         newPositionY -= diffY;
       }
 
@@ -281,8 +281,8 @@
 
       console.log(newPositionX, newPositionY);
 
-      if ( $('.room-builder-editor-items-panel').height() === 0 ){
-        $('.room-builder-editor-items-panel').hide();
+      if ( $('.furniture-board-editor-items-panel').height() === 0 ){
+        $('.furniture-board-editor-items-panel').hide();
       }
 
       // if ( controller.restrictAreaHoles(realItem) ) {
@@ -447,10 +447,10 @@
     }
 
     function defineRoomArea() {
-      var top = +$('.room-builder-editor').offset().top;
-      var left = +$('.room-builder-editor').offset().left;
-      var width = +$('.room-builder-editor').width();
-      var height = +$('.room-builder-editor').height();
+      var top = +$('.furniture-board-editor').offset().top;
+      var left = +$('.furniture-board-editor').offset().left;
+      var width = +$('.furniture-board-editor').width();
+      var height = +$('.furniture-board-editor').height();
 
       var leftTop = [top, left]
       var rightTop = [top, left + width]
