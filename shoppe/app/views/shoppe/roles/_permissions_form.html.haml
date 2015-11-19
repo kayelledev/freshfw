@@ -1,7 +1,7 @@
 %table.data.orderItems
 %thead
   %tr
-    %th.name= t('shoppe.logistics.titles.zones')
+    %th.name= 'Permissions'
 %tbody
   %tr.item{:class => 'existing'}
-    %td.name= f.collection_select(:permission_ids, Permission.all, :id, :name, {:selected => @role.permission_ids, include_hidden: false}, {:multiple => true})
+    %td.name= f.collection_select(:permission_ids, Permission.all, :id, :controller_action, {:selected => @role.permission_ids, include_hidden: false}, {:multiple => true})

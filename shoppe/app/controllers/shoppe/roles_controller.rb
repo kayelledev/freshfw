@@ -1,6 +1,6 @@
 module Shoppe
   class RolesController < Shoppe::ApplicationController
-	  # load_and_authorize_resource
+	  load_and_authorize_resource
     before_filter { @active_nav = :access_management }
     before_filter { params[:id] && @role = Role.find(params[:id]) }
 	
@@ -37,7 +37,7 @@ module Shoppe
 
     def destroy
       @role.destroy
-      redirect_to :roles_permission, :flash => {:notice => 'Role has been removed successfully'}
+      redirect_to :roles_permissions, :flash => {:notice => 'Role has been removed successfully'}
     end
 
     private

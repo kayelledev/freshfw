@@ -1,4 +1,4 @@
-.logistics_details
+.access_management_block
   %h2= "Permission Name: #{@permission.name}"
   %h2= "Permission Controller: #{@permission.subject_class}"
   %h2= "Permission Action: #{@permission.action}"
@@ -8,13 +8,13 @@
     %table.data.orderItems
       %thead
         %tr
-          %th.name= t('shoppe.logistics.cities.name')
+          %th.name= 'Role Name'
           %th.action= t('shoppe.logistics.links.action')
       %tbody
         - @permission.roles.each do |role|
           %tr.item{:class => 'existing'}
             %td.name= role.name
             %td.action
-              = link_to t('shoppe.logistics.cities.edit'),  [:edit, role], :class => 'button green'
+              = link_to 'Edit Role',  [:edit, role], :class => 'button green'
   - else
     You can add role for this permission

@@ -1,6 +1,6 @@
 module Shoppe
   class LogisticsController < Shoppe::ApplicationController
-	  # load_and_authorize_resource
+	  load_and_authorize_resource :class => 'Shoppe::LogisticsController'
     before_filter { @active_nav = :logistics }
     before_filter { @supplier, @customer = params[:supplier], params[:customer] }
 	

@@ -1,8 +1,9 @@
 module Shoppe
   class ZonesController < Shoppe::ApplicationController
   	before_filter { params[:id] && @zone = Shoppe::Zone.find(params[:id]) }
-    # load_and_authorize_resource
-  	def new
+    load_and_authorize_resource
+  	
+    def new
   	  @zone = Shoppe::Zone.new
   	end
 

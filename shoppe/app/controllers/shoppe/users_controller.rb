@@ -1,6 +1,6 @@
 module Shoppe
   class UsersController < Shoppe::ApplicationController
-    # load_and_authorize_resource
+    load_and_authorize_resource 
     before_filter { @active_nav = :users }
     before_filter { params[:id] && @user = ::User.find(params[:id]) }
     before_filter(:only => [:create, :update, :destroy]) do
@@ -48,7 +48,8 @@ module Shoppe
     private
 
     def safe_params
-      params[:user].permit(:first_name, :last_name, :email_address, :password, :password_confirmation, :admin)
+      params[:user][:role_ids] ||= []
+      params[:user].permit(:first_name, :last_name, :email_address, :admin, :role_ids => [])
     end
 
   end

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def self.permission
-      return name = self.name.gsub('Controller','').singularize.split('::').last.constantize.name rescue nil
+      return name = self.name.gsub('Controller','').singularize.constantize.name rescue self.name.constantize.name
     end
 
   private
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     def current_order
       @current_order ||= begin
         if has_order?
-          if params[:order_tax_rate]==nil
+          if params[:order_tax_rate] == nil
             params[:order_tax_rate] = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
           end
           @current_order

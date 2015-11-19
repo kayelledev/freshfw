@@ -1,6 +1,6 @@
 module Shoppe
   class CountriesController < Shoppe::ApplicationController
-    # load_and_authorize_resource
+    load_and_authorize_resource
     before_filter { @active_nav = :countries }
     before_filter { params[:id] && @country = Shoppe::Country.find(params[:id]) }
 

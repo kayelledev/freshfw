@@ -5,10 +5,6 @@ module Shoppe
     before_filter { @product = Shoppe::Product.find(params[:product_id]) }
     before_filter { params[:id] && @variant = @product.variants.find(params[:id]) }
 
-    def self.permission
-      "Shoppe::VariantsController"
-    end 
-
     def index
       @variants = @product.variants.ordered
     end

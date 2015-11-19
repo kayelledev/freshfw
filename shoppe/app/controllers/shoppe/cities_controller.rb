@@ -1,6 +1,6 @@
 module Shoppe
   class CitiesController < Shoppe::ApplicationController
-    # load_and_authorize_resource
+    load_and_authorize_resource
     before_filter { params[:zone_id] && @zone = Shoppe::Zone.find(params[:zone_id]) }
     before_filter { params[:id] && @city = Shoppe::City.find(params[:id]) }
     

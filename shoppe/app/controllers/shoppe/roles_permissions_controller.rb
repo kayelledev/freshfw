@@ -1,6 +1,6 @@
 module Shoppe
   class RolesPermissionsController < Shoppe::ApplicationController
-	  # load_and_authorize_resource
+	  load_and_authorize_resource :class => 'Shoppe::RolesPermissionsController'
     before_filter { @active_nav = :access_management }
 	
   	def index

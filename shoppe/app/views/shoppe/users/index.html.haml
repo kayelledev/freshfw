@@ -17,5 +17,5 @@
         %tr
           %td= link_to user.full_name, [:edit, user]
           %td= user.email_address
-          %td= user.admin ? 'X' : ''
+          %td= user.admin? ? 'X' : ''
           %td= user.created_at

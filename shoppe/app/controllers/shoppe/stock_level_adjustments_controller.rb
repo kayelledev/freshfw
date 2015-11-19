@@ -1,5 +1,6 @@
 module Shoppe
   class StockLevelAdjustmentsController < ApplicationController
+    load_and_authorize_resource :class => 'Shoppe::StockLevelAdjustmentsController'
 
     SUITABLE_OBJECTS = ['Shoppe::Product']
     before_filter do

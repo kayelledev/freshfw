@@ -1,8 +1,8 @@
 class WelcomeController < ApplicationController
   include ProductsHelper
   include ActionView::Helpers::UrlHelper
-  # load_and_authorize_resource :class => 'WelcomeController'
-  
+  load_and_authorize_resource :class => 'WelcomeController'
+
   def index
   end
 
@@ -12,9 +12,6 @@ class WelcomeController < ApplicationController
   def blog
   end
 
-  def self.permission
-    "WelcomeController"
-  end
 
   def account
     if current_user.present?

@@ -1,20 +1,25 @@
 module Shoppe
   class User < ActiveRecord::Base
-
+    rolify
     self.table_name = 'shoppe_users'
-  
     # has_secure_password
   
     # Validations
     validates :first_name, :presence => true
     validates :last_name, :presence => true
     validates :email_address, :presence => true
-  
+    has_and_belongs_to_many :roles, :join_table => :shoppe_roles_users
+    after_create :add_user_role
+
     # The user's first name & last name concatenated
     #
     # @return [String]
     def full_name
       "#{first_name} #{last_name}"
+    end
+
+    def add_user_role
+      self.add_role :user
     end
   
     # The user's first name & initial of last name concatenated
@@ -45,6 +50,9 @@ module Shoppe
       user
     end
 
+    def admin?
+      self.roles.map(&:name).include? 'admin'
+    end
     # def self.build_with_auth_data(auth_data, params)
     #   password = Devise.friendly_token.first(8)
     #   first_name = auth_data['info']['name'].split[0]

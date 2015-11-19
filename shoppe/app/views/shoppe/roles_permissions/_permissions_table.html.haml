@@ -5,12 +5,14 @@
       %tr
         %th= 'Permission Name'
         %th= 'Controller Name'
-        %th= 'Action'
+        %th= 'Associated Class Name'
+        %th= 'CanCan Action'
         %th= 'Actions'
     %tbody
       - @permissions.each do |permission|
         %tr
           %td= permission.name
+          %td= permission.controller_class
           %td= permission.subject_class
           %td= permission.action
           %td  

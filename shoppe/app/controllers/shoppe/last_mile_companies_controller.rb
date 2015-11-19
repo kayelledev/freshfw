@@ -1,6 +1,6 @@
 module Shoppe
   class LastMileCompaniesController < Shoppe::ApplicationController
-  	# load_and_authorize_resource
+  	load_and_authorize_resource
     before_filter { params[:id] && @last_mile_company = Shoppe:: LastMileCompany.find(params[:id]) }
 
   	def new

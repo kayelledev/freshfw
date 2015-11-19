@@ -113,6 +113,7 @@ en:
         first_name: First name
         last_name: Last name
         admin: Admin
+        roles: Roles
         reg_date: Registration date
         password: Password
         password_confirmation: Password confirmation

@@ -2,10 +2,6 @@ class ChargesController < ApplicationController
   before_filter { params[:id] && @payment = @order.payments.find(params[:id]) }
   load_and_authorize_resource :class => 'ChargesController'
 
-  def self.permission
-    "ChargesController"
-  end
-
   def helper
     Helper.instance
   end

@@ -47,7 +47,7 @@ Shoppe::Engine.routes.draw do
   resources :roles_permissions
   resources :roles
   resources :permissions
-
+  get 'get_controller_options' => 'permissions#get_controller_options'
   resources :attachments, :only => :destroy
 
   get 'settings'=> 'settings#edit'
