@@ -183,6 +183,13 @@ module Shoppe
           self.permalink = "#{self.name.parameterize}"
         else
           self.permalink = "#{self.name.parameterize}-#{self.sku.parameterize}"
+          count = 1
+          perma_link = "#{self.name.parameterize}-#{count}"
+          while !Shoppe::Product.where(permalink: perma_link).empty?
+            count += 1
+            perma_link = "#{self.name.parameterize}-#{count}"
+          end
+          self.permalink = perma_link
         end
       end
     end
