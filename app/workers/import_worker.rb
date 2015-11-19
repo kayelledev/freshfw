@@ -103,7 +103,12 @@ class ImportWorker
       end
     end
     begin
-      Shoppe::ImportMailer.imported(email, errors).deliver_now
+      if EmailValidator.valid?(email)
+        Shoppe::ImportMailer.imported(email, errors).deliver_now
+      else
+        errors.unshift("Email invalid (#{email})", "")
+        import_log.update(log_errors: errors.join("\n"))
+      end
       FileUtils::rm(file)
     rescue
     end
