@@ -529,6 +529,9 @@
 
         $(document).mouseup(function(e) {
           $(document).unbind('mousemove.rotateImg');
+          if ( !$('.editor-container').is(":visible") ) {
+            return false;
+          }
           if ( controller.restrictAreaHoles( currentElement ) ) {
             console.log('restr')
             controller.rotateInsideArea(positionBefore, currentElement);

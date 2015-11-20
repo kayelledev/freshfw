@@ -34,4 +34,14 @@ $(document).ready(function(){
     $( window ).resize(function() {
         resizeProductDescription();
     });
+
+    var sku = getURLParameter('sku');
+    if (sku) {
+        $('input#varsku_' + sku).click();
+    }
+    $('div.product-info').show();
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+    }
+
 });

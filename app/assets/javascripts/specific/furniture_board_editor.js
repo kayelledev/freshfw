@@ -1,9 +1,12 @@
 (function($) {
 
-  function Controller() {
+  function ControllerFb() {
     this.$holder = $('.furniture-board-editor');
-    this.$initialElenemts = 'draggable';
+    this.$initialElenemts = 'fb-draggable';
     this.$currentElement = null;
+    this.$parentElem = null;
+    this.$positionBefore = null;
+
     this.getPositionOfElement = function(elem) {
       var matrix = $(elem).css("-webkit-transform") ||
         $(elem).css("-moz-transform")    ||
@@ -36,17 +39,17 @@
     };
   }
 
-  Controller.prototype.initElements = function(elementsClass) {
+  ControllerFb.prototype.initElements = function(elementsClass) {
     var controller = this;
     // set container width
 
-    resizeArea();
+    setProportion();
 
     $(window).resize(function(){
-      resizeArea();
+      setProportion();
     });
 
-    function resizeArea() {
+    function setProportion() {
       var documentWidth = $(window).width();
       $('.furniture-board-editor').width(documentWidth * 0.6);
       $('.furniture-board-dragg').width(documentWidth * 0.6);
@@ -54,20 +57,8 @@
       $('.furniture-board-editor').height(furnitureBoardEditorHeight);
 
       $('.' + elementsClass).each(function() {
-        $(this).children('img').load(function() {
-          var oldWidth = $(this).width();
-          var oldHeight = $(this).height();
-          var newWidth = +$('.furniture-board-editor').width() / 4;
-          console.log(oldWidth);
-          console.log(newWidth);
-          c = oldWidth / newWidth;
-          $(this).width( oldWidth / c );
-          $(this).height( (oldHeight / c) );
-          $(this).parent().width( oldWidth / c );
-          $(this).parent().height( (oldHeight / c) );
-        }).each(function() {
-          if(this.complete) $(this).load();
-        });
+        var newWidth = +$('.furniture-board-editor').width() / 4;
+        $(this).width( newWidth );
       });
     }
 
@@ -158,10 +149,10 @@
 
     $('.' + elementsClass).hide();
 
-    $('.draggable').each(function() {
+    $('.fb-draggable').each(function() {
       $(this).qtip({
         content: {
-          text: $('#tooltip-' + $(this).attr('id')),
+          text: $(this).parent().children('.fb-elem-tooltip'),
           title: ' ',
           button: true
         },
@@ -185,15 +176,15 @@
     });
   };
 
-  Controller.prototype.catchElement = function() {
+  ControllerFb.prototype.catchElement = function() {
       var self = this;
       console.log(this);
 
       var mouse_is_outside = false;
 
       var div_elem = this.$holder.find('div');
-      var arrow_elem = this.$holder.find('.rotation-arrow');
-      var remove_elem = this.$holder.find('.remove-icon');
+      var arrow_elem = this.$holder.find('.fb-rotation-arrow');
+      var remove_elem = this.$holder.find('.fb-remove-icon');
 
       this.$holder.find('div').hover(function(){
           mouse_is_outside = false;
@@ -209,11 +200,11 @@
 
               self.$currentElement = $(this);
 
-              $('.rotation-arrow').hide();
-              $('.remove-icon').hide();
+              $('.fb-rotation-arrow').hide();
+              $('.fb-remove-icon').hide();
 
-              $(this).parent().find('.rotation-arrow').show();
-              $(this).parent().find('.remove-icon').show();
+              $(this).parent().find('.fb-rotation-arrow').show();
+              $(this).parent().find('.fb-remove-icon').show();
 
               // $('.qtip').hide();
           });
@@ -228,7 +219,7 @@
       })
   };
 
-  Controller.prototype.initItemsPanelArea = function(elem) {
+  ControllerFb.prototype.initItemsPanelArea = function(elem) {
     var controller = this;
     // show items panel
     $('.furniture-board-editor-items-panel').show();
@@ -243,10 +234,10 @@
       });
       $(elem).show();
     } else {
-      $('.items-panel-elem').show();
+      $('.fb-items-panel-elem').show();
     }
 
-    interact('.draggable2')
+    interact('.fb-draggable2')
       .draggable({
         // enable inertial throwing
         inertia: false,
@@ -267,7 +258,8 @@
 
     function dropElem (event) {
       var item = event.target;
-      var itemId = $(item).data('id');
+      var itemId = $(item).attr('data-panel-elem-id');
+      console.log(itemId)
       // new position
       var newPositionX = +$(item).offset().left - +$('.furniture-board-editor').offset().left;
       var newPositionY = +$(item).offset().top - +$('.furniture-board-editor').offset().top;
@@ -275,7 +267,7 @@
       $(item).hide();
 
       // show real item
-      var realItem = $('#' + itemId);
+      var realItem = $('div.fb-draggable[data-id="' + itemId + '"]' );
       realItem.show();
 
       // restrict position
@@ -336,11 +328,11 @@
     }
   };
 
-  Controller.prototype.removeElement = function() {
+  ControllerFb.prototype.removeElement = function() {
       var controller = this;
-      $('.remove-item').click(function() {
-        var elem = $("#" + $(this).attr('data-item-id'));
-        var elemId = $(elem).attr('id');
+      $('.fb-remove-item').click(function() {
+        var elemId = $(this).attr('data-item-id');
+        var elem = $('div.fb-draggable[data-id="' + elemId + '"]' )
         elem.hide();
 
         elem.parent().css({
@@ -362,44 +354,48 @@
         });
 
         // $('.qtip').hide();
-        var elemInPanel = $('.items-panel-elem[data-id="' + elemId + '"]')
+        var elemInPanel = $('.fb-items-panel-elem[data-panel-elem-id="' + elemId + '"]')
         controller.initItemsPanelArea( elemInPanel );
 
       });
   };
 
-  Controller.prototype.initMouseRotation = function() {
+  ControllerFb.prototype.initMouseRotation = function() {
         var controller = this;
 
-        $('.rotation-arrow').mousedown(function(e) {
+        $('.fb-rotation-arrow').mousedown(function(e) {
           e.preventDefault(); // prevents the dragging of the image.
 
-          currentElement = $(this).parent().children('.draggable');
-          parentElem = $(currentElement).parent();
-          positionBefore = controller.getPositionOfElement($(parentElem));
+          controller.$currentElement = $(this).parent().children('.fb-draggable');
+          controller.$parentElem = $(this).parent();
+          controller.$positionBefore = controller.getPositionOfElement( $(controller.$parentElem) );
+
 
           $(document).bind('mousemove.rotateImg', function(e2) {
-            rotateOnMouse(e2, currentElement, parentElem, positionBefore);
+            rotateOnMouse(e2, controller.$currentElement, controller.$parentElem, controller.$positionBefore);
           });
         });
 
         $(document).mouseup(function(e) {
+          if ( !$('.furniture-board-editor').is(":visible") ) {
+            return false;
+          }
           $(document).unbind('mousemove.rotateImg');
-          if ( controller.checkOutside( currentElement ) ) {
-            console.log('restr')
-            controller.rotateInsideArea(positionBefore, currentElement);
-            controller.setCollisions(currentElement);
+          if ( controller.checkOutside( controller.$currentElement ) ) {
+            console.log('rest');
+            controller.rotateInsideArea(controller.$positionBefore, controller.$currentElement);
+            controller.setCollisions(controller.$currentElement);
           }
         });
 
-        $('.rotation-arrow').click(function(e) {
+        $('.fb-rotation-arrow').click(function(e) {
           e.preventDefault();
 
-          currentElement = $(this).parent().children('.draggable');
-          parentElem = $(currentElement).parent();
-          positionBefore = controller.getPositionOfElement($(parentElem));
+          controller.$currentElement = $(this).parent().children('.fb-draggable');
+          controller.$parentElem = $(this).parent();
+          controller.$positionBefore = controller.getPositionOfElement($( controller.$parentElem ));
 
-          rotateOnMouseClick(currentElement, parentElem, positionBefore);
+          rotateOnMouseClick(controller.$currentElement, controller.$parentElem, controller.$positionBefore);
         });
 
         function rotateOnMouse(e, currentElement, parentElem, positionBefore) {
@@ -450,7 +446,7 @@
         }
   };
 
-  Controller.prototype.checkOutside = function(elem) {
+  ControllerFb.prototype.checkOutside = function(elem) {
     var controller = this;
     var elemPoints = defineElemPoints(elem);
     var roomAreaPoints = defineRoomArea();
@@ -501,7 +497,7 @@
     return checkOutside(elemPoints, roomAreaPoints, elem);
   };
 
-  Controller.prototype.rotateInsideArea = function(positionBefore, elem) {
+  ControllerFb.prototype.rotateInsideArea = function(positionBefore, elem) {
       var controller = this;
       var beforeDegree = positionBefore.degree;
       var beforetTop = positionBefore.top;
@@ -529,10 +525,10 @@
       }
   };
 
-  Controller.prototype.setCollisions = function(elem) {
+  ControllerFb.prototype.setCollisions = function(elem) {
       var controller = this;
       var elemPoints = defineElemPoints(elem);
-      var neighborsPoligons = defineNeighbors( $('.draggable').not('.active') );
+      var neighborsPoligons = defineNeighbors( $('.fb-draggable').not('.active') );
 
       setCollisions(elemPoints, neighborsPoligons, elem);
 
@@ -600,7 +596,7 @@
             filters.push(newFilter);
           }
         }
-        $('.draggable').each(function(){
+        $('.fb-draggable').each(function(){
           $(this).removeClass('collision');
         });
 
@@ -610,7 +606,7 @@
       }
   };
 
-  Controller.prototype.init = function() {
+  ControllerFb.prototype.init = function() {
     this.initElements(this.$initialElenemts);
     this.initItemsPanelArea();
     this.removeElement();
@@ -619,7 +615,7 @@
   };
 
   $(document).ready(function() {
-    var controller = new Controller();
+    var controller = new ControllerFb();
     controller.init();
   });
 
