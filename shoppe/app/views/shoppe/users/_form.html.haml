@@ -19,12 +19,18 @@
       %dl.third
         %dt= f.label :password_confirmation, t('shoppe.users.password_confirmation')
         %dd= f.password_field :password_confirmation, :class => 'text'
-  = field_set_tag t("shoppe.users.admin") do
+  / = field_set_tag t("shoppe.users.admin") do
+  /   .splitContainer
+  /     %dl.one
+  /       %dt= f.label :admin, t('shoppe.users.admin')
+  /       %dd= f.check_box :admin
+  = field_set_tag t("shoppe.users.roles") do
     .splitContainer
-      %dl.one
-        %dt= f.label :admin, t('shoppe.users.admin')
-        %dd= f.check_box :admin
-
+      %dl.third
+        %dt= f.label :role_ids, t("shoppe.users.roles")
+        %dd= f.collection_select(:role_ids, Role.all, :id, :name, {:selected => @user.role_ids, include_hidden: false}, {:multiple => true})
+      %dl.third
+      %dl.third
   %p.submit
     - unless @user.new_record?
       %span.right= link_to t('shoppe.delete'), @user, :class => 'button purple', :method => :delete, :data => {:confirm => t('shoppe.users.delete_confirmation')}

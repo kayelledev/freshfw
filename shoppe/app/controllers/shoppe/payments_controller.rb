@@ -1,8 +1,8 @@
 module Shoppe
   class PaymentsController < ApplicationController
-
     before_filter { @order = Shoppe::Order.find(params[:order_id]) }
     before_filter { params[:id] && @payment = @order.payments.find(params[:id]) }
+    load_and_authorize_resource
 
     def create
       puts "in SHoppe payments controller - create"

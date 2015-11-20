@@ -1,5 +1,4 @@
 class User < Shoppe::User
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :confirmable,
          :omniauthable, :validatable

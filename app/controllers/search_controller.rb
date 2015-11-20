@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  load_and_authorize_resource :class => 'SearchController'
 
   def index
     @search_words = params['srch-term'].split(' ').sort

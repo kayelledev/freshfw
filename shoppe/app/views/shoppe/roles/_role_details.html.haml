@@ -1,0 +1,21 @@
+.access_management_block
+  %h2= "Role: #{@role.name}"
+  - if @role.permissions.present?
+    %h2 Permissions:
+    %table.data.orderItems
+      %thead
+        %tr
+          %th= 'Permission Name'
+          %th= 'Controller Name'
+          %th= 'Action'
+          %th= 'Actions'
+      %tbody
+        - @role.permissions.each do |permission|
+          %tr
+            %td= permission.name
+            %td= permission.subject_class
+            %td= permission.action
+            %td  
+              = link_to 'Show', permission, :class => 'button green'
+  - else
+    You can add permissions for this role

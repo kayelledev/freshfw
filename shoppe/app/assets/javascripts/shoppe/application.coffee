@@ -3,6 +3,7 @@
 #= require shoppe/mousetrap
 #= require shoppe/jquery_ui
 #= require shoppe/chosen.jquery
+#= require shoppe/roles_permissions
 #= require nifty/dialog
 #= require_tree .
 

@@ -1,4 +1,6 @@
 class RoomController < ApplicationController
+  load_and_authorize_resource :class => 'RoomController'
+  
   def index
     @products = Shoppe::Product.all
   end

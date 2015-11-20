@@ -1,0 +1,9 @@
+- @page_title = 'Edit Role'
+
+= content_for :header do
+  %p.buttons
+    = link_to t('shoppe.logistics.links.back'), :back, :class => 'button'
+    = link_to 'Back to Access Management', :roles_permissions, :class => 'button'
+  %h2.roles= 'Edit Role'
+
+= render 'form'
