@@ -42,6 +42,8 @@
           <b>Heigh:</b> <%= item.height %><br>
           <b>Depth:</b> <%= item.depth %></p>
           <span class="glyphicon glyphicon-trash fb-remove-item" aria-hidden="true" data-item-id="<%= item.id %>"></span>
+          <br>
+          <%= image_tag image_link(item, 'default_image'), class: 'tooltip-item-image' %>
         </div>
 
       </span>
