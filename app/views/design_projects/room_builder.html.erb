@@ -1,0 +1,113 @@
+<main>
+    <section class="main-tabs">
+        <div class="l-wrapper">
+            <a class="main-tabs__one-tab" href="/designer-portal">project info</a>
+            <a class="main-tabs__one-tab" href="/designer-portal/select_items">select items</a>
+            <a class="main-tabs__one-tab main-tabs__one-tab--active" href="#">room builder</a>
+            <a class="main-tabs__one-tab" href="/designer-portal/instructions">instructions</a>
+        </div>
+    </section>
+    <div class="l-wrapper">
+        <div class="subtabs">
+            <a class="subtabs__one-tab subtabs__one-tab--active" data-appearer="selected-furniture" href="#">SELECED FURNITURE</a>
+            <a class="subtabs__one-tab" data-appearer="room-layout" href="#">ROOM LAYOUT</a>
+            <a class="subtabs__one-tab" data-appearer="furniture-board" href="#">FURNITURE BOARD</a>
+            <button class="subtabs__btn" type="button" style="visibility: hidden">Text Test</button>
+            <button class="subtabs__btn" type="button" style="visibility: hidden">Test Test</button>
+        </div>
+        <div id="selected-furniture" class="js-tabs-block selected-furniture active-tab">
+            <div class="selected-furniture__table">
+                <div class="selected-furniture__row selected-furniture__row--first">
+                    <div class="selected-furniture__cell"></div>
+                    <div class="selected-furniture__cell"></div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                </div>
+                <div class="selected-furniture__row selected-furniture__row--gray">
+                    <div class="selected-furniture__cell"></div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell"></div>
+                    <div class="selected-furniture__cell"></div>
+                    <div class="selected-furniture__cell"></div>
+                </div>
+                <div class="selected-furniture__row">
+                    <div class="selected-furniture__cell selected-furniture__cell--with-cross"> &#x2718;</div>
+                    <div class="selected-furniture__cell selected-furniture__cell--with-img">
+                        <img class="selected-furniture__product-img" src="http://www.jensen-lewis.com/images/product/midthumbs/American-Leather-Furniture-03-Alessandro-Sofa.jpg">
+                    </div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                </div>
+                <div class="selected-furniture__row">
+                    <div class="selected-furniture__cell selected-furniture__cell--with-cross"> &#x2718;</div>
+                    <div class="selected-furniture__cell selected-furniture__cell--with-img">
+                        <img class="selected-furniture__product-img" src="http://www.jensen-lewis.com/images/product/midthumbs/American-Leather-Furniture-03-Alessandro-Sofa.jpg">
+                    </div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                </div>
+                <div class="selected-furniture__row selected-furniture__row--gray">
+                    <div class="selected-furniture__cell"></div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell"></div>
+                    <div class="selected-furniture__cell"></div>
+                    <div class="selected-furniture__cell"></div>
+                </div>
+                <div class="selected-furniture__row">
+                    <div class="selected-furniture__cell selected-furniture__cell--with-cross"> &#x2718;</div>
+                    <div class="selected-furniture__cell selected-furniture__cell--with-img">
+                        <img class="selected-furniture__product-img" src="http://www.jensen-lewis.com/images/product/midthumbs/American-Leather-Furniture-03-Alessandro-Sofa.jpg">
+                    </div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Test Test Test</div>
+                </div>
+            </div>
+        </div>
+        <div id="room-layout" class="js-tabs-block room-layout">
+            <p class="room-layout__instr-text">Drag the line drawing to the room</p>
+        </div>
+        <div id="furniture-board" class="js-tabs-block furniture-board">
+            <p class="furniture-board__instr-text">Drag the images to the board</p>
+        </div>
+    </div>
+</main>
+<script>
+    ;(function() {
+        var subtabs = document.querySelectorAll(".subtabs__one-tab");
+        var subtabBtns = document.querySelectorAll(".subtabs__btn");
+        var blocks = document.querySelectorAll(".js-tabs-block");
+
+        for (var i = 0, lim = subtabs.length; i < lim; i += 1) {
+            subtabs[i].addEventListener("click", function(e) {
+                e.preventDefault();
+
+                for (var x = 0, max = blocks.length; x < max; x += 1) {
+                    blocks[x].classList.remove("active-tab");
+                };
+
+                for (var y = 0, max = subtabs.length; y < max; y += 1) {
+                    subtabs[y].classList.remove("subtabs__one-tab--active");
+                };
+
+                var dataText = this.dataset.appearer;
+                var block = document.getElementById(dataText);
+                block.classList.add("active-tab");
+                this.classList.add("subtabs__one-tab--active");
+
+                if (dataText === "selected-furniture") {
+                    for (var z = 0, len = subtabBtns.length; z < len; z += 1) {
+                        subtabBtns[z].style.visibility = 'hidden';
+                    };
+                } else {
+                    for (var z = 0, len = subtabBtns.length; z < len; z += 1) {
+                        subtabBtns[z].style.visibility = '';
+                    };
+                };
+            })
+        };
+    })();
+</script>
