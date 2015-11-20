@@ -8,14 +8,23 @@ module Shoppe
     validates :first_name, :presence => true
     validates :last_name, :presence => true
     validates :email_address, :presence => true
-    has_and_belongs_to_many :roles, :join_table => :shoppe_roles_users
+    has_and_belongs_to_many :roles, :join_table => :shoppe_roles_users, :after_remove => :check_roles!
     after_create :add_user_role
-
     # The user's first name & last name concatenated
     #
     # @return [String]
     def full_name
       "#{first_name} #{last_name}"
+    end
+
+    def check_roles!(role)
+      if role.name == 'admin' && User.select{|u| u.roles.include? role}.count == 0
+        self.errors.add(:base, "You can not delete last admin user")
+        raise Exception, "You can not delete last admin user"
+      elsif role.name == 'user'
+        self.errors.add(:base, "You can not delete user role") 
+        raise Exception, "You can not delete user role"
+      end
     end
 
     def add_user_role
@@ -52,6 +61,10 @@ module Shoppe
 
     def admin?
       self.roles.map(&:name).include? 'admin'
+    end
+
+    def delete_own_admin_role?(current_user, role_ids)
+      (self == current_user) && self.admin? && !(role_ids.include? Role.where(name: 'admin').first_or_create.id.to_s)
     end
     # def self.build_with_auth_data(auth_data, params)
     #   password = Devise.friendly_token.first(8)

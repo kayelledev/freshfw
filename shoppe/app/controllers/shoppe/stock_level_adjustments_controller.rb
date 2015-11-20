@@ -1,6 +1,5 @@
 module Shoppe
   class StockLevelAdjustmentsController < ApplicationController
-    load_and_authorize_resource :class => 'Shoppe::StockLevelAdjustmentsController'
 
     SUITABLE_OBJECTS = ['Shoppe::Product']
     before_filter do
@@ -8,6 +7,7 @@ module Shoppe
       @item = params[:item_type].constantize.find(params[:item_id].to_i)
     end
     before_filter { params[:id] && @sla = @item.stock_level_adjustments.find(params[:id].to_i) }
+    load_and_authorize_resource :class => 'Shoppe::StockLevelAdjustmentsController'
 
     def index
       @stock_level_adjustments = @item.stock_level_adjustments.ordered.page(params[:page]).per(10)

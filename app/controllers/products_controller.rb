@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   include ProductsHelper
   include ActionView::Helpers::UrlHelper
-  load_and_authorize_resource
   before_action :find_product, except: [:index, :get_product]
+  load_and_authorize_resource
 
   def index
     @products = Shoppe::Product.root.includes(:product_category, :variants).order(:parent_id)
@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+
     @items = Shoppe::Product.all
     @categories = Shoppe::ProductCategory.all
     reviewed_product = Product.find_by_permalink(params[:id])

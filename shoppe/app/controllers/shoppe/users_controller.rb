@@ -1,6 +1,5 @@
 module Shoppe
   class UsersController < Shoppe::ApplicationController
-    load_and_authorize_resource 
     before_filter { @active_nav = :users }
     before_filter { params[:id] && @user = ::User.find(params[:id]) }
     before_filter(:only => [:create, :update, :destroy]) do
@@ -8,6 +7,7 @@ module Shoppe
         raise Shoppe::Error, t('shoppe.users.demo_mode_error')
       end
     end
+    load_and_authorize_resource 
 
     def index
       @users = ::User.all
@@ -32,10 +32,15 @@ module Shoppe
     end
 
     def update
-      if @user.update(safe_params)
-        redirect_to [:edit, @user], :flash => {:notice => t('shoppe.users.update_notice') }
-      else
-        render :action => "edit"
+      begin
+        raise Exception, "You can not delete own admin role" if @user.delete_own_admin_role?(current_user, safe_params[:role_ids])
+        if @user.update(safe_params)
+          redirect_to [:edit, @user], :flash => {:notice => t('shoppe.users.update_notice') }
+        else
+          render :action => "edit"
+        end
+      rescue Exception => e
+        redirect_to [:edit, @user], :flash => {:notice => e.message }
       end
     end
 
@@ -49,7 +54,11 @@ module Shoppe
 
     def safe_params
       params[:user][:role_ids] ||= []
-      params[:user].permit(:first_name, :last_name, :email_address, :admin, :role_ids => [])
+      if params[:user][:password].present? 
+        params[:user].permit(:first_name, :last_name, :email_address, :admin, :password, :password_confirmation, :role_ids => [])
+      else
+        params[:user].permit(:first_name, :last_name, :email_address, :admin, :role_ids => [])
+      end  
     end
 
   end

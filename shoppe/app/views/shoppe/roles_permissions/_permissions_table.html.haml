@@ -5,7 +5,7 @@
       %tr
         %th= 'Permission Name'
         %th= 'Controller Name'
-        %th= 'Associated Class Name'
+        / %th= 'Associated Class Name'
         %th= 'CanCan Action'
         %th= 'Actions'
     %tbody
@@ -13,7 +13,7 @@
         %tr
           %td= permission.name
           %td= permission.controller_class
-          %td= permission.subject_class
+          / %td= permission.subject_class
           %td= permission.action
           %td  
             = link_to 'Show', permission, :class => 'button green'

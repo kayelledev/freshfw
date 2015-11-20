@@ -1,7 +1,7 @@
 module Shoppe
   class FreightRoutesController < Shoppe::ApplicationController
-    load_and_authorize_resource
     before_filter { params[:id] && @freight_route = Shoppe::FreightRoute.find(params[:id]) }
+    load_and_authorize_resource
 
   	def new
   	  @freight_route = Shoppe::FreightRoute.new

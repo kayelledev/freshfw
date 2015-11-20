@@ -1,8 +1,8 @@
-STANDART_ACTIONS = ["index", "new", "create", "show", "edit", "update", "delete", "destroy"]
 namespace 'permissions' do
   desc "Loading all models and their related controller methods inpermissions table."
-  task(:permissions => :environment) do
+  task(:generate => :environment) do
     arr = []
+    STANDART_ACTIONS = ["index", "new", "create", "show", "edit", "update", "delete", "destroy"]
     #load all the controllers
     controllers = Dir.new("#{Rails.root}/app/controllers").entries
     controllers.each do |entry|
@@ -31,7 +31,7 @@ namespace 'permissions' do
         end
       end
     end
-    arr[0..0].each do |controller|
+    arr.each do |controller|
       #only that controller which represents a model
       if controller.permission
         #create a universal permission for that model. eg "manage User" will allow all actions on User model.
@@ -48,20 +48,18 @@ namespace 'permissions' do
       end
     end
     # 
-    guest = Role.where(name: 'guest').first_or_create
-    user = Role.where(name: 'user').first_or_create
-    Permission.where.not('controller_class LIKE ?', 'Shoppe').each{|permission| permission.roles << guest << user }
+    
   end
 end
 
-  def eval_cancan_action(action)
+  def eval_permission_data(action)
     case action.to_s
     when "index"
       name = 'list'
       cancan_action = "index" 
       action_desc = 'list'
     when "new", "create"
-      name = 'create and update'
+      name = 'new and create'
       cancan_action = "create"
       action_desc = 'create'
     when "show"
@@ -69,7 +67,7 @@ end
       cancan_action = "view"
       action_desc = 'view'
     when "edit", "update"
-      name = 'create and update'
+      name = 'edit and update'
       cancan_action = "update"
       action_desc = 'update'
     when "delete", "destroy"
@@ -86,17 +84,15 @@ end
  
 #check if the permission is present else add a new one.
 def write_permission(controller, model, method)
-  name, cancan_action, action_desc = eval_cancan_action(method)
+  name, cancan_action, action_desc = eval_permission_data(method)
   permission = Permission.where("subject_class = ? and action = ?", model, cancan_action)
   unless permission.present?
     permission = Permission.new
-    admin_role = Role.where(name: 'admin').first_or_create
     permission.name = name
     permission.action = cancan_action
     permission.description = action_desc
     permission.controller_class = controller
-    permission.roles << admin_role
-    binding.pry
+    permission.subject_class = model
     permission.save
   end
 end

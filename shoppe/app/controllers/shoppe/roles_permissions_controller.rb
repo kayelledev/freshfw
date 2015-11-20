@@ -1,11 +1,11 @@
 module Shoppe
   class RolesPermissionsController < Shoppe::ApplicationController
+    before_filter { @active_nav = :roles_permissions }
 	  load_and_authorize_resource :class => 'Shoppe::RolesPermissionsController'
-    before_filter { @active_nav = :access_management }
 	
   	def index
-      @roles = Role.all
-  	  @permissions = Permission.all
+      @roles = Role.order('name')
+  	  @permissions = Permission.order('controller_class')
     end
 
     def new

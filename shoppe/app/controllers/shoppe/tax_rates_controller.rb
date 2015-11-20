@@ -1,8 +1,8 @@
 module Shoppe
   class TaxRatesController < Shoppe::ApplicationController
-    load_and_authorize_resource
     before_filter { @active_nav = :tax_rates }
     before_filter { params[:id] && @tax_rate = Shoppe::TaxRate.find(params[:id]) }
+    load_and_authorize_resource
 
     def index
       @tax_rates = Shoppe::TaxRate.ordered.all

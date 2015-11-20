@@ -1,4 +1,12 @@
 module AccessManagementProccessor
+  require 'rake'
+
+  def permission_generation
+    load File.join(Rails.root, 'lib', 'tasks', 'permissions.rake')
+    Rake::Task.define_task(:environment)
+    Rake::Task["permissions:generate"].invoke
+  end
+
   def controllers_list
     arr = []
     # load all controller from /app/controllers
@@ -57,7 +65,7 @@ module AccessManagementProccessor
       cancan_action = "index" 
       action_desc = 'list'
     when "new", "create"
-      name = 'create and update'
+      name = 'new and create'
       cancan_action = "create"
       action_desc = 'create'
     when "show"
@@ -65,7 +73,7 @@ module AccessManagementProccessor
       cancan_action = "view"
       action_desc = 'view'
     when "edit", "update"
-      name = 'create and update'
+      name = 'edit and update'
       cancan_action = "update"
       action_desc = 'update'
     when "delete", "destroy"
