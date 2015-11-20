@@ -181,6 +181,7 @@ div#dialog-form-errors {
 
 .items-panel-elem {
   display: none;
+  padding: 5px;
 }
 
 .draggable2 {
@@ -190,10 +191,6 @@ div#dialog-form-errors {
           transform: translate(0px, 0px);
   z-index: 3;
   position:relative;
-}
-
-.items-panel-elem {
-  padding: 5px;
 }
 
 #room-slider .slide img {
