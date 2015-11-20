@@ -1,0 +1,187 @@
+<main>
+    <section class="main-tabs">
+        <div class="l-wrapper">
+            <a class="main-tabs__one-tab main-tabs__one-tab--active" href="#">project info</a>
+            <a class="main-tabs__one-tab" href="designer-portal/select_items">select items</a>
+            <a class="main-tabs__one-tab" href="designer-portal/room_builder">room builder</a>
+            <a class="main-tabs__one-tab" href="/designer-portal/instructions">instructions</a>
+        </div>
+    </section>
+    <div class="l-wrapper">
+        <div class="l-tabs-alignment">
+            <div class="info-table">
+                <div class="info-table__row">
+                    <div class="info-table__cell">project status:</div>
+                    <div class="info-table__cell">draft</div>
+                </div>
+                <div class="info-table__row">
+                    <div class="info-table__cell">creation date:</div>
+                    <div class="info-table__cell">[date created]</div>
+                </div>
+                <div class="info-table__row">
+                    <div class="info-table__cell">last modefied date:</div>
+                    <div class="info-table__cell">[Today’s date, timestamp]</div>
+                </div>
+                <div class="info-table__row">
+                    <div class="info-table__cell">designed by:</div>
+                    <div class="info-table__cell">[Name]</div>
+                </div>
+                <div class="info-table__row">
+                    <div class="info-table__cell">designer email:</div>
+                    <div class="info-table__cell">[user email addres]</div>
+                </div>
+            </div>
+            <form class="project-init-info">
+                <div class="project-init-info__row">
+                    <div class="project-init-info__cell">Project Name</div>
+                    <div class="project-init-info__cell">
+                        <label class="project-init-info__label">
+                            <input class="project-init-info__input" type="text">
+                        </label>
+                    </div>
+                    <div class="project-init-info__cell"></div>
+                </div>
+                <div class="project-init-info__row">
+                    <div class="project-init-info__cell">Inspiration</div>
+                    <div class="project-init-info__cell">
+                        <label class="project-init-info__label">
+                            <textarea class="project-init-info__textarea"></textarea>
+                        </label>
+                    </div>
+                    <div class="project-init-info__cell"></div>
+                </div>
+                <div class="project-init-info__row">
+                    <div class="project-init-info__cell">Inspiration Images</div>
+                    <div class="project-init-info__cell">
+                        <label class="project-init-info__label">
+                            <input class="project-init-info__input" type="url" placeholder="url">
+                        </label>
+                    </div>
+                    <div class="project-init-info__cell">
+                        <div class="project-init-info__furtiv-inp-cont">
+                            or <span class="project-init-info__btn">Upload</span>
+                            <label class="project-init-info__transp-mask">
+                                <input type="file" accept=".jpg, .png, gif">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-init-info__row">
+                    <div class="project-init-info__cell"></div>
+                    <div class="project-init-info__cell">
+                        <label class="project-init-info__label">
+                            <input class="project-init-info__input" type="url" placeholder="url">
+                        </label>
+                    </div>
+                    <div class="project-init-info__cell">
+                        <div class="project-init-info__furtiv-inp-cont">
+                            or <span class="project-init-info__btn">Upload</span>
+                            <label class="project-init-info__transp-mask">
+                                <input type="file" accept=".jpg, .png, gif">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-init-info__row">
+                    <div class="project-init-info__cell"></div>
+                    <div class="project-init-info__cell">
+                        <label class="project-init-info__label">
+                            <input class="project-init-info__input" type="url" placeholder="url">
+                        </label>
+                    </div>
+                    <div class="project-init-info__cell">
+                        <div class="project-init-info__furtiv-inp-cont">
+                            or <span class="project-init-info__btn">Upload</span>
+                            <label class="project-init-info__transp-mask">
+                                <input type="file" accept=".jpg, .png, gif">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="project-init-info__row no-display">
+                    <div class="project-init-info__cell">Inspiration Images</div>
+                    <div class="project-init-info__cell">
+                        <div class="project-init-info__adm-img-cont l-cont">
+                            <img class="l-el" src="">
+                            <img class="l-el" src="">
+                            <img class="l-el" src="">
+                        </div>
+                    </div>
+                    <div class="project-init-info__cell"></div>
+                </div>
+
+
+                <div class="project-init-info__row">
+                    <div class="project-init-info__cell">Room Type</div>
+                    <div class="project-init-info__cell">
+                        <label class="project-init-info__label">
+                            <select class="project-init-info__select">
+                                <option>Type 1</option>
+                                <option>Type 2</option>
+                                <option>Type 3</option>
+                                <option>Type 4</option>
+                                <option>Type 5</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="project-init-info__cell"></div>
+                </div>
+                <div class="project-init-info__row">
+                    <div class="project-init-info__cell">Ideal Room Size</div>
+                    <div class="project-init-info__cell">
+                        <table>
+                            <tr>
+                                <td>
+                                    <span>Width</span>
+                                    <label class="project-init-info__small-label">
+                                        <input class="project-init-info__small-input" type="number" min="0" step="0.01">
+                                    </label>
+                                    <span>ft.</span>
+                                </td>
+                                <td>
+                                    <label class="project-init-info__small-label">
+                                        <input class="project-init-info__small-input" type="number" min="0" step="0.01">
+                                    </label>
+                                    <span>in.</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Depth</span>
+                                    <label class="project-init-info__small-label">
+                                        <input class="project-init-info__small-input" type="number" min="0" step="0.01">
+                                    </label>
+                                    <span>ft.</span>
+                                </td>
+                                <td>
+                                    <label class="project-init-info__small-label">
+                                        <input class="project-init-info__small-input" type="number" min="0" step="0.01">
+                                    </label>
+                                    <span>in.</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="project-init-info__cell"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<script>
+ ;(function() {
+    var urlInputs = document.querySelectorAll("input[type='url']");
+    for (var i = 0, lim = urlInputs.length; i < lim; i += 1) {
+        urlInputs[i].addEventListener("change", function() {
+            var reg = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+            if(this.value.length !== 0 && !reg.test(this.value)) {
+                this.classList.add("project-init-info__input--error");
+            } else {
+                this.classList.remove("project-init-info__input--error");
+            }
+        });
+    };
+ })();
+</script>

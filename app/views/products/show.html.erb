@@ -1,12 +1,12 @@
 <% content_for :custom_scripts do %>
-  <%= javascript_include_tag 'products/products.js' %>
+  <%= javascript_include_tag "specific/products.js" %>
 <% end %>
 
 <div class="col-full">
   <div class="content inside-page product-details container-fluid">
     <div class="row">
       <div class="col-md-4">
-        <div class='product-info'>
+        <div class='product-info' hidden>
           <h3 class='product-name'><%= @product.name %></h3>
           <p class='product-description'>
             <p><%= @product.description %><p>

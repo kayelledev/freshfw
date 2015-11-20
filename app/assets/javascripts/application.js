@@ -15,6 +15,4 @@
 //= require bxslider
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require_directory .
-//= require 'checkout/checkout.js'
-//= require 'item_quantity.js'
+//= require_directory ./global

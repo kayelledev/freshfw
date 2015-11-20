@@ -1,0 +1,52 @@
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag "specific/furniture_board_editor.js" %>
+<% end %>
+
+<div class='furniture-board-dragg'>
+
+  <div class="furniture-board-editor-items-panel">
+    <% @project.included_products.each do |item| %>
+      <div class='fb-draggable2 fb-items-panel-elem' data-panel-elem-id="<%= item.id %>">
+        <% if image_link(item, 'default_image') %>
+          <%= image_tag image_link(item, 'default_image'), width: '100%', height: '100%' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="furniture-board-editor">
+    <% @project.included_products.each do |item| %>
+      <span class='fb-room-item' style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>">
+
+        <%= image_tag 'remove.png', class: 'fb-remove-icon fb-remove-item', 'data-item-id': item.id, width: '15px', height: '15px', hidden: true %>
+
+        <div data-id="<%= item.id %>" class="fb-draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>">
+
+          <% if image_link(item, 'default_image') %>
+            <%= image_tag image_link(item, 'default_image'), class: 'fb-item-image'%>
+          <% end %>
+
+          <div class="point left-top"></div>
+          <div class="point right-top"></div>
+          <div class="point left-bottom"></div>
+          <div class="point right-bottom"></div>
+        </div>
+
+        <%= image_tag 'rotate.png', class: 'fb-rotation-arrow', width: '20px', height: '20px', hidden: true %>
+
+        <div class='fb-elem-tooltip' data-tooltip="<%= item.id %>" style='visibility:hidden;'>
+          <%= link_to item.permalink, target:"_blank" do %>
+            <p><%= item.name %></p>
+          <% end %>
+          <p><b>Width:</b> <%= item.width %><br>
+          <b>Heigh:</b> <%= item.height %><br>
+          <b>Depth:</b> <%= item.depth %></p>
+          <span class="glyphicon glyphicon-trash fb-remove-item" aria-hidden="true" data-item-id="<%= item.id %>"></span>
+          <br>
+          <%= image_tag image_link(item, 'default_image'), class: 'tooltip-item-image' %>
+        </div>
+
+      </span>
+    <% end %>
+  </div>
+</div>

@@ -49,6 +49,10 @@
          */
         this.$currentElement = null;
 
+        this.$parentElem = null;
+
+        this.$positionBefore = null;
+
         /**
          * Calculate Holder width
          */
@@ -89,6 +93,21 @@
           return { top: top, left: left, degree: degree };
         }
 
+        this.checkInsidePoligon = function(point, vs) {
+          // ray-casting algorithm based on
+          // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+          var x = point[0], y = point[1];
+          var inside = false;
+            for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+                var xi = vs[i][0], yi = vs[i][1];
+                var xj = vs[j][0], yj = vs[j][1];
+                var intersect = ((yi > y) != (yj > y))
+                    && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+          return inside;
+        };
+
     }
 
     /**
@@ -107,6 +126,7 @@
 
         // set container height according width
         var scaling = parseFloat(this.$holder.data('width')) / this.$holder.width();
+        console.log(this.$holder.data('width'))
         $('.editor-container').height($('.editor-container').data('height') / scaling);
         // change editor height line
         $('.editor-height').height($('.editor-container').height());
@@ -160,25 +180,25 @@
           // call this function on every dragend event
           onend: function (event) {
             controller.moveInsideArea(event);
-            console.log(event);
-            var createRect = function($element) {
-              return new SAT.Box(
-                new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
-                $element.parent().width(),
-                $element.parent().height()
-              ).toPolygon().setAngle(parseInt($element.attr('data-rotation')) * Math.PI/180.0);
-            },
+            controller.setCollisions(event.target);
+            // var createRect = function($element) {
+            //   return new SAT.Box(
+            //     new SAT.Vector(parseFloat($element.parent().attr('data-x')), parseFloat($element.parent().attr('data-y'))),
+            //     $element.parent().width(),
+            //     $element.parent().height()
+            //   ).toPolygon().setAngle(parseInt($element.attr('data-rotation')) * Math.PI/180.0);
+            // },
 
-            $elements = $('.editor-container div').not('.active'),
-            activeRect = createRect($(event.target));
+            // $elements = $('.editor-container div').not('.active'),
+            // activeRect = createRect($(event.target));
 
-            $elements.removeClass('collision');
+            // $elements.removeClass('collision');
 
-            $elements.each(function() {
-              if(SAT.testPolygonPolygon(createRect($(this)), activeRect)) {
-                $(this).addClass('collision');
-              }
-            });
+            // $elements.each(function() {
+            //   if(SAT.testPolygonPolygon(createRect($(this)), activeRect)) {
+            //     $(this).addClass('collision');
+            //   }
+            // });
 
             controller.restrictAreaHoles(event.target);
           }
@@ -187,8 +207,8 @@
         // target elements with the "draggable" class
         $('.' + elementsClass).each(function() {
 
-          $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling || $(this).width()/2.0);
-          $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling || $(this).height()/2.0);
+          $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
+          $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
 
           $(this).parent().css({
               'width': $(this).data('width') / scaling,
@@ -257,6 +277,62 @@
               $(".included-product[data-product-id='" + $(this).attr('id') + "']").removeClass('active-product');
             }
           });
+
+        if ( $('.dragg').attr('data-status') === 'clear' ) {
+          clearAreaAndInitPanel();
+        }
+
+        function clearAreaAndInitPanel() {
+          clearArea();
+          resetElemInArea();
+          resetItemsInPanel();
+          controller.initItemsPanelArea();
+
+          function clearArea(){
+            $('.' + elementsClass).each(function() {
+               $(this).css('display', 'none');
+            });
+          }
+
+          function resetElemInArea(){
+            console.log('zzzz');
+            $('.draggable').each(function() {
+              $(this).parent().css({
+                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                   '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                    '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                        'transform': 'translate(0px, 0px) rotate(0deg)',
+              });
+
+              $(this).parent().attr('data-rotation', 0);
+              $(this).parent().attr('data-x', 0);
+              $(this).parent().attr('data-y', 0);
+              $(this).attr('data-rotation', 0);
+              $(this).attr('data-x', 0);
+              $(this).attr('data-y', 0);
+              $(this).parent().css({
+                top: 0,
+                left: 0
+              });
+            });
+          }
+
+          function resetItemsInPanel() {
+            $('.items-panel-elem').each(function() {
+              $(this).attr('data-x', '0');
+              $(this).attr('data-y', '0');
+
+              $(this).css({
+                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                   '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                    '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                        'transform': 'translate(0px, 0px) rotate(0deg)',
+              });
+
+              $(this).show();
+            });
+          }
+        }
     }
 
     /**
@@ -288,6 +364,7 @@
      */
     Controller.prototype.catchElement = function() {
         var self = this;
+        console.log(this);
 
         var mouse_is_outside = false;
 
@@ -304,7 +381,6 @@
         this.$holder.find('div')
             .off('mousedown')
             .on('mousedown', function() {
-
                 self.$holder.find('div').removeClass('active');
                 $(this).addClass('active');
 
@@ -438,78 +514,87 @@
 
     Controller.prototype.initMouseRotation = function() {
         var controller = this;
-        var currentElem;
-        var positionBefore;
-
-        function rotateOnMouse(e) {
-            var offset = controller.$currentElement.offset();
-            var center_x = offset.left;
-            var center_y = offset.top;
-            var mouse_x = e.pageX;
-            var mouse_y = e.pageY;
-            var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
-            var degree = (radians * (180 / Math.PI) * -1) + 60;
-            var offsetX = parseFloat(controller.$currentElement.parent().attr('data-x')),
-                offsetY = parseFloat(controller.$currentElement.parent().attr('data-y'));
-
-            controller.$currentElement.parent().css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            controller.$currentElement.parent().css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            controller.$currentElement.parent().css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            controller.$currentElement.parent().css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-
-            controller.$currentElement.attr('data-rotation', degree);
-        }
-
-        function rotateOnMouseClick() {
-          currentElem = controller.$currentElement.parent();
-          positionBefore = controller.getDegreeOfElement(currentElem);
-
-          var beforeDegree = controller.getDegreeOfElement(currentElem).degree
-          var newDegree = beforeDegree + 90;
-
-          var offsetX = parseFloat(currentElem.attr('data-x')),
-              offsetY = parseFloat(currentElem.attr('data-y'));
-
-          setDegree(newDegree);
-
-          if ( controller.restrictAreaHoles( controller.$currentElement ) ) {
-            setDegree(beforeDegree);;
-          }
-
-          function setDegree(degree) {
-            currentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            currentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            currentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            currentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-
-            controller.$currentElement.attr('data-rotation', degree);
-            controller.$currentElement.parent().attr('data-rotation', degree);
-          }
-        }
 
         $('.rotation-arrow').mousedown(function(e) {
           e.preventDefault(); // prevents the dragging of the image.
 
-          currentElem = controller.$currentElement.parent();
-
-          positionBefore = controller.getDegreeOfElement(currentElem);
+          currentElement = $(this).parent().children('.draggable');
+          parentElem = $(currentElement).parent();
+          positionBefore = controller.getDegreeOfElement($(parentElem));
 
           $(document).bind('mousemove.rotateImg', function(e2) {
-            rotateOnMouse(e2);
+            rotateOnMouse(e2, currentElement, parentElem, positionBefore);
           });
         });
 
         $(document).mouseup(function(e) {
           $(document).unbind('mousemove.rotateImg');
-          if ( controller.restrictAreaHoles( controller.$currentElement ) ) {
-            controller.rotateInsideArea(positionBefore, controller.$currentElement);
+          if ( !$('.editor-container').is(":visible") ) {
+            return false;
+          }
+          if ( controller.restrictAreaHoles( currentElement ) ) {
+            console.log('restr')
+            controller.rotateInsideArea(positionBefore, currentElement);
+            controller.setCollisions(parentElement);
           }
         });
 
         $('.rotation-arrow').click(function(e) {
           e.preventDefault();
-          rotateOnMouseClick();
+
+          currentElement = $(this).parent().children('.draggable');
+          parentElem = $(currentElement).parent();
+          positionBefore = controller.getDegreeOfElement($(parentElem));
+
+          rotateOnMouseClick(currentElement, parentElem, positionBefore);
         });
+
+        function rotateOnMouse(e, currentElement, parentElem, positionBefore) {
+          var offset = currentElement.offset();
+          var center_x = offset.left;
+          var center_y = offset.top;
+          var mouse_x = e.pageX;
+          var mouse_y = e.pageY;
+          var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+          var degree = (radians * (180 / Math.PI) * -1) + 60;
+          var offsetX = parseFloat(parentElem.attr('data-x')),
+              offsetY = parseFloat(parentElem.attr('data-y'));
+
+          parentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          parentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          parentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+          parentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+
+          currentElement.attr('data-rotation', degree);
+          parentElem.attr('data-rotation', degree);
+        }
+
+        function rotateOnMouseClick(currentElement, parentElem, positionBefore) {
+
+          var beforeDegree = positionBefore.degree
+          var newDegree = beforeDegree + 90;
+          console.log(beforeDegree);
+          console.log(newDegree);
+
+          var offsetX = parseFloat(parentElem.attr('data-x')),
+              offsetY = parseFloat(parentElem.attr('data-y'));
+
+          setDegree(newDegree);
+
+          if ( controller.restrictAreaHoles( currentElement ) ) {
+            setDegree(beforeDegree);
+          }
+
+          function setDegree(degree) {
+            parentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            parentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            parentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            parentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+
+            currentElement.attr('data-rotation', degree);
+            parentElem.attr('data-rotation', degree);
+          }
+        }
     };
 
     /**
@@ -3148,7 +3233,6 @@
                   'transform': 'translate(' + parseFloat($(this).attr('data-x')) + 'px,' + $(this).attr('data-y') + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
               });
 
-
               $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
            });
         });
@@ -3210,24 +3294,23 @@
         return roomArea;
       }
 
-      function restrictHoles(points, holes, areaPoints, elem) {
+      function checkOutside(points, holes, areaPoints, elem) {
         var wrongPosition = [];
         // console.log(holes);
         // check elem point in holes
         $.each(points, function(index, point) {
           $.each(holes, function(index, hole) {
-            wrongPosition.push( checkInsideHole(point, hole) );
+            wrongPosition.push( controller.checkInsidePoligon(point, hole) );
           });
         });
         //check holes point in elem
         $.each(holes, function(index, hole) {
-          $.each(hole, function(index, holepoint) {
-            wrongPosition.push( checkInsideHole(holepoint, points) );
-            // console.log( checkInsideHole(holepoint, points) );
+          $.each(hole, function(index, holePoint) {
+            wrongPosition.push( controller.checkInsidePoligon(holePoint, points) );
           });
         });
         $.each(points, function(index, point) {
-          wrongPosition.push( !checkInsideHole(point, areaPoints) );
+          wrongPosition.push( !controller.checkInsidePoligon(point, areaPoints) );
         });
         if (wrongPosition.indexOf(true) != -1) {
           // $(elem).addClass('out-of-area');
@@ -3240,21 +3323,7 @@
         // console.log( inside([ 1.5, 1.5 ], polygon) );
       }
 
-      function checkInsideHole(point, vs) {
-        // ray-casting algorithm based on
-        // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
-        var x = point[0], y = point[1];
-        var inside = false;
-          for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
-              var xi = vs[i][0], yi = vs[i][1];
-              var xj = vs[j][0], yj = vs[j][1];
-              var intersect = ((yi > y) != (yj > y))
-                  && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-              if (intersect) inside = !inside;
-          }
-        return inside;
-      };
-      return restrictHoles(elemPoints, holesPoligons, roomAreaPoints, elem);
+      return checkOutside(elemPoints, holesPoligons, roomAreaPoints, elem);
     }
 
     Controller.prototype.moveInsideArea = function(event) {
@@ -3297,11 +3366,7 @@
       var beforetTop = positionBefore.top;
       var beforeLeft = positionBefore.left;
 
-      console.log(elem.parent());
-
       var afterDegree = controller.getDegreeOfElement(elem.parent()).degree
-
-      console.log(beforeDegree);
 
       while ( controller.restrictAreaHoles(elem) ) {
         console.log(afterDegree);
@@ -3321,6 +3386,88 @@
           return;
         }
       }
+    }
+
+    Controller.prototype.setCollisions = function(elem) {
+      var controller = this;
+      var elemPoints = defineElemPoints(elem);
+      var neighborsPoligons = defineNeighbors( $('.draggable').not('.active') );
+
+      setCollisions(elemPoints, neighborsPoligons, elem);
+
+      function defineElemPoints(elem) {
+
+        var pointTopLeft = $(elem).children('.left-top');
+        var pointTopRight = $(elem).children('.right-top');
+        var pointBottomLeft = $(elem).children('.left-bottom');
+        var pointBottomRight = $(elem).children('.right-bottom');
+
+        var elemTopLeft = [+pointTopLeft.offset().top, +pointTopLeft.offset().left];
+        var elemTopRight = [+pointTopRight.offset().top, +pointTopRight.offset().left];
+        var elemBottomLeft = [+pointBottomLeft.offset().top, +pointBottomLeft.offset().left];
+        var elemBottomRight = [+pointBottomRight.offset().top, +pointBottomRight.offset().left];
+
+        var elemPoints = [elemTopLeft, elemTopRight, elemBottomRight, elemBottomLeft];
+        return elemPoints;
+      }
+
+      function defineNeighbors(neighborsClass) {
+        var neighbors = [];
+        $(neighborsClass).each(function() {
+          var top = +$(this).offset().top;
+          var left = +$(this).offset().left;
+          var width = +$(this).width();
+          var height = +$(this).height();
+
+          var leftTop = [top, left]
+          var rightTop = [top, left + width]
+          var rightBottom = [top + height, left + width]
+          var leftBottom = [top + height, left]
+
+          var neighbor = { elem: $(this), points: [leftTop, rightTop, rightBottom, leftBottom] };
+          neighbors.push(neighbor);
+        });
+
+        return neighbors;
+      }
+
+      function setCollisions(points, neighbors, elem){
+        var wrongPosition = [];
+        var collNeighbors = [];
+        var found;
+        $.each(points, function(index, point) {
+          $.each(neighbors, function(index, neighbor) {
+            wrongPosition.push( controller.checkInsidePoligon(point, neighbor.points) );
+            if ( controller.checkInsidePoligon(point, neighbor.points) ) {
+              pushIfNotAlready(collNeighbors, neighbor.elem);
+            }
+          });
+        });
+        $.each(neighbors, function(index, neighbor) {
+          $.each(neighbor.points, function(index, neighborPoint) {
+            wrongPosition.push( controller.checkInsidePoligon(neighborPoint, points) );
+            if ( controller.checkInsidePoligon(neighborPoint, points) ) {
+              pushIfNotAlready(collNeighbors, neighbor.elem);
+            }
+          });
+        });
+
+        function pushIfNotAlready(filters, newFilter) {
+          var found = jQuery.inArray(newFilter, filters);
+          if (found === -1) {
+            // Element was not found, add it.
+            filters.push(newFilter);
+          }
+        }
+        $('.draggable').each(function(){
+          $(this).removeClass('collision');
+        });
+
+        $.each(collNeighbors, function() {
+          $(this).addClass('collision');
+        });
+      }
+
     }
 
     /**
@@ -3349,6 +3496,18 @@
             $button = $('.save-preset');
 
         controller.init();
+
+        $('.editor-container-wr').arrive(".editor-container", function() {
+          controller = new Controller(),
+            $presetSelector = $('.preset'),
+            $button = $('.save-preset');
+          controller.initElements(controller.$initialElenemts);
+          controller.catchElement();
+          controller.rotateElement();
+          controller.initMouseRotation();
+          controller.removeElement();
+          console.log('arrive');
+        });
 
         $presetSelector.on('change', function() {
             this.attr('value', $(this).find('option:selected').val());

@@ -6,9 +6,10 @@ $(document).ready(function(){
         var product_items = $('#product_items_' + e.target.value);
         $('.variant').hide();
         $(product).show();
-        $(descr_prod).show();;
+        $(descr_prod).show();
         $(product_items).show();
         $('#buy').attr('href', product.data('url'));
+        $.get( "get_product", { sku: e.target.value } );
     });
 
     // cut description text
@@ -33,4 +34,14 @@ $(document).ready(function(){
     $( window ).resize(function() {
         resizeProductDescription();
     });
+
+    var sku = getURLParameter('sku');
+    if (sku) {
+        $('input#varsku_' + sku).click();
+    }
+    $('div.product-info').show();
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+    }
+
 });

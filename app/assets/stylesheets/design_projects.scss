@@ -1,0 +1,1237 @@
+// Place all the styles related to the DesignProjects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*===================================================================================
+    LAYOUT CSS
+=====================================================================================*/
+
+.l-el { /*create something like column in table or flex element*/
+    display: inline-block;/*for flex-box behavior*/
+    letter-spacing: normal;/*normalize space between words*/
+    line-height: normal;/*normalize height of line*/
+    vertical-align: top;
+    font-family: 'Roboto Condensed', sans-serif; /*set normal web-site font; must change from project to project*/
+    font-size: 1rem;
+}
+
+.l-cont { /*container for columns of flex elements*/
+    font-family: Arial, sans-serif;/*required for proper letter-spacing*/
+    font-size: 16px;
+    letter-spacing: -.28em; /*remove extra spaces*/
+    line-height: 0;/*reset default height of line*/
+}
+
+.l-cont:after { /*for children vertical centering*/
+    content: '';
+    display: inline-block;
+    height: 100%;
+    width: 0px;
+    vertical-align: middle;
+}
+
+.l-valmid {
+    vertical-align: middle;
+}
+
+.l-wrapper {
+    width: 100%;
+    height: 100%;
+    padding-left:2%;
+    padding-right:2%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.l-tabs-alignment {
+    padding-left: 2rem;
+}
+
+@media screen and (max-width: 510px) {
+    .l-tabs-alignment {
+        padding-left: 1rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .main-tabs__one-tab {
+        padding-left: 0.1rem;
+    }
+}
+
+.l-to-right {
+    text-align: right;
+}
+
+/*===================================================================================
+    ACCOUNT PAGE
+=====================================================================================*/
+
+/*===================================================================================
+    WELCOME-MESSAGE MODULE
+=====================================================================================*/
+
+.welcome-message {
+    /*Box rules*/
+    padding: 1.5rem 0;
+}
+
+/*===================================================================================
+    ONE-TABLE MODULE
+=====================================================================================*/
+
+.one-table {
+    /*Box rules*/
+    margin-bottom: 3rem;
+}
+
+.one-table__title {
+    /*Box rules*/
+    margin-bottom: 1rem;
+
+    /*Typography*/
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.one-table__btn {
+    /*Box rules*/
+    padding: 0.25rem;
+    margin-top: 0.5rem;
+
+    /*Typography*/
+    text-transform: capitalize;
+    font-size: 0.85rem;
+
+    /*Decorations*/
+    color: #ffffff;
+    background-color: #f49224;
+    border: none;
+}
+
+/*===================================================================================
+    TABLE MODULE
+=====================================================================================*/
+
+.table {
+    /*Box rules*/
+    display: table;
+    width: 100%;
+
+    /*Decorations*/
+    border: 1px solid #777777;
+    border-radius: 30px;
+    border-collapse: collapse;
+}
+
+.table__row--head {
+    /*Box rules*/
+    display: table-header-group;
+
+    /*Typography*/
+    text-transform: capitalize;
+
+    /*Decorations*/
+    background-color: #aaaaaa;
+}
+
+.table__body {
+    /*Box rules*/
+    display: table
+}
+
+.table__row {
+    /*Box rules*/
+    display: table-row;
+}
+
+.table__cell {
+    /*Box rules*/
+    display: table-cell;
+    padding: 0.5%;
+    width: 20%;
+}
+
+.table__cell--first-cell {
+    /*Box rules*/
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+/*===================================================================================
+    DESIGNER PORTAL PAGE
+=====================================================================================*/
+
+/*===================================================================================
+    MAIN-TABS MODULE
+=====================================================================================*/
+
+.main-tabs {
+    display: inline-block;
+    width: 100%;
+    padding: 0 !important;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+.main-tabs__one-tab {
+    display: block;
+    float: left;
+    padding: 24px;
+
+    text-transform: uppercase;
+    color: #cccccc;
+    border-left: 1px solid #aaaaaa;
+}
+
+.main-tabs__one-tab--active {
+    margin-bottom: -1px;
+    color: black;
+    border-bottom: 1px solid #ffffff;
+}
+
+@media screen and (max-width: 565px) {
+    .main-tabs__one-tab {
+        padding: 12px;
+    }
+
+    /*.main-tabs__one-tab--active {
+        border-bottom: 1px solid #aaaaaa;
+    }*/
+}
+
+@media screen and (max-width: 465px) {
+    .main-tabs__one-tab {
+        padding: 12px 2px;
+    }
+
+    /*.main-tabs__one-tab--active {
+        border-bottom: 1px solid #aaaaaa;
+    }*/
+}
+
+/*===================================================================================
+    INFO-TABLE MODULE
+=====================================================================================*/
+
+.info-table {
+    display: table;
+    padding: 0 !important;
+    margin: 3rem 0;
+}
+
+.info-table__row {
+    display: table-row;
+}
+
+.info-table__cell {
+    display: table-cell;
+    padding: 0.25rem 0;
+    padding-right: 2rem;
+    text-transform: capitalize;
+}
+
+/*===================================================================================
+    PROJECT-INIT-INFO MODULE
+=====================================================================================*/
+
+.project-init-info {
+    display: table;
+    max-width: 100%;
+}
+
+.project-init-info__row {
+    display: table-row;
+}
+
+.project-init-info__cell {
+    display: table-cell;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    vertical-align: top;
+    font-weight: normal !important;
+}
+
+.project-init-info__cell:nth-child(1) {
+    max-width: 30%;
+}
+
+.project-init-info__cell:nth-child(2) {
+    max-width: 55%;
+}
+
+.project-init-info__cell:nth-child(3) {
+    max-width: 15%;
+}
+
+.project-init-info__cell td {
+    padding-bottom: 0.5rem;
+}
+
+.project-init-info__cell td span {
+    padding: 0 5px;
+/*===================================================================================
+	LAYOUT CSS
+=====================================================================================*/
+
+.l-el { /*create something like column in table or flex element*/
+	display: inline-block;/*for flex-box behavior*/
+	letter-spacing: normal;/*normalize space between words*/
+	line-height: normal;/*normalize height of line*/
+	vertical-align: top;
+	font-family: 'Roboto Condensed', sans-serif; /*set normal web-site font; must change from project to project*/
+	font-size: 1rem;
+}
+
+.l-cont { /*container for columns of flex elements*/
+	font-family: Arial, sans-serif;/*required for proper letter-spacing*/
+	font-size: 16px;
+	letter-spacing: -.28em; /*remove extra spaces*/
+	line-height: 0;/*reset default height of line*/
+}
+
+.l-cont:after { /*for children vertical centering*/
+	content: '';
+	display: inline-block;
+	height: 100%;
+	width: 0px;
+	vertical-align: middle;
+}
+
+.l-valmid {
+	vertical-align: middle;
+}
+
+.l-wrapper {
+	width: 100%;
+	height: 100%;
+	padding-left:2%;
+	padding-right:2%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.l-tabs-alignment {
+	padding-left: 2rem;
+}
+
+@media screen and (max-width: 510px) {
+	.l-tabs-alignment {
+		padding-left: 1rem;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.main-tabs__one-tab {
+		padding-left: 0.1rem;
+	}
+}
+
+.l-to-right {
+	text-align: right;
+}
+
+/*===================================================================================
+	ACCOUNT PAGE
+=====================================================================================*/
+
+/*===================================================================================
+	WELCOME-MESSAGE MODULE
+=====================================================================================*/
+
+.welcome-message {
+	/*Box rules*/
+	padding: 1.5rem 0;
+}
+
+/*===================================================================================
+	ONE-TABLE MODULE
+=====================================================================================*/
+
+.one-table {
+	/*Box rules*/
+	margin-bottom: 3rem;
+}
+
+.one-table__title {
+	/*Box rules*/
+	margin-bottom: 1rem;
+
+	/*Typography*/
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+.one-table__btn {
+	/*Box rules*/
+	padding: 0.5rem 1rem;
+	margin-top: 0.5rem;
+
+	/*Typography*/
+	text-transform: capitalize;
+
+	/*Decorations*/
+	color: #ffffff;
+	background-color: #f49224;
+	border: none;
+}
+
+/*===================================================================================
+	TABLE MODULE
+=====================================================================================*/
+
+.table {
+	/*Box rules*/
+	display: table;
+	width: 100%;
+
+	/*Decorations*/
+	border: 1px solid #777777;
+	border-radius: 30px;
+	border-collapse: collapse;
+}
+
+.table__row--head {
+	/*Box rules*/
+	display: table-header-group;
+
+	/*Typography*/
+	text-transform: capitalize;
+
+	/*Decorations*/
+	background-color: #aaaaaa;
+}
+
+.table__body {
+	/*Box rules*/
+	display: table
+}
+
+.table__row {
+	/*Box rules*/
+	display: table-row;
+}
+
+.table__cell {
+	/*Box rules*/
+	display: table-cell;
+	padding: 0.5%;
+	width: 20%;
+}
+
+.table__cell--first-cell {
+	/*Box rules*/
+	padding-left: 2.5%;
+	padding-right: 2.5%;
+}
+
+/*===================================================================================
+	DESIGNER PORTAL PAGE
+=====================================================================================*/
+
+/*===================================================================================
+	MAIN-TABS MODULE
+=====================================================================================*/
+
+.main-tabs {
+	display: inline-block;
+	width: 100%;
+	padding: 0 !important;
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.main-tabs__one-tab {
+	display: block;
+	float: left;
+	padding: 24px;
+
+	text-transform: uppercase;
+	color: #cccccc;
+	border-left: 1px solid #aaaaaa;
+}
+
+.main-tabs__one-tab--active {
+	margin-bottom: -1px;
+	color: black;
+	border-bottom: 1px solid #ffffff;
+}
+
+@media screen and (max-width: 565px) {
+	.main-tabs__one-tab {
+		padding: 12px;
+	}
+
+	/*.main-tabs__one-tab--active {
+		border-bottom: 1px solid #aaaaaa;
+	}*/
+}
+
+@media screen and (max-width: 465px) {
+	.main-tabs__one-tab {
+		padding: 12px 2px;
+	}
+
+	/*.main-tabs__one-tab--active {
+		border-bottom: 1px solid #aaaaaa;
+	}*/
+}
+
+/*===================================================================================
+	INFO-TABLE MODULE
+=====================================================================================*/
+
+.info-table {
+	display: table;
+	padding: 0 !important;
+	margin: 3rem 0;
+}
+
+.info-table__row {
+	display: table-row;
+}
+
+.info-table__cell {
+	display: table-cell;
+	padding: 0.25rem 0;
+	padding-right: 2rem;
+	text-transform: capitalize;
+}
+
+/*===================================================================================
+	PROJECT-INIT-INFO MODULE
+=====================================================================================*/
+
+.project-init-info {
+	display: table;
+	max-width: 100%;
+}
+
+.project-init-info__row {
+	display: table-row;
+}
+
+.project-init-info__cell {
+	display: table-cell;
+	padding-right: 1rem;
+	padding-bottom: 2rem;
+	vertical-align: top;
+	font-weight: normal !important;
+}
+
+.project-init-info__cell:nth-child(1) {
+	max-width: 30%;
+}
+
+.project-init-info__cell:nth-child(2) {
+	max-width: 55%;
+}
+
+.project-init-info__cell:nth-child(3) {
+	max-width: 15%;
+}
+
+.project-init-info__cell td {
+	padding-bottom: 0.5rem;
+}
+
+.project-init-info__cell td span {
+	padding: 0 5px;
+}
+
+.project-init-info__label,
+.project-init-info__input,
+.project-init-info__select {
+    max-width: 30rem;
+    width: 100%;
+}
+
+.project-init-info__input--error {
+    outline: 2px solid red;
+	max-width: 30rem;
+	width: 100%;
+}
+
+.project-init-info__input--error {
+	outline: 2px solid red;
+}
+
+.project-init-info__small-label,
+.project-init-info__small-input {
+    display: inline-block;
+    width: 8rem;
+}
+
+.project-init-info__textarea {
+    max-width: 30rem;
+    width: 100%;
+    height: 5rem;
+}
+
+.project-init-info__furtiv-inp-cont {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 3rem;
+}
+
+.project-init-info__btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+
+    /*Box rules*/
+    padding: 0.5rem 1rem;
+    margin-left: 0.25rem;
+
+    /*Typography*/
+    text-transform: capitalize;
+
+    /*Decorations*/
+    color: #ffffff;
+    background-color: #f49224;
+    border: none;
+}
+
+.project-init-info__transp-mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+}
+
+.project-init-info__adm-img-cont {
+    width: 100%;
+}
+
+.project-init-info__adm-img-cont > img {
+    width: 60px;
+    margin-right: 5px;
+}
+
+/*===================================================================================
+    SELECT ITEMS PAGE
+=====================================================================================*/
+
+/*===================================================================================
+    FILTERS MODULE
+=====================================================================================*/
+
+.filters-section {
+    display: inline-block;
+    width: 100%;
+    padding-top: 40px;
+}
+
+.filters {
+    float: left;
+    width: 130px;
+    padding-left: 10px;
+}
+
+/*===================================================================================
+    ONE FILTER CATEGORY MODULE
+=====================================================================================*/
+
+.one-filter-category {
+    margin-top: 10px;
+}
+
+.one-filter-category__title {
+    margin: 0 !important;
+    text-transform: uppercase;
+}
+
+.one-filter-category__table {
+    display: table;
+    padding-left: 10px;
+}
+
+.one-filter-category__row {
+    display: table-row;
+}
+
+.one-filter-category__cell {
+    display: table-cell;
+}
+
+.one-filter-category__cell > label {
+    margin: 0 !important;
+}
+
+.one-filter-category__cell input[type="checkbox"] {
+    margin: 0 !important;
+}
+
+.one-filter-category__name {
+    padding-left: 5px;
+    margin: 0 !important;
+}
+
+.one-filter-category__name--sub {
+    padding-left: 15px;
+}
+
+/*===================================================================================
+    PRODUCTS GRID MODULE
+=====================================================================================*/
+
+.products-grid {
+    display: block;
+    margin-left: 130px;
+}
+
+.products-grid__btn-cont {
+    display: inline-block;
+    width: 100%;
+}
+
+.products-grid__left-btn {
+    float: left;
+    padding-left: 5px;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+    color: #f49224;
+}
+
+.products-grid__right-btn {
+    float: right;
+    padding: 5px 10px;
+
+    /*Typography*/
+    text-transform: capitalize;
+
+    /*Decorations*/
+    color: #ffffff;
+    background-color: #f49224;
+    border: none;
+}
+
+/*===================================================================================
+    ONE PRODUCT CATEGORY MODULE
+=====================================================================================*/
+
+.one-products-category {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.one-products-category__title {
+    width: 100%;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 1em;
+    color: #aaaaaa;
+}
+
+.one-products-category__product {
+    width: 24%;
+    min-width: 190px;
+    padding-bottom: 20px;
+    margin-right: 1%;
+}
+
+.one-products-category__anch {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    border: 2px solid transparent;
+}
+
+.one-products-category__anch.chosen {
+    border: 2px solid #f49224;
+}
+
+.one-products-category__img {
+    width: 100%;
+}
+
+.one-products-category__label {
+    display: block;
+    width: 100%;
+    padding-left: 10px;
+}
+
+/*===================================================================================
+    ROOM-BUILDER PAGE
+=====================================================================================*/
+
+/*===================================================================================
+    SUBTABS MODULE
+=====================================================================================*/
+
+.subtabs {
+    display: inline-block;
+    width: 100%;
+    padding: 18px 0;
+}
+
+.subtabs__one-tab {
+    float: left;
+    padding-right: 40px;
+    color: #000000;
+}
+
+.subtabs__btn {
+    /*Box rules*/
+    visibility: visible;
+    float: right;
+    padding: 5px 10px;
+    margin-left: 10px;
+    margin-top: -4px;
+
+    /*Typography*/
+    text-transform: capitalize;
+
+    /*Decorations*/
+    color: #ffffff;
+    background-color: #f49224;
+    border: none;
+}
+
+.subtabs__one-tab--active {
+    color: #f49224 !important;
+    text-decoration: none !important;
+}
+
+.active-tab {
+    display: block !important;
+}
+
+/*===================================================================================
+    SELECTED FURNITURE MODULE
+=====================================================================================*/
+
+.selected-furniture {
+    display: none;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.selected-furniture__table {
+    display: table;
+    width: 100%;
+    border: 2px solid #aaaaaa;
+}
+
+.selected-furniture__row {
+    display: table-row;
+}
+
+.selected-furniture__row--first {
+    font-weight: bold;
+}
+
+.selected-furniture__row--gray {
+    background-color: #cccccc;
+    text-transform: uppercase;
+}
+
+.selected-furniture__cell {
+    display: table-cell;
+    padding: 12px 0;
+    vertical-align: middle;
+    border-bottom: 1px solid #cccccc;
+}
+
+.selected-furniture__cell--with-cross {
+    width: 10%;
+    text-align: center;
+    font-weight: bold;
+    color: red;
+}
+
+.selected-furniture__cell--with-img {
+    width: 15%;
+    padding-right: 30px;
+}
+
+.selected-furniture__product-img {
+    width: 100%;
+}
+
+/*===================================================================================
+    ROOM LAYOUT MODULE
+=======
+	display: inline-block;
+	width: 8rem;
+}
+
+.project-init-info__textarea {
+	max-width: 30rem;
+	width: 100%;
+	height: 5rem;
+}
+
+.project-init-info__furtiv-inp-cont {
+	position: relative;
+	display: inline-block;
+	width: 100px;
+	height: 3rem;
+}
+
+.project-init-info__btn {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 15px;
+
+	/*Box rules*/
+	padding: 0.5rem 1rem;
+	margin-left: 0.25rem;
+
+	/*Typography*/
+	text-transform: capitalize;
+
+	/*Decorations*/
+	color: #ffffff;
+	background-color: #f49224;
+	border: none;
+}
+
+.project-init-info__transp-mask {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	opacity: 0;
+}
+
+.project-init-info__adm-img-cont {
+	width: 100%;
+}
+
+.project-init-info__adm-img-cont > img {
+	width: 60px;
+	margin-right: 5px;
+}
+
+/*===================================================================================
+	SELECT ITEMS PAGE
+=====================================================================================*/
+
+/*===================================================================================
+	FILTERS MODULE
+=====================================================================================*/
+
+.filters-section {
+	display: inline-block;
+	width: 100%;
+	padding-top: 40px;
+}
+
+.filters {
+	float: left;
+	width: 130px;
+	padding-left: 10px;
+}
+
+/*===================================================================================
+	ONE FILTER CATEGORY MODULE
+=====================================================================================*/
+
+.one-filter-category {
+	margin-top: 10px;
+}
+
+.one-filter-category__title {
+	margin: 0 !important;
+	text-transform: uppercase;
+}
+
+.one-filter-category__table {
+	display: table;
+	padding-left: 10px;
+}
+
+.one-filter-category__row {
+	display: table-row;
+}
+
+.one-filter-category__cell {
+	display: table-cell;
+}
+
+.one-filter-category__cell > label {
+	margin: 0 !important;
+}
+
+.one-filter-category__cell input[type="checkbox"] {
+	margin: 0 !important;
+}
+
+.one-filter-category__name {
+	padding-left: 5px;
+	margin: 0 !important;
+}
+
+.one-filter-category__name--sub {
+	padding-left: 15px;
+}
+
+/*===================================================================================
+	PRODUCTS GRID MODULE
+=====================================================================================*/
+
+.products-grid {
+	display: block;
+	margin-left: 130px;
+}
+
+.products-grid__btn-cont {
+	display: inline-block;
+	width: 100%;
+}
+
+.products-grid__left-btn {
+	float: left;
+	padding-left: 5px;
+	padding-bottom: 15px;
+	text-transform: uppercase;
+	color: #f49224;
+}
+
+.products-grid__right-btn {
+	float: right;
+	padding: 5px 10px;
+
+	/*Typography*/
+	text-transform: capitalize;
+
+	/*Decorations*/
+	color: #ffffff;
+	background-color: #f49224;
+	border: none;
+}
+
+/*===================================================================================
+	ONE PRODUCT CATEGORY MODULE
+=====================================================================================*/
+
+.one-products-category {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+.one-products-category__title {
+	width: 100%;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+	font-size: 1em;
+	color: #aaaaaa;
+}
+
+.one-products-category__product {
+	width: 24%;
+	min-width: 190px;
+	padding-bottom: 20px;
+	margin-right: 1%;
+}
+
+.one-products-category__anch {
+	display: block;
+	width: 100%;
+	margin-bottom: 5px;
+	border: 2px solid transparent;
+}
+
+.one-products-category__anch.chosen {
+	border: 2px solid #f49224;
+}
+
+.one-products-category__img {
+	width: 100%;
+}
+
+.one-products-category__label {
+	display: block;
+	width: 100%;
+	padding-left: 10px;
+}
+
+/*===================================================================================
+	ROOM-BUILDER PAGE
+=====================================================================================*/
+
+/*===================================================================================
+	SUBTABS MODULE
+=====================================================================================*/
+
+.subtabs {
+	display: inline-block;
+	width: 100%;
+	padding: 18px 0;
+}
+
+.subtabs__one-tab {
+	float: left;
+	padding-right: 40px;
+	color: #000000;
+}
+
+.subtabs__btn {
+	/*Box rules*/
+	visibility: visible;
+	float: right;
+	padding: 5px 10px;
+	margin-left: 10px;
+	margin-top: -4px;
+
+	/*Typography*/
+	text-transform: capitalize;
+
+	/*Decorations*/
+	color: #ffffff;
+	background-color: #f49224;
+	border: none;
+}
+
+.subtabs__one-tab--active {
+	color: #f49224 !important;
+	text-decoration: none !important;
+}
+
+.active-tab {
+	display: block !important;
+}
+
+/*===================================================================================
+	SELECTED FURNITURE MODULE
+=====================================================================================*/
+
+.selected-furniture {
+	display: none;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.selected-furniture__table {
+	display: table;
+	width: 100%;
+	border: 2px solid #aaaaaa;
+}
+
+.selected-furniture__row {
+	display: table-row;
+}
+
+.selected-furniture__row--first {
+	font-weight: bold;
+}
+
+.selected-furniture__row--gray {
+	background-color: #cccccc;
+	text-transform: uppercase;
+}
+
+.selected-furniture__cell {
+	display: table-cell;
+	padding: 12px 0;
+	vertical-align: middle;
+	border-bottom: 1px solid #cccccc;
+}
+
+.selected-furniture__cell--with-cross {
+	width: 10%;
+	text-align: center;
+	font-weight: bold;
+	color: red;
+}
+
+.selected-furniture__cell--with-img {
+	width: 15%;
+	padding-right: 30px;
+}
+
+.selected-furniture__product-img {
+	width: 100%;
+}
+
+/*===================================================================================
+	ROOM LAYOUT MODULE
+>>>>>>> 169615b6a47b1221ee3ed551aae5a3ea2370e8fe
+=====================================================================================*/
+
+.room-layout,
+.furniture-board {
+    display: none;
+    padding: 10px 0;
+}
+
+.room-layout__instr-text,
+.furniture-board__instr-text {
+    color: #aaaaaa;
+}
+
+/*===================================================================================
+    FURNITURE BOARD AREA
+=====================================================================================*/
+
+.furniture-board-dragg {
+    position: relative;
+    margin: 0 auto;
+}
+.furniture-board-editor {
+    border: 1px solid black;
+}
+
+.furniture-board-editor-items-panel {
+    float: left;
+    position: absolute;
+    width: 10%;
+    left: -10%;
+    border: 1px solid black;
+    display: none;
+    height: auto;
+}
+
+.furniture-board-editor .fb-draggable {
+    border: 1px solid white;
+    position: relative;
+    transform-origin: top left;
+}
+
+.furniture-board-editor .fb-draggable.active {
+    border-color: #3eff00;
+}
+
+.furniture-board-editor .fb-draggable:hover {
+    border-color: #ffac00;
+}
+
+.furniture-board-editor .fb-draggable.collision {
+    border-color: red;
+}
+
+.furniture-board-editor img.fb-item-image {
+    width: 100%;
+    height: auto;
+}
+
+.fb-remove-icon {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    cursor: pointer;
+}
+
+.fb-rotation-arrow {
+    position: absolute;
+    right: -20px;
+    cursor: pointer;
+}
+
+.furniture-board-editor .fb-draggable2 {
+    width:100%;
+    height:auto;
+    -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+    z-index: 3;
+    position: relative;
+}
+
+.fb-items-panel-elem {
+    padding: 5px;
+}

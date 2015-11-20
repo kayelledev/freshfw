@@ -1,0 +1,6 @@
+$('.editor-container-wr').html(
+  "<%= j render(partial: 'shared/editor_container', locals: { variant: @product }) %>"
+);
+$(".editor-items-panel").html(
+    "<%= j render(partial: 'shared/room_editor_panel_items', locals: { variant: @product }) %>"
+);

@@ -39,7 +39,7 @@ Shoppe::Engine.routes.draw do
   resources :zones do
     resources :cities
   end
-  resources :freight_routes 
+  resources :freight_routes
   resources :suppliers
   resources :last_mile_companies
   resources :freight_companies

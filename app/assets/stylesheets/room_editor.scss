@@ -8,8 +8,6 @@
 }
 
 .editor-container .draggable {
-  //width: 100px;
-  //height: 100px;
   border: 1px solid white;
   position: relative;
   transform-origin: top left;
@@ -183,6 +181,7 @@ div#dialog-form-errors {
 
 .items-panel-elem {
   display: none;
+  padding: 5px;
 }
 
 .draggable2 {
@@ -192,10 +191,6 @@ div#dialog-form-errors {
           transform: translate(0px, 0px);
   z-index: 3;
   position:relative;
-}
-
-.items-panel-elem {
-  padding: 5px;
 }
 
 #room-slider .slide img {
@@ -287,4 +282,10 @@ div#dialog-form-errors {
 
 .elem-tooltip .glyphicon-trash {
   cursor:pointer;
+}
+
+.tooltip-item-image {
+  width: 100px;
+  height: auto;
+  padding-top: 5px;
 }

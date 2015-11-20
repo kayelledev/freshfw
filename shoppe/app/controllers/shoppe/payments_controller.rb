@@ -6,7 +6,7 @@ module Shoppe
 
     def create
       puts "in SHoppe payments controller - create"
-      
+
       payment = @order.payments.build(params[:payment].permit(:amount, :method, :reference))
       if payment.save
         redirect_to @order, :notice => t('shoppe.payments.create_notice')

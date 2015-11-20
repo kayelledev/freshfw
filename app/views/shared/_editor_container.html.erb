@@ -1,0 +1,42 @@
+<div class="editor-container" data-width="<%= variant.parent.width %>" data-height="<%= variant.parent.depth %>" style="height: 600px;">
+  <% variant.included_products.each do |item| %>
+    <span class='room-item' style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>"
+                data-rotation="<%= item.rotation %>"
+                data-x="<%= item.posX %>"
+                data-y="<%= item.posY %>"
+                data-toggle="tooltip">
+
+      <%= image_tag 'remove.png', class: 'remove-icon remove-item', 'data-item-id': item.id, width: '15px', height: '15px', hidden: true %>
+
+      <div id="<%= item.id %>" class="draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>"
+                data-rotation="<%= item.rotation %>"
+                data-x="<%= item.posX %>"
+                data-y="<%= item.posY %>">
+
+        <% if image_link(item, 'image6') %>
+          <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image'%>
+        <% end %>
+
+        <div class="point left-top"></div>
+        <div class="point right-top"></div>
+        <div class="point left-bottom"></div>
+        <div class="point right-bottom"></div>
+      </div>
+
+      <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
+
+      <div class='elem-tooltip' id="tooltip-<%= item.id %>" style='visibility:hidden;'>
+        <%= link_to item.permalink, target:"_blank" do %>
+          <p><%= item.name %></p>
+        <% end %>
+        <p><b>Width:</b> <%= item.width %><br>
+        <b>Heigh:</b> <%= item.height %><br>
+        <b>Depth:</b> <%= item.depth %></p>
+        <span class="glyphicon glyphicon-trash remove-item" aria-hidden="true" data-item-id="<%= item.id %>"></span>
+        <br>
+        <%= image_tag image_link(item, 'default_image'), class: 'tooltip-item-image' %>
+      </div>
+
+    </span>
+  <% end %>
+</div>

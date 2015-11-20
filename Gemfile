@@ -59,6 +59,7 @@ gem "figaro"
 gem 'pg'
 gem 'sinatra', :require => nil
 gem 'sidekiq'
+gem 'email_validator'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
