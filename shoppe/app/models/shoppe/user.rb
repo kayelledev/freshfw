@@ -9,6 +9,7 @@ module Shoppe
     validates :last_name, :presence => true
     validates :email_address, :presence => true
     has_and_belongs_to_many :roles, :join_table => :shoppe_roles_users, :after_remove => :check_roles!
+    has_many :design_projects, :class_name => 'Shoppe::DesignProject' 
     after_create :add_user_role
     # The user's first name & last name concatenated
     #
