@@ -142,8 +142,8 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active", using: :btree
 
   create_table "shoppe_design_projects", force: :cascade do |t|
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "name"
     t.string   "status"
     t.datetime "submited_at"
@@ -153,7 +153,8 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "inspiration_image3"
     t.integer  "user_id"
     t.integer  "room_type_id"
-    t.string   "room_size"
+    t.float    "width",              default: 0.0
+    t.float    "depth",              default: 0.0
   end
 
   create_table "shoppe_design_projects_products", force: :cascade do |t|
