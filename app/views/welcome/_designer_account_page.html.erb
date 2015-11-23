@@ -1,7 +1,7 @@
 <main>
     <div class="welcome-message">
         <div class="l-wrapper">
-            <p class="welcome-message__text">Hey [Name], here is a summary of your account activites:</p>
+            <p class="welcome-message__text">Hey <%= current_user.fullname %>, here is a summary of your account activites:</p>
         </div>
     </div>
     <div class="one-table">
@@ -33,60 +33,54 @@
             <button class="one-table__btn" type="button">create new project</button>
         </div>
     </div>
-    <div class="one-table">
+    <% if @orders.present? %>
+      <div class="one-table">
         <div class="l-wrapper">
             <h2 class="one-table__title">order history</h2>
             <div class="table">
                 <div class="table__row table__row--head">
-                    <div class="table__cell table__cell--first-cell">project name</div>
-                    <div class="table__cell">status</div>
-                    <div class="table__cell">submission date</div>
-                    <div class="table__cell">creation date</div>
-                    <div class="table__cell">last modefied date</div>
+                    <div class="table__cell table__cell--first-cell">ORDER #</div>
+                    <div class="table__cell">ORDER DATE</div>
+                    <div class="table__cell">DELIVERY SERVICE</div>
+                    <div class="table__cell">ORDER TOTAL</div>
+                    <div class="table__cell">STATUS</div>
                 </div>
-                <div class="table__row">
-                    <div class="table__cell table__cell--first-cell"><a href="#">project1-name</a></div>
-                    <div class="table__cell">Daft</div>
+                <% @orders.each do |order| %>
+                  <div class="table__row">
+                    <div class="table__cell table__cell--first-cell"><a href="#"><%= order.number %></a></div>
+                    <div class="table__cell"><%= order.updated_at.strftime('%F') %></div>
                     <div class="table__cell"></div>
-                    <div class="table__cell">Oct 31, 2015</div>
-                    <div class="table__cell">Oct 31, 2015 2:39pm</div>
-                </div>
-                <div class="table__row">
-                    <div class="table__cell table__cell--first-cell"><a href="#">project2-name</a></div>
-                    <div class="table__cell">Submited</div>
-                    <div class="table__cell">Sept 30, 2015</div>
-                    <div class="table__cell">Sept 14, 2015</div>
-                    <div class="table__cell">Sept 30, 2015 2:39pm</div>
-                </div>
+                    <div class="table__cell"><%= number_to_currency order.total %></div>
+                    <div class="table__cell"><%= order.status %></div>
+                  </div>
+                <% end %>
             </div>
         </div>
-    </div>
-    <div class="one-table">
+      </div>
+    <% end %>
+    <% if @products.present? %>
+      <div class="one-table">
         <div class="l-wrapper">
             <h2 class="one-table__title">recent product visits</h2>
             <div class="table table--three-col">
                 <div class="table__row table__row--head">
-                    <div class="table__cell table__cell--first-cell">project name</div>
-                    <div class="table__cell">status</div>
-                    <div class="table__cell">submission date</div>
+                    <div class="table__cell table__cell--first-cell">PRODUCT NAME</div>
+                    <div class="table__cell">CATEGORY</div>
+                    <div class="table__cell">RECENT VISIT DATE</div>
                     <div class="table__cell"></div>
                     <div class="table__cell"></div>
                 </div>
-                <div class="table__row">
-                    <div class="table__cell table__cell--first-cell"><a href="#">project1-name</a></div>
-                    <div class="table__cell">Daft</div>
+                <% @products.each do |product| %>
+                  <div class="table__row">
+                    <div class="table__cell table__cell--first-cell"><%= link_to product.name, product_path(product.permalink) %></div>
+                    <div class="table__cell"><%= product.product_category.try(:name) %></div>
+                    <div class="table__cell"><%= product.updated_at.strftime('%F') %></div>
                     <div class="table__cell"></div>
                     <div class="table__cell"></div>
-                    <div class="table__cell"></div>
-                </div>
-                <div class="table__row">
-                    <div class="table__cell table__cell--first-cell"><a href="#">project2-name</a></div>
-                    <div class="table__cell">Submited</div>
-                    <div class="table__cell">Sept 30, 2015</div>
-                    <div class="table__cell"></div>
-                    <div class="table__cell"></div>
-                </div>
+                  </div>
+                <% end %>
             </div>
         </div>
-    </div>
+      </div>
+    <% end %>
 </main>
