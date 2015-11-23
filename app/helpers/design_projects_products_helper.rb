@@ -1,0 +1,2 @@
+module DesignProjectsProductsHelper
+end
