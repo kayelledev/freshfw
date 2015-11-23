@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20153002432638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -277,6 +276,23 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_payments", ["order_id"], name: "index_shoppe_payments_on_order_id", using: :btree
   add_index "shoppe_payments", ["parent_payment_id"], name: "index_shoppe_payments_on_parent_payment_id", using: :btree
 
+  create_table "shoppe_permissions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "subject_class"
+    t.string   "controller_class"
+    t.string   "action"
+    t.text     "description"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "shoppe_permissions_roles", id: false, force: :cascade do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
+  end
+
+  add_index "shoppe_permissions_roles", ["permission_id", "role_id"], name: "by_permission_and_role", unique: true, using: :btree
+
   create_table "shoppe_product_attributes", force: :cascade do |t|
     t.integer  "product_id"
     t.string   "key"
@@ -354,6 +370,25 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink", using: :btree
   add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id", using: :btree
   add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku", using: :btree
+
+  create_table "shoppe_roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shoppe_roles", ["name", "resource_type", "resource_id"], name: "index_shoppe_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "shoppe_roles", ["name"], name: "index_shoppe_roles_on_name", using: :btree
+
+  create_table "shoppe_roles_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "shoppe_roles_users", ["user_id", "role_id"], name: "by_user_and_role", unique: true, using: :btree
+  add_index "shoppe_roles_users", ["user_id", "role_id"], name: "index_shoppe_roles_users_on_user_id_and_role_id", using: :btree
 
   create_table "shoppe_settings", force: :cascade do |t|
     t.string "key"

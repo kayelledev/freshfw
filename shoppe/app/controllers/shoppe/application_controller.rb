@@ -1,8 +1,13 @@
 module Shoppe
   class ApplicationController < ActionController::Base
     
-    before_action :is_an_admin?    
+    # before_action :is_an_admin?    
     before_action :authenticate_user!
+    rescue_from CanCan::AccessDenied do |exception|
+      flash[:alert] = "Access denied. You are not authorized to access the requested page."
+      redirect_to main_app.root_path 
+    end
+
 
     rescue_from ActiveRecord::DeleteRestrictionError do |e|
       redirect_to request.referer || root_path, :alert => e.message
@@ -13,15 +18,25 @@ module Shoppe
       render :layout => 'shoppe/sub', :template => 'shoppe/shared/error'
     end
 
+    protected
+    
+    # def self.permission
+    #   return name = self.name.gsub('Controller','').singularize.split('::').last.constantize.name rescue nil
+    # end
+    def self.permission
+      return name = self.name.gsub('Controller','').singularize.constantize.name  rescue self.name.constantize.name
+    end
+
     private
 
-    def is_an_admin?
-      if current_user
-        unless current_user.admin == true
-          redirect_to main_app.root_path
-        end
-      end
-    end
+
+    # def is_an_admin?
+    #   if current_user
+    #     unless current_user.admin == true
+    #       redirect_to main_app.root_path
+    #     end
+    #   end
+    # end
 
     def login_required
       unless logged_in?

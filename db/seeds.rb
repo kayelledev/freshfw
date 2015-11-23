@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Access Management
+
 # Logistic
 # zone generation
 zoneA = Shoppe::Zone.where(name: "A").first_or_create

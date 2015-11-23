@@ -91,6 +91,7 @@ GEM
     bxslider-rails (4.2.5.1)
     byebug (4.0.5)
       columnize (= 0.9.0)
+    cancancan (1.13.1)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -384,6 +385,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rolify (4.1.1)
     roo (1.13.2)
       nokogiri
       rubyzip
@@ -459,6 +461,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.4)
   bxslider-rails
   byebug
+  cancancan
   capistrano (~> 3.4.0)
   capistrano-rails
   capistrano-rvm
@@ -483,6 +486,7 @@ DEPENDENCIES
   pry
   rails (= 4.2.1)
   redis (~> 3.2.1)
+  rolify
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   shoppe!

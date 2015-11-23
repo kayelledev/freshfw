@@ -1,9 +1,9 @@
 module Shoppe
   class DeliveryServicePricesController < Shoppe::ApplicationController
-
     before_filter { @active_nav = :delivery_services }
     before_filter { @delivery_service = Shoppe::DeliveryService.find(params[:delivery_service_id])}
     before_filter { params[:id] && @delivery_service_price = @delivery_service.delivery_service_prices.find(params[:id])}
+    load_and_authorize_resource
 
     def index
       @delivery_service_prices = @delivery_service.delivery_service_prices.ordered

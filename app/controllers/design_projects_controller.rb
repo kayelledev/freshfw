@@ -1,4 +1,6 @@
 class DesignProjectsController < ApplicationController
+ load_and_authorize_resource :class => 'DesignProjectsController'
+ 
   def project_info
   end
 

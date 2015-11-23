@@ -1,6 +1,7 @@
 module Shoppe
   class FreightCompaniesController < Shoppe::ApplicationController
-  	before_filter { params[:id] && @freight_company = Shoppe::FreightCompany.find(params[:id]) }
+    before_filter { params[:id] && @freight_company = Shoppe::FreightCompany.find(params[:id]) }
+  	load_and_authorize_resource
 
   	def new
   	  @freight_company = Shoppe::FreightCompany.new
