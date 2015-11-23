@@ -97,7 +97,7 @@
              data-y="<%= item.posY %>"
              >
           <% if image_link(item, 'image6') %>
-              <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image'%>
+              <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image', crossorigin: 'anonymous'%>
           <% end %>
         </div>
         <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
@@ -170,9 +170,4 @@
       </form>
     </div>
   </div>
-
-
 </div>
-
-<script>
-</script>

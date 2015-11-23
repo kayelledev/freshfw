@@ -219,22 +219,4 @@
   });
 
 </script>
-<script language="javascript">
-    $('#save-as-image').click(function downimg(){
-        var container = $('.room-editor-container'),
-        c_width = container.width() + 100,
-        c_height = container.height();
-        console.log('width = ' + c_width + ' height = ' + c_height);
-        html2canvas($('.room-editor-container'), {
-            onrendered: function (canvas) {
-                canvas.toBlob(function(blob) {
-                    saveAs(blob ,"editor-container.jpeg");
-                }, "image/jpeg");
-                console.log('width = ' + c_width + ' height = ' + c_height);
-            },
-            background: '#fff',
-            width: c_width,
-            height: c_height
-        });
-    })
-</script>
+<%= javascript_include_tag 'saveToFile.js' %>
