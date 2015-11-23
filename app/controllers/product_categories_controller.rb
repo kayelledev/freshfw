@@ -3,11 +3,11 @@ class ProductCategoriesController < ApplicationController
   load_and_authorize_resource
  
    def index_type
-    @categories = Shoppe::ProductCategory.all
+    @categories = ProductCategory.all
   end
 
   def index_size
-    @categories = Shoppe::ProductCategory.all
+    @categories = ProductCategory.all
   end
 
 

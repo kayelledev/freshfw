@@ -8,7 +8,7 @@ class DesignProjectsController < ApplicationController
   end
 
   def room_builder
-    @project = Shoppe::Product.find_by(sku: 3)
+    @project = Product.find_by(sku: 3)
   end
 
   def instructions
