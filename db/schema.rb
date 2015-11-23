@@ -92,6 +92,12 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_cities_zones", ["city_id"], name: "index_shoppe_cities_zones_on_city_id", using: :btree
   add_index "shoppe_cities_zones", ["zone_id"], name: "index_shoppe_cities_zones_on_zone_id", using: :btree
 
+  create_table "shoppe_colors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shoppe_countries", force: :cascade do |t|
     t.string  "name"
     t.string  "code2"
@@ -133,6 +139,11 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   end
 
   add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active", using: :btree
+
+  create_table "shoppe_design_projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "shoppe_freight_companies", force: :cascade do |t|
     t.string "name"
@@ -364,6 +375,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.float    "arm_height",                                  default: 0.0
     t.text     "other_details"
     t.integer  "supplier_id"
+    t.integer  "color_id"
   end
 
   add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id", using: :btree

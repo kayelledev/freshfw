@@ -8,8 +8,8 @@ class ImportWorker
   def perform(file, email, import_log_id)
     field_array = ['Product Name', 'SKU', 'Category Name', 'Subcategory Name', 'Permalink', 'Description', 'Short Description', 'Featured',
                    "What's in the box?", 'Width', 'Height', 'Depth', 'Seat Width', 'Seat Depth', 'Seat Height', 'Arm Height',
-                   'CAD Price', 'USA Price', 'Default Image', 'Image2', 'Image3', 'Image4', 'Image5', 'Image6', 'Supplier']
-    attr_active_array = ['Color', 'Item 2 Width', 'Item 2 Depth', 'Item 2 Height', 'Item 3 Width', 'Item 3 Depth', 'Item 3 Height', 'NW', 'Technical Description',
+                   'CAD Price', 'USA Price', 'Default Image', 'Image2', 'Image3', 'Image4', 'Image5', 'Image6', 'Supplier', 'Color']
+    attr_active_array = ['Item 2 Width', 'Item 2 Depth', 'Item 2 Height', 'Item 3 Width', 'Item 3 Depth', 'Item 3 Height', 'NW', 'Technical Description',
                          'Features', 'Instructions', 'Outdoor']
     errors = []
     import_log = Shoppe::ImportLog.find(import_log_id)
@@ -76,6 +76,11 @@ class ImportWorker
             product.supplier_id = Shoppe::Supplier.where(name: row["Supplier"]).first_or_create.id
           else
             product.supplier_id = nil
+          end
+          if row["Color"].present?
+            product.color_id = Shoppe::Color.where(name: row["Color"]).first_or_create.id
+          else
+            product.color_id = nil
           end
           product.save!
           field_array.each{|element| row.delete(element)}
