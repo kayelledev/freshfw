@@ -6,10 +6,10 @@ class CreateColors < ActiveRecord::Migration
     end
     add_column :shoppe_products, :color_id, :integer, default: nil
 
-    Shoppe::ProductAttribute.where(key: "Color").each do |attribute|
-      color_id = Shoppe::Color.where(name: attribute.value).first_or_create.id
-      attribute.product.update(color_id: color_id)
-      attribute.destroy
-    end
+    # Shoppe::ProductAttribute.where(key: "Color").each do |attribute|
+    #   color_id = Shoppe::Color.where(name: attribute.value).first_or_create.id
+    #   attribute.product.update(color_id: color_id)
+    #   attribute.destroy
+    # end
   end
 end
