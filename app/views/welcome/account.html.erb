@@ -1,4 +1,4 @@
-<% if current_user.roles.map(&:name).include? 'designer' %>
+<% if current_user && current_user.roles.map(&:name).include? 'designer' %>
   <%= render 'designer_account_page' %>
 <% else %>
  <%= render 'user_account_page' %>
