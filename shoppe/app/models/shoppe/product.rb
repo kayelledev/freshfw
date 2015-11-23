@@ -54,7 +54,8 @@ module Shoppe
     #
     has_many :product_associations, dependent: :destroy, class_name: 'Shoppe::IncludedProduct', foreign_key: "parent_product_id"
     has_many :included_products, through: :product_associations, dependent: :destroy, class_name: 'Shoppe::Product'
-
+    has_many  :design_projects_products, :class_name => 'Shoppe::DesignProjectsProduct'
+    has_many :design_projects, through: :design_projects_products, :class_name => 'Shoppe::DesignProject'
     # Validations
     #with_options :if => Proc.new { |p| p.parent.nil? } do |product|
       #product.validates :product_category_id, :presence => true

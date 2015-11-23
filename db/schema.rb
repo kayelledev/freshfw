@@ -16,17 +16,6 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "design_projects_products", force: :cascade do |t|
-    t.integer  "design_project_id"
-    t.integer  "product_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
-
-  add_index "design_projects_products", ["design_project_id", "product_id"], name: "design_projects_products_index", unique: true, using: :btree
-  add_index "design_projects_products", ["design_project_id"], name: "index_design_projects_products_on_design_project_id", using: :btree
-  add_index "design_projects_products", ["product_id"], name: "index_design_projects_products_on_product_id", using: :btree
-
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
     t.string   "item_name"
@@ -165,6 +154,17 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer  "room_type_id"
     t.string   "room_size"
   end
+
+  create_table "shoppe_design_projects_products", force: :cascade do |t|
+    t.integer  "design_project_id"
+    t.integer  "product_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "shoppe_design_projects_products", ["design_project_id", "product_id"], name: "design_projects_products_index", unique: true, using: :btree
+  add_index "shoppe_design_projects_products", ["design_project_id"], name: "index_shoppe_design_projects_products_on_design_project_id", using: :btree
+  add_index "shoppe_design_projects_products", ["product_id"], name: "index_shoppe_design_projects_products_on_product_id", using: :btree
 
   create_table "shoppe_freight_companies", force: :cascade do |t|
     t.string "name"
