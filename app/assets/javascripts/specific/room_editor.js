@@ -3268,6 +3268,11 @@
           // change editor height line
           $('.editor-height').height($('.editor-container').height());
           $('.editor-height img').height($('.editor-container').height());
+          // change editor width line
+          $('.editor-width').width($('.editor-container').width());
+          $('.editor-width img').width($('.editor-container').width());
+
+          $('.dragg').width( $('.editor-container').css('width') );
 
 
           // target elements with the "draggable" class
@@ -3544,7 +3549,7 @@
         this.initMouseRotation();
         this.openDimensionsForm(this.$initialElenemts);
         this.setNewArea(this.$initialElenemts);
-        // this.adaptArea(this.$initialElenemts);
+        this.adaptArea(this.$initialElenemts);
         this.removeElement();
     };
 
