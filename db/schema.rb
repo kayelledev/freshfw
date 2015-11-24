@@ -141,8 +141,8 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active", using: :btree
 
   create_table "shoppe_design_projects", force: :cascade do |t|
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "name"
     t.string   "status"
     t.datetime "submited_at"
@@ -151,8 +151,8 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "inspiration_image2"
     t.string   "inspiration_image3"
     t.integer  "user_id"
-    t.integer  "room_type_id"
     t.string   "room_size"
+    t.integer  "product_category_id"
   end
 
   create_table "shoppe_design_projects_products", force: :cascade do |t|
@@ -422,12 +422,6 @@ ActiveRecord::Schema.define(version: 20153002432638) do
 
   add_index "shoppe_roles_users", ["user_id", "role_id"], name: "by_user_and_role", unique: true, using: :btree
   add_index "shoppe_roles_users", ["user_id", "role_id"], name: "index_shoppe_roles_users_on_user_id_and_role_id", using: :btree
-
-  create_table "shoppe_room_types", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "shoppe_settings", force: :cascade do |t|
     t.string "key"
