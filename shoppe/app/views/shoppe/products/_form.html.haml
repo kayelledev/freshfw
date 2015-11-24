@@ -33,6 +33,9 @@
     %dl
       %dt= f.label :color_id, t('shoppe.products.product_color')
       %dd= f.collection_select :color_id, Shoppe::Color.order(:name), :id, :name, {:class => 'chosen'}
+    %dl
+      %dt= f.label :material_id, t('shoppe.products.product_material')
+      %dd= f.collection_select :material_id, Shoppe::Material.order(:name), :id, :name, {:class => 'chosen'}
 
     .splitContainer
       %dl.fourth

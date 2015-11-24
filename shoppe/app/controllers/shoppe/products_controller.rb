@@ -62,6 +62,7 @@ module Shoppe
                               :width, :height, :depth,:other_details, :is_preset,
                               :url_default_image, :url_image2, :url_image3, :url_image4, :url_image5, :url_image6,
                               :seat_width, :seat_depth, :seat_height, :arm_height,
+                              :supplier_id, :color_id, :material_id,
                               :product_attributes_array => [:key, :value, :searchable, :public], :included=>[]
                               )
     end

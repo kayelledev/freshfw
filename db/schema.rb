@@ -223,6 +223,12 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id"], name: "index_shoppe_last_mile_companies_zones_on_last_mile_company_id", using: :btree
   add_index "shoppe_last_mile_companies_zones", ["zone_id"], name: "index_shoppe_last_mile_companies_zones_on_zone_id", using: :btree
 
+  create_table "shoppe_materials", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shoppe_order_items", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "ordered_item_id"
@@ -397,6 +403,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.text     "other_details"
     t.integer  "supplier_id"
     t.integer  "color_id"
+    t.integer  "material_id"
   end
 
   add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id", using: :btree
