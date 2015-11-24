@@ -11,5 +11,6 @@ class CreateColors < ActiveRecord::Migration
       attribute.product.update(color_id: color_id) if attribute.product.present?
       attribute.destroy
     end
+
   end
 end
