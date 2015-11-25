@@ -367,6 +367,9 @@
 
 .one-filter-category {
     margin-top: 10px;
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .one-filter-category__title {
@@ -376,7 +379,7 @@
 
 .one-filter-category__table {
     display: table;
-    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .one-filter-category__row {
@@ -410,12 +413,13 @@
 
 .products-grid {
     display: block;
-    margin-left: 130px;
+    margin-left: 150px;
 }
 
 .products-grid__btn-cont {
     display: inline-block;
     width: 100%;
+    cursor: pointer;
 }
 
 .products-grid__left-btn {
@@ -461,6 +465,7 @@
     min-width: 190px;
     padding-bottom: 20px;
     margin-right: 1%;
+    vertical-align: bottom;
 }
 
 .one-products-category__anch {

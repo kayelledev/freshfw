@@ -53,6 +53,11 @@ class DesignProjectsController < ApplicationController
     @products_categories = Product.where(color_id: @colors, material_id: @materials, product_category_id: @categories)
                                   .joins(:product_category).order('shoppe_product_categories.name')
                                   .group_by { |t| t.product_category.name }
+    binding.pry
+    @design_project.update(product_categories: params[:categories], 
+                          colors: params[:colors],
+                          materials: params[:materials])
+
     respond_to do |format|
       format.js
     end
