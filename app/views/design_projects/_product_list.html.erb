@@ -16,7 +16,7 @@
                <%= image_tag image_link(product, 'default_image'), class: "one-products-category__img", alt: "#{product.full_name}" %>
               </a>
               <label class="one-products-category__label">
-                <%= check_box_tag "product_ids[]", product.id %>
+                <%= check_box_tag "product_ids[]", product.id, @design_project.products.include?(product) %>
               </label>
             </div>
           <% end %>

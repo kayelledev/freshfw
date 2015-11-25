@@ -21,7 +21,7 @@
                                 <div class="one-filter-category__row">
                                     <div class="one-filter-category__cell">
                                         <label class="one-filter-category__label">
-                                            <%= check_box_tag "category_ids[]", category.id %>
+                                            <%= check_box_tag "category_ids[]", category.id, @design_project.product_categories.include?(category) %>
                                         </label>
                                     </div>
                                     <div class="one-filter-category__cell">
@@ -32,7 +32,7 @@
                                     <div class="one-filter-category__row">
                                         <div class="one-filter-category__cell">
                                             <label class="one-filter-category__label">
-                                                <%= check_box_tag "category_ids[]", child.id %>
+                                                <%= check_box_tag "category_ids[]", child.id, @design_project.product_categories.include?(child) %>
                                             </label>
                                         </div>
                                         <div class="one-filter-category__cell">
@@ -50,7 +50,7 @@
                                 <div class="one-filter-category__row">
                                     <div class="one-filter-category__cell">
                                         <label class="one-filter-category__label">
-                                            <%= check_box_tag "color_ids[]", color.id %>
+                                            <%= check_box_tag "color_ids[]", color.id, @design_project.colors.include?(color) %>
                                         </label>
                                     </div>
                                     <div class="one-filter-category__cell">
@@ -67,7 +67,7 @@
                                 <div class="one-filter-category__row">
                                     <div class="one-filter-category__cell">
                                         <label class="one-filter-category__label">
-                                            <%= check_box_tag "material_ids[]", material.id %>
+                                            <%= check_box_tag "material_ids[]", material.id, @design_project.materials.include?(material) %>
                                         </label>
                                     </div>
                                     <div class="one-filter-category__cell">
@@ -96,7 +96,7 @@
                                    <%= image_tag image_link(product, 'default_image'), class: "one-products-category__img", alt: "#{product.full_name}" %>
                                   </a>
                                   <label class="one-products-category__label">
-                                    <%= check_box_tag "product_ids[]", product.id %>
+                                    <%= check_box_tag "product_ids[]", product.id, @design_project.products.include?(product) %>
                                   </label>
                                 </div>
                               <% end %>
