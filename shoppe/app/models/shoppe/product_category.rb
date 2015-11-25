@@ -16,6 +16,8 @@ module Shoppe
     # All products within this category
     has_many :products, :dependent => :restrict_with_exception, :class_name => 'Shoppe::Product'
     has_many :design_projects, :class_name => 'Shoppe::DesignProject'
+    has_many :filters, as: :filter_element, :class_name => 'Shoppe::Filter'
+
     # Validations
     validates :name, :presence => true, :uniqueness => true
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true

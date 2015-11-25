@@ -160,6 +160,17 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "url_inspiration_image3"
   end
 
+  create_table "shoppe_design_projects_filters", force: :cascade do |t|
+    t.integer  "design_project_id"
+    t.integer  "filter_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "shoppe_design_projects_filters", ["design_project_id", "filter_id"], name: "design_projects_filters_index", unique: true, using: :btree
+  add_index "shoppe_design_projects_filters", ["design_project_id"], name: "index_shoppe_design_projects_filters_on_design_project_id", using: :btree
+  add_index "shoppe_design_projects_filters", ["filter_id"], name: "index_shoppe_design_projects_filters_on_filter_id", using: :btree
+
   create_table "shoppe_design_projects_products", force: :cascade do |t|
     t.integer  "design_project_id"
     t.integer  "product_id"
@@ -176,6 +187,13 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_design_projects_products", ["design_project_id", "product_id"], name: "design_projects_products_index", unique: true, using: :btree
   add_index "shoppe_design_projects_products", ["design_project_id"], name: "index_shoppe_design_projects_products_on_design_project_id", using: :btree
   add_index "shoppe_design_projects_products", ["product_id"], name: "index_shoppe_design_projects_products_on_product_id", using: :btree
+
+  create_table "shoppe_filters", force: :cascade do |t|
+    t.integer  "filter_element_id"
+    t.string   "filter_element_type"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "shoppe_freight_companies", force: :cascade do |t|
     t.string "name"
