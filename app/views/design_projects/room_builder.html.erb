@@ -1,3 +1,6 @@
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag "specific/selected_furniture.js" %>
+<% end %>
 <main>
     <section class="main-tabs">
         <div class="l-wrapper">
@@ -15,65 +18,49 @@
             <button class="subtabs__btn" type="button" style="visibility: hidden">Text Test</button>
             <button class="subtabs__btn" type="button" style="visibility: hidden">Test Test</button>
         </div>
-        <div id="selected-furniture" class="js-tabs-block selected-furniture active-tab">
+        <div id="selected-furniture" class="js-tabs-block selected-furniture active-tab" data-project-id="<%= @design_project.id %>">
             <div class="selected-furniture__table">
                 <div class="selected-furniture__row selected-furniture__row--first">
                     <div class="selected-furniture__cell"></div>
                     <div class="selected-furniture__cell"></div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
+                    <div class="selected-furniture__cell">Product Name</div>
+                    <div class="selected-furniture__cell">Short Description</div>
+                    <div class="selected-furniture__cell">Dimensions<br>W x D x H</div>
                 </div>
-                <div class="selected-furniture__row selected-furniture__row--gray">
-                    <div class="selected-furniture__cell"></div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell"></div>
-                    <div class="selected-furniture__cell"></div>
-                    <div class="selected-furniture__cell"></div>
-                </div>
-                <div class="selected-furniture__row">
-                    <div class="selected-furniture__cell selected-furniture__cell--with-cross"> &#x2718;</div>
-                    <div class="selected-furniture__cell selected-furniture__cell--with-img">
-                        <img class="selected-furniture__product-img" src="http://www.jensen-lewis.com/images/product/midthumbs/American-Leather-Furniture-03-Alessandro-Sofa.jpg">
+
+                <% @products_categories.each do |product_category, product_list| %>
+                    <div class="selected-furniture__row selected-furniture__row--gray product-category" data-id="<%= product_category.id %>">
+                        <div class="selected-furniture__cell"></div>
+                        <div class="selected-furniture__cell"><%= product_category.name %></div>
+                        <div class="selected-furniture__cell"></div>
+                        <div class="selected-furniture__cell"></div>
+                        <div class="selected-furniture__cell"></div>
                     </div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                </div>
-                <div class="selected-furniture__row">
-                    <div class="selected-furniture__cell selected-furniture__cell--with-cross"> &#x2718;</div>
-                    <div class="selected-furniture__cell selected-furniture__cell--with-img">
-                        <img class="selected-furniture__product-img" src="http://www.jensen-lewis.com/images/product/midthumbs/American-Leather-Furniture-03-Alessandro-Sofa.jpg">
-                    </div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                </div>
-                <div class="selected-furniture__row selected-furniture__row--gray">
-                    <div class="selected-furniture__cell"></div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell"></div>
-                    <div class="selected-furniture__cell"></div>
-                    <div class="selected-furniture__cell"></div>
-                </div>
-                <div class="selected-furniture__row">
-                    <div class="selected-furniture__cell selected-furniture__cell--with-cross"> &#x2718;</div>
-                    <div class="selected-furniture__cell selected-furniture__cell--with-img">
-                        <img class="selected-furniture__product-img" src="http://www.jensen-lewis.com/images/product/midthumbs/American-Leather-Furniture-03-Alessandro-Sofa.jpg">
-                    </div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                    <div class="selected-furniture__cell">Test Test Test</div>
-                </div>
+
+                    <% product_list.each do |product| %>
+                        <div class="selected-furniture__row product" data-id="<%= product.id %>" data-product-category-id="<%= product_category.id %>" >
+                            <div class="selected-furniture__cell selected-furniture__cell--with-cross">
+                                <span class="glyphicon glyphicon-remove product-remove" data-product-id="<%= product.id %>" data-url="<%= designer_portal_remove_product_path %>"></span>
+                            </div>
+                            <div class="selected-furniture__cell selected-furniture__cell--with-img">
+                                <%= image_tag image_link(product, 'default_image'), class: "one-products-category__img", alt: "#{product.full_name}" %>
+                            </div>
+                            <div class="selected-furniture__cell"><%= product.name %></div>
+                            <div class="selected-furniture__cell"><%= product.short_description %></div>
+                            <div class="selected-furniture__cell"><%= product_dimensions(product) %></div>
+                        </div>
+                    <% end %>
+                <% end %>
+
             </div>
         </div>
         <div id="room-layout" class="js-tabs-block room-layout">
             <p class="room-layout__instr-text">Drag the line drawing to the room</p>
-            <%= render partial: 'room_layout_editor' %>
+            <%#= render partial: 'room_layout_editor' %>
         </div>
         <div id="furniture-board" class="js-tabs-block furniture-board">
             <p class="furniture-board__instr-text">Drag the images to the board</p>
-            <%= render partial: 'furniture_board_editor' %>
+            <%#= render partial: 'furniture_board_editor' %>
         </div>
     </div>
 </main>

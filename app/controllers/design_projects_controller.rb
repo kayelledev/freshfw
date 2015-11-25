@@ -35,7 +35,8 @@ class DesignProjectsController < ApplicationController
   end
 
   def room_builder
-    @project = Product.find_by(sku: 3)
+    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+    @products_categories = @design_project.products.includes(:product_category).order('shoppe_product_categories.name').group_by { |t| t.product_category }
   end
 
   def add_to_room_builder
@@ -43,6 +44,15 @@ class DesignProjectsController < ApplicationController
     @design_project.update(product_ids: params[:product_ids])
     select_items
     render "select_items"
+  end
+
+  def remove_product
+    @design_projects_product = Shoppe::DesignProjectsProduct.where( product_id: params[:product_id], design_project_id: params[:design_project_id] ).first
+    @design_projects_product.destroy
+    @product = @design_projects_product.product
+    respond_to do |format|
+      format.js
+    end
   end
 
   def items_filtering
@@ -53,8 +63,7 @@ class DesignProjectsController < ApplicationController
     @products_categories = Product.where(color_id: @colors, material_id: @materials, product_category_id: @categories)
                                   .joins(:product_category).order('shoppe_product_categories.name')
                                   .group_by { |t| t.product_category.name }
-    binding.pry
-    @design_project.update(product_categories: params[:categories], 
+    @design_project.update(product_categories: params[:categories],
                           colors: params[:colors],
                           materials: params[:materials])
 
