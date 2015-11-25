@@ -1,0 +1,4 @@
+$('#productList').replaceWith("<%=  j (render 'product_list') %>");
+$('.products-grid__btn-cont').on('click', function () {
+$.post('/designer-portal/items_filtering', {});
+});
