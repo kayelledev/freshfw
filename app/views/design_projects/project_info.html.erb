@@ -123,13 +123,15 @@
                     <div class="project-init-info__cell">Room Type</div>
                     <div class="project-init-info__cell">
                         <label class="project-init-info__label">
-                            <select class="project-init-info__select">
+
+                       <%= f.collection_select :product_category_id, Shoppe::ProductCategory.order(:name), :id, :name, {:class => 'project-init-info__select'} %>
+                          <!--   <select class="project-init-info__select">
                                 <option>Type 1</option>
                                 <option>Type 2</option>
                                 <option>Type 3</option>
                                 <option>Type 4</option>
                                 <option>Type 5</option>
-                            </select>
+                            </select> -->
                         </label>
                     </div>
                     <div class="project-init-info__cell"></div>
