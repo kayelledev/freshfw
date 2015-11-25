@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   get 'designer-portal/room_builder', to: 'design_projects#room_builder'
   get 'designer-portal/instructions', to: 'design_projects#instructions'
   post 'designer-portal/create', to: 'design_projects#create'
+  patch 'designer-portal/create', to: 'design_projects#create'
   post 'designer-portal/add_to_room_builder', to: 'design_projects#add_to_room_builder'
   post 'designer-portal/items_filtering', to: 'design_projects#items_filtering'
 

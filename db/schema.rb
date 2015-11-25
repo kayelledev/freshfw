@@ -152,12 +152,12 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "inspiration_image2"
     t.string   "inspiration_image3"
     t.integer  "user_id"
-    t.integer  "product_category_id"
     t.float    "width",                  default: 0.0
     t.float    "depth",                  default: 0.0
     t.string   "url_inspiration_image1"
     t.string   "url_inspiration_image2"
     t.string   "url_inspiration_image3"
+    t.integer  "product_category_id"
   end
 
   create_table "shoppe_design_projects_filters", force: :cascade do |t|

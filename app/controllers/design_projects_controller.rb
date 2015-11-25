@@ -5,12 +5,14 @@ class DesignProjectsController < ApplicationController
     @design_project = Shoppe::DesignProject.new(design_project_params)
     @design_project.user = current_user
     @design_project.status = :draft
-    @result = @design_project.save
-    respond_to do |format|
-      if @result = @design_project.save
+    if @result = @design_project.save
+      session[:design_project_id] = @design_project.id
+      respond_to do |format|
         format.html { redirect_to designer_portal_path }
         format.js
-      else
+      end
+    else
+      respond_to do |format|
         format.html { render action: :project_info }
         format.js
       end
@@ -18,11 +20,11 @@ class DesignProjectsController < ApplicationController
   end
 
   def project_info
-    @design_project = Shoppe::DesignProject.new
+    @design_project = session[:design_project_id] ? Shoppe::DesignProject.find(session[:design_project_id]) : Shoppe::DesignProject.new
   end
 
   def select_items
-    @design_project = DesignProject.last # replace with actual product
+    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
   	@categories = ProductCategory.where(parent_id: nil).order("name")
   	@colors = Color.order("name")
   	@materials = Material.order("name")
@@ -37,14 +39,14 @@ class DesignProjectsController < ApplicationController
   end
 
   def add_to_room_builder
-    @design_project = DesignProject.last
+    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
     @design_project.update(product_ids: params[:product_ids])
     select_items
     render "select_items"
   end
 
   def items_filtering
-    @design_project = DesignProject.last
+    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
     @categories = params[:categories].present? ? params[:categories] : ProductCategory.where(parent_id: nil).order("name").ids
     @colors = params[:colors].present? ? params[:colors] : Color.order("name").ids
     @materials = params[:materials].present? ? params[:materials] : Material.order("name").ids
