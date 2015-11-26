@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
 
     @items = Shoppe::Product.all
     @categories = ProductCategory.all
-    reviewed_product = Shoppe::Product.find_by_permalink(params[:id])
+    reviewed_product = Product.find_by_permalink(params[:id])
     review = current_user.reviews.find_or_create_by(product: reviewed_product) if current_user
     review.touch if review
   end
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
   end
 
   def get_product
-    @product = Product.find_by(sku: params[:sku])
+    @product = Shoppe::Product.find_by(sku: params[:sku])
     respond_to do |format|
       format.js
     end
