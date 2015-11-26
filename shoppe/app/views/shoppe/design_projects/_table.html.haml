@@ -1,0 +1,18 @@
+%main
+  .one-table
+    .l-wrapper
+      %h2.one-table__title room design projects
+      .table
+        .table__row.table__row--head
+          .table__cell.table__cell--first-cell project name
+          .table__cell status
+          .table__cell submission date
+          .table__cell creation date
+          .table__cell last modefied date
+        - @design_projects.each do |design_project| 
+          .table__row
+            .table__cell.table__cell--first-cell= link_to design_project.name, design_project
+            .table__cell= design_project.status 
+            .table__cell= design_project.submited_at.strftime('%b %d, %Y') if design_project.submited_at
+            .table__cell= design_project.created_at.strftime('%b %d, %Y') 
+            .table__cell= design_project.updated_at.strftime('%b %d, %Y')

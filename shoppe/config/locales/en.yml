@@ -597,6 +597,14 @@ en:
       create_notice: Payment has been added successfully
       destroy_notice: Payment has been removed successfully
       refund_notice: Refund has been processed successfully.
+    
+    design_projects:
+      title: Room Designs
+      design_projects: Room Design Projects
+      design_project: Room Design
+      request_revision: Request revision
+      reject: Reject
+      approve: Approve
 
     navigation:
       admin_primary:
@@ -606,6 +614,7 @@ en:
         logistics: Logistics
         delivery_services: Delivery Services
         tax_rates: Tax Rates
+        design_projects: Room Designs
         users: Users
         countries: Countries
         settings: Settings

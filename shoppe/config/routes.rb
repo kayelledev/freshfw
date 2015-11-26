@@ -47,6 +47,13 @@ Shoppe::Engine.routes.draw do
   resources :roles_permissions
   resources :roles
   resources :permissions
+  resources :design_projects do
+    member do
+      post :reject
+      post :approve
+      post :request_revision
+    end
+  end
   get 'get_controller_options' => 'permissions#get_controller_options'
   resources :attachments, :only => :destroy
 
