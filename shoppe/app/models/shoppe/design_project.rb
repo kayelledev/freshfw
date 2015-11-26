@@ -20,5 +20,29 @@ module Shoppe
     mount_uploader :inspiration_image1, ImageUploader
     mount_uploader :inspiration_image2, ImageUploader
     mount_uploader :inspiration_image3, ImageUploader
+  
+    def create_filters_by(categories, colors, materials)
+      unless categories.nil? && colors.nil? && materials.nil? 
+        filters_array = []
+        categories.try(:each) do |category_id|
+          category = ProductCategory.find(category_id)
+          filter = Filter.where(filter_element_id: category_id, filter_element_type: 'Shoppe::ProductCategory').first_or_create
+          filters_array << filter
+        end
+        colors.try(:each) do |category_id|
+          category = Color.find(category_id)
+          filter = Filter.where(filter_element_id: category_id, filter_element_type: 'Shoppe::Color').first_or_create
+          filters_array << filter
+        end
+        materials.try(:each) do |material_id|
+          material = Material.find(material_id)
+          filter = Filter.where(filter_element_id: material_id, filter_element_type: 'Shoppe::Material').first_or_create
+          filters_array << filter
+        end
+        filters = Filter.where(id: filters_array.map(&:id))
+        self.update(filter_ids: filters.ids)
+      end
+    end
+
   end
 end
