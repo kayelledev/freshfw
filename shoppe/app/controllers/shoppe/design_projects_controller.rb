@@ -11,7 +11,30 @@ module Shoppe
   	end
 
   	def show
+      respond_to do |format|
+        format.html
+        format.js
+      end
   	end
+
+    def select_items
+      @categories = ProductCategory.where(parent_id: nil).order("name")
+      @colors = Color.order("name")
+      @materials = Material.order("name")
+      @products_categories = Product.where(color_id: @colors.ids, material_id: @materials.ids, product_category_id: @categories.ids)
+                                  .joins(:product_category).order('shoppe_product_categories.name')
+                                  .group_by { |t| t.product_category.name }
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    end
+
+    def room_builder
+    end
+    
+    def instructions
+    end
 
   	def reject
   	  @design_project.status = :rejected

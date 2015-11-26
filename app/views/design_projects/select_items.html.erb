@@ -17,7 +17,7 @@
                         <div class="one-filter-category">
                             <p class="one-filter-category__title">category</p>
                             <div class="one-filter-category__table">
-                              <% @categories.each do |category| %>
+                              <% @parent_categories.each do |category| %>
                                 <div class="one-filter-category__row">
                                     <div class="one-filter-category__cell">
                                         <label class="one-filter-category__label">
@@ -28,7 +28,7 @@
                                         <p class="one-filter-category__name"><%= category.name %></p>
                                     </div>
                                 </div>
-                                <% category.children.each do |child| %>
+                                <% category.descendents.each do |child| %>
                                     <div class="one-filter-category__row">
                                         <div class="one-filter-category__cell">
                                             <label class="one-filter-category__label">
@@ -117,7 +117,6 @@
                 if (checkboxes.length) {
                     for (var i = 0, lim = checkboxes.length; i < lim; i += 1) {
                         checkboxes[i].addEventListener("change", function() {
-                            console.log("should appear and disapear");
                             this.parentElement.previousElementSibling.classList.toggle("chosen");
                         });
                     };
