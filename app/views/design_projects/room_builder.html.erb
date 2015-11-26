@@ -15,8 +15,9 @@
             <a class="subtabs__one-tab subtabs__one-tab--active" data-appearer="selected-furniture" href="#">SELECED FURNITURE</a>
             <a class="subtabs__one-tab" data-appearer="room-layout" href="#">ROOM LAYOUT</a>
             <a class="subtabs__one-tab" data-appearer="furniture-board" href="#">FURNITURE BOARD</a>
-            <button class="subtabs__btn" type="button" style="visibility: hidden">Save Layout</button>
-            <button class="subtabs__btn" type="button" style="visibility: hidden">Submit Room</button>
+            <button class="subtabs__btn" id='submit-room' type="button" style="visibility: hidden">Submit Room</button>
+            <button class="subtabs__btn" id='save-layout' type="button" style="visibility: hidden">Save Layout</button>
+
         </div>
         <div id="selected-furniture" class="js-tabs-block selected-furniture active-tab" data-project-id="<%= @design_project.id %>">
             <div class="selected-furniture__table">

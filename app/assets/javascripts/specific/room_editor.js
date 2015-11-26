@@ -3409,17 +3409,40 @@
             coY = Math.abs(event.dy) / Math.abs(event.dx);
           }
         }
-        var top = $(event.target).offset().top;
-        var left = $(event.target).offset().left;
+
+        var positionBefore = controller.getDegreeOfElement( $(event.target).parent() );
+        var top = positionBefore.top;
+        var left = positionBefore.left;
+        var degree = positionBefore.degree;
+
         while ( controller.restrictAreaHoles(event.target) ) {
-          top -= ( event.dy / Math.abs(event.dy) ) *coY;
-          left -= ( event.dx / Math.abs(event.dx) ) *coX;
+          top -= ( event.dy / Math.abs(event.dy) ) * coY;
+          left -= ( event.dx / Math.abs(event.dx) ) * coX;
+
           // console.log(top, left, coX, coY);
-          $(event.target).parent().offset({
-            top: top,
-            left: left
-          });
+
+          // $(event.target).parent().offset({
+          //   top: top,
+          //   left: left
+          // });
+
+          if ( !isNaN(top) && !isNaN(left) ) {
+            $(event.target).parent().css({
+              '-webkit-transform': 'translate(' + left + 'px,' + top + 'px) rotate(' + degree +'deg)',
+              '-moz-transform': 'translate(' + left + 'px,' + top + 'px) rotate(' + degree +'deg)',
+              '-ms-transform': 'translate(' + left + 'px,' + top + 'px) rotate(' + degree +'deg)',
+              'transform': 'translate(' + left + 'px,' + top + 'px) rotate(' + degree +'deg)',
+            });
+            $(event.target).parent().attr('data-x', left);
+            $(event.target).parent().attr('data-y', top);
+            $(event.target).attr('data-x', left);
+            $(event.target).attr('data-y', top);
+          } else {
+            console.log('break');
+            break;
+          }
         }
+
         $(event.target).parent().css('visibility', 'visible');
       }
     }
