@@ -353,12 +353,12 @@
     display: inline-block;
     width: 100%;
     padding-top: 40px;
+    padding-bottom: 60px;
 }
 
 .filters {
     float: left;
-    width: 130px;
-    padding-left: 10px;
+    width: 200px;
 }
 
 /*===================================================================================
@@ -366,10 +366,12 @@
 =====================================================================================*/
 
 .one-filter-category {
+    position: relative;
     margin-top: 10px;
     height: 200px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
 }
 
 .one-filter-category__title {
@@ -399,12 +401,12 @@
 }
 
 .one-filter-category__name {
-    padding-left: 5px;
+    padding-left: 10px;
     margin: 0 !important;
 }
 
 .one-filter-category__name--sub {
-    padding-left: 15px;
+    padding-left: 20px;
 }
 
 /*===================================================================================
@@ -413,13 +415,12 @@
 
 .products-grid {
     display: block;
-    margin-left: 150px;
+    margin-left: 220px;
 }
 
 .products-grid__btn-cont {
     display: inline-block;
     width: 100%;
-    cursor: pointer;
 }
 
 .products-grid__left-btn {
@@ -428,6 +429,7 @@
     padding-bottom: 15px;
     text-transform: uppercase;
     color: #f49224;
+    cursor: pointer;
 }
 
 .products-grid__right-btn {
@@ -461,10 +463,10 @@
 }
 
 .one-products-category__product {
-    width: 24%;
+    width: 22%;
     min-width: 190px;
     padding-bottom: 20px;
-    margin-right: 1%;
+    margin-right: 3%;
     vertical-align: bottom;
 }
 

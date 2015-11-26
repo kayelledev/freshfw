@@ -111,11 +111,36 @@
         </main>
         <script>
             ;(function() {
-                var checkboxes = document.querySelectorAll(".one-products-category__label > input");
-                for (var i = 0, lim = checkboxes.length; i < lim; i += 1) {
-                    checkboxes[i].addEventListener("change", function() {
-                        this.parentElement.previousElementSibling.classList.toggle("chosen");
-                    });
-                };
+                document.addEventListener("readystatechange", function() {
+                    if (document.readyState = "complete") {
+                        var checkboxes = document.querySelectorAll(".one-products-category__label > input"),
+                            filterCategories = document.querySelectorAll(".one-filter-category"),
+                            categoryNames = document.querySelectorAll(".one-filter-category__name");
+                        if (checkboxes.length) {
+                            for (var i = 0, lim = checkboxes.length; i < lim; i += 1) {
+                                checkboxes[i].addEventListener("change", function() {
+                                    this.parentElement.previousElementSibling.classList.toggle("chosen");
+                                });
+                            };
+                        };
+                        
+                        if (filterCategories.length) {
+                            for (var i = 0, lim = filterCategories.length; i < lim; i += 1) {
+                                Ps.initialize(filterCategories[i], {
+                                  suppressScrollX: true
+                                });
+                            };
+                        };
+
+                        if (categoryNames.length) {
+                            for (var i = 0, lim = categoryNames.length; i < lim; i += 1) {
+                                var text = categoryNames[i].textContent;
+                                if (text.search(",") !== -1) {
+                                    categoryNames[i].textContent = text.split(",").join(", ");
+                                }
+                            };
+                        };
+                    }
+                })
             })();
         </script>
