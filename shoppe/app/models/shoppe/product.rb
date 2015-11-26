@@ -196,5 +196,21 @@ module Shoppe
       end
     end
 
+    def self.items_filtering(categories, colors, materials)
+      if categories || colors || materials  
+        categories = [] unless categories
+        colors = [] unless colors
+        materials = [] unless materials
+      else
+        categories = ProductCategory.order("name")
+        colors = Color.order("name")
+        materials = Material.order("name")
+      end  
+      products_categories = Product.where("color_id in (?) OR material_id in (?) OR product_category_id in (?)", colors, materials, categories)
+                                  .joins(:product_category).order('shoppe_product_categories.name')
+                                  .group_by { |t| t.product_category.name }
+      products_categories
+    end
+
   end
 end
