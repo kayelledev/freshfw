@@ -47,7 +47,7 @@ class DesignProjectsController < ApplicationController
   end
 
   def select_items
-  	@categories = ProductCategory.where(parent_id: nil).order("name")
+  	@categories = ProductCategory.order("name")
   	@colors = Color.order("name")
   	@materials = Material.order("name")
     @products_categories = Product.where(color_id: @colors.ids, material_id: @materials.ids, product_category_id: @categories.ids)
