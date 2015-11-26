@@ -10,9 +10,9 @@
   %section.main-tabs
     .l-wrapper
       = link_to 'project info', @design_project, class: "main-tabs__one-tab main-tabs__one-tab--active" 
-      = link_to 'select items', "#", class: "main-tabs__one-tab", id: 'select-items-tab'
-      = link_to 'room builder', "#", class: "main-tabs__one-tab"
-      = link_to 'instructions', "#", class: "main-tabs__one-tab" 
+      = link_to 'select items', [:select_items, @design_project], class: "main-tabs__one-tab", id: 'select-items-tab', remote: true 
+      = link_to 'room builder', [:room_builder, @design_project], class: "main-tabs__one-tab", remote: true 
+      = link_to 'instructions', [:instructions, @design_project], class: "main-tabs__one-tab", remote: true 
   .l-wrapper
     .l-tabs-alignment
       .info-table
@@ -49,8 +49,8 @@
           .project-init-info__cell
             .project-init-info__adm-img-cont.l-cont
               = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
-              = image_tag image_link(@design_project, 'inspiration_image2'), class: "l-el"
-              = image_tag image_link(@design_project, 'inspiration_image3'), class: "l-el"
+              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
+              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
           .project-init-info__cell
         .project-init-info__row
           .project-init-info__cell Room Type
