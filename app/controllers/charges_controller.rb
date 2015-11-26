@@ -51,7 +51,7 @@ class ChargesController < ApplicationController
     end
     
     begin 
-      @payment = Shoppe::Payment.new(:amount => @order.total, :order_id => @order.id, :method =>'Stripe CC', :reference => @charge.id)
+      @payment = Payment.new(:amount => @order.total, :order_id => @order.id, :method =>'Stripe CC', :reference => @charge.id)
       @payment.save 
     rescue
       flash[:error] = "Something went wrong with the payment transaction. Please check all information and try again. If the error persists, contact us to have it resolved."

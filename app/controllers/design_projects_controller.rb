@@ -1,5 +1,5 @@
 class DesignProjectsController < ApplicationController
- # load_and_authorize_resource :class => 'DesignProjectsController'
+ load_and_authorize_resource 
     before_filter { (params[:id] && @design_project = DesignProject.find(params[:id])) ||
                     (session[:design_project_id] && @design_project = DesignProject.find(session[:design_project_id]) )
                   }
@@ -43,22 +43,20 @@ class DesignProjectsController < ApplicationController
 
   def project_info
     session[:design_project_id] = params[:id] if params[:id].present?
-    @design_project = session[:design_project_id] ? DesignProject.find(session[:design_project_id]) : Shoppe::DesignProject.new
+    @design_project = session[:design_project_id] ? DesignProject.find(session[:design_project_id]) : DesignProject.new
   end
 
   def select_items
-
+    # @products_categories = Product.items_filtering(params[:categories], params[:colors], params[:materials])
   	@parent_categories = ProductCategory.where(parent_id: nil).order("name")
     @categories = ProductCategory.order("name")
   	@colors = Color.order("name")
   	@materials = Material.order("name")
-    @products_categories = Product.where(color_id: @colors.ids, material_id: @materials.ids, product_category_id: @categories.ids)
-                                  .joins(:product_category).order('shoppe_product_categories.name')
-                                  .group_by { |t| t.product_category.name }
+    @products_categories = @design_project.product_list_by_filters
   end
 
   def room_builder
-    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+    @design_project = DesignProject.find(session[:design_project_id])
     @products_categories = @design_project.products.includes(:product_category).order('shoppe_product_categories.name').group_by { |t| t.product_category }
   end
 
@@ -68,7 +66,7 @@ class DesignProjectsController < ApplicationController
   end
 
   def remove_product
-    @design_projects_product = Shoppe::DesignProjectsProduct.where( product_id: params[:product_id], design_project_id: params[:design_project_id] ).first
+    @design_projects_product = DesignProjectsProduct.where( product_id: params[:product_id], design_project_id: params[:design_project_id] ).first
     @design_projects_product.destroy
     @product = @design_projects_product.product
     respond_to do |format|

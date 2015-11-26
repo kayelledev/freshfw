@@ -20,7 +20,7 @@ module Shoppe
     mount_uploader :inspiration_image1, ImageUploader
     mount_uploader :inspiration_image2, ImageUploader
     mount_uploader :inspiration_image3, ImageUploader
-  
+
     def create_filters_by(categories, colors, materials)
       unless categories.nil? && colors.nil? && materials.nil? 
         filters_array = []
@@ -44,5 +44,9 @@ module Shoppe
       end
     end
 
+    def product_list_by_filters
+      Product.items_filtering(self.product_category_ids, self.color_ids, self.material_ids)
+    end 
+  
   end
 end

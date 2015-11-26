@@ -2,9 +2,9 @@ require_dependency "shoppe/application_controller"
 
 module Shoppe
   class DesignProjectsController < ApplicationController
-  	# load_and_authorize_resource
-  	before_filter { @active_nav = :design_projects }
-  	 before_filter { params[:id] && @design_project = Shoppe::DesignProject.find(params[:id]) }
+    before_filter { @active_nav = :design_projects }
+    before_filter { params[:id] && @design_project = Shoppe::DesignProject.find(params[:id]) }
+  	load_and_authorize_resource
   	
   	def index
       @design_projects = Shoppe::DesignProject.all
