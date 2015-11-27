@@ -93,8 +93,8 @@ class DesignProjectsController < ApplicationController
   private
 
   def design_project_params
-    width = ( params[:width_ft].to_i * 12 ) + params[:width_in].to_i
-    depth = ( params[:depth_ft].to_i * 12 ) + params[:depth_in].to_i
+    width = ( params[:design_project][:width_ft].to_i * 12 ) + params[:design_project][:width_in].to_i
+    depth = ( params[:design_project][:depth_ft].to_i * 12 ) + params[:design_project][:depth_in].to_i
     params.require(:design_project).permit(:name, :inspiration, :inspiration_image1, :inspiration_image2, :inspiration_image3, :product_category_id, :url_inspiration_image1, :url_inspiration_image2, :url_inspiration_image3, :inspiration_image1, :inspiration_image2, :inspiration_image3).merge(width: width, depth: depth)
   end
 end

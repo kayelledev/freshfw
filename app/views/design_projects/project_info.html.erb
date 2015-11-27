@@ -124,7 +124,7 @@
                     <div class="project-init-info__cell">
                         <label class="project-init-info__label">
 
-                       <%= f.collection_select :product_category_id, ProductCategory.order(:name), :id, :name, {:class => 'project-init-info__select'} %>
+                       <%= f.collection_select :product_category_id, ProductCategory.where(is_room: true).order(:name), :id, :name, {:class => 'project-init-info__select'} %>
                           <!--   <select class="project-init-info__select">
                                 <option>Type 1</option>
                                 <option>Type 2</option>
@@ -144,13 +144,13 @@
                                 <td>
                                     <span>Width</span>
                                     <label class="project-init-info__small-label">
-                                        <%= number_field_tag :width_ft, nil, class: "project-init-info__small-input", id: 'project-width-ft', min: "0", step: "1" %>
+                                        <%= f.number_field :width_ft, class: "project-init-info__small-input", id: 'project-width-ft', min: "0", step: "1" %>
                                     </label>
                                     <span>ft.</span>
                                 </td>
                                 <td>
                                     <label class="project-init-info__small-label">
-                                        <%= number_field_tag :width_in, nil, class: "project-init-info__small-input", id: 'project-width-in', min: "0", step: "0.01" %>
+                                        <%= f.number_field :width_in, class: "project-init-info__small-input", id: 'project-width-in', min: "0", step: "0.01" %>
                                     </label>
                                     <span>in.</span>
                                 </td>
@@ -159,13 +159,13 @@
                                 <td>
                                     <span>Depth</span>
                                     <label class="project-init-info__small-label">
-                                        <%= number_field_tag :depth_ft, nil, class: "project-init-info__small-input", id: 'project-depth-ft', min: "0", step: "1" %>
+                                        <%= f.number_field :depth_ft, class: "project-init-info__small-input", id: 'project-depth-ft', min: "0", step: "1" %>
                                     </label>
                                     <span>ft.</span>
                                 </td>
                                 <td>
                                     <label class="project-init-info__small-label">
-                                        <%= number_field_tag :depth_in, nil, class: "project-init-info__small-input", id: 'project-depth-in', min: "0", step: "0.01" %>
+                                        <%= f.number_field :depth_in, class: "project-init-info__small-input", id: 'project-depth-in', min: "0", step: "0.01" %>
                                     </label>
                                     <span>in.</span>
                                 </td>
