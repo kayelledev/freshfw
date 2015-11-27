@@ -20,7 +20,7 @@ class CreatePermissions < ActiveRecord::Migration
     permission_generation    
     guest = Role.where(name: 'guest').first_or_create
     user = Role.where(name: 'user').first_or_create
-    Permission.where.not('controller_class LIKE ?', '%Shoppe%').each{|permission| permission.roles << guest << user }
+    Permission.where.not('subject_class LIKE ?', '%Shoppe%').each{|permission| permission.roles << user }
   end
 
 end
