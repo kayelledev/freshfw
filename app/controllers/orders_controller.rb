@@ -42,7 +42,6 @@ class OrdersController < ApplicationController
   end
 
   def checkout
-    binding.pry
     @order = current_order
     @order.update(currency: cookies[:currency])
     if request.get?
