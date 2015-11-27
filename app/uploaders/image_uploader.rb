@@ -24,15 +24,15 @@ class ImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-  before :store, :swap_out_store_dir
+  # before :store, :swap_out_store_dir
 
-  def swap_out_store_dir
-    self.class_eval do
-      def store_dir
-        "photos/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-      end
-    end
-  end
+  # def swap_out_store_dir
+  #   self.class_eval do
+  #     def store_dir
+  #       "photos/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  #     end
+  #   end
+  # end
 
   def cache_dir
       '/tmp/fw-cache'
