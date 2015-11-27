@@ -19,19 +19,19 @@
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">creation date:</div>
-                    <div class="info-table__cell">[date created]</div>
+                    <div class="info-table__cell"><%= @design_project.try(:created_at) || Date.today %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">last modefied date:</div>
-                    <div class="info-table__cell">[Today’s date, timestamp]</div>
+                    <div class="info-table__cell"><%= @design_project.try(:updated_at) || Date.today %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">designed by:</div>
-                    <div class="info-table__cell">[Name]</div>
+                    <div class="info-table__cell"><%= current_user.try(:full_name) %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">designer email:</div>
-                    <div class="info-table__cell">[user email addres]</div>
+                    <div class="info-table__cell"><%= current_user.try(:email_address) %></div>
                 </div>
             </div>
             <%= form_for @design_project, url: designer_portal_create_path, html: { class: "project-init-info", id: 'project-form', multipart: true }, remote: true do |f| %>
