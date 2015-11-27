@@ -10,6 +10,12 @@ module Shoppe
         wants.json { render :status => 'complete' }
       end
     end
+  
+  private
+
+  def self.non_restfull_permission
+    self.name
+  end
 
   end
 end

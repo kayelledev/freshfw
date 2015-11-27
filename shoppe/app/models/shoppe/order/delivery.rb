@@ -29,15 +29,15 @@ module Shoppe
       order.validates :delivery_country, :presence => true
     end
 
-    validate do
-      if self.delivery_required?
-        if self.delivery_service.nil?
-          errors.add :delivery_service_id, :must_be_specified
-        elsif !self.valid_delivery_service?
-          errors.add :delivery_service_id, :not_suitable
-        end
-      end
-    end
+    # validate do
+    #   if self.delivery_required?
+    #     if self.delivery_service.nil?
+    #       errors.add :delivery_service_id, :must_be_specified
+    #     elsif !self.valid_delivery_service?
+    #       errors.add :delivery_service_id, :not_suitable
+    #     end
+    #   end
+    # end
 
     before_confirmation do
       # Ensure that before we confirm the order that the delivery service which has been selected

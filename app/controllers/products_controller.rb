@@ -5,13 +5,12 @@ class ProductsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @products = Shoppe::Product.root.includes(:product_category, :variants).order(:parent_id)
+    @products = Product.root.includes(:product_category, :variants).order(:parent_id)
     @products = @products.group_by(&:product_category)
   end
 
   def show
-
-    @items = Shoppe::Product.all
+    @items = Product.all
     @categories = ProductCategory.all
     reviewed_product = Product.find_by_permalink(params[:id])
     review = current_user.reviews.find_or_create_by(product: reviewed_product) if current_user
@@ -24,7 +23,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy_img
-    product = Shoppe::Product.find(params[:id])
+    product = Product.find(params[:id])
     product.update(params[:img_id].to_sym => nil)
     product.update("url_#{params[:img_id]}".to_sym => nil)
     product.send "remove_#{params[:img_id]}!"
@@ -33,7 +32,7 @@ class ProductsController < ApplicationController
   end
 
   def get_product
-    @product = Shoppe::Product.find_by(sku: params[:sku])
+    @product = Product.find_by(sku: params[:sku])
     respond_to do |format|
       format.js
     end
@@ -42,7 +41,7 @@ class ProductsController < ApplicationController
   private
 
   def find_product
-    @product = Shoppe::Product.find_by_permalink(params[:id])
+    @product = Product.find_by_permalink(params[:id])
   end
 
 end

@@ -201,14 +201,18 @@ module Shoppe
         categories = [] unless categories
         colors = [] unless colors
         materials = [] unless materials
+        products_categories = Product.where("color_id in (?) OR material_id in (?) OR product_category_id in (?)", colors, materials, categories)
+                                  .joins(:product_category).order('shoppe_product_categories.name')
+                                  .group_by { |t| t.product_category.name }
       else
         categories = ProductCategory.order("name")
         colors = Color.order("name")
         materials = Material.order("name")
-      end  
-      products_categories = Product.where("color_id in (?) OR material_id in (?) OR product_category_id in (?)", colors, materials, categories)
+        products_categories = Product.where(color_id: colors.ids, material_id: materials.ids, product_category_id: categories.ids)
                                   .joins(:product_category).order('shoppe_product_categories.name')
                                   .group_by { |t| t.product_category.name }
+        
+      end  
       products_categories
     end
 
