@@ -1,6 +1,6 @@
 class ChargesController < ApplicationController
+  # load_and_authorize_resource :class => 'ChargesController'
   before_filter { params[:id] && @payment = @order.payments.find(params[:id]) }
-  load_and_authorize_resource :class => 'ChargesController'
 
   def helper
     Helper.instance
@@ -58,5 +58,9 @@ class ChargesController < ApplicationController
       redirect_to charges_path
     end
   end 
+
+  def self.non_restfull_permission
+    nil
+  end
     
 end

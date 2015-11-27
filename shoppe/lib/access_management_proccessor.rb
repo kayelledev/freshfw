@@ -9,18 +9,18 @@ module AccessManagementProccessor
 
   def controllers_list
     arr = []
-    # load all controller from /app/controllers
+    #load all the controllers
     controllers = Dir.new("#{Rails.root}/app/controllers").entries
     controllers.each do |entry|
       if entry =~ /_controller/
         #check if the controller is valid
-        arr << entry.camelize.gsub('.rb', '').constantize
+        controller = entry.camelize.gsub('.rb', '').constantize
+        arr << (controller.permission || controller.non_restfull_permission)
       elsif entry =~ /^[a-z]*$/ #namescoped controllers
         Dir.new("#{Rails.root}/app/controllers/#{entry}").entries.each do |x|
           if x =~ /_controller/
             controller = "#{entry.titleize}::#{x.camelize.gsub('.rb', '')}".constantize
-            controller = controller.permission ? controller.constantize.permission : controller.constantize.non_restfull_permission
-            arr << controller
+            arr << (controller.permission || controller.non_restfull_permission)
           end
         end
       end
@@ -30,27 +30,47 @@ module AccessManagementProccessor
     controllers.each do |entry|
       if entry =~ /_controller/
         #check if the controller is valid
-        arr << ('Shoppe::' + entry.camelize.gsub('.rb', '')).constantize
+        controller = ('Shoppe::' + entry.camelize.gsub('.rb', '')).constantize
+        arr << (controller.permission || controller.non_restfull_permission)
       elsif entry =~ /^[a-z]*$/ #namescoped controllers
         Dir.new("#{Rails.root}/shoppe/app/controllers/shoppe/#{entry}").entries.each do |x|
           if x =~ /_controller/
             controller = "#{entry.titleize}::#{x.camelize.gsub('.rb', '')}".constantize
-            controller = controller.permission ? controller.constantize.permission : controller.constantize.non_restfull_permission
-            arr << controller
+            arr << (controller.permission || controller.non_restfull_permission)
           end
         end
       end
     end
-    arr
+
+    models =  Dir.new("#{Rails.root}/app/models").entries
+    models.each do |entry|
+      if entry =~ /^[a-z]*$/ #namescoped models
+        Dir.new("#{Rails.root}/app/models/#{entry}").entries.each do |x|
+          arr << "#{entry.titleize}::#{x.camelize.gsub('.rb', '')}".constantize if x =~ /rb*$/ rescue nil
+        end
+      else
+        arr << entry.camelize.gsub('.rb', '').constantize if entry =~ /rb*$/ rescue nil
+      end
+    end
+    #load all shoppe models
+    models =  Dir.new("#{Rails.root}/shoppe/app/models/shoppe").entries
+    models.each do |entry|
+      if entry =~ /^[a-z]*$/ #namescoped models
+        Dir.new("#{Rails.root}/shoppe/app/models/shoppe/#{entry}").entries.each do |x|
+          arr << "#{entry.titleize}::#{x.camelize.gsub('.rb', '')}".constantize if x =~ /rb*$/ rescue nil
+        end
+      else
+        arr << ('Shoppe::' + entry.camelize.gsub('.rb', '')).constantize if entry =~ /rb*$/ rescue nil
+      end
+    end
+    arr.compact.uniq
   end
 
   def actions_list(controller_name)
     actions = []
-
-    controller = controller_name.constantize
-    if controller.permission
-      actions = ['manage', 'read', 'create', 'update', 'destroy']
-    else
+    controller = controller_name.constantize.non_restfull_permission rescue nil
+    if controller
+      controller = controller_name.constantize
       actions << 'manage'
       all_methods = controller.public_instance_methods(false).map { |m| m.to_s }
       params_methods = all_methods.grep /param/
@@ -60,6 +80,8 @@ module AccessManagementProccessor
           actions << method
         end
       end
+    else
+      actions = ['manage', 'read', 'create', 'update', 'destroy']
     end
     actions
   end
