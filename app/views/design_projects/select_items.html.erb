@@ -4,10 +4,10 @@
         <main>
             <div class="main-tabs">
                 <div class="l-wrapper">
-                    <a class="main-tabs__one-tab" href="/designer-portal">project info</a>
-                    <a class="main-tabs__one-tab main-tabs__one-tab--active" href="#">select items</a>
-                    <a class="main-tabs__one-tab" href="/designer-portal/room_builder">room builder</a>
-                    <a class="main-tabs__one-tab" href="/designer-portal/instructions">instructions</a>
+                    <%= link_to 'project info', designer_portal_path, class: "main-tabs__one-tab", id: 'project-info-tab' %>
+                    <%= link_to 'select items', designer_portal_select_items_path, class: "main-tabs__one-tab main-tabs__one-tab--active", id: 'select-items-tab' %>
+                    <%= link_to 'room builder', designer_portal_room_builder_path, class: "main-tabs__one-tab", id: 'room-builder-tab' %>
+                    <%= link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab", id: 'instructions-tab' %>
                 </div>
             </div>
             <div class="l-wrapper">

@@ -4,34 +4,34 @@
 <main>
     <section class="main-tabs">
         <div class="l-wrapper">
-            <%= link_to 'project info', designer_portal_path, class: "main-tabs__one-tab main-tabs__one-tab--active" %>
+            <%= link_to 'project info', designer_portal_path, class: "main-tabs__one-tab main-tabs__one-tab--active", id: 'project-info-tab' %>
             <%= link_to 'select items', designer_portal_select_items_path, class: "main-tabs__one-tab", id: 'select-items-tab' %>
-            <%= link_to 'room builder', designer_portal_room_builder_path, class: "main-tabs__one-tab" %>
-            <%= link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab" %>
+            <%= link_to 'room builder', designer_portal_room_builder_path, class: "main-tabs__one-tab", id: 'room-builder-tab' %>
+            <%= link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab", id: 'instructions-tab' %>
         </div>
     </section>
     <div class="l-wrapper">
         <div class="l-tabs-alignment">
             <div class="info-table">
                 <div class="info-table__row">
-                    <div class="info-table__cell">project status:</div>
-                    <div class="info-table__cell">draft</div>
+                    <div class="info-table__cell">Project Status:</div>
+                    <div class="info-table__cell" id='project-status'><%= @design_project.status %></div>
                 </div>
                 <div class="info-table__row">
-                    <div class="info-table__cell">creation date:</div>
-                    <div class="info-table__cell">[date created]</div>
+                    <div class="info-table__cell">Creation Date:</div>
+                    <div class="info-table__cell"><%= @design_project.created_at %></div>
                 </div>
                 <div class="info-table__row">
-                    <div class="info-table__cell">last modefied date:</div>
-                    <div class="info-table__cell">[Today’s date, timestamp]</div>
+                    <div class="info-table__cell">Last Modefied Date:</div>
+                    <div class="info-table__cell"><%= @design_project.updated_at %></div>
                 </div>
                 <div class="info-table__row">
-                    <div class="info-table__cell">designed by:</div>
-                    <div class="info-table__cell">[Name]</div>
+                    <div class="info-table__cell">Designed By:</div>
+                    <div class="info-table__cell"><%= @design_project.user.full_name if @design_project.user %></div>
                 </div>
                 <div class="info-table__row">
-                    <div class="info-table__cell">designer email:</div>
-                    <div class="info-table__cell">[user email addres]</div>
+                    <div class="info-table__cell">Designer Email:</div>
+                    <div class="info-table__cell" id='designer-email'><%= @design_project.user.email_address if @design_project.user %></div>
                 </div>
             </div>
             <%= form_for @design_project, url: designer_portal_create_path, html: { class: "project-init-info", id: 'project-form', multipart: true }, remote: true do |f| %>
