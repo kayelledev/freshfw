@@ -7,6 +7,7 @@
 #= require nifty/dialog
 #= require shoppe/design_projects
 #= require shoppe/perfect-scrollbar.min
+#= require shoppe/jquery.multiselect.min
 #= require_tree .
 
 $ ->

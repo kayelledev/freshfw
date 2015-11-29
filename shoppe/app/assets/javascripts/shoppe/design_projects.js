@@ -38,6 +38,14 @@ $(document).ready(function() {
     });
   });
   $('.products-grid__btn-cont').on('click', function () {
-    $.post('/shoppe/designer-portal/items_filtering', {});
+    $.post('/shoppe/designer-portal/items_filtering', {show_all: true});
   });
+  $("#role_permission_ids").multiselect();
+  
+   // $('#role_permission_ids .ui-multiselect').width(200);
+  // $('#role_permission_ids option').mousedown(function(e) {
+  //   e.preventDefault();
+  //   $(this).prop('selected', $(this).prop('selected') ? false : true);
+  // });   
+  
 });
