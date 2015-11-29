@@ -127,5 +127,11 @@ module Shoppe
       @nodes
     end
 
+    def descendents
+      children.map do |child|
+        [child] + child.descendents
+      end.flatten
+    end
+
   end
 end

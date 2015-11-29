@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-
     @items = Product.all
     @categories = ProductCategory.all
     reviewed_product = Product.find_by_permalink(params[:id])

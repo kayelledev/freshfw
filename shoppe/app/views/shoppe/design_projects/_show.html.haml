@@ -1,11 +1,3 @@
-- @page_title = t('shoppe.design_projects.design_projects')
-
-= content_for :header do
-  %p.buttons
-    = link_to t('shoppe.design_projects.request_revision') , [:request_revision, @design_project], method: 'post', :class => 'button green'
-    = link_to t('shoppe.design_projects.reject'), [:reject, @design_project], method: 'post', :class => 'button green'
-    = link_to t('shoppe.design_projects.approve') , [:approve, @design_project], method: 'post', :class => 'button green'
-  %h2.products= "#{t('shoppe.design_projects.design_project')} - #{@design_project.id}"
 %main
   %section.main-tabs
     .l-wrapper
@@ -48,12 +40,9 @@
           .project-init-info__cell Inspiration Images
           .project-init-info__cell
             .project-init-info__adm-img-cont.l-cont
-              - if image_link(@design_project, 'inspiration_image1')
-                = image_tag image_link(@design_project, 'inspiration_image1'), :class => 'l-el'
-              - if image_link(@design_project, 'inspiration_image2')
-                = image_tag image_link(@design_project, 'inspiration_image2'), :class => 'l-el'
-              - if image_link(@design_project, 'inspiration_image3')
-                = image_tag image_link(@design_project, 'inspiration_image3'), :class => 'l-el'
+              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
+              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
+              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
           .project-init-info__cell
         .project-init-info__row
           .project-init-info__cell Room Type

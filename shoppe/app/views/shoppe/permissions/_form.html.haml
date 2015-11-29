@@ -3,8 +3,8 @@
     = f.error_messages
     = f.label :name
     = f.text_field :name, :class => 'text'
-    = f.label :controller_class, 'Controller'
-    = f.collection_select :controller_class, @controllers, :to_s, :to_s, include_blank: false, :class => 'text'
+    = f.label :controller_class, 'Class'
+    = f.collection_select :subject_class, @controllers, :to_s, :to_s, include_blank: false, :class => 'text'
     = f.label :action, 'Action'
     = f.collection_select :action, @actions, :to_s, :to_s, include_blank: false, :class => 'text'
 

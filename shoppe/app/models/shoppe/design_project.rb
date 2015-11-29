@@ -20,5 +20,70 @@ module Shoppe
     mount_uploader :inspiration_image1, ImageUploader
     mount_uploader :inspiration_image2, ImageUploader
     mount_uploader :inspiration_image3, ImageUploader
+    attr_accessor :width_ft, :width_in, :depth_ft, :depth_in
+    
+    # def width_ft=(value)
+    #   @width_ft = value.to_f
+    #   self.width = @width_ft * 12 + width_in
+    # end
+
+    # def width_in=(value)
+    #   @width_in = value.to_f
+    #   self.width = width_ft + @width_in
+    # end
+
+    def width_ft
+      (self.width / 12).to_i
+    end
+
+    def width_in
+      self.width % 12
+    end
+    
+    # def depth_ft=(value)
+    #   @depth_ft = value.to_f
+    #   self.depth = @depth_ft * 12 + depth_in
+    # end
+
+    # def depth_in=(value)
+    #   @depth_in = value.to_f
+    #   self.depth = depth_ft + @depth_in
+    # end
+
+    def depth_ft
+      (self.depth / 12).to_i
+    end
+
+    def depth_in
+      self.depth % 12
+    end
+
+    def create_filters_by(categories, colors, materials)
+      unless categories.nil? && colors.nil? && materials.nil? 
+        filters_array = []
+        categories.try(:each) do |category_id|
+          category = ProductCategory.find(category_id)
+          filter = Filter.where(filter_element_id: category_id, filter_element_type: 'Shoppe::ProductCategory').first_or_create
+          filters_array << filter
+        end
+        colors.try(:each) do |category_id|
+          category = Color.find(category_id)
+          filter = Filter.where(filter_element_id: category_id, filter_element_type: 'Shoppe::Color').first_or_create
+          filters_array << filter
+        end
+        materials.try(:each) do |material_id|
+          material = Material.find(material_id)
+          filter = Filter.where(filter_element_id: material_id, filter_element_type: 'Shoppe::Material').first_or_create
+          filters_array << filter
+        end
+        filters = Filter.where(id: filters_array.map(&:id))
+        self.update(filter_ids: filters.ids)
+      end
+    end
+
+    def product_list_by_filters
+      Product.items_filtering(self.product_category_ids, self.color_ids, self.material_ids)
+    end 
+  
   end
 end

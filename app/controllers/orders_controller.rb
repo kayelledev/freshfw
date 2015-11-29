@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   helper_method :current_order, :has_order?
   before_action :authenticate_user!, only: :checkout
-  load_and_authorize_resource :class => "OrdersController"
+  load_and_authorize_resource
 
   def destroy
     current_order.destroy
@@ -64,11 +64,6 @@ class OrdersController < ApplicationController
     #@order = Shoppe::Order.find(current_order.id)
 
     if request.patch?
-      #TODO don't commit debug tools
-      #create charges
-      # binding_pry
-
-      #TODO don't commit debug tools
       puts "delivery address 1 = #{params[:order][:delivery_address1]}"
       puts "order: #{params[:order]}"
       puts "order id: sep delivery? #{@order.separate_delivery_address}"
@@ -110,7 +105,7 @@ class OrdersController < ApplicationController
   end
 
   def country_changing
-    @provinces = Shoppe::TaxRate.ordered.where(country:params[:country_name]).map{|s| [s.province, s.id]}
+    @provinces = TaxRate.ordered.where(country:params[:country_name]).map{|s| [s.province, s.id]}
     @country_type = params[:country_type]
     respond_to do |format|
       format.js
@@ -118,7 +113,7 @@ class OrdersController < ApplicationController
   end
 
   def check_country
-    @country = Shoppe::Country.find(params[:country_id])
+    @country = Country.find(params[:country_id])
     current_country = cookies[:currency] == 'us' ? 'Other' : 'Canada'
     order_country = @country.try(:name) == 'Canada' ? 'Canada' : 'Other'    
     country_equal = current_country == order_country

@@ -52,6 +52,9 @@ Shoppe::Engine.routes.draw do
       post :reject
       post :approve
       post :request_revision
+      get :select_items
+      get :room_builder
+      get :instructions
     end
   end
   get 'get_controller_options' => 'permissions#get_controller_options'

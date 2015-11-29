@@ -383,6 +383,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.string   "default_image"
+    t.boolean  "is_room",       default: false
   end
 
   add_index "shoppe_product_categories", ["permalink"], name: "index_shoppe_product_categories_on_permalink", using: :btree

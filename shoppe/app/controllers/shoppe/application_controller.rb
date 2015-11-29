@@ -24,8 +24,14 @@ module Shoppe
     #   return name = self.name.gsub('Controller','').singularize.split('::').last.constantize.name rescue nil
     # end
     def self.permission
-      return name = self.name.gsub('Controller','').singularize.constantize.name  rescue self.name.constantize.name
+      return name = self.name.gsub('Controller','').singularize.constantize.name  rescue nil
     end
+
+    def self.non_restfull_permission
+      self.name
+    end
+
+
 
     private
 
