@@ -1,4 +1,23 @@
-$(document).ready(function(){
+$(document).ready(function() {
+
+  $('#select-items-tab').click(function(e) {
+    e.preventDefault();
+    var form = $('form#project-form')[0];
+    var formData = new FormData(form);
+
+    $('.images-upload').each(function() {
+      formData.append($(this).attr('id'), $(this)[0].files[0]);
+    });
+
+    $.ajax({
+        url: '/shoppe/designer-portal/create',
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        dataType: 'script'
+    });
+  });
   $('.one-filter-category__label > input[type=checkbox]').on('change', function () {
     var categoriesArray = $('input[name="category_ids[]"]:checked').serializeArray();
     var categoriesIdsArray = jQuery.map(categoriesArray, function(item){
@@ -12,13 +31,13 @@ $(document).ready(function(){
     var materialsIdsArray = jQuery.map(materialsArray, function(item){
       return item["value"];
     });
-    $.post('/designer-portal/items_filtering', {
+    $.post('/shoppe/designer-portal/items_filtering', {
         categories: categoriesIdsArray,
         colors: colorsIdsArray,
         materials: materialsIdsArray
     });
   });
   $('.products-grid__btn-cont').on('click', function () {
-    $.post('/designer-portal/items_filtering', {show_all: true});
+    $.post('/shoppe/designer-portal/items_filtering', {});
   });
- })
+});

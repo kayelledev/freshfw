@@ -52,11 +52,21 @@ Shoppe::Engine.routes.draw do
       post :reject
       post :approve
       post :request_revision
-      get :select_items
-      get :room_builder
-      get :instructions
     end
   end
+  get 'designer-portal', to: 'design_projects#project_info'
+  get 'designer-portal/select_items', to: 'design_projects#select_items'
+  get 'designer-portal/room_builder', to: 'design_projects#room_builder'
+  get 'designer-portal/instructions', to: 'design_projects#instructions'
+  post 'designer-portal/create', to: 'design_projects#create'
+  patch 'designer-portal/create', to: 'design_projects#create'
+  post 'designer-portal/add_to_room_builder', to: 'design_projects#add_to_room_builder'
+  post 'designer-portal/items_filtering', to: 'design_projects#items_filtering'
+  delete 'designer-portal/remove_product', to: 'design_projects#remove_product'
+  post 'designer-portal/create_new', to: 'design_projects#create_new'
+  get 'design_portals/:id', to: 'design_projects#edit'
+
+
   get 'get_controller_options' => 'permissions#get_controller_options'
   resources :attachments, :only => :destroy
 

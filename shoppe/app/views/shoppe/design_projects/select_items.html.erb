@@ -1,10 +1,11 @@
+<%= render 'bottom_buttons' %>
 <main>
     <div class="main-tabs">
         <div class="l-wrapper">
-          <%= link_to 'project info', @design_project, class: "main-tabs__one-tab", remote: true  %>
-          <%= link_to 'select items', [:select_items, @design_project], class: "main-tabs__one-tab main-tabs__one-tab--active", id: 'select-items-tab', remote: true %>
-          <%= link_to 'room builder', [:room_builder, @design_project], class: "main-tabs__one-tab", remote: true %>
-          <%= link_to 'instructions', [:instructions, @design_project], class: "main-tabs__one-tab", remote: true %>
+      <%=  link_to 'project info', designer_portal_path, class: "main-tabs__one-tab" %>
+      <%= link_to 'select items', designer_portal_select_items_path, class: "main-tabs__one-tab main-tabs__one-tab--active", id: 'select-items-tab' %>
+      <%= link_to 'room builder', designer_portal_room_builder_path, class: "main-tabs__one-tab" %>
+      <%= link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab" %>
         </div>
     </div>
     <div class="l-wrapper">
@@ -80,9 +81,8 @@
                 <%= f.error_messages %>
                 <article class="products-grid">
                   <div class="products-grid__btn-cont">
-                    <!-- <a class="products-grid__left-btn" >show all</a> -->
-                    <!-- <button class="" type="button"></button> -->
-                    <%#= f.submit "Add Selections to Room Builder", :class => 'products-grid__right-btn' %>
+                    <a class="products-grid__left-btn" >show all</a>
+                    <%= f.submit "Add Selections to Room Builder", :class => 'products-grid__right-btn' %>
                   </div>
                   <div class="one-products-category l-cont">
                     <% @products_categories.each do |category, product_list| %>

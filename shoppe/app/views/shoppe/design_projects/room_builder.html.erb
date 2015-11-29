@@ -1,13 +1,14 @@
 <% content_for :custom_scripts do %>
   <%= javascript_include_tag "specific/selected_furniture.js" %>
 <% end %>
+<%= render 'bottom_buttons' %>
 <main>
     <section class="main-tabs">
         <div class="l-wrapper">
-            <a class="main-tabs__one-tab" href="/designer-portal">project info</a>
-            <a class="main-tabs__one-tab" href="/designer-portal/select_items">select items</a>
-            <a class="main-tabs__one-tab main-tabs__one-tab--active" href="#">room builder</a>
-            <a class="main-tabs__one-tab" href="/designer-portal/instructions">instructions</a>
+          <%=  link_to 'project info', designer_portal_path, class: "main-tabs__one-tab" %>
+          <%= link_to 'select items', designer_portal_select_items_path, class: "main-tabs__one-tab", id: 'select-items-tab' %>
+          <%= link_to 'room builder', "#", class: "main-tabs__one-tab main-tabs__one-tab--active" %>
+          <%= link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab" %>
         </div>
     </section>
     <div class="l-wrapper">

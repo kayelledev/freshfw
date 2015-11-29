@@ -69,9 +69,9 @@ Rails.application.routes.draw do
   post 'designer-portal/create_new', to: 'design_projects#create_new'
 
   get 'design_portals/:id', to: 'design_projects#edit'
-  get 'designer-portal/:id/select_items', to: 'design_projects#select_items'
-  get 'designer-portal/:id/room_builder', to: 'design_projects#room_builder'
-  get 'designer-portal/:id/instructions', to: 'design_projects#instructions'
+  # get 'designer-portal/:id/select_items', to: 'design_projects#select_items'
+  # get 'designer-portal/:id/room_builder', to: 'design_projects#room_builder'
+  # get 'designer-portal/:id/instructions', to: 'design_projects#instructions'
   
   # You can have the root of your site routed with "root"
   root 'welcome#index'

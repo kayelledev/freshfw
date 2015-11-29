@@ -75,8 +75,9 @@ class DesignProjectsController < ApplicationController
   end
 
   def items_filtering
+    params[:show_all] ||= false
     @products_categories = Product.items_filtering(params[:categories], params[:colors], params[:materials])
-    @design_project.create_filters_by(params[:categories], params[:colors], params[:materials])
+    @design_project.create_filters_by(params[:categories], params[:colors], params[:materials], params[:show_all])
     respond_to do |format|
       format.js
     end
