@@ -20,14 +20,14 @@
 
 	  <div class="carousel-inner" role="listbox" id="carousel-inner-main">
 	    <div class="item carousel-item active">
-	      <img class="first-slide slide-img" src="<%= Rails.application.config.carousel1s3path %>" alt="First slide">
+	      <a href="<%= products_url %>"><img class="first-slide slide-img" src="<%= Rails.application.config.carousel1s3path %>" alt="First slide"></a>
 	      <div class="container">
 
 	      </div>
 	    </div>
 
 	    <div class="item carousel-item">
-	      <img class="fill slide-img" src="<%= Rails.application.config.carousel2s3path %>" alt="Second slide">
+	      <a href="<%= products_url %>"><img class="fill slide-img" src="<%= Rails.application.config.carousel2s3path %>" alt="Second slide"></a>
 	      <div class="container">
 	        <div class="carousel-caption">
 
@@ -35,7 +35,7 @@
 	      </div>
 	    </div>
 	    <div class="item carousel-item">
-	      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel3s3path %>" alt="Third slide">
+	      <a href="<%= products_url %>"><img class="third-slide slide-img" src="<%= Rails.application.config.carousel3s3path %>" alt="Third slide"></a>
 	      <div class="container">
 	        <div class="carousel-caption">
 
@@ -43,7 +43,7 @@
 	      </div>
 	    </div>
 	    <div class="item carousel-item">
-	      <img class="third-slide slide-img" src="<%= Rails.application.config.carousel4s3path %>" alt="Third slide" >
+	      <a href="<%= products_url %>"><img class="third-slide slide-img" src="<%= Rails.application.config.carousel4s3path %>" alt="Third slide" ></abbr>
 	      <div class="container">
 	        <div class="carousel-caption">
 
@@ -144,21 +144,26 @@
 	<br>
 	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin: 50px 0 10px 0; ">
 		<h4 class="section-heading" >News</h4>
-		
 	</div>
 	<div class="col-md-4" style=" " >
 		<table>
 			<tr style="border-bottom: 1px solid #ccc;">
-				<td width="100%" style="text-align: center;">
-						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/vandyk-logo.jpeg" alt="VANDYK" width="40%" height="auto" style="padding: 5px;">
-						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/wotg-logo.png" alt="VANDYK - Windows on the Green" width="30%" height="auto" style="padding: 5px;">
-						<p>Checkout the model suite Four Walls just furnished for VANDYK's Windows On The Green project in Mississauga, Canada. Read <a href="http://blog.gofourwalls.com/2015/10/13/vandyk-windows-on-the-green/" style="color: #F49224;">more</a>.</p>
+				<td width="100%">
+					<p>October 30, 2015</p>
+					<h5>See our room designs in model suites</h5>
+					<p>Checkout the model suite Four Walls just furnished for VANDYK's Windows On The Green project in Mississauga, Canada. Read <a href="http://blog.gofourwalls.com/2015/10/13/vandyk-windows-on-the-green/" style="color: #F49224;">more</a>.</p>
+					<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/vandyk-logo.jpeg" alt="VANDYK" width="40%" height="auto" style="padding: 5px;">
+					<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/wotg-logo.png" alt="VANDYK - Windows on the Green" width="30%" height="auto" style="padding: 5px;">
+					
 				</td>
 			</tr>
 			<tr style="border-bottom: 1px solid #ccc;" >
 				<td width="100%">
-						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Fit+Factory+Fitness/fit-factory-logo.jpeg" alt="Fit Factory Fitness - Toronto" width="100%" height="auto" style="padding-top: 20px; " >
-						<p>Our first showroom in Toronto is coming soon! You can check out our products in <a href="http://fitfactoryfitness.com/" style="color: #F49224;">Fit Factory Fitness</a> and do a military-style workout!</p>
+					<p>October 20, 2015</p>
+					<h5>Showroom in Toronto!</h5>
+					<p>Our first showroom in Toronto is coming soon! You can check out our products in <a href="http://fitfactoryfitness.com/" style="color: #F49224;">Fit Factory Fitness</a> and do a military-style workout!</p>
+					<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Fit+Factory+Fitness/fit-factory-logo.jpeg" alt="Fit Factory Fitness - Toronto" width="100%" height="auto" style="padding-top: 20px; " >
+					
 				</td>
 			</tr>
 			<tr style="border-bottom: 1px solid #ccc;">
@@ -199,8 +204,9 @@
 	</div>
 	<div class="col-md-8"  >
 		<div id="partnerCarousel" class="carousel slide" data-ride="carousel" >
+			
 		  <!-- Indicators -->
-		  <ol class="carousel-indicators">
+  		  <ol class="carousel-indicators">
 		    <li data-target="#partnerCarousel" data-slide-to="0" class="active"></li>
 		    <li data-target="#partnerCarousel" data-slide-to="1"></li>
 		    <li data-target="#partnerCarousel" data-slide-to="2"></li>
@@ -208,14 +214,14 @@
 
 		  <div class="carousel-inner" role="listbox" id="carousel-inner-main">
 		    <div class="item carousel-item active" style="height: auto;">
-		      <img class="first-slide slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/living-dining-room-v2-1200x800.jpg" alt="First slide">
+		      <a href="<%= products_url %>"><img class="first-slide slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/living-dining-room-v2-1200x800.jpg" alt="First slide"></a>
 		      <div class="container">
 
 		      </div>
 		    </div>
 
 		    <div class="item carousel-item"  style="height: auto;">
-		      <img class="fill slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/bedroom-1200x800.jpg" alt="Second slide">
+		      <a href="<%= products_url %>"><img class="fill slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/bedroom-1200x800.jpg" alt="Second slide"></a>
 		      <div class="container">
 		        <div class="carousel-caption">
 
@@ -223,7 +229,7 @@
 		      </div>
 		    </div>
 		    <div class="item carousel-item" style="height: auto;">
-		      <img class="third-slide slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/living-room-v2-1200x800.jpg" alt="Third slide" >
+		      <a href="<%= products_url %>"><img class="third-slide slide-img" src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/living-room-v2-1200x800.jpg" alt="Third slide" ></a>
 		      <div class="container">
 		        <div class="carousel-caption">
 

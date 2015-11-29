@@ -29,7 +29,7 @@
                     <% end %>
 
                     <div class="row buttons">
-                        <div class="col-md-8">
+                        <div class="col-full">
                             <% if @product.has_variants? %>
                                 <%= link_to buy_product_path(@product.default_variant.permalink), method: :post, :class => "btn btn-xl", id: :buy do %>
                                     <i class="fa fa-shopping-cart"></i>
@@ -38,7 +38,7 @@
                             <% else %>
                                 <% if (@product.in_stock? && @product.stock_control) || !@product.stock_control %>
                                     <%= link_to buy_product_path(@product.permalink), method: :post, :class => "btn btn-xl" do %>
-                                        <i class="fa fa-shopping-cart"></i>
+                                        <i class="fa fa-shopping-cart" style="margin: 0 10px;" ></i>
                                         Add To Cart
                                     <% end %>
                                 <% else %>
@@ -49,12 +49,12 @@
                             <% end %>
 
                         </div>
-                        <div class="col-md-4">
+                        <!--<div class="col-md-4">
                             <a href="mailto:info@gofourwalls.com" class="btn btn-second">
                                 <i class="fa fa-envelope"></i>
                                 Email Us
                             </a>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div>
