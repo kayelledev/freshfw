@@ -3,5 +3,16 @@
     <% if image_link(item, 'image6') %>
       <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%' %>
     <% end %>
+    <div class='panel-elem-tooltip' id="panel-elem-tooltip-<%= item.id %>" style='display:none;'>
+      <%= link_to item.permalink, target:"_blank" do %>
+        <p><%= item.name %></p>
+      <% end %>
+      <p><b>Width:</b> <%= item.width %><br>
+      <b>Heigh:</b> <%= item.height %><br>
+      <b>Depth:</b> <%= item.depth %></p>
+      <span class="glyphicon glyphicon-trash remove-item" aria-hidden="true" data-item-id="<%= item.id %>"></span>
+      <br>
+      <%= image_tag image_link(item, 'default_image'), class: 'tooltip-item-image' %>
+    </div>
   </div>
 <% end %>

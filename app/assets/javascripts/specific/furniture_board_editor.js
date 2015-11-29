@@ -415,6 +415,32 @@
       target.setAttribute('data-x', x);
       target.setAttribute('data-y', y);
     }
+
+    $('.draggable2').each(function() {
+      $(this).qtip({
+        content: {
+          text: $('#panel-elem-tooltip-' + $(this).attr('data-id')).clone(),
+          title: ' ',
+          button: true
+        },
+        position: {
+          my: 'right top',
+          at: 'left center',
+          target: $(this)
+        },
+        style: {
+          classes: 'qtip-bootstrap'
+        },
+        hide: {
+          event: 'mousedown unfocus mouseleave',
+          delay: 150,
+          fixed: true
+        },
+        show: {
+          event: 'mouseover'
+        }
+      });
+    });
   };
 
   ControllerFb.prototype.removeElement = function() {

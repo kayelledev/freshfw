@@ -23,7 +23,7 @@
 
       <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
 
-      <div class='elem-tooltip' id="tooltip-<%= item.product.id %>" style='visibility:hidden;'>
+      <div class='elem-tooltip' id="tooltip-<%= item.product.id %>" style='display:none;'>
         <%= link_to item.product.permalink, target:"_blank" do %>
           <p><%= item.product.name %></p>
         <% end %>
