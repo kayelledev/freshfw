@@ -1,9 +1,7 @@
 <% content_for :custom_scripts do %>
   <%= javascript_include_tag "http://bxslider.com/lib/jquery.bxslider.js" %>
-  <%= javascript_include_tag "specific/room_editor.js" %>
+  <%= javascript_include_tag "specific/room_layout_editor.js" %>
 <% end %>
-
-<center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %></center>
 
 <div class='room-editor-container' style="margin: 0 auto; clear: both;">
   <div class="navigation-holder">
@@ -18,9 +16,9 @@
     <hr>
     <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
     <div class='measure-width'>
-      <span id='measure-width-ft'>0</span>
+      <span id='measure-width-ft'><%= full_measure( @design_project.width )[:ft] %></span>
       ft.
-      <span id='measure-width-inch'>0</span>
+      <span id='measure-width-inch'><%= full_measure( @design_project.width )[:inch] %></span>
       in.
     </div>
     <%= image_tag 'line.png', class: 'editor-line' %>
@@ -31,9 +29,9 @@
     <%= image_tag 'vertical-line.png' %>
       <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
       <div class='measure-height'>
-        <span id='measure-height-ft'>0</span>
+        <span id='measure-height-ft'><%= full_measure( @design_project.depth )[:ft] %></span>
         ft.
-        <span id='measure-height-inch'>0</span>
+        <span id='measure-height-inch'><%= full_measure( @design_project.depth )[:inch] %></span>
         in.
       </div>
   </div>
@@ -41,11 +39,11 @@
   <div class='dragg' data-status='clear'>
 
     <div class="editor-items-panel">
-      <%= render partial: "shared/room_editor_panel_items", locals: { variant: @project } %>
+      <%= render partial: "room_layout_editor_panel_items" %>
     </div>
 
     <div class='editor-container-wr'>
-      <%= render partial: "shared/editor_container", locals: { variant: @project } %>
+      <%= render partial: "room_layout_editor_container" %>
     </div>
 
   </div>

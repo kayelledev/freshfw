@@ -230,6 +230,9 @@
     display: table-cell;
     padding: 0.25rem 0;
     padding-right: 2rem;
+}
+
+#project-status {
     text-transform: capitalize;
 }
 
@@ -468,6 +471,7 @@
     padding-bottom: 20px;
     margin-right: 3%;
     vertical-align: bottom;
+    /*border: 1px solid #aaaaaa;*/
 }
 
 .one-products-category__anch {
@@ -687,5 +691,7 @@
 }
 
 .fb-items-panel-elem {
+    display: none;
     padding: 5px;
 }
+

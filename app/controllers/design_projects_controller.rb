@@ -1,5 +1,5 @@
 class DesignProjectsController < ApplicationController
- load_and_authorize_resource 
+ load_and_authorize_resource
     before_filter { (params[:id] && @design_project = DesignProject.find(params[:id])) ||
                     (session[:design_project_id] && @design_project = DesignProject.find(session[:design_project_id]) )
                   }
@@ -37,8 +37,65 @@ class DesignProjectsController < ApplicationController
     end
   end
 
+  def save_room_layout
+    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+    @design_project.design_projects_products.each do |design_projects_product|
+      design_projects_product.layout_posX = nil
+      design_projects_product.layout_posY = nil
+      design_projects_product.layout_rotation = nil
+      design_projects_product.save
+    end
+    params[:products].each do |product_id, product_params|
+      design_projects_product = Shoppe::DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
+      design_projects_product.layout_posX = product_params['layout_posX'].to_f
+      design_projects_product.layout_posY = product_params['layout_posY'].to_f
+      design_projects_product.layout_rotation = product_params['layout_rotation'].to_f
+      design_projects_product.save
+    end
+    render json: true
+  end
+
+  def save_furniture_board
+    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+    @design_project.design_projects_products.each do |design_projects_product|
+      design_projects_product.board_posX = nil
+      design_projects_product.board_posY = nil
+      design_projects_product.board_rotation = nil
+      design_projects_product.save
+      puts design_projects_product.board_posY
+    end
+    params[:products].each do |product_id, product_params|
+      design_projects_product = Shoppe::DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
+      design_projects_product.board_posX = product_params['board_posX'].to_f
+      design_projects_product.board_posY = product_params['board_posY'].to_f
+      design_projects_product.board_rotation = product_params['board_rotation'].to_f
+      design_projects_product.save
+    end
+    render json: true
+  end
+
+  def board_submit_room
+    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+    @design_projects_products_to_remove = Shoppe::DesignProjectsProduct.where(product_id: params[:ids], design_project_id: @design_project.id).destroy_all
+    @ids_to_remove = params[:ids]
+    @design_project.status = :draft
+    @design_project.save
+    render json: true
+  end
+
+  def layout_submit_room
+    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+    @design_projects_products_to_remove = Shoppe::DesignProjectsProduct.where(product_id: params[:ids], design_project_id: @design_project.id).destroy_all
+    @ids_to_remove = params[:ids]
+    @design_project.status = :revision_requested
+    @design_project.save
+    puts '==='
+    puts @design_project.status
+    render json: true
+  end
+
   def check_session_contain_project
-    session[:design_project_id] ? update : create 
+    session[:design_project_id] ? update : create
   end
 
   def project_info
@@ -67,8 +124,8 @@ class DesignProjectsController < ApplicationController
 
   def remove_product
     @design_projects_product = DesignProjectsProduct.where( product_id: params[:product_id], design_project_id: params[:design_project_id] ).first
-    @design_projects_product.destroy
-    @product = @design_projects_product.product
+    @design_projects_product.destroy if @design_projects_product
+    @product = @design_projects_product.product if @design_projects_product
     respond_to do |format|
       format.js
     end
@@ -87,6 +144,7 @@ class DesignProjectsController < ApplicationController
   end
 
   def create_new
+    @design_project = DesignProject.new
     session[:design_project_id] = nil
     redirect_to designer_portal_path
   end
@@ -98,4 +156,5 @@ class DesignProjectsController < ApplicationController
     depth = ( params[:design_project][:depth_ft].to_i * 12 ) + params[:design_project][:depth_in].to_i
     params.require(:design_project).permit(:name, :inspiration, :inspiration_image1, :inspiration_image2, :inspiration_image3, :product_category_id, :url_inspiration_image1, :url_inspiration_image2, :url_inspiration_image3, :inspiration_image1, :inspiration_image2, :inspiration_image3).merge(width: width, depth: depth)
   end
+
 end

@@ -147,7 +147,6 @@
         $(targetParent).attr('data-y', y);
       });
 
-    $('.' + elementsClass).hide();
 
     $('.fb-draggable').each(function() {
       $(this).qtip({
@@ -174,11 +173,104 @@
         }
       });
     });
+
+    var itemsWithoutPosition = [];
+    var itemsWithPosition = [];
+    $('.fb-draggable').each(function() {
+      if ( $(this).attr('data-board-x') === '' || $(this).attr('data-board-y') === '' ) {
+        itemsWithoutPosition.push( $(this) );
+      } else {
+        itemsWithPosition.push( $(this) );
+      }
+    });
+    console.log(itemsWithoutPosition, itemsWithPosition);
+
+    clearAreaAndInitPanel(itemsWithoutPosition);
+
+    $(itemsWithPosition).each(function() {
+      var posX = +$('.furniture-board-editor').width() / +$(this).attr('data-board-x');
+      var posY = +$('.furniture-board-editor').height() / +$(this).attr('data-board-y');
+      var rotation = $(this).attr('data-board-rotation');
+      $(this).parent().css({
+          '-webkit-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
+             '-moz-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
+              '-ms-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
+                  'transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)'
+      });
+      $(this).attr('data-x', posX);
+      $(this).attr('data-y', posY);
+      $(this).attr('data-rotation', rotation);
+      $(this).parent().attr('data-x', posX);
+      $(this).parent().attr('data-y', posY);
+      $(this).parent().attr('data-rotation', rotation);
+    });
+
+
+    function clearAreaAndInitPanel(items) {
+      // console.log(items);
+      clearArea();
+      resetElemInArea();
+      resetItemsInPanel();
+
+      $(items).each(function() {
+        console.log(this);
+        var elemId = $(this).attr('data-id');
+        console.log(elemId);
+        var elemInPanel = $('.fb-items-panel-elem[data-panel-elem-id="' + elemId + '"]');
+        controller.initItemsPanelArea(elemInPanel);
+      });
+
+      function clearArea(){
+        $(items).each(function() {
+          $(this).css('display', 'none');
+        });
+      }
+
+      function resetElemInArea(){
+        $(items).each(function() {
+          $(this).parent().css({
+            '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+               '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                    'transform': 'translate(0px, 0px) rotate(0deg)',
+          });
+
+          $(this).parent().attr('data-rotation', 0);
+          $(this).parent().attr('data-x', 0);
+          $(this).parent().attr('data-y', 0);
+          $(this).attr('data-rotation', 0);
+          $(this).attr('data-x', 0);
+          $(this).attr('data-y', 0);
+          $(this).parent().css({
+            top: 0,
+            left: 0
+          });
+        });
+      }
+
+      function resetItemsInPanel() {
+        $(items).each(function() {
+          elemId = $(this).attr('data-id');
+          panelElem = $(".fb-items-panel-elem[data-id='" + elemId + "']");
+
+          $(panelElem).attr('data-x', '0');
+          $(panelElem).attr('data-y', '0');
+
+          $(panelElem).css({
+            '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+               '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                    'transform': 'translate(0px, 0px) rotate(0deg)',
+          });
+
+          $(panelElem).show();
+        });
+      }
+    }
   };
 
   ControllerFb.prototype.catchElement = function() {
       var self = this;
-      console.log(this);
 
       var mouse_is_outside = false;
 
@@ -219,23 +311,21 @@
       })
   };
 
-  ControllerFb.prototype.initItemsPanelArea = function(elem) {
+  ControllerFb.prototype.initItemsPanelArea = function(item) {
     var controller = this;
     // show items panel
+
     $('.furniture-board-editor-items-panel').show();
-    if (elem) {
-      $(elem).attr('data-x', '0');
-      $(elem).attr('data-y', '0');
-      $(elem).css({
-        '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
-           '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
-            '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
-                'transform': 'translate(0px, 0px) rotate(0deg)',
-      });
-      $(elem).show();
-    } else {
-      $('.fb-items-panel-elem').show();
-    }
+    $(item).attr('data-x', '0');
+    $(item).attr('data-y', '0');
+    $(item).css({
+      '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+         '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+          '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+              'transform': 'translate(0px, 0px) rotate(0deg)'
+    });
+    console.log($(item));
+    $(item).show();
 
     interact('.fb-draggable2')
       .draggable({
@@ -259,7 +349,6 @@
     function dropElem (event) {
       var item = event.target;
       var itemId = $(item).attr('data-panel-elem-id');
-      console.log(itemId)
       // new position
       var newPositionX = +$(item).offset().left - +$('.furniture-board-editor').offset().left;
       var newPositionY = +$(item).offset().top - +$('.furniture-board-editor').offset().top;
@@ -422,8 +511,6 @@
 
           var beforeDegree = positionBefore.degree
           var newDegree = beforeDegree + 90;
-          console.log(beforeDegree);
-          console.log(newDegree);
 
           var offsetX = parseFloat(parentElem.attr('data-x')),
               offsetY = parseFloat(parentElem.attr('data-y'));
@@ -608,15 +695,94 @@
 
   ControllerFb.prototype.init = function() {
     this.initElements(this.$initialElenemts);
-    this.initItemsPanelArea();
+    // this.initItemsPanelArea();
     this.removeElement();
     this.catchElement();
     this.initMouseRotation();
   };
 
   $(document).ready(function() {
-    var controller = new ControllerFb();
-    controller.init();
+    var controllerFb = new ControllerFb();
+    controllerFb.init();
+
+    $('.save-board').on('click', function() {
+      var button = this;
+      var data = {
+        products: {}
+      };
+
+      $(".fb-draggable:visible").each(function() {
+        console.log($(this).parent())
+        var elemId = $(this).attr('data-id');
+
+        var posX = +$('.furniture-board-editor').width() / +controllerFb.getPositionOfElement( $(this).parent() ).left;
+        var posY = +$('.furniture-board-editor').height() / +controllerFb.getPositionOfElement( $(this).parent() ).top;
+        var rotation = +controllerFb.getPositionOfElement( $(this).parent() ).degree;
+        console.log(posY);
+
+        data.products[elemId] = {
+          board_posX: posX,
+          board_posY: posY,
+          board_rotation: rotation
+        }
+      });
+
+      $.ajax({
+          url: $(button).attr('data-url'),
+          type: "PATCH",
+          data: JSON.stringify(data),
+          dataType: "json",
+          contentType: 'application/json',
+          success: function() {
+            console.log('success');
+          },
+          error: function() {
+            console.log('error');
+          }
+      });
+    });
+
+    $('.board-submit-room').on('click', function() {
+      var button = this;
+      var data = {
+        ids: []
+      };
+
+      $(".fb-draggable:hidden").each(function() {
+        console.log(this);
+        var elemId = $(this).attr('data-id');
+        data.ids.push(elemId);
+      });
+
+      console.log(data.ids)
+
+      $.ajax({
+          url: $(button).attr('data-url'),
+          type: "PATCH",
+          data: JSON.stringify(data),
+          dataType: "json",
+          contentType: 'application/json',
+          success: function() {
+            $(data.ids).each(function() {
+              var id = this;
+              $("div.product[data-id='" + id + "']").remove();
+
+              $(".draggable#" + id).parent().remove();
+              $(".draggable2[data-id='" + id + "']").remove();
+
+              $(".fb-draggable[data-id='" + id + "']").parent().remove();
+              $(".fb-draggable2[data-panel-elem-id='" + id + "']").remove();
+
+              if ( $('.furniture-board-editor-items-panel').height() === 0 ){
+                $('.furniture-board-editor-items-panel').hide();
+              }
+            });
+          },
+          error: function() {
+            console.log('error');
+          }
+      });
+    });
   });
 
 })(jQuery);
