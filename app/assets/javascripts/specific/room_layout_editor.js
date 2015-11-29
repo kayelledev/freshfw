@@ -289,8 +289,6 @@
           }
         });
 
-        console.log(itemsWithoutPosition);
-        console.log(itemsWithPosition);
         clearAreaAndInitPanel(itemsWithoutPosition);
 
         $(itemsWithPosition).each(function() {

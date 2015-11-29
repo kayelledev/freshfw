@@ -71,6 +71,8 @@ Rails.application.routes.draw do
   patch 'designer-portal/save_room_layout', to: 'design_projects#save_room_layout'
   patch 'designer-portal/save_furniture_board', to: 'design_projects#save_furniture_board'
   patch 'designer-portal/layout_submit_room', to: 'design_projects#layout_submit_room'
+  patch 'designer-portal/board_submit_room', to: 'design_projects#board_submit_room'
+
 
   get 'design_portals/:id', to: 'design_projects#edit'
   get 'designer-portal/:id/select_items', to: 'design_projects#select_items'
