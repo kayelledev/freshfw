@@ -48,14 +48,12 @@ module FourWalls
             ENV['S3_Secret_Key'] = cfg['S3_Secret_Key'] if ENV['S3_Secret_Key'].nil?
             ENV['S3_Bucket'] = cfg['S3_Bucket'] if ENV['S3_Bucket'].nil?
         end
-    end
-    if Rails.env.production?
         if ENV['TWITTER_API_KEY'].nil? || ENV['TWITTER_API_SECRET'].nil? || ENV['FACEBOOK_APP_ID'].nil? || ENV['FACEBOOK_APP_SECRET'].nil?
             cfg = YAML.load_file("#{Rails.root}/config/social.yml")
             ENV['TWITTER_API_KEY'] = cfg['TWITTER_API_KEY'] if ENV['TWITTER_API_KEY'].nil?
             ENV['TWITTER_API_SECRET'] = cfg['TWITTER_API_SECRET'] if ENV['TWITTER_API_SECRET'].nil?
             ENV['FACEBOOK_APP_ID'] = cfg['FACEBOOK_APP_ID'] if ENV['FACEBOOK_APP_ID'].nil?
-            ENV['FACEBOOK_APP_ID'] = cfg['FACEBOOK_APP_ID'] if ENV['FACEBOOK_APP_ID'].nil?
+            ENV['FACEBOOK_APP_SECRET'] = cfg['FACEBOOK_APP_SECRET'] if ENV['FACEBOOK_APP_SECRET'].nil?
         end
     end
 

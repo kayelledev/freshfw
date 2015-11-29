@@ -32,6 +32,7 @@ module Shoppe
     #
     # @return [Shoppe::ProductCategory]
     belongs_to :product_category, :class_name => 'Shoppe::ProductCategory'
+    belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
 
     # The product's tax rate
     #
@@ -54,12 +55,16 @@ module Shoppe
     # Validations
     with_options :if => Proc.new { |p| p.parent.nil? } do |product|
       product.validates :product_category_id, :presence => true
-      product.validates :description, :presence => true
-      product.validates :short_description, :presence => true
+      product.validates :product_subcategory_id, :presence => true
+      #product.validates :description, :presence => true
+      #product.validates :short_description, :presence => true
     end
-    validates :name, :presence => true, :uniqueness => true
+    validates :name, :presence => true
+    validates :sku, :presence => true
+    validates_uniqueness_of :name, :scope => :sku
+    validates_uniqueness_of :sku, :scope => :name
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true
-    validates :sku, :presence => true, :uniqueness => true
+
     validates :weight, :numericality => true
     validates :width, numericality: {only_float: true}
     validates :height, numericality: {only_float: true}
@@ -68,7 +73,7 @@ module Shoppe
     validates :cost_price, :numericality => true, :allow_blank => true
 
     # Before validation, set the permalink if we don't already have one
-    before_validation { self.permalink = self.name.parameterize if self.permalink.blank? && self.name.is_a?(String) }
+    before_validation { self.permalink = "#{self.name.parameterize}-#{self.sku}" if self.permalink.blank? && self.name.is_a?(String) }
 
     # All active products
     scope :active, -> { where(:active => true) }
@@ -157,49 +162,7 @@ module Shoppe
     #
     #   Shoppe:Product.import("path/to/file.csv")
     def self.import(file)
-      spreadsheet = open_spreadsheet(file)
-      spreadsheet.default_sheet = spreadsheet.sheets.first
-      header = spreadsheet.row(1)
-      (2..spreadsheet.last_row).each do |i|
-        row = Hash[[header, spreadsheet.row(i)].transpose]
-
-        # Don't import products where the name is blank
-        unless row["name"].nil?
-          if product = find_by(name: row["name"])
-            # Dont import products with the same name but update quantities if they're not the same
-            qty = row["qty"].to_i
-            if qty > 0 && qty != product.stock
-              product.stock_level_adjustments.create!(description: I18n.t('shoppe.import'), adjustment: qty)
-            end
-          else
-            product = new
-            product.name = row["name"]
-            product.sku = row["sku"]
-            product.description = row["description"]
-            product.short_description = row["short_description"]
-            product.weight = row["weight"]
-            product.price = row["price"].nil? ? 0 : row["price"]
-
-            product.product_category_id = begin
-              if Shoppe::ProductCategory.find_by(name: row["category_name"]).present?
-                # Find and set the category
-                Shoppe::ProductCategory.find_by(name: row["category_name"]).id
-              else
-                # Create the category
-                Shoppe::ProductCategory.create(name: row["category_name"]).id
-              end
-            end
-
-            product.save!
-
-            # Create quantities
-            qty = row["qty"].to_i
-            if qty > 0
-              product.stock_level_adjustments.create!(description: I18n.t('shoppe.import'), adjustment: qty)
-            end
-          end
-        end
-      end
+      "It will be in the next sprint"
     end
 
     def self.open_spreadsheet(file)

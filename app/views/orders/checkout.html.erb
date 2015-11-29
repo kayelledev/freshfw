@@ -37,21 +37,24 @@
                                 </div>
                                 <div class='control-group'>
                                     <div class="row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <%= f.text_field :billing_address1, class: 'form-control', placeholder: 'Address 1'%>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                             <%= f.text_field :billing_address2, class: 'form-control', placeholder: 'Address 2'%>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                          <%= f.text_field :billing_address3, class: 'form-control', placeholder: 'Town / City'%>
                                         </div>
                                     </div>
                                 </div>
                                 <div class='control-group'>
                                     <div class="row">
                                         <div class="form-group col-md-4">
-                                            <%= f.text_field :billing_address3, class: 'form-control', placeholder: 'Town / City'%>
+                                          <%= f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, {}, {class: 'form-control'} %>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <%= f.collection_select :billing_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province, {}, {class: "form-control"} %>
+                                          <%= f.collection_select :billing_address4, Shoppe::TaxRate.ordered.where(country: @order.try(:billing_country).try(:name)), :id, :province, {}, {class: "form-control"} %>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <%= f.text_field :billing_postcode, class: 'form-control', placeholder: 'Zip'%>
@@ -92,21 +95,24 @@
                                     </div>
                                     <div class='control-group'>
                                         <div class="row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <%= f.text_field :delivery_address1, class: 'form-control', placeholder: 'Address 1' %>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <%= f.text_field :delivery_address2, class: 'form-control', placeholder: 'Address 2' %>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <%= f.text_field :delivery_address3, class: 'form-control', placeholder: 'Town / City' %>
                                             </div>
                                         </div>
                                     </div>
                                     <div class='control-group'>
                                         <div class="row">
                                             <div class="form-group col-md-4">
-                                                <%= f.text_field :delivery_address3, class: 'form-control', placeholder: 'Town / City' %>
+                                                <%= f.collection_select :delivery_country_id, Shoppe::Country.ordered, :id, :name, {:selected => @order.delivery_country.present? ? @order.delivery_country.id : Shoppe::Country.where(name: "Canada").try(:first).try(:id)}, {class: 'form-control'} %>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <%= f.collection_select :delivery_address4, Shoppe::TaxRate.ordered.where(country: 'Canada'), :id, :province, {}, {class: "form-control"} %>
+                                                <%= f.collection_select :delivery_address4, @order.delivery_country.present? ? Shoppe::TaxRate.ordered.where(country: @order.try(:delivery_country).try(:name)) : Shoppe::TaxRate.ordered.where(country: "Canada") , :id, :province, {}, {class: "form-control"} %>
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <%= f.text_field :delivery_postcode, class: 'form-control', placeholder: 'Zip'%>

@@ -34,9 +34,9 @@ module ProductsHelper
   end
 
   def full_measure(value)
-    ft = value / 12
-    inch = value % 12
-    "#{ft.floor} ft #{inch.round} in"
+    ft = value.to_i / 12
+    inch = value.to_i % 12
+    {ft: ft, inch: inch}
   end
 
 end

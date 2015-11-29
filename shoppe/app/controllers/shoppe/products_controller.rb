@@ -43,8 +43,8 @@ module Shoppe
         if params[:import].nil?
           redirect_to import_products_path, :flash => {:alert => I18n.t('shoppe.imports.errors.no_file')}
         else
-          Shoppe::Product.import(params[:import][:import_file])
-          redirect_to products_path, :flash => {:notice => I18n.t("shoppe.products.imports.success")}
+          status = Shoppe::Product.import(params[:import][:import_file])
+          redirect_to products_path, :flash => {:notice => status}
         end
       end
     end
@@ -52,12 +52,13 @@ module Shoppe
     private
 
     def safe_params
-      params[:product].permit(:product_category_id, :name, :sku, :permalink, :description,
+      params[:product].permit(:product_category_id, :product_subcategory_id, :name, :sku, :permalink, :description,
                               :short_description, :weight, :price, :cost_price, :tax_rate_id,
-                              :stock_control, :default_image, :image2, :image3,:image4,:image5,:image6,
+                              :stock_control, :default_image, :image2, :image3, :image4, :image5, :image6,
                               :default_image_file_sheet_file, :active, :featured, :in_the_box, :image,
-                              :width, :height, :depth, :is_preset,
+                              :width, :height, :depth,:other_details, :is_preset,
                               :url_default_image, :url_image2, :url_image3, :url_image4, :url_image5, :url_image6,
+                              :seat_width, :seat_depth, :seat_height, :arm_height,
                               :product_attributes_array => [:key, :value, :searchable, :public], :included=>[]
                               )
     end
