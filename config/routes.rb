@@ -66,7 +66,7 @@ Rails.application.routes.draw do
   post 'designer-portal/items_filtering', to: 'design_projects#items_filtering'
   delete 'designer-portal/remove_product', to: 'design_projects#remove_product'
 
-  post 'designer-portal/create_new', to: 'design_projects#create_new'
+  get 'designer-portal/create_new', to: 'design_projects#create_new'
 
   patch 'designer-portal/save_room_layout', to: 'design_projects#save_room_layout'
   patch 'designer-portal/save_furniture_board', to: 'design_projects#save_furniture_board'

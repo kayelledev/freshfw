@@ -181,12 +181,17 @@
     color: #cccccc;
     border-left: 1px solid #aaaaaa;
 }
+.main-tabs__one-tab:last-child {
+    border-right: 1px solid #aaaaaa;
+}
 
 .main-tabs__one-tab--active {
     margin-bottom: -1px;
     color: black;
-    border-bottom: 1px solid #ffffff;
+    border-top: 1px solid #AAAAAA;
+    border-bottom: 1px solid #F7F9FC;
 }
+
 
  .main-tabs__one-tab--active:last-of-type {
     border-right: 1px solid #aaaaaa;
