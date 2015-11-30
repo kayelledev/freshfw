@@ -42,14 +42,14 @@
           .project-init-info__cell
             .project-init-info__adm-img-cont.l-cont
               = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
-              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
-              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
+              = image_tag @design_project.inspiration_image2.thumb, class: "l-el"
+              = image_tag @design_project.inspiration_image3.thumb, class: "l-el"
           .project-init-info__cell
         .project-init-info__row
           .project-init-info__cell Room Type
           .project-init-info__cell
             %label.project-init-info__label
-              = f.collection_select :product_category_id, Shoppe::ProductCategory.order(:name), :id, :name, {:class => 'project-init-info__select'} 
+              = f.collection_select :product_category_id, Shoppe::ProductCategory.order(:name).where(is_room: true), :id, :name, {:class => 'project-init-info__select'} 
                 
           .project-init-info__cell
         .project-init-info__row
