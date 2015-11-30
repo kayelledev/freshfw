@@ -41,9 +41,12 @@
           .project-init-info__cell Inspiration Images
           .project-init-info__cell
             .project-init-info__adm-img-cont.l-cont
-              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
-              = image_tag @design_project.inspiration_image2.thumb, class: "l-el"
-              = image_tag @design_project.inspiration_image3.thumb, class: "l-el"
+
+              = image_tag image_link(@design_project, @design_project.inspiration_image1), class: "l-el"
+              = image_tag image_link(@design_project, @design_project.inspiration_image2), class: "l-el"
+              = image_tag image_link(@design_project, @design_project.inspiration_image3), class: "l-el"
+              =# image_tag @design_project.inspiration_image2.thumb, class: "l-el"
+              =# image_tag @design_project.inspiration_image3.thumb, class: "l-el"
           .project-init-info__cell
         .project-init-info__row
           .project-init-info__cell Room Type
