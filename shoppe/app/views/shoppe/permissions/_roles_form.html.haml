@@ -4,4 +4,4 @@
     %th.name= 'Roles'
 %tbody
   %tr.item{:class => 'existing'}
-    %td.name= f.collection_select(:role_ids, Role.all, :id, :name, {:selected => @permission.role_ids, include_hidden: false}, {:multiple => true})
+    %td.name= f.collection_select(:role_ids, Shoppe::Role.list_without_admin, :id, :name, {:selected => @permission.role_ids, include_hidden: false}, {:multiple => true})

@@ -8,7 +8,7 @@ module Shoppe
 	validates :name, :subject_class, :action, :presence => true
 	validates :action, uniqueness: {scope: :subject_class}
     include AccessManagementProccessor
-     scope :sorted, -> {order('subject_class').partition { |f| ! f.subject_class.include? "Shoppe" }.flatten}
+    scope :sorted, -> {order('subject_class').partition { |f| ! f.subject_class.include? "Shoppe" }.flatten}
 	  
 	# def set_cancan_action
 	#   cancan_action, action_desc = eval_cancan_action(self.action)

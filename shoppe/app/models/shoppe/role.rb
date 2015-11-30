@@ -9,6 +9,7 @@ module Shoppe
             :inclusion => { :in => Rolify.resource_types },
             :allow_nil => true
     before_destroy :can_delete_role?
+    scope :list_without_admin, -> {where.not(name: 'admin')}
 
     scopify
     
