@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027212207) do
+ActiveRecord::Schema.define(version: 20151103120104) do
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -239,43 +239,49 @@ ActiveRecord::Schema.define(version: 20151027212207) do
     t.string   "permalink"
     t.text     "description"
     t.text     "short_description"
-    t.boolean  "active",                                      default: true
-    t.decimal  "weight",              precision: 8, scale: 3, default: 0.0
-    t.decimal  "price",               precision: 8, scale: 2, default: 0.0
-    t.decimal  "cost_price",          precision: 8, scale: 2, default: 0.0
+    t.boolean  "active",                                         default: true
+    t.decimal  "weight",                 precision: 8, scale: 3, default: 0.0
+    t.decimal  "price",                  precision: 8, scale: 2, default: 0.0
+    t.decimal  "cost_price",             precision: 8, scale: 2, default: 0.0
     t.integer  "tax_rate_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "featured",                                    default: false
+    t.boolean  "featured",                                       default: false
     t.text     "in_the_box"
-    t.boolean  "stock_control",                               default: true
-    t.boolean  "default",                                     default: false
+    t.boolean  "stock_control",                                  default: true
+    t.boolean  "default",                                        default: false
     t.string   "default_image"
     t.string   "image2"
     t.string   "image3"
     t.string   "image4"
     t.string   "image5"
     t.string   "image6"
-    t.float    "width",                                       default: 80.0
-    t.float    "height",                                      default: 80.0
-    t.boolean  "is_preset",                                   default: false
-    t.integer  "posX",                                        default: 0
-    t.integer  "posY",                                        default: 0
-    t.integer  "rotation",                                    default: 0
+    t.float    "width",                                          default: 80.0
+    t.float    "height",                                         default: 80.0
+    t.boolean  "is_preset",                                      default: false
+    t.integer  "posX",                                           default: 0
+    t.integer  "posY",                                           default: 0
+    t.integer  "rotation",                                       default: 0
     t.string   "url_default_image"
     t.string   "url_image2"
     t.string   "url_image3"
     t.string   "url_image4"
     t.string   "url_image5"
     t.string   "url_image6"
-    t.float    "depth",                                       default: 0.0
+    t.float    "depth",                                          default: 0.0
+    t.integer  "product_subcategory_id"
+    t.float    "seat_width",                                     default: 0.0
+    t.float    "seat_depth",                                     default: 0.0
+    t.float    "seat_height",                                    default: 0.0
+    t.float    "arm_height",                                     default: 0.0
+    t.text     "other_details"
   end
 
   add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id"
   add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink"
   add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id"
   add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku"
-  
+
   create_table "shoppe_settings", force: :cascade do |t|
     t.string "key"
     t.string "value"
