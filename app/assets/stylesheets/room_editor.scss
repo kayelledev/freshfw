@@ -145,11 +145,12 @@
 }
 
 #dimensions-dialog .form-group .form-control {
-  width: 100px;
+  width: 90px;
+  display: inline-block;
 }
 
-#dimensions-dialog .form-group .form-control {
-  display: inline-block;
+#dimensions-dialog .form-group span {
+  padding: 0 5px;
 }
 
 #dimensions-dialog {
