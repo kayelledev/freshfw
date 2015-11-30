@@ -11,6 +11,7 @@ class DesignProjectsController < ApplicationController
     @design_project.status = :draft
     if @result = @design_project.save
       session[:design_project_id] = @design_project.id
+      @redirect_url = params[:redirect_to_link]
       respond_to do |format|
         format.html { redirect_to designer_portal_path }
         format.js
@@ -25,6 +26,7 @@ class DesignProjectsController < ApplicationController
 
   def update
     if @result = @design_project.update(design_project_params)
+      @redirect_url = params[:redirect_to_link]
       respond_to do |format|
         format.html { redirect_to designer_portal_path }
         format.js
@@ -132,8 +134,9 @@ class DesignProjectsController < ApplicationController
   end
 
   def items_filtering
+    params[:show_all] ||= false
     @products_categories = Product.items_filtering(params[:categories], params[:colors], params[:materials])
-    @design_project.create_filters_by(params[:categories], params[:colors], params[:materials])
+    @design_project.create_filters_by(params[:categories], params[:colors], params[:materials], params[:show_all])
     respond_to do |format|
       format.js
     end

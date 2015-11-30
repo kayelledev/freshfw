@@ -1,0 +1,114 @@
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag "http://bxslider.com/lib/jquery.bxslider.js" %>
+  <%= javascript_include_tag "specific/room_editor.js" %>
+<% end %>
+
+<center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %></center>
+
+<div class='room-editor-container' style="margin: 0 auto; clear: both;">
+  <div class="navigation-holder">
+  </div>
+
+  <div class="rotate-angle" hidden>
+    Angle
+    <input type="number" class="rotation-manager" min="0" max="360" step="1">
+  </div>
+
+  <div class="editor-width">
+    <hr>
+    <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
+    <div class='measure-width'>
+      <span id='measure-width-ft'>0</span>
+      ft.
+      <span id='measure-width-inch'>0</span>
+      in.
+    </div>
+    <%= image_tag 'line.png', class: 'editor-line' %>
+  </div>
+
+
+  <div class="editor-height">
+    <%= image_tag 'vertical-line.png' %>
+      <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
+      <div class='measure-height'>
+        <span id='measure-height-ft'>0</span>
+        ft.
+        <span id='measure-height-inch'>0</span>
+        in.
+      </div>
+  </div>
+
+  <div class='dragg' data-status='clear'>
+
+    <div class="editor-items-panel">
+      <%= render partial: "shared/room_editor_panel_items", locals: { variant: @project } %>
+    </div>
+
+    <div class='editor-container-wr'>
+      <%= render partial: "shared/editor_container", locals: { variant: @project } %>
+    </div>
+
+  </div>
+
+  <div id="dimensions-dialog" title="Set dimensions">
+    <div id='room-slider'>
+      <div class="slide" data-room-id='27' data-room-type='pcross'><%= image_tag 'rooms/room_pcross_1.png', id: 'slide-image-27' %></div>
+      <div class="slide" data-room-id='28' data-room-type='pcross'><%= image_tag 'rooms/room_pcross_2.png', id: 'slide-image-28' %></div>
+      <div class="slide" data-room-id='29' data-room-type='pcross'><%= image_tag 'rooms/room_pcross_3.png', id: 'slide-image-29' %></div>
+      <div class="slide" data-room-id='30' data-room-type='o'><%= image_tag 'rooms/room_o_0.png', id: 'slide-image-30' %></div>
+      <div class="slide" data-room-id='0' data-room-type='rect'><%= image_tag 'rooms/room_rect_0.png', class: 'active-slider', id: 'slide-image-0' %></div>
+      <div class="slide" data-room-id='1' data-room-type='l'><%= image_tag 'rooms/room_l_0.png', id: 'slide-image-1' %></div>
+      <div class="slide" data-room-id='2' data-room-type='l'><%= image_tag 'rooms/room_l_1.png', id: 'slide-image-2' %></div>
+      <div class="slide" data-room-id='3' data-room-type='l'><%= image_tag 'rooms/room_l_2.png', id: 'slide-image-3' %></div>
+      <div class="slide" data-room-id='4' data-room-type='l'><%= image_tag 'rooms/room_l_3.png', id: 'slide-image-4' %></div>
+
+      <div class="slide" data-room-id='5' data-room-type='t'><%= image_tag 'rooms/room_t_0.png', id: 'slide-image-5' %></div>
+      <div class="slide" data-room-id='6' data-room-type='t'><%= image_tag 'rooms/room_t_1.png', id: 'slide-image-6' %></div>
+      <div class="slide" data-room-id='7' data-room-type='t'><%= image_tag 'rooms/room_t_2.png', id: 'slide-image-7' %></div>
+      <div class="slide" data-room-id='8' data-room-type='t'><%= image_tag 'rooms/room_t_3.png', id: 'slide-image-8' %></div>
+      <div class="slide" data-room-id='9' data-room-type='c'><%= image_tag 'rooms/room_c_0.png', id: 'slide-image-9' %></div>
+      <div class="slide" data-room-id='10' data-room-type='c'><%= image_tag 'rooms/room_c_1.png', id: 'slide-image-10' %></div>
+      <div class="slide" data-room-id='11' data-room-type='c'><%= image_tag 'rooms/room_c_2.png', id: 'slide-image-11' %></div>
+      <div class="slide" data-room-id='12' data-room-type='c'><%= image_tag 'rooms/room_c_3.png', id: 'slide-image-12' %></div>
+      <div class="slide" data-room-id='13' data-room-type='e'><%= image_tag 'rooms/room_e_0.png', id: 'slide-image-13' %></div>
+      <div class="slide" data-room-id='14' data-room-type='e'><%= image_tag 'rooms/room_e_1.png', id: 'slide-image-14' %></div>
+      <div class="slide" data-room-id='15' data-room-type='e'><%= image_tag 'rooms/room_e_2.png', id: 'slide-image-15' %></div>
+      <div class="slide" data-room-id='16' data-room-type='e'><%= image_tag 'rooms/room_e_3.png', id: 'slide-image-16' %></div>
+      <div class="slide" data-room-id='17' data-room-type='f'><%= image_tag 'rooms/room_f_0.png', id: 'slide-image-17' %></div>
+      <div class="slide" data-room-id='18' data-room-type='f'><%= image_tag 'rooms/room_f_1.png', id: 'slide-image-18' %></div>
+      <div class="slide" data-room-id='19' data-room-type='f'><%= image_tag 'rooms/room_f_2.png', id: 'slide-image-19' %></div>
+      <div class="slide" data-room-id='20' data-room-type='f'><%= image_tag 'rooms/room_f_3.png', id: 'slide-image-20' %></div>
+      <div class="slide" data-room-id='21' data-room-type='fl'><%= image_tag 'rooms/room_fl_0.png', id: 'slide-image-21' %></div>
+      <div class="slide" data-room-id='22' data-room-type='fl'><%= image_tag 'rooms/room_fl_1.png', id: 'slide-image-22' %></div>
+      <div class="slide" data-room-id='23' data-room-type='fl'><%= image_tag 'rooms/room_fl_2.png', id: 'slide-image-23' %></div>
+      <div class="slide" data-room-id='24' data-room-type='fl'><%= image_tag 'rooms/room_fl_3.png', id: 'slide-image-24' %></div>
+      <div class="slide" data-room-id='25' data-room-type='cross'><%= image_tag 'rooms/room_cross_0.png', id: 'slide-image-25' %></div>
+      <div class="slide" data-room-id='26' data-room-type='pcross'><%= image_tag 'rooms/room_pcross_0.png', id: 'slide-image-26' %></div>
+
+    </div>
+
+    <div class='row'>
+      <div class='col-sm-6'>
+        <div id='room-preview'>
+          <%= image_tag 'rooms/room_rect_0.png' %>
+        </div>
+      </div>
+      <div class='col-sm-6'>
+        <div id='dialog-form-errors'></div>
+        <form class="form-horizontal" id='dialog-form'>
+
+          <%= render partial: 'shared/inputs' %>
+
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <button class="btn btn-guideline" id='submit-new-dimensions'>Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<center><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %></center>

@@ -356,12 +356,12 @@
     display: inline-block;
     width: 100%;
     padding-top: 40px;
+    padding-bottom: 60px;
 }
 
 .filters {
     float: left;
-    width: 130px;
-    padding-left: 10px;
+    width: 200px;
 }
 
 /*===================================================================================
@@ -369,10 +369,12 @@
 =====================================================================================*/
 
 .one-filter-category {
+    position: relative;
     margin-top: 10px;
     height: 200px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
 }
 
 .one-filter-category__title {
@@ -402,12 +404,12 @@
 }
 
 .one-filter-category__name {
-    padding-left: 5px;
+    padding-left: 10px;
     margin: 0 !important;
 }
 
 .one-filter-category__name--sub {
-    padding-left: 15px;
+    padding-left: 20px;
 }
 
 /*===================================================================================
@@ -416,13 +418,12 @@
 
 .products-grid {
     display: block;
-    margin-left: 150px;
+    margin-left: 220px;
 }
 
 .products-grid__btn-cont {
     display: inline-block;
     width: 100%;
-    cursor: pointer;
 }
 
 .products-grid__left-btn {
@@ -431,6 +432,7 @@
     padding-bottom: 15px;
     text-transform: uppercase;
     color: #f49224;
+    cursor: pointer;
 }
 
 .products-grid__right-btn {
@@ -464,18 +466,27 @@
 }
 
 .one-products-category__product {
-    width: 24%;
-    min-width: 190px;
+    width: 22%;
+    min-width: 100px;
     padding-bottom: 20px;
-    margin-right: 1%;
+    margin-right: 3%;
     vertical-align: bottom;
+    /*border: 1px solid #aaaaaa;*/
 }
 
 .one-products-category__anch {
     display: block;
     width: 100%;
+    height: 200px;
     margin-bottom: 5px;
-    border: 2px solid transparent;
+    text-align: center;
+    border: 2px solid #aaaaaa;
+}
+
+@media screen and (max-width: 420px) {
+    .one-products-category__anch {
+        height: 100px;
+    }
 }
 
 .one-products-category__anch.chosen {
@@ -483,7 +494,10 @@
 }
 
 .one-products-category__img {
+    display: inline-block;
+    vertical-align: middle;
     width: 100%;
+    max-height: 100%;
 }
 
 .one-products-category__label {
@@ -677,5 +691,7 @@
 }
 
 .fb-items-panel-elem {
+    display: none;
     padding: 5px;
 }
+
