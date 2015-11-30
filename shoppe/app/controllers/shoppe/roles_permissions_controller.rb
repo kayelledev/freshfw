@@ -5,7 +5,7 @@ module Shoppe
 	
   	def index
       @roles = Role.order('name')
-  	  @permissions = Permission.order('created_at')
+  	  @permissions = Permission.sorted
     end
   end
 end
