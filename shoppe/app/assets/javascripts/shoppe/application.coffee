@@ -8,6 +8,7 @@
 #= require shoppe/design_projects
 #= require shoppe/perfect-scrollbar.min
 #= require shoppe/jquery.multiselect.min
+#= require shoppe/selected_furniture.js
 #= require_tree .
 
 $ ->

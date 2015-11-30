@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  $('#select-items-tab').click(function(e) {
+  $('.save-project-info-tab').click(function(e) {
     e.preventDefault();
     var form = $('form#project-form')[0];
     var formData = new FormData(form);
@@ -8,7 +8,8 @@ $(document).ready(function() {
     $('.images-upload').each(function() {
       formData.append($(this).attr('id'), $(this)[0].files[0]);
     });
-
+    formData.append("redirect_to_link", this.href);
+    
     $.ajax({
         url: '/shoppe/designer-portal/create',
         data: formData,
@@ -37,15 +38,8 @@ $(document).ready(function() {
         materials: materialsIdsArray
     });
   });
-  $('.products-grid__btn-cont').on('click', function () {
+  $('.products-grid__btn-cont a').on('click', function () {
     $.post('/shoppe/designer-portal/items_filtering', {show_all: true});
   });
-  $("#role_permission_ids").multiselect();
-  
-   // $('#role_permission_ids .ui-multiselect').width(200);
-  // $('#role_permission_ids option').mousedown(function(e) {
-  //   e.preventDefault();
-  //   $(this).prop('selected', $(this).prop('selected') ? false : true);
-  // });   
-  
+  $("#role_permission_ids").multiselect();  
 });

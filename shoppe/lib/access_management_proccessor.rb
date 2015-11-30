@@ -81,7 +81,18 @@ module AccessManagementProccessor
         end
       end
     else
-      actions = ['manage', 'read', 'create', 'update', 'destroy']
+      controller = (controller_name.pluralize + 'Controller').constantize rescue nil
+      if controller
+        all_methods = controller.public_instance_methods(false).map { |m| m.to_s }
+        params_methods = all_methods.grep /param/
+        methods = all_methods - params_methods
+        methods.each do |method|
+          if method =~ /^([A-Za-z\d*]+)+([\w]*)+([A-Za-z\d*]+)$/ #add_user, add_user_info, Add_user, add_User
+            actions << method
+          end
+        end
+      end
+      actions << 'manage' << 'read' << 'create' << 'update' << 'destroy'
     end
     actions
   end

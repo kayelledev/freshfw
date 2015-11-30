@@ -19,6 +19,7 @@ module Shoppe
       @design_project.status = :draft
       if @result = @design_project.save
         session[:design_project_id] = @design_project.id
+        @redirect_url = params[:redirect_to_link]
         respond_to do |format|
           format.html { redirect_to designer_portal_path }
           format.js
@@ -33,6 +34,7 @@ module Shoppe
 
     def update
       if @result = @design_project.update(design_project_params)
+        @redirect_url = params[:redirect_to_link]
         respond_to do |format|
           format.html { redirect_to designer_portal_path }
           format.js
@@ -69,6 +71,7 @@ module Shoppe
     end
 
     def add_to_room_builder
+      binding.pry
       @design_project.update(product_ids: params[:product_ids])
       redirect_to designer_portal_select_items_path
     end
@@ -84,8 +87,8 @@ module Shoppe
 
     def items_filtering
       params[:show_all] ||= false
-      @products_categories = Shoppe::Product.items_filtering(params[:categories], params[:colors], params[:materials], params[:show_all])
-      @design_project.create_filters_by(params[:categories], params[:colors], params[:materials])
+      @products_categories = Shoppe::Product.items_filtering(params[:categories], params[:colors], params[:materials])
+      @design_project.create_filters_by(params[:categories], params[:colors], params[:materials], params[:show_all])
       respond_to do |format|
         format.js
       end

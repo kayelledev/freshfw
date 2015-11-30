@@ -18,7 +18,7 @@ $(document).ready(function(){
         materials: materialsIdsArray
     });
   });
-  $('.products-grid__btn-cont').on('click', function () {
+  $('.products-grid__btn-cont a').on('click', function () {
     $.post('/designer-portal/items_filtering', {show_all: true});
   });
  })
