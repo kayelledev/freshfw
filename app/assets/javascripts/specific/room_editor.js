@@ -3579,29 +3579,6 @@
             this.attr('value', $(this).find('option:selected').val());
         });
 
-        // $button.on('click', function() {
-        //     var positions = {};
-        //     var scaling = parseFloat( $('.editor-container').data('width')) /  $('.editor-container').width();
-
-        //     controller.$holder.find('div').each(function() {
-        //         var data = {
-        //             'posX': parseInt($(this).parent().attr('data-x') * scaling),
-        //             'posY': parseInt($(this).parent().attr('data-y') * scaling),
-        //             'rotation': parseInt($(this).attr('data-rotation'))
-        //         };
-        //         positions[$(this).attr('id')] = data;
-        //     });
-
-        //     $.ajax({
-        //         url: "/room_editor/save", // Route to the Script Controller method
-        //         type: "POST",
-        //         data: { position: positions }, // This goes to Controller in params hash, i.e. params[:file_name]
-        //         success: function(response) {
-        //             console.log(response);
-        //         }
-        //     });
-        // });
-
         $button.on('click', function() {
           var data = {
             products: {}

@@ -1,4 +1,6 @@
 = render 'bottom_buttons'
+- content_for :custom_scripts do 
+  = javascript_include_tag "shoppe/specific/designer-portal-ajax.js" 
 %main
   %section.main-tabs
     .l-wrapper

@@ -13,3 +13,5 @@ Rails.application.config.assets.precompile += %w( checkout/* )
 Rails.application.config.assets.precompile += %w( bootstrap-treeview.min.js )
 Rails.application.config.assets.precompile += %w( bx_loader.gif controls.png )
 Rails.application.config.assets.precompile += %w( specific/* )
+Rails.application.config.assets.precompile += %w( shoppe/specific/* )
+

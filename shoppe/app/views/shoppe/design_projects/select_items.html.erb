@@ -1,4 +1,7 @@
 <%= render 'bottom_buttons' %>
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag "shoppe/specific/design_items_select.js" %>
+<% end %>
 <main>
     <div class="main-tabs">
         <div class="l-wrapper">
@@ -76,33 +79,7 @@
                     </div>
                 </div>
             </aside>
-            <div id='productList'>
-              <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, :method => 'post' do |f| %>
-                <%= f.error_messages %>
-                <article class="products-grid">
-                  <div class="products-grid__btn-cont">
-                    <a class="products-grid__left-btn" >show all</a>
-                    <%= f.submit "Add Selections to Room Builder", :class => 'products-grid__right-btn' %>
-                  </div>
-                  <div class="one-products-category l-cont">
-                    <% @products_categories.each do |category, product_list| %>
-                      <div class="one-products-category__title l-el"><%= category %></div>
-                      <% product_list.each do |product| %>
-                        <div class="one-products-category__product l-el">
-                          <div class="one-products-category__anch" href="#">
-                           <%= image_tag image_link(product, 'default_image'), class: "one-products-category__img", alt: "#{product.full_name}" %>
-                          </div>
-                          <label class="one-products-category__label">
-                            <%= check_box_tag "product_ids[]", product.id, @design_project.products.include?(product) %>
-                          </label>
-                        </div>
-                      <% end %>
-                    <!--  -->
-                    <% end %>
-                  </div>
-                </article>
-              <% end %>
-            </div>
+            <%= render 'product_list' %>
         </div>
     </div>
 </main>

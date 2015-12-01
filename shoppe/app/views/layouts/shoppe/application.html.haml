@@ -8,6 +8,7 @@
     :javascript
       window.Shoppe = {}
       window.Shoppe.currencyUnit = "#{h Shoppe.settings.currency_unit}";
+    = yield :custom_scripts 
   %body
     %nav.sidebar
       %header.logo

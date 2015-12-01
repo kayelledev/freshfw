@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   $('.save-project-info-tab').click(function(e) {
     e.preventDefault();
     var form = $('form#project-form')[0];
@@ -10,7 +11,7 @@ $(document).ready(function() {
     formData.append("redirect_to_link", this.href);
 
     $.ajax({
-        url: 'designer-portal/create',
+        url: '/shoppe/designer-portal/create',
         data: formData,
         processData: false,
         contentType: false,
