@@ -9,9 +9,9 @@
 #= require shoppe/perfect-scrollbar.min
 #= require shoppe/jquery.multiselect.min
 #= require shoppe/selected_furniture
+#= require_directory ./global
 #= require shoppe/furniture_board_editor
 #= require shoppe/room_layout_editor
-#= require_directory ./global
 #= require_tree .
 
 $ ->
