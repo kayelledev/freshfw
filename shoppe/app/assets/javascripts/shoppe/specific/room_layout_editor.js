@@ -335,9 +335,9 @@
             StoreImageLocally(index, $(this)[0]);
           });
           $('#save-as-image').on('click', printToFile);
-          setPosition();
         });
-
+          
+        setPosition();
 
         function setPosition() {
 
