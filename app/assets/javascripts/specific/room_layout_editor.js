@@ -278,15 +278,6 @@
             }
           });
 
-        // $('.draggable img').each(function() {
-        //   // console.log( $(this).width(), $(this).height() )
-        //   $(this).load(function(){
-        //       console.log( $(this).width(), $(this).height() );
-        //       console.log( $(this) );
-        //     });
-        // });
-
-
         StoreImageLocally = function(id, zis) {
           var cellId, dataImage, imgData;
           imgData = getBase64Image(zis);
@@ -972,6 +963,32 @@
         // update the posiion attributes
         target.setAttribute('data-x', x);
         target.setAttribute('data-y', y);
+
+        $('.draggable2').each(function() {
+          $(this).qtip({
+            content: {
+              text: $('#panel-elem-tooltip-' + $(this).attr('data-id')).clone(),
+              title: ' ',
+              button: true
+            },
+            position: {
+              my: 'right top',
+              at: 'left center',
+              target: $(this)
+            },
+            style: {
+              classes: 'qtip-bootstrap'
+            },
+            hide: {
+              event: 'mousedown unfocus mouseleave',
+              delay: 150,
+              fixed: true
+            },
+            show: {
+              event: 'mouseover'
+            }
+          });
+        });
       }
 
     };
