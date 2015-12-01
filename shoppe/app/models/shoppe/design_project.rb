@@ -58,8 +58,11 @@ module Shoppe
       self.depth % 12
     end
 
-    def create_filters_by(categories, colors, materials)
-      unless categories.nil? && colors.nil? && materials.nil? 
+    def create_filters_by(categories, colors, materials, show_all=false)
+      unless show_all
+        categories ||= []
+        colors ||= []
+        materials ||= []
         filters_array = []
         categories.try(:each) do |category_id|
           category = ProductCategory.find(category_id)
@@ -82,7 +85,11 @@ module Shoppe
     end
 
     def product_list_by_filters
-      Product.items_filtering(self.product_category_ids, self.color_ids, self.material_ids)
+      if self.product_category_ids.present? || self.color_ids.present? || self.material_ids.present?
+        Product.items_filtering(self.product_category_ids, self.color_ids, self.material_ids) 
+      else
+        Product.items_filtering
+      end
     end 
   
   end

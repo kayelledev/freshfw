@@ -1,0 +1,51 @@
+<% content_for :custom_scripts do %>
+  <%= javascript_include_tag "http://bxslider.com/lib/jquery.bxslider.js" %>
+<% end %>
+
+<div class='room-editor-container' style="margin: 0 auto; clear: both;">
+  <div class="navigation-holder">
+  </div>
+
+  <div class="rotate-angle" hidden>
+    Angle
+    <input type="number" class="rotation-manager" min="0" max="360" step="1">
+  </div>
+
+  <div class="editor-width">
+    <hr>
+    <!--<input type="number" class="holder-width" min="0" step="1" disabled>-->
+    <div class='measure-width'>
+      <span id='measure-width-ft'><%= full_measure( @design_project.width )[:ft] %></span>
+      ft.
+      <span id='measure-width-inch'><%= full_measure( @design_project.width )[:inch] %></span>
+      in.
+    </div>
+    <%= image_tag 'line.png', class: 'editor-line' %>
+  </div>
+
+
+  <div class="editor-height">
+    <%= image_tag 'vertical-line.png' %>
+      <!--<input type="number" class="holder-height" min="0" step="1" disabled>-->
+      <div class='measure-height'>
+        <span id='measure-height-ft'><%= full_measure( @design_project.depth )[:ft] %></span>
+        ft.
+        <span id='measure-height-inch'><%= full_measure( @design_project.depth )[:inch] %></span>
+        in.
+      </div>
+  </div>
+
+  <div class='dragg' data-status='clear'>
+
+    <div class="editor-items-panel">
+      <%= render partial: "room_layout_editor_panel_items" %>
+    </div>
+
+    <div class='editor-container-wr'>
+      <%= render partial: "room_layout_editor_container" %>
+    </div>
+
+  </div>
+</div>
+
+<center><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %></center>

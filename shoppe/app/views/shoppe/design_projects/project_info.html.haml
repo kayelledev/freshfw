@@ -1,10 +1,11 @@
+= render 'bottom_buttons'
 %main
   %section.main-tabs
     .l-wrapper
-      = link_to 'project info', @design_project, class: "main-tabs__one-tab main-tabs__one-tab--active" 
-      = link_to 'select items', [:select_items, @design_project], class: "main-tabs__one-tab", id: 'select-items-tab', remote: true 
-      = link_to 'room builder', [:room_builder, @design_project], class: "main-tabs__one-tab", remote: true 
-      = link_to 'instructions', [:instructions, @design_project], class: "main-tabs__one-tab", remote: true 
+      = link_to 'project info', designer_portal_path, class: "main-tabs__one-tab main-tabs__one-tab--active" 
+      = link_to 'select items', designer_portal_select_items_path, class: "main-tabs__one-tab save-project-info-tab", id: 'select-items-tab'
+      = link_to 'room builder', designer_portal_room_builder_path, class: "main-tabs__one-tab save-project-info-tab", id: 'room-builder-tab' 
+      = link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab save-project-info-tab", id: 'instructions-tab'
   .l-wrapper
     .l-tabs-alignment
       .info-table
@@ -40,15 +41,18 @@
           .project-init-info__cell Inspiration Images
           .project-init-info__cell
             .project-init-info__adm-img-cont.l-cont
-              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
-              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
-              = image_tag @design_project.inspiration_image1.thumb, class: "l-el"
+
+              = image_tag image_link(@design_project, 'inspiration_image1'), class: "l-el"
+              = image_tag image_link(@design_project, 'inspiration_image2'), class: "l-el"
+              = image_tag image_link(@design_project, 'inspiration_image3'), class: "l-el"
+              =# image_tag @design_project.inspiration_image2.thumb, class: "l-el"
+              =# image_tag @design_project.inspiration_image3.thumb, class: "l-el"
           .project-init-info__cell
         .project-init-info__row
           .project-init-info__cell Room Type
           .project-init-info__cell
             %label.project-init-info__label
-              = f.collection_select :product_category_id, Shoppe::ProductCategory.order(:name), :id, :name, {:class => 'project-init-info__select'} 
+              = f.collection_select :product_category_id, Shoppe::ProductCategory.order(:name).where(is_room: true), :id, :name, {:class => 'project-init-info__select'} 
                 
           .project-init-info__cell
         .project-init-info__row
@@ -59,21 +63,22 @@
                 %td
                   %span Width
                   %label.project-init-info__small-label
-                    = number_field_tag :width_ft, nil, class: "project-init-info__small-input", id: 'project-width-ft', min: "0", step: "1"
+                    = f.number_field :width_ft, class: "project-init-info__small-input", id: 'project-width-ft', min: "0", step: "1"
                   %span ft.
                 %td
                   %label.project-init-info__small-label
-                    = number_field_tag :width_in, nil, class: "project-init-info__small-input", id: 'project-width-in', min: "0", step: "0.01" 
+                    = f.number_field :width_in, class: "project-init-info__small-input", id: 'project-width-in', min: "0", step: "0.01" 
                   %span in.
               %tr
                 %td
                   %span Depth
                   %label.project-init-info__small-label
-                    = number_field_tag :depth_ft, nil, class: "project-init-info__small-input", id: 'project-depth-ft', min: "0", step: "1" 
+                    = f.number_field :depth_ft, class: "project-init-info__small-input", id: 'project-depth-ft', min: "0", step: "1" 
                   %span ft.
                 %td
                   %label.project-init-info__small-label
-                    = number_field_tag :depth_in, nil, class: "project-init-info__small-input", id: 'project-depth-in', min: "0", step: "0.01" 
+                    = f.number_field :depth_in, class: "project-init-info__small-input", id: 'project-depth-in', min: "0", step: "0.01" 
                   %span in.
           .project-init-info__cell
+
 

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_user_currency, unless: :location_in_cookies? 
   
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = "Access denied. You are not authorized to access the requested page."
+    flash[:alert] = "Access denied. You are not authorized to access the requested page. #{exception.action} #{exception.subject.class}"
     redirect_to root_path  
   end
 

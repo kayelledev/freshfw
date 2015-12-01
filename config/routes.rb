@@ -66,7 +66,7 @@ Rails.application.routes.draw do
   post 'designer-portal/items_filtering', to: 'design_projects#items_filtering'
   delete 'designer-portal/remove_product', to: 'design_projects#remove_product'
 
-  post 'designer-portal/create_new', to: 'design_projects#create_new'
+  get 'designer-portal/create_new', to: 'design_projects#create_new'
 
   patch 'designer-portal/save_room_layout', to: 'design_projects#save_room_layout'
   patch 'designer-portal/save_furniture_board', to: 'design_projects#save_furniture_board'
@@ -75,12 +75,10 @@ Rails.application.routes.draw do
 
 
   get 'design_portals/:id', to: 'design_projects#edit'
-  get 'designer-portal/:id/select_items', to: 'design_projects#select_items'
-  get 'designer-portal/:id/room_builder', to: 'design_projects#room_builder'
-  get 'designer-portal/:id/instructions', to: 'design_projects#instructions'
-
-
-
+  # get 'designer-portal/:id/select_items', to: 'design_projects#select_items'
+  # get 'designer-portal/:id/room_builder', to: 'design_projects#room_builder'
+  # get 'designer-portal/:id/instructions', to: 'design_projects#instructions'
+  
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 

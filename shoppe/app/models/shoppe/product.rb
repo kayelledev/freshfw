@@ -196,7 +196,7 @@ module Shoppe
       end
     end
 
-    def self.items_filtering(categories, colors, materials)
+    def self.items_filtering(categories=nil, colors=nil, materials=nil)
       if categories || colors || materials  
         categories = [] unless categories
         colors = [] unless colors

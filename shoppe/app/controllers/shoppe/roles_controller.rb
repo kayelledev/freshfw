@@ -1,7 +1,7 @@
 module Shoppe
   class RolesController < Shoppe::ApplicationController
     before_filter { @active_nav = :roles_permissions }
-    before_filter { params[:id] && @role = Role.find(params[:id]) }
+    before_filter { params[:id] && @role = Shoppe::Role.find(params[:id]) }
 	  load_and_authorize_resource
 	
 	def new
@@ -9,6 +9,7 @@ module Shoppe
   	end
 
   	def show
+
   	end
 
   	def edit
@@ -20,7 +21,7 @@ module Shoppe
 
     def create
       begin
-        @role = Role.new(safe_params)
+        @role = Shoppe::Role.new(safe_params)
         if @role.save
           redirect_to @role, :flash => {:notice =>  'Role has been created successfully' }
         else

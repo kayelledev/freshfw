@@ -1,0 +1,13 @@
+$("div.product[data-id=<%= @product.id %>]").fadeOut( 400, function() {
+  $(this).remove();
+
+  var sameCategoryProducts = $("div.product[data-product-category-id=<%= @product.product_category.id %>]");
+
+  console.log(sameCategoryProducts);
+  console.log( $(sameCategoryProducts).length );
+  if ( sameCategoryProducts.length == 0 ) {
+    $('div.product-category[data-id=<%= @product.product_category.id %>]').remove();
+  }
+
+});
+

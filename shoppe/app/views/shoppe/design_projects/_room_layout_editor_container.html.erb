@@ -1,0 +1,40 @@
+<div class="editor-container" data-width="<%= @design_project.width %>" data-height="<%= @design_project.depth %>" data-project-id="<%= @design_project.id %>" style="height: 600px;">
+  <% @design_project.design_projects_products.each do |item| %>
+    <span class='room-item' style="position: absolute;" data-width="<%= item.product.width %>" data-height="<%= item.product.depth %>"
+                data-toggle="tooltip">
+
+      <%= image_tag 'remove.png', class: 'remove-icon remove-item', 'data-item-id': item.product.id, width: '15px', height: '15px', hidden: true %>
+
+      <div id="<%= item.product.id %>" class="draggable" data-width="<%= item.product.width %>" data-height="<%= item.product.depth %>"
+                data-layout-rotation="<%= item.layout_rotation %>"
+                data-layout-x="<%= item.layout_posX %>"
+                data-layout-y="<%= item.layout_posY %>"
+                >
+
+        <% if image_link(item.product, 'image6') %>
+          <%= image_tag image_link(item.product, 'image6'), width: '100%', height: '100%', class: 'item-image', crossorigin: 'anonymous'%>
+        <% end %>
+
+        <div class="point left-top"></div>
+        <div class="point right-top"></div>
+        <div class="point left-bottom"></div>
+        <div class="point right-bottom"></div>
+      </div>
+
+      <%= image_tag 'rotate.png', class: 'rotation-arrow', width: '20px', height: '20px', hidden: true %>
+
+      <div class='elem-tooltip' id="tooltip-<%= item.product.id %>" style='display:none;'>
+        <%= link_to item.product.permalink, target:"_blank" do %>
+          <p><%= item.product.name %></p>
+        <% end %>
+        <p><b>Width:</b> <%= item.product.width %><br>
+        <b>Heigh:</b> <%= item.product.height %><br>
+        <b>Depth:</b> <%= item.product.depth %></p>
+        <span class="glyphicon glyphicon-trash remove-item" aria-hidden="true" data-item-id="<%= item.product.id %>"></span>
+        <br>
+        <%= image_tag image_link(item.product, 'default_image'), class: 'tooltip-item-image' %>
+      </div>
+
+    </span>
+  <% end %>
+</div>

@@ -11,6 +11,7 @@ class DesignProjectsController < ApplicationController
     @design_project.status = :draft
     if @result = @design_project.save
       session[:design_project_id] = @design_project.id
+      @redirect_url = params[:redirect_to_link]
       respond_to do |format|
         format.html { redirect_to designer_portal_path }
         format.js
@@ -25,6 +26,7 @@ class DesignProjectsController < ApplicationController
 
   def update
     if @result = @design_project.update(design_project_params)
+      @redirect_url = params[:redirect_to_link]
       respond_to do |format|
         format.html { redirect_to designer_portal_path }
         format.js
@@ -38,7 +40,7 @@ class DesignProjectsController < ApplicationController
   end
 
   def save_room_layout
-    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+    @design_project = DesignProject.find(session[:design_project_id])
     @design_project.design_projects_products.each do |design_projects_product|
       design_projects_product.layout_posX = nil
       design_projects_product.layout_posY = nil
@@ -46,7 +48,7 @@ class DesignProjectsController < ApplicationController
       design_projects_product.save
     end
     params[:products].each do |product_id, product_params|
-      design_projects_product = Shoppe::DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
+      design_projects_product = DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
       design_projects_product.layout_posX = product_params['layout_posX'].to_f
       design_projects_product.layout_posY = product_params['layout_posY'].to_f
       design_projects_product.layout_rotation = product_params['layout_rotation'].to_f
@@ -56,7 +58,7 @@ class DesignProjectsController < ApplicationController
   end
 
   def save_furniture_board
-    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+    @design_project = DesignProject.find(session[:design_project_id])
     @design_project.design_projects_products.each do |design_projects_product|
       design_projects_product.board_posX = nil
       design_projects_product.board_posY = nil
@@ -65,7 +67,7 @@ class DesignProjectsController < ApplicationController
       puts design_projects_product.board_posY
     end
     params[:products].each do |product_id, product_params|
-      design_projects_product = Shoppe::DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
+      design_projects_product = DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
       design_projects_product.board_posX = product_params['board_posX'].to_f
       design_projects_product.board_posY = product_params['board_posY'].to_f
       design_projects_product.board_rotation = product_params['board_rotation'].to_f
@@ -75,8 +77,8 @@ class DesignProjectsController < ApplicationController
   end
 
   def board_submit_room
-    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
-    @design_projects_products_to_remove = Shoppe::DesignProjectsProduct.where(product_id: params[:ids], design_project_id: @design_project.id).destroy_all
+    @design_project = DesignProject.find(session[:design_project_id])
+    @design_projects_products_to_remove = DesignProjectsProduct.where(product_id: params[:ids], design_project_id: @design_project.id).destroy_all
     @ids_to_remove = params[:ids]
     @design_project.status = :draft
     @design_project.save
@@ -84,8 +86,8 @@ class DesignProjectsController < ApplicationController
   end
 
   def layout_submit_room
-    @design_project = Shoppe::DesignProject.find(session[:design_project_id])
-    @design_projects_products_to_remove = Shoppe::DesignProjectsProduct.where(product_id: params[:ids], design_project_id: @design_project.id).destroy_all
+    @design_project = DesignProject.find(session[:design_project_id])
+    @design_projects_products_to_remove = DesignProjectsProduct.where(product_id: params[:ids], design_project_id: @design_project.id).destroy_all
     @ids_to_remove = params[:ids]
     @design_project.status = :revision_requested
     @design_project.save
@@ -132,8 +134,9 @@ class DesignProjectsController < ApplicationController
   end
 
   def items_filtering
+    params[:show_all] ||= false
     @products_categories = Product.items_filtering(params[:categories], params[:colors], params[:materials])
-    @design_project.create_filters_by(params[:categories], params[:colors], params[:materials])
+    @design_project.create_filters_by(params[:categories], params[:colors], params[:materials], params[:show_all])
     respond_to do |format|
       format.js
     end
