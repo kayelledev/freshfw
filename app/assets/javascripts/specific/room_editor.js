@@ -221,7 +221,7 @@
           });
 
           // replase item to top and left if room is too small
-          if( +$(this).data('x') + +$(this).data('width') > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).data('height') > +$('.editor-container').data('height') ) {
+          if( controller.restrictAreaHoles( $(this) ) ) {
 
             $(this).parent().css({
               '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
@@ -3579,27 +3579,66 @@
             this.attr('value', $(this).find('option:selected').val());
         });
 
+        // $button.on('click', function() {
+        //     var positions = {};
+        //     var scaling = parseFloat( $('.editor-container').data('width')) /  $('.editor-container').width();
+
+        //     controller.$holder.find('div').each(function() {
+        //         var data = {
+        //             'posX': parseInt($(this).parent().attr('data-x') * scaling),
+        //             'posY': parseInt($(this).parent().attr('data-y') * scaling),
+        //             'rotation': parseInt($(this).attr('data-rotation'))
+        //         };
+        //         positions[$(this).attr('id')] = data;
+        //     });
+
+        //     $.ajax({
+        //         url: "/room_editor/save", // Route to the Script Controller method
+        //         type: "POST",
+        //         data: { position: positions }, // This goes to Controller in params hash, i.e. params[:file_name]
+        //         success: function(response) {
+        //             console.log(response);
+        //         }
+        //     });
+        // });
+
         $button.on('click', function() {
-            var positions = {};
-            var scaling = parseFloat( $('.editor-container').data('width')) /  $('.editor-container').width();
+          var data = {
+            products: {}
+          };
 
-            controller.$holder.find('div').each(function() {
-                var data = {
-                    'posX': parseInt($(this).parent().attr('data-x') * scaling),
-                    'posY': parseInt($(this).parent().attr('data-y') * scaling),
-                    'rotation': parseInt($(this).attr('data-rotation'))
-                };
-                positions[$(this).attr('id')] = data;
-            });
+          $(".draggable").each(function() {
+            var elemId = $(this).attr('id');
 
-            $.ajax({
-                url: "/room_editor/save", // Route to the Script Controller method
-                type: "POST",
-                data: { position: positions }, // This goes to Controller in params hash, i.e. params[:file_name]
-                success: function(response) {
-                    console.log(response);
-                }
-            });
+            coX = +$('.editor-container').width() / +controller.getDegreeOfElement( $(this).parent() ).left;
+            coY = +$('.editor-container').height() / +controller.getDegreeOfElement( $(this).parent() ).top;
+
+            var posX = +$('.editor-container').attr('data-width') / coX;
+            var posY = +$('.editor-container').attr('data-height') / coY;
+            var rotation = +controller.getDegreeOfElement( $(this).parent() ).degree;
+            console.log(rotation);
+
+            data.products[elemId] = {
+              posX: posX,
+              posY: posY,
+              rotation: rotation
+            }
+          });
+          console.log(data);
+
+          $.ajax({
+              url: "/room_editor/save",
+              type: "POST",
+              data: JSON.stringify(data),
+              dataType: "json",
+              contentType: 'application/json',
+              success: function() {
+                console.log('success');
+              },
+              error: function() {
+                console.log('error');
+              }
+          });
         });
     });
 
