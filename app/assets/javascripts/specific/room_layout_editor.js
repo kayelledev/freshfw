@@ -278,97 +278,13 @@
             }
           });
 
-
-        var itemsWithoutPosition = [];
-        var itemsWithPosition = [];
-        $('.draggable').each(function() {
-          if ( $(this).attr('data-layout-x') === '' || $(this).attr('data-layout-y') === '' ) {
-            itemsWithoutPosition.push( $(this) );
-          } else {
-            itemsWithPosition.push( $(this) );
-          }
-        });
-
-        clearAreaAndInitPanel(itemsWithoutPosition);
-
-        $(itemsWithPosition).each(function() {
-          var posX = +$(this).attr('data-layout-x') / scaling;
-          var posY = +$(this).attr('data-layout-y') / scaling;
-          var rotation = $(this).attr('data-layout-rotation');
-          console.log(posX, posY, rotation);
-          $(this).parent().css({
-              '-webkit-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
-              '-moz-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
-              '-ms-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
-              'transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)'
-          });
-          $(this).attr('data-x', posX);
-          $(this).attr('data-y', posY);
-          $(this).attr('data-rotation', rotation);
-          $(this).parent().attr('data-x', posX);
-          $(this).parent().attr('data-y', posY);
-          $(this).parent().attr('data-rotation', rotation);
-        });
-
-
-        function clearAreaAndInitPanel(items) {
-          clearArea();
-          resetElemInArea();
-          resetItemsInPanel();
-          $(items).each(function() {
-            elemIt = $(this).attr('id');
-            var elemInPanel = $('.items-panel-elem[data-id="' + elemId + '"]')
-            controller.initItemsPanelArea(elemInPanel);
-          })
-
-          function clearArea(){
-            $(items).each(function() {
-              console.log($(this));
-              $(this).css('display', 'none');
-            });
-          }
-
-          function resetElemInArea(){
-            $(items).each(function() {
-              $(this).parent().css({
-                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
-                   '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
-                    '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
-                        'transform': 'translate(0px, 0px) rotate(0deg)',
-              });
-
-              $(this).parent().attr('data-rotation', 0);
-              $(this).parent().attr('data-x', 0);
-              $(this).parent().attr('data-y', 0);
-              $(this).attr('data-rotation', 0);
-              $(this).attr('data-x', 0);
-              $(this).attr('data-y', 0);
-              $(this).parent().css({
-                top: 0,
-                left: 0
-              });
-            });
-          }
-
-          function resetItemsInPanel() {
-            $(items).each(function() {
-              elemId = $(this).attr('id');
-              panelElem = $(".items-panel-elem[data-id='" + elemId + "']");
-
-              $(panelElem).attr('data-x', '0');
-              $(panelElem).attr('data-y', '0');
-
-              $(panelElem).css({
-                '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
-                   '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
-                    '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
-                        'transform': 'translate(0px, 0px) rotate(0deg)',
-              });
-
-              $(panelElem).show();
-            });
-          }
-        }
+        // $('.draggable img').each(function() {
+        //   // console.log( $(this).width(), $(this).height() )
+        //   $(this).load(function(){
+        //       console.log( $(this).width(), $(this).height() );
+        //       console.log( $(this) );
+        //     });
+        // });
 
 
         StoreImageLocally = function(id, zis) {
@@ -421,14 +337,113 @@
           }
         };
 
-        window.onload = function() {
+        $('#room-layout-tab').click(function() {
           var imgs;
           imgs = $('.room-editor-container').find('.item-image');
           imgs.each(function(index) {
             StoreImageLocally(index, $(this)[0]);
           });
           $('#save-as-image').on('click', printToFile);
-        };
+          setPosition();
+        });
+
+
+        function setPosition() {
+
+          var itemsWithoutPosition = [];
+          var itemsWithPosition = [];
+          $('.draggable').each(function() {
+            if ( $(this).attr('data-layout-x') === '' || $(this).attr('data-layout-y') === '' ) {
+              itemsWithoutPosition.push( $(this) );
+            } else {
+              itemsWithPosition.push( $(this) );
+            }
+          });
+
+          clearAreaAndInitPanel(itemsWithoutPosition);
+
+          $(itemsWithPosition).each(function() {
+            var posX = +$(this).attr('data-layout-x') / scaling;
+            var posY = +$(this).attr('data-layout-y') / scaling;
+            var rotation = $(this).attr('data-layout-rotation');
+            console.log(posX, posY, rotation);
+            $(this).parent().css({
+                '-webkit-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
+                '-moz-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
+                '-ms-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)',
+                'transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation + 'deg)'
+            });
+            $(this).attr('data-x', posX);
+            $(this).attr('data-y', posY);
+            $(this).attr('data-rotation', rotation);
+            $(this).parent().attr('data-x', posX);
+            $(this).parent().attr('data-y', posY);
+            $(this).parent().attr('data-rotation', rotation);
+          });
+
+          function clearAreaAndInitPanel(items) {
+            clearArea();
+            resetElemInArea();
+            resetItemsInPanel();
+            $(items).each(function() {
+              elemIt = $(this).attr('id');
+              var elemInPanel = $('.items-panel-elem[data-id="' + elemId + '"]')
+              controller.initItemsPanelArea(elemInPanel);
+            })
+
+            function clearArea(){
+              $(items).each(function() {
+                console.log($(this));
+                $(this).css('display', 'none');
+              });
+            }
+
+            function resetElemInArea(){
+              $(items).each(function() {
+                $(this).parent().css({
+                  '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                     '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                      '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                          'transform': 'translate(0px, 0px) rotate(0deg)',
+                });
+
+                $(this).parent().attr('data-rotation', 0);
+                $(this).parent().attr('data-x', 0);
+                $(this).parent().attr('data-y', 0);
+                $(this).attr('data-rotation', 0);
+                $(this).attr('data-x', 0);
+                $(this).attr('data-y', 0);
+                $(this).parent().css({
+                  top: 0,
+                  left: 0
+                });
+              });
+            }
+
+            function resetItemsInPanel() {
+              $(items).each(function() {
+                elemId = $(this).attr('id');
+                panelElem = $(".items-panel-elem[data-id='" + elemId + "']");
+
+                $(panelElem).attr('data-x', '0');
+                $(panelElem).attr('data-y', '0');
+
+                $(panelElem).css({
+                  '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                     '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                      '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                          'transform': 'translate(0px, 0px) rotate(0deg)',
+                });
+
+                $(panelElem).show();
+              });
+            }
+          }
+        }
+
+
+
+
     }
 
     /**
@@ -1296,18 +1311,6 @@
             $button = $('.save-preset');
 
         controller.init();
-
-        $('.editor-container-wr').arrive(".editor-container", function() {
-          controller = new Controller(),
-            $presetSelector = $('.preset'),
-            $button = $('.save-preset');
-          controller.initElements(controller.$initialElenemts);
-          controller.catchElement();
-          controller.rotateElement();
-          controller.initMouseRotation();
-          controller.removeElement();
-          console.log('arrive');
-        });
 
         $presetSelector.on('change', function() {
             this.attr('value', $(this).find('option:selected').val());
