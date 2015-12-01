@@ -151,7 +151,7 @@
     $('.fb-draggable').each(function() {
       $(this).qtip({
         content: {
-          text: $(this).parent().children('.fb-elem-tooltip'),
+          text: $('#fb-elem-tooltip-' + $(this).attr('data-id')).clone(),
           title: ' ',
           button: true
         },
@@ -416,10 +416,10 @@
       target.setAttribute('data-y', y);
     }
 
-    $('.draggable2').each(function() {
+    $('.fb-draggable2').each(function() {
       $(this).qtip({
         content: {
-          text: $('#panel-elem-tooltip-' + $(this).attr('data-id')).clone(),
+          text: $('#fb-panel-elem-tooltip-' + $(this).attr('data-panel-elem-id')).clone(),
           title: ' ',
           button: true
         },
