@@ -15,7 +15,6 @@ module Shoppe
     
     def check_permissions!(permission)
       raise ActiveRecord::RecordNotSaved, "You cannot delete permissions for admin role" if self.name == 'admin'
-      raise ActiveRecord::RecordNotSaved, "You cannot delete WelcomeController index permission" if permission.controller_class == 'WelcomeController' && permission.action == 'index'
     end
     
     def can_delete_role?

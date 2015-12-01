@@ -1,29 +1,28 @@
-<% content_for :custom_scripts do %>
-  <%= javascript_include_tag "specific/furniture_board_editor.js" %>
-<% end %>
-
 <div class='furniture-board-dragg'>
 
   <div class="furniture-board-editor-items-panel">
-    <% @project.included_products.each do |item| %>
-      <div class='fb-draggable2 fb-items-panel-elem' data-panel-elem-id="<%= item.id %>">
-        <% if image_link(item, 'default_image') %>
-          <%= image_tag image_link(item, 'default_image'), width: '100%', height: '100%' %>
+    <% @design_project.design_projects_products.each do |item| %>
+      <div class='fb-draggable2 fb-items-panel-elem' data-panel-elem-id="<%= item.product.id %>">
+        <% if image_link(item.product, 'default_image') %>
+          <%= image_tag image_link(item.product, 'default_image'), width: '100%', height: '100%' %>
         <% end %>
       </div>
     <% end %>
   </div>
 
   <div class="furniture-board-editor">
-    <% @project.included_products.each do |item| %>
-      <span class='fb-room-item' style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>">
+    <% @design_project.design_projects_products.each do |item| %>
+      <span class='fb-room-item' style="position: absolute;" data-width="<%= item.product.width %>" data-height="<%= item.product.depth %>">
 
-        <%= image_tag 'remove.png', class: 'fb-remove-icon fb-remove-item', 'data-item-id': item.id, width: '15px', height: '15px', hidden: true %>
+        <%= image_tag 'remove.png', class: 'fb-remove-icon fb-remove-item', 'data-item-id': item.product.id, width: '15px', height: '15px', hidden: true %>
 
-        <div data-id="<%= item.id %>" class="fb-draggable" data-width="<%= item.width %>" data-height="<%= item.depth %>">
+        <div data-id="<%= item.product.id %>" class="fb-draggable" data-width="<%= item.product.width %>" data-height="<%= item.product.depth %>"
+                data-board-rotation="<%= item.board_rotation %>"
+                data-board-x="<%= item.board_posX %>"
+                data-board-y="<%= item.board_posY %>">
 
-          <% if image_link(item, 'default_image') %>
-            <%= image_tag image_link(item, 'default_image'), class: 'fb-item-image'%>
+          <% if image_link(item.product, 'default_image') %>
+            <%= image_tag image_link(item.product, 'default_image'), class: 'fb-item-image'%>
           <% end %>
 
           <div class="point left-top"></div>
@@ -34,14 +33,14 @@
 
         <%= image_tag 'rotate.png', class: 'fb-rotation-arrow', width: '20px', height: '20px', hidden: true %>
 
-        <div class='fb-elem-tooltip' data-tooltip="<%= item.id %>" style='visibility:hidden;'>
-          <%= link_to item.permalink, target:"_blank" do %>
-            <p><%= item.name %></p>
+        <div class='fb-elem-tooltip' data-tooltip="<%= item.product.id %>" style='visibility:hidden;'>
+          <%= link_to item.product.permalink, target:"_blank" do %>
+            <p><%= item.product.name %></p>
           <% end %>
-          <p><b>Width:</b> <%= item.width %><br>
-          <b>Heigh:</b> <%= item.height %><br>
-          <b>Depth:</b> <%= item.depth %></p>
-          <span class="glyphicon glyphicon-trash fb-remove-item" aria-hidden="true" data-item-id="<%= item.id %>"></span>
+          <p><b>Width:</b> <%= item.product.width %><br>
+          <b>Heigh:</b> <%= item.product.height %><br>
+          <b>Depth:</b> <%= item.product.depth %></p>
+          <span class="glyphicon glyphicon-trash fb-remove-item" aria-hidden="true" data-item-id="<%= item.product.id %>"></span>
         </div>
 
       </span>
