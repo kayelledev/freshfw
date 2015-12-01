@@ -281,7 +281,10 @@
 
         $('#room-layout-tab').click(function() {
           $('.draggable').find('.item-image:visible').each(function(index) {
-            controller.redrawImage(+$(this).attr('id'), $(this));
+            $(this).on('load', function() {
+              controller.redrawImage(+$(this).attr('id'), $(this));
+            });
+
           });
         });
 
@@ -857,8 +860,9 @@
         realItem.show();
 
         var realImage = $(realItem).find('.item-image');
-
-        controller.redrawImage(+realImage.attr('id'), realImage);
+        $(realImage).on('load', function() {
+          controller.redrawImage(+realImage.attr('id'), $(this));
+        });
 
         // restrict position
         if ( newPositionX + +realItem.width() >= +$('.editor-container').width() ) {
