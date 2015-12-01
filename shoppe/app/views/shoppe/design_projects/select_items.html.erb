@@ -83,15 +83,16 @@
         </div>
     </div>
 </main>
-<script>
-    ;(function() {
-        document.addEventListener("readystatechange", function() {
-            if (document.readyState = "complete") {
+        <script>
+            ;(function() {
                 var checkboxes = document.querySelectorAll(".one-products-category__label > input"),
                     filterCategories = document.querySelectorAll(".one-filter-category"),
                     categoryNames = document.querySelectorAll(".one-filter-category__name");
                 if (checkboxes.length) {
                     for (var i = 0, lim = checkboxes.length; i < lim; i += 1) {
+                        if (checkboxes[i].checked) {
+                            checkboxes[i].parentElement.previousElementSibling.classList.add("chosen");
+                        };
                         checkboxes[i].addEventListener("change", function() {
                             this.parentElement.previousElementSibling.classList.toggle("chosen");
                         });
@@ -114,7 +115,5 @@
                         }
                     };
                 };
-            }
-        })
-    })();
-</script>
+            })();
+        </script>
