@@ -32,10 +32,10 @@
       %dd= f.collection_select :supplier_id, Shoppe::Supplier.order(:name), :id, :name, {:class => 'chosen'}
     %dl
       %dt= f.label :color_id, t('shoppe.products.product_color')
-      %dd= f.collection_select :color_id, Shoppe::Color.order(:name), :id, :name, {:class => 'chosen'}
+      %dd= f.collection_select(:color_ids, Shoppe::Color.order(:name), :id, :name, {:selected => @product.color_ids, include_hidden: true}, {:multiple => true})
     %dl
-      %dt= f.label :material_id, t('shoppe.products.product_material')
-      %dd= f.collection_select :material_id, Shoppe::Material.order(:name), :id, :name, {:class => 'chosen'}
+      %dt= f.label :material_ids, t('shoppe.products.product_material')
+      %dd= f.collection_select(:material_ids, Shoppe::Material.order(:name), :id, :name, {:selected => @product.material_ids, include_hidden: true}, {:multiple => true})
 
     .splitContainer
       %dl.fourth
@@ -212,6 +212,8 @@
     = link_to t('shoppe.cancel'), :products, :class => 'button'
 
 :javascript
+  $("#product_material_ids").multiselect();  
+  $("#product_color_ids").multiselect();  
   $('header.logo').css('height','auto');
   $('fieldset legend').css('width','auto');
   $('fieldset legend').css('border','none');
