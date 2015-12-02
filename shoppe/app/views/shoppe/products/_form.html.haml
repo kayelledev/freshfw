@@ -31,7 +31,7 @@
       %dt= f.label :supplier_id, t('shoppe.products.product_supplier')
       %dd= f.collection_select :supplier_id, Shoppe::Supplier.order(:name), :id, :name, {:class => 'chosen'}
     %dl
-      %dt= f.label :color_id, t('shoppe.products.product_color')
+      %dt= f.label :color_ids, t('shoppe.products.product_color')
       %dd= f.collection_select(:color_ids, Shoppe::Color.order(:name), :id, :name, {:selected => @product.color_ids, include_hidden: true}, {:multiple => true})
     %dl
       %dt= f.label :material_ids, t('shoppe.products.product_material')
