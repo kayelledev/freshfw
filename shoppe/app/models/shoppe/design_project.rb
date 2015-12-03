@@ -68,6 +68,10 @@ module Shoppe
           category = ProductCategory.find(category_id)
           filter = Filter.where(filter_element_id: category_id, filter_element_type: 'Shoppe::ProductCategory').first_or_create
           filters_array << filter
+          # category.descendents.try(:each) do |category_child|
+          #   filter = Filter.where(filter_element_id: category_child.id, filter_element_type: 'Shoppe::ProductCategory').first_or_create
+          #   filters_array << filter
+          # end
         end
         colors.try(:each) do |category_id|
           category = Color.find(category_id)
