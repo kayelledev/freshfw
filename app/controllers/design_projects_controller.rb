@@ -4,6 +4,7 @@ class DesignProjectsController < ApplicationController
                     (session[:design_project_id] && @design_project = DesignProject.find(session[:design_project_id]) )
                   }
     before_filter :check_session_contain_project, only: [:create]
+    before_filter :check_user_access, if: :design_project_present?
 
   def create
     @design_project = DesignProject.new(design_project_params)
@@ -22,6 +23,17 @@ class DesignProjectsController < ApplicationController
         format.js
       end
     end
+  end
+
+  def check_user_access
+    unless current_user.admin? || (@design_project.user && @design_project.user.id == current_user.id)
+      flash[:alert] = "Access denied. You are not authorized to access this design project. "
+      redirect_to root_path 
+    end
+  end
+
+  def design_project_present?
+    @design_project.present?
   end
 
   def update

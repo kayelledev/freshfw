@@ -27,11 +27,11 @@
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Designed By:</div>
-                    <div class="info-table__cell"><%= current_user.try(:full_name) %></div>
+                    <div class="info-table__cell"><%= (@design_project.user || current_user).try(:full_name) %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Designer Email:</div>
-                    <div class="info-table__cell" id='designer-email'><%= current_user.try(:email_address) %></div>
+                    <div class="info-table__cell" id='designer-email'><%= (@design_project.user || current_user).try(:email_address) %></div>
                 </div>
             </div>
             <%= form_for @design_project, url: designer_portal_create_path, html: { class: "project-init-info", id: 'project-form', multipart: true }, remote: true do |f| %>

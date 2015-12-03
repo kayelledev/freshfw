@@ -1,0 +1,21 @@
+=> [32m#<User:0x00000007d205f8[0m
+ id: [1;34m20[0m,
+ first_name: [31m[1;31m"[0m[31mIrina[1;31m"[0m[31m[0m,
+ last_name: [31m[1;31m"[0m[31mDerezhenets[1;31m"[0m[31m[0m,
+ email_address: [31m[1;31m"[0m[31mirina@sloboda-studio.com[1;31m"[0m[31m[0m,
+ password_digest: [1;36mnil[0m,
+ created_at: [1;34;4mSun[0m, [1;34m07[0m [1;34;4mJun[0m [1;34m2015[0m [1;34m08[0m:[1;34m01[0m:[1;34m40[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+ updated_at: [1;34;4mThu[0m, [1;34m03[0m [1;34;4mDec[0m [1;34m2015[0m [1;34m12[0m:[1;34m17[0m:[1;34m33[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+ encrypted_password:
+  [31m[1;31m"[0m[31m$2a$10$3/LnpgRvqHzm7M7p95kqYuw3o6vmd30J3zyDbyPU335DJo3g3DuWu[1;31m"[0m[31m[0m,
+ reset_password_token: [1;36mnil[0m,
+ reset_password_sent_at: [1;36mnil[0m,
+ remember_created_at: [1;36mnil[0m,
+ confirmation_token:
+  [31m[1;31m"[0m[31ma5a0f5ca3f793be918302efb66e64c96037caed4706a5e2223b6030980ad1144[1;31m"[0m[31m[0m,
+ confirmed_at: [1;34;4mMon[0m, [1;34m08[0m [1;34;4mJun[0m [1;34m2015[0m [1;34m07[0m:[1;34m01[0m:[1;34m54[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+ confirmation_sent_at: [1;34;4mSun[0m, [1;34m07[0m [1;34;4mJun[0m [1;34m2015[0m [1;34m08[0m:[1;34m01[0m:[1;34m40[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+ unconfirmed_email: [1;36mnil[0m,
+ twitter: [1;36mnil[0m,
+ facebook: [1;36mnil[0m,
+ admin: [1;36mfalse[0m[32m>[0m
