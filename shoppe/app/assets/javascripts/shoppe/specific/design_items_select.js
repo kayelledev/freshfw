@@ -21,4 +21,15 @@ $(document).ready(function(){
   $('.products-grid__btn-cont a').on('click', function () {
     $.post('/shoppe/designer-portal/items_filtering', {show_all: true});
   });
+
+  $(".one-products-category__anch").on('click', function () {
+    var checkbox = $(this).parent().find('.one-products-category__label > input');
+    if (checkbox[0].checked) {
+      checkbox.prop('checked', false);
+      checkbox[0].parentElement.previousElementSibling.classList.toggle("chosen");
+    } else {
+      checkbox.prop('checked', true);
+      checkbox[0].parentElement.previousElementSibling.classList.add("chosen");
+    }
+  });
  })
