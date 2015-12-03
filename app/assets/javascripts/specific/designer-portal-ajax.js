@@ -8,7 +8,7 @@ $(document).ready(function() {
       formData.append($(this).attr('id'), $(this)[0].files[0]);
     });
     formData.append("redirect_to_link", this.href);
-
+    console.log('start saving');
     $.ajax({
         url: 'designer-portal/create',
         data: formData,
@@ -16,6 +16,8 @@ $(document).ready(function() {
         contentType: false,
         type: 'POST',
         dataType: 'script'
+    }).done(function() {
+      console.log('end saving');
     });
   });
 });
