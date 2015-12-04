@@ -1428,6 +1428,8 @@
         }
 
         $('.layout-submit-room').on('click', function() {
+          saveRoomLayout();
+
           var button = this;
           var data = {
             ids: []
