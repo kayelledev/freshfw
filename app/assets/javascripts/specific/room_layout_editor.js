@@ -1370,8 +1370,24 @@
             });
         });
 
-        $('.save-layout').on('click', function() {
-          var button = this;
+        $('.subtabs__one-tab').click(function(e) {
+          e.preventDefault();
+          if ( $('.active-tab').attr('id') === 'room-layout' ) {
+            console.log('room-builder-subtab');
+            saveRoomLayout();
+          }
+        });
+
+        $('.main-tabs__one-tab').click(function(e) {
+          e.preventDefault();
+          if ( $('.active-tab').attr('id') === 'room-layout' ) {
+            console.log('room-builder-tab');
+            saveRoomLayout();
+            window.open( $(this).attr('href') ,"_self");
+          }
+        });
+
+        function saveRoomLayout() {
           var data = {
             products: {}
           };
@@ -1396,8 +1412,8 @@
             }
           });
 
-          $.ajax({
-              url: $(button).attr('data-url'),
+          return $.ajax({
+              url: $('#room-layout').attr('data-url'),
               type: "PATCH",
               data: JSON.stringify(data),
               dataType: "json",
@@ -1409,7 +1425,7 @@
                 console.log('error');
               }
           });
-        });
+        }
 
         $('.layout-submit-room').on('click', function() {
           var button = this;

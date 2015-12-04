@@ -731,8 +731,24 @@
     var controllerFb = new ControllerFb();
     controllerFb.init();
 
-    $('.save-board').on('click', function() {
-      var button = this;
+    $('.subtabs__one-tab').click(function(e) {
+      e.preventDefault();
+      if ( $('.active-tab').attr('id') === 'furniture-board' ) {
+        console.log('furniture-board-subtab');
+        saveFunitureBoard();
+      }
+    });
+
+    $('.main-tabs__one-tab').click(function(e) {
+      e.preventDefault();
+      if ( $('.active-tab').attr('id') === 'furniture-board' ) {
+        console.log('furniture-board-tab');
+        saveFunitureBoard()
+        window.open( $(this).attr('href') ,"_self")
+      }
+    });
+
+    function saveFunitureBoard() {
       var data = {
         products: {}
       };
@@ -754,7 +770,7 @@
       });
 
       $.ajax({
-          url: $(button).attr('data-url'),
+          url: $('#furniture-board').attr('data-url'),
           type: "PATCH",
           data: JSON.stringify(data),
           dataType: "json",
@@ -766,7 +782,7 @@
             console.log('error');
           }
       });
-    });
+    }
 
     $('.board-submit-room').on('click', function() {
       var button = this;
