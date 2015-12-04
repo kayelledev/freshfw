@@ -13,7 +13,7 @@
       .info-table
         .info-table__row
           .info-table__cell project status:
-          .info-table__cell= @design_project.status
+          .info-table__cell= @design_project.status.try(:humanize).try(:titleize)
         .info-table__row
           .info-table__cell creation date:
           .info-table__cell= @design_project.created_at.strftime('%b %d, %Y')

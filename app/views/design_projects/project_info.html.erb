@@ -15,15 +15,15 @@
             <div class="info-table">
                 <div class="info-table__row">
                     <div class="info-table__cell">Project Status:</div>
-                    <div class="info-table__cell" id='project-status'><%= @design_project.status %></div>
+                    <div class="info-table__cell" id='project-status'><%= @design_project.status.try(:humanize).try(:titleize) %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Creation Date:</div>
-                    <div class="info-table__cell"><%= @design_project.try(:created_at) || Date.today %></div>
+                    <div class="info-table__cell"><%= (@design_project.try(:created_at) || Date.today).strftime('%b %d, %Y') %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Last Modefied Date:</div>
-                    <div class="info-table__cell"><%= @design_project.try(:updated_at) || Date.today %></div>
+                    <div class="info-table__cell"><%= (@design_project.try(:updated_at) || Date.today).strftime('%b %d, %Y') %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Designed By:</div>
