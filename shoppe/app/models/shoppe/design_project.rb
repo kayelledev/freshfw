@@ -12,8 +12,8 @@ module Shoppe
     has_many  :materials, through: :filters, source: :filter_element, source_type: 'Shoppe::Material'
 
     validates :name, presence: true
-    validates :width, numericality: true
-    validates :depth, numericality: true
+    validates :width, numericality: {greater_than: 0}
+    validates :depth, numericality: {greater_than: 0}
 
     enum status: [:draft, :under_review, :revision_requested, :rejected, :approved]
 
@@ -68,6 +68,10 @@ module Shoppe
           category = ProductCategory.find(category_id)
           filter = Filter.where(filter_element_id: category_id, filter_element_type: 'Shoppe::ProductCategory').first_or_create
           filters_array << filter
+          # category.descendents.try(:each) do |category_child|
+          #   filter = Filter.where(filter_element_id: category_child.id, filter_element_type: 'Shoppe::ProductCategory').first_or_create
+          #   filters_array << filter
+          # end
         end
         colors.try(:each) do |category_id|
           category = Color.find(category_id)

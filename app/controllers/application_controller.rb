@@ -6,7 +6,12 @@ class ApplicationController < ActionController::Base
   before_action :set_user_currency, unless: :location_in_cookies? 
   
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = "Access denied. You are not authorized to access the requested page. #{exception.action} #{exception.subject.class}"
+    if exception.try(:subject).try(:name) == "DesignProject"
+      flash[:alert] = "Access to the designer portal is restricted to registered designers only. To register as a designer, contact info@gofourwalls.com"
+    else
+      flash[:alert] = "Access denied. You are not authorized to access the requested page."  
+    end  
+    # flash[:alert] = "Access denied. You are not authorized to access the requested page. #{exception.action} #{exception.subject.name}"
     redirect_to root_path  
   end
 

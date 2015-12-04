@@ -176,7 +176,7 @@
     display: block;
     float: left;
     padding: 24px;
-
+    border-top: 1px solid #AAAAAA;
     text-transform: uppercase;
     color: #cccccc;
     border-left: 1px solid #aaaaaa;
@@ -188,7 +188,6 @@
 .main-tabs__one-tab--active {
     margin-bottom: -1px;
     color: black;
-    border-top: 1px solid #AAAAAA;
     border-bottom: 1px solid #F7F9FC;
 }
 

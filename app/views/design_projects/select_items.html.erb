@@ -18,10 +18,11 @@
                             <p class="one-filter-category__title">category</p>
                             <div class="one-filter-category__table">
                               <% @parent_categories.each do |category| %>
+                                <div class="one-filter-category__filter-group">
                                 <div class="one-filter-category__row">
                                     <div class="one-filter-category__cell">
                                         <label class="one-filter-category__label">
-                                            <%= check_box_tag "category_ids[]", category.id, @design_project.product_categories.include?(category) %>
+                                            <%= check_box_tag "category_ids[]", category.id, @design_project.product_categories.include?(category), class: 'one-filter-category__filter-parent' %>
                                         </label>
                                     </div>
                                     <div class="one-filter-category__cell">
@@ -32,7 +33,7 @@
                                     <div class="one-filter-category__row">
                                         <div class="one-filter-category__cell">
                                             <label class="one-filter-category__label">
-                                                <%= check_box_tag "category_ids[]", child.id, @design_project.product_categories.include?(child) %>
+                                                <%= check_box_tag "category_ids[]", child.id, @design_project.product_categories.include?(child), class: 'one-filter-category__filter-child' %>
                                             </label>
                                         </div>
                                         <div class="one-filter-category__cell">
@@ -40,6 +41,7 @@
                                         </div>
                                     </div>
                                 <% end %>
+                                </div>
                               <% end %>
                             </div>
                         </div>
@@ -79,7 +81,7 @@
                         </div>
                     </aside>
                     <div id='productList'>
-                      <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, :method => 'post' do |f| %>
+                      <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, remote: true do |f| %>
                         <%= f.error_messages %>
                         <article class="products-grid">
                           <div class="products-grid__btn-cont">

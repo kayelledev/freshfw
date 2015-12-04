@@ -13,7 +13,7 @@
       .info-table
         .info-table__row
           .info-table__cell project status:
-          .info-table__cell= @design_project.status
+          .info-table__cell= @design_project.status.try(:humanize).try(:titleize)
         .info-table__row
           .info-table__cell creation date:
           .info-table__cell= @design_project.created_at.strftime('%b %d, %Y')
@@ -22,10 +22,10 @@
           .info-table__cell= @design_project.updated_at.strftime('%b %d, %Y')
         .info-table__row
           .info-table__cell designed by:
-          .info-table__cell= @design_project.user.full_name
+          .info-table__cell= (@design_project.user || current_user).try(:full_name)
         .info-table__row
           .info-table__cell designer email:
-          .info-table__cell= @design_project.user.email_address
+          .info-table__cell= (@design_project.user || current_user).try(:email_address)
       = form_for @design_project, html: { class: "project-init-info", id: 'project-form', multipart: true }, remote: true do |f| 
         .project-init-info__row
           .project-init-info__cell Project Name

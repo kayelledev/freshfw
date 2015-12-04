@@ -1,9 +1,9 @@
 <div id='productList'>
-  <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, :method => 'post' do |f| %>
+  <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, remote: true do |f| %>
     <%= f.error_messages %>
     <article class="products-grid">
       <div class="products-grid__btn-cont">
-        <a class="products-grid__left-btn" id="showAllLink">show all</a>
+        <a class="products-grid__left-btn" >show all</a>
         <!-- <button class="" type="button"></button> -->
         <%= f.submit "Add Selections to Room Builder", :class => 'products-grid__right-btn' %>
       </div>
@@ -12,8 +12,8 @@
           <div class="one-products-category__title l-el"><%= category %></div>
           <% product_list.each do |product| %>
             <div class="one-products-category__product l-el">
-              <div class="one-products-category__anch" href="#">
-               <%= image_tag image_link(product, 'default_image'), class: "one-products-category__img", alt: "#{product.full_name}" %>
+              <div class="one-products-category__anch l-cont" href="#">
+               <%= image_tag image_link(product, 'default_image'), class: "one-products-category__img l-el", alt: "#{product.full_name}" %>
               </div>
               <label class="one-products-category__label">
                 <%= check_box_tag "product_ids[]", product.id, @design_project.products.include?(product) %>
@@ -26,3 +26,30 @@
     </article>
   <% end %>
 </div>
+<script>
+$(document).ready(function(){
+ $(".one-products-category__anch").on('click', function () {
+    var checkbox = $(this).parent().find('.one-products-category__label > input');
+    if (checkbox[0].checked) {
+      checkbox.prop('checked', false);
+      checkbox[0].parentElement.previousElementSibling.classList.toggle("chosen");
+    } else {
+      checkbox.prop('checked', true);
+      checkbox[0].parentElement.previousElementSibling.classList.add("chosen");
+    }
+  });
+ var checkboxes = document.querySelectorAll(".one-products-category__label > input"),
+      filterCategories = document.querySelectorAll(".one-filter-category"),
+      categoryNames = document.querySelectorAll(".one-filter-category__name");
+  if (checkboxes.length) {
+      for (var i = 0, lim = checkboxes.length; i < lim; i += 1) {
+          if (checkboxes[i].checked) {
+              checkboxes[i].parentElement.previousElementSibling.classList.add("chosen");
+          };
+          checkboxes[i].addEventListener("change", function() {
+              this.parentElement.previousElementSibling.classList.toggle("chosen");
+          });
+      };
+  };
+})
+</script>

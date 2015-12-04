@@ -15,23 +15,23 @@
             <div class="info-table">
                 <div class="info-table__row">
                     <div class="info-table__cell">Project Status:</div>
-                    <div class="info-table__cell" id='project-status'><%= @design_project.status %></div>
+                    <div class="info-table__cell" id='project-status'><%= @design_project.status.try(:humanize).try(:titleize) %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Creation Date:</div>
-                    <div class="info-table__cell"><%= @design_project.try(:created_at) || Date.today %></div>
+                    <div class="info-table__cell"><%= (@design_project.try(:created_at) || Date.today).strftime('%b %d, %Y') %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Last Modefied Date:</div>
-                    <div class="info-table__cell"><%= @design_project.try(:updated_at) || Date.today %></div>
+                    <div class="info-table__cell"><%= (@design_project.try(:updated_at) || Date.today).strftime('%b %d, %Y') %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Designed By:</div>
-                    <div class="info-table__cell"><%= current_user.try(:full_name) %></div>
+                    <div class="info-table__cell"><%= (@design_project.user || current_user).try(:full_name) %></div>
                 </div>
                 <div class="info-table__row">
                     <div class="info-table__cell">Designer Email:</div>
-                    <div class="info-table__cell" id='designer-email'><%= current_user.try(:email_address) %></div>
+                    <div class="info-table__cell" id='designer-email'><%= (@design_project.user || current_user).try(:email_address) %></div>
                 </div>
             </div>
             <%= form_for @design_project, url: designer_portal_create_path, html: { class: "project-init-info", id: 'project-form', multipart: true }, remote: true do |f| %>
@@ -70,6 +70,16 @@
                             </label>
                         </div>
                     </div>
+                    <div id="floatingBarSaving1" class="float-bar-saving">
+                        <div class="blockG" id="rotateG_01"></div>
+                        <div class="blockG" id="rotateG_02"></div>
+                        <div class="blockG" id="rotateG_03"></div>
+                        <div class="blockG" id="rotateG_04"></div>
+                        <div class="blockG" id="rotateG_05"></div>
+                        <div class="blockG" id="rotateG_06"></div>
+                        <div class="blockG" id="rotateG_07"></div>
+                        <div class="blockG" id="rotateG_08"></div>
+                    </div>
                 </div>
 
                 <div class="project-init-info__row">
@@ -87,6 +97,16 @@
                             </label>
                         </div>
                     </div>
+                    <div id="floatingBarSaving2" class="float-bar-saving">
+                        <div class="blockG" id="rotateG_01"></div>
+                        <div class="blockG" id="rotateG_02"></div>
+                        <div class="blockG" id="rotateG_03"></div>
+                        <div class="blockG" id="rotateG_04"></div>
+                        <div class="blockG" id="rotateG_05"></div>
+                        <div class="blockG" id="rotateG_06"></div>
+                        <div class="blockG" id="rotateG_07"></div>
+                        <div class="blockG" id="rotateG_08"></div>
+                    </div>
                 </div>
                 <div class="project-init-info__row">
                     <div class="project-init-info__cell"></div>
@@ -102,6 +122,16 @@
                                 <%= f.file_field 'inspiration_image3', id: "project-inspiration-image3", class: 'images-upload' %>
                             </label>
                         </div>
+                    </div>
+                    <div id="floatingBarSaving3" class="float-bar-saving">
+                        <div class="blockG" id="rotateG_01"></div>
+                        <div class="blockG" id="rotateG_02"></div>
+                        <div class="blockG" id="rotateG_03"></div>
+                        <div class="blockG" id="rotateG_04"></div>
+                        <div class="blockG" id="rotateG_05"></div>
+                        <div class="blockG" id="rotateG_06"></div>
+                        <div class="blockG" id="rotateG_07"></div>
+                        <div class="blockG" id="rotateG_08"></div>
                     </div>
                 </div>
 
