@@ -8,7 +8,6 @@ $(document).ready(function() {
       formData.append($(this).attr('id'), $(this)[0].files[0]);
     });
     formData.append("redirect_to_link", this.href);
-    // $('#floatingBarSaving').show();
     $.ajax({
         url: 'designer-portal/create',
         data: formData,
@@ -17,7 +16,6 @@ $(document).ready(function() {
         type: 'POST',
         dataType: 'script'
     }).done(function() {
-      // $('#floatingBarSaving').hide();
     });
   });
 
@@ -30,6 +28,7 @@ $(document).ready(function() {
       formData.append($(this).attr('id'), $(this)[0].files[0]);
     });
     $(this).parents().eq(3).find('.float-bar-saving').show();
+    var float_bar = $(this).parents().eq(3).find('.float-bar-saving');
     $.ajax({
         url: 'designer-portal/create',
         data: formData,
@@ -38,7 +37,7 @@ $(document).ready(function() {
         type: 'POST',
         dataType: 'script'
     }).done(function() {
-      $(this).parents().eq(3).find('.float-bar-saving').hide();
+      float_bar.hide();
     });
   })
 });
