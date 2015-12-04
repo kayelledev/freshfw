@@ -47,4 +47,17 @@ $(document).ready(function(){
       checkbox[0].parentElement.previousElementSibling.classList.add("chosen");
     }
   });
+  var checkboxes = document.querySelectorAll(".one-products-category__label > input"),
+      filterCategories = document.querySelectorAll(".one-filter-category"),
+      categoryNames = document.querySelectorAll(".one-filter-category__name");
+  if (checkboxes.length) {
+      for (var i = 0, lim = checkboxes.length; i < lim; i += 1) {
+          if (checkboxes[i].checked) {
+              checkboxes[i].parentElement.previousElementSibling.classList.add("chosen");
+          };
+          checkboxes[i].addEventListener("change", function() {
+              this.parentElement.previousElementSibling.classList.toggle("chosen");
+          });
+      };
+  };
  })

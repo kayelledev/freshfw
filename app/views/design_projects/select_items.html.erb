@@ -81,7 +81,7 @@
                         </div>
                     </aside>
                     <div id='productList'>
-                      <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, :method => 'post' do |f| %>
+                      <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, remote: true do |f| %>
                         <%= f.error_messages %>
                         <article class="products-grid">
                           <div class="products-grid__btn-cont">

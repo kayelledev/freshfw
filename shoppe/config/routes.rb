@@ -60,7 +60,7 @@ Shoppe::Engine.routes.draw do
   get 'designer-portal/instructions', to: 'design_projects#instructions'
   post 'designer-portal/create', to: 'design_projects#create'
   patch 'designer-portal/create', to: 'design_projects#create'
-  post 'designer-portal/add_to_room_builder', to: 'design_projects#add_to_room_builder'
+  patch 'designer-portal/add_to_room_builder', to: 'design_projects#add_to_room_builder'
   post 'designer-portal/items_filtering', to: 'design_projects#items_filtering'
   delete 'designer-portal/remove_product', to: 'design_projects#remove_product'
   get 'design_portals/:id', to: 'design_projects#edit'

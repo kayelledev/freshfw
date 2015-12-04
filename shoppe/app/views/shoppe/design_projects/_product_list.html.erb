@@ -1,5 +1,5 @@
 <div id='productList'>
-  <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, :method => 'post' do |f| %>
+  <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, remote: true do |f| %>
     <%= f.error_messages %>
     <article class="products-grid">
       <div class="products-grid__btn-cont">
@@ -38,7 +38,7 @@ $(document).ready(function(){
       checkbox[0].parentElement.previousElementSibling.classList.add("chosen");
     }
   });
-  var checkboxes = document.querySelectorAll(".one-products-category__label > input"),
+ var checkboxes = document.querySelectorAll(".one-products-category__label > input"),
       filterCategories = document.querySelectorAll(".one-filter-category"),
       categoryNames = document.querySelectorAll(".one-filter-category__name");
   if (checkboxes.length) {
