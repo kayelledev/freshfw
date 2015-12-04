@@ -71,7 +71,6 @@ module Shoppe
     end
 
     def add_to_room_builder
-      binding.pry
       @design_project.update(product_ids: params[:product_ids])
       render nothing: true
     end
