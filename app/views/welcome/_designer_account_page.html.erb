@@ -18,14 +18,14 @@
                 <% @design_projects.each do |design_project| %>
                   <div class="table__row">
                     <div class="table__cell table__cell--first-cell"><%= link_to design_project.name, designer_portal_path(id: design_project.id) %></div>
-                    <div class="table__cell"><%= design_project.status %></div>
+                    <div class="table__cell"><%= design_project.status.try(:humanize).try(:titleize) %></div>
                     <div class="table__cell"><%= design_project.submited_at.strftime('%b %d, %Y') if design_project.submited_at %></div>
                     <div class="table__cell"><%= design_project.created_at.strftime('%b %d, %Y') %></div>
                     <div class="table__cell"><%= design_project.updated_at.strftime('%b %d, %Y') %></div>
                   </div>
                 <% end %>
             </div>
-            <%= link_to designer_portal_create_new_path, method: 'post' do %>
+            <%= link_to designer_portal_create_new_path do %>
               <button class="one-table__btn" type="button">create new project</button>
             <% end %>
         </div>

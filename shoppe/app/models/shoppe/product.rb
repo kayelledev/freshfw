@@ -34,7 +34,9 @@ module Shoppe
     belongs_to :product_category, :class_name => 'Shoppe::ProductCategory'
     belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
     belongs_to :supplier, :class_name => 'Shoppe::Supplier'
-    belongs_to :color, :class_name => 'Shoppe::Color'
+    # has_many :color, :class_name => 'Shoppe::Color'
+    has_and_belongs_to_many :colors, :join_table => :shoppe_products_colors
+    has_and_belongs_to_many :materials, :join_table => :shoppe_products_materials
     #belongs_to :product_subcategory, :class_name => 'Shoppe::ProductCategory', foreign_key: "subcategory_id"
 
     # The product's tax rate
@@ -194,6 +196,25 @@ module Shoppe
           self.permalink = perma_link
         end
       end
+    end
+
+    def self.items_filtering(categories=nil, colors=nil, materials=nil)
+      if categories || colors || materials  
+        categories = [] unless categories
+        colors = [] unless colors
+        materials = [] unless materials
+        products_categories = Product.includes(:colors, :materials, :product_category).where("shoppe_colors.id in (?) OR shoppe_materials.id in (?) OR product_category_id in (?)", colors, materials, categories)
+                                  .order('shoppe_product_categories.name').uniq
+                                  .group_by { |t| t.product_category.name }
+      else
+        categories = ProductCategory.order("name")
+        colors = Color.order("name")
+        materials = Material.order("name")
+        products_categories = Product.includes(:product_category).order('shoppe_product_categories.name')
+                                  .group_by { |t| t.product_category.name }
+        
+      end  
+      products_categories
     end
 
   end

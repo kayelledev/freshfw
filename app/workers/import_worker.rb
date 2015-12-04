@@ -78,14 +78,16 @@ class ImportWorker
             product.supplier_id = nil
           end
           if row["Color"].present?
-            product.color_id = Shoppe::Color.where(name: row["Color"]).first_or_create.id
-          else
-            product.color_id = nil
+            row["Color"].split(",").each do |color_name|
+              color_element = Color.where(name: color_name.strip).first_or_create
+              product.colors << color_element unless product.colors.include?(color_element)
+            end
           end
           if row["Technical Description"].present?
-            product.material_id = Shoppe::Material.where(name: row["Technical Description"]).first_or_create.id
-          else
-            product.material_id = nil
+            row["Technical Description"].split(",").each do |material_name|
+              material_element = Material.where(name: material_name.strip).first_or_create
+              product.materials << material_element unless product.materials.include?(material_element)
+            end
           end
           product.save!
           field_array.each{|element| row.delete(element)}

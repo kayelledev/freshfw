@@ -11,8 +11,9 @@
           .table__cell last modefied date
         - @design_projects.each do |design_project| 
           .table__row
-            .table__cell.table__cell--first-cell= link_to design_project.name, design_project
-            .table__cell= design_project.status 
+          
+            .table__cell.table__cell--first-cell= link_to design_project.name, designer_portal_path(id: design_project.id) 
+            .table__cell= design_project.status.try(:humanize).try(:titleize)
             .table__cell= design_project.submited_at.strftime('%b %d, %Y') if design_project.submited_at
             .table__cell= design_project.created_at.strftime('%b %d, %Y') 
             .table__cell= design_project.updated_at.strftime('%b %d, %Y')

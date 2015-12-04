@@ -1,5 +1,6 @@
 $(".order-items-list #item_<%= @item.id %>").fadeOut( 400, function() {
     $(this).remove();
+    $('#productsCart').replaceWith("<%=  j (render 'cart_item') %>");
 });
 var emptyCart = "<%= @order.order_items.count == 0 %>";
 if (emptyCart == 'true') {

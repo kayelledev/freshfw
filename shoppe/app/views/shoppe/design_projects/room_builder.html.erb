@@ -1,0 +1,48 @@
+<% content_for :custom_scripts do %>
+    <%= javascript_include_tag "shoppe/specific/selected_furniture.js" %>
+    <%= javascript_include_tag "shoppe/specific/room_layout_editor.js" %>
+    <%= javascript_include_tag "shoppe/specific/furniture_board_editor.js" %>
+    <%= javascript_include_tag "shoppe/specific/room_builder.js" %>
+<% end %>
+
+
+<%= render 'bottom_buttons' %>
+<main class='room-builder'>
+    <section class="main-tabs">
+        <div class="l-wrapper">
+            <%= link_to 'project info', designer_portal_path, class: "main-tabs__one-tab", id: 'project-info-tab' %>
+            <%= link_to 'select items', designer_portal_select_items_path, class: "main-tabs__one-tab" %>
+            <%= link_to 'room builder', designer_portal_room_builder_path, class: "main-tabs__one-tab main-tabs__one-tab--active", id: 'room-builder-tab' %>
+            <%= link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab", id: 'instructions-tab' %>
+        </div>
+    </section>
+    <div class="l-wrapper">
+        <div class="subtabs">
+            <a class="subtabs__one-tab subtabs__one-tab--active" data-appearer="selected-furniture" href="#" id='selected-furniture-tab'>SELECED FURNITURE</a>
+            <a class="subtabs__one-tab" data-appearer="room-layout" href="#" id='room-layout-tab'>ROOM LAYOUT</a>
+            <a class="subtabs__one-tab" data-appearer="furniture-board" href="#" id='furniture-board-tab'>FURNITURE BOARD</a>
+
+            <%= button_tag 'Submit Room', class: "subtabs__btn submit-room-btn layout-submit-room", style: "display: none", data: { url: "#{designer_portal_layout_submit_room_path}" } %>
+
+            <%= button_tag 'Submit Room', class: "subtabs__btn submit-room-btn board-submit-room", style: "display: none", data: { url: "#{designer_portal_board_submit_room_path}" } %>
+
+        </div>
+         <div id="selected-furniture" class="js-tabs-block selected-furniture active-tab" data-project-id="<%= @design_project.id %>">
+            <div class='selected-furniture-wrapper'>
+                <%= render partial: 'selected_furniture' %>
+            </div>
+        </div>
+        <div id="room-layout" class="js-tabs-block room-layout" data-url="<%= designer_portal_save_room_layout_path %>">
+            <p class="room-layout__instr-text">Drag the line drawing to the room</p>
+            <div class='room-layout-wrapper'>
+                <%= render partial: 'room_layout_editor' %>
+            </div>
+        </div>
+        <div id="furniture-board" class="js-tabs-block furniture-board" data-url="<%= designer_portal_save_furniture_board_path %>">
+            <p class="furniture-board__instr-text">Drag the images to the board</p>
+            <div class='furniture-board-wrapper'>
+                <%= render partial: 'furniture_board_editor' %>
+            </div>
+        </div>
+    </div>
+</main>

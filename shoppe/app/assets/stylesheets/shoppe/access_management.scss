@@ -19,3 +19,27 @@
 .access_management_block #role_permission_ids{
 	height: 600px;
 }
+.role_permission_block{
+	max-width: 400px;
+  float: left;
+}
+.role_permission_block h2{
+  font-size: 1.2em;
+  color: #333;
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+
+.role_permission_block form{
+  max-width: 300px;
+}
+.role_permission_block #role_permission_ids{
+	height: 600px;
+}
+.role_permission_block .number, .role_permission_block label,.role_permission_block select{
+  width:100%;
+}
+.button.fixed-button{
+  position: fixed;
+  margin: 20px;
+}

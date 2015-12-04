@@ -62,6 +62,9 @@ class Omniauth::CallbacksController < Devise::OmniauthCallbacksController
   alias_method :facebook, :callback
   alias_method :twitter,  :callback
 
+  def self.non_restfull_permission
+    nil
+  end
   private
 
   def load_remote_avatar
@@ -69,4 +72,5 @@ class Omniauth::CallbacksController < Devise::OmniauthCallbacksController
     @avatar = @@auth_data.try(:[], "extra").try(:[], 'raw_info').try(:[], "photo_100") || @@auth_data.try(:[], "info").try(:[], 'image') || @@auth_data.try(:[], "extra").try(:[], 'raw_info').try(:[], 'pic') ||
           @@auth_data.try(:[], 'info').try(:[], 'image') || @@auth_data.try(:[], 'extra').try(:[], 'raw_info').try(:[], 'pic_1')
   end
+
 end

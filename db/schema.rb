@@ -152,12 +152,12 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string   "inspiration_image2"
     t.string   "inspiration_image3"
     t.integer  "user_id"
+    t.integer  "product_category_id"
     t.float    "width",                  default: 0.0
     t.float    "depth",                  default: 0.0
     t.string   "url_inspiration_image1"
     t.string   "url_inspiration_image2"
     t.string   "url_inspiration_image3"
-    t.integer  "product_category_id"
   end
 
   create_table "shoppe_design_projects_filters", force: :cascade do |t|
@@ -383,6 +383,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.string   "default_image"
+    t.boolean  "is_room",       default: false
   end
 
   add_index "shoppe_product_categories", ["permalink"], name: "index_shoppe_product_categories_on_permalink", using: :btree
@@ -431,14 +432,34 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.float    "arm_height",                                  default: 0.0
     t.text     "other_details"
     t.integer  "supplier_id"
-    t.integer  "color_id"
-    t.integer  "material_id"
   end
 
   add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id", using: :btree
   add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink", using: :btree
   add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id", using: :btree
   add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku", using: :btree
+
+  create_table "shoppe_products_colors", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "shoppe_products_colors", ["color_id"], name: "index_shoppe_products_colors_on_color_id", using: :btree
+  add_index "shoppe_products_colors", ["product_id", "color_id"], name: "shoppe_products_colors_index", unique: true, using: :btree
+  add_index "shoppe_products_colors", ["product_id"], name: "index_shoppe_products_colors_on_product_id", using: :btree
+
+  create_table "shoppe_products_materials", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "material_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "shoppe_products_materials", ["material_id"], name: "index_shoppe_products_materials_on_material_id", using: :btree
+  add_index "shoppe_products_materials", ["product_id", "material_id"], name: "shoppe_products_materials_index", unique: true, using: :btree
+  add_index "shoppe_products_materials", ["product_id"], name: "index_shoppe_products_materials_on_product_id", using: :btree
 
   create_table "shoppe_roles", force: :cascade do |t|
     t.string   "name"

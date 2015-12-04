@@ -17,11 +17,25 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "photos/#{model.class.to_s.gsub('Shoppe::','').underscore}/#{mounted_as}/#{model.id}"
+    if model.class.superclass == ActiveRecord::Base
+      "photos/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    else
+      "photos/#{model.class.superclass.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
   end
 
+  # before :store, :swap_out_store_dir
+
+  # def swap_out_store_dir
+  #   self.class_eval do
+  #     def store_dir
+  #       "photos/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  #     end
+  #   end
+  # end
+
   def cache_dir
-      '/tmp/fw-cache'
+      "#{Rails.root}/tmp/fw-cache"
   end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url

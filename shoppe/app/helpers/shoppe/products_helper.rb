@@ -17,6 +17,15 @@ module Shoppe
       end
     end
 
+    def product_dimensions(product)
+      "#{product.width}\" x #{product.depth}\" x #{product.height}\""
+    end
+     
+    
+    def full_measure(value)
+      ft = value.to_i / 12
+      inch = value.to_i % 12
+      {ft: ft, inch: inch}
+    end
   end
-
 end
