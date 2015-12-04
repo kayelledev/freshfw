@@ -12,8 +12,8 @@ module Shoppe
     has_many  :materials, through: :filters, source: :filter_element, source_type: 'Shoppe::Material'
 
     validates :name, presence: true
-    validates :width, numericality: true
-    validates :depth, numericality: true
+    validates :width, numericality: {greater_than: 0}
+    validates :depth, numericality: {greater_than: 0}
 
     enum status: [:draft, :under_review, :revision_requested, :rejected, :approved]
 
