@@ -133,7 +133,8 @@ class DesignProjectsController < ApplicationController
 
   def add_to_room_builder
     @design_project.update(product_ids: params[:product_ids])
-    redirect_to designer_portal_select_items_path
+    # redirect_to designer_portal_select_items_path
+    render :nothing => true
   end
 
   def remove_product
