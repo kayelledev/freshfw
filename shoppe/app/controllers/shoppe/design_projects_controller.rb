@@ -32,20 +32,22 @@ module Shoppe
       end
     end
 
-    def update
-      if @result = @design_project.update(design_project_params)
-        @redirect_url = params[:redirect_to_link]
-        respond_to do |format|
-          format.html { redirect_to designer_portal_path }
-          format.js
-        end
-      else
-        respond_to do |format|
-          format.html { render action: :project_info }
-          format.js
-        end
+  def update
+    @design_project.assign_attributes(design_project_params)
+    @result = @design_project.changed? ? @design_project.save : @design_project.valid?
+    if @result
+      @redirect_url = params[:redirect_to_link]
+      respond_to do |format|
+        format.html { redirect_to designer_portal_path }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render action: :project_info }
+        format.js
       end
     end
+  end
 
     def check_session_contain_project
       session[:design_project_id] ? update : create

@@ -37,7 +37,9 @@ class DesignProjectsController < ApplicationController
   end
 
   def update
-    if @result = @design_project.update(design_project_params)
+    @design_project.assign_attributes(design_project_params)
+    @result = @design_project.changed? ? @design_project.save : @design_project.valid?
+    if @result
       @redirect_url = params[:redirect_to_link]
       respond_to do |format|
         format.html { redirect_to designer_portal_path }
@@ -124,10 +126,10 @@ class DesignProjectsController < ApplicationController
 
   def select_items
     # @products_categories = Product.items_filtering(params[:categories], params[:colors], params[:materials])
-  	@parent_categories = ProductCategory.where(parent_id: nil).order("name")
+    @parent_categories = ProductCategory.where(parent_id: nil).order("name")
     @categories = ProductCategory.order("name")
-  	@colors = Color.order("name")
-  	@materials = Material.order("name")
+    @colors = Color.order("name")
+    @materials = Material.order("name")
     @products_categories = @design_project.product_list_by_filters
   end
 
@@ -173,7 +175,12 @@ class DesignProjectsController < ApplicationController
   def design_project_params
     width = ( params[:design_project][:width_ft].to_i * 12 ) + params[:design_project][:width_in].to_i
     depth = ( params[:design_project][:depth_ft].to_i * 12 ) + params[:design_project][:depth_in].to_i
-    params.require(:design_project).permit(:name, :inspiration, :inspiration_image1, :inspiration_image2, :inspiration_image3, :product_category_id, :url_inspiration_image1, :url_inspiration_image2, :url_inspiration_image3, :inspiration_image1, :inspiration_image2, :inspiration_image3).merge(width: width, depth: depth)
+    if params[:save_image] == '0'
+      params.require(:design_project).permit(:name, :inspiration, :product_category_id, :url_inspiration_image1, :url_inspiration_image2, :url_inspiration_image3).merge(width: width, depth: depth)
+    else
+      params.require(:design_project).permit(:name, :inspiration, :inspiration_image1, :inspiration_image2, :inspiration_image3, :product_category_id, :url_inspiration_image1, :url_inspiration_image2, :url_inspiration_image3, :inspiration_image1, :inspiration_image2, :inspiration_image3).merge(width: width, depth: depth)
+    end
   end
+
 
 end
