@@ -1542,8 +1542,8 @@
           if ( $('.active-tab').attr('id') === 'room-layout' ) {
             console.log('room-builder-tab');
             saveRoomLayout();
-            window.open( $(this).attr('href') ,"_self");
           }
+          window.open( $(this).attr('href') ,"_self");
         });
 
         function saveRoomLayout() {

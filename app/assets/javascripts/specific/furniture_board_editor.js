@@ -784,8 +784,8 @@
       if ( $('.active-tab').attr('id') === 'furniture-board' ) {
         console.log('furniture-board-tab');
         saveFunitureBoard()
-        window.open( $(this).attr('href') ,"_self")
       }
+      window.open( $(this).attr('href') ,"_self")
     });
 
     function saveFunitureBoard() {
