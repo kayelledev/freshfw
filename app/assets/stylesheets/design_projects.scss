@@ -681,6 +681,22 @@
     cursor: pointer;
 }
 
+.resize-arrow {
+  position: absolute;
+  display: none;
+  width: auto;
+  height: auto;
+}
+.resize-arrow span.glyphicon {
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+.resize-arrow-top { left: 50%; top: -14px; }
+.resize-arrow-bottom { left: 50%; bottom: -14px; }
+.resize-arrow-right { right: -10px; top: 50%; }
+.resize-arrow-left { left: -10px; top: 50%; }
+
 .furniture-board-editor .fb-draggable2 {
     width:100%;
     height:auto;

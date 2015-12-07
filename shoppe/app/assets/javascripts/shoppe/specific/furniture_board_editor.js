@@ -69,6 +69,7 @@
           $(this).parent().height( newDepth );
           $(this).find('.fb-item-image').height( newDepth );
         }
+        controller.initResizeArrow( $(this) );
       });
     }
 
@@ -156,6 +157,9 @@
         $(target).attr('data-y', y);
         $(targetParent).attr('data-x', x);
         $(targetParent).attr('data-y', y);
+
+        controller.initResizeArrow( $(target) );
+
       });
 
 
@@ -168,7 +172,7 @@
         },
         position: {
           my: 'right top',
-          at: 'left center',
+          at: 'left bottom',
           target: $(this)
         },
         style: {
@@ -194,7 +198,6 @@
         itemsWithPosition.push( $(this) );
       }
     });
-    console.log(itemsWithoutPosition, itemsWithPosition);
 
     clearAreaAndInitPanel(itemsWithoutPosition);
 
@@ -216,7 +219,6 @@
       $(this).parent().attr('data-rotation', rotation);
     });
 
-
     function clearAreaAndInitPanel(items) {
       // console.log(items);
       clearArea();
@@ -224,9 +226,7 @@
       resetItemsInPanel();
 
       $(items).each(function() {
-        console.log(this);
         var elemId = $(this).attr('data-id');
-        console.log(elemId);
         var elemInPanel = $('.fb-items-panel-elem[data-panel-elem-id="' + elemId + '"]');
         controller.initItemsPanelArea(elemInPanel);
       });
@@ -278,16 +278,20 @@
         });
       }
     }
+
+
   };
 
   ControllerFb.prototype.catchElement = function() {
-      var self = this;
+      var controller = this;
 
       var mouse_is_outside = false;
 
-      var div_elem = this.$holder.find('div');
-      var arrow_elem = this.$holder.find('.fb-rotation-arrow');
-      var remove_elem = this.$holder.find('.fb-remove-icon');
+      var divElem = this.$holder.find('div');
+      var arrowElem = this.$holder.find('.fb-rotation-arrow');
+      var removeElem = this.$holder.find('.fb-remove-icon');
+      var resizeElem = this.$holder.find('.resize-arrow');
+
 
       this.$holder.find('div').hover(function(){
           mouse_is_outside = false;
@@ -298,25 +302,28 @@
       this.$holder.find('div')
           .off('mousedown')
           .on('mousedown', function() {
-              self.$holder.find('div').removeClass('active');
+              controller.$holder.find('div').removeClass('active');
               $(this).addClass('active');
 
-              self.$currentElement = $(this);
+              controller.$currentElement = $(this);
 
-              $('.fb-rotation-arrow').hide();
-              $('.fb-remove-icon').hide();
+              arrowElem.hide();
+              removeElem.hide();
+              resizeElem.hide();
 
               $(this).parent().find('.fb-rotation-arrow').show();
               $(this).parent().find('.fb-remove-icon').show();
-
+              $(this).find('.resize-arrow').show();
+              controller.initResizeArrow( $(this) )
               // $('.qtip').hide();
           });
 
       $(document).click(function() {
           if(mouse_is_outside) {
-              div_elem.removeClass('active');
-              arrow_elem.hide();
-              remove_elem.hide();
+              divElem.removeClass('active');
+              arrowElem.hide();
+              removeElem.hide();
+              resizeElem.hide();
               $(".included-product").removeClass('active-product');
           }
       })
@@ -396,7 +403,7 @@
         'transform': 'translate('+ newPositionX +'px, ' + newPositionY +'px) rotate(0deg)',
       });
 
-      console.log(newPositionX, newPositionY);
+      controller.initResizeArrow( $(realItem) );
 
       if ( $('.furniture-board-editor-items-panel').height() === 0 ){
         $('.furniture-board-editor-items-panel').hide();
@@ -730,6 +737,28 @@
       }
   };
 
+  ControllerFb.prototype.initResizeArrow = function(elem) {
+    console.log('eeeeeeeeeeeeeeeeeeeeee');
+    var resizeArrowTop = $(elem).find('.resize-arrow-top');
+    var resizeArrowBottom = $(elem).find('.resize-arrow-bottom');
+    var resizeArrowRight = $(elem).find('.resize-arrow-right');
+    var resizeArrowLeft = $(elem).find('.resize-arrow-left');
+
+    $(resizeArrowTop).css({
+      'left': ( +$(elem).width() / 2 ) - ( +resizeArrowTop.width() / 2)  + 'px'
+    });
+    $(resizeArrowBottom).css({
+      'left': ( +$(elem).width() / 2 ) - ( +resizeArrowBottom.width() / 2)  + 'px'
+    });
+    $(resizeArrowRight).css({
+      'top': ( +$(elem).height() / 2 ) - ( +resizeArrowRight.height() / 2)  + 'px'
+    });
+    $(resizeArrowLeft).css({
+      'top': ( +$(elem).height() / 2 ) - ( +resizeArrowLeft.height() / 2)  + 'px'
+    });
+  };
+
+
   ControllerFb.prototype.init = function() {
     this.initElements(this.$initialElenemts);
     // this.initItemsPanelArea();
@@ -770,21 +799,8 @@
         var width = +$('.furniture-board-editor').width() / +$(this).parent().width();
         var depth = +$('.furniture-board-editor').height() / +$(this).parent().height();
 
-        var currentX =  Math.abs( +controllerFb.getPositionOfElement( $(this).parent() ).left );
-        var currentY = Math.abs( +controllerFb.getPositionOfElement( $(this).parent() ).top );
-
-        if(currentX !== 0) {
-          var posX = +$('.furniture-board-editor').width() / currentX;
-        } else {
-          var posX = 1;
-        }
-
-        if(currentY !== 0) {
-          var posY = +$('.furniture-board-editor').height() / currentY;
-        } else {
-          var posY = 1;
-        }
-
+        var posX = +$('.furniture-board-editor').width() / Math.abs( +controllerFb.getPositionOfElement( $(this).parent() ).left );
+        var posY = +$('.furniture-board-editor').height() / Math.abs( +controllerFb.getPositionOfElement( $(this).parent() ).top );
         var rotation = +controllerFb.getPositionOfElement( $(this).parent() ).degree;
 
         data.products[elemId] = {
