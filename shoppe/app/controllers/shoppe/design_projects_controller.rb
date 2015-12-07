@@ -94,7 +94,10 @@ module Shoppe
     end
 
     def save_room_layout
-      @design_project = Shoppe::DesignProject.find(session[:design_project_id])
+      @design_project = DesignProject.find(session[:design_project_id])
+      @design_project.width =  params[:room_dimensions][:width] if params[:room_dimensions][:width]
+      @design_project.depth =  params[:room_dimensions][:depth] if params[:room_dimensions][:depth]
+      @design_project.save
       @design_project.design_projects_products.each do |design_projects_product|
         design_projects_product.layout_posX = nil
         design_projects_product.layout_posY = nil
@@ -102,7 +105,7 @@ module Shoppe
         design_projects_product.save
       end
       params[:products].each do |product_id, product_params|
-        design_projects_product = Shoppe::DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
+        design_projects_product = DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
         design_projects_product.layout_posX = product_params['layout_posX'].to_f
         design_projects_product.layout_posY = product_params['layout_posY'].to_f
         design_projects_product.layout_rotation = product_params['layout_rotation'].to_f

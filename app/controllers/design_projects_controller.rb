@@ -53,6 +53,9 @@ class DesignProjectsController < ApplicationController
 
   def save_room_layout
     @design_project = DesignProject.find(session[:design_project_id])
+    @design_project.width =  params[:room_dimensions][:width] if params[:room_dimensions][:width]
+    @design_project.depth =  params[:room_dimensions][:depth] if params[:room_dimensions][:depth]
+    @design_project.save
     @design_project.design_projects_products.each do |design_projects_product|
       design_projects_product.layout_posX = nil
       design_projects_product.layout_posY = nil

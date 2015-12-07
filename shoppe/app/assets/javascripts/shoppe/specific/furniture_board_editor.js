@@ -828,6 +828,7 @@
     }
 
     $('.board-submit-room').on('click', function() {
+      saveFunitureBoard();
       var button = this;
       var data = {
         ids: []

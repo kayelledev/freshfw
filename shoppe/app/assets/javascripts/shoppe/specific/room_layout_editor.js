@@ -651,7 +651,6 @@
           }
         }
     };
-
     /**
      * Open Dimensions Form
      */
@@ -677,66 +676,12 @@
           restoreArea();
         }
       });
-      var slider = $('#room-slider');
-      var clicked = false;
 
       // open dialog form
       setDimensionsButton.on('click', function(){
         clearArea();
         dimensionsDialog.dialog('open');
-        if (clicked === false) {
-          initSlider();
-        }
-        interactSlide();
-        clicked = true;
       });
-
-      function initSlider() {
-        slider.bxSlider({
-          speed: 250,
-          slideWidth: 200,
-          minSlides: roomsOnSlide,
-          maxSlides: roomsOnSlide,
-          slideMargin: 5,
-          moveSlides: 1,
-          pager: false,
-          onSlideAfter: function($slideElement, oldIndex, newIndex){
-            var currentSlideDataID = +$slideElement.attr('data-room-id');
-            var newSlideDataID;
-            if (currentSlideDataID >= 0 && currentSlideDataID <= 26) {
-              newSlideDataID = currentSlideDataID + 4;
-            } else {
-              newSlideDataID = 3 - (30 - currentSlideDataID);
-            }
-            var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
-            // console.log(newSlide);
-            addYellowBorder( newSlide );
-            setPreviewImage( newSlide );
-            displayInputs( newSlide );
-          }
-        });
-      }
-
-      function interactSlide() {
-        $('#room-slider .slide').click(function(){
-          // move slider
-          var currentSlide = slider.getCurrentSlide();
-          var currlenElemIndex = $(this).index();
-          var sliderElemPosition = currlenElemIndex - currentSlide - roomsOnSlide;
-          var slidesCount = slider.getSlideCount();
-          if (roomsOnSlide % 2 > 0){
-            var slideCenter = Math.floor(roomsOnSlide / 2);
-            var toSlide = currentSlide - (slideCenter - sliderElemPosition);
-
-            if (toSlide < 0) {
-              toSlide = slidesCount + toSlide;
-            } else if (toSlide > 30) {
-              toSlide = toSlide - slidesCount;
-            }
-            slider.goToSlide(toSlide);
-          }
-        });
-      }
 
       function clearArea(){
         $('.' + elementsClass).each(function() {
@@ -776,6 +721,219 @@
         $('.room-inputs').removeClass('active-room-inputs');
         $(".room-inputs[data-room-id='" + roomId + "']").addClass('active-room-inputs');
       }
+    };
+
+    Controller.prototype.setNewArea = function(elementsClass) {
+      var controller = this;
+      var dimensionsDialog = $('div#dimensions-dialog');
+      $('#submit-new-dimensions').on('click', function(e) {
+        e.preventDefault();
+        newRect0();
+
+        function newRect0() {
+          var form = $(".room-inputs[data-room-id='0']");
+          var formInputs = form.find('.dialog-input');
+          var inputsCount = 4;
+          var newWidthFt = +form.find('.n-s-ft').val();
+          var newWidthInch = +form.find('.n-s-inch').val();
+          var newHeightFt = +form.find('.e-w-ft').val();
+          var newHeightInch = +form.find('.e-w-inch').val();
+
+          var newWidth = ( newWidthFt * 12 ) + newWidthInch;
+          var newHeight = ( newHeightFt * 12 ) + newHeightInch;
+
+          var scaling = newWidth / +$('.editor-container').width();
+
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
+
+          if ( !renderFormErrors( validateNewRoomDimensions(newWidth, newHeight, formInputs), formInputs ) ) { return; }
+
+          setNewDimensionsToArea(newWidth, newHeight);
+
+          scaleAreaHeight(scaling);
+
+          scaleEditorHeightLine();
+
+          updateMeasureDescription(newWidthFt, newWidthInch, newHeightFt, newHeightInch);
+
+          scaleItems(scaling);
+
+          resetItemsInPanel();
+
+          resetElemInArea();
+
+          controller.initItemsPanelArea();
+
+          dimensionsDialog.dialog('close');
+
+        }
+
+        // common function
+
+        function toInches(ft, inch) { return ( +ft * 12 ) + +inch; }
+
+        function toFoolMeasure(totalInch) {
+          ft = Math.floor(totalInch / 12);
+          inch = totalInch % 12;
+          return { ft: ft, inch: inch };
+        }
+
+        function isNumber(number) { return !isNaN(parseFloat(number)) && isFinite(number) && number >= 0; }
+
+        function getSum(ft, inch) {
+          var totalFt = 0;
+          var totalInch = 0;
+          for(var i = 0, length = ft.length; i < length; i++) {
+            totalFt += +ft[i];
+          }
+          for(var i = 0, length = inch.length; i < length; i++) {
+            totalInch += +inch[i];
+          }
+          if (totalInch >= 12) {
+            var addToFt = Math.floor(totalInch / 12);
+            totalFt += addToFt;
+            totalInch = totalInch % 12;
+          }
+          return { ft: totalFt, inch: totalInch };
+        }
+
+        function validateNumbersInForm(inputs, count) {
+          var validInputs = 0;
+          inputs.each(function(index) {
+            if ( !isNumber( $(this).val() ) ) {
+              $(this).css('border-color', '#A94442');
+            } else {
+              $(this).css('border-color', '#ccc');
+              validInputs++;
+            }
+          });
+
+          if (validInputs < count) {
+            return false;
+          } else {
+            return true;
+          }
+        }
+
+        function renderFormErrors(validation, inputs) {
+          var invalidInputs = validation.invalidInputs;
+          var errorMessages = validation.errorMessages;
+          $(inputs).css('border-color', '#ccc');
+          $('#dialog-form-errors').empty();
+
+          if (invalidInputs.length > 0) {
+            $(invalidInputs).each(function() {
+              $(this).css('border-color', '#A94442');
+            });
+            $(errorMessages).each(function() {
+              $('#dialog-form-errors').append("<center><p><b>" + this + "</b></p></center");
+            })
+            return false;
+          } else {
+            return true;
+          }
+        }
+
+        function validateNewRoomDimensions(width, height, inputs) {
+          var invalidInputs = [];
+          var errorMessages = [];
+          var newEditorContainerWidth = width;
+          var newEditorContainerHeight = height;
+          var haveErrors = false;
+
+          // validate width and heigh of room
+          $('.' + elementsClass).each(function() {
+            var newItemWidth = +$(this).data('width');
+            var newItemHeight = +$(this).data('height');
+
+            if(newItemWidth > newEditorContainerWidth || newItemHeight > newEditorContainerHeight) {
+              haveErrors = true;
+            }
+          });
+          if (haveErrors) {
+            invalidInputs = inputs;
+            errorMessages.push('New room dimensions are not enough for all the furniture included. Please, enlarge them.');
+          }
+          return { invalidInputs: invalidInputs, errorMessages: errorMessages };
+        }
+
+        function setNewDimensionsToArea(width, height) {
+          $('.editor-container').attr('data-width', width);
+          $('.editor-container').attr('data-height', height);
+        }
+
+        function scaleAreaHeight(scaling) {
+          $('.editor-container').height(+$('.editor-container').attr('data-height') / scaling)
+        }
+
+        function scaleEditorHeightLine() {
+          $('.editor-height').height($('.editor-container').height());
+          $('.editor-height img').height($('.editor-container').height());
+        }
+
+        function scaleItems(scaling) {
+            $('.' + elementsClass).each(function() {
+              // $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
+              // $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
+
+              $(this).parent().css({
+                'width': $(this).data('width') / scaling,
+                'height': $(this).data('heigh') / scaling,
+                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
+                'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+              });
+            });
+        }
+
+        function updateMeasureDescription(widthFt, widthInch, heightFt, heightInch) {
+            $('span#measure-width-ft').html(widthFt);
+            $('span#measure-width-inch').html(widthInch);
+            $('span#measure-height-ft').html(heightFt);
+            $('span#measure-height-inch').html(heightInch);
+        }
+
+        function resetItemsInPanel() {
+          $('.items-panel-elem').each(function() {
+            $(this).attr('data-x', '0');
+            $(this).attr('data-y', '0');
+
+            $(this).css({
+              '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                 '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                  '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                      'transform': 'translate(0px, 0px) rotate(0deg)',
+            });
+
+            $(this).show();
+          });
+        }
+
+        function resetElemInArea(){
+          console.log('zzzz');
+          $('.draggable').each(function() {
+            $(this).parent().css({
+              '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
+                 '-moz-transform': 'translate(0px, 0px) rotate(0deg)',
+                  '-ms-transform': 'translate(0px, 0px) rotate(0deg)',
+                      'transform': 'translate(0px, 0px) rotate(0deg)',
+            });
+
+            $(this).parent().attr('data-rotation', 0);
+            $(this).parent().attr('data-x', 0);
+            $(this).parent().attr('data-y', 0);
+            $(this).attr('data-rotation', 0);
+            $(this).attr('data-x', 0);
+            $(this).attr('data-y', 0);
+            $(this).parent().css({
+              top: 0,
+              left: 0
+            });
+          });
+        }
+      });
+
     };
 
     Controller.prototype.removeElement = function() {
@@ -1331,6 +1489,7 @@
         //this.manageCats();
         this.initMouseRotation();
         this.openDimensionsForm(this.$initialElenemts);
+        this.setNewArea(this.$initialElenemts);
         this.adaptArea(this.$initialElenemts);
         this.removeElement();
     };
@@ -1370,16 +1529,38 @@
             });
         });
 
-        $('.save-layout').on('click', function() {
-          var button = this;
+        $('.subtabs__one-tab').click(function(e) {
+          e.preventDefault();
+          if ( $('.active-tab').attr('id') === 'room-layout' ) {
+            console.log('room-builder-subtab');
+            saveRoomLayout();
+          }
+        });
+
+        $('.main-tabs__one-tab').click(function(e) {
+          e.preventDefault();
+          if ( $('.active-tab').attr('id') === 'room-layout' ) {
+            console.log('room-builder-tab');
+            saveRoomLayout();
+            window.open( $(this).attr('href') ,"_self");
+          }
+        });
+
+        function saveRoomLayout() {
           var data = {
             products: {}
           };
 
+          var roomWidth = +$('.editor-container').attr('data-width');
+          var roomDepth = +$('.editor-container').attr('data-height');
+
+          data.room_dimensions = {
+            width: roomWidth,
+            depth: roomDepth
+          }
+
           $(".draggable:visible").each(function() {
             var elemId = $(this).attr('id');
-
-            console.log($(this).parent());
 
             coX = +$('.editor-container').width() / +controller.getDegreeOfElement( $(this).parent() ).left;
             coY = +$('.editor-container').height() / +controller.getDegreeOfElement( $(this).parent() ).top;
@@ -1387,17 +1568,15 @@
             var posX = +$('.editor-container').attr('data-width') / coX;
             var posY = +$('.editor-container').attr('data-height') / coY;
             var rotation = +controller.getDegreeOfElement( $(this).parent() ).degree;
-            console.log(rotation);
-
             data.products[elemId] = {
               layout_posX: posX,
               layout_posY: posY,
-              layout_rotation: rotation
+              layout_rotation: rotation,
             }
           });
 
-          $.ajax({
-              url: $(button).attr('data-url'),
+          return $.ajax({
+              url: $('#room-layout').attr('data-url'),
               type: "PATCH",
               data: JSON.stringify(data),
               dataType: "json",
@@ -1409,9 +1588,10 @@
                 console.log('error');
               }
           });
-        });
+        }
 
         $('.layout-submit-room').on('click', function() {
+          saveRoomLayout();
           var button = this;
           var data = {
             ids: []

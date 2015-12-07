@@ -44,4 +44,27 @@
   </div>
 </div>
 
+<div id="dimensions-dialog" title="Set dimensions">
+  <div class='row'>
+    <div class='col-sm-6'>
+      <div id='room-preview'>
+        <%= image_tag 'rooms/room_rect_0.png' %>
+      </div>
+    </div>
+    <div class='col-sm-6'>
+      <div id='dialog-form-errors'></div>
+      <form class="form-horizontal" id='dialog-form'>
+
+        <%= render partial: 'dimensions_inputs' %>
+
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-guideline" id='submit-new-dimensions'>Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <center><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %></center>
