@@ -57,8 +57,18 @@
       $('.furniture-board-editor').height(furnitureBoardEditorHeight);
 
       $('.' + elementsClass).each(function() {
-        var newWidth = +$('.furniture-board-editor').width() / 4;
-        $(this).width( newWidth );
+        if( $(this).attr('data-width') === '' || $(this).attr('data-depth') === '' ) {
+          var newWidth = +$('.furniture-board-editor').width() / 4;
+          $(this).width( newWidth );
+        } else {
+          var newWidth = +$('.furniture-board-editor').width() / +$(this).attr('data-width');
+          var newDepth = +$('.furniture-board-editor').height() / +$(this).attr('data-height');
+          $(this).width( newWidth );
+          $(this).height( newDepth );
+          $(this).parent().width( newWidth );
+          $(this).parent().height( newDepth );
+          $(this).find('.fb-item-image').height( newDepth );
+        }
       });
     }
 
@@ -114,7 +124,6 @@
         edges: { left: true, right: true, bottom: true, top: true }
       })
       .on('resizemove', function (event) {
-
         var target = $(event.target),
             targetParent = $(event.target).parent(),
             targetImage = $(event.target).children('img'),
@@ -143,6 +152,8 @@
                   'transform': 'translate(' + x + 'px,' + y + 'px) rotate(' + currentDegree +'deg)'
         });
 
+        $(target).attr('data-x', x);
+        $(target).attr('data-y', y);
         $(targetParent).attr('data-x', x);
         $(targetParent).attr('data-y', y);
       });
@@ -731,22 +742,54 @@
     var controllerFb = new ControllerFb();
     controllerFb.init();
 
-    $('.save-board').on('click', function() {
-      var button = this;
+    $('.subtabs__one-tab').click(function(e) {
+      e.preventDefault();
+      if ( $('.active-tab').attr('id') === 'furniture-board' ) {
+        console.log('furniture-board-subtab');
+        saveFunitureBoard();
+      }
+    });
+
+    $('.main-tabs__one-tab').click(function(e) {
+      e.preventDefault();
+      if ( $('.active-tab').attr('id') === 'furniture-board' ) {
+        console.log('furniture-board-tab');
+        saveFunitureBoard()
+        window.open( $(this).attr('href') ,"_self")
+      }
+    });
+
+    function saveFunitureBoard() {
       var data = {
         products: {}
       };
 
       $(".fb-draggable:visible").each(function() {
-        console.log($(this).parent())
         var elemId = $(this).attr('data-id');
 
-        var posX = +$('.furniture-board-editor').width() / +controllerFb.getPositionOfElement( $(this).parent() ).left;
-        var posY = +$('.furniture-board-editor').height() / +controllerFb.getPositionOfElement( $(this).parent() ).top;
+        var width = +$('.furniture-board-editor').width() / +$(this).parent().width();
+        var depth = +$('.furniture-board-editor').height() / +$(this).parent().height();
+
+        var currentX =  Math.abs( +controllerFb.getPositionOfElement( $(this).parent() ).left );
+        var currentY = Math.abs( +controllerFb.getPositionOfElement( $(this).parent() ).top );
+
+        if(currentX !== 0) {
+          var posX = +$('.furniture-board-editor').width() / currentX;
+        } else {
+          var posX = 1;
+        }
+
+        if(currentY !== 0) {
+          var posY = +$('.furniture-board-editor').height() / currentY;
+        } else {
+          var posY = 1;
+        }
+
         var rotation = +controllerFb.getPositionOfElement( $(this).parent() ).degree;
-        console.log(posY);
 
         data.products[elemId] = {
+          board_width: width,
+          board_depth: depth,
           board_posX: posX,
           board_posY: posY,
           board_rotation: rotation
@@ -754,7 +797,7 @@
       });
 
       $.ajax({
-          url: $(button).attr('data-url'),
+          url: $('#furniture-board').attr('data-url'),
           type: "PATCH",
           data: JSON.stringify(data),
           dataType: "json",
@@ -766,7 +809,7 @@
             console.log('error');
           }
       });
-    });
+    }
 
     $('.board-submit-room').on('click', function() {
       var button = this;

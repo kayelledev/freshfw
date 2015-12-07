@@ -57,8 +57,18 @@
       $('.furniture-board-editor').height(furnitureBoardEditorHeight);
 
       $('.' + elementsClass).each(function() {
-        var newWidth = +$('.furniture-board-editor').width() / 4;
-        $(this).width( newWidth );
+        if( $(this).attr('data-width') === '' || $(this).attr('data-depth') === '' ) {
+          var newWidth = +$('.furniture-board-editor').width() / 4;
+          $(this).width( newWidth );
+        } else {
+          var newWidth = +$('.furniture-board-editor').width() / +$(this).attr('data-width');
+          var newDepth = +$('.furniture-board-editor').height() / +$(this).attr('data-height');
+          $(this).width( newWidth );
+          $(this).height( newDepth );
+          $(this).parent().width( newWidth );
+          $(this).parent().height( newDepth );
+          $(this).find('.fb-item-image').height( newDepth );
+        }
       });
     }
 
@@ -755,15 +765,18 @@
       };
 
       $(".fb-draggable:visible").each(function() {
-        console.log($(this).parent())
         var elemId = $(this).attr('data-id');
 
-        var posX = +$('.furniture-board-editor').width() / +controllerFb.getPositionOfElement( $(this).parent() ).left;
-        var posY = +$('.furniture-board-editor').height() / +controllerFb.getPositionOfElement( $(this).parent() ).top;
+        var width = +$('.furniture-board-editor').width() / +$(this).parent().width();
+        var depth = +$('.furniture-board-editor').height() / +$(this).parent().height();
+
+        var posX = +$('.furniture-board-editor').width() / Math.abs( +controllerFb.getPositionOfElement( $(this).parent() ).left );
+        var posY = +$('.furniture-board-editor').height() / Math.abs( +controllerFb.getPositionOfElement( $(this).parent() ).top );
         var rotation = +controllerFb.getPositionOfElement( $(this).parent() ).degree;
-        console.log(posY);
 
         data.products[elemId] = {
+          board_width: width,
+          board_depth: depth,
           board_posX: posX,
           board_posY: posY,
           board_rotation: rotation

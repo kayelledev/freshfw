@@ -8,7 +8,7 @@ module Shoppe
                   }
   	before_filter :check_session_contain_project, only: [:create]
     load_and_authorize_resource
-  	
+
   	def index
       @design_projects = Shoppe::DesignProject.all
   	end
@@ -48,7 +48,7 @@ module Shoppe
     end
 
     def check_session_contain_project
-      session[:design_project_id] ? update : create 
+      session[:design_project_id] ? update : create
     end
 
     def select_items
@@ -58,7 +58,7 @@ module Shoppe
       @materials = Shoppe::Material.order("name")
       @products_categories = @design_project.product_list_by_filters
     end
- 
+
 
     def project_info
       session[:design_project_id] = params[:id] if params[:id].present?
@@ -112,23 +112,27 @@ module Shoppe
     end
 
     def save_furniture_board
-      @design_project = Shoppe::DesignProject.find(session[:design_project_id])
-      @design_project.design_projects_products.each do |design_projects_product|
-        design_projects_product.board_posX = nil
-        design_projects_product.board_posY = nil
-        design_projects_product.board_rotation = nil
-        design_projects_product.save
-        puts design_projects_product.board_posY
-      end
-      params[:products].each do |product_id, product_params|
-        design_projects_product = Shoppe::DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
-        design_projects_product.board_posX = product_params['board_posX'].to_f
-        design_projects_product.board_posY = product_params['board_posY'].to_f
-        design_projects_product.board_rotation = product_params['board_rotation'].to_f
-        design_projects_product.save
-      end
-      render json: true
+    @design_project = DesignProject.find(session[:design_project_id])
+    @design_project.design_projects_products.each do |design_projects_product|
+      design_projects_product.board_width = nil
+      design_projects_product.board_depth = nil
+      design_projects_product.board_posX = nil
+      design_projects_product.board_posY = nil
+      design_projects_product.board_rotation = nil
+      design_projects_product.save
+      puts design_projects_product.board_posY
     end
+    params[:products].each do |product_id, product_params|
+      design_projects_product = DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
+      design_projects_product.board_width = product_params['board_width'].to_f
+      design_projects_product.board_depth = product_params['board_depth'].to_f
+      design_projects_product.board_posX = product_params['board_posX'].to_f
+      design_projects_product.board_posY = product_params['board_posY'].to_f
+      design_projects_product.board_rotation = product_params['board_rotation'].to_f
+      design_projects_product.save
+    end
+    render json: true
+  end
 
     def board_submit_room
       @design_project = Shoppe::DesignProject.find(session[:design_project_id])
@@ -149,7 +153,7 @@ module Shoppe
       puts @design_project.status
       render json: true
     end
-    
+
     def instructions
     end
 
@@ -187,7 +191,7 @@ module Shoppe
     end
 
     private
-    
+
     def design_project_params
       width = ( params[:design_project][:width_ft].to_i * 12 ) + params[:design_project][:width_in].to_i
       depth = ( params[:design_project][:depth_ft].to_i * 12 ) + params[:design_project][:depth_in].to_i

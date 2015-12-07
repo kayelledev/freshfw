@@ -28,7 +28,7 @@ class DesignProjectsController < ApplicationController
   def check_user_access
     unless current_user.admin? || (@design_project.user && @design_project.user.id == current_user.id)
       flash[:alert] = "Access denied. You are not authorized to access this design project. "
-      redirect_to root_path 
+      redirect_to root_path
     end
   end
 
@@ -72,6 +72,8 @@ class DesignProjectsController < ApplicationController
   def save_furniture_board
     @design_project = DesignProject.find(session[:design_project_id])
     @design_project.design_projects_products.each do |design_projects_product|
+      design_projects_product.board_width = nil
+      design_projects_product.board_depth = nil
       design_projects_product.board_posX = nil
       design_projects_product.board_posY = nil
       design_projects_product.board_rotation = nil
@@ -80,6 +82,8 @@ class DesignProjectsController < ApplicationController
     end
     params[:products].each do |product_id, product_params|
       design_projects_product = DesignProjectsProduct.find_or_create_by(product_id: product_id, design_project_id: @design_project.id)
+      design_projects_product.board_width = product_params['board_width'].to_f
+      design_projects_product.board_depth = product_params['board_depth'].to_f
       design_projects_product.board_posX = product_params['board_posX'].to_f
       design_projects_product.board_posY = product_params['board_posY'].to_f
       design_projects_product.board_rotation = product_params['board_rotation'].to_f
@@ -103,8 +107,6 @@ class DesignProjectsController < ApplicationController
     @ids_to_remove = params[:ids]
     @design_project.status = :revision_requested
     @design_project.save
-    puts '==='
-    puts @design_project.status
     render json: true
   end
 

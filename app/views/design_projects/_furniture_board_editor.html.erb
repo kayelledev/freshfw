@@ -22,11 +22,11 @@
 
   <div class="furniture-board-editor">
     <% @design_project.design_projects_products.each do |item| %>
-      <span class='fb-room-item' style="position: absolute;" data-width="<%= item.product.width %>" data-height="<%= item.product.depth %>">
+      <span class='fb-room-item' style="position: absolute;" data-width="<%= item.board_width %>" data-height="<%= item.board_depth %>">
 
         <%= image_tag 'remove.png', class: 'fb-remove-icon fb-remove-item', 'data-item-id': item.product.id, width: '15px', height: '15px', hidden: true %>
 
-        <div data-id="<%= item.product.id %>" class="fb-draggable" data-width="<%= item.product.width %>" data-height="<%= item.product.depth %>"
+        <div data-id="<%= item.product.id %>" class="fb-draggable" data-width="<%= item.board_width %>" data-height="<%= item.board_depth %>"
                 data-board-rotation="<%= item.board_rotation %>"
                 data-board-x="<%= item.board_posX %>"
                 data-board-y="<%= item.board_posY %>">
