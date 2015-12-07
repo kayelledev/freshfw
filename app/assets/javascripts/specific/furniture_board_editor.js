@@ -114,14 +114,13 @@
         edges: { left: true, right: true, bottom: true, top: true }
       })
       .on('resizemove', function (event) {
-
         var target = $(event.target),
             targetParent = $(event.target).parent(),
             targetImage = $(event.target).children('img'),
             x = (parseFloat($(targetParent).attr('data-x')) || 0),
             y = (parseFloat($(targetParent).attr('data-y')) || 0);
 
-        var currentDegree = controller.getPositionOfElement(targetParent);
+        var currentDegree = controller.getPositionOfElement(targetParent).degree;
 
         // update the element's style
 
@@ -143,6 +142,8 @@
                   'transform': 'translate(' + x + 'px,' + y + 'px) rotate(' + currentDegree +'deg)'
         });
 
+        $(target).attr('data-x', x);
+        $(target).attr('data-y', y);
         $(targetParent).attr('data-x', x);
         $(targetParent).attr('data-y', y);
       });

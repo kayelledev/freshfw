@@ -121,7 +121,7 @@
             x = (parseFloat($(targetParent).attr('data-x')) || 0),
             y = (parseFloat($(targetParent).attr('data-y')) || 0);
 
-        var currentDegree = controller.getPositionOfElement(targetParent);
+        var currentDegree = controller.getPositionOfElement(targetParent).degree;
 
         // update the element's style
 
