@@ -1014,7 +1014,10 @@
         realItem.show();
 
         var realImage = $(realItem).find('.item-image');
-        controller.redrawImage(+realImage.attr('id'), realImage);
+        if( realImage.attr('data-redraw') !== 'true' ) {
+          controller.redrawImage(+realImage.attr('id'), realImage);
+          realImage.attr('data-redraw', 'true');
+        }
 
         // restrict position
         if ( newPositionX + +realItem.width() >= +$('.editor-container').width() ) {
