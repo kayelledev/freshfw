@@ -20,7 +20,7 @@ class DesignProjectsController < ApplicationController
     else
       respond_to do |format|
         format.html { render action: :project_info }
-        format.js
+        format.js { render status: 422 }
       end
     end
   end
@@ -48,7 +48,7 @@ class DesignProjectsController < ApplicationController
     else
       respond_to do |format|
         format.html { render action: :project_info }
-        format.js
+        format.js { render status: 422 }
       end
     end
   end

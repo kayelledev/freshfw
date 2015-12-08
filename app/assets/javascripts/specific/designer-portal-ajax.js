@@ -33,6 +33,9 @@ $(document).ready(function() {
     $(this).parents().eq(3).find('.float-bar-saving').show();
     var float_bar = $(this).parents().eq(3).find('.float-bar-saving');
     var load_icon = $(this).parents().eq(3).find('.load-icon-saving');
+    var load_icon_error = $(this).parents().eq(3).find('.load-icon-error');
+    load_icon.hide();
+    load_icon_error.hide();  
     $.ajax({
         url: 'designer-portal/create',
         data: formData,
@@ -40,10 +43,15 @@ $(document).ready(function() {
         contentType: false,
         type: 'POST',
         dataType: 'script'
-    }).done(function() {
-      float_bar.hide();
-      load_icon.show();
-    });
+    })
+    .done(function(response) {
+        float_bar.hide();
+        load_icon.show();
+    })
+    .fail(function(response){
+        float_bar.hide();
+        load_icon_error.show();  
+    })
   })
 });
 
