@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20153002432638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
