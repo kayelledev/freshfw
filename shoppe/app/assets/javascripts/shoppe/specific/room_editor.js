@@ -210,6 +210,11 @@
           $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
           $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
 
+          $(this).css({
+            'width': $(this).data('width') / scaling,
+            'height': $(this).data('height') / scaling
+          });
+
           $(this).parent().css({
               'width': $(this).data('width') / scaling,
               'height': $(this).data('heigh') / scaling,
