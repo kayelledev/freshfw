@@ -79,13 +79,13 @@ class ImportWorker
           end
           if row["Color"].present?
             row["Color"].split(",").each do |color_name|
-              color_element = Color.where(name: color_name.strip).first_or_create
+              color_element = Color.where(name: color_name.strip.downcase).first_or_create
               product.colors << color_element unless product.colors.include?(color_element)
             end
           end
           if row["Technical Description"].present?
             row["Technical Description"].split(",").each do |material_name|
-              material_element = Material.where(name: material_name.strip).first_or_create
+              material_element = Material.where(name: material_name.strip.downcase).first_or_create
               product.materials << material_element unless product.materials.include?(material_element)
             end
           end
