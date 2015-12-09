@@ -210,18 +210,18 @@
           $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
           $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
 
-          $(this).parent().css({
-              'width': $(this).data('width') / scaling,
-              'height': $(this).data('heigh') / scaling,
+          $(this).css({
+            'width': $(this).data('width') / scaling,
+            'height': $(this).data('height') / scaling
+          });
 
-              '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-              '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-              '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-              'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+          $(this).parent().css({
+            'width': $(this).data('width') / scaling,
+            'height': $(this).data('height') / scaling
           });
 
           // replase item to top and left if room is too small
-          if( +$(this).data('x') + +$(this).data('width') > +$('.editor-container').data('width') || +$(this).data('y') + +$(this).data('height') > +$('.editor-container').data('height') ) {
+          if( controller.restrictAreaHoles( $(this) ) ) {
 
             $(this).parent().css({
               '-webkit-transform': 'translate(0px, 0px) rotate(0deg)',
@@ -278,6 +278,7 @@
             }
           });
 
+        //redraw image
         $('.room-layout').on('show', function() {
           $('.draggable').find('.item-image:visible').each(function(index) {
             if( $(this).attr('data-redraw') !== 'true' ) {
@@ -1487,7 +1488,7 @@
         this.initMouseRotation();
         this.openDimensionsForm(this.$initialElenemts);
         this.setNewArea(this.$initialElenemts);
-        this.adaptArea(this.$initialElenemts);
+        // this.adaptArea(this.$initialElenemts);
         this.removeElement();
     };
 
