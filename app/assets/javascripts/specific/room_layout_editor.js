@@ -1146,14 +1146,19 @@
             $(this).parent().attr('data-x', parentDataX);
             $(this).parent().attr('data-y', parentDataY);
 
-            $(this).parent().css({
-                'width': $(this).data('width') / scaling,
-                'height': $(this).data('heigh') / scaling,
-                '-webkit-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
-                '-moz-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
-                '-ms-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
-                'transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
-            });
+            // $(this).parent().css({
+            //     'width': $(this).data('width') / scaling,
+            //     'height': $(this).data('height') / scaling,
+            //     '-webkit-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
+            //     '-moz-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
+            //     '-ms-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
+            //     'transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
+            // });
+            $(this).width( $(this).data('width') / scaling );
+            $(this).height( $(this).data('height') / scaling );
+
+            $(this).parent().width( $(this).data('width') / scaling );
+            $(this).parent().height( $(this).data('height') / scaling );
 
             $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
         });
