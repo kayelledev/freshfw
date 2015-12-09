@@ -370,15 +370,15 @@
 
 .one-filter-category {
     position: relative;
-    margin-top: 10px;
     height: 200px;
     overflow: hidden;
+    border: 2px solid #B8B8B8;
     // overflow-y: scroll;
     // overflow-x: hidden;
 }
 
 .one-filter-category__title {
-    margin: 0 !important;
+    margin-top: 10px;
     text-transform: uppercase;
 }
 

@@ -14,8 +14,8 @@
                 <div class="filters-section">
                     <aside class="filters">
                         <p class="filters__caption">Filter By</p>
-                        <div class="one-filter-category">
-                            <p class="one-filter-category__title">category</p>
+                          <p class="one-filter-category__title">category</p>
+                          <div class="one-filter-category">
                             <div class="one-filter-category__table">
                               <% @parent_categories.each do |category| %>
                                 <div class="one-filter-category__filter-group">
@@ -45,8 +45,8 @@
                               <% end %>
                             </div>
                         </div>
+                        <p class="one-filter-category__title">colors</p>
                         <div class="one-filter-category">
-                            <p class="one-filter-category__title">colors</p>
                             <div class="one-filter-category__table">
                               <% @colors.each do |color| %>
                                 <div class="one-filter-category__row">
@@ -56,14 +56,14 @@
                                         </label>
                                     </div>
                                     <div class="one-filter-category__cell">
-                                        <p class="one-filter-category__name"><%= color.name %></p>
+                                        <p class="one-filter-category__name"><%= color.name.try(:capitalize) %></p>
                                     </div>
                                 </div>
                               <% end %>
                             </div>
                         </div>
+                        <p class="one-filter-category__title">materials</p>
                         <div class="one-filter-category">
-                            <p class="one-filter-category__title">materials</p>
                             <div class="one-filter-category__table">
                               <% @materials.each do |material| %>
                                 <div class="one-filter-category__row">
@@ -73,7 +73,7 @@
                                         </label>
                                     </div>
                                     <div class="one-filter-category__cell">
-                                        <p class="one-filter-category__name"><%= material.name %></p>
+                                        <p class="one-filter-category__name"><%= material.name.try(:capitalize) %></p>
                                     </div>
                                 </div>
                               <% end %>
