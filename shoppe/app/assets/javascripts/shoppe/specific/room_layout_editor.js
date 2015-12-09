@@ -278,13 +278,12 @@
             }
           });
 
-
-        $('#room-layout-tab').click(function() {
+        $('.room-layout').on('show', function() {
           $('.draggable').find('.item-image:visible').each(function(index) {
-            $(this).on('load', function() {
-              controller.redrawImage(+$(this).attr('id'), $(this));
-            });
-
+            if( $(this).attr('data-redraw') !== 'true' ) {
+              controller.redrawImage( +$(this).attr('id'), $(this) );
+              $(this).attr('data-redraw', 'true');
+            }
           });
         });
 
@@ -382,9 +381,6 @@
             }
           }
         }
-
-
-
 
     }
 
@@ -1018,9 +1014,7 @@
         realItem.show();
 
         var realImage = $(realItem).find('.item-image');
-        $(realImage).on('load', function() {
-          controller.redrawImage(+realImage.attr('id'), $(this));
-        });
+        controller.redrawImage(+realImage.attr('id'), realImage);
 
         // restrict position
         if ( newPositionX + +realItem.width() >= +$('.editor-container').width() ) {

@@ -13,6 +13,7 @@ $(document).ready(function() {
     } else if ( $(this).attr('id') === 'room-layout-tab' ) {
       $('.layout-submit-room').css('display', 'block');
       $('.room-layout').addClass('active-tab');
+      $('.room-layout').trigger('show');
 
     } else if ( $(this).attr('id') === 'furniture-board-tab' ) {
       $('.board-submit-room').css('display', 'block');
