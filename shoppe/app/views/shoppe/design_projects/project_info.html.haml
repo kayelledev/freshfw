@@ -1,0 +1,86 @@
+= render 'bottom_buttons'
+- content_for :custom_scripts do 
+  = javascript_include_tag "shoppe/specific/designer-portal-ajax.js" 
+%main
+  %section.main-tabs
+    .l-wrapper
+      = link_to 'project info', designer_portal_path, class: "main-tabs__one-tab main-tabs__one-tab--active" 
+      = link_to 'select items', designer_portal_select_items_path, class: "main-tabs__one-tab save-project-info-tab", id: 'select-items-tab'
+      = link_to 'room builder', designer_portal_room_builder_path, class: "main-tabs__one-tab save-project-info-tab", id: 'room-builder-tab' 
+      = link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab save-project-info-tab", id: 'instructions-tab'
+  .l-wrapper
+    .l-tabs-alignment
+      .info-table
+        .info-table__row
+          .info-table__cell project status:
+          .info-table__cell= @design_project.status.try(:humanize).try(:titleize)
+        .info-table__row
+          .info-table__cell creation date:
+          .info-table__cell= @design_project.created_at.strftime('%b %d, %Y')
+        .info-table__row
+          .info-table__cell last modefied date:
+          .info-table__cell= @design_project.updated_at.strftime('%b %d, %Y')
+        .info-table__row
+          .info-table__cell designed by:
+          .info-table__cell= (@design_project.user || current_user).try(:full_name)
+        .info-table__row
+          .info-table__cell designer email:
+          .info-table__cell= (@design_project.user || current_user).try(:email_address)
+      = form_for @design_project, html: { class: "project-init-info", id: 'project-form', multipart: true }, remote: true do |f| 
+        .project-init-info__row
+          .project-init-info__cell Project Name
+          .project-init-info__cell
+            %label.project-init-info__label
+              = f.text_field :name, class: "project-init-info__input", id: 'project-name' 
+          .project-init-info__cell
+        .project-init-info__row
+          .project-init-info__cell Inspiration
+          .project-init-info__cell
+            %label.project-init-info__label
+              = f.text_area :inspiration, class: "project-init-info__textarea", id: 'project-inspiration' 
+          .project-init-info__cell
+        .project-init-info__row
+          .project-init-info__cell Inspiration Images
+          .project-init-info__cell
+            .project-init-info__adm-img-cont.l-cont
+
+              = image_tag image_link(@design_project, 'inspiration_image1'), class: "l-el"
+              = image_tag image_link(@design_project, 'inspiration_image2'), class: "l-el"
+              = image_tag image_link(@design_project, 'inspiration_image3'), class: "l-el"
+              =# image_tag @design_project.inspiration_image2.thumb, class: "l-el"
+              =# image_tag @design_project.inspiration_image3.thumb, class: "l-el"
+          .project-init-info__cell
+        .project-init-info__row
+          .project-init-info__cell Room Type
+          .project-init-info__cell
+            %label.project-init-info__label
+              = f.collection_select :product_category_id, Shoppe::ProductCategory.order(:name).where(is_room: true), :id, :name, {:class => 'project-init-info__select'} 
+                
+          .project-init-info__cell
+        .project-init-info__row
+          .project-init-info__cell Ideal Room Size
+          .project-init-info__cell
+            %table
+              %tr
+                %td
+                  %span Width
+                  %label.project-init-info__small-label
+                    = f.number_field :width_ft, class: "project-init-info__small-input", id: 'project-width-ft', min: "0", step: "1"
+                  %span ft.
+                %td
+                  %label.project-init-info__small-label
+                    = f.number_field :width_in, class: "project-init-info__small-input", id: 'project-width-in', min: "0", step: "0.01" 
+                  %span in.
+              %tr
+                %td
+                  %span Depth
+                  %label.project-init-info__small-label
+                    = f.number_field :depth_ft, class: "project-init-info__small-input", id: 'project-depth-ft', min: "0", step: "1" 
+                  %span ft.
+                %td
+                  %label.project-init-info__small-label
+                    = f.number_field :depth_in, class: "project-init-info__small-input", id: 'project-depth-in', min: "0", step: "0.01" 
+                  %span in.
+          .project-init-info__cell
+
+

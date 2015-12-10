@@ -57,11 +57,11 @@ module Shoppe
     end
 
     def furniture_categories 
-      return ['sofas', 'chairs', 'tables', 'storage', 'lighting', 'accents', 'beds']
+      return ['furniture', 'sofas', 'chairs', 'tables', 'storage', 'lighting', 'beds', 'coffee-tables']
     end 
     
     def room_categories
-      return ['livingrooms', 'bedrooms']
+      return ['rooms', 'living-rooms', 'dining-rooms', 'bedrooms']
     end 
   end
 end

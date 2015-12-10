@@ -450,6 +450,10 @@ en:
       update_notice: Product has been updated successfully
       website_properties: Website Properties
       weight: Weight
+      product_supplier: Product supplier
+      product_color: Product color
+      product_material: Product material
+
 
       imports: 
         help: Products and Categories are matched by name.  If no product is found, a new one will be created with all the attributes on the line.  If a product is found, only the quantity will be updated and all other fields will be ignored.  If no category is found, one with that name will be created .  One product per line.  
@@ -593,6 +597,14 @@ en:
       create_notice: Payment has been added successfully
       destroy_notice: Payment has been removed successfully
       refund_notice: Refund has been processed successfully.
+    
+    design_projects:
+      title: Room Designs
+      design_projects: Room Design Projects
+      design_project: Room Design
+      request_revision: Request revision
+      reject: Reject
+      approve: Approve
 
     navigation:
       admin_primary:
@@ -602,6 +614,7 @@ en:
         logistics: Logistics
         delivery_services: Delivery Services
         tax_rates: Tax Rates
+        design_projects: Room Designs
         users: Users
         countries: Countries
         settings: Settings

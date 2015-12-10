@@ -9,12 +9,12 @@ module Shoppe
             :inclusion => { :in => Rolify.resource_types },
             :allow_nil => true
     before_destroy :can_delete_role?
+    scope :list_without_admin, -> {where.not(name: 'admin')}
 
     scopify
     
     def check_permissions!(permission)
       raise ActiveRecord::RecordNotSaved, "You cannot delete permissions for admin role" if self.name == 'admin'
-      raise ActiveRecord::RecordNotSaved, "You cannot delete WelcomeController index permission" if permission.controller_class == 'WelcomeController' && permission.action == 'index'
     end
     
     def can_delete_role?

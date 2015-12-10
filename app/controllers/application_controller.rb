@@ -6,14 +6,23 @@ class ApplicationController < ActionController::Base
   before_action :set_user_currency, unless: :location_in_cookies? 
   
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = "Access denied. You are not authorized to access the requested page."
+    if exception.try(:subject).try(:name) == "DesignProject"
+      flash[:alert] = "Access to the designer portal is restricted to registered designers only. To register as a designer, contact info@gofourwalls.com"
+    else
+      flash[:alert] = "Access denied. You are not authorized to access the requested page."  
+    end  
+    # flash[:alert] = "Access denied. You are not authorized to access the requested page. #{exception.action} #{exception.subject.name}"
     redirect_to root_path  
   end
 
   protected
 
     def self.permission
-      return name = self.name.gsub('Controller','').singularize.constantize.name rescue self.name.constantize.name
+      return name = self.name.gsub('Controller','').singularize.constantize.name rescue nil
+    end
+
+    def self.non_restfull_permission
+      self.name
     end
 
   private
@@ -22,17 +31,16 @@ class ApplicationController < ActionController::Base
       cookies[:currency].present?
     end
 
-
     def current_order
       @current_order ||= begin
         if has_order?
           if params[:order_tax_rate] == nil
-            params[:order_tax_rate] = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+            params[:order_tax_rate] = TaxRate.find_by_province(Rails.application.config.state_code).rate
           end
           @current_order
         else
           @ip_address = request.ip
-          order = Shoppe::Order.create(:ip_address => @ip_address)
+          order = Order.create(:ip_address => @ip_address)
           session[:order_id] = order.id
           set_tax_rate(@ip_address, order)
           order
@@ -52,7 +60,7 @@ class ApplicationController < ActionController::Base
     def has_order?
       !!(
         session[:order_id] &&
-        @current_order = Shoppe::Order.includes(:order_items => :ordered_item).find_by_id(session[:order_id])
+        @current_order = Order.includes(:order_items => :ordered_item).find_by_id(session[:order_id])
       )
     end
 
@@ -68,23 +76,23 @@ class ApplicationController < ActionController::Base
         @user_state = Rails.application.config.state_code
         @user_country = Rails.application.config.country
       end 
-        @db_tax_rate = Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
+        @db_tax_rate = TaxRate.find_by_province(Rails.application.config.state_code).rate
       #@db_tax_rate = 0.13 #Shoppe::TaxRate.find_by_province(Rails.application.config.state_code).rate
 
 
       puts "show the db tax rate for ON: #{@db_tax_rate}"
-      @db_country = Shoppe::Country.where(name: @user_country).first
+      @db_country = Country.where(name: @user_country).first
 
       if @user_country!=nil && @db_country!=nil
         order.update(billing_country: @db_country)
       else
-        order.update(billing_country: Shoppe::Country.where(name: Rails.application.config.country).first)
+        order.update(billing_country: Country.where(name: Rails.application.config.country).first)
       end
 
       if @user_state != nil
         order.billing_address4 = @user_state
         begin
-          @db_tax_rate = Shoppe::TaxRate.find_by_province(@user_state).first.rate
+          @db_tax_rate = TaxRate.find_by_province(@user_state).first.rate
         rescue
 
         end

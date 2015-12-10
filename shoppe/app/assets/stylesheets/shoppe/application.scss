@@ -1,4 +1,6 @@
 /*
+ *= require shoppe/bootstrap.min
+ *= require jquery-ui
  *= require shoppe/reset
  *= require shoppe/elements
  *= require shoppe/chosen
@@ -7,6 +9,12 @@
  *= require shoppe/user_account
  *= require shoppe/logistics
  *= require shoppe/access_management
+ *= require shoppe/design_projects
+ *= require shoppe/jquery.multiselect
+ *= require shoppe/room_editor
+ *= require bxslider
+ *= require font-awesome
+ *= require shoppe/jquery.qip.min
  *= require_self
  */
 

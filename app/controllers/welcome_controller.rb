@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   include ProductsHelper
   include ActionView::Helpers::UrlHelper
-  load_and_authorize_resource :class => 'WelcomeController'
+  # load_and_authorize_resource :class => 'WelcomeController'
 
   def index
   end
@@ -15,8 +15,9 @@ class WelcomeController < ApplicationController
 
   def account
     if current_user.present?
-      @orders = Shoppe::Order.where(email_address: current_user.email_address).order('updated_at DESC')
-      @products = current_user.reviews.order('updated_at DESC').take(3).map{|review| Shoppe::Product.find(review.product_id) }
+      @orders = Order.where(email_address: current_user.email_address).order('updated_at DESC')
+      @products = current_user.reviews.order('updated_at DESC').take(3).map{|review| Product.find(review.product_id) }
+      @design_projects = current_user.design_projects 
     end
   end
 
@@ -25,6 +26,11 @@ class WelcomeController < ApplicationController
     @order = current_order
     @order.update(currency: cookies[:currency])
     render json: {status: true}
+  end
+
+  private
+  def self.non_restfull_permission
+    nil
   end
 
 end

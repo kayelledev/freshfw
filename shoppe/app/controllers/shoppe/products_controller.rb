@@ -55,6 +55,8 @@ module Shoppe
     private
 
     def safe_params
+      params[:product][:color_ids] ||= []
+      params[:product][:material_ids] ||= []
       params[:product].permit(:product_category_id, :product_subcategory_id, :name, :sku, :permalink, :description,
                               :short_description, :weight, :price, :cost_price, :tax_rate_id,
                               :stock_control, :default_image, :image2, :image3, :image4, :image5, :image6,
@@ -62,9 +64,9 @@ module Shoppe
                               :width, :height, :depth,:other_details, :is_preset,
                               :url_default_image, :url_image2, :url_image3, :url_image4, :url_image5, :url_image6,
                               :seat_width, :seat_depth, :seat_height, :arm_height,
+                              :supplier_id, :color_ids => [], :material_ids => [],
                               :product_attributes_array => [:key, :value, :searchable, :public], :included=>[]
                               )
     end
-
   end
 end

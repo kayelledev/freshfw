@@ -1,0 +1,8 @@
+- @page_title = t('shoppe.design_projects.design_projects')
+
+= content_for :header do
+  %p.buttons
+    = link_to t('shoppe.design_projects.request_revision') , [:request_revision, @design_project], method: 'post', :class => 'button green'
+    = link_to t('shoppe.design_projects.reject'), [:reject, @design_project], method: 'post', :class => 'button green'
+    = link_to t('shoppe.design_projects.approve') , [:approve, @design_project], method: 'post', :class => 'button green'
+  %h2.products= "#{t('shoppe.design_projects.design_project')} - #{@design_project.id}"

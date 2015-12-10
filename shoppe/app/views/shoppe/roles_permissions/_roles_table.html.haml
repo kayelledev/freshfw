@@ -11,4 +11,5 @@
           %td= role.name
           %td  
             = link_to 'Show', role, :class => 'button green'
+            = link_to 'Edit', [:edit, role], :class => 'button green'
             = link_to 'Delete', role, :class => 'button purple', :method => :delete, :data => {:confirm => 'Are you sure you wish to remove this role?'}

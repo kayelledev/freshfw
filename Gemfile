@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.2.2"
 
+gem 'remotipart', '~> 1.2'
 # Slider
 gem 'bxslider-rails'
 

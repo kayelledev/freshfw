@@ -1,0 +1,147 @@
+    <% content_for :custom_scripts do %>
+       <%= javascript_include_tag "specific/design_items_select.js" %>
+    <% end %>
+        <main>
+            <div class="main-tabs">
+                <div class="l-wrapper">
+                    <%= link_to 'project info', designer_portal_path, class: "main-tabs__one-tab", id: 'project-info-tab' %>
+                    <%= link_to 'select items', designer_portal_select_items_path, class: "main-tabs__one-tab main-tabs__one-tab--active", id: 'select-items-tab' %>
+                    <%= link_to 'room builder', designer_portal_room_builder_path, class: "main-tabs__one-tab", id: 'room-builder-tab' %>
+                    <%= link_to 'instructions', designer_portal_instructions_path, class: "main-tabs__one-tab", id: 'instructions-tab' %>
+                </div>
+            </div>
+            <div class="l-wrapper">
+                <div class="filters-section">
+                    <aside class="filters">
+                        <p class="filters__caption">Filter By</p>
+                        <p class="one-filter-category__title">category</p>
+                        <div class="one-filter-category">
+                            <div class="one-filter-category__table">
+                              <% @parent_categories.each do |category| %>
+                                <div class="one-filter-category__filter-group">
+                                <div class="one-filter-category__row">
+                                    <div class="one-filter-category__cell">
+                                        <label class="one-filter-category__label">
+                                            <%= check_box_tag "category_ids[]", category.id, @design_project.product_categories.include?(category), class: 'one-filter-category__filter-parent' %>
+                                        </label>
+                                    </div>
+                                    <div class="one-filter-category__cell">
+                                        <p class="one-filter-category__name"><%= category.name %></p>
+                                    </div>
+                                </div>
+                                <% category.descendents.each do |child| %>
+                                    <div class="one-filter-category__row">
+                                        <div class="one-filter-category__cell">
+                                            <label class="one-filter-category__label">
+                                                <%= check_box_tag "category_ids[]", child.id, @design_project.product_categories.include?(child), class: 'one-filter-category__filter-child' %>
+                                            </label>
+                                        </div>
+                                        <div class="one-filter-category__cell">
+                                            <p class="one-filter-category__name one-filter-category__name--sub"><%= child.name %></p>
+                                        </div>
+                                    </div>
+                                <% end %>
+                                </div>
+                              <% end %>
+                            </div>
+                        </div>
+                        <p class="one-filter-category__title">colors</p>
+                        <div class="one-filter-category">
+                            <div class="one-filter-category__table">
+                              <% @colors.each do |color| %>
+                                <div class="one-filter-category__row">
+                                    <div class="one-filter-category__cell">
+                                        <label class="one-filter-category__label">
+                                            <%= check_box_tag "color_ids[]", color.id, @design_project.colors.include?(color) %>
+                                        </label>
+                                    </div>
+                                    <div class="one-filter-category__cell">
+                                        <p class="one-filter-category__name"><%= color.name.try(:capitalize) %></p>
+                                    </div>
+                                </div>
+                              <% end %>
+                            </div>
+                        </div>
+                        <p class="one-filter-category__title">materials</p>
+                        <div class="one-filter-category">
+                            <div class="one-filter-category__table">
+                              <% @materials.each do |material| %>
+                                <div class="one-filter-category__row">
+                                    <div class="one-filter-category__cell">
+                                        <label class="one-filter-category__label">
+                                            <%= check_box_tag "material_ids[]", material.id, @design_project.materials.include?(material) %>
+                                        </label>
+                                    </div>
+                                    <div class="one-filter-category__cell">
+                                        <p class="one-filter-category__name"><%= material.name.try(:capitalize) %></p>
+                                    </div>
+                                </div>
+                              <% end %>
+                            </div>
+                        </div>
+                    </aside>
+                    <div id='productList'>
+                      <%= form_for @design_project, :url => designer_portal_add_to_room_builder_path, remote: true do |f| %>
+                        <%= f.error_messages %>
+                        <article class="products-grid">
+                          <div class="products-grid__btn-cont">
+                            <a class="products-grid__left-btn" >show all</a>
+                            <!-- <button class="" type="button"></button> -->
+                            <%= f.submit "Add Selections to Room Builder", :class => 'products-grid__right-btn' %>
+                          </div>
+                          <div class="one-products-category l-cont">
+                            <% @products_categories.each do |category, product_list| %>
+                              <div class="one-products-category__title l-el"><%= category %></div>
+                              <% product_list.each do |product| %>
+                                <div class="one-products-category__product l-el">
+                                  <div class="one-products-category__anch l-cont" href="#">
+                                   <%= image_tag image_link(product, 'default_image'), class: "one-products-category__img l-el", alt: "#{product.full_name}" %>
+                                  </div>
+                                  <label class="one-products-category__label">
+                                    <%= check_box_tag "product_ids[]", product.id, @design_project.products.include?(product) %>
+                                  </label>
+                                </div>
+                              <% end %>
+                            <!--  -->
+                            <% end %>
+                          </div>
+                        </article>
+                      <% end %>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script>
+            ;(function() {
+                var checkboxes = document.querySelectorAll(".one-products-category__label > input"),
+                    filterCategories = document.querySelectorAll(".one-filter-category"),
+                    categoryNames = document.querySelectorAll(".one-filter-category__name");
+                if (checkboxes.length) {
+                    for (var i = 0, lim = checkboxes.length; i < lim; i += 1) {
+                        if (checkboxes[i].checked) {
+                            checkboxes[i].parentElement.previousElementSibling.classList.add("chosen");
+                        };
+                        checkboxes[i].addEventListener("change", function() {
+                            this.parentElement.previousElementSibling.classList.toggle("chosen");
+                        });
+                    };
+                };
+                
+                if (filterCategories.length) {
+                    for (var i = 0, lim = filterCategories.length; i < lim; i += 1) {
+                        Ps.initialize(filterCategories[i], {
+                          suppressScrollX: true
+                        });
+                    };
+                };
+
+                if (categoryNames.length) {
+                    for (var i = 0, lim = categoryNames.length; i < lim; i += 1) {
+                        var text = categoryNames[i].textContent;
+                        if (text.search(",") !== -1) {
+                            categoryNames[i].textContent = text.split(",").join(", ");
+                        }
+                    };
+                };
+            })();
+        </script>

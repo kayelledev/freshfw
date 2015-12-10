@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-
     @items = Product.all
     @categories = ProductCategory.all
     reviewed_product = Product.find_by_permalink(params[:id])
@@ -20,7 +19,7 @@ class ProductsController < ApplicationController
 
   def buy
     current_order.order_items.add_item(@product, 1)
-    redirect_to product_path(id: root_product.permalink), :notice => "Product has been added successfuly! #{link_to 'View your Cart', cart_path}"
+    redirect_to product_path(id: root_product.permalink), :notice => "Product has been added successfully! #{link_to 'View your Cart', cart_path}"
   end
 
   def destroy_img

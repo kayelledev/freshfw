@@ -1,0 +1,5 @@
+<% if @result && @redirect_url %>
+  window.open("<%= @redirect_url %>","_self"); 
+<% else %>
+  $('.error-messages-block').html("<%= j render partial: 'shared/error_messages', locals: { object: @design_project } %>");
+<% end %>

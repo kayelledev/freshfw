@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  filter_element_id: 1
+  filter_element_type: MyString
+
+two:
+  filter_element_id: 1
+  filter_element_type: MyString

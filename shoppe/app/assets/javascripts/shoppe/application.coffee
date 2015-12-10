@@ -1,11 +1,8 @@
 #= require jquery
 #= require jquery_ujs
-#= require shoppe/mousetrap
-#= require shoppe/jquery_ui
-#= require shoppe/chosen.jquery
-#= require shoppe/roles_permissions
+#= require jquery-ui
 #= require nifty/dialog
-#= require_tree .
+#= require_directory ./global
 
 $ ->
   # Automatically focus all fields with the 'focus' class

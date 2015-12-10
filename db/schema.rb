@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20153002432638) do
-
-  # These are extensions that must be enabled in order to support this database
+ActiveRecord::Schema.define(version: 20151118133034) do
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -81,6 +80,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string  "province"
   end
 
+
   add_index "shoppe_cities", ["country_id"], name: "index_shoppe_cities_on_country_id", using: :btree
 
   create_table "shoppe_cities_zones", force: :cascade do |t|
@@ -141,30 +141,60 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_delivery_services", ["active"], name: "index_shoppe_delivery_services_on_active", using: :btree
 
   create_table "shoppe_design_projects", force: :cascade do |t|
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "name"
-    t.string   "status"
+    t.integer  "status",                 default: 0
     t.datetime "submited_at"
     t.text     "inspiration"
     t.string   "inspiration_image1"
     t.string   "inspiration_image2"
     t.string   "inspiration_image3"
     t.integer  "user_id"
-    t.string   "room_size"
     t.integer  "product_category_id"
+    t.float    "width",                  default: 0.0
+    t.float    "depth",                  default: 0.0
+    t.string   "url_inspiration_image1"
+    t.string   "url_inspiration_image2"
+    t.string   "url_inspiration_image3"
   end
+
+  create_table "shoppe_design_projects_filters", force: :cascade do |t|
+    t.integer  "design_project_id"
+    t.integer  "filter_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "shoppe_design_projects_filters", ["design_project_id", "filter_id"], name: "design_projects_filters_index", unique: true, using: :btree
+  add_index "shoppe_design_projects_filters", ["design_project_id"], name: "index_shoppe_design_projects_filters_on_design_project_id", using: :btree
+  add_index "shoppe_design_projects_filters", ["filter_id"], name: "index_shoppe_design_projects_filters_on_filter_id", using: :btree
 
   create_table "shoppe_design_projects_products", force: :cascade do |t|
     t.integer  "design_project_id"
     t.integer  "product_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.decimal  "layout_posX"
+    t.decimal  "layout_posY"
+    t.decimal  "layout_rotation"
+    t.decimal  "board_posX"
+    t.decimal  "board_posY"
+    t.decimal  "board_rotation"
+    t.decimal  "board_width"
+    t.decimal  "board_depth"
   end
 
   add_index "shoppe_design_projects_products", ["design_project_id", "product_id"], name: "design_projects_products_index", unique: true, using: :btree
   add_index "shoppe_design_projects_products", ["design_project_id"], name: "index_shoppe_design_projects_products_on_design_project_id", using: :btree
   add_index "shoppe_design_projects_products", ["product_id"], name: "index_shoppe_design_projects_products_on_product_id", using: :btree
+
+  create_table "shoppe_filters", force: :cascade do |t|
+    t.integer  "filter_element_id"
+    t.string   "filter_element_type"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "shoppe_freight_companies", force: :cascade do |t|
     t.string "name"
@@ -202,6 +232,47 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer  "user_id"
   end
 
+  create_table "shoppe_design_projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shoppe_freight_companies", force: :cascade do |t|
+    t.string "name"
+    t.string "dc"
+    t.string "website"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_freight_companies_zones", force: :cascade do |t|
+    t.integer "freight_company_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_freight_companies_zones", ["freight_company_id", "zone_id"], name: "freight_company_zone_index", unique: true
+  add_index "shoppe_freight_companies_zones", ["freight_company_id"], name: "index_shoppe_freight_companies_zones_on_freight_company_id"
+  add_index "shoppe_freight_companies_zones", ["zone_id"], name: "index_shoppe_freight_companies_zones_on_zone_id"
+
+  create_table "shoppe_freight_routes", force: :cascade do |t|
+    t.integer "travel_days"
+    t.integer "freight_company_id"
+    t.integer "zone_id"
+    t.integer "suppliers_zone_id"
+  end
+
+  add_index "shoppe_freight_routes", ["freight_company_id"], name: "index_shoppe_freight_routes_on_freight_company_id"
+  add_index "shoppe_freight_routes", ["suppliers_zone_id"], name: "index_shoppe_freight_routes_on_suppliers_zone_id"
+  add_index "shoppe_freight_routes", ["zone_id"], name: "index_shoppe_freight_routes_on_zone_id"
+
+  create_table "shoppe_import_logs", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "finish_time"
+    t.string   "filename"
+    t.integer  "import_status"
+    t.text     "log_errors"
+    t.integer  "user_id"
+  end
+
   create_table "shoppe_included_products", force: :cascade do |t|
     t.integer "parent_product_id"
     t.integer "included_product_id"
@@ -222,6 +293,12 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id", "zone_id"], name: "last_mile_company_zone_index", unique: true, using: :btree
   add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id"], name: "index_shoppe_last_mile_companies_zones_on_last_mile_company_id", using: :btree
   add_index "shoppe_last_mile_companies_zones", ["zone_id"], name: "index_shoppe_last_mile_companies_zones_on_zone_id", using: :btree
+
+  create_table "shoppe_materials", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "shoppe_order_items", force: :cascade do |t|
     t.integer  "order_id"
@@ -348,6 +425,7 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.string   "default_image"
+    t.boolean  "is_room",       default: false
   end
 
   add_index "shoppe_product_categories", ["permalink"], name: "index_shoppe_product_categories_on_permalink", using: :btree
@@ -396,13 +474,35 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.float    "arm_height",                                  default: 0.0
     t.text     "other_details"
     t.integer  "supplier_id"
-    t.integer  "color_id"
   end
 
   add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id", using: :btree
   add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink", using: :btree
   add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id", using: :btree
   add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku", using: :btree
+
+
+  create_table "shoppe_products_colors", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "color_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "shoppe_products_colors", ["color_id"], name: "index_shoppe_products_colors_on_color_id", using: :btree
+  add_index "shoppe_products_colors", ["product_id", "color_id"], name: "shoppe_products_colors_index", unique: true, using: :btree
+  add_index "shoppe_products_colors", ["product_id"], name: "index_shoppe_products_colors_on_product_id", using: :btree
+
+  create_table "shoppe_products_materials", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "material_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "shoppe_products_materials", ["material_id"], name: "index_shoppe_products_materials_on_material_id", using: :btree
+  add_index "shoppe_products_materials", ["product_id", "material_id"], name: "shoppe_products_materials_index", unique: true, using: :btree
+  add_index "shoppe_products_materials", ["product_id"], name: "index_shoppe_products_materials_on_product_id", using: :btree
 
   create_table "shoppe_roles", force: :cascade do |t|
     t.string   "name"
@@ -462,6 +562,23 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_suppliers_zones", ["supplier_id"], name: "index_shoppe_suppliers_zones_on_supplier_id", using: :btree
   add_index "shoppe_suppliers_zones", ["zone_id"], name: "index_shoppe_suppliers_zones_on_zone_id", using: :btree
 
+  create_table "shoppe_suppliers", force: :cascade do |t|
+    t.string "warehouse"
+    t.string "name"
+    t.string "website"
+    t.string "prime"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_suppliers_zones", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_suppliers_zones", ["supplier_id", "zone_id"], name: "index_shoppe_suppliers_zones_on_supplier_id_and_zone_id", unique: true
+  add_index "shoppe_suppliers_zones", ["supplier_id"], name: "index_shoppe_suppliers_zones_on_supplier_id"
+  add_index "shoppe_suppliers_zones", ["zone_id"], name: "index_shoppe_suppliers_zones_on_zone_id"
+
   create_table "shoppe_tax_rates", force: :cascade do |t|
     t.string   "name"
     t.decimal  "rate",         precision: 8, scale: 2
@@ -494,6 +611,10 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   end
 
   add_index "shoppe_users", ["email_address"], name: "index_shoppe_users_on_email_address", using: :btree
+
+  create_table "shoppe_zones", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "shoppe_zones", force: :cascade do |t|
     t.string "name"

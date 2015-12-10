@@ -1,6 +1,7 @@
 class ChargesController < ApplicationController
+  # load_and_authorize_resource :class => 'ChargesController'
+  authorize_resource :class => 'ChargesController'
   before_filter { params[:id] && @payment = @order.payments.find(params[:id]) }
-  load_and_authorize_resource :class => 'ChargesController'
 
   def helper
     Helper.instance
@@ -51,12 +52,16 @@ class ChargesController < ApplicationController
     end
     
     begin 
-      @payment = Shoppe::Payment.new(:amount => @order.total, :order_id => @order.id, :method =>'Stripe CC', :reference => @charge.id)
+      @payment = Payment.new(:amount => @order.total, :order_id => @order.id, :method =>'Stripe CC', :reference => @charge.id)
       @payment.save 
     rescue
       flash[:error] = "Something went wrong with the payment transaction. Please check all information and try again. If the error persists, contact us to have it resolved."
       redirect_to charges_path
     end
   end 
+
+  def self.non_restfull_permission
+    nil
+  end
     
 end

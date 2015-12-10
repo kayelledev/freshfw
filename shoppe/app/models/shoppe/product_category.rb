@@ -15,6 +15,8 @@ module Shoppe
 
     # All products within this category
     has_many :products, :dependent => :restrict_with_exception, :class_name => 'Shoppe::Product'
+    has_many :design_projects, :class_name => 'Shoppe::DesignProject'
+    has_many :filters, as: :filter_element, :class_name => 'Shoppe::Filter', :dependent => :destroy
 
     # Validations
     validates :name, :presence => true, :uniqueness => true
@@ -123,6 +125,12 @@ module Shoppe
         node[:nodes] = nil if node[:children_count].zero?
       end
       @nodes
+    end
+
+    def descendents
+      children.map do |child|
+        [child] + child.descendents
+      end.flatten
     end
 
   end

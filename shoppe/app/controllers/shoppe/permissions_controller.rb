@@ -8,7 +8,7 @@ module Shoppe
     def new
       @permission = Permission.new
       @controllers = controllers_list
-      @actions = [] 
+      @actions = actions_list(@controllers.first) 
       
     end
 
@@ -19,7 +19,7 @@ module Shoppe
 
     def edit
       @controllers = controllers_list
-      @actions = actions_list(@permission.controller_class)
+      @actions = actions_list(@permission.subject_class)
     end
 
     def index

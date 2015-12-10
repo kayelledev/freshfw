@@ -39,4 +39,8 @@ module ProductsHelper
     {ft: ft, inch: inch}
   end
 
+  def product_dimensions(product)
+    "#{product.width}\" x #{product.depth}\" x #{product.height}\""
+  end
+
 end

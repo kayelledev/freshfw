@@ -5,20 +5,7 @@ module Shoppe
 	
   	def index
       @roles = Role.order('name')
-  	  @permissions = Permission.order('controller_class')
+  	  @permissions = Permission.sorted
     end
-
-    def new
-    end
-
-    def create
-    end
-
-    def edit
-    end
-
-    def update
-    end
-
   end
 end

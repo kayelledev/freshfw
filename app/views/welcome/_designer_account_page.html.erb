@@ -15,24 +15,19 @@
                     <div class="table__cell">creation date</div>
                     <div class="table__cell">last modefied date</div>
                 </div>
-                <div class="table__row">
-                    <div class="table__cell table__cell--first-cell"><a href="#">project1-name</a></div>
-                    <div class="table__cell">Daft</div>
-                    <div class="table__cell"></div>
-                    <div class="table__cell">Oct 31, 2015</div>
-                    <div class="table__cell">Oct 31, 2015 2:39pm</div>
-                </div>
-                <div class="table__row">
-                    <div class="table__cell table__cell--first-cell"><a href="#">project2-name</a></div>
-                    <div class="table__cell">Submited</div>
-                    <div class="table__cell">Sept 30, 2015</div>
-                    <div class="table__cell">Sept 14, 2015</div>
-                    <div class="table__cell">Sept 30, 2015 2:39pm</div>
-                </div>
+                <% @design_projects.each do |design_project| %>
+                  <div class="table__row">
+                    <div class="table__cell table__cell--first-cell"><%= link_to design_project.name, designer_portal_path(id: design_project.id) %></div>
+                    <div class="table__cell"><%= design_project.status.try(:humanize).try(:titleize) %></div>
+                    <div class="table__cell"><%= design_project.submited_at.strftime('%b %d, %Y') if design_project.submited_at %></div>
+                    <div class="table__cell"><%= design_project.created_at.strftime('%b %d, %Y') %></div>
+                    <div class="table__cell"><%= design_project.updated_at.strftime('%b %d, %Y') %></div>
+                  </div>
+                <% end %>
             </div>
-            <a href="/designer-portal">
+            <%= link_to designer_portal_create_new_path do %>
               <button class="one-table__btn" type="button">create new project</button>
-            </a>
+            <% end %>
         </div>
     </div>
     <% if @orders.present? %>
@@ -50,7 +45,7 @@
                 <% @orders.each do |order| %>
                   <div class="table__row">
                     <div class="table__cell table__cell--first-cell"><a href="#"><%= order.number %></a></div>
-                    <div class="table__cell"><%= order.updated_at.strftime('%F') %></div>
+                    <div class="table__cell"><%= order.updated_at.strftime('%b %d, %Y') %></div>
                     <div class="table__cell"></div>
                     <div class="table__cell"><%= number_to_currency order.total %></div>
                     <div class="table__cell"><%= order.status %></div>
@@ -76,7 +71,7 @@
                   <div class="table__row">
                     <div class="table__cell table__cell--first-cell"><%= link_to product.name, product_path(product.permalink) %></div>
                     <div class="table__cell"><%= product.product_category.try(:name) %></div>
-                    <div class="table__cell"><%= product.updated_at.strftime('%F') %></div>
+                    <div class="table__cell"><%= product.updated_at.strftime('%b %d, %Y') %></div>
                     <div class="table__cell"></div>
                     <div class="table__cell"></div>
                   </div>
