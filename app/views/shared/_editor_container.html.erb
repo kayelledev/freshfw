@@ -15,6 +15,8 @@
 
         <% if image_link(item, 'image6') %>
           <%= image_tag image_link(item, 'image6'), width: '100%', height: '100%', class: 'item-image', crossorigin: 'anonymous'%>
+        <% else %>
+          <%= image_tag 'no_image.png', width: '100%', height: '100%', class: 'item-image', crossorigin: 'anonymous'%>
         <% end %>
 
         <div class="point left-top"></div>

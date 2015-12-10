@@ -33,6 +33,8 @@
 
           <% if image_link(item.product, 'default_image') %>
             <%= image_tag image_link(item.product, 'default_image'), class: 'fb-item-image'%>
+          <% else %>
+            <%= image_tag 'no_image.png', width: '100%', height: '100%', class: 'item-image' %>
           <% end %>
 
           <div class="point left-top"></div>
