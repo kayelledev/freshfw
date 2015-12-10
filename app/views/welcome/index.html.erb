@@ -1,4 +1,4 @@
-<!-- Carousel 
+<!-- Carousel
 	================================================== -->
 <header class="intro-header">
 <!--<div class="col-full">-->
@@ -62,8 +62,9 @@
 	</div><!-- /.carousel -->
 </header>
 <br>
+
 <div class="container" id="portfolio" >
-	
+
 	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin: 30px 0 10px 0; " ><h4 class="section-heading" style="color: #333;">Featured Rooms</h4></div>
     <div class="col-md-4 col-sm-6 portfolio-item">
           <% livingroomId = Shoppe::ProductCategory.where(permalink: "living-rooms") %>
@@ -78,8 +79,8 @@
             </a>
           </div>
       <div class="col-md-4 col-sm-6 portfolio-item">
-		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>		  
-		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal"> 
+		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>
+		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal">
               <div class="portfolio-hover" >
                   <div class="portfolio-hover-content">
 					  <%= product2.name if product2.present? %>
@@ -100,7 +101,7 @@
             <%= default_image(product3) if product3.present? && default_image(product3) %>
         </a>
     </div>
-	
+
 	<br><br>
 	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%;  margin: 50px 0 10px 0;  " >
 		<h4 class="section-heading" style="color: #333;">Featured Accents</h4>
@@ -118,7 +119,7 @@
             </a>
       </div>
       <div class="col-md-4 col-sm-6 portfolio-item">
-		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>		  
+		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>
 		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal">
               <div class="portfolio-hover" >
                   <div class="portfolio-hover-content">
@@ -148,94 +149,88 @@
 	<div class="l-subsection color_dark" style="background: url(https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/OFS-Living-room.jpg)no-repeat; background-size: 100%;margin: 0 0%; color: #fff;  background-color: #000; height: 20em;"> 
         <div class="row" style="width: 100%;">
             <h2 class="section-heading" style="text-shadow: 0px 1px 5px #666; color: #fff; margin: 10px; padding: 10px; text-align: center;">How It Works</h2>
-		
-		  <div class="col-md-4" style="text-align: center; ">
+			<div class="col-md-4" style="text-align: center; ">
 			  <h3><a href="http://gofourwalls.com/shop" style="text-shadow: 0px 1px 5px #666; color: #fff;">1. Choose your room</a></h3>
 		      <p style="text-shadow: 0px 1px 5px #666; font-size: 12pt;">Pick the room in your home that needs furnishing.</p> 
 			  <p style="text-shadow: 0px 1px 5px #666; font-size: 12pt;">Whether it’s your living room or bedroom, </p>
 			  <p style="text-shadow: 0px 1px 5px #666; font-size: 12pt;">we’ve got the design for you!</p>         
-		</div>
-		<div class="col-md-4" style="text-align: center;">
-			  <h3><a href="http://gofourwalls.com/all-products" style="text-shadow: 0px 1px 5px #666; color: #fff;">2. Choose your design</a></h3>
-			  <p style="text-shadow: 0px 1px 5px #666;font-size: 12pt;">Choose the look that best suits your style.</p>
-		</div>
-		<div class="col-md-4" style="text-align: center; ">
-			  <h3><a href="http://gofourwalls.com/room-sizes/" style="text-shadow: 0px 1px 5px #666; color: #fff;">3. Choose your space</a></h3>
-		      <p style="text-shadow: 0px 1px 5px #666;font-size: 12pt;">Which option fits your needs? Small, medium or large</p>
+			</div>
+			<div class="col-md-4" style="text-align: center;">
+				  <h3><a href="http://gofourwalls.com/all-products" style="text-shadow: 0px 1px 5px #666; color: #fff;">2. Choose your design</a></h3>
+				  <p style="text-shadow: 0px 1px 5px #666;font-size: 12pt;">Choose the look that best suits your style.</p>
+			</div>
+			<div class="col-md-4" style="text-align: center; ">
+				  <h3><a href="http://gofourwalls.com/room-sizes/" style="text-shadow: 0px 1px 5px #666; color: #fff;">3. Choose your space</a></h3>
+			      <p style="text-shadow: 0px 1px 5px #666;font-size: 12pt;">Which option fits your needs? Small, medium or large</p>
+			</div>
 		</div>
 	</div>
 </section>
 
-<div class="container">
-	<section>
-		<div class="col-md-4" style="" >
-			<img src="https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/OFS-sideboard.jpg" width="100%"/>
-		</div>
-		<div class="col-md-4" style=" " >
-		    <h4 style="color: #F49224;">Convenience</h4>
-		    <p>We value excellence in the overall shopping and delivery experience. You order. We deliver. And we pick up if need to return. That's how simple it is!</p>
+<div class="container" id="portfolio" >
 
-		    <h4 style="color: #F49224;">Savings</h4>
-		    <p >We group the furniture into rooms to bring you savings in money and time! Getting individual pieces is not only costly and is time-consuming. Now you can get the entire room in a box!</p>
-
-		    <h4 style="color: #F49224;">Design</h4>
-		    <p>We curate timeless and functional furniture from established manufacturers with a reputation in quality. The rooms are put together by interior designers to ensure its functional and beautiful!</p>
-
-		</div>
-
-		<div class="col-md-4" style="" >
-			<table>
-				<tr width="100%">
-					<td>
-						<!-- Begin MailChimp Signup Form -->
-						<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
-						<style type="text/css">
-							#mc_embed_signup{background:#fff; clear:left; border-color: #F49224;}
-							/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-							   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-						</style>
-						<div id="mc_embed_signup" style="background: none; ">
-							<form action="//gofourwalls.us9.list-manage.com/subscribe/post?u=2925a3a7e8e3d72d2bf106eca&amp;id=82d02b4614" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-							    <div id="mc_embed_signup_scroll">
-									<h4 style="color: #F49224;text-align: center; text-transform: capitalize;">Get the newest designs and new offers</h4>
-									<div class="mc-field-group" style="width: 100%; ">
-										<label for="mce-EMAIL" style="color: #777;">Email Address </label>
-										<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" style="min-width: 50%;">
-									</div>
-								    <div class="clear">
-										<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="sub-btn" style="">
-									</div>
-							    </div>
-								<div id="mce-responses" class="clear" style="width: 40%; word-wrap: normal; margin-left: 30%; max-width: 60%;">
-									<div class="response" id="mce-error-response" style="display:none"></div>
-									<div class="response" id="mce-success-response" style="display:none; color: #777777;"></div>
-								</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-							    <div style="position: absolute; left: -5000px;">
-									<input type="text" name="b_2925a3a7e8e3d72d2bf106eca_82d02b4614" tabindex="-1" value="">
-								</div>
-							</form>
-						</div>
-						<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='UBPAGEID';ftypes[3]='text';fnames[4]='UBVARIANT';ftypes[4]='text';fnames[5]='UBDATE';ftypes[5]='date';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-						<!--End mc_embed_signup-->
-					</td>
-				</tr>
-				<br>
-				<tr>
-					<td style="text-align: center;">
-						<h4 style="color: #F49224;text-align: center; margin-top: 2em; ">A Proud Partner of</h4>
-						<div style="color: #F49224; font-size: 20px; display: inline; margin-left: 10px; "> 						
-							<img src="https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/onefinestay-logo.png" height="auto" width="50%" style="" alt="One Fine Stay">
-							<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Signature+Communities/Signature+Communities+Logo.png" height="auto" width="30%" style="" alt="Signature Communities">
-							<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/vandyk-logo.jpeg" height="auto" width="40%" style=" margin-left: 10px; "  alt="VANDYK">
-							<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Fit+Factory+Fitness/fit-factory-logo.jpeg" height="auto" width="50%" style=""  alt="Fit Factory Fitness">
-						
-						</div>					
-					</td>
-				</tr>
-			</table>
-		</div>
+	<div class="col-md-4" style="padding: 3px 0; " >
+		<img src="https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/OFS-sideboard.jpg" width="100%" height="auto">
+	</div>
+	<div class="col-md-4" style="" >
+          <h4>Convenience</h4>
+          <p>We value excellence in the overall shopping and delivery experience. You order. We deliver. And we pick up if need to return. That's how simple it is!</p>
+	      <h4>Savings</h4>
+          <p>We group the furniture into rooms to bring you savings in money and time! Getting individual pieces is not only costly and is time-consuming. Now you can get the entire room in a box!</p>
+          <h4>Design</h4>
+          <p>We curate timeless and functional furniture from established manufacturers with a reputation in quality. The rooms are put together by interior designers to ensure its functional and beautiful!</p>
+	</div>
 	
-	</section>
+	<div class="col-md-4" style="" >
+		<table>
+			<tr width="100%">
+				<td>
+					<!-- Begin MailChimp Signup Form -->
+					<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
+					<style type="text/css">
+						#mc_embed_signup{background:#fff; clear:left; border-color: #F49224;}
+						/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+						   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+					</style>
+					<div id="mc_embed_signup" style="background: none; ">
+						<form action="//gofourwalls.us9.list-manage.com/subscribe/post?u=2925a3a7e8e3d72d2bf106eca&amp;id=82d02b4614" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+						    <div id="mc_embed_signup_scroll">
+								<h4 style="color: #F49224;text-align: center; text-transform: capitalize;">Get the newest designs and new offers</h4>
+								<div class="mc-field-group" style="width: 100%; ">
+									<label for="mce-EMAIL" style="color: #777;">Email Address </label>
+									<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" style="min-width: 50%;">
+								</div>
+							    <div class="clear">
+									<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="sub-btn" style="">
+								</div>
+						    </div>
+							<div id="mce-responses" class="clear" style="width: 40%; word-wrap: normal; margin-left: 30%; max-width: 60%;">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none; color: #777777;"></div>
+							</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+						    <div style="position: absolute; left: -5000px;">
+								<input type="text" name="b_2925a3a7e8e3d72d2bf106eca_82d02b4614" tabindex="-1" value="">
+							</div>
+						</form>
+					</div>
+					<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='UBPAGEID';ftypes[3]='text';fnames[4]='UBVARIANT';ftypes[4]='text';fnames[5]='UBDATE';ftypes[5]='date';fnames[6]='MMERGE6';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+					<!--End mc_embed_signup-->
+				</td>
+			</tr>
+			<br>
+			<tr>
+				<td style="text-align: center;">
+					<h4 style="color: #F49224;text-align: center; margin-top: 2em; ">A Proud Partner of</h4>
+					<div style="color: #F49224; font-size: 20px; display: inline; margin-left: 10px; "> 						
+						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/onefinestay-logo.png" height="auto" width="50%" style="" alt="One Fine Stay">
+						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Signature+Communities/Signature+Communities+Logo.png" height="auto" width="30%" style="" alt="Signature Communities">
+						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/vandyk-logo.jpeg" height="auto" width="40%" style=" margin-left: 10px; "  alt="VANDYK">
+						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Fit+Factory+Fitness/fit-factory-logo.jpeg" height="auto" width="50%" style=""  alt="Fit Factory Fitness">
+					
+					</div>					
+				</td>
+			</tr>
+		</table>
+	</div>
 	
 </div>
-	

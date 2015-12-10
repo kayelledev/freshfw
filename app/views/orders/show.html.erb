@@ -1,69 +1,69 @@
 <div class="container-fluid cart-view">
-    <div class='breadcrumbs'>
-        <p>
-            <span class="active"><%= link_to 'VIEW CART', cart_path %></span>
-            <span>>></span>
-            BILLING AND SHIPPING INFO
-            <span>>></span>
-            PAYMENT
-            <span>>></span>
-            REVIEW AND CONFIRM
-        </p>
+  <div class='breadcrumbs'>
+    <p>
+      <span class="active"><%= link_to 'VIEW CART', cart_path %></span>
+      <span>>></span>
+      BILLING AND SHIPPING INFO
+      <span>>></span>
+      PAYMENT
+      <span>>></span>
+      REVIEW AND CONFIRM
+    </p>
+  </div>
+
+  <div class="row ">
+    <div class='col-md-8'>
+      <div class='shopping-cart' data-order="<%= current_order.id %>">
+        <div class='title'>
+          <p><b>SHOPPING CART</b></p>
+          <div class='row'  style='margin:0'>
+            <div class='col-md-7 col-sm-7 col-xs-4'>
+            </div>
+            <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
+              <center><span>PRICE</span></center>
+            </div>
+            <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
+              <center><span class='quantity-title'>QTY</span></center>
+            </div>
+
+            <div class='col-md-2 col-sm-2 col-xs-2'>
+            </div>
+
+            <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
+              <center><span>TOTAL</span></center>
+            </div>
+          </div>
+        </div>
+        <div class='description'>
+          <center><p>All products for a room will be delivered on one single day</p></center>
+        </div>
+        <div class='order-items-list'>
+          <% current_order.order_items.each do |item| %>
+            <div class='order-item row' id="item_<%= item.id %>" data-item="<%= item.id %>">
+              <%= render partial: 'order_item', locals: { item: item, order: current_order } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
 
-    <div class="row ">
-        <div class='col-md-8'>
-            <div class='shopping-cart' data-order="<%= current_order.id %>">
-                <div class='title'>
-                    <p><b>SHOPPING CART</b></p>
-                    <div class='row'  style='margin:0'>
-                        <div class='col-md-7 col-sm-7 col-xs-4'>
-                        </div>
-                        <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
-                            <center><span>PRICE</span></center>
-                        </div>
-                        <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
-                            <center><span class='quantity-title'>QTY</span></center>
-                        </div>
-
-                        <div class='col-md-2 col-sm-2 col-xs-2'>
-                        </div>
-
-                        <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
-                            <center><span>TOTAL</span></center>
-                        </div>
-                    </div>
-                </div>
-                <div class='description'>
-                    <center><p>All products for a room will be delivered on one single day</p></center>
-                </div>
-                <div class='order-items-list'>
-                    <% current_order.order_items.each do |item| %>
-                        <div class='order-item row' id="item_<%= item.id %>" data-item="<%= item.id %>">
-                            <%= render partial: 'order_item', locals: { item: item, order: current_order } %>
-                        </div>
-                    <% end %>
-                </div>
-            </div>
+    <div class='col-md-4'>
+      <div class='cart-order-summary'>
+        <div class='title'>
+          <p><b>ORDER SUMMARY</b></p>
         </div>
-
-        <div class='col-md-4'>
-            <div class='cart-order-summary'>
-                <div class='title'>
-                    <p><b>ORDER SUMMARY</b></p>
-                </div>
-                <div class='box'>
-                    <div class='inside-box'>
-                        <div class='info' id='order-summary-info'>
-                            <%= render 'order_summary_info', order: current_order  %>
-                        </div>
-                    </div>
-                    <center>
-                        <p>PROCEED CHECKOUT</p>
-                        <%= link_to "PROCEED TO PAYMENT", checkout_path, class: 'btn btn-default btn-lg btn-block', id: 'proceed-to-payment' %>
-                    </center>
-                </div>
+        <div class='box'>
+          <div class='inside-box'>
+            <div class='info' id='order-summary-info'>
+              <%= render 'order_summary_info', order: current_order  %>
             </div>
+          </div>
+          <center>
+            <p>PROCEED CHECKOUT</p>
+            <%= link_to "PROCEED TO PAYMENT", checkout_path, class: 'btn btn-default btn-lg btn-block', id: 'proceed-to-payment' %>
+          </center>
         </div>
+      </div>
     </div>
+  </div>
 </div>

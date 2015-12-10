@@ -594,6 +594,7 @@ pl:
         products: Produkty
         product_categories: Kategorie produktów
         delivery_services: Opcje dostawy
+        logistics: Logistics
         tax_rates: Stawki podatkowe
         users: Użytkownicy
         countries: Kraje

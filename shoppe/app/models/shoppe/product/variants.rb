@@ -13,6 +13,12 @@ module Shoppe
     # All products which are not variants
     scope :root, -> { where(:parent_id => nil) }
 
+    before_validation {
+      if self.parent
+        self.product_category_id = parent.product_category_id
+      end
+    }
+
     # If a variant is created, the base product should be updated so that it doesn't have stock control enabled
     after_save do
       if self.parent

@@ -1,0 +1,29 @@
+<div class="row">
+  <% items.each do |item|%>
+    <div class="col-md-6">
+      <div class="included-product" data-product-id='<%= item.id %>'>
+        <div class="product-list-image">
+          <%= link_to item.permalink, target:"_blank" do %>
+            <%= image_tag image_link(item, 'default_image'), class: "img-responsive product-list-image", alt: "product" %>
+          <% end %>
+        </div>
+        <div class="product-list-description" style="vertical-align: text-bottom; ">
+          <div class='product-name'>
+            <%= link_to item.permalink, target: "_blank" do %>
+              <p><%= item.name %></p>
+            <% end %>
+          </div>
+          <div class="desc">
+            <div class='product-desc'>
+              <%= item.description %>
+              <%= link_to 'more', item.permalink, class: 'readmore', target: "_blank"  %>
+            </div>
+          </div>
+          <div class='dimensions'>
+            <p><%= item.width %>"W x <%= item.depth %>"H</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

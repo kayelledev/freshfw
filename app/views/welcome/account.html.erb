@@ -32,7 +32,7 @@
       	  </td>
       	  <td><%= number_to_currency order.total %></td>
       	  <td><%= boolean_tag order.paid_in_full?, nil, :true_text => number_to_currency(order.amount_paid), :false_text => number_to_currency(order.amount_paid) %></td>
-      	  <td><%= order.created_at.strftime('%F') %></td>
+      	  <td><%= order.updated_at.strftime('%F') %></td>
         </tr>
       <% end %>
     </tbody>

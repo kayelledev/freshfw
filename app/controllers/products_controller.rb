@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   include ProductsHelper
   include ActionView::Helpers::UrlHelper
 
-  before_action :find_product, except: [:index]
+  before_action :find_product, except: [:index, :get_product]
 
   def index
     @products = Shoppe::Product.root.includes(:product_category, :variants).order(:parent_id)
@@ -13,7 +13,8 @@ class ProductsController < ApplicationController
     @items = Shoppe::Product.all
     @categories = Shoppe::ProductCategory.all
     reviewed_product = Product.find_by_permalink(params[:id])
-    current_user.reviews.create(product: reviewed_product) if current_user && ! current_user.products.include?(reviewed_product)
+    review = current_user.reviews.find_or_create_by(product: reviewed_product) if current_user
+    review.touch if review
   end
 
   def buy
@@ -28,6 +29,13 @@ class ProductsController < ApplicationController
     product.send "remove_#{params[:img_id]}!"
     product.save!
     render json: { status: 'ok', status_code: 200 }
+  end
+
+  def get_product
+    @product = Shoppe::Product.find_by(sku: params[:sku])
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

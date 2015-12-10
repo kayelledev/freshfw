@@ -1,0 +1,2280 @@
+<div class='room-inputs active-room-inputs' data-room-id='0' data-room-type='rect'>
+  <%= hidden_field_tag 'room-id', '0' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North (N)<br>South (S)</label>
+    <div class="col-sm-9 equal">
+      <input type="number" class="form-control dialog-input n-s-ft" placeholder="ft." required value="<%= full_measure( @product.width )[:ft] %>">
+      <input type="number" class="form-control dialog-input n-s-inch" placeholder="inch." required value="<%= full_measure( @product.width )[:inch] %>">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East (E)<br>West (W)</label>
+    <div class="col-sm-9 equal">
+      <input type="number" class="form-control dialog-input e-w-ft" id="e-w-ft" placeholder="ft." required value="<%= full_measure( @product.depth )[:ft] %>">
+      <input type="number" class="form-control dialog-input e-w-inch" id="e-w-inch" placeholder="inch." required value="<%= full_measure( @product.depth )[:inch] %>">
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='1' data-room-type='l'>
+  <%= hidden_field_tag 'room-id', '1' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South (S)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West (W)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='2' data-room-type='l'>
+  <%= hidden_field_tag 'room-id', '2' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North (N)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West (W)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='3' data-room-type='l'>
+  <%= hidden_field_tag 'room-id', '3' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North (N)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East (E)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='4' data-room-type='l'>
+  <%= hidden_field_tag 'room-id', '4' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East (E)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South (S)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='5' data-room-type='t'>
+  <%= hidden_field_tag 'room-id', '5' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North (N)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='6' data-room-type='t'>
+  <%= hidden_field_tag 'room-id', '6' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East (E)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='7' data-room-type='t'>
+  <%= hidden_field_tag 'room-id', '7' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South (S)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='8' data-room-type='t'>
+  <%= hidden_field_tag 'room-id', '8' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West (W)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='9' data-room-type='c'>
+  <%= hidden_field_tag 'room-id', '9' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West (W)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='10' data-room-type='c'>
+  <%= hidden_field_tag 'room-id', '10' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North (N)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='11' data-room-type='c'>
+  <%= hidden_field_tag 'room-id', '11' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East (E)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='12' data-room-type='c'>
+  <%= hidden_field_tag 'room-id', '12' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South (S)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='13' data-room-type='e'>
+  <%= hidden_field_tag 'room-id', '13' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 4 (E4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 5 (E5)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e5-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e5-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West (W)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='14' data-room-type='e'>
+  <%= hidden_field_tag 'room-id', '14' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North (N)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 4 (S4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 5 (S5)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s5-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s5-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='15' data-room-type='e'>
+  <%= hidden_field_tag 'room-id', '15' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East (E)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 4 (W4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 5 (W5)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w5-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w5-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='16' data-room-type='e'>
+  <%= hidden_field_tag 'room-id', '16' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 4 (N4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 5 (N5)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n5-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n5-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South (S)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='17' data-room-type='f'>
+  <%= hidden_field_tag 'room-id', '17' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 4 (E4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West (W)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='18' data-room-type='f'>
+  <%= hidden_field_tag 'room-id', '18' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North (N)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 4 (S4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='19' data-room-type='f'>
+  <%= hidden_field_tag 'room-id', '19' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East (E)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 4 (W4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w4-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='20' data-room-type='f'>
+  <%= hidden_field_tag 'room-id', '20' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 4 (N4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South (S)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='21' data-room-type='fl'>
+  <%= hidden_field_tag 'room-id', '21' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East (E)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 4 (W4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w4-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='22' data-room-type='fl'>
+  <%= hidden_field_tag 'room-id', '22' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 4 (N4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South (S)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='23' data-room-type='fl'>
+  <%= hidden_field_tag 'room-id', '23' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 4 (E4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West (W)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='24' data-room-type='fl'>
+  <%= hidden_field_tag 'room-id', '24' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 4 (E4)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e4-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e4-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West (W)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='25' data-room-type='cross'>
+  <%= hidden_field_tag 'room-id', '25' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='26' data-room-type='pcross'>
+  <%= hidden_field_tag 'room-id', '26' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='27' data-room-type='pcross'>
+  <%= hidden_field_tag 'room-id', '27' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 3 (E3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='28' data-room-type='pcross'>
+  <%= hidden_field_tag 'room-id', '28' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 3 (S3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='29' data-room-type='pcross'>
+  <%= hidden_field_tag 'room-id', '29' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 3 (N3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n3-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 1 (S1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>South 2 (S2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 1 (W1)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 2 (W2)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>West 3 (W3)</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
+
+<div class='room-inputs' data-room-id='30' data-room-type='o'>
+  <%= hidden_field_tag 'room-id', '30' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 1 (N1)<br>South 1 (S1)</label>
+    <div class="col-sm-9 equal">
+      <input type="number" class="form-control dialog-input n1-s1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n1-s1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 1 (E1)<br>West 1 (W1)</label>
+    <div class="col-sm-9 equal">
+      <input type="number" class="form-control dialog-input e1-w1-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e1-w1-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>North 2 (N2)<br>South 2 (S2)</label>
+    <div class="col-sm-9 equal">
+      <input type="number" class="form-control dialog-input n2-s2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input n2-s2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>East 2 (E2)<br>West 2 (W2)</label>
+    <div class="col-sm-9 equal">
+      <input type="number" class="form-control dialog-input e2-w2-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input e2-w2-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>X</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input x-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input x-inch" placeholder="inch." required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>Y</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input y-ft" placeholder="ft." required>
+      <input type="number" class="form-control dialog-input y-inch" placeholder="inch." required>
+    </div>
+  </div>
+</div>
