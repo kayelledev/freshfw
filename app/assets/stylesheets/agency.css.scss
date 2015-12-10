@@ -1000,6 +1000,7 @@ body {
 	display: inline-block;
     color: white;
 	text-align: left;
+	text-shadow: 0px 1px 5px #666;
 }
 
 .floating-text h1 {
@@ -1340,5 +1341,49 @@ p {
 .portfolio-image {
 
      width: 100%;
+}
+
+.top-nav {
+	position: absolute;
+	margin-top: -5px;
+	margin-bottom: -15px;
+	margin-left: 2%;
+	margin-right: 2%;
+	top: 0;
+	float: right;
+	
+}
+
+.carousel-inner > .item > img:hover{
+      width: 100%;
+      margin: auto;
+	  position: absolute; 
+	  z-index: 999; 
+	  -o-transform: scale(1.5,1.5); 
+	  -ms-transform: scale(1.5,1.5);
+	  -moz-transform: scale(1.5,1.5);
+	   -webkit-transform: scale(1.5,1.5);
+	   transform: scale(1.5,1.5);
+	      
+  }
+
+@media (max-width: 768px) {
+
+	.top-nav {
+		position: absolute;
+		margin-top: -5px;
+		top: 0;
+		float: right;
+	
+	}
+}
+
+/* COLOR: dark */
+
+.l-subsection.color_dark {
+
+background-color: #000;
+
+color: #fff;
 
 }
