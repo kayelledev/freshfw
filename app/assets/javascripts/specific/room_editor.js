@@ -375,8 +375,7 @@
 
         downloadURI = function(uri, name) {
           var link;
-          link = document.createElement('a');
-          link.className = 'temporaryLink';
+          link = document.getElementById('save-as-image-link');
           link.download = name;
           link.href = uri;
           if (uri) {
