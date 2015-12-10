@@ -1,13 +1,27 @@
 <div class="container-fluid sign-in-or-register">
     <div class='row title'>
         <div class='col-md-4 form-title'>
-            <center><p>SIGN IN</p></center>
+            <div class='forms-links' >
+			    <%= link_to "#", id: 'change-form' do %>
+		            <center><span style="color: #000;">SIGN IN OR REGISTER</span></center>
+		        <% end %>				
+            			
+			</div>
         </div>
         <div class='col-md-4'>
             <center><p>FACEBOOK</p></center>
+            <center><ul class="list-inline social-buttons">
+                <li><i class="fa fa-facebook fa-2x"></i>
+                </li>
+			</ul></center>
         </div>
         <div class='col-md-4'>
             <center><p>TWITTER</p></center>
+            <center><ul class="list-inline social-buttons">
+                <li><i class="fa fa-twitter fa-2x"></i>
+                </li>
+			</ul></center>
+			
         </div>
     </div>
     <div class='row'>
@@ -75,7 +89,7 @@
                 </div>
                 <div class='forms-links'>
                     <%= link_to "#", id: 'change-form' do %>
-                        <p>CREATE ACCOUNT</p>
+                        <p style="color: #f49224;">REGISTER NEW ACCOUNT</p>
                     <% end %>
 
                     <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
