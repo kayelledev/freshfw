@@ -279,14 +279,14 @@
           });
 
         //redraw image
-        $('.room-layout').on('show', function() {
-          $('.draggable').find('.item-image:visible').each(function(index) {
-            if( $(this).attr('data-redraw') !== 'true' ) {
-              controller.redrawImage( +$(this).attr('id'), $(this) );
-              $(this).attr('data-redraw', 'true');
-            }
-          });
-        });
+        // $('.room-layout').on('show', function() {
+        //   $('.draggable').find('.item-image:visible').each(function(index) {
+        //     if( $(this).attr('data-redraw') !== 'true' ) {
+        //       controller.redrawImage( +$(this).attr('id'), $(this) );
+        //       $(this).attr('data-redraw', 'true');
+        //     }
+        //   });
+        // });
 
         setPosition();
 
@@ -1015,11 +1015,11 @@
         var realItem = $('#' + itemId);
         realItem.show();
 
-        var realImage = $(realItem).find('.item-image');
-        if( realImage.attr('data-redraw') !== 'true' ) {
-          controller.redrawImage(+realImage.attr('id'), realImage);
-          realImage.attr('data-redraw', 'true');
-        }
+        // var realImage = $(realItem).find('.item-image');
+        // if( realImage.attr('data-redraw') !== 'true' ) {
+        //   controller.redrawImage(+realImage.attr('id'), realImage);
+        //   realImage.attr('data-redraw', 'true');
+        // }
 
         // restrict position
         if ( newPositionX + +realItem.width() >= +$('.editor-container').width() ) {
@@ -1421,10 +1421,66 @@
 
     }
 
-    Controller.prototype.redrawImage = function(index, img) {
-      console.log('redraw');
+    // Controller.prototype.redrawImage = function(index, img) {
+    //   console.log('redraw');
 
-      storeImageLocally = function(id, zis) {
+    //   storeImageLocally = function(id, zis) {
+    //     var cellId, dataImage, imgData;
+    //     imgData = getBase64Image(zis);
+    //     cellId = 'imgData' + id;
+    //     localStorage.setItem(cellId, imgData);
+    //     dataImage = localStorage.getItem(cellId);
+    //     zis.src = 'data:image/png;base64, ' + dataImage;
+    //   };
+
+    //   getBase64Image = function(img) {
+    //     var canvas, ctx, dataURL, i_height, i_width;
+    //     canvas = document.createElement('canvas');
+    //     i_width = img.offsetWidth;
+    //     i_height = img.offsetHeight;
+    //     canvas.width = img.width;
+    //     canvas.height = img.height;
+    //     ctx = canvas.getContext('2d');
+    //     ctx.drawImage(img, 0, 0, i_width, i_height);
+    //     dataURL = canvas.toDataURL('image/png');
+    //     return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+    //   };
+
+    //   printToFile = function() {
+    //     var c_height, c_width, div;
+    //     div = $('.room-editor-container');
+    //     c_width = div.width() + 100;
+    //     c_height = div.height();
+    //     html2canvas(div, {
+    //       onrendered: function(canvas) {
+    //         var myImage;
+    //         myImage = canvas.toDataURL('image/png');
+    //         downloadURI(myImage, 'FurniturePlan.png');
+    //       },
+    //       background: '#fff',
+    //       width: c_width,
+    //       height: c_height
+    //     });
+    //   };
+
+    //   downloadURI = function(uri, name) {
+    //     var link;
+    //     link = document.createElement('a');
+    //     link.className = 'temporaryLink';
+    //     link.download = name;
+    //     link.href = uri;
+    //     if (uri) {
+    //       link.click();
+    //     }
+    //   };
+
+    //   storeImageLocally(index, img[0]);
+
+    //   $('#save-as-image').on('click', printToFile);
+    // }
+
+    Controller.prototype.redrawImage = function() {
+      StoreImageLocally = function(id, zis) {
         var cellId, dataImage, imgData;
         imgData = getBase64Image(zis);
         cellId = 'imgData' + id;
@@ -1465,8 +1521,7 @@
 
       downloadURI = function(uri, name) {
         var link;
-        link = document.createElement('a');
-        link.className = 'temporaryLink';
+        link = document.getElementById('save-as-image-link');
         link.download = name;
         link.href = uri;
         if (uri) {
@@ -1474,9 +1529,19 @@
         }
       };
 
-      storeImageLocally(index, img[0]);
+      window.onload = function() {
 
-      $('#save-as-image').on('click', printToFile);
+
+        $('#save-as-image').on('click', function() {
+          console.log('#save-as-image');
+          var imgs;
+          imgs = $('.draggable').find('.item-image:visible');
+          imgs.each(function(index) {
+            StoreImageLocally(index, $(this)[0]);
+          });
+          printToFile();
+        });
+      };
     }
 
     /**
@@ -1496,6 +1561,7 @@
         this.setNewArea(this.$initialElenemts);
         // this.adaptArea(this.$initialElenemts);
         this.removeElement();
+        this.redrawImage();
     };
 
     $(document).ready(function() {
