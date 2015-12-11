@@ -1,15 +1,130 @@
-<div class="container">	  
-	<h2 style='padding-left: 2em; padding-top: 1em; '>Step 3 of 3: Make Payment</h2>
-  <% puts @params 
-  @order = current_order %>
-  	<%= render 'orders/final_items', :order => @order %>
-	<div class="row" style="float: right; margin-right: 10px; ">
-	<%= form_tag charges_path do %>
-	  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-	          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-	          data-description="<%=@order.first_name %>'s Order"
-	          data-amount="<%=@order.total*100%>"
-	  		data-stripeEmail="<%= @order.email_address %>"></script>  
-	<% end %>
+<div class="container-fluid cart-view">
+    <div class='breadcrumbs'>
+        <p>
+            <%= link_to 'VIEW CART', cart_path %>
+            <span>>></span>
+            <span><%= link_to 'BILLING AND SHIPPING INFO', checkout_path %></span>
+            <span class="active">>></span>
+            PAYMENT
+            <span>>></span>
+            REVIEW AND CONFIRM
+        </p>
+    </div>
+	<% puts @params 
+	@order = current_order %>
+		  <div class="row ">
+		    <div class='col-md-8'>
+		      <div class='shopping-cart' data-order="<%= current_order.id %>">
+		        <div class='title'>
+		          <p><b>SHOPPING CART</b></p>
+  	            <div class='row'  style='margin:0'>
+	              <div class='col-md-7 col-sm-7 col-xs-4'>
+	              </div>
+	              <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
+	                <center><span>PRICE</span></center>
+	              </div>
+	              <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
+	                <center><span class='quantity-title'>QTY</span></center>
+	              </div>
+
+	              <div class='col-md-2 col-sm-2 col-xs-2'>
+	              </div>
+
+	              <div class='col-md-1 col-sm-1 col-xs-2 column-name'>
+	                <center><span>TOTAL</span></center>
+	              </div>
+	            </div>
+	          </div>
+	          <div class='description'>
+	            <center><p>All products for a room will be delivered on one single day</p></center>
+	          </div>
+	          <div class='order-items-list'>
+	            <% current_order.order_items.each do |item| %>
+	              <div class='order-item row' id="item_<%= item.id %>" data-item="<%= item.id %>">
+	                <%= render partial: 'orders/order_item', locals: { item: item, order: current_order } %>
+	              </div>
+	            <% end %>
+	          </div>
+	        </div>
+		</div>
+		<div class="col-md-4">
+
+            <div class='checkout right-side-checkout'>
+	            <div class='order-summary'>
+	                <div class='title'>
+	                    <p><b>ORDER SUMMARY</b></p>
+	                </div>
+	                <div class='box'>
+	                    <div class='inside-box'>
+	                        <div class='info' id='order-summary-info'>
+	                            <%= render 'orders/order_summary_info', :order => @order %>
+	                        </div>
+	                    </div>
+						<center>
+							<div class="btn btn-default btn-lg btn-block" id="proceed-to-payment">
+								<%= form_tag charges_path do %>
+								  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+								          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+								          data-description="<%=@order.first_name %>'s Order"
+								          data-amount="<%=@order.total*100%>"
+								  		data-stripeEmail="<%= @order.email_address %>"></script>  
+								<% end %>
+							</div>
+	                    </center>
+	                </div>
+	            </div>
+			</div>
+		</div>
+		<div class="col-md-4">
+            <div class='checkout right-side-checkout'>
+  	            <div class='order-summary'>
+  	                <div class='title' style="padding-left: 10px; ">
+	  	                <p><b>BILLING ADDRESS</b></p>
+				    </div>		 			  
+	                <div class='box'>
+	                    <div class='inside-box'  style="padding: 10px; ">
+						  	<p><%= @order.first_name %> <%= @order.last_name %></p>
+							<p><%= @order.billing_address1 %>, <%= @order.billing_address4 %>,</p>
+							<p><%= @order.billing_postcode %>, <%= @order.billing_country.name %></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+              <div class='checkout right-side-checkout'>
+    	            <div class='order-summary'>
+    	                <div class='title' style="padding-left: 10px; ">
+  	  	                <p><b>SHIPPING ADDRESS</b></p>
+  				    	</div>		 			  
+	  	                <div class='box'>
+		                    <div class='inside-box' style="padding: 10px; ">
+		  		  			  	<p><%= @order.delivery_first_name%> <%= @order.delivery_last_name %></p>
+	  						  	<p><%= @order.delivery_address1%>, <%= @order.delivery_address4 %>,</p>
+	  							<p><%= @order.delivery_postcode %>, <%= @order.delivery_country.name %></p>
+							</div>
+	      			    </div>
+					</div>
+			  </div>
+		</div>
+		
+        
+        <div class='col-md-4'>
+            <div class='checkout right-side-checkout'>
+	            <div class='order-summary'>
+	                <div class='title'>
+	                    <p><b>CONTACT INFO</b></p>
+	                </div>
+	                <div class='box'>
+	                    <div class='inside-box'>
+	                        <div class='info' id='order-summary-info'>
+			                    <%= render 'orders/contact_info' %>
+	                        </div>
+	                    </div>
+					</div>
+                </div>
+            </div>
+		</div>
+		
 	</div>
 </div>
