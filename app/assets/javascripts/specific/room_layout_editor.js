@@ -873,13 +873,14 @@
               // $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
               // $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
 
+              $(this).css({
+                'width': $(this).data('width') / scaling,
+                'height': $(this).data('height') / scaling
+              });
+
               $(this).parent().css({
                 'width': $(this).data('width') / scaling,
-                'height': $(this).data('heigh') / scaling,
-                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+                'height': $(this).data('height') / scaling
               });
             });
         }

@@ -804,22 +804,22 @@
         }
 
         function newRect0() {
-          var rect0Form = $(".room-inputs[data-room-id='0']");
-          var rect0Inputs = rect0Form.find('.dialog-input');
+          var form = $(".room-inputs[data-room-id='0']");
+          var formInputs = form.find('.dialog-input');
           var inputsCount = 4;
-          var newWidthFt = +rect0Form.find('.n-s-ft').val();
-          var newWidthInch = +rect0Form.find('.n-s-inch').val();
-          var newHeightFt = +rect0Form.find('.e-w-ft').val();
-          var newHeightInch = +rect0Form.find('.e-w-inch').val();
+          var newWidthFt = +form.find('.n-s-ft').val();
+          var newWidthInch = +form.find('.n-s-inch').val();
+          var newHeightFt = +form.find('.e-w-ft').val();
+          var newHeightInch = +form.find('.e-w-inch').val();
 
           var newWidth = ( newWidthFt * 12 ) + newWidthInch;
           var newHeight = ( newHeightFt * 12 ) + newHeightInch;
 
           var scaling = newWidth / +$('.editor-container').width();
 
-          if ( !validateNumbersInForm(rect0Inputs, inputsCount) ) { return; }
+          if ( !validateNumbersInForm(formInputs, inputsCount) ) { return; }
 
-          if ( !renderFormErrors( validateNewRoomDimensions(scaling), rect0Inputs ) ) { return; }
+          if ( !renderFormErrors( validateNewRoomDimensions(newWidth, newHeight, formInputs), formInputs ) ) { return; }
 
           setNewDimensionsToArea(newWidth, newHeight);
 
@@ -840,63 +840,63 @@
           dimensionsDialog.dialog('close');
 
 
-          function validateNewRoomDimensions(scaling) {
-            var newEditorContainerWidth =  +$('.editor-container').data('width');
-            var newEditorContainerHeight =  +$('.editor-container').data('height');
-            var invalidItemWidth = 0;
-            var invalidItemHeight = 0;
+          // function validateNewRoomDimensions(scaling) {
+          //   var newEditorContainerWidth =  +$('.editor-container').data('width');
+          //   var newEditorContainerHeight =  +$('.editor-container').data('height');
+          //   var invalidItemWidth = 0;
+          //   var invalidItemHeight = 0;
 
-            // validate width and heigh of room
-            $('.' + elementsClass).each(function() {
-              var newItemWidth = $(this).data('width');
-              var newItemHeight = $(this).data('height');
+          //   // validate width and heigh of room
+          //   $('.' + elementsClass).each(function() {
+          //     var newItemWidth = $(this).data('width');
+          //     var newItemHeight = $(this).data('height');
 
-              if(newItemWidth > newEditorContainerWidth) {
-                invalidItemWidth++;
-              }
-              if (newItemHeight > newEditorContainerHeight) {
-                invalidItemHeight++;
-              }
-            });
+          //     if(newItemWidth > newEditorContainerWidth) {
+          //       invalidItemWidth++;
+          //     }
+          //     if (newItemHeight > newEditorContainerHeight) {
+          //       invalidItemHeight++;
+          //     }
+          //   });
 
-            return { invalidItemWidth: invalidItemWidth, invalidItemHeight: invalidItemHeight };
-          }
+          //   return { invalidItemWidth: invalidItemWidth, invalidItemHeight: invalidItemHeight };
+          // }
 
-          function renderFormErrors(errors) {
-            console.log(errors);
-            var invalidItemWidth = errors.invalidItemWidth;
-            var invalidItemHeight = errors.invalidItemHeight;
+          // function renderFormErrors(errors) {
+          //   console.log(errors);
+          //   var invalidItemWidth = errors.invalidItemWidth;
+          //   var invalidItemHeight = errors.invalidItemHeight;
 
-            if (invalidItemWidth > 0 || invalidItemHeight > 0) {
-              if (invalidItemWidth > 0 && invalidItemHeight === 0) {
-                $('#dialog-form-errors').html("<center><p><b>New room width is too small for the furniture included. Please enlarge it.</b></p></center");
-                $('.dialog-input-width').each(function(index) {
-                    $(this).css('border-color', '#A94442');
-                });
-                $('.dialog-input-height').each(function(index) {
-                    $(this).css('border-color', '#ccc');
-                });
+          //   if (invalidItemWidth > 0 || invalidItemHeight > 0) {
+          //     if (invalidItemWidth > 0 && invalidItemHeight === 0) {
+          //       $('#dialog-form-errors').html("<center><p><b>New room width is too small for the furniture included. Please enlarge it.</b></p></center");
+          //       $('.dialog-input-width').each(function(index) {
+          //           $(this).css('border-color', '#A94442');
+          //       });
+          //       $('.dialog-input-height').each(function(index) {
+          //           $(this).css('border-color', '#ccc');
+          //       });
 
-              } else if (invalidItemWidth === 0 && invalidItemHeight > 0) {
-                $('#dialog-form-errors').html("<center><p><b>New room depth is too small for the furniture included. Please enlarge it.</b></p></center>");
-                $('.dialog-input-width').each(function(index) {
-                    $(this).css('border-color', '#ccc');
-                });
-                $('.dialog-input-height').each(function(index) {
-                    $(this).css('border-color', '#A94442');
-                });
+          //     } else if (invalidItemWidth === 0 && invalidItemHeight > 0) {
+          //       $('#dialog-form-errors').html("<center><p><b>New room depth is too small for the furniture included. Please enlarge it.</b></p></center>");
+          //       $('.dialog-input-width').each(function(index) {
+          //           $(this).css('border-color', '#ccc');
+          //       });
+          //       $('.dialog-input-height').each(function(index) {
+          //           $(this).css('border-color', '#A94442');
+          //       });
 
-              } else if (invalidItemWidth > 0 && invalidItemHeight > 0) {
-                $('#dialog-form-errors').html("<center><p><b>New room dimensions are not enough for all the furniture included. Please, enlarge them both.</b></p></center");
-                $('.dialog-input').each(function(index) {
-                    $(this).css('border-color', '#A94442');
-                });
-              }
-              return false;
-            } else {
-              return true;
-            }
-          }
+          //     } else if (invalidItemWidth > 0 && invalidItemHeight > 0) {
+          //       $('#dialog-form-errors').html("<center><p><b>New room dimensions are not enough for all the furniture included. Please, enlarge them both.</b></p></center");
+          //       $('.dialog-input').each(function(index) {
+          //           $(this).css('border-color', '#A94442');
+          //       });
+          //     }
+          //     return false;
+          //   } else {
+          //     return true;
+          //   }
+          // }
         }
         function newL0() {
           var form = $(".room-inputs[data-room-id='1']");
@@ -3000,13 +3000,14 @@
               // $(this).parent().attr('data-x', parseFloat($(this).data('x'))/scaling);
               // $(this).parent().attr('data-y', parseFloat($(this).data('y'))/scaling);
 
+              $(this).css({
+                'width': $(this).data('width') / scaling,
+                'height': $(this).data('height') / scaling
+              });
+
               $(this).parent().css({
                 'width': $(this).data('width') / scaling,
-                'height': $(this).data('heigh') / scaling,
-                '-webkit-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-moz-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                '-ms-transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)',
-                'transform': 'translate(' + parseFloat($(this).data('x'))/scaling + 'px,' + $(this).data('y')/scaling + 'px) rotate(' + parseInt($(this).data('rotation')) +'deg)'
+                'height': $(this).data('height') / scaling
               });
             });
         }
