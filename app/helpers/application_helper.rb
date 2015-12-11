@@ -1,12 +1,12 @@
 module ApplicationHelper
   include CurrencySelection
-  #def furniture_categories
-   # return ['sofas', 'chairs', 'tables', 'storage', 'lighting', 'beds']
-  #end
+  def furniture_categories
+   return ['sofas', 'chairs', 'tables', 'storage', 'lighting', 'beds']
+  end
 
-  #def room_categories
-   # return ['living-rooms', 'bedrooms', 'dining-rooms']
-  #end
+  def room_categories
+   return ['living-rooms', 'bedrooms', 'dining-rooms']
+  end
 
   def form_errors_for(object=nil)
     render('shared/form_errors', object: object) unless object.blank?
