@@ -63,6 +63,7 @@ gem 'sidekiq'
 gem 'email_validator'
 
 group :development, :test do
+  gem 'thin'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'pry'
