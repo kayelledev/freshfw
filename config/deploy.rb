@@ -26,8 +26,8 @@ namespace :custom_tasks do
   end 
 end 
 
-after 'deploy:publishing', 'custom_tasks:permissions'
 after 'deploy:publishing', 'deploy:restart'
+after 'deploy:publishing', 'custom_tasks:permissions'
 
 namespace :deploy do
   task :restart do

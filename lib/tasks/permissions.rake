@@ -1,6 +1,7 @@
 namespace 'permissions' do
   desc "Loading all models and their related controller methods inpermissions table."
   task(:generate => :environment) do
+    puts "start task"
     arr = []
     #load all the controllers
     controllers = Dir.new("#{Rails.root}/app/controllers").entries
@@ -88,7 +89,7 @@ namespace 'permissions' do
     #     end
     #   end      
     # end
-    
+    puts "stop task"
   end
 end
 
