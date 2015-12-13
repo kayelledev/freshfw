@@ -11,20 +11,10 @@
           <p class='product-description'>
             <p><%= @product.short_description %><p>
           </p>
-          <p class='dimensions'>
-            <p><%= dimension_if_positive("Width(in)", @product.width) %><p>
-            <p><%= dimension_if_positive("Depth(in)", @product.depth) %><p>
-            <p><%= dimension_if_positive("Height(in)", @product.height) %><p>
-          </p>
-          <p>
-            <p><%= "Other Details: #{@product.other_details}" if @product.other_details.present? %></p>
-          </p>
-          <p class='dimensions'>
-            <p><%= dimension_if_positive("Seat Width(in)", @product.seat_width) %><p>
-            <p><%= dimension_if_positive("Seat Depth(in)", @product.seat_depth) %><p>
-            <p><%= dimension_if_positive("Seat Height(in)", @product.seat_height) %><p>
-            <p><%= dimension_if_positive("Arm Height(in)", @product.arm_height) %><p>
-          </p>
+		  
+          <% if !@product.is_preset %>
+          	<p><%= @product.description %></p>
+		  <% end %>
           <% if @product.has_variants? %>
             <p class='option'>Options</p>
           <% end %>
@@ -64,12 +54,12 @@
 
             </div>
             <div class="col-md-4">
-              <a href="mailto:info@gofourwalls.com" class="btn btn-second">
-                <i class="fa fa-envelope"></i>
-                Email Us
-              </a>
+              
             </div>
           </div>
+          <p class='product-description'>
+            <p>Delivery, setup and clean-up included.<p>
+          </p>
 
           <div>
             <% if root_product.has_variants? %>
@@ -109,25 +99,139 @@
       </div>
 
     </div>
+	
+	<div class="row description-area-row">
+		<div class="col-md-7" style="border-right:  1px solid grey; padding: 0 5% 0 0;">
+	        <h3><%= @product.short_description %></h3>
+	        <p><%= @product.description %></p>
+		</div>
+		<div class="col-md-5" style="padding: 0 0 0 5%;">
+            <div class="product-attribute-label">Dimensions:</div>
+            <div class="product-attribute-value">
+              <%= dimension_if_positive("Width(in)", @product.width) %><%= dimension_if_positive("		 Depth(in)", @product.depth) %><%= dimension_if_positive("		 Height(in)", @product.height) %>
+			  <p><%= "Other Details: #{@product.other_details}" if @product.other_details.present? %></p>
+	          <p class='dimensions'>
+	            <p><%= dimension_if_positive("Seat Width(in)", @product.seat_width) %><p>
+	            <p><%= dimension_if_positive("Seat Depth(in)", @product.seat_depth) %><p>
+	            <p><%= dimension_if_positive("Seat Height(in)", @product.seat_height) %><p>
+	            <p><%= dimension_if_positive("Arm Height(in)", @product.arm_height) %><p>
+	          </p>
+			</div>
+            <% @product.product_attributes.where(public: true).each do |attribure| %>
+              <% if attribure.value.present? && attribure.value!="0" %>
+                <div class="product-attribute-label">
+                <%= attribure.key %>:
+                </div>
+                <div class="product-attribute-value">
+                <%= attribure.value %>
+                </div>
+              <% end %>
+            <% end %>
+		</div>
+	</div>
+	<div class="col-full">
+	  <table width="100%">
+		  <tr >
+			  <td width="25%" style="border: 2px solid white; background-color: #F7F7F7;">
+				  <div class="product_shipping_info_content">
+					  <table width="100%">
+						  <tr>
+							  <td width="30%">
+								  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/floorplan-icon.png" style="max-width: 100%; height: auto; display: inline;"/>
+							  </td>
+							  <td width="100%">
+								  <div class="product_shipping_label">					  
+									  Layout Planning
+								  </div>
+								  <div class="product_shipping_value">
+									  Try out our room planner below.
+								  </div>
+							  </td>
+						  </tr>
+						  <tr>
+						  </tr>
+					  </table>				  
+				  </div>	
+			  </td>
+			  <td width="25%" style="border: 2px solid white;background-color: #F7F7F7;">
+				  <div class="product_shipping_info_content">
+					  <table width="100%">
+						  <tr>
+							  <td width="30%">
+								  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/estimated_delivery.png" style="max-width: 100%; height: auto; display: inline;"/>
+							  </td>
+							  <td width="100%">
+								  <div class="product_shipping_label">					  
+									  Estimated Delivery
+								  </div>
+								  <div class="product_shipping_value">
+									  This item will be delivered within 5-15 business days.
+								  </div>
+							  </td>
+						  </tr>
+						  <tr>
+						  </tr>
+					  </table>				  
+				  </div>
+			  </td>
+			  <td width="25%" style="border: 2px solid white;background-color: #F7F7F7;">
+				  <div class="product_shipping_info_content">
+					  <table width="100%">
+						  <tr>
+							  <td width="30%">
+								  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/delivery-services.png" style="max-width: 100%; height: auto; display: inline;"/>
+							  </td>
+							  <td width="100%">
+								  <div class="product_shipping_label">					  
+									  Delivery Services
+								  </div>
+								  <div class="product_shipping_value">
+									  Delivery includes furniture setup and clean-up.
+								  </div>
+							  </td>
+						  </tr>
+						  <tr>
+						  </tr>
+					  </table>				  
+				  </div>
+			  </td>
+			  <td width="25%" style="border: 2px solid white;background-color: #777;">
+				  <div class="product_shipping_info_icon">
+				  </div>
+				  <div class="product_shipping_info_content">
+					  <table width="100%">
+						  <tr>
+							  <td width="30%">
+								  <img src="https://s3.amazonaws.com/gofourwalls/globalimages/message-icon.png" style="max-width: 100%; height: auto; display: inline;"/>
+							  </td>
+							  <td width="100%">
+								  <div class="product_shipping_label"  style="color: white;">					  
+									  Have a Question?
+								  </div>
+								  <div class="product_shipping_value">
+						                <i class="fa fa-envelope" style="color: white;"></i>
+						              	<a href="mailto:info@gofourwalls.com"  style="color: white;">Email us.</a>
+								  </div>
+							  </td>
+						  </tr>
+						  <tr>
+						  </tr>
+					  </table>
+				  </div>
+			  </td>
+		  </tr>
+	  </table>
+	</div>
+	
+	<!-- To remove these once variants are fixed -->
     <div class="products-list">
       <% if @product.included_products.any? %>
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation col-md-4" class="active">
-            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-              <h4>DETAILS AND DIMENSIONS</h4>
-            </a>
-          </li>
-          <li role="presentation col-md-8">
-            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-              <h4>SHIPPING AND DELIVERY INFO</h4>
-            </a>
-          </li>
-        </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade in active" id="home">
 
             <p><%= @product.description %></p>
-
+            
+			
             <div class="product-items">
               <% root_product.variants.each do |variant| %>
                 <div class='variant' id='product_items_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>">
@@ -135,6 +239,7 @@
                 </div>
               <% end %>
             </div>
+
 
             <% if @product.is_preset %>
               <h4>LAYOUT OPTIONS</h4>
