@@ -89,6 +89,12 @@ namespace 'permissions' do
     #     end
     #   end      
     # end
+
+    guest = Role.where(name: 'guest').first_or_create
+    user = Role.where(name: 'user').first_or_create
+    Permission.where.not('subject_class LIKE ?', '%Shoppe%').each{|permission| permission.roles << user } unless user.permissions.present?
+    Permission.where.not('subject_class LIKE ?', '%Shoppe%').each{|permission| permission.roles << guest } unless guest.permissions.present?
+
     puts "stop task"
   end
 end
