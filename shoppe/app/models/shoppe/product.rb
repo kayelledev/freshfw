@@ -199,7 +199,7 @@ module Shoppe
     end
 
     def self.items_filtering(categories=nil, colors=nil, materials=nil)
-      if categories || colors || materials  
+      if categories || colors || materials
         categories = [] unless categories
         colors = [] unless colors
         materials = [] unless materials
@@ -212,8 +212,8 @@ module Shoppe
         materials = Material.order("name")
         products_categories = Product.includes(:product_category).order('shoppe_product_categories.name')
                                   .group_by { |t| t.product_category.name }
-        
-      end  
+
+      end
       products_categories
     end
 
