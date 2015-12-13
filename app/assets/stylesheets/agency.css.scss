@@ -138,14 +138,14 @@ fieldset[disabled] .btn-landing.active {
 
 .btn-xl {
     padding: 20px 40px;
-    border-color: #FED536;
+    border-color: #2d6d50;
     border-radius: 3px;
     text-transform: uppercase;
     font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 18px;
     font-weight: 700;
     color: #fff;
-    background-color: #fec503;
+    background-color: #2d6d50;
 	margin: 10px 0;
 }
 
@@ -417,7 +417,7 @@ section h1.section-subheading {
     display: block;
     position: relative;
     margin: 0 auto;
-    max-width: 400px;
+    //max-width: 400px;
 }
 
 #portfolio .portfolio-item .portfolio-link .portfolio-hover {
@@ -458,7 +458,7 @@ section h1.section-subheading {
 #portfolio .portfolio-item .portfolio-caption {
     margin: 0 auto;
     padding: 25px;
-    max-width: 400px;
+    //max-width: 400px;
     text-align: center;
     background-color: #fff;
 }
@@ -1309,9 +1309,9 @@ p {
      padding: 0.5em 0.5em;
 	 margin: 0;
 	 font-weight: 700;
-	 background-color: #F49224;
+	 background-color: #2d6d50;
 	 color: #fff;
-	 border-color: #F49224;
+	 border-color: #2d6d50;
 	 border-radius: 3px;
 	 float: left;
 	 text-transform: uppercase;
@@ -1328,9 +1328,9 @@ p {
      padding: 0 25%; 
 	 margin: 0;
 	 font-weight: 700;
-	 background-color: #F49224;
+	 background-color: #2d6d50;
 	 color: #fff;
-	 border-color: #F49224;
+	 border-color: #2d6d50;
 	 border-radius: 3px;
 	 text-transform: uppercase;
 	 
@@ -1439,3 +1439,29 @@ color: #fff;
 	color: #333;
 }
 
+.prod-cat-title{
+	color: #2d6d50; 
+	display: block; 
+	float: left; 
+	width: 100%; 
+	text-align: center;
+	font-size: 14pt;
+	font-family: 'Lato',sans-serif; 
+	text-transform: uppercase;
+}
+.prod-cat-desc{
+	color: #777; 
+	display: block; 
+	float: left; 
+	width: 100%; 
+	text-align: center;
+	font-size: 10pt;
+	text-transform: italic;
+	font-family: 'Lato',sans-serif; 
+}
+
+.email-signup-title{
+	color: #F49224;
+	text-align: center; 
+	text-transform: capitalize;
+}

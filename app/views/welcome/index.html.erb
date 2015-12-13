@@ -65,8 +65,9 @@
 
 <div class="container" id="portfolio" >
 
-	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin: 30px 0 10px 0; " ><h4 class="section-heading" style="color: #333;">Featured Rooms</h4></div>
-    <div class="col-md-4 col-sm-6 portfolio-item">
+	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%; margin: 30px 0 10px 0; " ><h4 class="section-heading" style="color: #333;">Featured Rooms</h4>
+	</div>
+    <div class="col-md-8 portfolio-item">
           <% livingroomId = Shoppe::ProductCategory.where(permalink: "living-rooms") %>
 		  <% product1= Shoppe::Product.where(product_category_id: livingroomId ).first %>
   		  <a href="<%= product_path(product1.permalink) if product1.present?  %>" class="portfolio-link" data-toggle="modal">
@@ -76,9 +77,9 @@
                     </div>
                 </div>
                 <%= default_image(product1) if product1.present? && default_image(product1) %>
-            </a>
-          </div>
-      <div class="col-md-4 col-sm-6 portfolio-item">
+          </a>
+      </div>
+      <div class="col-md-4 portfolio-item">
 		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>
 		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal">
               <div class="portfolio-hover" >
@@ -88,8 +89,6 @@
               </div>
               <%= default_image(product2) if product2.present? && default_image(product2) %>
           </a>
-        </div>
-      <div class="col-md-4 col-sm-6 portfolio-item">
          <% diningroomId = Shoppe::ProductCategory.where(permalink: "dining-rooms") %>
 		  <% product3= Shoppe::Product.where(product_category_id: diningroomId).first%>
   		  <a href="<%= product_path(product3.permalink) if product3.present? %>" class="portfolio-link" data-toggle="modal">
@@ -101,47 +100,6 @@
             <%= default_image(product3) if product3.present? && default_image(product3) %>
         </a>
     </div>
-
-	<br><br>
-	<div class="col-full" style="border-bottom: 1px solid #ccc; width: 100%;  margin: 50px 0 10px 0;  " >
-		<h4 class="section-heading" style="color: #333;">Featured Accents</h4>
-	</div>
-    <div class="col-md-4 col-sm-6 portfolio-item">
-          <% accentsId = Shoppe::ProductCategory.where(permalink: "accents") %>
-		  <% accent1= Shoppe::Product.where(product_category_id: accentsId ).first %>
-  		  <a href="<%= product_path(accent1.permalink) if accent1.present?  %>" class="portfolio-link" data-toggle="modal">
-                <div class="portfolio-hover" >
-                    <div class="portfolio-hover-content">
-  					  <%= accent1.name if accent1.present? %>
-                    </div>
-                </div>
-                <%= default_image(accent1) if accent1.present? && default_image(accent1) %>
-            </a>
-      </div>
-      <div class="col-md-4 col-sm-6 portfolio-item">
-		  <% product2= Shoppe::Product.where(product_category_id: livingroomId ).last %>
-		  <a href="<%= product_path(product2.permalink) if product2.present? %>" class="portfolio-link" data-toggle="modal">
-              <div class="portfolio-hover" >
-                  <div class="portfolio-hover-content">
-					  <%= product2.name if product2.present? %>
-                  </div>
-              </div>
-              <%= default_image(product2) if product2.present? && default_image(product2) %>
-          </a>
-	    </div>
-      <div class="col-md-4 col-sm-6 portfolio-item">
-         <% diningroomId = Shoppe::ProductCategory.where(permalink: "dining-rooms") %>
-		  <% product3= Shoppe::Product.where(product_category_id: livingroomId).first%>
-  		  <a href="<%= product_path(product3.permalink) if product3.present? %>" class="portfolio-link" data-toggle="modal">
-            <div class="portfolio-hover" >
-                <div class="portfolio-hover-content">
-				  <%= product3.name if product3.present? %>
-                </div>
-            </div>
-            <%= default_image(product3) if product3.present? && default_image(product3) %>
-        </a>
-    </div>
-	
 </div>
 
 <section >
@@ -195,7 +153,7 @@
 					<div id="mc_embed_signup" style="background: none; ">
 						<form action="//gofourwalls.us9.list-manage.com/subscribe/post?u=2925a3a7e8e3d72d2bf106eca&amp;id=82d02b4614" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 						    <div id="mc_embed_signup_scroll">
-								<h4 style="color: #F49224;text-align: center; text-transform: capitalize;">Get the newest designs and new offers</h4>
+								<h4 class="email-signup-title">Get the newest designs and new offers</h4>
 								<div class="mc-field-group" style="width: 100%; ">
 									<label for="mce-EMAIL" style="color: #777;">Email Address </label>
 									<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" style="min-width: 50%;">
@@ -220,8 +178,8 @@
 			<br>
 			<tr>
 				<td style="text-align: center;">
-					<h4 style="color: #F49224;text-align: center; margin-top: 2em; ">A Proud Partner of</h4>
-					<div style="color: #F49224; font-size: 20px; display: inline; margin-left: 10px; "> 						
+					<h4 style="color: #333;text-align: center; margin-top: 2em; ">A Proud Partner of</h4>
+					<div style="color: #333; font-size: 20px; display: inline; margin-left: 10px; "> 						
 						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/onefinestay-logo.png" height="auto" width="50%" style="" alt="One Fine Stay">
 						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Signature+Communities/Signature+Communities+Logo.png" height="auto" width="30%" style="" alt="Signature Communities">
 						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/vandyk-logo.jpeg" height="auto" width="40%" style=" margin-left: 10px; "  alt="VANDYK">
