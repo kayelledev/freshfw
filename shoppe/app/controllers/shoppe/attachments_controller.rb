@@ -1,6 +1,6 @@
 module Shoppe
   class AttachmentsController < Shoppe::ApplicationController
-    load_and_authorize_resource
+    load_and_authorize_resource :class => ' Nifty::Attachments::Attachment'
     
     def destroy
       @attachment = Nifty::Attachments::Attachment.find(params[:id])
@@ -12,10 +12,6 @@ module Shoppe
     end
   
   private
-
-  def self.non_restfull_permission
-    self.name
-  end
 
   end
 end

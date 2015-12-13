@@ -17,6 +17,9 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
     # invoke 'test_rake:test_rake'
+    within "#{current_path}" do
+      execute :rake, "permissions:generate"
+    end
   end
 end
 
