@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
   include ProductsHelper
   include ActionView::Helpers::UrlHelper
+# There is no need to add welcome controller to roles system
   # load_and_authorize_resource :class => 'WelcomeController'
 
   def index

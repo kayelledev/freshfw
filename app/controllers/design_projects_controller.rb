@@ -4,7 +4,7 @@ class DesignProjectsController < ApplicationController
                     (session[:design_project_id] && @design_project = DesignProject.find(session[:design_project_id]) )
                   }
     before_filter :check_session_contain_project, only: [:create]
-    before_filter :check_user_access, if: :design_project_present?
+    before_filter :check_user_access, if: :design_project_present
 
   def create
     @design_project = DesignProject.new(design_project_params)
@@ -32,7 +32,7 @@ class DesignProjectsController < ApplicationController
     end
   end
 
-  def design_project_present?
+  def design_project_present
     @design_project.present?
   end
 

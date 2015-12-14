@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
     if exception.try(:subject).try(:name) == "DesignProject"
       flash[:alert] = "Access to the designer portal is restricted to registered designers only. To register as a designer, contact info@gofourwalls.com"
     else
+    flash[:alert] = "Access denied. You are not authorized to access the requested page. #{exception.action} #{exception.subject.class}"
       flash[:alert] = "Access denied. You are not authorized to access the requested page."  
     end  
-    # flash[:alert] = "Access denied. You are not authorized to access the requested page. #{exception.action} #{exception.subject.name}"
     redirect_to root_path  
   end
 

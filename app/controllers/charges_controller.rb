@@ -1,6 +1,5 @@
 class ChargesController < ApplicationController
-  # load_and_authorize_resource :class => 'ChargesController'
-  authorize_resource :class => 'ChargesController'
+  load_and_authorize_resource :class => 'Payment'
   before_filter { params[:id] && @payment = @order.payments.find(params[:id]) }
 
   def helper
@@ -30,7 +29,7 @@ class ChargesController < ApplicationController
     begin
       @amount = helper.number_with_precision(@order.total*100, precision: 0)
       
-      if params[:stripeEmail]==nil
+      if params[:stripeEmail] == nil
         params[:stripeEmail]= current_order.email_address  
       end 
       
@@ -60,8 +59,8 @@ class ChargesController < ApplicationController
     end
   end 
 
-  def self.non_restfull_permission
-    nil
+  def self.permission
+    "Payment"
   end
     
 end

@@ -1,6 +1,7 @@
 namespace 'permissions' do
   desc "Loading all models and their related controller methods inpermissions table."
   task(:generate => :environment) do
+    puts "start task"
     arr = []
     #load all the controllers
     controllers = Dir.new("#{Rails.root}/app/controllers").entries
@@ -31,63 +32,70 @@ namespace 'permissions' do
       end
     end
     #load all models
-    models_arr = []
-    models =  Dir.new("#{Rails.root}/app/models").entries
-    models.each do |entry|
-      if entry =~ /^[a-z]*$/ #namescoped models
-        Dir.new("#{Rails.root}/app/models/#{entry}").entries.each do |x|
-          models_arr << "#{entry.titleize}::#{x.camelize.gsub('.rb', '')}".constantize if x =~ /rb*$/ rescue nil
-        end
-      else
-        models_arr << entry.camelize.gsub('.rb', '').constantize if entry =~ /rb*$/ rescue nil
-      end
-    end
+    # models_arr = []
+    # models =  Dir.new("#{Rails.root}/app/models").entries
+    # models.each do |entry|
+    #   if entry =~ /^[a-z]*$/ #namescoped models
+    #     Dir.new("#{Rails.root}/app/models/#{entry}").entries.each do |x|
+    #       models_arr << "#{entry.titleize}::#{x.camelize.gsub('.rb', '')}".constantize if x =~ /rb*$/ rescue nil
+    #     end
+    #   else
+    #     models_arr << entry.camelize.gsub('.rb', '').constantize if entry =~ /rb*$/ rescue nil
+    #   end
+    # end
     #load all shoppe models
-    models =  Dir.new("#{Rails.root}/shoppe/app/models/shoppe").entries
-    models.each do |entry|
-      if entry =~ /^[a-z]*$/ #namescoped models
-        Dir.new("#{Rails.root}/shoppe/app/models/shoppe/#{entry}").entries.each do |x|
-          models_arr << "#{entry.titleize}::#{x.camelize.gsub('.rb', '')}".constantize if x =~ /rb*$/ rescue nil
-        end
-      else
-        models_arr << ('Shoppe::' + entry.camelize.gsub('.rb', '')).constantize if entry =~ /rb*$/ rescue nil
+    # models =  Dir.new("#{Rails.root}/shoppe/app/models/shoppe").entries
+    # models.each do |entry|
+    #   if entry =~ /^[a-z]*$/ #namescoped models
+    #     Dir.new("#{Rails.root}/shoppe/app/models/shoppe/#{entry}").entries.each do |x|
+    #       models_arr << "#{entry.titleize}::#{x.camelize.gsub('.rb', '')}".constantize if x =~ /rb*$/ rescue nil
+    #     end
+    #   else
+    #     models_arr << ('Shoppe::' + entry.camelize.gsub('.rb', '')).constantize if entry =~ /rb*$/ rescue nil
         
-      end
-    end
+    #   end
+    # end
     arr.each do |controller|
       #only that controller which represents a model
-      if controller.permission
+      permission_name = controller.permission ? controller.permission : controller.non_restfull_permission
         # write_permission(controller.permission, 'manage') #add permission to do CRUD for every model.
-        methods = ['manage', 'read', 'create', 'update', 'destroy']
-        methods.each do |method|
-          if method =~ /^([A-Za-z\d*]+)+([\w]*)+([A-Za-z\d*]+)$/ #add_user, add_user_info, Add_user, add_User
-            write_permission(controller.permission, method)
-          end
-        end        
+        # methods = ['manage', 'read', 'create', 'update', 'destroy']
+        # methods.each do |method|
+          # if method =~ /^([A-Za-z\d*]+)+([\w]*)+([A-Za-z\d*]+)$/ #add_user, add_user_info, Add_user, add_User
+            # write_permission(controller.permission, method)
+          # end
+        # end        
       # non-restfull controllers 
-      elsif controller.non_restfull_permission
+      # elsif controller.non_restfull_permission
         #create a universal permission for that model. eg "manage User" will allow all actions on User model.
-        write_permission(controller.non_restfull_permission, 'manage') #add permission to do CRUD for every model.
+      if permission_name && (! permission_name.include? 'ApplicationController')
+        write_permission(permission_name, 'manage') #add permission to do CRUD for every model.
         all_methods = controller.public_instance_methods(false).map { |m| m.to_s }
         params_methods = all_methods.grep /param/
         methods = all_methods - params_methods
         methods.each do |method|
           if method =~ /^([A-Za-z\d*]+)+([\w]*)+([A-Za-z\d*]+)$/ 
-            write_permission(controller.non_restfull_permission, method)
+            write_permission(permission_name, method)
           end
         end
       end
     end
 
-    models_arr.each do |model|
-      methods = ['manage', 'read', 'create', 'update', 'destroy']
-      methods.each do |method|
-        if method =~ /^([A-Za-z\d*]+)+([\w]*)+([A-Za-z\d*]+)$/ 
-          write_permission(model.name, method)
-        end
-      end      
-    end
-    
+    # models_arr.each do |model|
+    #   methods = ['manage', 'read', 'create', 'update', 'destroy']
+    #   methods.each do |method|
+    #     if method =~ /^([A-Za-z\d*]+)+([\w]*)+([A-Za-z\d*]+)$/ 
+    #       write_permission(model.name, method)
+    #     end
+    #   end      
+    # end
+
+    guest = Role.where(name: 'guest').first_or_create
+    user = Role.where(name: 'user').first_or_create
+    Permission.where.not('subject_class LIKE ?', '%Shoppe%').each{|permission| permission.roles << user } unless user.permissions.present?
+    Permission.where.not('subject_class LIKE ?', '%Shoppe%').each{|permission| permission.roles << guest } unless guest.permissions.present?
+
+    puts "stop task"
   end
 end
 

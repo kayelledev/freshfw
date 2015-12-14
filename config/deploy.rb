@@ -12,11 +12,26 @@ set :linked_dirs, %w{log tmp/pids public/uploads public/assets public/system pub
 
 set :sidekiq_config, -> { File.join(current_path, 'config', 'sidekiq.yml') }
 
+# Auto generation permissions table
+namespace :custom_tasks do 
+  desc "Generate permission"
+  task :permissions do 
+  	on roles(:app) do
+  	  within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "permissions:generate"
+        end
+      end
+    end
+  end 
+end 
+
 after 'deploy:publishing', 'deploy:restart'
+after 'deploy:publishing', 'custom_tasks:permissions'
+
 namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
-    # invoke 'test_rake:test_rake'
   end
 end
 
