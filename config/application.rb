@@ -39,7 +39,7 @@ module FourWalls
 
         # default state and country
         config.country = 'Canada'
-        config.state_code = 'Ontario'
+        config.state_code = 'ON'
 
         unless Rails.env.development?
             if ENV['S3_Access_Key'].nil? || ENV['S3_Access_Key'].nil? || ENV['S3_Access_Key'].nil?
