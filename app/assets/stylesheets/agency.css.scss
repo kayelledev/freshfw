@@ -1389,56 +1389,6 @@ color: #fff;
 
 }
 
-.product_shipping_label{
-	font-family: "Didot 06 A","Didot 06 B";
-	padding: 10px 0 0px 0; 
-	letter-spacing: 1px;
-	line-height: 1.4;
-	font-weight: 300;
-	color: black;
-}
-
-.product_shipping_value{
-	font-family: 'Lato',sans-serif; 
-	letter-spacing: 1px;
-	padding: 10px 0 10px 0; 
-	font-size: 10pt;
-	line-height: 1;
-	font-weight: 200;
-	color: #333;
-}
-.product_shipping_info_content{
-	width: 80%;
-}
-
-.description-area-row{
-	background-color: #f9f9f9;
-	text-align: left;
-	padding: 5%;
-	display: block;
-}
-
-.product-attribute-label{
-	display: block;
-	font-family: "Didot 06 A","Didot 06 B";
-	padding: 0.5em 0 0 0; 
-	letter-spacing: 1px;
-	line-height: 1.4;
-	font-weight: 300;
-	color: black;
-	
-}
-.product-attribute-value{
-	display: block;	
-	font-family: 'Lato',sans-serif; 
-	letter-spacing: 1px;
-	padding: 0.5em 0 1em 0; 
-	font-size: 10pt;
-	line-height: 1;
-	font-weight: 200;
-	color: #333;
-}
-
 .prod-cat-title{
 	color: #2d6d50; 
 	display: block; 
@@ -1461,7 +1411,7 @@ color: #fff;
 }
 
 .email-signup-title{
-	color: #F49224;
+	color: #2d6d50;
 	text-align: center; 
 	text-transform: capitalize;
 }
