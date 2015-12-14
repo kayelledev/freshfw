@@ -11,11 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20151118133034) do
+=======
 ActiveRecord::Schema.define(version: 20153002432638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+>>>>>>> fbc796274369f471cdab992362e2ceb391e2da4c
 
   create_table "items", force: :cascade do |t|
     t.string   "item_sku"
@@ -82,16 +86,26 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.string  "province"
   end
 
+<<<<<<< HEAD
+  add_index "shoppe_cities", ["country_id"], name: "index_shoppe_cities_on_country_id"
+=======
   add_index "shoppe_cities", ["country_id"], name: "index_shoppe_cities_on_country_id", using: :btree
+>>>>>>> fbc796274369f471cdab992362e2ceb391e2da4c
 
   create_table "shoppe_cities_zones", force: :cascade do |t|
     t.integer "city_id"
     t.integer "zone_id"
   end
 
+<<<<<<< HEAD
+  add_index "shoppe_cities_zones", ["city_id", "zone_id"], name: "index_shoppe_cities_zones_on_city_id_and_zone_id", unique: true
+  add_index "shoppe_cities_zones", ["city_id"], name: "index_shoppe_cities_zones_on_city_id"
+  add_index "shoppe_cities_zones", ["zone_id"], name: "index_shoppe_cities_zones_on_zone_id"
+=======
   add_index "shoppe_cities_zones", ["city_id", "zone_id"], name: "index_shoppe_cities_zones_on_city_id_and_zone_id", unique: true, using: :btree
   add_index "shoppe_cities_zones", ["city_id"], name: "index_shoppe_cities_zones_on_city_id", using: :btree
   add_index "shoppe_cities_zones", ["zone_id"], name: "index_shoppe_cities_zones_on_zone_id", using: :btree
+>>>>>>> fbc796274369f471cdab992362e2ceb391e2da4c
 
   create_table "shoppe_colors", force: :cascade do |t|
     t.string   "name"
@@ -231,6 +245,47 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer  "user_id"
   end
 
+  create_table "shoppe_design_projects", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shoppe_freight_companies", force: :cascade do |t|
+    t.string "name"
+    t.string "dc"
+    t.string "website"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_freight_companies_zones", force: :cascade do |t|
+    t.integer "freight_company_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_freight_companies_zones", ["freight_company_id", "zone_id"], name: "freight_company_zone_index", unique: true
+  add_index "shoppe_freight_companies_zones", ["freight_company_id"], name: "index_shoppe_freight_companies_zones_on_freight_company_id"
+  add_index "shoppe_freight_companies_zones", ["zone_id"], name: "index_shoppe_freight_companies_zones_on_zone_id"
+
+  create_table "shoppe_freight_routes", force: :cascade do |t|
+    t.integer "travel_days"
+    t.integer "freight_company_id"
+    t.integer "zone_id"
+    t.integer "suppliers_zone_id"
+  end
+
+  add_index "shoppe_freight_routes", ["freight_company_id"], name: "index_shoppe_freight_routes_on_freight_company_id"
+  add_index "shoppe_freight_routes", ["suppliers_zone_id"], name: "index_shoppe_freight_routes_on_suppliers_zone_id"
+  add_index "shoppe_freight_routes", ["zone_id"], name: "index_shoppe_freight_routes_on_zone_id"
+
+  create_table "shoppe_import_logs", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "finish_time"
+    t.string   "filename"
+    t.integer  "import_status"
+    t.text     "log_errors"
+    t.integer  "user_id"
+  end
+
   create_table "shoppe_included_products", force: :cascade do |t|
     t.integer "parent_product_id"
     t.integer "included_product_id"
@@ -248,9 +303,15 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer "zone_id"
   end
 
+<<<<<<< HEAD
+  add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id", "zone_id"], name: "last_mile_company_zone_index", unique: true
+  add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id"], name: "index_shoppe_last_mile_companies_zones_on_last_mile_company_id"
+  add_index "shoppe_last_mile_companies_zones", ["zone_id"], name: "index_shoppe_last_mile_companies_zones_on_zone_id"
+=======
   add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id", "zone_id"], name: "last_mile_company_zone_index", unique: true, using: :btree
   add_index "shoppe_last_mile_companies_zones", ["last_mile_company_id"], name: "index_shoppe_last_mile_companies_zones_on_last_mile_company_id", using: :btree
   add_index "shoppe_last_mile_companies_zones", ["zone_id"], name: "index_shoppe_last_mile_companies_zones_on_zone_id", using: :btree
+>>>>>>> fbc796274369f471cdab992362e2ceb391e2da4c
 
   create_table "shoppe_materials", force: :cascade do |t|
     t.string   "name"
@@ -434,10 +495,17 @@ ActiveRecord::Schema.define(version: 20153002432638) do
     t.integer  "supplier_id"
   end
 
+<<<<<<< HEAD
+  add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id"
+  add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink"
+  add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id"
+  add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku"
+=======
   add_index "shoppe_products", ["parent_id"], name: "index_shoppe_products_on_parent_id", using: :btree
   add_index "shoppe_products", ["permalink"], name: "index_shoppe_products_on_permalink", using: :btree
   add_index "shoppe_products", ["product_category_id"], name: "index_shoppe_products_on_product_category_id", using: :btree
   add_index "shoppe_products", ["sku"], name: "index_shoppe_products_on_sku", using: :btree
+>>>>>>> fbc796274369f471cdab992362e2ceb391e2da4c
 
   create_table "shoppe_products_colors", force: :cascade do |t|
     t.integer  "product_id"
@@ -519,6 +587,23 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_suppliers_zones", ["supplier_id"], name: "index_shoppe_suppliers_zones_on_supplier_id", using: :btree
   add_index "shoppe_suppliers_zones", ["zone_id"], name: "index_shoppe_suppliers_zones_on_zone_id", using: :btree
 
+  create_table "shoppe_suppliers", force: :cascade do |t|
+    t.string "warehouse"
+    t.string "name"
+    t.string "website"
+    t.string "prime"
+    t.text   "notes"
+  end
+
+  create_table "shoppe_suppliers_zones", force: :cascade do |t|
+    t.integer "supplier_id"
+    t.integer "zone_id"
+  end
+
+  add_index "shoppe_suppliers_zones", ["supplier_id", "zone_id"], name: "index_shoppe_suppliers_zones_on_supplier_id_and_zone_id", unique: true
+  add_index "shoppe_suppliers_zones", ["supplier_id"], name: "index_shoppe_suppliers_zones_on_supplier_id"
+  add_index "shoppe_suppliers_zones", ["zone_id"], name: "index_shoppe_suppliers_zones_on_zone_id"
+
   create_table "shoppe_tax_rates", force: :cascade do |t|
     t.string   "name"
     t.decimal  "rate",         precision: 8, scale: 2
@@ -551,6 +636,10 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   end
 
   add_index "shoppe_users", ["email_address"], name: "index_shoppe_users_on_email_address", using: :btree
+
+  create_table "shoppe_zones", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "shoppe_zones", force: :cascade do |t|
     t.string "name"
