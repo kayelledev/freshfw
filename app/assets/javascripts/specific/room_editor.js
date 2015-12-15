@@ -128,9 +128,12 @@
         var scaling = parseFloat(this.$holder.data('width')) / this.$holder.width();
         console.log(this.$holder.data('width'))
         $('.editor-container').height($('.editor-container').data('height') / scaling);
+        $('.room-planner-intro').height($('.editor-container').height());
         // change editor height line
         $('.editor-height').height($('.editor-container').height());
         $('.editor-height img').height($('.editor-container').height());
+        // change the intro height
+        $('.room-planner-intro').height($('.editor-container').height() + 153);
 
         // init draggable
         interact('.' + elementsClass).draggable({

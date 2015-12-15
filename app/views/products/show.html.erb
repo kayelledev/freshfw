@@ -109,22 +109,23 @@
     <% end %>
   </div>
 
-  <div class="col-full">
+  <div class="col-full margin-bottom20">
     <%= render 'delivery_info_bar' %>
   </div>
 
   <% if @product.is_preset %>
-    <div class="col-full">
+    <div class="col-full asTallAsChild">
       <div class="col-md-8">
-        <h3>Room Planner</h3>
+        <h3 class="margin-top40">Room Planner</h3>
         <div class='room-editor-container' style="margin: 0 auto; clear: both;">
           <%= render 'shared/room_editor', product: @product %>
         </div>
-        <center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %>
-          <br><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %>
+        <center>
+          <%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %>
+          <%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %>
         </center>
        </div>
-       <div class="col-md-4">
+       <div class="col-md-4 asHighAsDnd">
          <div class="room-planner-intro">
            <h3>How to use the room planner?</h3>
            <ul>

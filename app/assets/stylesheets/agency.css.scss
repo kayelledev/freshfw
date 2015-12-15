@@ -1090,7 +1090,7 @@ p {
 }
 
 .included-product:hover {
-   border: 4px solid #F49224;
+   border: 4px solid #2d6d50;
 }
 
 .active-product {
@@ -1419,4 +1419,16 @@ color: #fff;
 	color: #2d6d50;
 	text-align: center; 
 	text-transform: capitalize;
+}
+.margin-top40{
+    margin-top: 40px;
+}
+.margin-bottom20{
+    margin-bottom: 20px;
+}
+.asTallAsChild{
+    overflow: hidden;
+}
+.asHighAsDnd{
+    height: 100%;
 }
