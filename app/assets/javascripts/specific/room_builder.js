@@ -14,11 +14,11 @@ $(document).ready(function() {
       $('.layout-submit-room').css('display', 'block');
       $('.room-layout').addClass('active-tab');
       $('.room-layout').trigger('show');
-    
+
     } else if ( $(this).attr('id') === 'furniture-board-tab' ) {
       $('.board-submit-room').css('display', 'block');
       $('.furniture-board').addClass('active-tab');
-      }
+    }
   });
 
 
@@ -67,9 +67,5 @@ $(document).ready(function() {
   //     };
   //   })
   // };
-=======
-    }
-  });
->>>>>>> master
 });
 

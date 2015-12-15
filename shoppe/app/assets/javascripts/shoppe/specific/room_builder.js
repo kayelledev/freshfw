@@ -67,7 +67,5 @@ $(document).ready(function() {
   //     };
   //   })
   // };
-=======
->>>>>>> master
 });
 
