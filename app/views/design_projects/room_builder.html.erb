@@ -1,8 +1,9 @@
 <% content_for :custom_scripts do %>
+    <%= javascript_include_tag "specific/room_builder.js" %>
     <%= javascript_include_tag "specific/selected_furniture.js" %>
     <%= javascript_include_tag "specific/room_layout_editor.js" %>
     <%= javascript_include_tag "specific/furniture_board_editor.js" %>
-    <%= javascript_include_tag "specific/room_builder.js" %>
+
 <% end %>
 <main class='room-builder'>
     <section class="main-tabs">
