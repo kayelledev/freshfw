@@ -11,10 +11,10 @@
           <p class='product-description'>
             <p><%= @product.short_description %><p>
           </p>
-		  
+
           <% if !@product.is_preset %>
-          	<p><%= @product.description %></p>
-		  <% end %>
+            <p><%= @product.description %></p>
+      <% end %>
           <% if @product.has_variants? %>
             <p class='option'>Options</p>
           <% end %>
@@ -54,10 +54,10 @@
 
             </div>
             <div class="col-md-4">
-              
+
             </div>
           </div>
-          
+
           <div>
             <% if root_product.has_variants? %>
               <% root_product.variants.each do |variant| %>
@@ -93,12 +93,12 @@
       </div>
 
     </div>
-	<div class="row description-area-row">
-	    <%= render 'product_description_area', product: @product %>	
-	</div>
-	
+  <div class="row description-area-row">
+      <%= render 'product_description_area', product: @product %>
+  </div>
+
     <div class="products-list">
-		<% if @product.included_products.any? %>
+    <% if @product.included_products.any? %>
             <div class="product-items">
               <% root_product.variants.each do |variant| %>
                 <div class='variant' id='product_items_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>">
@@ -106,111 +106,37 @@
                 </div>
               <% end %>
             </div>
-		<% end %>
-	</div>
-	
-	<div class="col-full">
-		<%= render 'delivery_info_bar' %>
-	</div>
-
-    <% if @product.is_preset %>
-		<div class="col-full">
-			<div class="col-md-8">
-				<h3>Room Planner</h3>
-				<div class='room-editor-container' style="margin: 0 auto; clear: both;">
-					<%= render 'shared/room_editor', product: @product %>
-				</div>
-				<center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %>
-					<br><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %>
-				</center>
-			 </div>
-			 <div class="col-md-4">
-				 <div class="room-planner-intro">
-					 <h3>How to use the room planner?</h3>
-					 <ul>
-						 <li>Drag and drop to move and rotate furniture</li>
-						 <li>Overlapping furniture is possible and is indicated by a red box</li>
-						 <li>Change the shape and dimensions of the room by clicking 'Set Dimensions'</li>
-						 <li>Save the layout as an image anytime!</li>
-					 </ur>
-				 </div>
-			 </div>
-		</div>
-	<% end %>
-	
-	
-	<!-- To remove these once variants are fixed -->
-    <div class="products-list">
-      <% if @product.included_products.any? %>
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active" id="home">
-			
-            <div class="product-items">
-              <% if root_product.has_variants? %>
-                <% root_product.variants.each do |variant| %>
-                  <div class='variant' id='product_items_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>">
-                    <%= render partial: 'product_items', locals: { items: variant.included_products } %>
-                  </div>
-                <% end %>
-              <% else %>
-                <div class='variant'>
-                  <%= render partial: 'product_items', locals: { items: root_product.included_products } %>
-                </div>
-              <% end %>
-            </div>
-
-
-            <% if @product.is_preset %>
-              <h4>LAYOUT OPTIONS</h4>
-              <center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %></center>
-              <div class='room-editor-container' style="margin: 0 auto; clear: both;">
-                <%= render 'shared/room_editor', product: @product %>
-              </div>
-              <center><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %>
-              <%= link_to "save-as-image-link" , "" , id: 'save-as-image-link' ,class: "invisible" %>
-              </center>
-             <% end %>
-          </div>
-          <div role="tabpanel" class="tab-pane fade  col-md-6" id="profile">
-            <% @product.product_attributes.where(public: true).each do |attribure| %>
-              <% if attribure.value.present? && attribure.value!="0" %>
-                <div class="col-md-3">
-                <%= attribure.key %>:
-                </div>
-                <div class="col-md-7">
-                <%= attribure.value %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-      <% else %>
-        <% if @product.product_attributes.where(public: true).present? %>
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation col-md-8" class="active">
-              <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" class='active' aria-expanded="true">
-                <h2>SHIPPING AND DELIVERY INFO</h2>
-              </a>
-            </li>
-            <div class="tab-content" style="margin-top: 100px;">
-              <div role="tabpanel" class="tab-pane fade active in col-md-6" id="profile">
-                <% @product.product_attributes.where(public: true).each do |attribure| %>
-                  <% if attribure.value.present? && attribure.value!="0" %>
-                    <div class="col-md-3">
-                    <%= attribure.key %>:
-                    </div>
-                    <div class="col-md-7">
-                    <%= attribure.value %>
-                    </div>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
-          </ul>
-        <% end %>
-      <% end %>
-    </div>
+    <% end %>
   </div>
+
+  <div class="col-full">
+    <%= render 'delivery_info_bar' %>
+  </div>
+
+  <% if @product.is_preset %>
+    <div class="col-full">
+      <div class="col-md-8">
+        <h3>Room Planner</h3>
+        <div class='room-editor-container' style="margin: 0 auto; clear: both;">
+          <%= render 'shared/room_editor', product: @product %>
+        </div>
+        <center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %>
+          <br><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %>
+        </center>
+       </div>
+       <div class="col-md-4">
+         <div class="room-planner-intro">
+           <h3>How to use the room planner?</h3>
+           <ul>
+             <li>Drag and drop to move and rotate furniture</li>
+             <li>Overlapping furniture is possible and is indicated by a red box</li>
+             <li>Change the shape and dimensions of the room by clicking 'Set Dimensions'</li>
+             <li>Save the layout as an image anytime!</li>
+           </ur>
+         </div>
+       </div>
+    </div>
+  <% end %>
 </div>
 
 <script>
