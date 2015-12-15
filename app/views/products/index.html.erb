@@ -2,7 +2,8 @@
   <br>
   <% @products.each do |category, products| %>
       <% if category.parent_id != nil && Shoppe::ProductCategory.find_by_permalink('rooms').try(:id) == category.parent_id %>
-		<h3 style="color: #333; display: block; float: left; width: 100%;" ><%=  category.name.upcase %></h3>
+		<h3 class="prod-cat-title" ><%=  category.name %></h3>
+		<p class="prod-cat-desc" ><%=  category.description %></p>
 		<ul>
 		  <% products.each do |product| %>
 		    <div class="col-md-4 portfolio-item">

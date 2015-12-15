@@ -19,9 +19,9 @@
 }
 
 .carousel-indicators .carousel-indicators-image {
-    height: 100px;
+    height: 70px;
     max-width: auto;
-    width: 150px;
+    width: 100px;
 }
 P
 .product-details .row .col-md-4 .product-info p.option {
@@ -84,8 +84,8 @@ P
 }
 
 .product-details .row .col-md-4 .product-info .buttons .col-md-8 .btn {
-    background-color: #F49224;
-    border-color: #F49224;
+    background-color: #2d6d50;
+    border-color: #2d6d50;
 }
 
 .included-product {
@@ -110,7 +110,8 @@ P
 
 .product-name a {
     color: #777777;
-    text-transform: uppercase;
+    text-transform: capitalize;
+	font-family: "Didot 06 A","Didot 06 B";
 }
 
 .product-name a:hover {
@@ -137,3 +138,74 @@ img {
     height: auto;
 }
 */
+
+
+.product_shipping_label{
+	font-family: "Didot 06 A","Didot 06 B";
+	padding: 10px 0 0px 0; 
+	letter-spacing: 1px;
+	line-height: 1.4;
+	font-weight: 300;
+	color: black;
+}
+
+.product_shipping_value{
+	font-family: 'Lato',sans-serif; 
+	letter-spacing: 1px;
+	padding: 10px 0 10px 0; 
+	font-size: 10pt;
+	line-height: 1.4;
+	font-weight: 200;
+	color: #333;
+}
+.product_shipping_info_content{
+	width: 80%;
+}
+
+.description-area-row{
+	background-color: #f9f9f9;
+	text-align: left;
+	padding: 5%;
+	display: block;
+}
+
+.product-attribute-label{
+	display: block;
+	font-family: "Didot 06 A","Didot 06 B";
+	padding: 0.5em 0 0 0; 
+	letter-spacing: 1px;
+	line-height: 1.4;
+	font-weight: 300;
+	color: black;
+	
+}
+.product-attribute-value{
+	display: block;	
+	font-family: 'Lato',sans-serif; 
+	letter-spacing: 1px;
+	padding: 0.5em 0 1em 0; 
+	font-size: 10pt;
+	line-height: 1;
+	font-weight: 200;
+	color: #333;
+}
+
+.room-planner-intro{
+	background-color: #f9f9f9;
+	text-align: left;
+	line-height: 1;
+	padding: 5%;
+	display: block;
+	font-family: 'Lato',sans-serif; 
+	font-size: 10pt;
+	letter-spacing: 1px;
+}
+
+.product-headings{
+	font-family: "Didot 06 A","Didot 06 B";
+	font-size: 14pt;
+	line-height: 2;
+	font-weight: 400;
+	color: black;
+	
+}
