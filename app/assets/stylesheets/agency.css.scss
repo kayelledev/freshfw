@@ -6,7 +6,11 @@
 
 body {
     overflow-x: hidden;
-    font-family: 'roboto_condensedregular', sans-serif !important;
+	font-family: 'Lato',sans-serif !important;
+	letter-spacing: 1px;
+	font-size: 10pt;
+	line-height: 1;
+	font-weight: 200;
 }
 
 h1 {
@@ -16,7 +20,8 @@ h2 {
     font-size: 16px
 }
 h3 {
-    font-size: 14px
+    font-size: 14px;
+	font-family: "Didot 06 A","Didot 06 B";
 }
 
 .text-muted {
@@ -138,14 +143,14 @@ fieldset[disabled] .btn-landing.active {
 
 .btn-xl {
     padding: 20px 40px;
-    border-color: #FED536;
+    border-color: #2d6d50;
     border-radius: 3px;
     text-transform: uppercase;
     font-family: 'roboto_condensedregular', sans-serif !important;
     font-size: 18px;
     font-weight: 700;
     color: #fff;
-    background-color: #fec503;
+    background-color: #2d6d50;
 	margin: 10px 0;
 }
 
@@ -154,9 +159,9 @@ fieldset[disabled] .btn-landing.active {
 .btn-xl:active,
 .btn-xl.active,
 .open .dropdown-toggle.btn-xl {
-    border-color: #FED536;
+    border-color: #fec503;
     color: #fff;
-    background-color: #FED536;
+    background-color: #fec503;
 }
 
 .btn-xl:active,
@@ -417,7 +422,7 @@ section h1.section-subheading {
     display: block;
     position: relative;
     margin: 0 auto;
-    max-width: 400px;
+    //max-width: 400px;
 }
 
 #portfolio .portfolio-item .portfolio-link .portfolio-hover {
@@ -458,7 +463,7 @@ section h1.section-subheading {
 #portfolio .portfolio-item .portfolio-caption {
     margin: 0 auto;
     padding: 25px;
-    max-width: 400px;
+    //max-width: 400px;
     text-align: center;
     background-color: #fff;
 }
@@ -1074,7 +1079,7 @@ p {
     /*margin-bottom: 35px;*/
     margin-top: 1em;
     margin-right: 1px;
-    font-family: 'roboto_condensedregular', sans-serif !important;
+	font-family: 'Lato',sans-serif !important;
     font-weight: 400;
     letter-spacing: 1px;
     color: #777;
@@ -1102,8 +1107,9 @@ p {
       margin: auto;
   }
 #product-gallery {
-  border-left: 1px solid grey;
+  border-left: 1px solid white;
   padding-left: 0px;
+  padding-top: 1.5em;
 }
 #product-gallery h2 {
     font-size: 16px;
@@ -1309,9 +1315,9 @@ p {
      padding: 0.5em 0.5em;
 	 margin: 0;
 	 font-weight: 700;
-	 background-color: #F49224;
+	 background-color: #2d6d50;
 	 color: #fff;
-	 border-color: #F49224;
+	 border-color: #2d6d50;
 	 border-radius: 3px;
 	 float: left;
 	 text-transform: uppercase;
@@ -1328,9 +1334,9 @@ p {
      padding: 0 25%;
 	 margin: 0;
 	 font-weight: 700;
-	 background-color: #F49224;
+	 background-color: #2d6d50;
 	 color: #fff;
-	 border-color: #F49224;
+	 border-color: #2d6d50;
 	 border-radius: 3px;
 	 text-transform: uppercase;
 
@@ -1351,20 +1357,20 @@ p {
 	margin-right: 2%;
 	top: 0;
 	float: right;
-	
+
 }
 
 .carousel-inner > .item > img:hover{
       width: 100%;
       margin: auto;
-	  position: absolute; 
-	  z-index: 999; 
-	  -o-transform: scale(1.5,1.5); 
+	  position: absolute;
+	  z-index: 999;
+	  -o-transform: scale(1.5,1.5);
 	  -ms-transform: scale(1.5,1.5);
 	  -moz-transform: scale(1.5,1.5);
 	   -webkit-transform: scale(1.5,1.5);
 	   transform: scale(1.5,1.5);
-	      
+
   }
 
 @media (max-width: 768px) {
@@ -1374,7 +1380,7 @@ p {
 		margin-top: -5px;
 		top: 0;
 		float: right;
-	
+
 	}
 }
 
@@ -1386,4 +1392,31 @@ background-color: #000;
 
 color: #fff;
 
+}
+
+.prod-cat-title{
+	color: #2d6d50; 
+	display: block; 
+	float: left; 
+	width: 100%; 
+	text-align: center;
+	font-size: 14pt;
+	font-family: 'Lato',sans-serif; 
+	text-transform: uppercase;
+}
+.prod-cat-desc{
+	color: #777; 
+	display: block; 
+	float: left; 
+	width: 100%; 
+	text-align: center;
+	font-size: 10pt;
+	text-transform: italic;
+	font-family: 'Lato',sans-serif; 
+}
+
+.email-signup-title{
+	color: #2d6d50;
+	text-align: center; 
+	text-transform: capitalize;
 }

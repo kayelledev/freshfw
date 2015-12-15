@@ -4,6 +4,7 @@
     <%= javascript_include_tag "specific/furniture_board_editor.js" %>
     <%= javascript_include_tag "specific/room_builder.js" %>
 <% end %>
+
 <main class='room-builder'>
     <section class="main-tabs">
         <div class="l-wrapper">
@@ -20,13 +21,18 @@
             <a class="subtabs__one-tab" data-appearer="furniture-board" href="#" id='furniture-board-tab'>FURNITURE BOARD</a>
 
             <%= button_tag 'Submit Room', class: "subtabs__btn submit-room-btn layout-submit-room", style: "display: none", data: { url: "#{designer_portal_layout_submit_room_path}" } %>
+<<<<<<< HEAD
             <%#= button_tag 'Save Layout', class: "subtabs__btn room-layout-btn save-layout", style: "display: none", data: { url: "#{designer_portal_save_room_layout_path}" } %>
 
             <%= button_tag 'Submit Room', class: "subtabs__btn submit-room-btn board-submit-room", style: "display: none", data: { url: "#{designer_portal_board_submit_room_path}" } %>
             <%#= button_tag 'Save Board', class: "subtabs__btn furniture-board-btn save-board", style: "display: none", data: { url: "#{designer_portal_save_furniture_board_path}" } %>
+=======
+
+            <%= button_tag 'Submit Room', class: "subtabs__btn submit-room-btn board-submit-room", style: "display: none", data: { url: "#{designer_portal_board_submit_room_path}" } %>
+>>>>>>> master
 
         </div>
-        <div id="selected-furniture" class="js-tabs-block selected-furniture active-tab" data-project-id="<%= @design_project.id %>">
+         <div id="selected-furniture" class="js-tabs-block selected-furniture active-tab" data-project-id="<%= @design_project.id %>">
             <div class='selected-furniture-wrapper'>
                 <%= render partial: 'selected_furniture' %>
             </div>

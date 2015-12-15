@@ -9,23 +9,12 @@
         <div class='product-info' hidden>
           <h3 class='product-name'><%= @product.name %></h3>
           <p class='product-description'>
-            <p><%= @product.description %><p>
             <p><%= @product.short_description %><p>
           </p>
-          <p class='dimensions'>
-            <p><%= dimension_if_positive("Width(in)", @product.width) %><p>
-            <p><%= dimension_if_positive("Depth(in)", @product.depth) %><p>
-            <p><%= dimension_if_positive("Height(in)", @product.height) %><p>
-          </p>
-          <p>
-            <p><%= "Other Details: #{@product.other_details}" if @product.other_details.present? %></p>
-          </p>
-          <p class='dimensions'>
-            <p><%= dimension_if_positive("Seat Width(in)", @product.seat_width) %><p>
-            <p><%= dimension_if_positive("Seat Depth(in)", @product.seat_depth) %><p>
-            <p><%= dimension_if_positive("Seat Height(in)", @product.seat_height) %><p>
-            <p><%= dimension_if_positive("Arm Height(in)", @product.arm_height) %><p>
-          </p>
+		  
+          <% if !@product.is_preset %>
+          	<p><%= @product.description %></p>
+		  <% end %>
           <% if @product.has_variants? %>
             <p class='option'>Options</p>
           <% end %>
@@ -65,13 +54,10 @@
 
             </div>
             <div class="col-md-4">
-              <a href="mailto:info@gofourwalls.com" class="btn btn-second">
-                <i class="fa fa-envelope"></i>
-                Email Us
-              </a>
+              
             </div>
           </div>
-
+          
           <div>
             <% if root_product.has_variants? %>
               <% root_product.variants.each do |variant| %>
@@ -107,25 +93,58 @@
       </div>
 
     </div>
+	<div class="row description-area-row">
+	    <%= render 'product_description_area', product: @product %>	
+	</div>
+	
+    <div class="products-list">
+		<% if @product.included_products.any? %>
+            <div class="product-items">
+              <% root_product.variants.each do |variant| %>
+                <div class='variant' id='product_items_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>">
+                  <%= render partial: 'product_items', locals: { items: variant.included_products } %>
+                </div>
+              <% end %>
+            </div>
+		<% end %>
+	</div>
+	
+	<div class="col-full">
+		<%= render 'delivery_info_bar' %>
+	</div>
+
+    <% if @product.is_preset %>
+		<div class="col-full">
+			<div class="col-md-8">
+				<h3>Room Planner</h3>
+				<div class='room-editor-container' style="margin: 0 auto; clear: both;">
+					<%= render 'shared/room_editor', product: @product %>
+				</div>
+				<center><%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %>
+					<br><%= button_tag 'Save as image', class: "btn btn-save-as-image", id: 'save-as-image' %>
+				</center>
+			 </div>
+			 <div class="col-md-4">
+				 <div class="room-planner-intro">
+					 <h3>How to use the room planner?</h3>
+					 <ul>
+						 <li>Drag and drop to move and rotate furniture</li>
+						 <li>Overlapping furniture is possible and is indicated by a red box</li>
+						 <li>Change the shape and dimensions of the room by clicking 'Set Dimensions'</li>
+						 <li>Save the layout as an image anytime!</li>
+					 </ur>
+				 </div>
+			 </div>
+		</div>
+	<% end %>
+	
+	
+	<!-- To remove these once variants are fixed -->
     <div class="products-list">
       <% if @product.included_products.any? %>
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation col-md-4" class="active">
-            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-              <h4>DETAILS AND DIMENSIONS</h4>
-            </a>
-          </li>
-          <li role="presentation col-md-8">
-            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
-              <h4>SHIPPING AND DELIVERY INFO</h4>
-            </a>
-          </li>
-        </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade in active" id="home">
-
-            <p><%= @product.description %></p>
-
+			
             <div class="product-items">
               <% if root_product.has_variants? %>
                 <% root_product.variants.each do |variant| %>
@@ -139,6 +158,7 @@
                 </div>
               <% end %>
             </div>
+
 
             <% if @product.is_preset %>
               <h4>LAYOUT OPTIONS</h4>
@@ -199,3 +219,4 @@
   $(this).tab('show');
   });
 </script>
+
