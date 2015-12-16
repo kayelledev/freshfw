@@ -119,8 +119,8 @@
         var controller = this;
         // set container width
         var documentWidth = $(window).width();
-        $('.room-editor-container').width(documentWidth * 0.6);
-        $('.editor-container').width(documentWidth * 0.6);
+        $('.room-editor-container').width(documentWidth * 0.35);
+        $('.editor-container').width(documentWidth * 0.35);
 
         $('.dragg').width( $('.editor-container').css('width') );
 
@@ -3185,8 +3185,8 @@
 
       function scaleArea(){
         var documentWidth = $(window).width();
-        $('.room-editor-container').width(documentWidth * 0.6);
-        $('.editor-container').width(documentWidth * 0.6);
+        $('.room-editor-container').width(documentWidth * 0.35);
+        $('.editor-container').width(documentWidth * 0.35);
 
         // set container height according width
         var scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
