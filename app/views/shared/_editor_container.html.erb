@@ -1,5 +1,5 @@
 <div class="editor-container" data-width="<%= object.parent ? object.parent.width : object.width %>" data-height="<%= object.parent ? object.parent.depth : object.depth %>" style="height: 600px;">
-  <% object.included_products.order(:width).each do |item| %>
+  <% object.included_products.order(width: :desc).each do |item| %>
     <span class='room-item' style="position: absolute;" data-width="<%= item.width %>" data-height="<%= item.depth %>"
                 data-rotation="<%= item.rotation %>"
                 data-x="<%= item.posX %>"
