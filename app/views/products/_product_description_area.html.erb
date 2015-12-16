@@ -3,10 +3,8 @@
     <p><%= @product.description %></p>
 </div>
 <div class="col-md-5" style="border-left:  1px solid #ccc; padding: 0 0 0 5%;">
-    <!--div class="product-attribute-label">Dimensions:</div-->
-    <div>Dimensions:</div>
-    <!--div class="product-attribute-value"-->
-    <div>
+    <div class="product-attribute-label">Dimensions:</div>
+    <div class="product-attribute-value">
       <%= dimension_if_positive("Width(in)", @product.width) %><%= dimension_if_positive("		 Depth(in)", @product.depth) %><%= dimension_if_positive("		 Height(in)", @product.height) %>
 	  <p><%= "Other Details: #{@product.other_details}" if @product.other_details.present? %></p>
       <p class='dimensions'>
@@ -18,12 +16,10 @@
 	</div>
     <% @product.product_attributes.where(public: true).each do |attribure| %>
       <% if attribure.value.present? && attribure.value!="0" %>
-        <!--div class="product-attribute-label"-->
-        <div>
+        <div class="product-attribute-label">
         <%= attribure.key %>:
         </div>
-        <!--div class="product-attribute-value"-->
-        <div>
+        <div class="product-attribute-value">
         <%= attribure.value %>
         </div>
       <% end %>
