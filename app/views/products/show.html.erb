@@ -97,15 +97,23 @@
       <%= render 'product_description_area', product: @product %>
   </div>
 
-    <div class="products-list">
-    <% if @product.included_products.any? %>
-            <div class="product-items">
-              <% root_product.variants.each do |variant| %>
-                <div class='variant' id='product_items_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>">
-                  <%= render partial: 'product_items', locals: { items: variant.included_products } %>
-                </div>
-              <% end %>
-            </div>
+  <div class="products-list">
+    <% if root_product.has_variants? %>
+      <div class="product-items">
+        <% root_product.variants.each do |variant| %>
+          <div class='variant' id='product_items_<%= variant.sku %>' style="display: <%= product_visibility(variant) %>">
+            <%= render partial: 'product_items', locals: { items: variant.included_products } %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="product-items">
+        <div class='variant'>
+          <% if @product.included_products.any? %>
+            <%= render partial: 'product_items', locals: { items: @product.included_products } %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </div>
 
