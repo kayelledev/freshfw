@@ -3278,10 +3278,10 @@
       }
 
       function defineRoomArea() {
-        var top = +$('.editor-container').offset().top;
-        var left = +$('.editor-container').offset().left;
-        var width = +$('.editor-container').width();
-        var height = +$('.editor-container').height();
+        var top = +$('.dragg').offset().top;
+        var left = +$('.dragg').offset().left;
+        var width = +$('.dragg').width();
+        var height = +$('.dragg').height();
 
         var leftTop = [top, left]
         var rightTop = [top, left + width]
