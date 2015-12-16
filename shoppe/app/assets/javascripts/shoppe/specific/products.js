@@ -11,6 +11,7 @@ $(document).ready(function(){
         $(product_items).show();
         $('#buy').attr('href', product.data('url'));
         $.get( "get_product", { sku: e.target.value } );
+        resizeProductDescription();
     });
 
     // cut description text
