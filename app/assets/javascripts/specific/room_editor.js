@@ -3119,7 +3119,7 @@
 
         console.log(newPositionX, newPositionY);
 
-        if ( $('.editor-items-panel').height() === 0 ){
+        if ( $('.editor-items-panel').height() <= 1 ){
           $('.editor-items-panel').hide();
         }
 

@@ -1,7 +1,8 @@
 .editor-container {
   width: 100%;
   height: 100%;
-  border: 6px solid black;
+  /*border: 6px solid black;*/
+  box-shadow: 0 0 0 6px  black;
   margin: 10px auto;
   position: relative;
   background-color: #fff;
@@ -178,8 +179,9 @@ div#dialog-form-errors {
 .editor-items-panel {
   float: left;
   position: absolute;
-  width: 10%;
-  left: -10%;
+  width: 14%;
+  left: -15%;
+  top: -5px;
   border: 1px solid black;
   display: none;
   height: auto;
