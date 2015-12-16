@@ -130,8 +130,8 @@
         $('.editor-container').height($('.editor-container').data('height') / scaling);
         $('.room-planner-intro').height($('.editor-container').height());
         // change editor height line
-        $('.editor-height').height($('.editor-container').height());
-        $('.editor-height img').height($('.editor-container').height());
+        $('.editor-height').height(+$('.editor-container').height() + 15);
+        $('.editor-height img').height(+$('.editor-container').height() + 15);
         // change the intro height
         $('.room-planner-intro').height($('.editor-container').height() + 153);
 
@@ -2936,8 +2936,8 @@
         }
 
         function scaleEditorHeightLine() {
-          $('.editor-height').height($('.editor-container').height());
-          $('.editor-height img').height($('.editor-container').height());
+          $('.editor-height').height(+$('.editor-container').height() + 15);
+          $('.editor-height img').height(+$('.editor-container').height() + 15);
         }
 
         function scaleItems(scaling) {
@@ -3193,8 +3193,8 @@
         $('.editor-container').height($('.editor-container').data('height') / scaling);
 
         // change editor height line
-        $('.editor-height').height($('.editor-container').height());
-        $('.editor-height img').height($('.editor-container').height());
+        $('.editor-height').height(+$('.editor-container').height() + 15);
+        $('.editor-height img').height(+$('.editor-container').height() + 15);
         // change editor width line
         $('.editor-width').width($('.editor-container').width());
         $('.editor-width img').width($('.editor-container').width());
