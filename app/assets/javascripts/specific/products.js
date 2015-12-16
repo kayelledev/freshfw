@@ -14,6 +14,7 @@ $(document).ready(function(){
 
     // cut description text
     function resizeProductDescription() {
+        console.log('resizeProductDescription');
         $(".product-desc").each(function(){
             $(this).dotdotdot({
                 after: "a.readmore",
