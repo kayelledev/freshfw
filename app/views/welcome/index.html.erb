@@ -89,7 +89,7 @@
               </div>
               <%= default_image(product2) if product2.present? && default_image(product2) %>
           </a>
-         <% diningroomId = Shoppe::ProductCategory.where(permalink: "dining-rooms") %>
+         <% diningroomId = Shoppe::ProductCategory.where(permalink: "bedrooms") %>
 		  <% product3= Shoppe::Product.where(product_category_id: diningroomId).first%>
   		  <a href="<%= product_path(product3.permalink) if product3.present? %>" class="portfolio-link" data-toggle="modal">
             <div class="portfolio-hover" >
@@ -104,14 +104,14 @@
 
 <section >
 
-	<div class="l-subsection color_dark" style="background: url(https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/OFS-Living-room.jpg)no-repeat; background-size: 100%;margin: 0 0%; color: #fff;  background-color: #000; height: 20em;"> 
+	<div class="l-subsection color_dark" style="background: url(https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/OFS-Living-room.jpg)no-repeat; background-size: 100%;margin: 0 0%; color: #fff;  background-color: #000; height: 20em;">
         <div class="row" style="width: 100%;">
             <h2 class="section-heading" style="text-shadow: 0px 1px 5px #666; color: #fff; margin: 10px; padding: 10px; text-align: center;">How It Works</h2>
 			<div class="col-md-4" style="text-align: center; ">
 			  <h3><a href="http://gofourwalls.com/shop" style="text-shadow: 0px 1px 5px #666; color: #fff;">1. Choose your room</a></h3>
-		      <p style="text-shadow: 0px 1px 5px #666; font-size: 12pt;">Pick the room in your home that needs furnishing.</p> 
+		      <p style="text-shadow: 0px 1px 5px #666; font-size: 12pt;">Pick the room in your home that needs furnishing.</p>
 			  <p style="text-shadow: 0px 1px 5px #666; font-size: 12pt;">Whether it’s your living room or bedroom, </p>
-			  <p style="text-shadow: 0px 1px 5px #666; font-size: 12pt;">we’ve got the design for you!</p>         
+			  <p style="text-shadow: 0px 1px 5px #666; font-size: 12pt;">we’ve got the design for you!</p>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
 				  <h3><a href="http://gofourwalls.com/all-products" style="text-shadow: 0px 1px 5px #666; color: #fff;">2. Choose your design</a></h3>
@@ -138,7 +138,7 @@
           <h4>Design</h4>
           <p>We curate timeless and functional furniture from established manufacturers with a reputation in quality. The rooms are put together by interior designers to ensure its functional and beautiful!</p>
 	</div>
-	
+
 	<div class="col-md-4" style="" >
 		<table>
 			<tr width="100%">
@@ -179,13 +179,13 @@
 			<tr>
 				<td style="text-align: center;">
 					<h4 style="color: #333;text-align: center; margin-top: 2em; ">A Proud Partner of</h4>
-					<div style="color: #333; font-size: 20px; display: inline; margin-left: 10px; "> 						
+					<div style="color: #333; font-size: 20px; display: inline; margin-left: 10px; ">
 						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/One+Fine+Stay/onefinestay-logo.png" height="auto" width="50%" style="" alt="One Fine Stay">
 						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Signature+Communities/Signature+Communities+Logo.png" height="auto" width="30%" style="" alt="Signature Communities">
 						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Vandyk/vandyk-logo.jpeg" height="auto" width="40%" style=" margin-left: 10px; "  alt="VANDYK">
 						<img src="https://s3.amazonaws.com/gofourwalls/globalimages/Fit+Factory+Fitness/fit-factory-logo.jpeg" height="auto" width="50%" style=""  alt="Fit Factory Fitness">
-					
-					</div>					
+
+					</div>
 				</td>
 			</tr>
 		</table>
