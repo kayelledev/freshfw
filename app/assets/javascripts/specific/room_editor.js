@@ -951,7 +951,7 @@
 
           if ( !renderFormErrors( validateShape(), formInputs ) ) { return; }
 
-           if ( !renderFormErrors( validateNewRoomDimensions(s, w, formInputs), formInputs ) ) { return; }
+           if ( !renderFormErrors( validateNewRoomDimensions(n, w, formInputs), formInputs ) ) { return; }
 
           var scaling = n / +$('.editor-container').width();
 
