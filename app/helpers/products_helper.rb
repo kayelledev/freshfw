@@ -23,13 +23,11 @@ module ProductsHelper
   end
 
   def image_link(product, img)
-    puts '===='
     if (product.send "url_#{img}").present?
-      image = product.send "url_#{img}"
-      image.gsub(/https:/, 'http:')
+      product.send "url_#{img}"
     elsif (product.send img).present?
       image = product.send img
-      image.url.gsub(/https:/, 'http:')
+      image.url
     else
       nil
     end
