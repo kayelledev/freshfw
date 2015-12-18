@@ -51,4 +51,4 @@ v2.save!
 v3 = pro.variants.create(:name => "Plus One", :sku => "1000301", :permalink => 'casual-electic-plus', :price => 2499.00, :tax_rate => tax_rate, :default => false)
 v3.save!
 
-adminuser = Shoppe::User.create(:email_address => 'admin@example.com', :password => 'password', :password_confirmation => 'password', :first_name => 'Default', :last_name => 'Admin')
+adminuser = Shoppe::User.create(:email_address => 'admin@example.com', :password_digest => 'password', :admin => 't', :first_name => 'Default', :last_name => 'Admin')
