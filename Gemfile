@@ -29,7 +29,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #Bootstrap-sass
 gem 'bootstrap-sass', '~> 3.3.4'
 
-#Shoppe Engine
+#Shoppe
 #gem 'shoppe', '~> 1.0'
 #gem "shoppe-stripe", require: "shoppe/stripe"
 gem 'shoppe', path: "shoppe"
