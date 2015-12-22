@@ -4,7 +4,7 @@ working_directory "#{app_path}/current"
 pid               "#{app_path}/shared/tmp/pids/unicorn.pid"
 
 # listen
-listen "#{app_path}/shared/tmp/pids/unicorn.pid", :backlog => 64
+listen "#{app_path}/tmp/unicorn.sock", :backlog => 64
 
 # logging
 stderr_path "#{app_path}/shared/log/unicorn.stderr.log"
