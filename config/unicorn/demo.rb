@@ -1,5 +1,5 @@
 # paths
-app_path = "/home/deploy/fourwalls"
+app_path = "/home/fresh_fw_demo/fresh_fw_demo_app"
 working_directory "#{app_path}/current"
 pid               "#{app_path}/current/tmp/pids/unicorn.pid"
 
