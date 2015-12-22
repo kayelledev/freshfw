@@ -1,14 +1,10 @@
-set :deploy_to, '/home/fresh_fw_demo/fresh_fw_demo_app'
+set :deploy_to, '/home/deploy/fourwalls'
 
 # RVM-specific config
-set :application, 'fresh-fw-demo'
-set :branch, "master"
+set :application, 'fourwalls'
+set :branch, "staging"
 set :rails_env, :production
 
-server 'server.sloboda-studio.com',
-  user: 'fresh_fw_demo',
-  roles: %w{web app db},
-  ssh_options: {
-    port: 3333,
-  }
-
+server '52.10.143.186',
+  user: 'deploy',
+  roles: %w{web app db}
