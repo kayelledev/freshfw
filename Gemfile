@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 ruby "2.2.2"
 
+gem "figaro"
+
 gem 'remotipart', '~> 1.2'
 # Slider
 gem 'bxslider-rails'
@@ -30,7 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #Bootstrap-sass
 gem 'bootstrap-sass', '~> 3.3.4'
 
-#Shoppe 
+#Shoppe
 #gem 'shoppe', '~> 1.0'
 #gem "shoppe-stripe", require: "shoppe/stripe"
 gem 'shoppe', path: "shoppe"

@@ -61,8 +61,6 @@ config/social.yml
 config/secrets.yml
 ./idea
 
-config/social.yml
-config/secrets.yml
 vendor/cache
 ./idea
 vendor/cache
