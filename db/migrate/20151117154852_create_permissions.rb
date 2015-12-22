@@ -17,10 +17,10 @@ class CreatePermissions < ActiveRecord::Migration
     add_index :shoppe_roles_users, [ :user_id, :role_id ], :unique => true, :name => 'by_user_and_role'
     add_index :shoppe_permissions_roles, [ :permission_id, :role_id ], :unique => true, :name => 'by_permission_and_role'
     # rake task run to generate Permissions
-    permission_generation    
-    guest = Role.where(name: 'guest').first_or_create
-    user = Role.where(name: 'user').first_or_create
-    Permission.where.not('subject_class LIKE ?', '%Shoppe%').each{|permission| permission.roles << user }
+    # permission_generation
+    # guest = Role.where(name: 'guest').first_or_create
+    # user = Role.where(name: 'user').first_or_create
+    # Permission.where.not('subject_class LIKE ?', '%Shoppe%').each{|permission| permission.roles << user }
   end
 
 end
