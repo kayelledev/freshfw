@@ -1,17 +1,65 @@
-<h2>Resend confirmation instructions</h2>
-
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  	<% content_for :form_errors do %>
-      <%= devise_error_messages! %>
-    <% end %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %> 
+<div class="container-fluid sign-in-or-register">
+  <div class='row title'>
+    <div class='col-md-4 form-title'>
+      <div class='forms-links' >
+        <%= link_to "#", id: 'change-form' do %>
+          <center><span style="color: #000;">RESEND CONFIRMATION INSTRUCTIONS</span></center>
+        <% end %>
+      </div>
+    </div>
+    <div class='col-md-4'>
+      <center><p>FACEBOOK</p></center>
+      <center><ul class="list-inline social-buttons">
+        <li><i class="fa fa-facebook fa-2x"></i>
+        </li>
+      </ul></center>
+    </div>
+    <div class='col-md-4'>
+      <center><p>TWITTER</p></center>
+      <center><ul class="list-inline social-buttons">
+        <li><i class="fa fa-twitter fa-2x"></i>
+        </li>
+      </ul></center>
+    </div>
   </div>
+  <div class='row'>
+    <div class='col-md-4'>
+      <div class='sign-in-or-register-forms content'>
+        <div class='sign-in'>
+          <div class='sign-in-form'>
+            <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+              <% content_for :form_errors do %>
+                <%= devise_error_messages! %>
+              <% end %>
+              <div class="form-group">
+                <%= f.email_field :email_address, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control', placeholder: 'Email Address' %>
+              </div>
+              <div class="actions">
+                <%= f.submit "RESEND INSTRUCTIONS", class: 'btn btn-default btn-lg btn-block submit-button', style: 'margin: 10px 0' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class='forms-links'>
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+          <% end -%>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+          <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+            <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+          <% end -%>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-4 facebook'>
+      <div class="social-button content">
+        <%= link_to "CONNECT WITH FACEBOOK", omniauth_authorize_path(resource_name, :facebook), class: 'btn btn-default btn-lg btn-block submit-button' %>
+      </div>
+    </div>
+    <div class='col-md-4 twitter'>
+      <div class="social-button content">
+        <%= link_to "CONNECT WITH TWITTER", omniauth_authorize_path(resource_name, :twitter), class: 'btn btn-default btn-lg btn-block submit-button' %>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

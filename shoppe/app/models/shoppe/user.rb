@@ -3,13 +3,13 @@ module Shoppe
     rolify
     self.table_name = 'shoppe_users'
     # has_secure_password
-  
+
     # Validations
     validates :first_name, :presence => true
     validates :last_name, :presence => true
     validates :email_address, :presence => true
     has_and_belongs_to_many :roles, :join_table => :shoppe_roles_users, :after_remove => :check_roles!
-    has_many :design_projects, :class_name => 'Shoppe::DesignProject' 
+    has_many :design_projects, :class_name => 'Shoppe::DesignProject'
     after_create :add_user_role
     # The user's first name & last name concatenated
     #
@@ -23,7 +23,7 @@ module Shoppe
         self.errors.add(:base, "You can not delete last admin user")
         raise Exception, "You can not delete last admin user"
       elsif role.name == 'user'
-        self.errors.add(:base, "You can not delete user role") 
+        self.errors.add(:base, "You can not delete user role")
         raise Exception, "You can not delete user role"
       end
     end
@@ -31,14 +31,14 @@ module Shoppe
     def add_user_role
       self.add_role :user
     end
-  
+
     # The user's first name & initial of last name concatenated
     #
     # @return [String]
     def short_name
       "#{first_name} #{last_name[0,1]}"
     end
-  
+
     # Reset the user's password to something random and e-mail it to them
     def reset_password!
       self.password = SecureRandom.hex(8)
@@ -46,8 +46,8 @@ module Shoppe
       self.save!
       Shoppe::UserMailer.new_password(self).deliver_now
     end
-  
-    # Attempt to authenticate a user based on email & password. Returns the 
+
+    # Attempt to authenticate a user based on email & password. Returns the
     # user if successful otherwise returns false.
     #
     # @param email_address [String]
