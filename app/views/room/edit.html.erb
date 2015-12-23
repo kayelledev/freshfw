@@ -2,6 +2,6 @@
 <div class='room-editor-container' style="margin: 0 auto;">
     <button class="save-preset">Save Preset</button>
 
-    <%= render 'shared/room_editor', product: @product %>
+    <%= render partial: 'shared/room_editor', locals: { product: @product, preset: true } %>
 </div>
 

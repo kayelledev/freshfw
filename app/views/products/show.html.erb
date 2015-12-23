@@ -126,7 +126,7 @@
       <div class="col-md-8">
         <h3 class="margin-top40">Room Planner</h3>
         <div class='room-editor-container' style="margin: 0 auto; clear: both;">
-          <%= render 'shared/room_editor', product: @product %>
+          <%= render partial: 'shared/room_editor', locals: { product: @product, preset: false } %>
         </div>
         <center>
           <%= button_tag 'Set dimensions', class: "btn btn-guideline", id: 'set-dimensions' %>
@@ -147,9 +147,9 @@
     </div>
   <% end %>
   <div class="row description-area-row">
-    <%= render 'designer_profile_area' %> 
+    <%= render 'designer_profile_area' %>
   </div>
-  
+
 
 </div>
 

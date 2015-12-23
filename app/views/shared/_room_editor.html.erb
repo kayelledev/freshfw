@@ -37,11 +37,17 @@
 
 <div class='dragg'>
 
+  <% if preset %>
+    <% object = root_product %>
+  <% else %>
+    <% object = root_product.has_variants? ? root_product.variants.first : root_product %>
+  <% end %>
+
   <div class="editor-items-panel">
-    <%= render partial: "shared/room_editor_panel_items", locals: { object: root_product.has_variants? ? root_product.variants.first : root_product } %>
+    <%= render partial: "shared/room_editor_panel_items", locals: { object: object } %>
   </div>
   <div class='editor-container-wr'>
-    <%= render partial: "shared/editor_container", locals: { object: root_product.has_variants? ? root_product.variants.first : root_product } %>
+    <%= render partial: "shared/editor_container", locals: { object: object } %>
   </div>
 </div>
 
