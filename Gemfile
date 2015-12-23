@@ -92,6 +92,6 @@ group :production do
   #gem 'rails_12factor'
 end
 
-group :production, :staging do
+group :production, :staging, :demo do
   gem 'unicorn'
 end
