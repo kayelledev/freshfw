@@ -3,7 +3,7 @@ lock '3.4.0'
 set :log_level, :debug
 set :repo_url, 'git@bitbucket.org:freshfourwalls/fourwalls.git'
 
-set :stages, %w(production staging)
+set :stages, %w(production staging demo)
 
 set :rvm_ruby_version, '2.2.2@freshfw'
 
