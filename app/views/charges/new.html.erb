@@ -10,7 +10,7 @@
             REVIEW AND CONFIRM
         </p>
     </div>
-	<% puts @params 
+	<% puts @params
 	@order = current_order %>
 		  <div class="row ">
 		    <div class='col-md-8'>
@@ -61,15 +61,34 @@
 	                        </div>
 	                    </div>
 						<center>
-							<div class="btn btn-default btn-lg btn-block" id="proceed-to-payment">
-								<%= form_tag charges_path do %>
-								  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-								          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-								          data-description="<%=@order.first_name %>'s Order"
-								          data-amount="<%=@order.total*100%>"
-								  		data-stripeEmail="<%= @order.email_address %>"></script>  
-								<% end %>
-							</div>
+							<script src="https://checkout.stripe.com/checkout.js"></script>
+
+								<a id="proceed-to-payment" class='btn btn-default btn-lg btn-block'>Pay with Card</a>
+
+								<script>
+								  var handler = StripeCheckout.configure({
+								    key: "<%= Rails.configuration.stripe[:publishable_key] %>",
+								    token: function(token) {
+								      // Use the token to create the charge with a server-side script.
+								      // You can access the token ID with `token.id`
+								    }
+								  });
+
+								  $('#proceed-to-payment').on('click', function(e) {
+								    // Open Checkout with further options
+								    handler.open({
+								      description: "<%=@order.first_name %>'s Order",
+								      amount: "<%=@order.total*100%>",
+								      email: "<%= @order.email_address %>"
+								    });
+								    e.preventDefault();
+								  });
+
+								  // Close Checkout on page navigation
+								  $(window).on('popstate', function() {
+								    handler.close();
+								  });
+								</script>
 	                    </center>
 	                </div>
 	            </div>
@@ -80,7 +99,7 @@
   	            <div class='order-summary'>
   	                <div class='title' style="padding-left: 10px; ">
 	  	                <p><b>BILLING ADDRESS</b></p>
-				    </div>		 			  
+				    </div>
 	                <div class='box'>
 	                    <div class='inside-box'  style="padding: 10px; ">
 						  	<p><%= @order.first_name %> <%= @order.last_name %></p>
@@ -96,7 +115,7 @@
     	            <div class='order-summary'>
     	                <div class='title' style="padding-left: 10px; ">
   	  	                <p><b>SHIPPING ADDRESS</b></p>
-  				    	</div>		 			  
+  				    	</div>
 	  	                <div class='box'>
 		                    <div class='inside-box' style="padding: 10px; ">
 		  		  			  	<p><%= @order.delivery_first_name%> <%= @order.delivery_last_name %></p>
@@ -107,8 +126,8 @@
 					</div>
 			  </div>
 		</div>
-		
-        
+
+
         <div class='col-md-4'>
             <div class='checkout right-side-checkout'>
 	            <div class='order-summary'>
@@ -125,6 +144,6 @@
                 </div>
             </div>
 		</div>
-		
+
 	</div>
 </div>
