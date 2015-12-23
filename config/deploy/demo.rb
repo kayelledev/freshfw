@@ -3,7 +3,7 @@ set :deploy_to, '/home/fresh_fw_demo/fresh_fw_demo_app'
 # RVM-specific config
 set :application, 'fresh-fw-demo'
 set :branch, "master"
-set :rails_env, :production
+set :rails_env, :demo
 
 server 'server.sloboda-studio.com',
   user: 'fresh_fw_demo',
