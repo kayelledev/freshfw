@@ -1,4 +1,310 @@
-<div class='room-inputs active-room-inputs' data-room-id='0' data-room-type='rect'>
+<div class='room-inputs active-room-inputs' data-room-id='' data-room-type='rect_0'>
+  <%= hidden_field_tag 'room-id', '0' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>A<br>C</label>
+    <div class="col-sm-9 equal">
+      <input type="number" class="form-control dialog-input n-s-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input n-s-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>B<br>D</label>
+    <div class="col-sm-9 equal">
+      <input type="number" class="form-control dialog-input e-w-ft" id="e-w-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input e-w-inch" id="e-w-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+</div>
+<div class='room-inputs' data-room-id='' data-room-type='l_0'>
+  <%= hidden_field_tag 'room-id', '1' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>A</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>B</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>C</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>D</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>E</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input s-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>F</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input w-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+</div>
+<div class='room-inputs' data-room-id='' data-room-type='l_2'>
+  <%= hidden_field_tag 'room-id', '3' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>A</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input n-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>B</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>C</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>D</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>E</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>F</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+</div>
+<div class='room-inputs' data-room-id='' data-room-type='t_0'>
+  <%= hidden_field_tag 'room-id', '5' %>
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>A</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input n-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>B</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input e1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>C</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s3-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input s3-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>D</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input e2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>E</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>F</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>G</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>H</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+</div>
+<div class='room-inputs' data-room-id='' data-room-type='t_1'>
+  <%= hidden_field_tag 'room-id', '6' %>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>A</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input n2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>B</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input e-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input e-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>C</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input s2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>D</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w3-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input w3-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>E</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input s1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input s1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>F</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w2-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input w2-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>G</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input n1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input n1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-sm-3 control-label'>H</label>
+    <div class="col-sm-9">
+      <input type="number" class="form-control dialog-input w1-ft" placeholder="ft." min="0" step="1" value='0' required>
+      <span>ft.</span>
+      <input type="number" class="form-control dialog-input w1-inch" placeholder="inch." min="0" step="0.01" value='0.00' required>
+      <span>in.</span>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--
+<div class='room-inputs active-room-inputs' data-room-id='0' data-room-type='rect_0'>
   <%= hidden_field_tag 'room-id', '0' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)<br>South (S)</label>
@@ -21,7 +327,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='1' data-room-type='l'>
+<div class='room-inputs' data-room-id='1' data-room-type='l_0'>
   <%= hidden_field_tag 'room-id', '1' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -79,7 +385,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='2' data-room-type='l'>
+<div class='room-inputs' data-room-id='2' data-room-type='l_1'>
   <%= hidden_field_tag 'room-id', '2' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
@@ -137,7 +443,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='3' data-room-type='l'>
+<div class='room-inputs' data-room-id='3' data-room-type='l_2'>
   <%= hidden_field_tag 'room-id', '3' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
@@ -195,7 +501,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='4' data-room-type='l'>
+<div class='room-inputs' data-room-id='4' data-room-type='l_3'>
   <%= hidden_field_tag 'room-id', '4' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -253,7 +559,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='5' data-room-type='t'>
+<div class='room-inputs' data-room-id='5' data-room-type='t_0'>
   <%= hidden_field_tag 'room-id', '5' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
@@ -336,7 +642,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='6' data-room-type='t'>
+<div class='room-inputs' data-room-id='6' data-room-type='t_1'>
   <%= hidden_field_tag 'room-id', '6' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -419,7 +725,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='7' data-room-type='t'>
+<div class='room-inputs' data-room-id='7' data-room-type='t_2'>
   <%= hidden_field_tag 'room-id', '7' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -502,7 +808,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='8' data-room-type='t'>
+<div class='room-inputs' data-room-id='8' data-room-type='t_3'>
   <%= hidden_field_tag 'room-id', '8' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -585,7 +891,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='9' data-room-type='c'>
+<div class='room-inputs' data-room-id='9' data-room-type='c_0'>
   <%= hidden_field_tag 'room-id', '9' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -668,7 +974,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='10' data-room-type='c'>
+<div class='room-inputs' data-room-id='10' data-room-type='c_1'>
   <%= hidden_field_tag 'room-id', '10' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
@@ -751,7 +1057,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='11' data-room-type='c'>
+<div class='room-inputs' data-room-id='11' data-room-type='c_2'>
   <%= hidden_field_tag 'room-id', '11' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -834,7 +1140,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='12' data-room-type='c'>
+<div class='room-inputs' data-room-id='12' data-room-type='c_3'>
   <%= hidden_field_tag 'room-id', '12' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -917,7 +1223,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='13' data-room-type='e'>
+<div class='room-inputs' data-room-id='13' data-room-type='e_0'>
   <%= hidden_field_tag 'room-id', '13' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -1040,7 +1346,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='14' data-room-type='e'>
+<div class='room-inputs' data-room-id='14' data-room-type='e_1'>
   <%= hidden_field_tag 'room-id', '14' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
@@ -1163,7 +1469,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='15' data-room-type='e'>
+<div class='room-inputs' data-room-id='15' data-room-type='e_2'>
   <%= hidden_field_tag 'room-id', '15' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -1286,7 +1592,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='16' data-room-type='e'>
+<div class='room-inputs' data-room-id='16' data-room-type='e_3'>
   <%= hidden_field_tag 'room-id', '16' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -1409,7 +1715,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='17' data-room-type='f'>
+<div class='room-inputs' data-room-id='17' data-room-type='f_0'>
   <%= hidden_field_tag 'room-id', '17' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -1512,7 +1818,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='18' data-room-type='f'>
+<div class='room-inputs' data-room-id='18' data-room-type='f_1'>
   <%= hidden_field_tag 'room-id', '18' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North (N)</label>
@@ -1615,7 +1921,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='19' data-room-type='f'>
+<div class='room-inputs' data-room-id='19' data-room-type='f_2'>
   <%= hidden_field_tag 'room-id', '19' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -1718,7 +2024,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='20' data-room-type='f'>
+<div class='room-inputs' data-room-id='20' data-room-type='f_3'>
   <%= hidden_field_tag 'room-id', '20' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -1821,7 +2127,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='21' data-room-type='fl'>
+<div class='room-inputs' data-room-id='21' data-room-type='fl_0'>
   <%= hidden_field_tag 'room-id', '21' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -1924,7 +2230,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='22' data-room-type='fl'>
+<div class='room-inputs' data-room-id='22' data-room-type='fl_1'>
   <%= hidden_field_tag 'room-id', '22' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -2027,7 +2333,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='23' data-room-type='fl'>
+<div class='room-inputs' data-room-id='23' data-room-type='fl_2'>
   <%= hidden_field_tag 'room-id', '23' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -2130,7 +2436,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='24' data-room-type='fl'>
+<div class='room-inputs' data-room-id='24' data-room-type='fl_3'>
   <%= hidden_field_tag 'room-id', '24' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -2356,7 +2662,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='26' data-room-type='pcross'>
+<div class='room-inputs' data-room-id='26' data-room-type='pcross_0'>
   <%= hidden_field_tag 'room-id', '26' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -2459,7 +2765,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='27' data-room-type='pcross'>
+<div class='room-inputs' data-room-id='27' data-room-type='pcross_1'>
   <%= hidden_field_tag 'room-id', '27' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -2562,7 +2868,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='28' data-room-type='pcross'>
+<div class='room-inputs' data-room-id='28' data-room-type='pcross_2'>
   <%= hidden_field_tag 'room-id', '28' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -2665,7 +2971,7 @@
   </div>
 </div>
 
-<div class='room-inputs' data-room-id='29' data-room-type='pcross'>
+<div class='room-inputs' data-room-id='29' data-room-type='pcross_3'>
   <%= hidden_field_tag 'room-id', '29' %>
   <div class="form-group">
     <label class='col-sm-3 control-label'>North 1 (N1)</label>
@@ -2830,3 +3136,12 @@
     </div>
   </div>
 </div>
+ -->
+
+<script>
+  var count = 0;
+  $('.room-inputs').each(function() {
+    $(this).attr('data-room-id', count);
+    count += 1;
+  });
+</script>

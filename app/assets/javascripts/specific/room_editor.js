@@ -687,69 +687,69 @@
         e.preventDefault();
         $('.hole').remove();
 
-        var roomId = +$('.active-room-inputs input[name="room-id"]').val();
-        switch (roomId) {
-          case 0:
-            newRect0();
+        var activeRoomType = $('.active-room-inputs').attr('data-room-type');
+        switch (activeRoomType) {
+          case 'rect_0':
+            newRect0('rect_0');
             break;
-          case 1:
-            newL0();
+          case 'l_0':
+            newL0('l_0');
             break;
-          case 2:
-            newL1();
+          case 'l_1':
+            newL1('l_1');
             break;
-          case 3:
-            newL2();
+          case 'l_2':
+            newL2('l_2');
             break;
-          case 4:
-            newL3();
+          case 'l_3':
+            newL3('l_3');
             break;
-          case 5:
-            newT0();
+          case 't_0':
+            newT0('t_0');
             break;
-          case 6:
-            newT1();
+          case 't_1':
+            newT1('t_1');
             break;
-          case 7:
-            newT2();
+          case 't_2':
+            newT2('t_2');
             break;
-          case 8:
-            newT3();
+          case 't_3':
+            newT3('t_3');
             break;
-          case 9:
-            newC0();
+          case 'c_0':
+            newC0('c_0');
             break;
-          case 10:
-            newC1();
+          case 'c_1':
+            newC1('c_1');
             break;
-          case 11:
-            newC2();
+          case 'c_2':
+            newC2('c_2');
             break;
-          case 12:
-            newC3();
+          case 'c_3':
+            newC3('c_3');
             break;
-          case 13:
-            newE0();
+          case 'e_0':
+            newE0('e_0');
             break;
-          case 14:
-            newE1();
+          case 'e_1':
+            newE1('e_1');
             break;
-          case 15:
-            newE2();
+          case 'e_2':
+            newE2('e_2');
             break;
-          case 16:
-            newE3();
+          case 'e_3':
+            newE3('e_3');
             break;
-          case 17:
-            newF0();
+          case 'e_4':
+            newF0('e_4');
             break;
-          case 18:
-            newF1();
+          case 'e_5':
+            newF1('e_5');
             break;
         }
 
-        function newRect0() {
-          var form = $(".room-inputs[data-room-id='0']");
+        function newRect0(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = 4;
           var newWidthFt = +form.find('.n-s-ft').val();
@@ -843,8 +843,8 @@
           //   }
           // }
         }
-        function newL0() {
-          var form = $(".room-inputs[data-room-id='1']");
+        function newL0(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -915,15 +915,16 @@
             $('.hole').css({
               'width': n2 / scaling,
               'height': e1 / scaling,
-              'border-bottom': '1px solid black',
-              'border-left': '1px solid black',
+              '-webkit-box-shadow': 'inset 3px -3px 0 3px black, 9px -9px 0 3px white',
+              '-moz-box-shadow': 'inset 3px -3px 0 3px black, 9px -9px 0 3px white',
+              'box-shadow': 'inset 3px -3px 0 3px black, 9px -9px 0 3px white',
               'top': 0,
               'right': 0
             })
           }
         }
-        function newL1() {
-          var form = $(".room-inputs[data-room-id='2']");
+        function newL1(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1002,8 +1003,8 @@
             })
           }
         }
-        function newL2() {
-          var form = $(".room-inputs[data-room-id='3']");
+        function newL2(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1075,15 +1076,16 @@
             $('.hole').css({
               'width': s1 / scaling,
               'height': w2 / scaling,
-              'border-top': '1px solid black',
-              'border-right': '1px solid black',
+              '-webkit-box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
+              '-moz-box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
+              'box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
               'bottom': 0,
               'left': 0
             })
           }
         }
-        function newL3() {
-          var form = $(".room-inputs[data-room-id='4']");
+        function newL3(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1162,8 +1164,8 @@
             })
           }
         }
-        function newT0() {
-          var form = $(".room-inputs[data-room-id='5']");
+        function newT0(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1253,25 +1255,29 @@
             $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
             $('.dragg').append("<div class='hole' data-hole-id='2'></div>");
 
-            $("div[data-hole-id='1']").addClass('hole-border-top hole-border-left');
             $("div[data-hole-id='1']").css({
               'width': s3 / scaling,
               'height': e2 / scaling,
+              '-webkit-box-shadow': 'inset 3px 3px 0 3px black, 9px 9px 0 3px white',
+              '-moz-box-shadow': 'inset 3px 3px 0 3px black, 9px 9px 0 3px white',
+              'box-shadow': 'inset -px 3px 0 3px black, 9px 9px 0 3px white',
               'bottom': 0,
               'right': 0
             });
 
-            $("div[data-hole-id='2']").addClass('hole-border-top hole-border-right')
             $("div[data-hole-id='2']").css({
               'width': s1 / scaling,
               'height': w2 / scaling,
+              '-webkit-box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
+              '-moz-box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
+              'box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
               'bottom': 0,
               'left': 0
             })
           }
         }
-        function newT1() {
-          var form = $(".room-inputs[data-room-id='6']");
+        function newT1(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1360,25 +1366,33 @@
             $('.dragg').append("<div class='hole' data-hole-id='1'></div>");
             $('.dragg').append("<div class='hole' data-hole-id='2'></div>");
 
-            $("div[data-hole-id='1']").addClass('hole-border-bottom hole-border-right')
             $("div[data-hole-id='1']").css({
               'width': n1 / scaling,
               'height': w1 / scaling,
+              // 'box-shadow': '3px 3px 0 3px black',
+
+              '-webkit-box-shadow': 'inset -3px -3px 0 3px black, -9px -9px 0 3px white',
+              '-moz-box-shadow': 'inset -3px -3px 0 3px black, -9px -9px 0 3px white',
+              'box-shadow': 'inset -3px -3px 0 3px black, -9px -9px 0 3px white',
               'top': 0,
               'left': 0
             });
 
-            $("div[data-hole-id='2']").addClass('hole-border-top hole-border-right');
             $("div[data-hole-id='2']").css({
               'width': s1 / scaling,
               'height': w3 / scaling,
+              // 'box-shadow': '3px -3px 0 3px black',
+
+              '-webkit-box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
+              '-moz-box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
+              'box-shadow': 'inset -3px 3px 0 3px black, -9px 9px 0 3px white',
               'bottom': 0,
               'left': 0
             });
           }
         }
-        function newT2() {
-          var form = $(".room-inputs[data-room-id='7']");
+        function newT2(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1484,8 +1498,8 @@
             });
           }
         }
-        function newT3() {
-          var form = $(".room-inputs[data-room-id='8']");
+        function newT3(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1591,8 +1605,8 @@
             });
           }
         }
-        function newC0() {
-          var form = $(".room-inputs[data-room-id='9']");
+        function newC0(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1699,8 +1713,8 @@
 
           }
         }
-        function newC1() {
-          var form = $(".room-inputs[data-room-id='10']");
+        function newC1(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1807,8 +1821,8 @@
 
           }
         }
-        function newC2() {
-          var form = $(".room-inputs[data-room-id='11']");
+        function newC2(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -1915,8 +1929,8 @@
 
           }
         }
-        function newC3() {
-          var form = $(".room-inputs[data-room-id='12']");
+        function newC3(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -2023,8 +2037,8 @@
 
           }
         }
-        function newE0() {
-          var form = $(".room-inputs[data-room-id='13']");
+        function newE0(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -2160,8 +2174,8 @@
 
           }
         }
-        function newE1() {
-          var form = $(".room-inputs[data-room-id='14']");
+        function newE1(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -2297,8 +2311,8 @@
 
           }
         }
-        function newE2() {
-          var form = $(".room-inputs[data-room-id='15']");
+        function newE2(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -2434,8 +2448,8 @@
 
           }
         }
-        function newE3() {
-          var form = $(".room-inputs[data-room-id='16']");
+        function newE3(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -2574,8 +2588,8 @@
 
           }
         }
-        function newF0() {
-          var form = $(".room-inputs[data-room-id='17']");
+        function newF0(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
@@ -2704,8 +2718,8 @@
 
           }
         }
-        function newF1() {
-          var form = $(".room-inputs[data-room-id='18']");
+        function newF1(roomType) {
+          var form = $(".room-inputs[data-room-type='" + roomType + "']");
           var formInputs = form.find('.dialog-input');
           var inputsCount = formInputs.lenght;
 
