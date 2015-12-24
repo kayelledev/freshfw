@@ -901,11 +901,11 @@
             var errorMessages = [];
             if ( !(s === n1 + n2) ) {
               invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch, sFt, sInch);
-              errorMessages.push('S have to be equal N1+N2');
+              errorMessages.push('E have to be equal A+C');
             }
             if ( !(w === e1 + e2) ) {
               invalidInputs.push(e1Ft, e1Inch, e2Ft, e2Inch, wFt, wInch);
-              errorMessages.push('W have to be equal E1+E2');
+              errorMessages.push('F have to be equal B+D');
             }
             return { invalidInputs: invalidInputs, errorMessages: errorMessages };
           }
@@ -1062,11 +1062,11 @@
             var errorMessages = [];
             if ( !(n === s1 + s2) ) {
               invalidInputs.push(s1Ft, s1Inch, s2Ft, s2Inch, nFt, nInch);
-              errorMessages.push('N have to be equal S1+S2');
+              errorMessages.push('A have to be equal E+C');
             }
             if ( !(e === w1 + w2) ) {
               invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, eFt, eInch);
-              errorMessages.push('E have to be equal W1+W2');
+              errorMessages.push('B have to be equal F+D');
             }
             return { invalidInputs: invalidInputs, errorMessages: errorMessages };
           }
@@ -1242,11 +1242,11 @@
             var errorMessages = [];
             if ( !(w1 + w2 === e1 + e2) ) {
               invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, e1Ft, e1Inch, e2Ft, e2Inch);
-              errorMessages.push('W1+W2 have to be equal E1+E2');
+              errorMessages.push('H+F have to be equal B+D');
             }
             if ( !(n === s1 + s2 + s3) ) {
               invalidInputs.push(s1Ft, s1Inch, s2Ft, s2Inch, s3Ft, s3Inch, nFt, nInch);
-              errorMessages.push('N have to be equal S1+S2+S3');
+              errorMessages.push('A have to be equal G+E+C');
             }
             return { invalidInputs: invalidInputs, errorMessages: errorMessages };
           }
@@ -1353,11 +1353,11 @@
             var errorMessages = [];
             if ( !(n1 + n2 === s1 + s2) ) {
               invalidInputs.push(n1Ft, n1Inch, n2Ft, n2Inch, s1Ft, s1Inch, s2Ft, s2Inch);
-              errorMessages.push('N1+N2 have to be equal S1+S2');
+              errorMessages.push('G+A have to be equal E+C');
             }
             if ( !(e === w1 + w2 + w3) ) {
               invalidInputs.push(w1Ft, w1Inch, w2Ft, w2Inch, w3Ft, w3Inch, eFt, eInch);
-              errorMessages.push('E have to be equal W1+W2+W3');
+              errorMessages.push('B have to be equal H+F+D');
             }
             return { invalidInputs: invalidInputs, errorMessages: errorMessages };
           }
