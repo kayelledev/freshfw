@@ -555,24 +555,31 @@
 
           var beforeDegree = positionBefore.degree
           var newDegree = beforeDegree + 90;
+          var currentDegree = beforeDegree;
 
           var offsetX = parseFloat(parentElem.attr('data-x')),
               offsetY = parseFloat(parentElem.attr('data-y'));
 
-          setDegree(newDegree);
+          while ( currentDegree !== newDegree ) {
+            currentDegree += 1;
 
-          if ( controller.checkOutside( currentElement ) ) {
-            setDegree(beforeDegree);
-          }
+            parentElem.css({
+              '-webkit-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
+                 '-moz-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
+                   '-o-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
+                  '-ms-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)'
+            });
 
-          function setDegree(degree) {
-            parentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            parentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            parentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            parentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            currentElement.attr('data-rotation', currentDegree);
+            parentElem.attr('data-rotation', currentDegree);
 
-            currentElement.attr('data-rotation', degree);
-            parentElem.attr('data-rotation', degree);
+            if ( controller.checkOutside( currentElement ) ) {
+              console.log('restr');
+              controller.rotateInsideArea(positionBefore, currentElement);
+              controller.setCollisions( currentElement );
+
+              break;
+            }
           }
         }
   };
@@ -783,9 +790,9 @@
       e.preventDefault();
       if ( $('.active-tab').attr('id') === 'furniture-board' ) {
         console.log('furniture-board-tab');
-        saveFunitureBoard();
+        saveFunitureBoard()
       }
-      window.open( $(this).attr('href') ,"_self");
+      window.open( $(this).attr('href') ,"_self")
     });
 
     function saveFunitureBoard() {
@@ -829,7 +836,6 @@
 
     $('.board-submit-room').on('click', function() {
       saveFunitureBoard();
-
       var button = this;
       var data = {
         ids: []

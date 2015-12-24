@@ -488,7 +488,7 @@
             if ( controller.restrictAreaHoles( currentElement ) ) {
               console.log('restr')
               controller.rotateInsideArea(positionBefore, currentElement);
-              controller.setCollisions(parentElement);
+              controller.setCollisions(currentElement);
             }
           }
         });
@@ -501,6 +501,7 @@
           positionBefore = controller.getDegreeOfElement($(parentElem));
 
           rotateOnMouseClick(currentElement, parentElem, positionBefore);
+
         });
 
         function rotateOnMouse(e, currentElement, parentElem, positionBefore) {
@@ -527,26 +528,31 @@
 
           var beforeDegree = positionBefore.degree
           var newDegree = beforeDegree + 90;
-          console.log(beforeDegree);
-          console.log(newDegree);
+          var currentDegree = beforeDegree;
 
           var offsetX = parseFloat(parentElem.attr('data-x')),
               offsetY = parseFloat(parentElem.attr('data-y'));
 
-          setDegree(newDegree);
+          while ( currentDegree !== newDegree ) {
+            currentDegree += 1;
 
-          if ( controller.restrictAreaHoles( currentElement ) ) {
-            setDegree(beforeDegree);
-          }
+            parentElem.css({
+              '-webkit-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
+                 '-moz-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
+                   '-o-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
+                  '-ms-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)'
+            });
 
-          function setDegree(degree) {
-            parentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            parentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            parentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
-            parentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            currentElement.attr('data-rotation', currentDegree);
+            parentElem.attr('data-rotation', currentDegree);
 
-            currentElement.attr('data-rotation', degree);
-            parentElem.attr('data-rotation', degree);
+            if ( controller.restrictAreaHoles( currentElement ) ) {
+              console.log('restr');
+              controller.rotateInsideArea(positionBefore, currentElement);
+              controller.setCollisions( currentElement );
+
+              break;
+            }
           }
         }
     };
