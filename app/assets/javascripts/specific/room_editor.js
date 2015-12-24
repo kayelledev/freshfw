@@ -557,7 +557,7 @@
     Controller.prototype.openDimensionsForm = function(elementsClass) {
       var setDimensionsButton = $('#set-dimensions');
       var dimensionsDialog = $('div#dimensions-dialog');
-      var roomsOnSlide = 9;
+      var roomsOnSlide = 5;
 
       // define form dialog
       dimensionsDialog.dialog({
@@ -602,10 +602,10 @@
           onSlideAfter: function($slideElement, oldIndex, newIndex){
             var currentSlideDataID = +$slideElement.attr('data-room-id');
             var newSlideDataID;
-            if (currentSlideDataID >= 0 && currentSlideDataID <= 26) {
-              newSlideDataID = currentSlideDataID + 4;
+            if (currentSlideDataID >= 0 && currentSlideDataID <= 2) {
+              newSlideDataID = currentSlideDataID + 2;
             } else {
-              newSlideDataID = 3 - (30 - currentSlideDataID);
+              newSlideDataID = 1 - (4 - currentSlideDataID);
             }
             var newSlide = $('#room-slider .slide[data-room-id="' + newSlideDataID + '"]');
             // console.log(newSlide);
@@ -629,7 +629,7 @@
 
             if (toSlide < 0) {
               toSlide = slidesCount + toSlide;
-            } else if (toSlide > 30) {
+            } else if (toSlide > 4) {
               toSlide = toSlide - slidesCount;
             }
             slider.goToSlide(toSlide);
