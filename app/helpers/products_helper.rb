@@ -18,6 +18,16 @@ module ProductsHelper
     end
   end
 
+  def default_image_better_quality(product)
+    if (product.url_default_image).present?
+      image_tag product.url_default_image, class: "img-responsive portfolio-image", alt: "#{product.full_name}"
+    elsif (product.default_image).present?
+      image_tag product.default_image, class: "img-responsive portfolio-image", alt: "#{product.full_name}"
+    else
+      nil
+    end
+  end
+
   def array_images
     ['default_image'] + (2..6).map{|index| "image#{index}"}
   end

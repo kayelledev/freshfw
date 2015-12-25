@@ -76,7 +76,7 @@
   					  <%= product1.name if product1.present?  %>
                     </div>
                 </div>
-				<%= default_image(product1) if product1.present? && default_image(product1) %>
+				<%= default_image_better_quality(product1) if product1.present? && default_image_better_quality(product1) %>
           </a>
       </div>
       <div class="col-md-4 portfolio-item">
@@ -87,7 +87,7 @@
 					  <%= product2.name if product2.present? %>
                   </div>
               </div>
-              <%= default_image(product2) if product2.present? && default_image(product2) %>
+              <%= default_image_better_quality(product2) if product2.present? && default_image_better_quality(product2) %>
           </a>
          <% diningroomId = Shoppe::ProductCategory.where(permalink: "bedrooms") %>
 		  <% product3= Shoppe::Product.where(product_category_id: diningroomId).first%>
@@ -97,7 +97,7 @@
 				  <%= product3.name if product3.present? %>
                 </div>
             </div>
-            <%= default_image(product3) if product3.present? && default_image(product3) %>
+            <%= default_image_better_quality(product3) if product3.present? && default_image_better_quality(product3) %>
         </a>
     </div>
 </div>
