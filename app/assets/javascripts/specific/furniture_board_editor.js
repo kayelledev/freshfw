@@ -555,31 +555,26 @@
 
           var beforeDegree = positionBefore.degree
           var newDegree = beforeDegree + 90;
-          var currentDegree = beforeDegree;
 
           var offsetX = parseFloat(parentElem.attr('data-x')),
               offsetY = parseFloat(parentElem.attr('data-y'));
 
-          while ( currentDegree !== newDegree ) {
-            currentDegree += 1;
+          setDegree(newDegree);
 
-            parentElem.css({
-              '-webkit-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
-                 '-moz-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
-                   '-o-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)',
-                  '-ms-transform': 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + currentDegree + 'deg)'
-            });
+          if ( controller.checkOutside( controller.$currentElement ) ) {
+            console.log('rest');
+            controller.rotateInsideArea(controller.$positionBefore, controller.$currentElement);
+            controller.setCollisions(controller.$currentElement);
+          }
 
-            currentElement.attr('data-rotation', currentDegree);
-            parentElem.attr('data-rotation', currentDegree);
+          function setDegree(degree) {
+            parentElem.css('-moz-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            parentElem.css('-webkit-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            parentElem.css('-o-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
+            parentElem.css('-ms-transform', 'translate(' + offsetX + 'px,' + offsetY + 'px) rotate(' + degree + 'deg)');
 
-            if ( controller.checkOutside( currentElement ) ) {
-              console.log('restr');
-              controller.rotateInsideArea(positionBefore, currentElement);
-              controller.setCollisions( currentElement );
-
-              break;
-            }
+            currentElement.attr('data-rotation', degree);
+            parentElem.attr('data-rotation', degree);
           }
         }
   };
