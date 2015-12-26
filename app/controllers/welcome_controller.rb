@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
   def account
     if current_user.present?
       @orders = Order.where(email_address: current_user.email_address).order('updated_at DESC')
-      @products = current_user.reviews.order('updated_at DESC').take(3).map{|review| Product.find(review.product_id) }
+      @products = current_user.reviews.order('updated_at DESC').take(3).map{|review| Product.find(review.product_id) if Shoppe::Product.where(id: review.product_id).present?}
       @design_projects = current_user.design_projects 
     end
   end
