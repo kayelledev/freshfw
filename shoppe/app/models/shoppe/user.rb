@@ -79,5 +79,8 @@ module Shoppe
     #            auth_data['provider'] => auth_data['uid']
     #           )
     # end
+    def last_reviews
+      reviews.order('updated_at DESC').take(3).map{|review| Product.find(review.product_id) if Shoppe::Product.where(id: review.product_id).present?}.compact
+    end
   end
 end
