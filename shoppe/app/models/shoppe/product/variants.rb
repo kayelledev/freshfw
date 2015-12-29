@@ -42,7 +42,7 @@ module Shoppe
     #
     # @return [Shoppe::Product]
     def default_variant
-      return nil if self.parent
+      # return nil if self.parent
       @default_variant ||= self.variants.select { |v| v.default? }.first
     end
 
