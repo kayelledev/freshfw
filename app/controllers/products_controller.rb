@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.root.includes(:product_category, :variants).order(:parent_id)
     @products = @products.group_by(&:product_category)
+    @project_categories = current_user.project_categories if current_user
   end
 
   def show

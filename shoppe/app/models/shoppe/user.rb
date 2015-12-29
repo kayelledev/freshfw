@@ -82,5 +82,19 @@ module Shoppe
     def last_reviews
       reviews.order('updated_at DESC').take(3).map{|review| Product.find(review.product_id) if Shoppe::Product.where(id: review.product_id).present?}.compact
     end
+
+    def project_categories
+      ProductCategory.includes(:roles).where('shoppe_roles.id in (?)', self.role_ids).references(:roles)
+    end
+
+    def project_categories_with_children
+      all_descendents = project_categories.all
+      project_categories.all.each{|category| category.descendents.each{|descedent| all_descendents << descedent}}
+      all_descendents.flatten.uniq
+    end
+
+    def project_category_allowed?(project_category)
+      self.project_categories_with_children.map(&:id).include?(project_category.id)
+    end
   end
 end

@@ -16,6 +16,20 @@
             %td= permission.subject_class
             %td= permission.action
             %td  
-              = link_to 'Show', permission, :class => 'button green'
+  - if @role.product_categories.present?
+    %h2 Product categories:
+    %table.data.orderItems
+      %thead
+        %tr
+          %th= 'Category Name'
+          %th= 'Permalink'
+          %th= 'Actions'
+      %tbody
+        - @role.product_categories.each do |product_category|
+          %tr
+            %td= product_category.name
+            %td= product_category.permalink
+            %td  
+              = link_to 'Show', [:edit, product_category], :class => 'button green'
   - else
     You can add permissions for this role

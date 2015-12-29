@@ -5,12 +5,12 @@ module Shoppe
 	  load_and_authorize_resource
     include AccessManagementProccessor
     
-    def new
-      @permission = Permission.new
-      @controllers = controllers_list
-      @actions = actions_list(@controllers.first) 
+    # def new
+    #   @permission = Permission.new
+    #   @controllers = controllers_list
+    #   @actions = actions_list(@controllers.first) 
       
-    end
+    # end
 
     def show
       @controllers = controllers_list

@@ -4,5 +4,6 @@
       = f.error_messages
       = f.label :name
       = f.text_field :name, :class => 'text'
+      = render 'categories_form', :f => f
       = render 'permissions_form', :f => f
     = f.submit t('shoppe.submit'), :class => 'button green fixed-button'

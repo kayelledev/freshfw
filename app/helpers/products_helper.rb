@@ -18,6 +18,15 @@ module ProductsHelper
     end
   end
 
+  def default_category_image(category)
+    if (category.default_image).present?
+      image_tag category.default_image.catalog, class: "img-responsive portfolio-image", alt: "#{category.name}"
+    else
+      nil
+    end
+  end
+
+
   def default_image_better_quality(product)
     if (product.url_default_image).present?
       image_tag product.url_default_image, class: "img-responsive portfolio-image", alt: "#{product.full_name}"
