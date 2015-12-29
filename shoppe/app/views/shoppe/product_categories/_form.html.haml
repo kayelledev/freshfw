@@ -17,6 +17,11 @@
           = 'Is Room: '
           = f.check_box :is_room, id: 'isRoom'
     %dl
+      %dt
+        = f.label :role_ids, class: 'roles' do
+          = 'Roles: '
+          = f.collection_select(:role_ids, Shoppe::Role.list_without_admin, :id, :name, {:selected => @product_category.role_ids, include_hidden: false}, {:multiple => true})
+    %dl
       %dt= f.label :description, t('shoppe.product_category.description')
       %dd= f.text_area :description, :class => 'text'
 

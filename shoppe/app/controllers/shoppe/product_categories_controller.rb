@@ -40,7 +40,8 @@ module Shoppe
     private
 
     def safe_params
-      params[:product_category].permit(:name, :permalink, :description, :default_image, :parent_id, :is_room)
+      params[:product_category][:role_ids] ||= []
+      params[:product_category].permit(:name, :permalink, :description, :default_image, :parent_id, :is_room, :role_ids => [])
     end
 
   end
