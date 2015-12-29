@@ -1307,24 +1307,19 @@ p {
     margin-left: auto;
     margin-right: auto;
 }
-
-.sub-btn {
-
-     text-align: center;
-	 min-width: 60%;
-     padding: 0.5em 0.5em;
-	 margin: 0;
-	 font-weight: 700;
-	 background-color: #F49224;
-	 color: #fff;
-	 border-color: #F49224;
-	 border-radius: 3px;
-	 float: left;
-	 text-transform: uppercase;
-
+#mc_embed_signup_scroll .sub-btn {
+    text-align: center;
+    width: 60%;
+    padding: 0.5em 0.5em;
+    font-weight: 700;
+    background-color: #F49224;
+    color: #fff;
+    border-color: #F49224;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-
 @media (max-width: 768px) {
 
   .sub-btn {
@@ -1386,14 +1381,15 @@ p {
 
 /* COLOR: dark */
 
-.l-subsection.color_dark {
-
-background-color: #000;
-
-color: #fff;
-
+section .l-subsection.color_dark {
+    background-color: #000;
+    color: #fff;
+    height: 25em;
+    padding: 15px;
+    @media(max-width:991px) {
+        height: auto;
+    }
 }
-
 .prod-cat-title{
 	// color: #2d6d50;
 	// display: block;

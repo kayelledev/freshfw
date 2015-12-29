@@ -40,7 +40,7 @@
   <% if preset %>
     <% object = root_product %>
   <% else %>
-    <% object = root_product.has_variants? ? root_product.variants.first : root_product %>
+    <% object = root_product.has_variants? ? root_product.default_variant : root_product %>
   <% end %>
 
   <div class="editor-items-panel">
