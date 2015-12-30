@@ -3,7 +3,6 @@
 = content_for :header do
   %p.buttons
     = link_to t('shoppe.edit'), [:edit, @permission], :class => 'button green'
-    = link_to 'New Permission', :new_permission, :class => 'button green'
     = link_to 'Back to Access Management', :roles_permissions, :class => 'button'
   %h2.permissions= "#{@permission.name}"
 #zone

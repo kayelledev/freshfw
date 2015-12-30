@@ -2,6 +2,7 @@ module Shoppe
   class Role < ActiveRecord::Base
   	has_and_belongs_to_many :users, :join_table => :shoppe_roles_users
     has_and_belongs_to_many :permissions, :join_table => :shoppe_permissions_roles, :uniq => true, :before_remove => :check_permissions!
+    has_and_belongs_to_many :product_categories, :join_table => :shoppe_roles_product_categories
     rolify :role_cname => 'User'
     belongs_to :resource, :polymorphic => true
     validates :name, :presence => true

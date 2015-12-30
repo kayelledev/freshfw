@@ -42,4 +42,5 @@ $(document).ready(function() {
     $.post('/shoppe/designer-portal/items_filtering', {show_all: true});
   });
   $("#role_permission_ids").multiselect();  
+  $("#product_category_ids").multiselect();  
 });

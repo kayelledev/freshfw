@@ -27,7 +27,7 @@ module Shoppe
 
 	def check_if_admin_present
       admin_role = Role.where(name: 'admin').first_or_create
-      errors.add(:role_ids, "You can not delete admin for this permission") unless self.roles.include? admin_role
+      self.roles << admin_role unless self.roles.include? admin_role
 	end
 
 	def check_roles!(role)

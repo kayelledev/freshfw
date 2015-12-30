@@ -173,7 +173,8 @@
         position: {
           my: 'right top',
           at: 'left bottom',
-          target: $(this)
+          target: $(this),
+          viewport: $(window)
         },
         style: {
           classes: 'qtip-bootstrap'
@@ -444,7 +445,8 @@
         position: {
           my: 'right top',
           at: 'left center',
-          target: $(this)
+          target: $(this),
+          viewport: $(window)
         },
         style: {
           classes: 'qtip-bootstrap'

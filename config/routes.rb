@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   get "room_type", to: "product_categories#index_type"
   get "room_size", to: "product_categories#index_size"
   get "category_tree", to: "product_categories#category_tree"
-
+  resources :product_categories, only: [:show]
   #adding products to basket
   get "cart", to: "orders#show"
   delete "cart", to: "orders#destroy"

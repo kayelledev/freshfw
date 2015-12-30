@@ -17,7 +17,7 @@ module Shoppe
     has_many :products, :dependent => :restrict_with_exception, :class_name => 'Shoppe::Product'
     has_many :design_projects, :class_name => 'Shoppe::DesignProject'
     has_many :filters, as: :filter_element, :class_name => 'Shoppe::Filter', :dependent => :destroy
-
+    has_and_belongs_to_many :roles, :join_table => :shoppe_roles_product_categories
     # Validations
     validates :name, :presence => true, :uniqueness => true
     validates :permalink, :presence => true, :uniqueness => true, :permalink => true

@@ -5,4 +5,3 @@
   %tbody
     %tr.item{:class => 'existing'}
       %td.name= f.collection_select(:permission_ids, Shoppe::Permission.sorted, :id, :controller_action, {:selected => @role.permission_ids, include_hidden: false}, {:multiple => true})
-    =# f.select(:permission_ids, options_for_select(@role.permissions.collect { |pr| [pr.controller_action, pr.id] }, @role.permissions.collect { |p| p.id }), {:multiple=>true, :id => "permission_ids"}, {:selected => @role.permission_ids, include_hidden: false})

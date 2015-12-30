@@ -43,11 +43,9 @@
 		 	
 	  <% end %>
   <% end %>
-<% if @project_categories.present? %>
-  <% @project_categories.each do |category| %>
-    <h3 class="prod-cat-title" ><%=  category.name %></h3>
+    <h3 class="prod-cat-title" ><%=  @project_category.name %></h3>
     <ul>
-    <% category.children.order('created_at').try(:each) do |child_category| %>
+    <% @project_category.children.order('created_at').try(:each) do |child_category| %>
       <div class="col-md-4 portfolio-item">
         <a href="<%= product_category_path(child_category) %>" class="portfolio-link" data-toggle="modal"  >
 		  <div class="portfolio-hover" >
@@ -59,7 +57,7 @@
 		</a>
       </div>
     <% end %>
-    <% category.products.try(:each) do |product| %>
+    <% @project_category.products.try(:each) do |product| %>
 	    <div class="col-md-4 portfolio-item">
 	        <a href="<%= product_path(product.permalink) %>" class="portfolio-link" data-toggle="modal" >
 			  <div class="portfolio-hover" >
@@ -93,6 +91,4 @@
 	    </div>
 	<% end %>
     </ul>
-  <% end %>
-<% end %>
 </div>

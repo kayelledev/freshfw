@@ -247,7 +247,8 @@
             content: {
               text: $('#tooltip-' + $(this).attr('id')),
               title: ' ',
-              button: true
+              button: true,
+              viewport: $(window)
             },
             position: {
               my: 'right top',
@@ -1087,7 +1088,8 @@
             position: {
               my: 'right top',
               at: 'left center',
-              target: $(this)
+              target: $(this),
+              viewport: $(window)
             },
             style: {
               classes: 'qtip-bootstrap'

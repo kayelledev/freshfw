@@ -56,7 +56,8 @@ module Shoppe
 
     def safe_params
       params[:role][:permission_ids] ||= []
-      params[:role].permit(:name, :permission_ids => [])
+      params[:role][:product_category_ids] ||= []
+      params[:role].permit(:name, permission_ids: [], product_category_ids: [])
     end
 
   end

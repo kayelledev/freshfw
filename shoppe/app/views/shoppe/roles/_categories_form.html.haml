@@ -1,0 +1,7 @@
+%table.data.orderItems
+  %thead
+    %tr
+      %th.name= 'Product Categories'
+  %tbody
+    %tr.item{:class => 'existing'}
+      %td.name= f.collection_select(:product_category_ids, Shoppe::ProductCategory.all, :id, :name, {:selected => @role.product_category_ids, include_hidden: false}, {:multiple => true})
