@@ -474,6 +474,17 @@ ActiveRecord::Schema.define(version: 20153002432638) do
   add_index "shoppe_roles", ["name", "resource_type", "resource_id"], name: "index_shoppe_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "shoppe_roles", ["name"], name: "index_shoppe_roles_on_name", using: :btree
 
+  create_table "shoppe_roles_product_categories", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "product_category_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "shoppe_roles_product_categories", ["product_category_id"], name: "index_shoppe_roles_product_categories_on_product_category_id", using: :btree
+  add_index "shoppe_roles_product_categories", ["role_id", "product_category_id"], name: "shoppe_roles_product_categories_index", unique: true, using: :btree
+  add_index "shoppe_roles_product_categories", ["role_id"], name: "index_shoppe_roles_product_categories_on_role_id", using: :btree
+
   create_table "shoppe_roles_users", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
