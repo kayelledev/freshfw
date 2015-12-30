@@ -993,6 +993,10 @@ body {
     left: 10%;
     bottom: 10%;
 	z-index: 2;
+    @media (max-height: 380px) and (min-width: 769px) {
+        bottom: auto;
+        top: 10%;
+    }
 }
 
 .intro-header {

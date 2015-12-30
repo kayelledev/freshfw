@@ -316,10 +316,7 @@
      */
     Controller.prototype.catchElement = function() {
         var self = this;
-        console.log(this);
-
         var mouse_is_outside = false;
-
         var div_elem = this.$holder.find('div');
         var arrow_elem = this.$holder.find('.rotation-arrow');
         var remove_elem = this.$holder.find('.remove-icon');
@@ -3200,52 +3197,54 @@
       function scaleArea(){
         var documentWidth = $(window).width();
         $('.room-editor-container').width(documentWidth * 0.35);
+        var old_ec_width = $('.editor-container').width();
         $('.editor-container').width(documentWidth * 0.35);
-
+        var new_ec_width = $('.editor-container').width(),
+            ec_delta = new_ec_width/old_ec_width;
         // set container height according width
         var scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
         $('.editor-container').height($('.editor-container').data('height') / scaling);
-
         // change editor height line
         $('.editor-height').height(+$('.editor-container').height() + 15);
         $('.editor-height img').height(+$('.editor-container').height() + 15);
         // change editor width line
         $('.editor-width').width($('.editor-container').width());
         $('.editor-width img').width($('.editor-container').width());
-
         $('.dragg').width( $('.editor-container').css('width') );
-
         // target elements with the "draggable" class
         $('.' + elementsClass).each(function() {
+            var dwidth = $(this).data('width') / scaling,
+                dheight = $(this).data('height') / scaling,
+                dataX = $(this).attr('data-x') * ec_delta,
+                dataY = $(this).attr('data-y') * ec_delta,
+                SdataX = dataX + 'px',
+                SdataY = dataY + 'px',
+                rotation = +controller.getDegreeOfElement( $(this).parent() ).degree,
+                Srotation = rotation + 'deg';
 
-            var parentDataX = +$(this).parent().data('x')/scaling;
-            var parentDataY = +$(this).parent().data('y')/scaling;
-            var dataX = +$(this).data('x')/scaling;
-            var dataY = +$(this).data('y')/scaling;
-            var posX = +controller.getDegreeOfElement( $(this).parent() ).left / +scaling;
-            var posY = +controller.getDegreeOfElement( $(this).parent() ).top / +scaling;
-            var rotation = +controller.getDegreeOfElement( $(this).parent() ).rotation;
+            $(this).attr({
+              'data-x': dataX,
+              'data-y': dataY
+            });
 
-            $(this).attr('data-x', parentDataX);
-            $(this).attr('data-y', parentDataY);
-            $(this).parent().attr('data-x', parentDataX);
-            $(this).parent().attr('data-y', parentDataY);
+            $(this).parent().attr({
+              'data-x': dataX,
+              'data-y': dataY
+            }).css({
+              'width': dwidth,
+              'height': dheight,
+              '-webkit-transform': 'translate(' + SdataX + ',' + SdataY + ') rotate(' + Srotation +')',
+              '-moz-transform': 'translate(' + SdataX + ',' + SdataY + ') rotate(' + Srotation +')',
+              '-ms-transform': 'translate(' + SdataX + ',' + SdataY + ') rotate(' + Srotation +')',
+              'transform': 'translate(' + SdataX + ',' + SdataY + ') rotate(' + Srotation +')'
+            });
+            $(this).width( dwidth );
+            $(this).height( dheight );
 
-            // $(this).parent().css({
-            //     'width': $(this).data('width') / scaling,
-            //     'height': $(this).data('height') / scaling,
-            //     '-webkit-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
-            //     '-moz-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
-            //     '-ms-transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
-            //     'transform': 'translate(' + posX + 'px,' + posY + 'px) rotate(' + rotation +'deg)',
-            // });
-            $(this).width( $(this).data('width') / scaling );
-            $(this).height( $(this).data('height') / scaling );
+            $(this).parent().width( dwidth );
+            $(this).parent().height( dheight );
 
-            $(this).parent().width( $(this).data('width') / scaling );
-            $(this).parent().height( $(this).data('height') / scaling );
-
-            $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px')
+            $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px');
         });
       }
     }
@@ -3585,11 +3584,10 @@
         this.initMouseRotation();
         this.openDimensionsForm(this.$initialElenemts);
         this.setNewArea(this.$initialElenemts);
-        // this.adaptArea(this.$initialElenemts);
+        this.adaptArea(this.$initialElenemts);
         this.removeElement();
         this.redrawImage();
     };
-
     $(document).ready(function() {
 
         var controller = new Controller(),
