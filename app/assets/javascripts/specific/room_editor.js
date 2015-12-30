@@ -134,7 +134,6 @@
         $('.editor-height img').height(+$('.editor-container').height() + 15);
         // change the intro height
         $('.room-planner-intro').height($('.editor-container').height() + 153);
-
         // init draggable
         interact('.' + elementsClass).draggable({
           // enable inertial throwing
@@ -586,6 +585,20 @@
         }
         interactSlide();
         clicked = true;
+
+        //room-layout-editor size adjustment according to the window width
+        var documentWidth = $(window).width();
+        if (documentWidth < 850){
+          var ui_dialog_width = $('.ui-dialog').width(documentWidth*0.8).width();
+        }
+        else {
+          var ui_dialog_width = $('.ui-dialog').width(850).width();
+        }
+        var left = (documentWidth - ui_dialog_width)/2;
+        $('.ui-dialog').css({'left': left});
+        $('html, body').animate({
+          scrollTop: $(".ui-dialog").offset().top
+        }, "fast");
       });
 
       function initSlider() {
@@ -3198,6 +3211,14 @@
 
       function scaleArea(){
         var documentWidth = $(window).width();
+        if (documentWidth < 850){
+          var ui_dialog_width = $('.ui-dialog').width(documentWidth*0.8).width();
+        }
+        else {
+          var ui_dialog_width = $('.ui-dialog').width(850).width();
+        }
+        var left = (documentWidth - ui_dialog_width)/2;
+        $('.ui-dialog').css({'left': left});
         $('.room-editor-container').width(documentWidth * 0.35);
         var old_ec_width = $('.editor-container').width();
         $('.editor-container').width(documentWidth * 0.35);
@@ -3652,5 +3673,4 @@
           });
         });
     });
-
 })(jQuery);
