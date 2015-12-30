@@ -3202,9 +3202,9 @@
         var old_ec_width = $('.editor-container').width();
         $('.editor-container').width(documentWidth * 0.35);
         var new_ec_width = $('.editor-container').width(),
-            ec_delta = new_ec_width/old_ec_width;
+            ec_delta = new_ec_width/old_ec_width,
         // set container height according width
-        var scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
+            scaling = parseFloat(controller.$holder.data('width')) / controller.$holder.width();
         $('.editor-container').height($('.editor-container').data('height') / scaling);
         // change editor height line
         $('.editor-height').height(+$('.editor-container').height() + 15);
@@ -3217,8 +3217,8 @@
         $('.' + elementsClass).each(function() {
             var dwidth = $(this).data('width') / scaling,
                 dheight = $(this).data('height') / scaling,
-                dataX = $(this).attr('data-x') * ec_delta,
-                dataY = $(this).attr('data-y') * ec_delta,
+                dataX = $(this).parent().attr('data-x') * ec_delta,
+                dataY = $(this).parent().attr('data-y') * ec_delta,
                 SdataX = dataX + 'px',
                 SdataY = dataY + 'px',
                 rotation = +controller.getDegreeOfElement( $(this).parent() ).degree,
@@ -3227,6 +3227,9 @@
             $(this).attr({
               'data-x': dataX,
               'data-y': dataY
+            }).css({
+              'width': dwidth,
+              'height': dheight
             });
 
             $(this).parent().attr({
@@ -3240,11 +3243,6 @@
               '-ms-transform': 'translate(' + SdataX + ',' + SdataY + ') rotate(' + Srotation +')',
               'transform': 'translate(' + SdataX + ',' + SdataY + ') rotate(' + Srotation +')'
             });
-            $(this).width( dwidth );
-            $(this).height( dheight );
-
-            $(this).parent().width( dwidth );
-            $(this).parent().height( dheight );
 
             $(this).parent().children('.rotation-arrow').css('top', $(this).height() + 5 + 'px');
         });
