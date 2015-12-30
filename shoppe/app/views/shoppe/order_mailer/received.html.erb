@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+    <style>
+      table {
+          border-collapse: collapse;
+      }
+
+      table, td, tr {
+          border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+
+    <center><%= image_tag 'Four-Walls-Logo-v4--rect.png' %></center>
+    <p>Hi <%= @order.first_name %>,</p>
+    <p>Thank you for choosing Four Walls! Here are the details of your order.</p>
+
+    <table>
+    <tr>
+        <th colspan="3">
+          <h2>Order #<%= @order.number %> on <%= @order.received_at.strftime('%B %e, %Y') %></h2>
+        </th>
+      </tr>
+
+      <tr>
+        <td>
+          <b>Product</b>
+        </td>
+        <td>
+          <b>Quantity </b>
+        </td>
+        <td>
+          <b>Price</b>
+        </td>
+      </tr>
+
+      <% @order.order_items.each do |order_item| %>
+        <tr>
+          <td>
+            <%= order_item.ordered_item.name %>
+          </td>
+          <td>
+            <%= order_item.quantity %>
+          </td>
+          <td>
+            <%= order_item.unit_price %>
+          </td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td>&nbsp;</td><td></td><td></td>
+      </tr>
+
+      <tr>
+        <td>
+          Cart Subtotal
+        </td>
+        <td></td>
+        <td>
+          <%= number_to_currency(@order.cart_total_cost, unit: "$", format: "%u%n") %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Shipping & Delivery
+        </td>
+        <td></td>
+        <td>
+          <%= @order.delivery_cost_price %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Taxes & Fees
+        </td>
+        <td></td>
+        <td>
+          <%= @order.tax %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <b>Order Total</b>
+        </td>
+        <td></td>
+        <td>
+          <%= number_to_currency(@order.total, unit: "$", format: "%u%n") %>
+        </td>
+      </tr>
+    </table>
+
+    <p>You can check the status of your order any time. All order information can be reviewed <%= link_to 'here', account_url %> on your account page upon logging in.</p>
+
+    <p>Once the order is processed, a Four Walls representative will contact you within 3-5 business days to confirm a delivery date and time window.</p>
+
+    <p>If you have any questions, need further assistance or would like to provide feedback, please contact us at <%= mail_to 'hi@gofourwalls.com' %>. We appreciate all feedback in making your experience with Four Walls better.</p>
+
+    <p>For more information on our return or shipping policies, please visit:
+    <br>Return Policy<p>
+
+    <p>We hope you enjoyed shopping at Four Walls.</p>
+
+    <p><b>Team Four Walls</b></p>
+
+  </body>
+</html>
