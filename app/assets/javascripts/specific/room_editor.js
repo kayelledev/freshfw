@@ -3219,6 +3219,11 @@
         }
         var left = (documentWidth - ui_dialog_width)/2;
         $('.ui-dialog').css({'left': left});
+        if ($('html')[0].scrollHeight != $('body')[0].scrollHeight){
+          $('.ui-dialog').css({
+            'top': $('html')[0].scrollHeight - $('.ui-dialog').outerHeight()
+          });
+        }
         $('.room-editor-container').width(documentWidth * 0.35);
         var old_ec_width = $('.editor-container').width();
         $('.editor-container').width(documentWidth * 0.35);
