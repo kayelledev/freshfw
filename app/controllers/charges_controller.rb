@@ -47,7 +47,7 @@ class ChargesController < ApplicationController
     rescue Stripe::CardError => e
       flash[:error] = e.message
       Rails.logger.error e
-      redirect_to charges_path
+      redirect_to :back
     end
 
     begin
