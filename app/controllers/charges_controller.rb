@@ -10,29 +10,29 @@ class ChargesController < ApplicationController
     include Singleton
     include ActionView::Helpers::NumberHelper
   end
-  
+
   def new
     puts current_order.total
-    
+
     if current_order.total < 0.01
       puts "balance is 0"
       flash[:notice] = "You cannot check out an empty order. Add a room to your basket first."
       redirect_to products_url
-    end 
+    end
   end
 
   def create
     # Amount in cents
     @order = current_order
     puts "in charges create controller "
-    
+
     begin
       @amount = helper.number_with_precision(@order.total*100, precision: 0)
-      
+
       if params[:stripeEmail] == nil
-        params[:stripeEmail]= current_order.email_address  
-      end 
-      
+        params[:stripeEmail]= current_order.email_address
+      end
+
       @customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
         :card  => params[:stripeToken]
@@ -44,23 +44,23 @@ class ChargesController < ApplicationController
         :description => "#{@order.first_name}'s Order",
         :currency    => currency
       )
-      
     rescue Stripe::CardError => e
       flash[:error] = e.message
+      Rails.logger.error e
       redirect_to charges_path
     end
-    
-    begin 
+
+    begin
       @payment = Payment.new(:amount => @order.total, :order_id => @order.id, :method =>'Stripe CC', :reference => @charge.id)
-      @payment.save 
+      @payment.save
     rescue
       flash[:error] = "Something went wrong with the payment transaction. Please check all information and try again. If the error persists, contact us to have it resolved."
       redirect_to charges_path
     end
-  end 
+  end
 
   def self.permission
     "Payment"
   end
-    
+
 end

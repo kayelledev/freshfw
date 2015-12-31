@@ -7,6 +7,8 @@ set :stages, %w(production staging demo)
 
 set :rvm_ruby_version, '2.2.2@freshfw'
 
+set :keep_releases, 1
+
 set :linked_files, %w{config/database.yml config/secrets.yml config/application.yml}
 set :linked_dirs, %w{log tmp/pids public/uploads public/assets public/system public/certificate}
 
