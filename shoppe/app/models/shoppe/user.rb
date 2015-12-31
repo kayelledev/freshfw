@@ -11,7 +11,6 @@ module Shoppe
     has_and_belongs_to_many :roles, :join_table => :shoppe_roles_users, :after_remove => :check_roles!
     has_many :design_projects, :class_name => 'Shoppe::DesignProject'
     after_create :add_user_role
-    after_create :add_product_access_role
     # The user's first name & last name concatenated
     #
     # @return [String]
@@ -31,10 +30,6 @@ module Shoppe
 
     def add_user_role
       self.add_role :user
-    end
-
-    def add_product_access_role
-      self.add_role :product_access
     end
 
     # The user's first name & initial of last name concatenated
