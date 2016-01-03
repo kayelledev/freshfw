@@ -40,6 +40,7 @@ gem "mini_magick"
 gem "fog", "~> 1.27"
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
 gem 'devise'
+gem 'mailchimp-api', require: 'mailchimp'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'

@@ -1,7 +1,8 @@
-<div class="container">	  
-
-	<h2>Thank you for your payment. </h2>
-	<%= render 'orders/final_items', :order => current_order %>
-	<% current_order.confirm!
-	   session[:order_id] = nil %>
+<div class="container-fluid cart-view">
+    
+	<h2 style="color: #f49224;">Thank you for your order!</h2>
+	<p> We will process the order within 3 business days. You can check the status of your order any time on your <a href="http://gofourwalls.com/account">account page</a> upon logging in.</p>
+	<p>You will be informed throughout the process of the order via email. Once your order is processed and all items are on their way to the local warehouse in your city, a Four Walls representative will contact you to confirm a delivery date and time window. </p>
+	<p>If you have any questions, need further assistance or would like to provide feedback, please contact us at <a href="mailto:hi@gofourwalls.com">hi@gofourwalls.com</a>. We appreciate all feedback in making your experience with Four Walls better.</p>
+	<% current_order.confirm! session[:order_id] = nil %>
 </div>

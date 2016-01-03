@@ -40,7 +40,7 @@ module FourWalls
     # default state and country
     config.country = 'Canada'
     config.state_code = 'ON'
-
+  	
     unless Rails.env.development?
         if ENV['S3_Access_Key'].nil? || ENV['S3_Access_Key'].nil? || ENV['S3_Access_Key'].nil?
             cfg = YAML.load_file("#{Rails.root}/config/fog_credentials.yml")
@@ -57,5 +57,6 @@ module FourWalls
         end
     end
 
+  
   end
 end
