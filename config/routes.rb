@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'about_us', to: 'welcome#about_us', as: 'about_us'
-  get 'blog', to: 'welcome#blog', as: 'blog'
+  get 'blog' => redirect("http://blog.gofourwalls.com"), as: 'blog'
   get 'account', to: 'welcome#account', as: 'account'
 
   resources :charges

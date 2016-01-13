@@ -1,5 +1,5 @@
 <% if current_user && (current_user.roles.map(&:name) & ['designer', 'admin']).present? %>
   <%= render 'designer_account_page' %>
 <% else %>
- <%= render 'user_account_page' %>
+  <%= render 'user_account_page' %>
 <% end %>

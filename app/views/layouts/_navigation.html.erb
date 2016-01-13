@@ -1,8 +1,9 @@
 <div class="navbar-wrapper" >
   <div class="container-fluid">
-
+	 
 	<nav class="navbar navbar-default navbar-custom header-navbar">
         <div class="container-fluid">
+			
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll" >
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -16,7 +17,7 @@
                 <% end %>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+			<!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <%= render 'layouts/currency_checker' %>
 
@@ -32,15 +33,22 @@
                 </form>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><%= link_to "Shop", products_url, class: "active"%></li>
+                    <li><%= link_to "Shop", products_url, class: "active", style: "font-color: #F49224;"%></li>
                     <li><%= link_to "About Us", about_us_url, class: "active"%></li>
                     <li><%= link_to "Blog", blog_url %></li>
                     <li><%= link_to "Account", account_url %></li>
                     <li><%= link_to "Cart (#{current_order.total_items})", cart_path, class: "active", id: "productsCart" %></li>
+
                     <% if current_user %>
+					  <li><%= link_to "Account", account_url %></li>
                       <li><%= link_to "Logout", destroy_user_session_path, method: 'DELETE' %></li>
                     <% else %>
                       <li><%= link_to "Sign in", new_user_session_path %></li>
+					  <!--<li><a data-toggle="modal" href="#myModal">Sign In</a><li>-->
+
+
+				  	<!-- Button to trigger modal --> 
+				      
                     <% end %>
                 </ul>
             </div>
@@ -51,6 +59,7 @@
 
   </div>
 </div>
+
 <div class='error-messages-block'>
     <%= render 'layouts/flashes' %>
     <%= render 'layouts/errors' %>
@@ -61,3 +70,20 @@
 	<!-- <header style="background-color: #000; opacity: 0.8; height: 7.5em; width: 100%;">
 	</header> -->
 <% end %>
+
+
+<!-- Modal -->
+  <div class="modal" id="myModal" role="dialog" style="max-width: 95%; min-width: 80%; opacity: 0.8;">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:black;"><span class="glyphicon glyphicon-lock"></span>Sign In or Create Account</h4>
+        </div>
+        <%= render 'devise/shared/sign_in_or_register' %>
+        
+      </div>
+    </div>
+  </div> 

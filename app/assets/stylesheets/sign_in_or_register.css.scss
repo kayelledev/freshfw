@@ -12,9 +12,11 @@
 
 .sign-in-or-register .sign-in-or-register-forms .create-account {
     display: none;
+	padding-top: 1em;
 }
 .sign-in-or-register .sign-in-or-register-forms .forms-links a {
     color: black;
+	padding-top: 1em;
 }
 
 .sign-in-or-register .col-md-4 .social-button {
@@ -23,8 +25,8 @@
 
 .sign-in-or-register .facebook {
     height: 190px;
-    border-left: 2px solid #c1c1c1;
-    border-right: 2px solid #c1c1c1;
+    border-left: 1px solid #c1c1c1;
+	padding: 2em 0;
 }
 
 .sign-in-or-register .content {

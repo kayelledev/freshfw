@@ -19,9 +19,12 @@ class WelcomeController < ApplicationController
       @orders = Order.where(email_address: current_user.email_address).order('updated_at DESC')
       @products = current_user.last_reviews
       @design_projects = current_user.design_projects 
+      @current_user = current_user
     end
+
   end
 
+  
   def change_user_country
     cookies[:currency] = params[:currency] if params[:currency].present?
     @order = current_order
